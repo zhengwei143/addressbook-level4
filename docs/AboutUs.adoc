@@ -12,7 +12,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Tan Zheng Wei
 image::zhengwei143.jpeg[width="150", align="left"]
-{empty}[https://github.com/zhengwei143[github]] [<<template#, portfolio>>]
+{empty}[https://github.com/zhengwei143[github]] [<<zhengwei143#, portfolio>>]
 
 Role: Team Lead +
 Responsibilities: Search
@@ -21,7 +21,7 @@ Responsibilities: Search
 
 === Fan Wenkai
 image::jasonvank.jpeg[width="150", align="left"]
-{empty}[https://github.com/jasonvank[github]] [<<template#, portfolio>>]
+{empty}[https://github.com/jasonvank[github]] [<<jasonvank#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Edit
@@ -30,7 +30,7 @@ Responsibilities: Edit
 
 === Li Changrui
 image::leo-1997.png[width="150", align="left"]
-{empty}[http://github.com/leo-1997[github]] [<<template#, portfolio>>]
+{empty}[http://github.com/leo-1997[github]] [<<leo-1997#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Add + Delete
@@ -38,8 +38,8 @@ Responsibilities: Add + Delete
 '''
 
 === Liu Tianyu
-image::xllliu.png[width="150", align="left"]
-{empty}[http://github.com/xllliu[github]] [<<template#, portfolio>>]
+image::xllliu.jpg[width="150", align="left"]
+{empty}[http://github.com/xllliu[github]] [<<xllliu#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Command related features
@@ -48,7 +48,7 @@ Responsibilities: Command related features
 
 === Yang Shuqi
 image::yshu7.jpeg[width="150", align="left"]
-{empty}[http://github.com/yshu7[github]] [<<template#, portfolio>>]
+{empty}[http://github.com/yshu7[github]] [<<yshu7#, portfolio>>]
 
 Role: Developer +
 Responsibilities: List

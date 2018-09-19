@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+=SaveIt - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -12,9 +12,9 @@ ifdef::env-github[]
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4/tree/master
+:repoURL: https://github.com/CS2103AUG2018-T04/addressbook-level4
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team T12-4`      Since: `Sep 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -69,9 +69,9 @@ Optionally, you can follow the <<UsingCheckstyle#, UsingCheckstyle.adoc>> docume
 
 ==== Updating documentation to match your fork
 
-After forking the repo, the documentation will still have the SE-EDU branding and refer to the `se-edu/addressbook-level4` repo.
+After forking the repo, the documentation will still have the SE-EDU branding and refer to the `CS2103AUG2018-T04/addressbook-level4` repo.
 
-If you plan to develop this fork as a separate product (i.e. instead of contributing to `se-edu/addressbook-level4`), you should do the following:
+If you plan to develop this fork as a separate product (i.e. instead of contributing to `CS2103AUG2018-T04/addressbook-level4`), you should do the following:
 
 . Configure the <<Docs-SiteWideDocSettings, site-wide documentation settings>> in link:{repoURL}/build.gradle[`build.gradle`], such as the `site-name`, to suit your own project.
 
@@ -815,13 +815,13 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
+* has a need to manage previous technical issues
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: Manage the technical issues for future reference
 
 [appendix]
 == User Stories
@@ -831,17 +831,39 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |programmer |record the issue and solution |review it when i encountered it again
 
-|`* * *` |user |add a new person |
+|`* * *` |programmer using multiple programming languages |search issues of different language easily |fix my code easily
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |a learner of programming |record the technical details |refer to it in the future
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |CS Professor |record the common mistakes that students tend to make |reinforce/spend more time covering those areas
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* *` |team member of a SWE team |share solutions to mistakes/bugs that I encountered and found previously with my team |help my team by reducing their time spent in debugging
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`*` |programmer |add remark for the issues |have better understanding of the issue
+
+|`* *` |a CS student |note common mistakes among my classmates |learn from them and avoid the common mistakes
+
+|`* *` |a programmer dealing with many programs at the same time |search the issue based on the tag or key words |So that i can find the issue easily
+
+|`* *` |a programmer encounter various issues while coding |add the tag for each issue |collect same tag
+
+|`* *` |a CS student who aims to improve technical skills |store the way I solved certain issue |review it and see if there is a better solution in the future
+
+|`*` |a busy programmer dealing with a big project |highlight the certain part of the page |See the most important part of the solution
+
+|`* *` |a CS student who are learning new techniques |delete the issue after I got familiar with that issue |pay more attention to those I am not familiar with
+
+|`* *` |a CS student |collect all the mistakes i have made during daily coding |revise them before exam
+
+|`* *` |developer maintaining an open source project |allow external developers who might be working on PRs of the project to have access to the mistakes/bugs encountered during development |Help them with any bugs that they encountered
+
+|`* *` |normal user |have a autocomplete command |Type faster and do not needs to memorise command format
+
+|`* *` |normal user |have a autosuggestion tag |type faster
+
+|`* *` |normal user |have different color in different parameters in commands |distinguish different information I input
 |=======================================================================
 
 _{More to be added}_
@@ -852,14 +874,30 @@ _{More to be added}_
 (For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+=== Use case: Add issue
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a new issue
+2. User add statement in command line
+3. User can choose add issue statement, multiple solution links, remarks and tag.
+4. The ‘Success’ message shown on the screen.
++
+Use case ends.
+
+[none]
+
+[discrete]
+=== Use case: Edit issue
+
+*MSS*
+
+1. User requests to list issues
+2. SaveIt shows a list of issues
+3. User requests to edit a specific issue in the list
+4. SaveIt updates the issue
+5. Use case ends.
+6. The ‘Success’ message shown on the screen.
 +
 Use case ends.
 
@@ -873,7 +911,41 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. SaveIt shows an error message.
++
+Use case resumes at step 2.
+
+* 3b. None of the optional fields is provided.
++
+[none]
+** 3b1. SaveIt shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Delete issue
+
+*MSS*
+
+1.  User requests to list issues
+2.  SaveIt shows a list of issues
+3.  User requests to delete a specific issue in the list
+4.  SaveIt deletes the issue
+5. The "Success" message shown on the screen.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. SaveIt shows an error message.
 +
 Use case resumes at step 2.
 
@@ -885,6 +957,8 @@ _{More to be added}_
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+.  Should work with or without internet connection.
+.  The data used should be stored locally.
 
 _{More to be added}_
 

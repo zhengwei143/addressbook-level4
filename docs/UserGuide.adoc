@@ -139,7 +139,9 @@ Examples:
 Search issue by tags, issue statement or remarks.
 Format: `search KEYWORD [MORE_KEYWORDS]`
 
-****
+[TIP]
+====
+
 * The search is case insensitive. e.g hans will match Hans
 * The order of the keywords does not matter. e.g. ‘kill port’ will match ‘port kill’
 * Searches through the issue statement, tags or remarks.
@@ -147,7 +149,7 @@ Format: `search KEYWORD [MORE_KEYWORDS]`
 * Issues matching at least one keyword will be returned (i.e. OR search). e.g. Hans Bo will return the page and relevant remarks
 * Search results will be ordered based on the following priority:
 ** Issue match > Tag match
-****
+====
 
 Examples:
 
@@ -161,9 +163,9 @@ Returns any person having names `Betsy`, `Tim`, or `John`
 Deletes the specified issue from the issue tracker. +
 Format: `delete INDEX`
 
-[TIP]
+[NOTE]
 ====
-* Deletes the person at the specified `INDEX`.
+* Deletes the issue at the specified `INDEX`.
 * The index refers to the index number shown in the displayed issue list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ====
@@ -182,11 +184,12 @@ Examples:
 Selects the issue identified by the index number used in the displayed issue list.
 Format: `select INDEX`
 
-****
+[NOTE]
+====
 * Selects the issue and loads the first solution link of the issue at the specified `INDEX`.
 * The index refers to the index number shown in the displayed issue list.
 * The index *must be a positive integer* `1, 2, 3, ...`
-****
+====
 
 Examples:
 
@@ -222,18 +225,18 @@ Undoable commands: those commands that modify the address book's content (`add`,
 Examples:
 
 * `delete 1` +
-* `list chr` +
-* `undo` (reverses the `delete 1` command) +
+`list chr` +
+`undo` (reverses the `delete 1` command) +
 
 * `select 1` +
-* `list chr` +
-* `undo` +
-* The `undo` command fails as there are no undoable commands executed previously.
+`list chr` +
+`undo` +
+The `undo` command fails as there are no undoable commands executed previously.
 
 * `delete 1` +
-* `clear` +
-* `undo` (reverses the `clear` command) +
-* `undo` (reverses the `delete 1` command) +
+`clear` +
+`undo` (reverses the `clear` command) +
+`undo` (reverses the `delete 1` command) +
 
 === Redoing the previously undone command : `redo`
 
@@ -276,12 +279,9 @@ Format: `refactorTag java javascript`
 
 * Changes all entries tagged [java] to be tagged [javascript]
 
-
 Format: `refactorTag java [null]`
 
 * Removes the tag [java] from all the entries
-
-
 
 
 === Saving the data

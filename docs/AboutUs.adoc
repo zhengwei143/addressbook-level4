@@ -20,7 +20,7 @@ Responsibilities: Search
 '''
 
 === Fan Wenkai
-image::jasonvank.jpeg[width="150", align="left"]
+image::jasonvank.jpg[width="150", align="left"]
 {empty}[https://github.com/jasonvank[github]] [<<jasonvank#, portfolio>>]
 
 Role: Developer +

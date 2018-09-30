@@ -8,7 +8,7 @@ import com.google.common.collect.ImmutableMultiset;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Issue;
 
 /**
  * Provides a handle to a person card in the person list panel.
@@ -75,7 +75,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
     /**
      * Returns true if this handle contains {@code person}.
      */
-    public boolean equals(Person person) {
+    public boolean equals(Issue person) {
         return getName().equals(person.getName().fullName)
                 && getAddress().equals(person.getAddress().value)
                 && getPhone().equals(person.getPhone().value)

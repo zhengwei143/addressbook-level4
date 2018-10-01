@@ -7,55 +7,55 @@ import static seedu.saveit.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Issue's name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidIssueStatement(String)}
  */
 public class IssueStatement {
 
-    public static final String MESSAGE_NAME_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String MESSAGE_ISSUE_STATEMENT_CONSTRAINTS =
+            "Issue statement should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String ISSUE_STATEMENT_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String fullName;
+    public final String issue;
 
     /**
      * Constructs a {@code IssueStatement}.
      *
-     * @param name A valid name.
+     * @param issue A valid name.
      */
-    public IssueStatement(String name) {
-        requireNonNull(name);
-        AppUtil.checkArgument(isValidName(name), MESSAGE_NAME_CONSTRAINTS);
-        fullName = name;
+    public IssueStatement(String issue) {
+        requireNonNull(issue);
+        AppUtil.checkArgument(isValidIssueStatement(issue), MESSAGE_ISSUE_STATEMENT_CONSTRAINTS);
+        this.issue = issue;
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidName(String test) {
-        return test.matches(NAME_VALIDATION_REGEX);
+    public static boolean isValidIssueStatement(String test) {
+        return test.matches(ISSUE_STATEMENT_VALIDATION_REGEX);
     }
 
 
     @Override
     public String toString() {
-        return fullName;
+        return issue;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof IssueStatement // instanceof handles nulls
-                && fullName.equals(((IssueStatement) other).fullName)); // state check
+                && issue.equals(((IssueStatement) other).issue)); // state check
     }
 
     @Override
     public int hashCode() {
-        return fullName.hashCode();
+        return issue.hashCode();
     }
 
 }

@@ -165,7 +165,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
 
         /* Case: invalid name -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_NAME_DESC,
-                IssueStatement.MESSAGE_NAME_CONSTRAINTS);
+                IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS);
 
         /* Case: invalid phone -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_PHONE_DESC,

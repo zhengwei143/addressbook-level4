@@ -61,7 +61,7 @@ public class XmlAdaptedPerson {
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
     public XmlAdaptedPerson(Issue source) {
-        name = source.getName().fullName;
+        name = source.getName().issue;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
@@ -84,8 +84,8 @@ public class XmlAdaptedPerson {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, IssueStatement.class.getSimpleName()));
         }
-        if (!IssueStatement.isValidName(name)) {
-            throw new IllegalValueException(IssueStatement.MESSAGE_NAME_CONSTRAINTS);
+        if (!IssueStatement.isValidIssueStatement(name)) {
+            throw new IllegalValueException(IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS);
         }
         final IssueStatement modelName = new IssueStatement(name);
 

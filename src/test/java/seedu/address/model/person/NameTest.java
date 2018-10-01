@@ -24,19 +24,19 @@ public class NameTest {
     @Test
     public void isValidName() {
         // null name
-        Assert.assertThrows(NullPointerException.class, () -> IssueStatement.isValidName(null));
+        Assert.assertThrows(NullPointerException.class, () -> IssueStatement.isValidIssueStatement(null));
 
         // invalid name
-        assertFalse(IssueStatement.isValidName("")); // empty string
-        assertFalse(IssueStatement.isValidName(" ")); // spaces only
-        assertFalse(IssueStatement.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(IssueStatement.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(IssueStatement.isValidIssueStatement("")); // empty string
+        assertFalse(IssueStatement.isValidIssueStatement(" ")); // spaces only
+        assertFalse(IssueStatement.isValidIssueStatement("^")); // only non-alphanumeric characters
+        assertFalse(IssueStatement.isValidIssueStatement("peter*")); // contains non-alphanumeric characters
 
         // valid name
-        assertTrue(IssueStatement.isValidName("peter jack")); // alphabets only
-        assertTrue(IssueStatement.isValidName("12345")); // numbers only
-        assertTrue(IssueStatement.isValidName("peter the 2nd")); // alphanumeric characters
-        assertTrue(IssueStatement.isValidName("Capital Tan")); // with capital letters
-        assertTrue(IssueStatement.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(IssueStatement.isValidIssueStatement("peter jack")); // alphabets only
+        assertTrue(IssueStatement.isValidIssueStatement("12345")); // numbers only
+        assertTrue(IssueStatement.isValidIssueStatement("peter the 2nd")); // alphanumeric characters
+        assertTrue(IssueStatement.isValidIssueStatement("Capital Tan")); // with capital letters
+        assertTrue(IssueStatement.isValidIssueStatement("David Roger Jackson Ray Jr 2nd")); // long names
     }
 }

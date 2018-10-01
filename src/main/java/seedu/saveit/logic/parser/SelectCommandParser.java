@@ -1,9 +1,9 @@
 package seedu.saveit.logic.parser;
 
+import seedu.saveit.commons.core.Messages;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.commands.SelectCommand;
 import seedu.saveit.logic.parser.exceptions.ParseException;
-import seedu.saveit.commons.core.Messages;
 
 /**
  * Parses input arguments and creates a new SelectCommand object

@@ -7,11 +7,11 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.saveit.commons.core.Messages;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.commands.EditCommand;
 import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.model.tag.Tag;
-import seedu.saveit.commons.core.Messages;
 
 /**
  * Parses input arguments and creates a new EditCommand object

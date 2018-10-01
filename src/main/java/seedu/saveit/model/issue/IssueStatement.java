@@ -1,9 +1,8 @@
 package seedu.saveit.model.issue;
 
-import seedu.saveit.commons.util.AppUtil;
-
 import static java.util.Objects.requireNonNull;
-import static seedu.saveit.commons.util.AppUtil.checkArgument;
+
+import seedu.saveit.commons.util.AppUtil;
 
 /**
  * Represents a Issue's name in the address book.

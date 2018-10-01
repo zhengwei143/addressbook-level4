@@ -9,6 +9,7 @@ import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.saveit.commons.core.Messages;
 import seedu.saveit.logic.commands.AddCommand;
 import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.model.issue.Address;
@@ -17,7 +18,6 @@ import seedu.saveit.model.issue.Issue;
 import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.model.issue.Phone;
 import seedu.saveit.model.tag.Tag;
-import seedu.saveit.commons.core.Messages;
 
 /**
  * Parses input arguments and creates a new AddCommand object

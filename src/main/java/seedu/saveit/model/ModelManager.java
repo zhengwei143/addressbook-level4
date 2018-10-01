@@ -1,7 +1,6 @@
 package seedu.saveit.model;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.saveit.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -12,8 +11,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.saveit.commons.core.ComponentManager;
 import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.events.model.SaveItChangedEvent;
-import seedu.saveit.model.issue.Issue;
 import seedu.saveit.commons.util.CollectionUtil;
+import seedu.saveit.model.issue.Issue;
 
 /**
  * Represents the in-memory model of the address book data.

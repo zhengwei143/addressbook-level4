@@ -1,14 +1,12 @@
 package seedu.saveit.model.issue;
 
-import static seedu.saveit.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.saveit.model.tag.Tag;
 import seedu.saveit.commons.util.CollectionUtil;
+import seedu.saveit.model.tag.Tag;
 
 /**
  * Represents a Issue in the address book.

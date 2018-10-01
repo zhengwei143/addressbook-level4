@@ -1,9 +1,8 @@
 package seedu.saveit.model.tag;
 
-import seedu.saveit.commons.util.AppUtil;
-
 import static java.util.Objects.requireNonNull;
-import static seedu.saveit.commons.util.AppUtil.checkArgument;
+
+import seedu.saveit.commons.util.AppUtil;
 
 /**
  * Represents a Tag in the address book.

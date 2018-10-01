@@ -29,8 +29,8 @@ import seedu.saveit.logic.commands.SelectCommand;
 import seedu.saveit.logic.commands.UndoCommand;
 import seedu.saveit.logic.parser.AddressBookParser;
 import seedu.saveit.logic.parser.exceptions.ParseException;
+import seedu.saveit.model.person.Issue;
 import seedu.saveit.model.person.NameContainsKeywordsPredicate;
-import seedu.saveit.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -43,9 +43,9 @@ public class SaveItParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        Issue issue = new PersonBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(issue));
+        assertEquals(new AddCommand(issue), command);
     }
 
     @Test
@@ -63,8 +63,8 @@ public class SaveItParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Issue issue = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(issue).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);

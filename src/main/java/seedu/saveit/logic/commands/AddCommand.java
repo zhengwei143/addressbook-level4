@@ -10,16 +10,16 @@ import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.model.Model;
-import seedu.saveit.model.person.Person;
+import seedu.saveit.model.person.Issue;
 
 /**
- * Adds a person to the address book.
+ * Adds a issue to the address book.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a issue to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -34,17 +34,17 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New issue added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This issue already exists in the address book";
 
-    private final Person toAdd;
+    private final Issue toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Issue}
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(Issue issue) {
+        requireNonNull(issue);
+        toAdd = issue;
     }
 
     @Override

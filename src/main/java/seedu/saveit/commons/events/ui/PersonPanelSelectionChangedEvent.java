@@ -1,17 +1,17 @@
 package seedu.saveit.commons.events.ui;
 
 import seedu.saveit.commons.events.BaseEvent;
-import seedu.saveit.model.person.Person;
+import seedu.saveit.model.person.Issue;
 
 /**
- * Represents a selection change in the Person List Panel
+ * Represents a selection change in the Issue List Panel
  */
 public class PersonPanelSelectionChangedEvent extends BaseEvent {
 
 
-    private final Person newSelection;
+    private final Issue newSelection;
 
-    public PersonPanelSelectionChangedEvent(Person newSelection) {
+    public PersonPanelSelectionChangedEvent(Issue newSelection) {
         this.newSelection = newSelection;
     }
 
@@ -20,7 +20,7 @@ public class PersonPanelSelectionChangedEvent extends BaseEvent {
         return getClass().getSimpleName();
     }
 
-    public Person getNewSelection() {
+    public Issue getNewSelection() {
         return newSelection;
     }
 }

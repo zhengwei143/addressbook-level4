@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.saveit.model.SaveIt;
-import seedu.saveit.model.person.Person;
+import seedu.saveit.model.person.Issue;
 
 /**
  * A utility class to help with building saveit objects.
@@ -21,10 +21,10 @@ public class AddressBookBuilder {
     }
 
     /**
-     * Adds a new {@code Person} to the {@code SaveIt} that we are building.
+     * Adds a new {@code Issue} to the {@code SaveIt} that we are building.
      */
-    public AddressBookBuilder withPerson(Person person) {
-        saveIt.addPerson(person);
+    public AddressBookBuilder withPerson(Issue issue) {
+        saveIt.addPerson(issue);
         return this;
     }
 

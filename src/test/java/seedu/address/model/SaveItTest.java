@@ -21,7 +21,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.ReadOnlySaveIt;
-import seedu.saveit.model.person.Person;
+import seedu.saveit.model.person.Issue;
 import seedu.saveit.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
 
@@ -52,11 +52,11 @@ public class SaveItTest {
 
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        // Two issues with the same identity fields
+        Issue editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        SaveItStub newData = new SaveItStub(newPersons);
+        List<Issue> newIssues = Arrays.asList(ALICE, editedAlice);
+        SaveItStub newData = new SaveItStub(newIssues);
 
         thrown.expect(DuplicatePersonException.class);
         saveIt.resetData(newData);
@@ -82,7 +82,7 @@ public class SaveItTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         saveIt.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Issue editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(saveIt.hasPerson(editedAlice));
     }
@@ -94,18 +94,18 @@ public class SaveItTest {
     }
 
     /**
-     * A stub ReadOnlySaveIt whose persons list can violate interface constraints.
+     * A stub ReadOnlySaveIt whose issues list can violate interface constraints.
      */
     private static class SaveItStub implements ReadOnlySaveIt {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Issue> issues = FXCollections.observableArrayList();
 
-        SaveItStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
+        SaveItStub(Collection<Issue> issues) {
+            this.issues.setAll(issues);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Issue> getPersonList() {
+            return issues;
         }
     }
 

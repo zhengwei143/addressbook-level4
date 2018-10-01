@@ -12,7 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.saveit.commons.core.ComponentManager;
 import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.events.model.AddressBookChangedEvent;
-import seedu.saveit.model.person.Person;
+import seedu.saveit.model.person.Issue;
 import seedu.saveit.commons.util.CollectionUtil;
 
 /**
@@ -22,7 +22,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final VersionedSaveIt versionedAddressBook;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Issue> filteredIssues;
 
     /**
      * Initializes a ModelManager with the given saveIt and userPrefs.
@@ -34,7 +34,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with address book: " + saveIt + " and user prefs " + userPrefs);
 
         versionedAddressBook = new VersionedSaveIt(saveIt);
-        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        filteredIssues = new FilteredList<>(versionedAddressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -58,47 +58,47 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return versionedAddressBook.hasPerson(person);
+    public boolean hasPerson(Issue issue) {
+        requireNonNull(issue);
+        return versionedAddressBook.hasPerson(issue);
     }
 
     @Override
-    public void deletePerson(Person target) {
+    public void deletePerson(Issue target) {
         versionedAddressBook.removePerson(target);
         indicateAddressBookChanged();
     }
 
     @Override
-    public void addPerson(Person person) {
-        versionedAddressBook.addPerson(person);
+    public void addPerson(Issue issue) {
+        versionedAddressBook.addPerson(issue);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         indicateAddressBookChanged();
     }
 
     @Override
-    public void updatePerson(Person target, Person editedPerson) {
-        CollectionUtil.requireAllNonNull(target, editedPerson);
+    public void updatePerson(Issue target, Issue editedIssue) {
+        CollectionUtil.requireAllNonNull(target, editedIssue);
 
-        versionedAddressBook.updatePerson(target, editedPerson);
+        versionedAddressBook.updatePerson(target, editedIssue);
         indicateAddressBookChanged();
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Issue List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Issue} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return FXCollections.unmodifiableObservableList(filteredPersons);
+    public ObservableList<Issue> getFilteredPersonList() {
+        return FXCollections.unmodifiableObservableList(filteredIssues);
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredPersonList(Predicate<Issue> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredIssues.setPredicate(predicate);
     }
 
     //=========== Undo/Redo =================================================================================
@@ -145,7 +145,7 @@ public class ModelManager extends ComponentManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredIssues.equals(other.filteredIssues);
     }
 
 }

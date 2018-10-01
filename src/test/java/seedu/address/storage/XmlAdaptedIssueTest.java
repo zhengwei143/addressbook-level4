@@ -19,7 +19,7 @@ import seedu.address.testutil.Assert;
 import seedu.saveit.storage.XmlAdaptedPerson;
 import seedu.saveit.storage.XmlAdaptedTag;
 
-public class XmlAdaptedPersonTest {
+public class XmlAdaptedIssueTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";

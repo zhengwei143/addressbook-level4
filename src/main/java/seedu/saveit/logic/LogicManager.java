@@ -11,7 +11,7 @@ import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.logic.parser.AddressBookParser;
 import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.model.Model;
-import seedu.saveit.model.person.Person;
+import seedu.saveit.model.person.Issue;
 
 /**
  * The main LogicManager of the app.
@@ -41,7 +41,7 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
+    public ObservableList<Issue> getFilteredPersonList() {
         return model.getFilteredPersonList();
     }
 

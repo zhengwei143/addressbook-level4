@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import seedu.saveit.commons.exceptions.IllegalValueException;
 import seedu.saveit.model.ReadOnlySaveIt;
 import seedu.saveit.model.SaveIt;
-import seedu.saveit.model.person.Person;
+import seedu.saveit.model.person.Issue;
 
 /**
  * An Immutable SaveIt that is serializable to XML format
@@ -18,7 +18,7 @@ import seedu.saveit.model.person.Person;
 @XmlRootElement(name = "saveit")
 public class XmlSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate issue(s).";
 
     @XmlElement
     private List<XmlAdaptedPerson> persons;
@@ -48,11 +48,11 @@ public class XmlSerializableAddressBook {
     public SaveIt toModelType() throws IllegalValueException {
         SaveIt saveIt = new SaveIt();
         for (XmlAdaptedPerson p : persons) {
-            Person person = p.toModelType();
-            if (saveIt.hasPerson(person)) {
+            Issue issue = p.toModelType();
+            if (saveIt.hasPerson(issue)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            saveIt.addPerson(person);
+            saveIt.addPerson(issue);
         }
         return saveIt;
     }

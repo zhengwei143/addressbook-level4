@@ -31,7 +31,7 @@ public class ModelManager extends ComponentManager implements Model {
         super();
         CollectionUtil.requireAllNonNull(saveIt, userPrefs);
 
-        logger.fine("Initializing with address book: " + saveIt + " and user prefs " + userPrefs);
+        logger.fine("Initializing with SaveIt: " + saveIt + " and user prefs " + userPrefs);
 
         versionedSaveIt = new VersionedSaveIt(saveIt);
         filteredIssues = new FilteredList<>(versionedSaveIt.getPersonList());

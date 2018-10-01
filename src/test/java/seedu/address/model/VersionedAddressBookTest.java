@@ -15,6 +15,9 @@ import java.util.List;
 import org.junit.Test;
 
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.saveit.model.AddressBook;
+import seedu.saveit.model.ReadOnlyAddressBook;
+import seedu.saveit.model.VersionedAddressBook;
 
 public class VersionedAddressBookTest {
 

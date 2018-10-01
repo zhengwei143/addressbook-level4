@@ -4,10 +4,10 @@ import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
-import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
-import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
-import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
+import static seedu.saveit.ui.BrowserPanel.DEFAULT_PAGE;
+import static seedu.saveit.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
+import static seedu.saveit.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
+import static seedu.saveit.ui.UiPart.FXML_FILE_FOLDER;
 import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
 
 import java.net.MalformedURLException;
@@ -30,19 +30,19 @@ import guitests.guihandles.MainWindowHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
-import seedu.address.MainApp;
+import seedu.saveit.MainApp;
 import seedu.address.TestApp;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SelectCommand;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
+import seedu.saveit.commons.core.EventsCenter;
+import seedu.saveit.commons.core.index.Index;
+import seedu.saveit.logic.commands.ClearCommand;
+import seedu.saveit.logic.commands.FindCommand;
+import seedu.saveit.logic.commands.ListCommand;
+import seedu.saveit.logic.commands.SelectCommand;
+import seedu.saveit.model.AddressBook;
+import seedu.saveit.model.Model;
 import seedu.address.testutil.TypicalPersons;
-import seedu.address.ui.BrowserPanel;
-import seedu.address.ui.CommandBox;
+import seedu.saveit.ui.BrowserPanel;
+import seedu.saveit.ui.CommandBox;
 
 /**
  * A system test class for AddressBook, which provides access to handles of GUI components and helper methods

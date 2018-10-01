@@ -12,13 +12,16 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.saveit.commons.core.Messages;
+import seedu.saveit.commons.core.index.Index;
+import seedu.saveit.logic.CommandHistory;
+import seedu.saveit.logic.commands.DeleteCommand;
+import seedu.saveit.logic.commands.RedoCommand;
+import seedu.saveit.logic.commands.UndoCommand;
+import seedu.saveit.model.Model;
+import seedu.saveit.model.ModelManager;
+import seedu.saveit.model.UserPrefs;
+import seedu.saveit.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for

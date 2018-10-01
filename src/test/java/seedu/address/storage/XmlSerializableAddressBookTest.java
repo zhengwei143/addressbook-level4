@@ -9,10 +9,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.AddressBook;
+import seedu.saveit.commons.exceptions.IllegalValueException;
+import seedu.saveit.commons.util.XmlUtil;
+import seedu.saveit.model.AddressBook;
 import seedu.address.testutil.TypicalPersons;
+import seedu.saveit.storage.XmlSerializableAddressBook;
 
 public class XmlSerializableAddressBookTest {
 

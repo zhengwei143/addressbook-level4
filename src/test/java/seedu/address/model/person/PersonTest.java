@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.testutil.PersonBuilder;
+import seedu.saveit.model.person.Person;
 
 public class PersonTest {
     @Rule

@@ -16,9 +16,10 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.saveit.commons.exceptions.DataConversionException;
+import seedu.saveit.model.AddressBook;
+import seedu.saveit.model.ReadOnlyAddressBook;
+import seedu.saveit.storage.XmlAddressBookStorage;
 
 public class XmlAddressBookStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlAddressBookStorageTest");

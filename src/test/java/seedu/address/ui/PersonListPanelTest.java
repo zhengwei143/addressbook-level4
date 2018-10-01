@@ -18,11 +18,12 @@ import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.person.Person;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
+import seedu.saveit.commons.util.FileUtil;
+import seedu.saveit.commons.util.XmlUtil;
+import seedu.saveit.model.person.Person;
+import seedu.saveit.storage.XmlSerializableAddressBook;
+import seedu.saveit.ui.PersonListPanel;
 
 public class PersonListPanelTest extends GuiUnitTest {
     private static final ObservableList<Person> TYPICAL_PERSONS =

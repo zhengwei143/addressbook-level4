@@ -7,7 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import guitests.guihandles.ResultDisplayHandle;
-import seedu.address.commons.events.ui.NewResultAvailableEvent;
+import seedu.saveit.commons.events.ui.NewResultAvailableEvent;
+import seedu.saveit.ui.ResultDisplay;
 
 public class ResultDisplayTest extends GuiUnitTest {
 

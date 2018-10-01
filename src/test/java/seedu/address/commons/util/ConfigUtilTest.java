@@ -14,8 +14,9 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.core.Config;
-import seedu.address.commons.exceptions.DataConversionException;
+import seedu.saveit.commons.core.Config;
+import seedu.saveit.commons.exceptions.DataConversionException;
+import seedu.saveit.commons.util.ConfigUtil;
 
 public class ConfigUtilTest {
 

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+import seedu.saveit.commons.core.index.Index;
 
 public class IndexTest {
 

@@ -4,9 +4,10 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.Test;
 
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
+import seedu.saveit.logic.CommandHistory;
+import seedu.saveit.logic.commands.HistoryCommand;
+import seedu.saveit.model.Model;
+import seedu.saveit.model.ModelManager;
 
 public class HistoryCommandTest {
     private CommandHistory history = new CommandHistory();

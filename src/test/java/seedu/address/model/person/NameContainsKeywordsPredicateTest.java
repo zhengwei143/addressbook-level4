@@ -10,6 +10,7 @@ import java.util.List;
 import org.junit.Test;
 
 import seedu.address.testutil.PersonBuilder;
+import seedu.saveit.model.person.NameContainsKeywordsPredicate;
 
 public class NameContainsKeywordsPredicateTest {
 

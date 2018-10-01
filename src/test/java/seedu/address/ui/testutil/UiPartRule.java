@@ -6,7 +6,7 @@ import org.testfx.api.FxToolkit;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import seedu.address.ui.UiPart;
+import seedu.saveit.ui.UiPart;
 
 /**
  * Provides an isolated stage to test an individual {@code UiPart}.

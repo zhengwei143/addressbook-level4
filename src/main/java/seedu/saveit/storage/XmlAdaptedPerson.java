@@ -82,7 +82,8 @@ public class XmlAdaptedPerson {
         }
 
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, IssueStatement.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                IssueStatement.class.getSimpleName()));
         }
         if (!IssueStatement.isValidIssueStatement(name)) {
             throw new IllegalValueException(IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS);

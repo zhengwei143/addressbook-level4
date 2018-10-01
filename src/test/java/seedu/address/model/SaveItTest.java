@@ -21,8 +21,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.ReadOnlySaveIt;
-import seedu.saveit.model.person.Issue;
-import seedu.saveit.model.person.exceptions.DuplicatePersonException;
+import seedu.saveit.model.issue.Issue;
+import seedu.saveit.model.issue.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
 
 public class SaveItTest {

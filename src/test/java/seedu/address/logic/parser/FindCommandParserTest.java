@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import seedu.saveit.logic.commands.FindCommand;
 import seedu.saveit.logic.parser.FindCommandParser;
-import seedu.saveit.model.person.NameContainsKeywordsPredicate;
+import seedu.saveit.model.issue.NameContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 

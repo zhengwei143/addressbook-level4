@@ -11,11 +11,11 @@ import java.util.stream.Stream;
 
 import seedu.saveit.logic.commands.AddCommand;
 import seedu.saveit.logic.parser.exceptions.ParseException;
-import seedu.saveit.model.person.Address;
-import seedu.saveit.model.person.Email;
-import seedu.saveit.model.person.Issue;
-import seedu.saveit.model.person.Name;
-import seedu.saveit.model.person.Phone;
+import seedu.saveit.model.issue.Address;
+import seedu.saveit.model.issue.Email;
+import seedu.saveit.model.issue.Issue;
+import seedu.saveit.model.issue.Name;
+import seedu.saveit.model.issue.Phone;
 import seedu.saveit.model.tag.Tag;
 import seedu.saveit.commons.core.Messages;
 

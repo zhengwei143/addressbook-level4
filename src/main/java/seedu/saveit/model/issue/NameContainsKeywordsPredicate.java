@@ -1,4 +1,4 @@
-package seedu.saveit.model.person;
+package seedu.saveit.model.issue;
 
 import java.util.List;
 import java.util.function.Predicate;

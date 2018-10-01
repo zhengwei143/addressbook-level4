@@ -20,8 +20,8 @@ import seedu.saveit.logic.commands.EditCommand;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.Model;
-import seedu.saveit.model.person.Issue;
-import seedu.saveit.model.person.NameContainsKeywordsPredicate;
+import seedu.saveit.model.issue.Issue;
+import seedu.saveit.model.issue.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**

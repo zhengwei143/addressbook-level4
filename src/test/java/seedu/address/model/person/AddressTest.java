@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import seedu.address.testutil.Assert;
-import seedu.saveit.model.person.Address;
+import seedu.saveit.model.issue.Address;
 
 public class AddressTest {
 

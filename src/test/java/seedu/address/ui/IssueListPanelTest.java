@@ -21,7 +21,7 @@ import javafx.collections.ObservableList;
 import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.commons.util.FileUtil;
 import seedu.saveit.commons.util.XmlUtil;
-import seedu.saveit.model.person.Issue;
+import seedu.saveit.model.issue.Issue;
 import seedu.saveit.storage.XmlSerializableAddressBook;
 import seedu.saveit.ui.PersonListPanel;
 

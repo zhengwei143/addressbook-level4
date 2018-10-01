@@ -16,7 +16,7 @@ import org.junit.rules.ExpectedException;
 import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.UserPrefs;
-import seedu.saveit.model.person.NameContainsKeywordsPredicate;
+import seedu.saveit.model.issue.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {

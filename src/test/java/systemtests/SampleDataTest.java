@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import org.junit.Test;
 
 import seedu.saveit.model.SaveIt;
-import seedu.saveit.model.person.Issue;
+import seedu.saveit.model.issue.Issue;
 import seedu.saveit.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 

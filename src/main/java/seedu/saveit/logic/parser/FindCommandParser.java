@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import seedu.saveit.logic.commands.FindCommand;
 import seedu.saveit.logic.parser.exceptions.ParseException;
-import seedu.saveit.model.person.NameContainsKeywordsPredicate;
+import seedu.saveit.model.issue.NameContainsKeywordsPredicate;
 import seedu.saveit.commons.core.Messages;
 
 /**

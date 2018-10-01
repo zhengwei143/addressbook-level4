@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
-import seedu.saveit.model.person.Issue;
+import seedu.saveit.model.issue.Issue;
 
 /**
  * A set of assertion methods useful for writing GUI tests.

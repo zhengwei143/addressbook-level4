@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.saveit.model.person.Issue;
+import seedu.saveit.model.issue.Issue;
 
 /**
  * An UI component that displays information of a {@code Issue}.

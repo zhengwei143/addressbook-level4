@@ -1,7 +1,7 @@
 package seedu.saveit.model;
 
 import javafx.collections.ObservableList;
-import seedu.saveit.model.person.Issue;
+import seedu.saveit.model.issue.Issue;
 
 /**
  * Unmodifiable view of an address book

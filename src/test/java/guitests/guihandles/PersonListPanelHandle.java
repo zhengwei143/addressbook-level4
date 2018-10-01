@@ -6,7 +6,7 @@ import java.util.Set;
 
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
-import seedu.saveit.model.person.Issue;
+import seedu.saveit.model.issue.Issue;
 
 /**
  * Provides a handle for {@code PersonListPanel} containing the list of {@code PersonCard}.

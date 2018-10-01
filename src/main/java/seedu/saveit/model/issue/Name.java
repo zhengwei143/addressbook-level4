@@ -1,4 +1,4 @@
-package seedu.saveit.model.person;
+package seedu.saveit.model.issue;
 
 import seedu.saveit.commons.util.AppUtil;
 

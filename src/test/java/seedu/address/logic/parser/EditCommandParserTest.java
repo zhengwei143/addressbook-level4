@@ -37,10 +37,10 @@ import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.commands.EditCommand;
 import seedu.saveit.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.saveit.logic.parser.EditCommandParser;
-import seedu.saveit.model.person.Address;
-import seedu.saveit.model.person.Email;
-import seedu.saveit.model.person.Name;
-import seedu.saveit.model.person.Phone;
+import seedu.saveit.model.issue.Address;
+import seedu.saveit.model.issue.Email;
+import seedu.saveit.model.issue.Name;
+import seedu.saveit.model.issue.Phone;
 import seedu.saveit.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 

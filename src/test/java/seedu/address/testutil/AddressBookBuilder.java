@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.saveit.model.SaveIt;
-import seedu.saveit.model.person.Issue;
+import seedu.saveit.model.issue.Issue;
 
 /**
  * A utility class to help with building saveit objects.

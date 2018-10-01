@@ -6,11 +6,11 @@ import java.util.stream.Collectors;
 
 import seedu.saveit.model.ReadOnlySaveIt;
 import seedu.saveit.model.SaveIt;
-import seedu.saveit.model.person.Address;
-import seedu.saveit.model.person.Email;
-import seedu.saveit.model.person.Issue;
-import seedu.saveit.model.person.Name;
-import seedu.saveit.model.person.Phone;
+import seedu.saveit.model.issue.Address;
+import seedu.saveit.model.issue.Email;
+import seedu.saveit.model.issue.Issue;
+import seedu.saveit.model.issue.Name;
+import seedu.saveit.model.issue.Phone;
 import seedu.saveit.model.tag.Tag;
 
 /**

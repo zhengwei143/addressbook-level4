@@ -18,7 +18,7 @@ import seedu.saveit.logic.commands.DeleteCommand;
 import seedu.saveit.logic.commands.RedoCommand;
 import seedu.saveit.logic.commands.UndoCommand;
 import seedu.saveit.model.Model;
-import seedu.saveit.model.person.Issue;
+import seedu.saveit.model.issue.Issue;
 
 public class DeleteCommandSystemTest extends SaveItSystemTest {
 

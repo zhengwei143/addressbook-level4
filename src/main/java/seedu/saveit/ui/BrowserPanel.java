@@ -13,7 +13,7 @@ import javafx.scene.web.WebView;
 import seedu.saveit.MainApp;
 import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.saveit.model.person.Issue;
+import seedu.saveit.model.issue.Issue;
 
 /**
  * The Browser Panel of the App.

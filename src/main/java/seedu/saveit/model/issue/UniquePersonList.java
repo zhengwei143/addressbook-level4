@@ -1,4 +1,4 @@
-package seedu.saveit.model.person;
+package seedu.saveit.model.issue;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.saveit.commons.util.CollectionUtil.requireAllNonNull;
@@ -8,8 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.saveit.model.person.exceptions.DuplicatePersonException;
-import seedu.saveit.model.person.exceptions.PersonNotFoundException;
+import seedu.saveit.model.issue.exceptions.DuplicatePersonException;
+import seedu.saveit.model.issue.exceptions.PersonNotFoundException;
 import seedu.saveit.commons.util.CollectionUtil;
 
 /**

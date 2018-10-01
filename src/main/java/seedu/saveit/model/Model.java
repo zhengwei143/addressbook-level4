@@ -3,7 +3,7 @@ package seedu.saveit.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.saveit.model.person.Issue;
+import seedu.saveit.model.issue.Issue;
 
 /**
  * The API of the Model component.

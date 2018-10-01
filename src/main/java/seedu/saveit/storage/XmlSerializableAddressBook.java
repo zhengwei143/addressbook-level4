@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import seedu.saveit.commons.exceptions.IllegalValueException;
 import seedu.saveit.model.ReadOnlySaveIt;
 import seedu.saveit.model.SaveIt;
-import seedu.saveit.model.person.Issue;
+import seedu.saveit.model.issue.Issue;
 
 /**
  * An Immutable SaveIt that is serializable to XML format

@@ -21,7 +21,7 @@ import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.model.ReadOnlySaveIt;
 import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.Model;
-import seedu.saveit.model.person.Issue;
+import seedu.saveit.model.issue.Issue;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {

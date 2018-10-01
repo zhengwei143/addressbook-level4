@@ -10,7 +10,7 @@ import java.util.Set;
 
 import seedu.saveit.logic.commands.AddCommand;
 import seedu.saveit.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.saveit.model.person.Issue;
+import seedu.saveit.model.issue.Issue;
 import seedu.saveit.model.tag.Tag;
 
 /**

@@ -1,7 +1,7 @@
 package seedu.saveit.commons.events.ui;
 
 import seedu.saveit.commons.events.BaseEvent;
-import seedu.saveit.model.person.Issue;
+import seedu.saveit.model.issue.Issue;
 
 /**
  * Represents a selection change in the Issue List Panel

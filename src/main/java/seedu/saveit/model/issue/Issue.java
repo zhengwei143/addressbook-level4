@@ -1,4 +1,4 @@
-package seedu.saveit.model.person;
+package seedu.saveit.model.issue;
 
 import static seedu.saveit.commons.util.CollectionUtil.requireAllNonNull;
 

@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.model.Model;
-import seedu.saveit.model.person.Issue;
+import seedu.saveit.model.issue.Issue;
 
 /**
  * A utility class for test cases.

@@ -10,7 +10,7 @@ import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.model.Model;
-import seedu.saveit.model.person.Issue;
+import seedu.saveit.model.issue.Issue;
 
 /**
  * Adds a issue to the address book.

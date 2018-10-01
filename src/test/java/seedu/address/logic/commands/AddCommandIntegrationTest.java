@@ -12,7 +12,7 @@ import seedu.saveit.logic.commands.AddCommand;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.UserPrefs;
-import seedu.saveit.model.person.Issue;
+import seedu.saveit.model.issue.Issue;
 import seedu.address.testutil.PersonBuilder;
 
 /**

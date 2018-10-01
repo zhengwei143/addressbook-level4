@@ -13,7 +13,7 @@ import javafx.scene.layout.Region;
 import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.saveit.model.person.Issue;
+import seedu.saveit.model.issue.Issue;
 
 /**
  * Panel containing the list of persons.

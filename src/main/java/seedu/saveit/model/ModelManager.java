@@ -12,7 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.saveit.commons.core.ComponentManager;
 import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.events.model.AddressBookChangedEvent;
-import seedu.saveit.model.person.Issue;
+import seedu.saveit.model.issue.Issue;
 import seedu.saveit.commons.util.CollectionUtil;
 
 /**

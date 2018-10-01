@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.saveit.commons.util.AppUtil;
 
 /**
- * Represents a Issue's name in the address book.
+ * Represents a Issue's name in the saveit book.
  * Guarantees: immutable; is valid as declared in {@link #isValidIssueStatement(String)}
  */
 public class IssueStatement {
@@ -14,7 +14,7 @@ public class IssueStatement {
             "Issue statement should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the saveit must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String ISSUE_STATEMENT_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";

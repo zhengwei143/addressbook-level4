@@ -9,7 +9,7 @@ import seedu.saveit.commons.util.CollectionUtil;
 import seedu.saveit.model.tag.Tag;
 
 /**
- * Represents a Issue in the address book.
+ * Represents a Issue in the saveit book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Issue {

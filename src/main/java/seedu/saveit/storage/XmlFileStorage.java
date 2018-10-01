@@ -25,7 +25,7 @@ public class XmlFileStorage {
     }
 
     /**
-     * Returns address book in the file or an empty address book
+     * Returns saveit book in the file or an empty saveit book
      */
     public static XmlSerializableSaveIt loadDataFromSaveFile(Path file) throws DataConversionException,
                                                                             FileNotFoundException {

@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.saveit.commons.util.AppUtil;
 
 /**
- * Represents a Issue's email in the address book.
+ * Represents a Issue's email in the saveit book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class Email {
@@ -33,7 +33,7 @@ public class Email {
     /**
      * Constructs an {@code Email}.
      *
-     * @param email A valid email address.
+     * @param email A valid email saveit.
      */
     public Email(String email) {
         requireNonNull(email);

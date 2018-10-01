@@ -13,13 +13,13 @@ import seedu.saveit.model.Model;
 import seedu.saveit.model.issue.Issue;
 
 /**
- * Adds a issue to the address book.
+ * Adds a issue to the saveit book.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a issue to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a issue to the saveit book. "
             + "Parameters: "
             + PREFIX_NAME + "ISSUE_STATEMENT "
             + PREFIX_PHONE + "PHONE "
@@ -35,7 +35,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New issue added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This issue already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This issue already exists in the saveit book";
 
     private final Issue toAdd;
 

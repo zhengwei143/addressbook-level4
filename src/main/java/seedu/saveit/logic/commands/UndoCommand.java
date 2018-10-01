@@ -7,7 +7,7 @@ import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.model.Model;
 
 /**
- * Reverts the {@code model}'s address book to its previous state.
+ * Reverts the {@code model}'s saveit book to its previous state.
  */
 public class UndoCommand extends Command {
 

@@ -9,7 +9,7 @@ import seedu.saveit.model.issue.Issue;
 import seedu.saveit.model.issue.UniquePersonList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the saveit-book level
  * Duplicates are not allowed (by .isSameIssue comparison)
  */
 public class SaveIt implements ReadOnlySaveIt {
@@ -59,7 +59,7 @@ public class SaveIt implements ReadOnlySaveIt {
     //// issue-level operations
 
     /**
-     * Returns true if a issue with the same identity as {@code issue} exists in the address book.
+     * Returns true if a issue with the same identity as {@code issue} exists in the saveit book.
      */
     public boolean hasPerson(Issue issue) {
         requireNonNull(issue);
@@ -67,8 +67,8 @@ public class SaveIt implements ReadOnlySaveIt {
     }
 
     /**
-     * Adds a issue to the address book.
-     * The issue must not already exist in the address book.
+     * Adds a issue to the saveit book.
+     * The issue must not already exist in the saveit book.
      */
     public void addPerson(Issue p) {
         persons.add(p);
@@ -76,8 +76,8 @@ public class SaveIt implements ReadOnlySaveIt {
 
     /**
      * Replaces the given issue {@code target} in the list with {@code editedIssue}.
-     * {@code target} must exist in the address book.
-     * The issue identity of {@code editedIssue} must not be the same as another existing issue in the address book.
+     * {@code target} must exist in the saveit book.
+     * The issue identity of {@code editedIssue} must not be the same as another existing issue in the saveit book.
      */
     public void updatePerson(Issue target, Issue editedIssue) {
         requireNonNull(editedIssue);
@@ -87,7 +87,7 @@ public class SaveIt implements ReadOnlySaveIt {
 
     /**
      * Removes {@code key} from this {@code SaveIt}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the saveit book.
      */
     public void removePerson(Issue key) {
         persons.remove(key);

@@ -8,7 +8,7 @@ import static seedu.saveit.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.saveit.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.saveit.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
 import static seedu.saveit.ui.UiPart.FXML_FILE_FOLDER;
-import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
+import static seedu.saveit.ui.testutil.GuiTestAssert.assertListMatching;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -31,7 +31,7 @@ import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.saveit.MainApp;
-import seedu.address.TestApp;
+import seedu.saveit.TestApp;
 import seedu.saveit.commons.core.EventsCenter;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.commands.ClearCommand;
@@ -40,7 +40,7 @@ import seedu.saveit.logic.commands.ListCommand;
 import seedu.saveit.logic.commands.SelectCommand;
 import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.Model;
-import seedu.address.testutil.TypicalPersons;
+import seedu.saveit.testutil.TypicalPersons;
 import seedu.saveit.ui.BrowserPanel;
 import seedu.saveit.ui.CommandBox;
 
@@ -139,7 +139,7 @@ public abstract class SaveItSystemTest {
     }
 
     /**
-     * Displays all persons in the address book.
+     * Displays all persons in the saveit book.
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
@@ -163,7 +163,7 @@ public abstract class SaveItSystemTest {
     }
 
     /**
-     * Deletes all persons in the address book.
+     * Deletes all persons in the saveit book.
      */
     protected void deleteAllPersons() {
         executeCommand(ClearCommand.COMMAND_WORD);

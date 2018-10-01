@@ -27,7 +27,7 @@ import seedu.saveit.model.issue.Phone;
 import seedu.saveit.model.tag.Tag;
 
 /**
- * Edits the details of an existing issue in the address book.
+ * Edits the details of an existing issue in the saveit book.
  */
 public class EditCommand extends Command {
 
@@ -48,7 +48,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Issue: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This issue already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This issue already exists in the saveit book.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;

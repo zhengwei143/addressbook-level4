@@ -19,26 +19,26 @@ public interface Model {
     ReadOnlySaveIt getSaveIt();
 
     /**
-     * Returns true if a issue with the same identity as {@code issue} exists in the address book.
+     * Returns true if a issue with the same identity as {@code issue} exists in the saveit book.
      */
     boolean hasPerson(Issue issue);
 
     /**
      * Deletes the given issue.
-     * The issue must exist in the address book.
+     * The issue must exist in the saveit book.
      */
     void deletePerson(Issue target);
 
     /**
      * Adds the given issue.
-     * {@code issue} must not already exist in the address book.
+     * {@code issue} must not already exist in the saveit book.
      */
     void addPerson(Issue issue);
 
     /**
      * Replaces the given issue {@code target} with {@code editedIssue}.
-     * {@code target} must exist in the address book.
-     * The issue identity of {@code editedIssue} must not be the same as another existing issue in the address book.
+     * {@code target} must exist in the saveit book.
+     * The issue identity of {@code editedIssue} must not be the same as another existing issue in the saveit book.
      */
     void updatePerson(Issue target, Issue editedIssue);
 
@@ -52,27 +52,27 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Issue> predicate);
 
     /**
-     * Returns true if the model has previous address book states to restore.
+     * Returns true if the model has previous saveit book states to restore.
      */
     boolean canUndoSaveIt();
 
     /**
-     * Returns true if the model has undone address book states to restore.
+     * Returns true if the model has undone saveit book states to restore.
      */
     boolean canRedoSaveIt();
 
     /**
-     * Restores the model's address book to its previous state.
+     * Restores the model's saveit book to its previous state.
      */
     void undoSaveIt();
 
     /**
-     * Restores the model's address book to its previously undone state.
+     * Restores the model's saveit book to its previously undone state.
      */
     void redoSaveIt();
 
     /**
-     * Saves the current address book state for undo/redo.
+     * Saves the current saveit book state for undo/redo.
      */
     void commitSaveIt();
 }

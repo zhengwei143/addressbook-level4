@@ -15,7 +15,7 @@ import seedu.saveit.commons.util.CollectionUtil;
 import seedu.saveit.model.issue.Issue;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the saveit book data.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);

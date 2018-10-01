@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.saveit.commons.util.AppUtil;
 
 /**
- * Represents a Issue's address in the address book.
+ * Represents a Issue's saveit in the saveit book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {
@@ -14,7 +14,7 @@ public class Address {
             "Addresses can take any values, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the saveit must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String ADDRESS_VALIDATION_REGEX = "[^\\s].*";
@@ -24,7 +24,7 @@ public class Address {
     /**
      * Constructs an {@code Address}.
      *
-     * @param address A valid address.
+     * @param address A valid saveit.
      */
     public Address(String address) {
         requireNonNull(address);

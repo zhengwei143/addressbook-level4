@@ -14,7 +14,7 @@ import seedu.saveit.model.Model;
 import seedu.saveit.model.issue.Issue;
 
 /**
- * Selects a issue identified using it's displayed index from the address book.
+ * Selects a issue identified using it's displayed index from the saveit book.
  */
 public class SelectCommand extends Command {
 

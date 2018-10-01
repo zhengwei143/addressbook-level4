@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.saveit.model.issue.Issue;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of an saveit book
  */
 public interface ReadOnlySaveIt {
 

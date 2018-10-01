@@ -7,7 +7,7 @@ import seedu.saveit.model.Model;
 import seedu.saveit.model.SaveIt;
 
 /**
- * Clears the address book.
+ * Clears the saveit book.
  */
 public class ClearCommand extends Command {
 

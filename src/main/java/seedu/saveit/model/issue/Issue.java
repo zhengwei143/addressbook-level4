@@ -17,7 +17,7 @@ import seedu.saveit.commons.util.CollectionUtil;
 public class Issue {
 
     // Identity fields
-    private final Name name;
+    private final IssueStatement name;
     private final Phone phone;
     private final Email email;
 
@@ -28,7 +28,7 @@ public class Issue {
     /**
      * Every field must be present and not null.
      */
-    public Issue(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Issue(IssueStatement name, Phone phone, Email email, Address address, Set<Tag> tags) {
         CollectionUtil.requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -37,7 +37,7 @@ public class Issue {
         this.tags.addAll(tags);
     }
 
-    public Name getName() {
+    public IssueStatement getName() {
         return name;
     }
 

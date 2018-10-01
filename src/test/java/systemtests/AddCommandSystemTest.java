@@ -40,7 +40,7 @@ import seedu.saveit.model.Model;
 import seedu.saveit.model.issue.Address;
 import seedu.saveit.model.issue.Email;
 import seedu.saveit.model.issue.Issue;
-import seedu.saveit.model.issue.Name;
+import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.model.issue.Phone;
 import seedu.saveit.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
@@ -158,7 +158,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
 
         /* Case: invalid name -> rejected */
         command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        assertCommandFailure(command, Name.MESSAGE_NAME_CONSTRAINTS);
+        assertCommandFailure(command, IssueStatement.MESSAGE_NAME_CONSTRAINTS);
 
         /* Case: invalid phone -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_PHONE_DESC + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;

@@ -42,7 +42,7 @@ import seedu.saveit.model.Model;
 import seedu.saveit.model.issue.Address;
 import seedu.saveit.model.issue.Email;
 import seedu.saveit.model.issue.Issue;
-import seedu.saveit.model.issue.Name;
+import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.model.issue.Phone;
 import seedu.saveit.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
@@ -165,7 +165,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
 
         /* Case: invalid name -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_NAME_DESC,
-                Name.MESSAGE_NAME_CONSTRAINTS);
+                IssueStatement.MESSAGE_NAME_CONSTRAINTS);
 
         /* Case: invalid phone -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_PHONE_DESC,

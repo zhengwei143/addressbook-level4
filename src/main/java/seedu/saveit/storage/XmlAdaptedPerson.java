@@ -13,7 +13,7 @@ import seedu.saveit.commons.exceptions.IllegalValueException;
 import seedu.saveit.model.issue.Address;
 import seedu.saveit.model.issue.Email;
 import seedu.saveit.model.issue.Issue;
-import seedu.saveit.model.issue.Name;
+import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.model.issue.Phone;
 import seedu.saveit.model.tag.Tag;
 
@@ -82,12 +82,12 @@ public class XmlAdaptedPerson {
         }
 
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, IssueStatement.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_NAME_CONSTRAINTS);
+        if (!IssueStatement.isValidName(name)) {
+            throw new IllegalValueException(IssueStatement.MESSAGE_NAME_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        final IssueStatement modelName = new IssueStatement(name);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));

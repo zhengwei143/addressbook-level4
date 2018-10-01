@@ -19,7 +19,7 @@ import seedu.saveit.logic.parser.ParserUtil;
 import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.model.issue.Address;
 import seedu.saveit.model.issue.Email;
-import seedu.saveit.model.issue.Name;
+import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.model.issue.Phone;
 import seedu.saveit.model.tag.Tag;
 import seedu.address.testutil.Assert;
@@ -77,14 +77,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
-        Name expectedName = new Name(VALID_NAME);
+        IssueStatement expectedName = new IssueStatement(VALID_NAME);
         assertEquals(expectedName, ParserUtil.parseName(VALID_NAME));
     }
 
     @Test
     public void parseName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
-        Name expectedName = new Name(VALID_NAME);
+        IssueStatement expectedName = new IssueStatement(VALID_NAME);
         assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
     }
 

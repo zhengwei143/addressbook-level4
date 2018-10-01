@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 import seedu.saveit.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.saveit.model.issue.Address;
 import seedu.saveit.model.issue.Email;
-import seedu.saveit.model.issue.Name;
+import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.model.issue.Issue;
 import seedu.saveit.model.issue.Phone;
 import seedu.saveit.model.tag.Tag;
@@ -40,10 +40,10 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code IssueStatement} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withName(String name) {
-        descriptor.setName(new Name(name));
+        descriptor.setName(new IssueStatement(name));
         return this;
     }
 

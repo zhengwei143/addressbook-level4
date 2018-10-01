@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import seedu.saveit.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Issue}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Issue}'s {@code IssueStatement} matches any of the keywords given.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Issue> {
     private final List<String> keywords;

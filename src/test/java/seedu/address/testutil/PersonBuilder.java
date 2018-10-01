@@ -6,7 +6,7 @@ import java.util.Set;
 import seedu.saveit.model.issue.Address;
 import seedu.saveit.model.issue.Email;
 import seedu.saveit.model.issue.Issue;
-import seedu.saveit.model.issue.Name;
+import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.model.issue.Phone;
 import seedu.saveit.model.tag.Tag;
 import seedu.saveit.model.util.SampleDataUtil;
@@ -21,14 +21,14 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
-    private Name name;
+    private IssueStatement name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
 
     public PersonBuilder() {
-        name = new Name(DEFAULT_NAME);
+        name = new IssueStatement(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
@@ -47,10 +47,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code Issue} that we are building.
+     * Sets the {@code IssueStatement} of the {@code Issue} that we are building.
      */
     public PersonBuilder withName(String name) {
-        this.name = new Name(name);
+        this.name = new IssueStatement(name);
         return this;
     }
 

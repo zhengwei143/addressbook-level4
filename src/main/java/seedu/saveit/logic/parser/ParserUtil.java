@@ -11,7 +11,7 @@ import seedu.saveit.commons.util.StringUtil;
 import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.model.issue.Address;
 import seedu.saveit.model.issue.Email;
-import seedu.saveit.model.issue.Name;
+import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.model.issue.Phone;
 import seedu.saveit.model.tag.Tag;
 
@@ -36,18 +36,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
+     * Parses a {@code String name} into a {@code IssueStatement}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static Name parseName(String name) throws ParseException {
+    public static IssueStatement parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_NAME_CONSTRAINTS);
+        if (!IssueStatement.isValidName(trimmedName)) {
+            throw new ParseException(IssueStatement.MESSAGE_NAME_CONSTRAINTS);
         }
-        return new Name(trimmedName);
+        return new IssueStatement(trimmedName);
     }
 
     /**

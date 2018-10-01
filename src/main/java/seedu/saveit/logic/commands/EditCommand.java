@@ -22,7 +22,7 @@ import seedu.saveit.model.Model;
 import seedu.saveit.model.issue.Address;
 import seedu.saveit.model.issue.Email;
 import seedu.saveit.model.issue.Issue;
-import seedu.saveit.model.issue.Name;
+import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.model.issue.Phone;
 import seedu.saveit.model.tag.Tag;
 
@@ -94,7 +94,7 @@ public class EditCommand extends Command {
     private static Issue createEditedPerson(Issue issueToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert issueToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(issueToEdit.getName());
+        IssueStatement updatedName = editPersonDescriptor.getName().orElse(issueToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(issueToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(issueToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(issueToEdit.getAddress());
@@ -126,7 +126,7 @@ public class EditCommand extends Command {
      * corresponding field value of the issue.
      */
     public static class EditPersonDescriptor {
-        private Name name;
+        private IssueStatement name;
         private Phone phone;
         private Email email;
         private Address address;
@@ -153,11 +153,11 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
         }
 
-        public void setName(Name name) {
+        public void setName(IssueStatement name) {
             this.name = name;
         }
 
-        public Optional<Name> getName() {
+        public Optional<IssueStatement> getName() {
             return Optional.ofNullable(name);
         }
 

@@ -60,7 +60,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add i/ISSUE`, `ISSUE` is a parameter which can be used as `add i/Segment Fault`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Items in square brackets are optional e.g `n/ISSUE_STATEMENT [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order e.g. if the command specifies `i/ISSUE_STATEMENT s/SOLUTION_LINK, s/SOUTION_LINK i/ISSUE_STATEMENT` is also acceptable.
 ====

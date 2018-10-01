@@ -1,52 +1,24 @@
 package systemtests;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-import static seedu.saveit.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.saveit.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.saveit.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.saveit.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.saveit.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.saveit.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.saveit.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.saveit.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.saveit.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.saveit.testutil.TypicalPersons.AMY;
-import static seedu.saveit.testutil.TypicalPersons.BOB;
-import static seedu.saveit.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
-
 import org.junit.Test;
-
 import seedu.saveit.commons.core.Messages;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.commands.EditCommand;
 import seedu.saveit.logic.commands.RedoCommand;
 import seedu.saveit.logic.commands.UndoCommand;
 import seedu.saveit.model.Model;
-import seedu.saveit.model.issue.Address;
-import seedu.saveit.model.issue.Email;
-import seedu.saveit.model.issue.Issue;
-import seedu.saveit.model.issue.IssueStatement;
-import seedu.saveit.model.issue.Phone;
+import seedu.saveit.model.issue.*;
 import seedu.saveit.model.tag.Tag;
 import seedu.saveit.testutil.PersonBuilder;
 import seedu.saveit.testutil.PersonUtil;
+
+import static org.junit.Assert.*;
+import static seedu.saveit.logic.commands.CommandTestUtil.*;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.saveit.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.saveit.testutil.TypicalPersons.*;
 
 public class EditCommandSystemTest extends SaveItSystemTest {
 

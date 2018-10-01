@@ -1,33 +1,23 @@
 package seedu.saveit.logic.commands;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-import static seedu.saveit.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.saveit.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.saveit.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.saveit.testutil.TypicalPersons.getTypicalSaveIt;
-
 import org.junit.Test;
-
 import seedu.saveit.commons.core.Messages;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
+import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.UserPrefs;
 import seedu.saveit.model.issue.Issue;
 import seedu.saveit.testutil.EditPersonDescriptorBuilder;
 import seedu.saveit.testutil.PersonBuilder;
+
+import static org.junit.Assert.*;
+import static seedu.saveit.logic.commands.CommandTestUtil.*;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.saveit.testutil.TypicalPersons.getTypicalSaveIt;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.

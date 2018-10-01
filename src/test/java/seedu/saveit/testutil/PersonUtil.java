@@ -1,17 +1,13 @@
 package seedu.saveit.testutil;
 
-import static seedu.saveit.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.saveit.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.saveit.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.saveit.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
-
-import java.util.Set;
-
 import seedu.saveit.logic.commands.AddCommand;
 import seedu.saveit.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.saveit.model.issue.Issue;
 import seedu.saveit.model.tag.Tag;
+
+import java.util.Set;
+
+import static seedu.saveit.logic.parser.CliSyntax.*;
 
 /**
  * A utility class for Issue.

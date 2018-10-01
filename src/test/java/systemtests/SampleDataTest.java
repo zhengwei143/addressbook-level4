@@ -1,17 +1,16 @@
 package systemtests;
 
-import static seedu.saveit.ui.testutil.GuiTestAssert.assertListMatching;
+import org.junit.Test;
+import seedu.saveit.model.SaveIt;
+import seedu.saveit.model.issue.Issue;
+import seedu.saveit.model.util.SampleDataUtil;
+import seedu.saveit.testutil.TestUtil;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import org.junit.Test;
-
-import seedu.saveit.model.SaveIt;
-import seedu.saveit.model.issue.Issue;
-import seedu.saveit.model.util.SampleDataUtil;
-import seedu.saveit.testutil.TestUtil;
+import static seedu.saveit.ui.testutil.GuiTestAssert.assertListMatching;
 
 public class SampleDataTest extends SaveItSystemTest {
     /**

@@ -1,20 +1,15 @@
 package seedu.saveit.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.saveit.testutil.TypicalPersons.AMY;
-import static seedu.saveit.testutil.TypicalPersons.BOB;
-import static seedu.saveit.testutil.TypicalPersons.CARL;
+import org.junit.Test;
+import seedu.saveit.testutil.SaveItBuilder;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Test;
-
-import seedu.saveit.testutil.SaveItBuilder;
+import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.saveit.testutil.TypicalPersons.*;
 
 public class VersionedSaveItTest {
 

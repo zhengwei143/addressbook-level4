@@ -1,17 +1,16 @@
 package seedu.saveit.logic.commands;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static seedu.saveit.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
-
 import org.junit.Rule;
 import org.junit.Test;
-
 import seedu.saveit.commons.events.ui.ExitAppRequestEvent;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
 import seedu.saveit.ui.testutil.EventsCollectorRule;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static seedu.saveit.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
 
 public class ExitCommandTest {
     @Rule

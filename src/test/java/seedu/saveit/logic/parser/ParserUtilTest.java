@@ -1,20 +1,8 @@
 package seedu.saveit.logic.parser;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import static seedu.saveit.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
-import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
 import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.model.issue.Address;
 import seedu.saveit.model.issue.Email;
@@ -22,6 +10,16 @@ import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.model.issue.Phone;
 import seedu.saveit.model.tag.Tag;
 import seedu.saveit.testutil.Assert;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static seedu.saveit.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";

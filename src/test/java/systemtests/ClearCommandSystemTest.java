@@ -1,16 +1,15 @@
 package systemtests;
 
-import static seedu.saveit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.saveit.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
-
 import org.junit.Test;
-
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.commands.ClearCommand;
 import seedu.saveit.logic.commands.RedoCommand;
 import seedu.saveit.logic.commands.UndoCommand;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
+
+import static seedu.saveit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.saveit.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 public class ClearCommandSystemTest extends SaveItSystemTest {
 

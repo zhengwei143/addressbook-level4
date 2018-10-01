@@ -1,17 +1,6 @@
 package seedu.saveit.logic.commands;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.saveit.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.saveit.testutil.TypicalPersons.getTypicalSaveIt;
-
 import org.junit.Test;
-
 import seedu.saveit.commons.core.Messages;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.CommandHistory;
@@ -19,6 +8,12 @@ import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.UserPrefs;
 import seedu.saveit.model.issue.Issue;
+
+import static org.junit.Assert.*;
+import static seedu.saveit.logic.commands.CommandTestUtil.*;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.saveit.testutil.TypicalPersons.getTypicalSaveIt;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for

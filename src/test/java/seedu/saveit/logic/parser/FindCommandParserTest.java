@@ -1,15 +1,14 @@
 package seedu.saveit.logic.parser;
 
-import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import org.junit.Test;
+import seedu.saveit.logic.commands.FindCommand;
+import seedu.saveit.model.issue.NameContainsKeywordsPredicate;
 
 import java.util.Arrays;
 
-import org.junit.Test;
-
-import seedu.saveit.logic.commands.FindCommand;
-import seedu.saveit.model.issue.NameContainsKeywordsPredicate;
+import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 public class FindCommandParserTest {
 

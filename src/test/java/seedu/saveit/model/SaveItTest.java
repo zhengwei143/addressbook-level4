@@ -1,27 +1,24 @@
 package seedu.saveit.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.saveit.testutil.TypicalPersons.ALICE;
-import static seedu.saveit.testutil.TypicalPersons.getTypicalSaveIt;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import seedu.saveit.model.issue.Issue;
+import seedu.saveit.model.issue.exceptions.DuplicatePersonException;
+import seedu.saveit.testutil.PersonBuilder;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import seedu.saveit.model.issue.Issue;
-import seedu.saveit.model.issue.exceptions.DuplicatePersonException;
-import seedu.saveit.testutil.PersonBuilder;
+import static org.junit.Assert.*;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.saveit.testutil.TypicalPersons.ALICE;
+import static seedu.saveit.testutil.TypicalPersons.getTypicalSaveIt;
 
 public class SaveItTest {
 

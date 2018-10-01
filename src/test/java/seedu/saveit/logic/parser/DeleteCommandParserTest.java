@@ -1,13 +1,12 @@
 package seedu.saveit.logic.parser;
 
+import org.junit.Test;
+import seedu.saveit.logic.commands.DeleteCommand;
+
 import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-
-import org.junit.Test;
-
-import seedu.saveit.logic.commands.DeleteCommand;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations

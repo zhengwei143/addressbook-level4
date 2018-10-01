@@ -1,20 +1,19 @@
 package seedu.saveit.model;
 
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import seedu.saveit.model.issue.NameContainsKeywordsPredicate;
+import seedu.saveit.testutil.SaveItBuilder;
+
+import java.nio.file.Paths;
+import java.util.Arrays;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.saveit.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.saveit.testutil.TypicalPersons.ALICE;
 import static seedu.saveit.testutil.TypicalPersons.BENSON;
-
-import java.nio.file.Paths;
-import java.util.Arrays;
-
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
-import seedu.saveit.model.issue.NameContainsKeywordsPredicate;
-import seedu.saveit.testutil.SaveItBuilder;
 
 public class ModelManagerTest {
     @Rule

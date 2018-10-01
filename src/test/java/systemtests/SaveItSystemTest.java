@@ -1,14 +1,23 @@
 package systemtests;
 
-import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static seedu.saveit.ui.BrowserPanel.DEFAULT_PAGE;
-import static seedu.saveit.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
-import static seedu.saveit.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
-import static seedu.saveit.ui.UiPart.FXML_FILE_FOLDER;
-import static seedu.saveit.ui.testutil.GuiTestAssert.assertListMatching;
+import guitests.guihandles.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.ClassRule;
+import seedu.saveit.MainApp;
+import seedu.saveit.TestApp;
+import seedu.saveit.commons.core.EventsCenter;
+import seedu.saveit.commons.core.index.Index;
+import seedu.saveit.logic.commands.ClearCommand;
+import seedu.saveit.logic.commands.FindCommand;
+import seedu.saveit.logic.commands.ListCommand;
+import seedu.saveit.logic.commands.SelectCommand;
+import seedu.saveit.model.Model;
+import seedu.saveit.model.SaveIt;
+import seedu.saveit.testutil.TypicalPersons;
+import seedu.saveit.ui.BrowserPanel;
+import seedu.saveit.ui.CommandBox;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -18,31 +27,13 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.ClassRule;
-
-import guitests.guihandles.BrowserPanelHandle;
-import guitests.guihandles.CommandBoxHandle;
-import guitests.guihandles.MainMenuHandle;
-import guitests.guihandles.MainWindowHandle;
-import guitests.guihandles.PersonListPanelHandle;
-import guitests.guihandles.ResultDisplayHandle;
-import guitests.guihandles.StatusBarFooterHandle;
-import seedu.saveit.MainApp;
-import seedu.saveit.TestApp;
-import seedu.saveit.commons.core.EventsCenter;
-import seedu.saveit.commons.core.index.Index;
-import seedu.saveit.logic.commands.ClearCommand;
-import seedu.saveit.logic.commands.FindCommand;
-import seedu.saveit.logic.commands.ListCommand;
-import seedu.saveit.logic.commands.SelectCommand;
-import seedu.saveit.model.SaveIt;
-import seedu.saveit.model.Model;
-import seedu.saveit.testutil.TypicalPersons;
-import seedu.saveit.ui.BrowserPanel;
-import seedu.saveit.ui.CommandBox;
+import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
+import static org.junit.Assert.*;
+import static seedu.saveit.ui.BrowserPanel.DEFAULT_PAGE;
+import static seedu.saveit.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
+import static seedu.saveit.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
+import static seedu.saveit.ui.UiPart.FXML_FILE_FOLDER;
+import static seedu.saveit.ui.testutil.GuiTestAssert.assertListMatching;
 
 /**
  * A system test class for SaveIt, which provides access to handles of GUI components and helper methods

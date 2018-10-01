@@ -1,17 +1,14 @@
 package seedu.saveit.logic.commands;
 
-import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.saveit.logic.commands.CommandTestUtil.deleteFirstPerson;
-import static seedu.saveit.testutil.TypicalPersons.getTypicalSaveIt;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.UserPrefs;
+
+import static seedu.saveit.logic.commands.CommandTestUtil.*;
+import static seedu.saveit.testutil.TypicalPersons.getTypicalSaveIt;
 
 public class UndoCommandTest {
 

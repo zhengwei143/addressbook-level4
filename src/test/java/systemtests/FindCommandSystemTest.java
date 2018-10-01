@@ -1,18 +1,6 @@
 package systemtests;
 
-import static org.junit.Assert.assertFalse;
-import static seedu.saveit.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
-import static seedu.saveit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.saveit.testutil.TypicalPersons.BENSON;
-import static seedu.saveit.testutil.TypicalPersons.CARL;
-import static seedu.saveit.testutil.TypicalPersons.DANIEL;
-import static seedu.saveit.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
-
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.commands.DeleteCommand;
 import seedu.saveit.logic.commands.FindCommand;
@@ -20,6 +8,14 @@ import seedu.saveit.logic.commands.RedoCommand;
 import seedu.saveit.logic.commands.UndoCommand;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.tag.Tag;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertFalse;
+import static seedu.saveit.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.saveit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.saveit.testutil.TypicalPersons.*;
 
 public class FindCommandSystemTest extends SaveItSystemTest {
 

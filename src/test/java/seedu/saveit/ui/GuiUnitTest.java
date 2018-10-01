@@ -1,15 +1,14 @@
 package seedu.saveit.ui;
 
-import java.util.Optional;
-
-import org.junit.After;
-import org.junit.Rule;
-
 import guitests.GuiRobot;
 import guitests.guihandles.exceptions.NodeNotFoundException;
 import javafx.scene.Node;
+import org.junit.After;
+import org.junit.Rule;
 import seedu.saveit.commons.core.EventsCenter;
 import seedu.saveit.ui.testutil.UiPartRule;
+
+import java.util.Optional;
 
 /**
  * A GUI unit test class for SaveIt.

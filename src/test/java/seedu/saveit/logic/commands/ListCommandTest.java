@@ -1,17 +1,16 @@
 package seedu.saveit.logic.commands;
 
-import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.saveit.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.saveit.testutil.TypicalPersons.getTypicalSaveIt;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.UserPrefs;
+
+import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.saveit.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.saveit.testutil.TypicalPersons.getTypicalSaveIt;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.

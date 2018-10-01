@@ -1,16 +1,12 @@
 package seedu.saveit.testutil;
 
+import seedu.saveit.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.saveit.model.issue.*;
+import seedu.saveit.model.tag.Tag;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import seedu.saveit.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.saveit.model.issue.Address;
-import seedu.saveit.model.issue.Email;
-import seedu.saveit.model.issue.IssueStatement;
-import seedu.saveit.model.issue.Issue;
-import seedu.saveit.model.issue.Phone;
-import seedu.saveit.model.tag.Tag;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.

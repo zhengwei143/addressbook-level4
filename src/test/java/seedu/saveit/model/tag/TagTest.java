@@ -1,7 +1,6 @@
 package seedu.saveit.model.tag;
 
 import org.junit.Test;
-
 import seedu.saveit.testutil.Assert;
 
 public class TagTest {

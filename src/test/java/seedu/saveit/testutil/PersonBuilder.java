@@ -1,15 +1,11 @@
 package seedu.saveit.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import seedu.saveit.model.issue.Address;
-import seedu.saveit.model.issue.Email;
-import seedu.saveit.model.issue.Issue;
-import seedu.saveit.model.issue.IssueStatement;
-import seedu.saveit.model.issue.Phone;
+import seedu.saveit.model.issue.*;
 import seedu.saveit.model.tag.Tag;
 import seedu.saveit.model.util.SampleDataUtil;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A utility class to help with building Issue objects.

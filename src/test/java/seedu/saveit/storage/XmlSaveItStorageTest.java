@@ -1,24 +1,20 @@
 package seedu.saveit.storage;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static seedu.saveit.testutil.TypicalPersons.ALICE;
-import static seedu.saveit.testutil.TypicalPersons.HOON;
-import static seedu.saveit.testutil.TypicalPersons.IDA;
-import static seedu.saveit.testutil.TypicalPersons.getTypicalSaveIt;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.junit.rules.TemporaryFolder;
+import seedu.saveit.commons.exceptions.DataConversionException;
+import seedu.saveit.model.ReadOnlySaveIt;
+import seedu.saveit.model.SaveIt;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.rules.TemporaryFolder;
-
-import seedu.saveit.commons.exceptions.DataConversionException;
-import seedu.saveit.model.ReadOnlySaveIt;
-import seedu.saveit.model.SaveIt;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static seedu.saveit.testutil.TypicalPersons.*;
 
 public class XmlSaveItStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlSaveItStorageTest");

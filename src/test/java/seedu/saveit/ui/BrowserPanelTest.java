@@ -1,20 +1,19 @@
 package seedu.saveit.ui;
 
+import guitests.guihandles.BrowserPanelHandle;
+import org.junit.Before;
+import org.junit.Test;
+import seedu.saveit.MainApp;
+import seedu.saveit.commons.events.ui.PersonPanelSelectionChangedEvent;
+
+import java.net.URL;
+
 import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static seedu.saveit.testutil.EventsUtil.postNow;
 import static seedu.saveit.testutil.TypicalPersons.ALICE;
 import static seedu.saveit.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.saveit.ui.UiPart.FXML_FILE_FOLDER;
-
-import java.net.URL;
-
-import org.junit.Before;
-import org.junit.Test;
-
-import guitests.guihandles.BrowserPanelHandle;
-import seedu.saveit.MainApp;
-import seedu.saveit.commons.events.ui.PersonPanelSelectionChangedEvent;
 
 public class BrowserPanelTest extends GuiUnitTest {
     private PersonPanelSelectionChangedEvent selectionChangedEventStub;

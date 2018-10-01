@@ -1,12 +1,11 @@
 package seedu.saveit.logic.commands;
 
-import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
-
 import org.junit.Test;
-
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
+
+import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 public class HistoryCommandTest {
     private CommandHistory history = new CommandHistory();

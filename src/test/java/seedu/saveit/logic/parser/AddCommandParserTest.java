@@ -1,44 +1,17 @@
 package seedu.saveit.logic.parser;
 
+import org.junit.Test;
+import seedu.saveit.logic.commands.AddCommand;
+import seedu.saveit.model.issue.*;
+import seedu.saveit.model.tag.Tag;
+import seedu.saveit.testutil.PersonBuilder;
+
 import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.saveit.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.saveit.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.saveit.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.saveit.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.saveit.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.saveit.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.saveit.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.saveit.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.saveit.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
-import static seedu.saveit.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.saveit.logic.commands.CommandTestUtil.*;
 import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.saveit.testutil.TypicalPersons.AMY;
 import static seedu.saveit.testutil.TypicalPersons.BOB;
-
-import org.junit.Test;
-
-import seedu.saveit.logic.commands.AddCommand;
-import seedu.saveit.model.issue.Address;
-import seedu.saveit.model.issue.Email;
-import seedu.saveit.model.issue.Issue;
-import seedu.saveit.model.issue.IssueStatement;
-import seedu.saveit.model.issue.Phone;
-import seedu.saveit.model.tag.Tag;
-import seedu.saveit.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();

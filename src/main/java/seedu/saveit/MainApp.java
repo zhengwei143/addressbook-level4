@@ -20,11 +20,8 @@ import seedu.saveit.commons.util.ConfigUtil;
 import seedu.saveit.commons.util.StringUtil;
 import seedu.saveit.logic.Logic;
 import seedu.saveit.logic.LogicManager;
-import seedu.saveit.model.AddressBook;
-import seedu.saveit.model.Model;
-import seedu.saveit.model.ModelManager;
-import seedu.saveit.model.ReadOnlyAddressBook;
-import seedu.saveit.model.UserPrefs;
+import seedu.saveit.model.*;
+import seedu.saveit.model.ReadOnlySaveIt;
 import seedu.saveit.model.util.SampleDataUtil;
 import seedu.saveit.storage.AddressBookStorage;
 import seedu.saveit.storage.JsonUserPrefsStorage;
@@ -54,7 +51,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing SaveIt ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -82,20 +79,20 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlySaveIt> addressBookOptional;
+        ReadOnlySaveIt initialData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+                logger.info("Data file not found. Will be starting with a sample SaveIt");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty SaveIt");
+            initialData = new SaveIt();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty SaveIt");
+            initialData = new SaveIt();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -159,7 +156,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty SaveIt");
             initializedPrefs = new UserPrefs();
         }
 
@@ -179,7 +176,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting SaveIt " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 

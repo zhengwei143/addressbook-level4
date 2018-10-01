@@ -38,17 +38,17 @@ import seedu.saveit.logic.commands.ClearCommand;
 import seedu.saveit.logic.commands.FindCommand;
 import seedu.saveit.logic.commands.ListCommand;
 import seedu.saveit.logic.commands.SelectCommand;
-import seedu.saveit.model.AddressBook;
+import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.Model;
 import seedu.address.testutil.TypicalPersons;
 import seedu.saveit.ui.BrowserPanel;
 import seedu.saveit.ui.CommandBox;
 
 /**
- * A system test class for AddressBook, which provides access to handles of GUI components and helper methods
+ * A system test class for SaveIt, which provides access to handles of GUI components and helper methods
  * for test verification.
  */
-public abstract class AddressBookSystemTest {
+public abstract class SaveItSystemTest {
     @ClassRule
     public static ClockRule clockRule = new ClockRule();
 
@@ -84,7 +84,7 @@ public abstract class AddressBookSystemTest {
     /**
      * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
      */
-    protected AddressBook getInitialData() {
+    protected SaveIt getInitialData() {
         return TypicalPersons.getTypicalAddressBook();
     }
 
@@ -179,7 +179,7 @@ public abstract class AddressBookSystemTest {
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
-        assertEquals(new AddressBook(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
+        assertEquals(new SaveIt(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
         assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
     }
 

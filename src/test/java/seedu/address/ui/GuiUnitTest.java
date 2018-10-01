@@ -12,7 +12,7 @@ import seedu.saveit.commons.core.EventsCenter;
 import seedu.address.ui.testutil.UiPartRule;
 
 /**
- * A GUI unit test class for AddressBook.
+ * A GUI unit test class for SaveIt.
  */
 public abstract class GuiUnitTest {
     @Rule

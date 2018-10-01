@@ -13,10 +13,10 @@ import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.exceptions.DataConversionException;
 import seedu.saveit.commons.exceptions.IllegalValueException;
 import seedu.saveit.commons.util.FileUtil;
-import seedu.saveit.model.ReadOnlyAddressBook;
+import seedu.saveit.model.ReadOnlySaveIt;
 
 /**
- * A class to access AddressBook data stored as an xml file on the hard disk.
+ * A class to access SaveIt data stored as an xml file on the hard disk.
  */
 public class XmlAddressBookStorage implements AddressBookStorage {
 
@@ -33,7 +33,7 @@ public class XmlAddressBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
+    public Optional<ReadOnlySaveIt> readAddressBook() throws DataConversionException, IOException {
         return readAddressBook(filePath);
     }
 
@@ -42,12 +42,12 @@ public class XmlAddressBookStorage implements AddressBookStorage {
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException,
+    public Optional<ReadOnlySaveIt> readAddressBook(Path filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         requireNonNull(filePath);
 
         if (!Files.exists(filePath)) {
-            logger.info("AddressBook file " + filePath + " not found");
+            logger.info("SaveIt file " + filePath + " not found");
             return Optional.empty();
         }
 
@@ -61,20 +61,20 @@ public class XmlAddressBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveAddressBook(ReadOnlySaveIt saveIt) throws IOException {
+        saveAddressBook(saveIt, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}
+     * Similar to {@link #saveAddressBook(ReadOnlySaveIt)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveAddressBook(ReadOnlySaveIt saveIt, Path filePath) throws IOException {
+        requireNonNull(saveIt);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableAddressBook(addressBook));
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableAddressBook(saveIt));
     }
 
 }

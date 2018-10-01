@@ -1,34 +1,34 @@
 package seedu.address.testutil;
 
-import seedu.saveit.model.AddressBook;
+import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.person.Person;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building saveit objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code SaveIt ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private SaveIt saveIt;
 
     public AddressBookBuilder() {
-        addressBook = new AddressBook();
+        saveIt = new SaveIt();
     }
 
-    public AddressBookBuilder(AddressBook addressBook) {
-        this.addressBook = addressBook;
+    public AddressBookBuilder(SaveIt saveIt) {
+        this.saveIt = saveIt;
     }
 
     /**
-     * Adds a new {@code Person} to the {@code AddressBook} that we are building.
+     * Adds a new {@code Person} to the {@code SaveIt} that we are building.
      */
     public AddressBookBuilder withPerson(Person person) {
-        addressBook.addPerson(person);
+        saveIt.addPerson(person);
         return this;
     }
 
-    public AddressBook build() {
-        return addressBook;
+    public SaveIt build() {
+        return saveIt;
     }
 }

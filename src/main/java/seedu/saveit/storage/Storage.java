@@ -7,7 +7,7 @@ import java.util.Optional;
 import seedu.saveit.commons.events.model.AddressBookChangedEvent;
 import seedu.saveit.commons.events.storage.DataSavingExceptionEvent;
 import seedu.saveit.commons.exceptions.DataConversionException;
-import seedu.saveit.model.ReadOnlyAddressBook;
+import seedu.saveit.model.ReadOnlySaveIt;
 import seedu.saveit.model.UserPrefs;
 
 /**
@@ -25,10 +25,10 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     Path getAddressBookFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlySaveIt> readAddressBook() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveAddressBook(ReadOnlySaveIt saveIt) throws IOException;
 
     /**
      * Saves the current version of the Address Book to the hard disk.

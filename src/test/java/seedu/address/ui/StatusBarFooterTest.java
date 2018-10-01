@@ -19,7 +19,7 @@ import org.junit.Test;
 
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.saveit.commons.events.model.AddressBookChangedEvent;
-import seedu.saveit.model.AddressBook;
+import seedu.saveit.model.SaveIt;
 import seedu.saveit.ui.StatusBarFooter;
 
 public class StatusBarFooterTest extends GuiUnitTest {
@@ -27,7 +27,7 @@ public class StatusBarFooterTest extends GuiUnitTest {
     private static final Path STUB_SAVE_LOCATION = Paths.get("Stub");
     private static final Path RELATIVE_PATH = Paths.get(".");
 
-    private static final AddressBookChangedEvent EVENT_STUB = new AddressBookChangedEvent(new AddressBook());
+    private static final AddressBookChangedEvent EVENT_STUB = new AddressBookChangedEvent(new SaveIt());
 
     private static final Clock originalClock = StatusBarFooter.getClock();
     private static final Clock injectedClock = Clock.fixed(Instant.now(), ZoneId.systemDefault());

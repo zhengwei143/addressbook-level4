@@ -16,8 +16,8 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.saveit.commons.events.model.AddressBookChangedEvent;
 import seedu.saveit.commons.events.storage.DataSavingExceptionEvent;
-import seedu.saveit.model.AddressBook;
-import seedu.saveit.model.ReadOnlyAddressBook;
+import seedu.saveit.model.SaveIt;
+import seedu.saveit.model.ReadOnlySaveIt;
 import seedu.saveit.model.UserPrefs;
 import seedu.address.ui.testutil.EventsCollectorRule;
 import seedu.saveit.storage.JsonUserPrefsStorage;
@@ -65,12 +65,12 @@ public class StorageManagerTest {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link XmlAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
+         * More extensive testing of UserPref saving/reading is done in {@link XmlSaveItStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
+        SaveIt original = getTypicalAddressBook();
         storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        ReadOnlySaveIt retrieved = storageManager.readAddressBook().get();
+        assertEquals(original, new SaveIt(retrieved));
     }
 
     @Test
@@ -83,7 +83,7 @@ public class StorageManagerTest {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(Paths.get("dummy")),
                                              new JsonUserPrefsStorage(Paths.get("dummy")));
-        storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new AddressBook()));
+        storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new SaveIt()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 
@@ -98,7 +98,7 @@ public class StorageManagerTest {
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        public void saveAddressBook(ReadOnlySaveIt saveIt, Path filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

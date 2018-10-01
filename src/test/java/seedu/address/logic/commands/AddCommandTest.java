@@ -18,9 +18,9 @@ import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.AddCommand;
 import seedu.saveit.logic.commands.CommandResult;
 import seedu.saveit.logic.commands.exceptions.CommandException;
-import seedu.saveit.model.AddressBook;
+import seedu.saveit.model.ReadOnlySaveIt;
+import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.Model;
-import seedu.saveit.model.ReadOnlyAddressBook;
 import seedu.saveit.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -96,12 +96,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void resetData(ReadOnlyAddressBook newData) {
+        public void resetData(ReadOnlySaveIt newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlySaveIt getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -198,8 +198,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlySaveIt getAddressBook() {
+            return new SaveIt();
         }
     }
 

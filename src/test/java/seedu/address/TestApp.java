@@ -12,11 +12,8 @@ import seedu.saveit.commons.core.GuiSettings;
 import seedu.saveit.commons.exceptions.DataConversionException;
 import seedu.saveit.commons.util.FileUtil;
 import seedu.saveit.commons.util.XmlUtil;
-import seedu.saveit.model.AddressBook;
-import seedu.saveit.model.Model;
-import seedu.saveit.model.ModelManager;
-import seedu.saveit.model.ReadOnlyAddressBook;
-import seedu.saveit.model.UserPrefs;
+import seedu.saveit.model.*;
+import seedu.saveit.model.ReadOnlySaveIt;
 import seedu.saveit.storage.UserPrefsStorage;
 import seedu.saveit.storage.XmlSerializableAddressBook;
 import seedu.address.testutil.TestUtil;
@@ -33,13 +30,13 @@ public class TestApp extends MainApp {
 
     protected static final Path DEFAULT_PREF_FILE_LOCATION_FOR_TESTING =
             TestUtil.getFilePathInSandboxFolder("pref_testing.json");
-    protected Supplier<ReadOnlyAddressBook> initialDataSupplier = () -> null;
+    protected Supplier<ReadOnlySaveIt> initialDataSupplier = () -> null;
     protected Path saveFileLocation = SAVE_LOCATION_FOR_TESTING;
 
     public TestApp() {
     }
 
-    public TestApp(Supplier<ReadOnlyAddressBook> initialDataSupplier, Path saveFileLocation) {
+    public TestApp(Supplier<ReadOnlySaveIt> initialDataSupplier, Path saveFileLocation) {
         super();
         this.initialDataSupplier = initialDataSupplier;
         this.saveFileLocation = saveFileLocation;
@@ -72,11 +69,11 @@ public class TestApp extends MainApp {
     /**
      * Returns a defensive copy of the address book data stored inside the storage file.
      */
-    public AddressBook readStorageAddressBook() {
+    public SaveIt readStorageAddressBook() {
         try {
-            return new AddressBook(storage.readAddressBook().get());
+            return new SaveIt(storage.readAddressBook().get());
         } catch (DataConversionException dce) {
-            throw new AssertionError("Data is not in the AddressBook format.", dce);
+            throw new AssertionError("Data is not in the SaveIt format.", dce);
         } catch (IOException ioe) {
             throw new AssertionError("Storage file cannot be found.", ioe);
         }

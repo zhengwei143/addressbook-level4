@@ -12,11 +12,11 @@ import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.events.model.AddressBookChangedEvent;
 import seedu.saveit.commons.events.storage.DataSavingExceptionEvent;
 import seedu.saveit.commons.exceptions.DataConversionException;
-import seedu.saveit.model.ReadOnlyAddressBook;
+import seedu.saveit.model.ReadOnlySaveIt;
 import seedu.saveit.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of SaveIt data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
@@ -49,7 +49,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ SaveIt methods ==============================
 
     @Override
     public Path getAddressBookFilePath() {
@@ -57,25 +57,25 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
+    public Optional<ReadOnlySaveIt> readAddressBook() throws DataConversionException, IOException {
         return readAddressBook(addressBookStorage.getAddressBookFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlySaveIt> readAddressBook(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
         return addressBookStorage.readAddressBook(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveAddressBook(ReadOnlySaveIt saveIt) throws IOException {
+        saveAddressBook(saveIt, addressBookStorage.getAddressBookFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveAddressBook(ReadOnlySaveIt saveIt, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        addressBookStorage.saveAddressBook(saveIt, filePath);
     }
 
 

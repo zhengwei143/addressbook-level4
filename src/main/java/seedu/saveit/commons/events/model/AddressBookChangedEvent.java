@@ -1,14 +1,14 @@
 package seedu.saveit.commons.events.model;
 
 import seedu.saveit.commons.events.BaseEvent;
-import seedu.saveit.model.ReadOnlyAddressBook;
+import seedu.saveit.model.ReadOnlySaveIt;
 
-/** Indicates the AddressBook in the model has changed*/
+/** Indicates the SaveIt in the model has changed*/
 public class AddressBookChangedEvent extends BaseEvent {
 
-    public final ReadOnlyAddressBook data;
+    public final ReadOnlySaveIt data;
 
-    public AddressBookChangedEvent(ReadOnlyAddressBook data) {
+    public AddressBookChangedEvent(ReadOnlySaveIt data) {
         this.data = data;
     }
 

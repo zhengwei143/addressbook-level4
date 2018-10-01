@@ -3,7 +3,7 @@ package seedu.saveit.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.saveit.logic.CommandHistory;
-import seedu.saveit.model.AddressBook;
+import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.Model;
 
 /**
@@ -18,7 +18,7 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.resetData(new AddressBook());
+        model.resetData(new SaveIt());
         model.commitAddressBook();
         return new CommandResult(MESSAGE_SUCCESS);
     }

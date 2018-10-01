@@ -16,7 +16,7 @@ public interface Model {
     void resetData(ReadOnlySaveIt newData);
 
     /** Returns the SaveIt */
-    ReadOnlySaveIt getAddressBook();
+    ReadOnlySaveIt getSaveIt();
 
     /**
      * Returns true if a issue with the same identity as {@code issue} exists in the address book.
@@ -54,25 +54,25 @@ public interface Model {
     /**
      * Returns true if the model has previous address book states to restore.
      */
-    boolean canUndoAddressBook();
+    boolean canUndoSaveIt();
 
     /**
      * Returns true if the model has undone address book states to restore.
      */
-    boolean canRedoAddressBook();
+    boolean canRedoSaveIt();
 
     /**
      * Restores the model's address book to its previous state.
      */
-    void undoAddressBook();
+    void undoSaveIt();
 
     /**
      * Restores the model's address book to its previously undone state.
      */
-    void redoAddressBook();
+    void redoSaveIt();
 
     /**
      * Saves the current address book state for undo/redo.
      */
-    void commitAddressBook();
+    void commitSaveIt();
 }

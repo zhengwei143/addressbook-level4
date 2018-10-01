@@ -13,7 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalSaveIt;
 
 import org.junit.Test;
 
@@ -38,7 +38,7 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalSaveIt(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -49,9 +49,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedIssue);
 
-        Model expectedModel = new ModelManager(new SaveIt(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new SaveIt(model.getSaveIt()), new UserPrefs());
         expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedIssue);
-        expectedModel.commitAddressBook();
+        expectedModel.commitSaveIt();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -71,9 +71,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedIssue);
 
-        Model expectedModel = new ModelManager(new SaveIt(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new SaveIt(model.getSaveIt()), new UserPrefs());
         expectedModel.updatePerson(lastIssue, editedIssue);
-        expectedModel.commitAddressBook();
+        expectedModel.commitSaveIt();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -85,8 +85,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedIssue);
 
-        Model expectedModel = new ModelManager(new SaveIt(model.getAddressBook()), new UserPrefs());
-        expectedModel.commitAddressBook();
+        Model expectedModel = new ModelManager(new SaveIt(model.getSaveIt()), new UserPrefs());
+        expectedModel.commitSaveIt();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -102,9 +102,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedIssue);
 
-        Model expectedModel = new ModelManager(new SaveIt(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new SaveIt(model.getSaveIt()), new UserPrefs());
         expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedIssue);
-        expectedModel.commitAddressBook();
+        expectedModel.commitSaveIt();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -123,7 +123,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit issue in filtered list into a duplicate in address book
-        Issue issueInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Issue issueInList = model.getSaveIt().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(issueInList).build());
 
@@ -148,7 +148,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getSaveIt().getPersonList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
@@ -162,19 +162,19 @@ public class EditCommandTest {
         Issue issueToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedIssue).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-        Model expectedModel = new ModelManager(new SaveIt(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new SaveIt(model.getSaveIt()), new UserPrefs());
         expectedModel.updatePerson(issueToEdit, editedIssue);
-        expectedModel.commitAddressBook();
+        expectedModel.commitSaveIt();
 
         // edit -> first issue edited
         editCommand.execute(model, commandHistory);
 
         // undo -> reverts saveit back to previous state and filtered issue list to show all persons
-        expectedModel.undoAddressBook();
+        expectedModel.undoSaveIt();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first issue edited again
-        expectedModel.redoAddressBook();
+        expectedModel.redoSaveIt();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -204,23 +204,23 @@ public class EditCommandTest {
         Issue editedIssue = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedIssue).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-        Model expectedModel = new ModelManager(new SaveIt(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new SaveIt(model.getSaveIt()), new UserPrefs());
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Issue issueToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         expectedModel.updatePerson(issueToEdit, editedIssue);
-        expectedModel.commitAddressBook();
+        expectedModel.commitSaveIt();
 
         // edit -> edits second issue in unfiltered issue list / first issue in filtered issue list
         editCommand.execute(model, commandHistory);
 
         // undo -> reverts saveit back to previous state and filtered issue list to show all persons
-        expectedModel.undoAddressBook();
+        expectedModel.undoSaveIt();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), issueToEdit);
         // redo -> edits same second issue in unfiltered issue list
-        expectedModel.redoAddressBook();
+        expectedModel.redoSaveIt();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

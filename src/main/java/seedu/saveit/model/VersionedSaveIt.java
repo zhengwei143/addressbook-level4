@@ -81,12 +81,12 @@ public class VersionedSaveIt extends SaveIt {
             return false;
         }
 
-        VersionedSaveIt otherVersionedAddressBook = (VersionedSaveIt) other;
+        VersionedSaveIt otherVersionedSaveIt = (VersionedSaveIt) other;
 
         // state check
-        return super.equals(otherVersionedAddressBook)
-                && addressBookStateList.equals(otherVersionedAddressBook.addressBookStateList)
-                && currentStatePointer == otherVersionedAddressBook.currentStatePointer;
+        return super.equals(otherVersionedSaveIt)
+                && addressBookStateList.equals(otherVersionedSaveIt.addressBookStateList)
+                && currentStatePointer == otherVersionedSaveIt.currentStatePointer;
     }
 
     /**

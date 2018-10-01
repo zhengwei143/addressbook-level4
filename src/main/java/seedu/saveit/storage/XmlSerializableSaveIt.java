@@ -16,7 +16,7 @@ import seedu.saveit.model.issue.Issue;
  * An Immutable SaveIt that is serializable to XML format
  */
 @XmlRootElement(name = "saveit")
-public class XmlSerializableAddressBook {
+public class XmlSerializableSaveIt {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate issue(s).";
 
@@ -24,17 +24,17 @@ public class XmlSerializableAddressBook {
     private List<XmlAdaptedPerson> persons;
 
     /**
-     * Creates an empty XmlSerializableAddressBook.
+     * Creates an empty XmlSerializableSaveIt.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableAddressBook() {
+    public XmlSerializableSaveIt() {
         persons = new ArrayList<>();
     }
 
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlySaveIt src) {
+    public XmlSerializableSaveIt(ReadOnlySaveIt src) {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
     }
@@ -63,9 +63,9 @@ public class XmlSerializableAddressBook {
             return true;
         }
 
-        if (!(other instanceof XmlSerializableAddressBook)) {
+        if (!(other instanceof XmlSerializableSaveIt)) {
             return false;
         }
-        return persons.equals(((XmlSerializableAddressBook) other).persons);
+        return persons.equals(((XmlSerializableSaveIt) other).persons);
     }
 }

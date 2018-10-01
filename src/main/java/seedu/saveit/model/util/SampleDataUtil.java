@@ -40,7 +40,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlySaveIt getSampleAddressBook() {
+    public static ReadOnlySaveIt getSampleSaveIt() {
         SaveIt sampleAb = new SaveIt();
         for (Issue sampleIssue : getSamplePersons()) {
             sampleAb.addPerson(sampleIssue);

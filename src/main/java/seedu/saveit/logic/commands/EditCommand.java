@@ -83,7 +83,7 @@ public class EditCommand extends Command {
 
         model.updatePerson(issueToEdit, editedIssue);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
+        model.commitSaveIt();
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedIssue));
     }
 

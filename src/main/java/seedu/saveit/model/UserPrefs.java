@@ -30,11 +30,11 @@ public class UserPrefs {
         guiSettings = new GuiSettings(width, height, x, y);
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getSaveItFilePath() {
         return addressBookFilePath;
     }
 
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+    public void setSaveItFilePath(Path addressBookFilePath) {
         this.addressBookFilePath = addressBookFilePath;
     }
 

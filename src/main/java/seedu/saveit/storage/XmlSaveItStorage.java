@@ -18,31 +18,31 @@ import seedu.saveit.model.ReadOnlySaveIt;
 /**
  * A class to access SaveIt data stored as an xml file on the hard disk.
  */
-public class XmlAddressBookStorage implements AddressBookStorage {
+public class XmlSaveItStorage implements SaveItStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(XmlAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(XmlSaveItStorage.class);
 
     private Path filePath;
 
-    public XmlAddressBookStorage(Path filePath) {
+    public XmlSaveItStorage(Path filePath) {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getSaveItFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlySaveIt> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlySaveIt> readSaveIt() throws DataConversionException, IOException {
+        return readSaveIt(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}
+     * Similar to {@link #readSaveIt()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlySaveIt> readAddressBook(Path filePath) throws DataConversionException,
+    public Optional<ReadOnlySaveIt> readSaveIt(Path filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         requireNonNull(filePath);
 
@@ -51,9 +51,9 @@ public class XmlAddressBookStorage implements AddressBookStorage {
             return Optional.empty();
         }
 
-        XmlSerializableAddressBook xmlAddressBook = XmlFileStorage.loadDataFromSaveFile(filePath);
+        XmlSerializableSaveIt xmlSaveIt = XmlFileStorage.loadDataFromSaveFile(filePath);
         try {
-            return Optional.of(xmlAddressBook.toModelType());
+            return Optional.of(xmlSaveIt.toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
@@ -61,20 +61,20 @@ public class XmlAddressBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlySaveIt saveIt) throws IOException {
-        saveAddressBook(saveIt, filePath);
+    public void saveSaveIt(ReadOnlySaveIt saveIt) throws IOException {
+        saveSaveIt(saveIt, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlySaveIt)}
+     * Similar to {@link #saveSaveIt(ReadOnlySaveIt)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveAddressBook(ReadOnlySaveIt saveIt, Path filePath) throws IOException {
+    public void saveSaveIt(ReadOnlySaveIt saveIt, Path filePath) throws IOException {
         requireNonNull(saveIt);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableAddressBook(saveIt));
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableSaveIt(saveIt));
     }
 
 }

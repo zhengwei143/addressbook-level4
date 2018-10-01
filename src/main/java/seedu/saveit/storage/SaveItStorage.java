@@ -11,12 +11,12 @@ import seedu.saveit.model.SaveIt;
 /**
  * Represents a storage for {@link SaveIt}.
  */
-public interface AddressBookStorage {
+public interface SaveItStorage {
 
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getSaveItFilePath();
 
     /**
      * Returns SaveIt data as a {@link ReadOnlySaveIt}.
@@ -24,23 +24,23 @@ public interface AddressBookStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlySaveIt> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlySaveIt> readSaveIt() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getSaveItFilePath()
      */
-    Optional<ReadOnlySaveIt> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlySaveIt> readSaveIt(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlySaveIt} to the storage.
      * @param saveIt cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlySaveIt saveIt) throws IOException;
+    void saveSaveIt(ReadOnlySaveIt saveIt) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlySaveIt)
+     * @see #saveSaveIt(ReadOnlySaveIt)
      */
-    void saveAddressBook(ReadOnlySaveIt saveIt, Path filePath) throws IOException;
+    void saveSaveIt(ReadOnlySaveIt saveIt, Path filePath) throws IOException;
 
 }

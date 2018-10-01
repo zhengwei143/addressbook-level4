@@ -22,7 +22,7 @@ import seedu.saveit.commons.core.Messages;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class SaveItParser {
 
     /**
      * Used for initial separation of command word and args.

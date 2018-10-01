@@ -17,7 +17,7 @@ import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.UserPrefs;
 import seedu.saveit.model.issue.NameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.SaveItBuilder;
 
 public class ModelManagerTest {
     @Rule
@@ -32,12 +32,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInSaveIt_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInSaveIt_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
     }
@@ -50,7 +50,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        SaveIt saveIt = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        SaveIt saveIt = new SaveItBuilder().withPerson(ALICE).withPerson(BENSON).build();
         SaveIt differentSaveIt = new SaveIt();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -81,7 +81,7 @@ public class ModelManagerTest {
 
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        differentUserPrefs.setSaveItFilePath(Paths.get("differentFilePath"));
         assertTrue(modelManager.equals(new ModelManager(saveIt, differentUserPrefs)));
     }
 }

@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.saveit.commons.core.ComponentManager;
 import seedu.saveit.commons.core.LogsCenter;
-import seedu.saveit.commons.events.model.AddressBookChangedEvent;
+import seedu.saveit.commons.events.model.SaveItChangedEvent;
 import seedu.saveit.model.issue.Issue;
 import seedu.saveit.commons.util.CollectionUtil;
 
@@ -21,7 +21,7 @@ import seedu.saveit.commons.util.CollectionUtil;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedSaveIt versionedAddressBook;
+    private final VersionedSaveIt versionedSaveIt;
     private final FilteredList<Issue> filteredIssues;
 
     /**
@@ -33,8 +33,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with address book: " + saveIt + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedSaveIt(saveIt);
-        filteredIssues = new FilteredList<>(versionedAddressBook.getPersonList());
+        versionedSaveIt = new VersionedSaveIt(saveIt);
+        filteredIssues = new FilteredList<>(versionedSaveIt.getPersonList());
     }
 
     public ModelManager() {
@@ -43,52 +43,52 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlySaveIt newData) {
-        versionedAddressBook.resetData(newData);
-        indicateAddressBookChanged();
+        versionedSaveIt.resetData(newData);
+        indicateSaveItChanged();
     }
 
     @Override
-    public ReadOnlySaveIt getAddressBook() {
-        return versionedAddressBook;
+    public ReadOnlySaveIt getSaveIt() {
+        return versionedSaveIt;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(versionedAddressBook));
+    private void indicateSaveItChanged() {
+        raise(new SaveItChangedEvent(versionedSaveIt));
     }
 
     @Override
     public boolean hasPerson(Issue issue) {
         requireNonNull(issue);
-        return versionedAddressBook.hasPerson(issue);
+        return versionedSaveIt.hasPerson(issue);
     }
 
     @Override
     public void deletePerson(Issue target) {
-        versionedAddressBook.removePerson(target);
-        indicateAddressBookChanged();
+        versionedSaveIt.removePerson(target);
+        indicateSaveItChanged();
     }
 
     @Override
     public void addPerson(Issue issue) {
-        versionedAddressBook.addPerson(issue);
+        versionedSaveIt.addPerson(issue);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        indicateAddressBookChanged();
+        indicateSaveItChanged();
     }
 
     @Override
     public void updatePerson(Issue target, Issue editedIssue) {
         CollectionUtil.requireAllNonNull(target, editedIssue);
 
-        versionedAddressBook.updatePerson(target, editedIssue);
-        indicateAddressBookChanged();
+        versionedSaveIt.updatePerson(target, editedIssue);
+        indicateSaveItChanged();
     }
 
     //=========== Filtered Issue List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Issue} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedSaveIt}
      */
     @Override
     public ObservableList<Issue> getFilteredPersonList() {
@@ -104,30 +104,30 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Undo/Redo =================================================================================
 
     @Override
-    public boolean canUndoAddressBook() {
-        return versionedAddressBook.canUndo();
+    public boolean canUndoSaveIt() {
+        return versionedSaveIt.canUndo();
     }
 
     @Override
-    public boolean canRedoAddressBook() {
-        return versionedAddressBook.canRedo();
+    public boolean canRedoSaveIt() {
+        return versionedSaveIt.canRedo();
     }
 
     @Override
-    public void undoAddressBook() {
-        versionedAddressBook.undo();
-        indicateAddressBookChanged();
+    public void undoSaveIt() {
+        versionedSaveIt.undo();
+        indicateSaveItChanged();
     }
 
     @Override
-    public void redoAddressBook() {
-        versionedAddressBook.redo();
-        indicateAddressBookChanged();
+    public void redoSaveIt() {
+        versionedSaveIt.redo();
+        indicateSaveItChanged();
     }
 
     @Override
-    public void commitAddressBook() {
-        versionedAddressBook.commit();
+    public void commitSaveIt() {
+        versionedSaveIt.commit();
     }
 
     @Override
@@ -144,7 +144,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
+        return versionedSaveIt.equals(other.versionedSaveIt)
                 && filteredIssues.equals(other.filteredIssues);
     }
 

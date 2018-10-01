@@ -22,7 +22,7 @@ import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.commons.util.FileUtil;
 import seedu.saveit.commons.util.XmlUtil;
 import seedu.saveit.model.issue.Issue;
-import seedu.saveit.storage.XmlSerializableAddressBook;
+import seedu.saveit.storage.XmlSerializableSaveIt;
 import seedu.saveit.ui.PersonListPanel;
 
 public class IssueListPanelTest extends GuiUnitTest {
@@ -82,9 +82,9 @@ public class IssueListPanelTest extends GuiUnitTest {
      */
     private ObservableList<Issue> createBackingList(int personCount) throws Exception {
         Path xmlFile = createXmlFileWithPersons(personCount);
-        XmlSerializableAddressBook xmlAddressBook =
-                XmlUtil.getDataFromFile(xmlFile, XmlSerializableAddressBook.class);
-        return FXCollections.observableArrayList(xmlAddressBook.toModelType().getPersonList());
+        XmlSerializableSaveIt xmlSaveIt =
+                XmlUtil.getDataFromFile(xmlFile, XmlSerializableSaveIt.class);
+        return FXCollections.observableArrayList(xmlSaveIt.toModelType().getPersonList());
     }
 
     /**

@@ -27,7 +27,7 @@ import seedu.saveit.logic.commands.ListCommand;
 import seedu.saveit.logic.commands.RedoCommand;
 import seedu.saveit.logic.commands.SelectCommand;
 import seedu.saveit.logic.commands.UndoCommand;
-import seedu.saveit.logic.parser.AddressBookParser;
+import seedu.saveit.logic.parser.SaveItParser;
 import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.model.issue.Issue;
 import seedu.saveit.model.issue.NameContainsKeywordsPredicate;
@@ -39,7 +39,7 @@ public class SaveItParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final SaveItParser parser = new SaveItParser();
 
     @Test
     public void parseCommand_add() throws Exception {

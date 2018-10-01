@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalSaveIt;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,16 +25,16 @@ public class AddCommandIntegrationTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalSaveIt(), new UserPrefs());
     }
 
     @Test
     public void execute_newPerson_success() {
         Issue validIssue = new PersonBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());
         expectedModel.addPerson(validIssue);
-        expectedModel.commitAddressBook();
+        expectedModel.commitSaveIt();
 
         assertCommandSuccess(new AddCommand(validIssue), model, commandHistory,
                 String.format(AddCommand.MESSAGE_SUCCESS, validIssue), expectedModel);
@@ -42,7 +42,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Issue issueInList = model.getAddressBook().getPersonList().get(0);
+        Issue issueInList = model.getSaveIt().getPersonList().get(0);
         assertCommandFailure(new AddCommand(issueInList), model, commandHistory,
                 AddCommand.MESSAGE_DUPLICATE_PERSON);
     }

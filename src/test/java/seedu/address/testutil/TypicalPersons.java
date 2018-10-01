@@ -62,7 +62,7 @@ public class TypicalPersons {
     /**
      * Returns an {@code SaveIt} with all the typical persons.
      */
-    public static SaveIt getTypicalAddressBook() {
+    public static SaveIt getTypicalSaveIt() {
         SaveIt ab = new SaveIt();
         for (Issue issue : getTypicalPersons()) {
             ab.addPerson(issue);

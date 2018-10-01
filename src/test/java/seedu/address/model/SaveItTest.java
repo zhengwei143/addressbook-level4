@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalSaveIt;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -44,8 +44,8 @@ public class SaveItTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        SaveIt newData = getTypicalAddressBook();
+    public void resetData_withValidReadOnlySaveIt_replacesData() {
+        SaveIt newData = getTypicalSaveIt();
         saveIt.resetData(newData);
         assertEquals(newData, saveIt);
     }
@@ -69,18 +69,18 @@ public class SaveItTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInSaveIt_returnsFalse() {
         assertFalse(saveIt.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInSaveIt_returnsTrue() {
         saveIt.addPerson(ALICE);
         assertTrue(saveIt.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasPerson_personWithSameIdentityFieldsInSaveIt_returnsTrue() {
         saveIt.addPerson(ALICE);
         Issue editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();

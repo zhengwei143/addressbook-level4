@@ -6,24 +6,24 @@ import seedu.saveit.model.issue.Issue;
 /**
  * A utility class to help with building saveit objects.
  * Example usage: <br>
- *     {@code SaveIt ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code SaveIt ab = new SaveItBuilder().withPerson("John", "Doe").build();}
  */
-public class AddressBookBuilder {
+public class SaveItBuilder {
 
     private SaveIt saveIt;
 
-    public AddressBookBuilder() {
+    public SaveItBuilder() {
         saveIt = new SaveIt();
     }
 
-    public AddressBookBuilder(SaveIt saveIt) {
+    public SaveItBuilder(SaveIt saveIt) {
         this.saveIt = saveIt;
     }
 
     /**
      * Adds a new {@code Issue} to the {@code SaveIt} that we are building.
      */
-    public AddressBookBuilder withPerson(Issue issue) {
+    public SaveItBuilder withPerson(Issue issue) {
         saveIt.addPerson(issue);
         return this;
     }

@@ -8,7 +8,7 @@ import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.logic.commands.Command;
 import seedu.saveit.logic.commands.CommandResult;
 import seedu.saveit.logic.commands.exceptions.CommandException;
-import seedu.saveit.logic.parser.AddressBookParser;
+import seedu.saveit.logic.parser.SaveItParser;
 import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.issue.Issue;
@@ -21,12 +21,12 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Model model;
     private final CommandHistory history;
-    private final AddressBookParser addressBookParser;
+    private final SaveItParser addressBookParser;
 
     public LogicManager(Model model) {
         this.model = model;
         history = new CommandHistory();
-        addressBookParser = new AddressBookParser();
+        addressBookParser = new SaveItParser();
     }
 
     @Override

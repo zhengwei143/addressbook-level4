@@ -23,12 +23,12 @@ import seedu.saveit.logic.LogicManager;
 import seedu.saveit.model.*;
 import seedu.saveit.model.ReadOnlySaveIt;
 import seedu.saveit.model.util.SampleDataUtil;
-import seedu.saveit.storage.AddressBookStorage;
+import seedu.saveit.storage.SaveItStorage;
 import seedu.saveit.storage.JsonUserPrefsStorage;
 import seedu.saveit.storage.Storage;
 import seedu.saveit.storage.StorageManager;
 import seedu.saveit.storage.UserPrefsStorage;
-import seedu.saveit.storage.XmlAddressBookStorage;
+import seedu.saveit.storage.XmlSaveItStorage;
 import seedu.saveit.ui.Ui;
 import seedu.saveit.ui.UiManager;
 
@@ -59,7 +59,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
+        SaveItStorage addressBookStorage = new XmlSaveItStorage(userPrefs.getSaveItFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         initLogging(config);
@@ -82,11 +82,11 @@ public class MainApp extends Application {
         Optional<ReadOnlySaveIt> addressBookOptional;
         ReadOnlySaveIt initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readSaveIt();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample SaveIt");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleSaveIt);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty SaveIt");
             initialData = new SaveIt();

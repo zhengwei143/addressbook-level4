@@ -4,11 +4,11 @@ import seedu.saveit.commons.events.BaseEvent;
 import seedu.saveit.model.ReadOnlySaveIt;
 
 /** Indicates the SaveIt in the model has changed*/
-public class AddressBookChangedEvent extends BaseEvent {
+public class SaveItChangedEvent extends BaseEvent {
 
     public final ReadOnlySaveIt data;
 
-    public AddressBookChangedEvent(ReadOnlySaveIt data) {
+    public SaveItChangedEvent(ReadOnlySaveIt data) {
         this.data = data;
     }
 

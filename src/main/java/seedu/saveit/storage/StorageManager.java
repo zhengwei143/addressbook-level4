@@ -21,13 +21,13 @@ import seedu.saveit.model.UserPrefs;
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private SaveItStorage addressBookStorage;
+    private SaveItStorage saveItStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(SaveItStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(SaveItStorage saveItStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
+        this.saveItStorage = saveItStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -53,29 +53,29 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public Path getSaveItFilePath() {
-        return addressBookStorage.getSaveItFilePath();
+        return saveItStorage.getSaveItFilePath();
     }
 
     @Override
     public Optional<ReadOnlySaveIt> readSaveIt() throws DataConversionException, IOException {
-        return readSaveIt(addressBookStorage.getSaveItFilePath());
+        return readSaveIt(saveItStorage.getSaveItFilePath());
     }
 
     @Override
     public Optional<ReadOnlySaveIt> readSaveIt(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readSaveIt(filePath);
+        return saveItStorage.readSaveIt(filePath);
     }
 
     @Override
     public void saveSaveIt(ReadOnlySaveIt saveIt) throws IOException {
-        saveSaveIt(saveIt, addressBookStorage.getSaveItFilePath());
+        saveSaveIt(saveIt, saveItStorage.getSaveItFilePath());
     }
 
     @Override
     public void saveSaveIt(ReadOnlySaveIt saveIt, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveSaveIt(saveIt, filePath);
+        saveItStorage.saveSaveIt(saveIt, filePath);
     }
 
 

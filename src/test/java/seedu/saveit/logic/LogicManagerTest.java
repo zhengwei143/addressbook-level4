@@ -1,8 +1,13 @@
 package seedu.saveit.logic;
 
+import static org.junit.Assert.assertEquals;
+import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.saveit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
 import seedu.saveit.logic.commands.CommandResult;
 import seedu.saveit.logic.commands.HistoryCommand;
 import seedu.saveit.logic.commands.ListCommand;
@@ -11,10 +16,6 @@ import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.UserPrefs;
-
-import static org.junit.Assert.assertEquals;
-import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.saveit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 
 public class LogicManagerTest {

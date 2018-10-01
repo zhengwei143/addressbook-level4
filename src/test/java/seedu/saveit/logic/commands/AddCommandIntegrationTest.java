@@ -1,17 +1,18 @@
 package seedu.saveit.logic.commands;
 
+import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.saveit.testutil.TypicalPersons.getTypicalSaveIt;
+
 import org.junit.Before;
 import org.junit.Test;
+
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.UserPrefs;
 import seedu.saveit.model.issue.Issue;
 import seedu.saveit.testutil.PersonBuilder;
-
-import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.saveit.testutil.TypicalPersons.getTypicalSaveIt;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.

@@ -1,16 +1,17 @@
 package systemtests;
 
-import org.junit.Test;
-import seedu.saveit.model.SaveIt;
-import seedu.saveit.model.issue.Issue;
-import seedu.saveit.model.util.SampleDataUtil;
-import seedu.saveit.testutil.TestUtil;
+import static seedu.saveit.ui.testutil.GuiTestAssert.assertListMatching;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import static seedu.saveit.ui.testutil.GuiTestAssert.assertListMatching;
+import org.junit.Test;
+
+import seedu.saveit.model.SaveIt;
+import seedu.saveit.model.issue.Issue;
+import seedu.saveit.model.util.SampleDataUtil;
+import seedu.saveit.testutil.TestUtil;
 
 public class SampleDataTest extends SaveItSystemTest {
     /**
@@ -43,7 +44,7 @@ public class SampleDataTest extends SaveItSystemTest {
     }
 
     @Test
-    public void addressBook_dataFileDoesNotExist_loadSampleData() {
+    public void saveIt_dataFileDoesNotExist_loadSampleData() {
         Issue[] expectedList = SampleDataUtil.getSamplePersons();
         assertListMatching(getPersonListPanel(), expectedList);
     }

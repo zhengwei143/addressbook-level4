@@ -1,8 +1,20 @@
 package seedu.saveit.commons.util;
 
+import static org.junit.Assert.assertEquals;
+
+import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collections;
+import java.util.List;
+
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
 import seedu.saveit.model.SaveIt;
 import seedu.saveit.storage.XmlAdaptedPerson;
 import seedu.saveit.storage.XmlAdaptedTag;
@@ -10,16 +22,6 @@ import seedu.saveit.storage.XmlSerializableSaveIt;
 import seedu.saveit.testutil.PersonBuilder;
 import seedu.saveit.testutil.SaveItBuilder;
 import seedu.saveit.testutil.TestUtil;
-
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.io.FileNotFoundException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Collections;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 
 public class XmlUtilTest {
 

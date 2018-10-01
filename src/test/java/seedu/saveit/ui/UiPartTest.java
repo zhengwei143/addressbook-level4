@@ -1,17 +1,18 @@
 package seedu.saveit.ui;
 
-import javafx.fxml.FXML;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.net.URL;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
+
+import javafx.fxml.FXML;
 import seedu.saveit.MainApp;
 import seedu.saveit.testutil.Assert;
-
-import java.net.URL;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 public class UiPartTest {
 

@@ -1,16 +1,21 @@
 package seedu.saveit.model.person;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.saveit.testutil.TypicalPersons.ALICE;
+import static seedu.saveit.testutil.TypicalPersons.BOB;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
 import seedu.saveit.model.issue.Issue;
 import seedu.saveit.testutil.PersonBuilder;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static seedu.saveit.logic.commands.CommandTestUtil.*;
-import static seedu.saveit.testutil.TypicalPersons.ALICE;
-import static seedu.saveit.testutil.TypicalPersons.BOB;
 
 public class IssueTest {
     @Rule

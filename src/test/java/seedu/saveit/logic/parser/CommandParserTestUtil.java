@@ -1,9 +1,9 @@
 package seedu.saveit.logic.parser;
 
+import static org.junit.Assert.assertEquals;
+
 import seedu.saveit.logic.commands.Command;
 import seedu.saveit.logic.parser.exceptions.ParseException;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Contains helper methods for testing command parsers.

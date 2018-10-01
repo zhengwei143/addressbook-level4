@@ -1,20 +1,21 @@
 package seedu.saveit.ui;
 
-import guitests.guihandles.StageHandle;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.testfx.api.FxToolkit;
+
+import guitests.guihandles.StageHandle;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import seedu.saveit.commons.core.Config;
 import seedu.saveit.commons.events.ui.ExitAppRequestEvent;
 import seedu.saveit.logic.LogicManager;
 import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.UserPrefs;
 import seedu.saveit.ui.testutil.EventsCollectorRule;
-
-import static org.junit.Assert.assertTrue;
 
 /**
  * Contains tests for closing of the {@code MainWindow}.

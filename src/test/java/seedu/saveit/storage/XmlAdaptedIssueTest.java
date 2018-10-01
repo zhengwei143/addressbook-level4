@@ -1,20 +1,21 @@
 package seedu.saveit.storage;
 
+import static org.junit.Assert.assertEquals;
+import static seedu.saveit.storage.XmlAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.saveit.testutil.TypicalPersons.BENSON;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.junit.Test;
+
 import seedu.saveit.commons.exceptions.IllegalValueException;
 import seedu.saveit.model.issue.Address;
 import seedu.saveit.model.issue.Email;
 import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.model.issue.Phone;
 import seedu.saveit.testutil.Assert;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static org.junit.Assert.assertEquals;
-import static seedu.saveit.storage.XmlAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.saveit.testutil.TypicalPersons.BENSON;
 
 public class XmlAdaptedIssueTest {
     private static final String INVALID_NAME = "R@chel";

@@ -1,11 +1,12 @@
 package seedu.saveit.model.person;
 
-import org.junit.Test;
-import seedu.saveit.model.issue.Email;
-import seedu.saveit.testutil.Assert;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
+import seedu.saveit.model.issue.Email;
+import seedu.saveit.testutil.Assert;
 
 public class EmailTest {
 

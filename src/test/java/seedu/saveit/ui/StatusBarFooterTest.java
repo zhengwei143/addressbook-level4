@@ -1,12 +1,9 @@
 package seedu.saveit.ui;
 
-import guitests.guihandles.StatusBarFooterHandle;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import seedu.saveit.commons.events.model.SaveItChangedEvent;
-import seedu.saveit.model.SaveIt;
+import static org.junit.Assert.assertEquals;
+import static seedu.saveit.testutil.EventsUtil.postNow;
+import static seedu.saveit.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
+import static seedu.saveit.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,10 +12,14 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.util.Date;
 
-import static org.junit.Assert.assertEquals;
-import static seedu.saveit.testutil.EventsUtil.postNow;
-import static seedu.saveit.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
-import static seedu.saveit.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import guitests.guihandles.StatusBarFooterHandle;
+import seedu.saveit.commons.events.model.SaveItChangedEvent;
+import seedu.saveit.model.SaveIt;
 
 public class StatusBarFooterTest extends GuiUnitTest {
 

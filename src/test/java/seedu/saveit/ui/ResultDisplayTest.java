@@ -1,12 +1,13 @@
 package seedu.saveit.ui;
 
-import guitests.guihandles.ResultDisplayHandle;
-import org.junit.Before;
-import org.junit.Test;
-import seedu.saveit.commons.events.ui.NewResultAvailableEvent;
-
 import static org.junit.Assert.assertEquals;
 import static seedu.saveit.testutil.EventsUtil.postNow;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import guitests.guihandles.ResultDisplayHandle;
+import seedu.saveit.commons.events.ui.NewResultAvailableEvent;
 
 public class ResultDisplayTest extends GuiUnitTest {
 

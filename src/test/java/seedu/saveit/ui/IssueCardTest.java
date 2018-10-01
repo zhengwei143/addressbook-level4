@@ -1,12 +1,15 @@
 package seedu.saveit.ui;
 
-import guitests.guihandles.PersonCardHandle;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static seedu.saveit.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
+
 import org.junit.Test;
+
+import guitests.guihandles.PersonCardHandle;
 import seedu.saveit.model.issue.Issue;
 import seedu.saveit.testutil.PersonBuilder;
-
-import static org.junit.Assert.*;
-import static seedu.saveit.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
 
 public class IssueCardTest extends GuiUnitTest {
 

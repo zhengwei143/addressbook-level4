@@ -1,18 +1,19 @@
 package seedu.saveit.ui;
 
-import guitests.guihandles.CommandBoxHandle;
-import javafx.scene.input.KeyCode;
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import guitests.guihandles.CommandBoxHandle;
+import javafx.scene.input.KeyCode;
 import seedu.saveit.logic.Logic;
 import seedu.saveit.logic.LogicManager;
 import seedu.saveit.logic.commands.ListCommand;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
-
-import java.util.ArrayList;
-
-import static org.junit.Assert.assertEquals;
 
 public class CommandBoxTest extends GuiUnitTest {
 

@@ -1,19 +1,20 @@
 package seedu.saveit.storage;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.rules.TemporaryFolder;
-import seedu.saveit.commons.exceptions.DataConversionException;
-import seedu.saveit.model.UserPrefs;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.junit.rules.TemporaryFolder;
+
+import seedu.saveit.commons.exceptions.DataConversionException;
+import seedu.saveit.model.UserPrefs;
 
 public class JsonUserPrefsStorageTest {
 
@@ -81,7 +82,7 @@ public class JsonUserPrefsStorageTest {
     private UserPrefs getTypicalUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setGuiSettings(1000, 500, 300, 100);
-        userPrefs.setSaveItFilePath(Paths.get("saveIt.xml"));
+        userPrefs.setSaveItFilePath(Paths.get("saveit.xml"));
         return userPrefs;
     }
 

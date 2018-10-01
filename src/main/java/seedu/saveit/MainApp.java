@@ -62,8 +62,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        SaveItStorage addressBookStorage = new XmlSaveItStorage(userPrefs.getSaveItFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        SaveItStorage saveItStorage = new XmlSaveItStorage(userPrefs.getSaveItFilePath());
+        storage = new StorageManager(saveItStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -82,14 +82,14 @@ public class MainApp extends Application {
      * or an empty saveit book will be used instead if errors occur when reading {@code storage}'s saveit book.
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlySaveIt> addressBookOptional;
+        Optional<ReadOnlySaveIt> saveItOptional;
         ReadOnlySaveIt initialData;
         try {
-            addressBookOptional = storage.readSaveIt();
-            if (!addressBookOptional.isPresent()) {
+            saveItOptional = storage.readSaveIt();
+            if (!saveItOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample SaveIt");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleSaveIt);
+            initialData = saveItOptional.orElseGet(SampleDataUtil::getSampleSaveIt);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty SaveIt");
             initialData = new SaveIt();

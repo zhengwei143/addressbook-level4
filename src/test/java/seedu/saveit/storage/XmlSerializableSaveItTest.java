@@ -1,17 +1,18 @@
 package seedu.saveit.storage;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import seedu.saveit.commons.exceptions.IllegalValueException;
-import seedu.saveit.commons.util.XmlUtil;
-import seedu.saveit.model.SaveIt;
-import seedu.saveit.testutil.TypicalPersons;
+import static org.junit.Assert.assertEquals;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import seedu.saveit.commons.exceptions.IllegalValueException;
+import seedu.saveit.commons.util.XmlUtil;
+import seedu.saveit.model.SaveIt;
+import seedu.saveit.testutil.TypicalPersons;
 
 public class XmlSerializableSaveItTest {
 

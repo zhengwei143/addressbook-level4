@@ -1,19 +1,5 @@
 package seedu.saveit.ui;
 
-import guitests.guihandles.PersonCardHandle;
-import guitests.guihandles.PersonListPanelHandle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import org.junit.Test;
-import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
-import seedu.saveit.commons.util.FileUtil;
-import seedu.saveit.commons.util.XmlUtil;
-import seedu.saveit.model.issue.Issue;
-import seedu.saveit.storage.XmlSerializableSaveIt;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import static java.time.Duration.ofMillis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
@@ -22,6 +8,21 @@ import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.saveit.testutil.TypicalPersons.getTypicalPersons;
 import static seedu.saveit.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
 import static seedu.saveit.ui.testutil.GuiTestAssert.assertCardEquals;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.junit.Test;
+
+import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.PersonListPanelHandle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
+import seedu.saveit.commons.util.FileUtil;
+import seedu.saveit.commons.util.XmlUtil;
+import seedu.saveit.model.issue.Issue;
+import seedu.saveit.storage.XmlSerializableSaveIt;
 
 public class IssueListPanelTest extends GuiUnitTest {
     private static final ObservableList<Issue> TYPICAL_ISSUES =

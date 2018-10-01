@@ -1,22 +1,25 @@
 package seedu.saveit.storage;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static seedu.saveit.testutil.TypicalPersons.getTypicalSaveIt;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+
 import seedu.saveit.commons.events.model.SaveItChangedEvent;
 import seedu.saveit.commons.events.storage.DataSavingExceptionEvent;
 import seedu.saveit.model.ReadOnlySaveIt;
 import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.UserPrefs;
 import seedu.saveit.ui.testutil.EventsCollectorRule;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import static org.junit.Assert.*;
-import static seedu.saveit.testutil.TypicalPersons.getTypicalSaveIt;
 
 public class StorageManagerTest {
 
@@ -29,9 +32,9 @@ public class StorageManagerTest {
 
     @Before
     public void setUp() {
-        XmlSaveItStorage addressBookStorage = new XmlSaveItStorage(getTempFilePath("ab"));
+        XmlSaveItStorage saveItStorage = new XmlSaveItStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(saveItStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -54,7 +57,7 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void saveItReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link XmlSaveItStorage} class.

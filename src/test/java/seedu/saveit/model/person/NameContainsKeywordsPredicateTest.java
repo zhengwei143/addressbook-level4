@@ -1,15 +1,16 @@
 package seedu.saveit.model.person;
 
-import org.junit.Test;
-import seedu.saveit.model.issue.NameContainsKeywordsPredicate;
-import seedu.saveit.testutil.PersonBuilder;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
+
+import seedu.saveit.model.issue.NameContainsKeywordsPredicate;
+import seedu.saveit.testutil.PersonBuilder;
 
 public class NameContainsKeywordsPredicateTest {
 

@@ -12,7 +12,7 @@ import seedu.saveit.commons.core.GuiSettings;
 public class UserPrefs {
 
     private GuiSettings guiSettings;
-    private Path addressBookFilePath = Paths.get("data" , "saveit.xml");
+    private Path saveItFilePath = Paths.get("data" , "saveit.xml");
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
@@ -31,11 +31,11 @@ public class UserPrefs {
     }
 
     public Path getSaveItFilePath() {
-        return addressBookFilePath;
+        return saveItFilePath;
     }
 
-    public void setSaveItFilePath(Path addressBookFilePath) {
-        this.addressBookFilePath = addressBookFilePath;
+    public void setSaveItFilePath(Path saveItFilePath) {
+        this.saveItFilePath = saveItFilePath;
     }
 
     @Override
@@ -50,19 +50,19 @@ public class UserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return Objects.equals(guiSettings, o.guiSettings)
-                && Objects.equals(addressBookFilePath, o.addressBookFilePath);
+                && Objects.equals(saveItFilePath, o.saveItFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath);
+        return Objects.hash(guiSettings, saveItFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings.toString());
-        sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("\nLocal data file location : " + saveItFilePath);
         return sb.toString();
     }
 

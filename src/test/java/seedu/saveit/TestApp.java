@@ -1,5 +1,9 @@
 package seedu.saveit;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.function.Supplier;
+
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import seedu.saveit.commons.core.Config;
@@ -7,19 +11,12 @@ import seedu.saveit.commons.core.GuiSettings;
 import seedu.saveit.commons.exceptions.DataConversionException;
 import seedu.saveit.commons.util.FileUtil;
 import seedu.saveit.commons.util.XmlUtil;
-import seedu.saveit.model.Model;
-import seedu.saveit.model.ModelManager;
+import seedu.saveit.model.*;
 import seedu.saveit.model.ReadOnlySaveIt;
-import seedu.saveit.model.SaveIt;
-import seedu.saveit.model.UserPrefs;
 import seedu.saveit.storage.UserPrefsStorage;
 import seedu.saveit.storage.XmlSerializableSaveIt;
 import seedu.saveit.testutil.TestUtil;
 import systemtests.ModelHelper;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.function.Supplier;
 
 /**
  * This class is meant to override some properties of MainApp so that it will be suited for

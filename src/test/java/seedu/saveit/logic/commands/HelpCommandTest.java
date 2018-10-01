@@ -1,16 +1,17 @@
 package seedu.saveit.logic.commands;
 
+import static org.junit.Assert.assertTrue;
+import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.saveit.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
+
 import org.junit.Rule;
 import org.junit.Test;
+
 import seedu.saveit.commons.events.ui.ShowHelpRequestEvent;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
 import seedu.saveit.ui.testutil.EventsCollectorRule;
-
-import static org.junit.Assert.assertTrue;
-import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.saveit.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
 
 public class HelpCommandTest {
     @Rule

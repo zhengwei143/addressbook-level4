@@ -1,19 +1,25 @@
 package seedu.saveit.logic.commands;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static seedu.saveit.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.saveit.testutil.TypicalPersons.CARL;
+import static seedu.saveit.testutil.TypicalPersons.ELLE;
+import static seedu.saveit.testutil.TypicalPersons.FIONA;
+import static seedu.saveit.testutil.TypicalPersons.getTypicalSaveIt;
+
+import java.util.Arrays;
+import java.util.Collections;
+
 import org.junit.Test;
+
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.UserPrefs;
 import seedu.saveit.model.issue.NameContainsKeywordsPredicate;
-
-import java.util.Arrays;
-import java.util.Collections;
-
-import static org.junit.Assert.*;
-import static seedu.saveit.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
-import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.saveit.testutil.TypicalPersons.*;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.

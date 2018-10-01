@@ -1,16 +1,19 @@
 package seedu.saveit.ui;
 
-import guitests.guihandles.HelpWindowHandle;
-import javafx.stage.Stage;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeFalse;
+import static seedu.saveit.ui.HelpWindow.USERGUIDE_FILE_PATH;
+
+import java.net.URL;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.api.FxToolkit;
 
-import java.net.URL;
-
-import static org.junit.Assert.*;
-import static org.junit.Assume.assumeFalse;
-import static seedu.saveit.ui.HelpWindow.USERGUIDE_FILE_PATH;
+import guitests.guihandles.HelpWindowHandle;
+import javafx.stage.Stage;
 
 public class HelpWindowTest extends GuiUnitTest {
 

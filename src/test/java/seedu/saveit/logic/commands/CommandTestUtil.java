@@ -1,5 +1,17 @@
 package seedu.saveit.logic.commands;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
@@ -8,14 +20,6 @@ import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.issue.Issue;
 import seedu.saveit.model.issue.NameContainsKeywordsPredicate;
 import seedu.saveit.testutil.EditPersonDescriptorBuilder;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static seedu.saveit.logic.parser.CliSyntax.*;
 
 /**
  * Contains helper methods for testing commands.

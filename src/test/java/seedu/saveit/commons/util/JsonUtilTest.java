@@ -1,13 +1,14 @@
 package seedu.saveit.commons.util;
 
-import org.junit.Test;
-import seedu.saveit.testutil.SerializableTestClass;
-import seedu.saveit.testutil.TestUtil;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.nio.file.Path;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+
+import seedu.saveit.testutil.SerializableTestClass;
+import seedu.saveit.testutil.TestUtil;
 
 /**
  * Tests JSON Read and Write

@@ -1,12 +1,12 @@
 package systemtests;
 
-import seedu.saveit.model.Model;
-import seedu.saveit.model.issue.Issue;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+
+import seedu.address.model.Model;
+import seedu.address.model.issue.Issue;
 
 /**
  * Contains helper methods to set up {@code Model} for testing.

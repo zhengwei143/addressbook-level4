@@ -4,7 +4,7 @@ import guitests.GuiRobot;
 import guitests.guihandles.exceptions.NodeNotFoundException;
 import javafx.scene.Node;
 import javafx.stage.Stage;
-import seedu.saveit.commons.core.LogsCenter;
+import seedu.address.commons.core.LogsCenter;
 
 import java.util.Optional;
 import java.util.logging.Logger;

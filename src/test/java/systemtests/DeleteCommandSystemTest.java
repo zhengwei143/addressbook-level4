@@ -1,24 +1,24 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.saveit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.saveit.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
-import static seedu.saveit.testutil.TestUtil.getLastIndex;
-import static seedu.saveit.testutil.TestUtil.getMidIndex;
-import static seedu.saveit.testutil.TestUtil.getPerson;
-import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.saveit.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
+import static seedu.address.testutil.TestUtil.getLastIndex;
+import static seedu.address.testutil.TestUtil.getMidIndex;
+import static seedu.address.testutil.TestUtil.getPerson;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
-import seedu.saveit.commons.core.Messages;
-import seedu.saveit.commons.core.index.Index;
-import seedu.saveit.logic.commands.DeleteCommand;
-import seedu.saveit.logic.commands.RedoCommand;
-import seedu.saveit.logic.commands.UndoCommand;
-import seedu.saveit.model.Model;
-import seedu.saveit.model.issue.Issue;
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
+import seedu.address.model.Model;
+import seedu.address.model.issue.Issue;
 
 public class DeleteCommandSystemTest extends SaveItSystemTest {
 
@@ -58,13 +58,13 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
 
         /* ------------------ Performing delete operation while a filtered list is being shown ---------------------- */
 
-        /* Case: filtered issue list, delete index within bounds of saveit book and issue list -> deleted */
+        /* Case: filtered issue list, delete index within bounds of address book and issue list -> deleted */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         Index index = INDEX_FIRST_PERSON;
         assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
         assertCommandSuccess(index);
 
-        /* Case: filtered issue list, delete index within bounds of saveit book but out of bounds of issue list
+        /* Case: filtered issue list, delete index within bounds of address book but out of bounds of issue list
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
@@ -112,7 +112,7 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
     }
 
     /**
-     * Removes the {@code Issue} at the specified {@code index} in {@code model}'s saveit book.
+     * Removes the {@code Issue} at the specified {@code index} in {@code model}'s address book.
      * @return the removed issue
      */
     private Issue removePerson(Model model, Index index) {

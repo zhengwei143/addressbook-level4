@@ -3,7 +3,7 @@ package systemtests;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
-import seedu.saveit.ui.StatusBarFooter;
+import seedu.address.ui.StatusBarFooter;
 
 import java.time.Clock;
 import java.time.Instant;

@@ -1,7 +1,7 @@
 package systemtests;
 
-import seedu.saveit.model.Model;
-import seedu.saveit.model.issue.Issue;
+import seedu.address.model.Model;
+import seedu.address.model.issue.Issue;
 
 import java.util.Arrays;
 import java.util.List;

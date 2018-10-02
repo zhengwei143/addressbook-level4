@@ -2,7 +2,7 @@ package guitests.guihandles;
 
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
-import seedu.saveit.model.issue.Issue;
+import seedu.address.model.issue.Issue;
 
 import java.util.List;
 import java.util.Optional;

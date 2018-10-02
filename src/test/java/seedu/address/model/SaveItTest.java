@@ -14,16 +14,17 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import seedu.address.model.issue.Issue;
 import seedu.address.model.issue.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import org.junit.rules.ExpectedException;
 
 public class SaveItTest {
 

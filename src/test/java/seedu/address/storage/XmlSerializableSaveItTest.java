@@ -5,9 +5,10 @@ import static org.junit.Assert.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.jupiter.api.Disabled;
+
 import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -26,7 +27,7 @@ public class XmlSerializableSaveItTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    @Disabled
+    @Ignore
     public void toModelType_typicalPersonsFile_success() throws Exception {
         XmlSerializableSaveIt dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE,
                 XmlSerializableSaveIt.class);
@@ -36,7 +37,7 @@ public class XmlSerializableSaveItTest {
     }
 
     @Test
-    @Disabled
+    @Ignore
     public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {
         XmlSerializableSaveIt dataFromFile = XmlUtil.getDataFromFile(INVALID_PERSON_FILE,
                 XmlSerializableSaveIt.class);
@@ -45,7 +46,7 @@ public class XmlSerializableSaveItTest {
     }
 
     @Test
-    @Disabled
+    @Ignore
     public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
         XmlSerializableSaveIt dataFromFile = XmlUtil.getDataFromFile(DUPLICATE_PERSON_FILE,
                 XmlSerializableSaveIt.class);

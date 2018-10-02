@@ -3,9 +3,10 @@ package seedu.address.ui;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.jupiter.api.Disabled;
+
 import org.testfx.api.FxToolkit;
 
 import guitests.guihandles.StageHandle;
@@ -43,7 +44,7 @@ public class MainWindowCloseTest extends GuiUnitTest {
     }
 
     @Test
-    @Disabled
+    @Ignore
     public void close_menuBarExitButton_exitAppRequestEventPosted() {
         mainWindowHandle.clickOnMenuExitButton();
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ExitAppRequestEvent);
@@ -51,7 +52,7 @@ public class MainWindowCloseTest extends GuiUnitTest {
     }
 
     @Test
-    @Disabled
+    @Ignore
     public void close_externalRequest_exitAppRequestEventPosted() {
         mainWindowHandle.closeMainWindowExternally();
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ExitAppRequestEvent);

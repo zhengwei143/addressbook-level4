@@ -11,9 +11,10 @@ import java.util.List;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.jupiter.api.Disabled;
+
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.SaveIt;
@@ -71,7 +72,7 @@ public class XmlUtilTest {
     }
 
     @Test
-    @Disabled
+    @Ignore
     public void getDataFromFile_validFile_validResult() throws Exception {
         SaveIt dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableSaveIt.class).toModelType();
         assertEquals(9, dataFromFile.getPersonList().size());

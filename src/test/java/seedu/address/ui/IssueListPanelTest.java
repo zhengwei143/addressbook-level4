@@ -12,8 +12,9 @@ import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.jupiter.api.Disabled;
+
 
 import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
@@ -67,7 +68,7 @@ public class IssueListPanelTest extends GuiUnitTest {
      * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
      */
     @Test
-    @Disabled
+    @Ignore
     public void performanceTest() throws Exception {
         ObservableList<Issue> backingList = createBackingList(10000);
 

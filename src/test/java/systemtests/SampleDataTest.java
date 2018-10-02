@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.jupiter.api.Disabled;
 
 import seedu.address.model.SaveIt;
 import seedu.address.model.Issue;
@@ -45,7 +45,7 @@ public class SampleDataTest extends SaveItSystemTest {
     }
 
     @Test
-    @Disabled
+    @Ignore
     public void saveIt_dataFileDoesNotExist_loadSampleData() {
         Issue[] expectedList = SampleDataUtil.getSamplePersons();
         assertListMatching(getPersonListPanel(), expectedList);

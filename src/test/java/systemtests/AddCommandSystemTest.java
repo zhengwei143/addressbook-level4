@@ -29,8 +29,8 @@ import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
+import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.jupiter.api.Disabled;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -50,7 +50,7 @@ import seedu.address.testutil.PersonUtil;
 public class AddCommandSystemTest extends SaveItSystemTest {
 
     @Test
-    @Disabled
+    @Ignore
     public void add() {
         Model model = getModel();
 

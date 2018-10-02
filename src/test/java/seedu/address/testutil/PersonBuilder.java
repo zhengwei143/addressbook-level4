@@ -1,11 +1,15 @@
 package seedu.address.testutil;
 
-import seedu.address.model.issue.*;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import seedu.address.model.issue.Address;
+import seedu.address.model.issue.Email;
+import seedu.address.model.issue.Issue;
+import seedu.address.model.issue.IssueStatement;
+import seedu.address.model.issue.Phone;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Issue objects.

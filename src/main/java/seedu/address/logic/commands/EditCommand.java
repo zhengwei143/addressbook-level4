@@ -18,10 +18,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Issue;
 import seedu.address.model.Model;
 import seedu.address.model.issue.*;
 import seedu.address.model.issue.Email;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.issue.Tag;
 
 /**
  * Edits the details of an existing issue in the address book.

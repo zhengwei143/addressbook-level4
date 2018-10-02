@@ -19,7 +19,6 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.issue.Issue;
 import seedu.address.model.issue.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
 

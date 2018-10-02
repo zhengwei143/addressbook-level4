@@ -1,4 +1,4 @@
-package seedu.address.model.solution;
+package seedu.address.model.issue.solution;
 
 /**
  * Represents a Issue's solution link in saveit.

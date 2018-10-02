@@ -1,6 +1,6 @@
 package seedu.address.model.issue;
 
-import seedu.address.model.solution.SolutionLink;
+import seedu.address.model.issue.solution.SolutionLink;
 
 import java.util.Objects;
 

@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.Disabled;
 
 import seedu.address.model.SaveIt;
-import seedu.address.model.issue.Issue;
+import seedu.address.model.Issue;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 

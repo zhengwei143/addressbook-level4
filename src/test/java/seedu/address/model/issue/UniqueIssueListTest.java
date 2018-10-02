@@ -16,6 +16,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.model.Issue;
+import seedu.address.model.UniqueIssueList;
 import seedu.address.model.issue.exceptions.DuplicatePersonException;
 import seedu.address.model.issue.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;

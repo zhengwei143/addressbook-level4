@@ -19,7 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlySaveIt;
 import seedu.address.model.SaveIt;
-import seedu.address.model.issue.Issue;
+import seedu.address.model.Issue;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {

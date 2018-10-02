@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.issue.Issue;
+import seedu.address.model.Issue;
 
 /**
  * API of the Logic component

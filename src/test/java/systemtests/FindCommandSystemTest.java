@@ -20,7 +20,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.issue.Tag;
 
 public class FindCommandSystemTest extends SaveItSystemTest {
 

@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.*;
-import seedu.address.model.person.Issue;
+import seedu.address.model.issue.*;
+import seedu.address.model.issue.Issue;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,7 +40,7 @@ public class XmlAdaptedPerson {
     public XmlAdaptedPerson() {}
 
     /**
-     * Constructs an {@code XmlAdaptedPerson} with the given person details.
+     * Constructs an {@code XmlAdaptedPerson} with the given issue details.
      */
     public XmlAdaptedPerson(String name, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
         this.name = name;
@@ -68,9 +68,9 @@ public class XmlAdaptedPerson {
     }
 
     /**
-     * Converts this jaxb-friendly adapted person object into the model's Issue object.
+     * Converts this jaxb-friendly adapted issue object into the model's Issue object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person
+     * @throws IllegalValueException if there were any data constraints violated in the adapted issue
      */
     public Issue toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();

@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Issue;
+import seedu.address.model.issue.Issue;
 
 /**
  * An Immutable AddressBook that is serializable to XML format
@@ -18,7 +18,7 @@ import seedu.address.model.person.Issue;
 @XmlRootElement(name = "addressbook")
 public class XmlSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate issue(s).";
 
     @XmlElement
     private List<XmlAdaptedPerson> persons;

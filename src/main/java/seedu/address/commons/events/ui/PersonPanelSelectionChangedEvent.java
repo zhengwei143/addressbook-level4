@@ -1,7 +1,7 @@
 package seedu.address.commons.events.ui;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.person.Issue;
+import seedu.address.model.issue.Issue;
 
 /**
  * Represents a selection change in the Issue List Panel

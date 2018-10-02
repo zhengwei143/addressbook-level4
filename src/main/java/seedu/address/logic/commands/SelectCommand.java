@@ -11,17 +11,17 @@ import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Issue;
+import seedu.address.model.issue.Issue;
 
 /**
- * Selects a person identified using it's displayed index from the address book.
+ * Selects a issue identified using it's displayed index from the address book.
  */
 public class SelectCommand extends Command {
 
     public static final String COMMAND_WORD = "select";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Selects the person identified by the index number used in the displayed person list.\n"
+            + ": Selects the issue identified by the index number used in the displayed issue list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 

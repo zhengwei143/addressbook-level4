@@ -32,8 +32,8 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.Test;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.*;
-import seedu.address.model.person.Issue;
+import seedu.address.model.issue.*;
+import seedu.address.model.issue.Issue;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 

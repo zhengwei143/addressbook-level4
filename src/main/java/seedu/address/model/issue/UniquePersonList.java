@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.issue;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -8,15 +8,15 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.issue.exceptions.DuplicatePersonException;
+import seedu.address.model.issue.exceptions.PersonNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Issue#isSamePerson(Issue)}. As such, adding and updating of
- * persons uses Issue#isSamePerson(Issue) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Issue#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A issue is considered unique by comparing using {@code Issue#isSamePerson(Issue)}. As such, adding and updating of
+ * persons uses Issue#isSamePerson(Issue) for equality so as to ensure that the issue being added or updated is
+ * unique in terms of identity in the UniquePersonList. However, the removal of a issue uses Issue#equals(Object) so
+ * as to ensure that the issue with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -27,7 +27,7 @@ public class UniquePersonList implements Iterable<Issue> {
     private final ObservableList<Issue> internalList = FXCollections.observableArrayList();
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent issue as the given argument.
      */
     public boolean contains(Issue toCheck) {
         requireNonNull(toCheck);
@@ -35,8 +35,8 @@ public class UniquePersonList implements Iterable<Issue> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a issue to the list.
+     * The issue must not already exist in the list.
      */
     public void add(Issue toAdd) {
         requireNonNull(toAdd);
@@ -47,9 +47,9 @@ public class UniquePersonList implements Iterable<Issue> {
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the issue {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The issue identity of {@code editedPerson} must not be the same as another existing issue in the list.
      */
     public void setPerson(Issue target, Issue editedPerson) {
         requireAllNonNull(target, editedPerson);
@@ -67,8 +67,8 @@ public class UniquePersonList implements Iterable<Issue> {
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent issue from the list.
+     * The issue must exist in the list.
      */
     public void remove(Issue toRemove) {
         requireNonNull(toRemove);

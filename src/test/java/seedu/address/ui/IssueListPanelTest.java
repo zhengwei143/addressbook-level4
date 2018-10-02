@@ -59,18 +59,18 @@ public class IssueListPanelTest extends GuiUnitTest {
         assertCardEquals(expectedPerson, selectedPerson);
     }
 
-//    /**
-//     * Verifies that creating and deleting large number of persons in {@code PersonListPanel} requires lesser than
-//     * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
-//     */
-//    @Test
-//    public void performanceTest() throws Exception {
-//        ObservableList<Issue> backingList = createBackingList(10000);
-//
-//        assertTimeoutPreemptively(ofMillis(CARD_CREATION_AND_DELETION_TIMEOUT), () -> {
-//            initUi(backingList);
-//            guiRobot.interact(backingList::clear);
-//        }, "Creation and deletion of issue cards exceeded time limit");
+    //    /**
+    //     * Verifies that creating and deleting large number of persons in {@code PersonListPanel} requires lesser than
+    //     * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
+    //     */
+    //    @Test
+    //    public void performanceTest() throws Exception {
+    //        ObservableList<Issue> backingList = createBackingList(10000);
+    //
+    //        assertTimeoutPreemptively(ofMillis(CARD_CREATION_AND_DELETION_TIMEOUT), () -> {
+    //            initUi(backingList);
+    //            guiRobot.interact(backingList::clear);
+    //        }, "Creation and deletion of issue cards exceeded time limit");
     //    }
 
     /**

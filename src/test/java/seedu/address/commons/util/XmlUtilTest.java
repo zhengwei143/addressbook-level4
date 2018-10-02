@@ -69,10 +69,10 @@ public class XmlUtilTest {
         XmlUtil.getDataFromFile(EMPTY_FILE, SaveIt.class);
     }
 
-//    @Test
-//    public void getDataFromFile_validFile_validResult() throws Exception {
-//        SaveIt dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableSaveIt.class).toModelType();
-//        assertEquals(9, dataFromFile.getPersonList().size());
+    //    @Test
+    //    public void getDataFromFile_validFile_validResult() throws Exception {
+    //        SaveIt dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableSaveIt.class).toModelType();
+    //        assertEquals(9, dataFromFile.getPersonList().size());
     //    }
 
     @Test

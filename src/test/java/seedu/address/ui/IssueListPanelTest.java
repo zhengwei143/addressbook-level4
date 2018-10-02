@@ -71,7 +71,7 @@ public class IssueListPanelTest extends GuiUnitTest {
 //            initUi(backingList);
 //            guiRobot.interact(backingList::clear);
 //        }, "Creation and deletion of issue cards exceeded time limit");
-//    }
+    //    }
 
     /**
      * Returns a list of persons containing {@code personCount} persons that is used to populate the

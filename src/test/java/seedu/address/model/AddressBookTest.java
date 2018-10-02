@@ -54,7 +54,7 @@ public class AddressBookTest {
         Issue editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Issue> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        SaveItStub newData = new SaveItStub(newPersons);
 
         thrown.expect(DuplicatePersonException.class);
         saveIt.resetData(newData);
@@ -94,10 +94,10 @@ public class AddressBookTest {
     /**
      * A stub ReadOnlySaveIt whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlySaveIt {
+    private static class SaveItStub implements ReadOnlySaveIt {
         private final ObservableList<Issue> persons = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Issue> persons) {
+        SaveItStub(Collection<Issue> persons) {
             this.persons.setAll(persons);
         }
 

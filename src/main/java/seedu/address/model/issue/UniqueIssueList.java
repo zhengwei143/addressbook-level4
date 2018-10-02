@@ -12,17 +12,17 @@ import seedu.address.model.issue.exceptions.DuplicatePersonException;
 import seedu.address.model.issue.exceptions.PersonNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ * A list of issues that enforces uniqueness between its elements and does not allow nulls.
  * A issue is considered unique by comparing using {@code Issue#isSameIssue(Issue)}. As such, adding and updating of
- * persons uses Issue#isSameIssue(Issue) for equality so as to ensure that the issue being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a issue uses Issue#equals(Object) so
+ * issues uses Issue#isSameIssue(Issue) for equality so as to ensure that the issue being added or updated is
+ * unique in terms of identity in the UniqueIssueList. However, the removal of a issue uses Issue#equals(Object) so
  * as to ensure that the issue with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
  * @see Issue#isSameIssue(Issue)
  */
-public class UniquePersonList implements Iterable<Issue> {
+public class UniqueIssueList implements Iterable<Issue> {
 
     private final ObservableList<Issue> internalList = FXCollections.observableArrayList();
 
@@ -51,7 +51,7 @@ public class UniquePersonList implements Iterable<Issue> {
      * {@code target} must exist in the list.
      * The issue identity of {@code editedPerson} must not be the same as another existing issue in the list.
      */
-    public void setPerson(Issue target, Issue editedPerson) {
+    public void setIssue(Issue target, Issue editedPerson) {
         requireAllNonNull(target, editedPerson);
 
         int index = internalList.indexOf(target);
@@ -77,22 +77,22 @@ public class UniquePersonList implements Iterable<Issue> {
         }
     }
 
-    public void setPersons(UniquePersonList replacement) {
+    public void setIssues(UniqueIssueList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code issues}.
+     * {@code issues} must not contain duplicate issues.
      */
-    public void setPersons(List<Issue> persons) {
-        requireAllNonNull(persons);
-        if (!personsAreUnique(persons)) {
+    public void setIssues(List<Issue> issues) {
+        requireAllNonNull(issues);
+        if (!issuesAreUnique(issues)) {
             throw new DuplicatePersonException();
         }
 
-        internalList.setAll(persons);
+        internalList.setAll(issues);
     }
 
     /**
@@ -110,8 +110,8 @@ public class UniquePersonList implements Iterable<Issue> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniquePersonList // instanceof handles nulls
-                        && internalList.equals(((UniquePersonList) other).internalList));
+                || (other instanceof UniqueIssueList // instanceof handles nulls
+                        && internalList.equals(((UniqueIssueList) other).internalList));
     }
 
     @Override
@@ -120,12 +120,19 @@ public class UniquePersonList implements Iterable<Issue> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code issues} contains only unique issues.
      */
+<<<<<<< HEAD:src/main/java/seedu/address/model/issue/UniquePersonList.java
     private boolean personsAreUnique(List<Issue> persons) {
         for (int i = 0; i < persons.size() - 1; i++) {
             for (int j = i + 1; j < persons.size(); j++) {
                 if (persons.get(i).isSameIssue(persons.get(j))) {
+=======
+    private boolean issuesAreUnique(List<Issue> issues) {
+        for (int i = 0; i < issues.size() - 1; i++) {
+            for (int j = i + 1; j < issues.size(); j++) {
+                if (issues.get(i).isSameIssue(issues.get(j))) {
+>>>>>>> * Refactored UniquePersonList -> UniqueIssueList:src/main/java/seedu/address/model/issue/UniqueIssueList.java
                     return false;
                 }
             }

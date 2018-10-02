@@ -10,8 +10,10 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Issue;
-import seedu.address.model.issue.*;
 import seedu.address.model.issue.Email;
+import seedu.address.model.issue.IssueStatement;
+import seedu.address.model.issue.Phone;
+import seedu.address.model.issue.Remark;
 import seedu.address.model.issue.Tag;
 
 /**

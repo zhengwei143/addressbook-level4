@@ -13,6 +13,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -20,8 +21,6 @@ import seedu.address.model.ReadOnlySaveIt;
 import seedu.address.model.SaveIt;
 import seedu.address.model.issue.Issue;
 import seedu.address.testutil.PersonBuilder;
-
-import javafx.collections.ObservableList;
 
 public class AddCommandTest {
 

@@ -122,17 +122,10 @@ public class UniqueIssueList implements Iterable<Issue> {
     /**
      * Returns true if {@code issues} contains only unique issues.
      */
-<<<<<<< HEAD:src/main/java/seedu/address/model/issue/UniquePersonList.java
-    private boolean personsAreUnique(List<Issue> persons) {
-        for (int i = 0; i < persons.size() - 1; i++) {
-            for (int j = i + 1; j < persons.size(); j++) {
-                if (persons.get(i).isSameIssue(persons.get(j))) {
-=======
     private boolean issuesAreUnique(List<Issue> issues) {
         for (int i = 0; i < issues.size() - 1; i++) {
             for (int j = i + 1; j < issues.size(); j++) {
                 if (issues.get(i).isSameIssue(issues.get(j))) {
->>>>>>> * Refactored UniquePersonList -> UniqueIssueList:src/main/java/seedu/address/model/issue/UniqueIssueList.java
                     return false;
                 }
             }

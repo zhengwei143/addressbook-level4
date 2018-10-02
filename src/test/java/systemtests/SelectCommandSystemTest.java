@@ -21,12 +21,14 @@
 //public class SelectCommandSystemTest extends SaveItSystemTest {
 //    @Test
 //    public void select() {
-//        /* ------------------------ Perform select operations on the shown unfiltered list -------------------------- */
+//        /* ------------------------ Perform select operations on the shown unfiltered list
+// -------------------------- */
 //
 //        /* Case: select the first card in the issue list, command with leading spaces and trailing spaces
 //         * -> selected
 //         */
-//        String command = "   " + SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + "   ";
+//        String command = "   " + SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + "
+//  ";
 //        assertCommandSuccess(command, INDEX_FIRST_PERSON);
 //
 //        /* Case: select the last card in the issue list -> selected */
@@ -52,22 +54,27 @@
 //        /* Case: select the current selected card -> selected */
 //        assertCommandSuccess(command, middleIndex);
 //
-//        /* ------------------------ Perform select operations on the shown filtered list ---------------------------- */
+//        /* ------------------------ Perform select operations on the shown filtered list
+// ---------------------------- */
 //
-//        /* Case: filtered issue list, select index within bounds of address book but out of bounds of issue list
+//        /* Case: filtered issue list, select index within bounds of address book but out of bounds of
+// issue list
 //         * -> rejected
 //         */
 //        showPersonsWithName(KEYWORD_MATCHING_MEIER);
 //        int invalidIndex = getModel().getSaveIt().getPersonList().size();
-//        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+//        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex,
+// MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 //
-//        /* Case: filtered issue list, select index within bounds of address book and issue list -> selected */
+//        /* Case: filtered issue list, select index within bounds of address book and issue list ->
+// selected */
 //        Index validIndex = Index.fromOneBased(1);
 //        assertTrue(validIndex.getZeroBased() < getModel().getFilteredPersonList().size());
 //        command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased();
 //        assertCommandSuccess(command, validIndex);
 //
-//        /* ----------------------------------- Perform invalid select operations ------------------------------------ */
+//        /* ----------------------------------- Perform invalid select operations
+// ------------------------------------ */
 //
 //        /* Case: invalid index (0) -> rejected */
 //        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + 0,
@@ -79,7 +86,8 @@
 //
 //        /* Case: invalid index (size + 1) -> rejected */
 //        invalidIndex = getModel().getFilteredPersonList().size() + 1;
-//        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+//        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex,
+// MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 //
 //        /* Case: invalid arguments (alphabets) -> rejected */
 //        assertCommandFailure(SelectCommand.COMMAND_WORD + " abc",
@@ -105,7 +113,8 @@
 //     * 3. Result display box displays the success message of executing select command with the
 //     * {@code expectedSelectedCardIndex} of the selected issue.<br>
 //     * 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br>
-//     * 5. Selected card is at {@code expectedSelectedCardIndex} and the browser url is updated accordingly.<br>
+//     * 5. Selected card is at {@code expectedSelectedCardIndex} and the browser url is updated
+// accordingly.<br>
 //     * 6. Status bar remains unchanged.<br>
 //     * Verifications 1, 3 and 4 are performed by
 //     * {@code SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>

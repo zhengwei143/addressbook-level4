@@ -13,7 +13,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalSaveIt;
 
 import org.junit.Rule;
 import org.junit.Test;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;

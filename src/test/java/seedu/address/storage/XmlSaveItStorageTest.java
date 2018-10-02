@@ -10,12 +10,10 @@ import static seedu.address.testutil.TypicalPersons.getTypicalSaveIt;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
-
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlySaveIt;
 import seedu.address.model.SaveIt;

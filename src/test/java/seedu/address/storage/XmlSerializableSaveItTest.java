@@ -2,7 +2,6 @@ package seedu.address.storage;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 

@@ -2,12 +2,11 @@ package seedu.address.testutil;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import seedu.address.model.issue.Remark;
 import seedu.address.model.issue.Email;
 import seedu.address.model.issue.Issue;
 import seedu.address.model.issue.IssueStatement;
 import seedu.address.model.issue.Phone;
+import seedu.address.model.issue.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 

@@ -11,9 +11,7 @@ import static seedu.address.testutil.TypicalPersons.CARL;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 import org.junit.Test;
-
 import seedu.address.testutil.SaveItBuilder;
 
 public class VersionedSaveItTest {

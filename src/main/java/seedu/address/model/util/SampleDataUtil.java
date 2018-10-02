@@ -6,11 +6,8 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.ReadOnlySaveIt;
 import seedu.address.model.SaveIt;
+import seedu.address.model.issue.*;
 import seedu.address.model.issue.Email;
-import seedu.address.model.issue.Issue;
-import seedu.address.model.issue.IssueStatement;
-import seedu.address.model.issue.Phone;
-import seedu.address.model.issue.Remark;
 import seedu.address.model.tag.Tag;
 
 /**

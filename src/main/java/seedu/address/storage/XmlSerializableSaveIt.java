@@ -8,15 +8,15 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlySaveIt;
+import seedu.address.model.SaveIt;
 import seedu.address.model.issue.Issue;
 
 /**
- * An Immutable AddressBook that is serializable to XML format
+ * An Immutable SaveIt that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
-public class XmlSerializableAddressBook {
+@XmlRootElement(name = "address")
+public class XmlSerializableSaveIt {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate issue(s).";
 
@@ -24,37 +24,37 @@ public class XmlSerializableAddressBook {
     private List<XmlAdaptedPerson> persons;
 
     /**
-     * Creates an empty XmlSerializableAddressBook.
+     * Creates an empty XmlSerializableSaveIt.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableAddressBook() {
+    public XmlSerializableSaveIt() {
         persons = new ArrayList<>();
     }
 
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
+    public XmlSerializableSaveIt(ReadOnlySaveIt src) {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this addressbook into the model's {@code AddressBook} object.
+     * Converts this address into the model's {@code SaveIt} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
      * {@code XmlAdaptedPerson}.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public SaveIt toModelType() throws IllegalValueException {
+        SaveIt saveIt = new SaveIt();
         for (XmlAdaptedPerson p : persons) {
-            Issue person = p.toModelType();
-            if (addressBook.hasPerson(person)) {
+            Issue issue = p.toModelType();
+            if (saveIt.hasPerson(issue)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(person);
+            saveIt.addPerson(issue);
         }
-        return addressBook;
+        return saveIt;
     }
 
     @Override
@@ -63,9 +63,9 @@ public class XmlSerializableAddressBook {
             return true;
         }
 
-        if (!(other instanceof XmlSerializableAddressBook)) {
+        if (!(other instanceof XmlSerializableSaveIt)) {
             return false;
         }
-        return persons.equals(((XmlSerializableAddressBook) other).persons);
+        return persons.equals(((XmlSerializableSaveIt) other).persons);
     }
 }

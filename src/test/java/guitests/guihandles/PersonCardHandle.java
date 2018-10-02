@@ -75,12 +75,12 @@ public class PersonCardHandle extends NodeHandle<Node> {
     /**
      * Returns true if this handle contains {@code issue}.
      */
-    public boolean equals(Issue person) {
-        return getName().equals(person.getName().fullName)
-                && getAddress().equals(person.getAddress().value)
-                && getPhone().equals(person.getPhone().value)
-                && getEmail().equals(person.getEmail().value)
-                && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(person.getTags().stream()
+    public boolean equals(Issue issue) {
+        return getName().equals(issue.getName().issue)
+                && getAddress().equals(issue.getAddress().value)
+                && getPhone().equals(issue.getPhone().value)
+                && getEmail().equals(issue.getEmail().value)
+                && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(issue.getTags().stream()
                         .map(tag -> tag.tagName)
                         .collect(Collectors.toList())));
     }

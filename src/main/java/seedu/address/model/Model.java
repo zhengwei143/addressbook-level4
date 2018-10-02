@@ -10,19 +10,18 @@ import seedu.address.model.issue.Issue;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Issue> PREDICATE_SHOW_ALL_ISSUES = unused -> true;
-
+    Predicate<Issue> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyAddressBook newData);
+    void resetData(ReadOnlySaveIt newData);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the SaveIt */
+    ReadOnlySaveIt getSaveIt();
 
     /**
      * Returns true if a issue with the same identity as {@code issue} exists in the address book.
      */
-    boolean hasPerson(Issue person);
+    boolean hasPerson(Issue issue);
 
     /**
      * Deletes the given issue.
@@ -34,14 +33,14 @@ public interface Model {
      * Adds the given issue.
      * {@code issue} must not already exist in the address book.
      */
-    void addPerson(Issue person);
+    void addPerson(Issue issue);
 
     /**
-     * Replaces the given issue {@code target} with {@code editedPerson}.
+     * Replaces the given issue {@code target} with {@code editedIssue}.
      * {@code target} must exist in the address book.
-     * The issue identity of {@code editedPerson} must not be the same as another existing issue in the address book.
+     * The issue identity of {@code editedIssue} must not be the same as another existing issue in the address book.
      */
-    void updatePerson(Issue target, Issue editedPerson);
+    void updatePerson(Issue target, Issue editedIssue);
 
     /** Returns an unmodifiable view of the filtered issue list */
     ObservableList<Issue> getFilteredPersonList();
@@ -55,25 +54,25 @@ public interface Model {
     /**
      * Returns true if the model has previous address book states to restore.
      */
-    boolean canUndoAddressBook();
+    boolean canUndoSaveIt();
 
     /**
      * Returns true if the model has undone address book states to restore.
      */
-    boolean canRedoAddressBook();
+    boolean canRedoSaveIt();
 
     /**
      * Restores the model's address book to its previous state.
      */
-    void undoAddressBook();
+    void undoSaveIt();
 
     /**
      * Restores the model's address book to its previously undone state.
      */
-    void redoAddressBook();
+    void redoSaveIt();
 
     /**
      * Saves the current address book state for undo/redo.
      */
-    void commitAddressBook();
+    void commitSaveIt();
 }

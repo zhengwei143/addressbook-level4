@@ -40,10 +40,10 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Issue personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        Issue issueToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deletePerson(issueToDelete);
+        model.commitSaveIt();
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, issueToDelete));
     }
 
     @Override

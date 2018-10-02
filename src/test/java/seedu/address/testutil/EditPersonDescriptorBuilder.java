@@ -5,11 +5,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.issue.Address;
+
 import seedu.address.model.issue.Email;
-import seedu.address.model.issue.Name;
 import seedu.address.model.issue.Issue;
+import seedu.address.model.issue.IssueStatement;
 import seedu.address.model.issue.Phone;
+import seedu.address.model.issue.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -30,20 +31,20 @@ public class EditPersonDescriptorBuilder {
     /**
      * Returns an {@code EditPersonDescriptor} with fields containing {@code issue}'s details
      */
-    public EditPersonDescriptorBuilder(Issue person) {
+    public EditPersonDescriptorBuilder(Issue issue) {
         descriptor = new EditPersonDescriptor();
-        descriptor.setName(person.getName());
-        descriptor.setPhone(person.getPhone());
-        descriptor.setEmail(person.getEmail());
-        descriptor.setAddress(person.getAddress());
-        descriptor.setTags(person.getTags());
+        descriptor.setName(issue.getName());
+        descriptor.setPhone(issue.getPhone());
+        descriptor.setEmail(issue.getEmail());
+        descriptor.setAddress(issue.getAddress());
+        descriptor.setTags(issue.getTags());
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code IssueStatement} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withName(String name) {
-        descriptor.setName(new Name(name));
+        descriptor.setName(new IssueStatement(name));
         return this;
     }
 
@@ -64,10 +65,10 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Remark} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+        descriptor.setAddress(new Remark(address));
         return this;
     }
 

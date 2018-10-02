@@ -1,12 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ISSUES;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -20,8 +19,11 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.issue.*;
+import seedu.address.model.issue.Email;
 import seedu.address.model.issue.Issue;
+import seedu.address.model.issue.IssueStatement;
+import seedu.address.model.issue.Phone;
+import seedu.address.model.issue.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,10 +37,10 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed issue list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_NAME + "ISSUE_STATEMENT] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -72,31 +74,31 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Issue personToEdit = lastShownList.get(index.getZeroBased());
-        Issue editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Issue issueToEdit = lastShownList.get(index.getZeroBased());
+        Issue editedIssue = createEditedPerson(issueToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!issueToEdit.isSameIssue(editedIssue) && model.hasPerson(editedIssue)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.updatePerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_ISSUES);
-        model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        model.updatePerson(issueToEdit, editedIssue);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.commitSaveIt();
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedIssue));
     }
 
     /**
-     * Creates and returns a {@code Issue} with the details of {@code personToEdit}
+     * Creates and returns a {@code Issue} with the details of {@code issueToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Issue createEditedPerson(Issue personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Issue createEditedPerson(Issue issueToEdit, EditPersonDescriptor editPersonDescriptor) {
+        assert issueToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        IssueStatement updatedName = editPersonDescriptor.getName().orElse(issueToEdit.getName());
+        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(issueToEdit.getPhone());
+        Email updatedEmail = editPersonDescriptor.getEmail().orElse(issueToEdit.getEmail());
+        Remark updatedAddress = editPersonDescriptor.getAddress().orElse(issueToEdit.getAddress());
+        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(issueToEdit.getTags());
 
         return new Issue(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
@@ -124,10 +126,10 @@ public class EditCommand extends Command {
      * corresponding field value of the issue.
      */
     public static class EditPersonDescriptor {
-        private Name name;
+        private IssueStatement name;
         private Phone phone;
         private Email email;
-        private Address address;
+        private Remark address;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -151,11 +153,11 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
         }
 
-        public void setName(Name name) {
+        public void setName(IssueStatement name) {
             this.name = name;
         }
 
-        public Optional<Name> getName() {
+        public Optional<IssueStatement> getName() {
             return Optional.ofNullable(name);
         }
 
@@ -175,11 +177,11 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
+        public void setAddress(Remark address) {
             this.address = address;
         }
 
-        public Optional<Address> getAddress() {
+        public Optional<Remark> getAddress() {
             return Optional.ofNullable(address);
         }
 

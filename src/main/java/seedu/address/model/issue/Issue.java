@@ -1,34 +1,33 @@
 package seedu.address.model.issue;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Issue in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Issue {
 
     // Identity fields
-    private final Name name;
+    private final IssueStatement name;
     private final Phone phone;
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Remark address;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Issue(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Issue(IssueStatement name, Phone phone, Email email, Remark address, Set<Tag> tags) {
+        CollectionUtil.requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -36,7 +35,7 @@ public class Issue {
         this.tags.addAll(tags);
     }
 
-    public Name getName() {
+    public IssueStatement getName() {
         return name;
     }
 
@@ -48,7 +47,7 @@ public class Issue {
         return email;
     }
 
-    public Address getAddress() {
+    public Remark getAddress() {
         return address;
     }
 
@@ -64,14 +63,14 @@ public class Issue {
      * Returns true if both persons of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Issue otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSameIssue(Issue otherIssue) {
+        if (otherIssue == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName())
-                && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
+        return otherIssue != null
+                && otherIssue.getName().equals(getName())
+                && (otherIssue.getPhone().equals(getPhone()) || otherIssue.getEmail().equals(getEmail()));
     }
 
     /**
@@ -88,12 +87,12 @@ public class Issue {
             return false;
         }
 
-        Issue otherPerson = (Issue) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+        Issue otherIssue = (Issue) other;
+        return otherIssue.getName().equals(getName())
+                && otherIssue.getPhone().equals(getPhone())
+                && otherIssue.getEmail().equals(getEmail())
+                && otherIssue.getAddress().equals(getAddress())
+                && otherIssue.getTags().equals(getTags());
     }
 
     @Override
@@ -110,7 +109,7 @@ public class Issue {
                 .append(getPhone())
                 .append(" Email: ")
                 .append(getEmail())
-                .append(" Address: ")
+                .append(" Remark: ")
                 .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);

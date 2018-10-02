@@ -16,9 +16,9 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlySaveIt;
+import seedu.address.model.SaveIt;
 import seedu.address.model.issue.Issue;
 import seedu.address.testutil.PersonBuilder;
 
@@ -40,20 +40,20 @@ public class AddCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Issue validPerson = new PersonBuilder().build();
+        Issue validIssue = new PersonBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub, commandHistory);
+        CommandResult commandResult = new AddCommand(validIssue).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validIssue), commandResult.feedbackToUser);
+        assertEquals(Arrays.asList(validIssue), modelStub.personsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        Issue validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+        Issue validIssue = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(validIssue);
+        ModelStub modelStub = new ModelStubWithPerson(validIssue);
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
@@ -89,22 +89,22 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public void addPerson(Issue person) {
+        public void addPerson(Issue issue) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void resetData(ReadOnlyAddressBook newData) {
+        public void resetData(ReadOnlySaveIt newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlySaveIt getSaveIt() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasPerson(Issue person) {
+        public boolean hasPerson(Issue issue) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -114,7 +114,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updatePerson(Issue target, Issue editedPerson) {
+        public void updatePerson(Issue target, Issue editedIssue) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -129,27 +129,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public boolean canUndoSaveIt() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public boolean canRedoSaveIt() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public void undoSaveIt() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public void redoSaveIt() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitSaveIt() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -158,17 +158,17 @@ public class AddCommandTest {
      * A Model stub that contains a single issue.
      */
     private class ModelStubWithPerson extends ModelStub {
-        private final Issue person;
+        private final Issue issue;
 
-        ModelStubWithPerson(Issue person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithPerson(Issue issue) {
+            requireNonNull(issue);
+            this.issue = issue;
         }
 
         @Override
-        public boolean hasPerson(Issue person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public boolean hasPerson(Issue issue) {
+            requireNonNull(issue);
+            return this.issue.isSameIssue(issue);
         }
     }
 
@@ -179,25 +179,25 @@ public class AddCommandTest {
         final ArrayList<Issue> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Issue person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasPerson(Issue issue) {
+            requireNonNull(issue);
+            return personsAdded.stream().anyMatch(issue::isSameIssue);
         }
 
         @Override
-        public void addPerson(Issue person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addPerson(Issue issue) {
+            requireNonNull(issue);
+            personsAdded.add(issue);
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitSaveIt() {
             // called by {@code AddCommand#execute()}
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlySaveIt getSaveIt() {
+            return new SaveIt();
         }
     }
 

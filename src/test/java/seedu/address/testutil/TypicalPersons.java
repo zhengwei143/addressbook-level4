@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.SaveIt;
 import seedu.address.model.issue.Issue;
 
 /**
@@ -60,12 +60,12 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code SaveIt} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        for (Issue person : getTypicalPersons()) {
-            ab.addPerson(person);
+    public static SaveIt getTypicalSaveIt() {
+        SaveIt ab = new SaveIt();
+        for (Issue issue : getTypicalPersons()) {
+            ab.addPerson(issue);
         }
         return ab;
     }

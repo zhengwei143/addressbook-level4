@@ -25,14 +25,14 @@ public class PersonListPanel extends UiPart<Region> {
     @FXML
     private ListView<Issue> personListView;
 
-    public PersonListPanel(ObservableList<Issue> personList) {
+    public PersonListPanel(ObservableList<Issue> issueList) {
         super(FXML);
-        setConnections(personList);
+        setConnections(issueList);
         registerAsAnEventHandler(this);
     }
 
-    private void setConnections(ObservableList<Issue> personList) {
-        personListView.setItems(personList);
+    private void setConnections(ObservableList<Issue> issueList) {
+        personListView.setItems(issueList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
@@ -68,14 +68,14 @@ public class PersonListPanel extends UiPart<Region> {
      */
     class PersonListViewCell extends ListCell<Issue> {
         @Override
-        protected void updateItem(Issue person, boolean empty) {
-            super.updateItem(person, empty);
+        protected void updateItem(Issue issue, boolean empty) {
+            super.updateItem(issue, empty);
 
-            if (empty || person == null) {
+            if (empty || issue == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                setGraphic(new PersonCard(issue, getIndex() + 1).getRoot());
             }
         }
     }

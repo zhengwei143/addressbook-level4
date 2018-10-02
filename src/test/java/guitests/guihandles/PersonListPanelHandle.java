@@ -29,15 +29,15 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Issue>> {
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
     public PersonCardHandle getHandleToSelectedCard() {
-        List<Issue> selectedPersonList = getRootNode().getSelectionModel().getSelectedItems();
+        List<Issue> selectedIssueList = getRootNode().getSelectionModel().getSelectedItems();
 
-        if (selectedPersonList.size() != 1) {
+        if (selectedIssueList.size() != 1) {
             throw new AssertionError("Issue list size expected 1.");
         }
 
         return getAllCardNodes().stream()
                 .map(PersonCardHandle::new)
-                .filter(handle -> handle.equals(selectedPersonList.get(0)))
+                .filter(handle -> handle.equals(selectedIssueList.get(0)))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
     }
@@ -65,13 +65,13 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Issue>> {
     /**
      * Navigates the listview to display {@code issue}.
      */
-    public void navigateToCard(Issue person) {
-        if (!getRootNode().getItems().contains(person)) {
+    public void navigateToCard(Issue issue) {
+        if (!getRootNode().getItems().contains(issue)) {
             throw new IllegalArgumentException("Issue does not exist.");
         }
 
         guiRobot.interact(() -> {
-            getRootNode().scrollTo(person);
+            getRootNode().scrollTo(issue);
         });
         guiRobot.pauseForHuman();
     }

@@ -1,7 +1,8 @@
 package seedu.address.model.issue;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import seedu.address.commons.util.AppUtil;
 
 /**
  * Represents a Issue's phone number in the address book.
@@ -22,7 +23,7 @@ public class Phone {
      */
     public Phone(String phone) {
         requireNonNull(phone);
-        checkArgument(isValidPhone(phone), MESSAGE_PHONE_CONSTRAINTS);
+        AppUtil.checkArgument(isValidPhone(phone), MESSAGE_PHONE_CONSTRAINTS);
         value = phone;
     }
 

@@ -8,8 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.issue.exceptions.DuplicatePersonException;
-import seedu.address.model.issue.exceptions.PersonNotFoundException;
+import seedu.address.model.issue.exceptions.DuplicateIssueException;
+import seedu.address.model.issue.exceptions.IssueNotFoundException;
 
 /**
  * A list of issues that enforces uniqueness between its elements and does not allow nulls.
@@ -41,7 +41,7 @@ public class UniqueIssueList implements Iterable<Issue> {
     public void add(Issue toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateIssueException();
         }
         internalList.add(toAdd);
     }
@@ -56,11 +56,11 @@ public class UniqueIssueList implements Iterable<Issue> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new IssueNotFoundException();
         }
 
         if (!target.isSameIssue(editedPerson) && contains(editedPerson)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateIssueException();
         }
 
         internalList.set(index, editedPerson);
@@ -73,7 +73,7 @@ public class UniqueIssueList implements Iterable<Issue> {
     public void remove(Issue toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new IssueNotFoundException();
         }
     }
 
@@ -89,7 +89,7 @@ public class UniqueIssueList implements Iterable<Issue> {
     public void setIssues(List<Issue> issues) {
         requireAllNonNull(issues);
         if (!issuesAreUnique(issues)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateIssueException();
         }
 
         internalList.setAll(issues);

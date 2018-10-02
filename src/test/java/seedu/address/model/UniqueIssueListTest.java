@@ -16,10 +16,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.Issue;
-import seedu.address.model.UniqueIssueList;
-import seedu.address.model.issue.exceptions.DuplicatePersonException;
-import seedu.address.model.issue.exceptions.PersonNotFoundException;
+import seedu.address.model.issue.exceptions.DuplicateIssueException;
+import seedu.address.model.issue.exceptions.IssueNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
 public class UniqueIssueListTest {
@@ -29,7 +27,7 @@ public class UniqueIssueListTest {
     private final UniqueIssueList uniqueIssueList = new UniqueIssueList();
 
     @Test
-    public void contains_nullPerson_throwsNullPointerException() {
+    public void contains_nullIssue_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniqueIssueList.contains(null);
     }
@@ -54,38 +52,38 @@ public class UniqueIssueListTest {
     }
 
     @Test
-    public void add_nullPerson_throwsNullPointerException() {
+    public void add_nullIssue_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniqueIssueList.add(null);
     }
 
     @Test
-    public void add_duplicatePerson_throwsDuplicatePersonException() {
+    public void add_duplicateIssue_throwsDuplicateIssueException() {
         uniqueIssueList.add(ALICE);
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicateIssueException.class);
         uniqueIssueList.add(ALICE);
     }
 
     @Test
-    public void setPerson_nullTargetPerson_throwsNullPointerException() {
+    public void setIssue_nullTargetIssue_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniqueIssueList.setIssue(null, ALICE);
     }
 
     @Test
-    public void setPerson_nullEditedPerson_throwsNullPointerException() {
+    public void setIssue_nullEditedIssue_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniqueIssueList.setIssue(ALICE, null);
     }
 
     @Test
-    public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
-        thrown.expect(PersonNotFoundException.class);
+    public void setIssue_targetIssueNotInList_throwsIssueNotFoundException() {
+        thrown.expect(IssueNotFoundException.class);
         uniqueIssueList.setIssue(ALICE, ALICE);
     }
 
     @Test
-    public void setPerson_editedPersonIsSamePerson_success() {
+    public void setIssue_editedIssueIsSameIssue_success() {
         uniqueIssueList.add(ALICE);
         uniqueIssueList.setIssue(ALICE, ALICE);
         UniqueIssueList expectedUniqueIssueList = new UniqueIssueList();
@@ -94,7 +92,7 @@ public class UniqueIssueListTest {
     }
 
     @Test
-    public void setPerson_editedPersonHasSameIdentity_success() {
+    public void setIssue_editedIssueHasSameIdentity_success() {
         uniqueIssueList.add(ALICE);
         Issue editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -105,7 +103,7 @@ public class UniqueIssueListTest {
     }
 
     @Test
-    public void setPerson_editedPersonHasDifferentIdentity_success() {
+    public void setIssue_editedIssueHasDifferentIdentity_success() {
         uniqueIssueList.add(ALICE);
         uniqueIssueList.setIssue(ALICE, BOB);
         UniqueIssueList expectedUniqueIssueList = new UniqueIssueList();
@@ -114,27 +112,27 @@ public class UniqueIssueListTest {
     }
 
     @Test
-    public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
+    public void setIssue_editedIssueHasNonUniqueIdentity_throwsDuplicateIssueException() {
         uniqueIssueList.add(ALICE);
         uniqueIssueList.add(BOB);
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicateIssueException.class);
         uniqueIssueList.setIssue(ALICE, BOB);
     }
 
     @Test
-    public void remove_nullPerson_throwsNullPointerException() {
+    public void remove_nullIssue_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniqueIssueList.remove(null);
     }
 
     @Test
-    public void remove_personDoesNotExist_throwsPersonNotFoundException() {
-        thrown.expect(PersonNotFoundException.class);
+    public void remove_personDoesNotExist_throwsIssueNotFoundException() {
+        thrown.expect(IssueNotFoundException.class);
         uniqueIssueList.remove(ALICE);
     }
 
     @Test
-    public void remove_existingPerson_removesPerson() {
+    public void remove_existingIssue_removesIssue() {
         uniqueIssueList.add(ALICE);
         uniqueIssueList.remove(ALICE);
         UniqueIssueList expectedUniqueIssueList = new UniqueIssueList();
@@ -142,13 +140,13 @@ public class UniqueIssueListTest {
     }
 
     @Test
-    public void setPersons_nullUniquePersonList_throwsNullPointerException() {
+    public void setIssues_nullUniqueIssueList_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniqueIssueList.setIssues((UniqueIssueList) null);
     }
 
     @Test
-    public void setPersons_uniquePersonList_replacesOwnListWithProvidedUniquePersonList() {
+    public void setIssues_uniqueIssueList_replacesOwnListWithProvidedUniqueIssueList() {
         uniqueIssueList.add(ALICE);
         UniqueIssueList expectedUniqueIssueList = new UniqueIssueList();
         expectedUniqueIssueList.add(BOB);
@@ -157,13 +155,13 @@ public class UniqueIssueListTest {
     }
 
     @Test
-    public void setPersons_nullList_throwsNullPointerException() {
+    public void setIssues_nullList_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniqueIssueList.setIssues((List<Issue>) null);
     }
 
     @Test
-    public void setPersons_list_replacesOwnListWithProvidedList() {
+    public void setIssues_list_replacesOwnListWithProvidedList() {
         uniqueIssueList.add(ALICE);
         List<Issue> personList = Collections.singletonList(BOB);
         uniqueIssueList.setIssues(personList);
@@ -173,10 +171,10 @@ public class UniqueIssueListTest {
     }
 
     @Test
-    public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
-        List<Issue> listWithDuplicatePersons = Arrays.asList(ALICE, ALICE);
-        thrown.expect(DuplicatePersonException.class);
-        uniqueIssueList.setIssues(listWithDuplicatePersons);
+    public void setIssues_listWithDuplicateIssues_throwsDuplicateIssueException() {
+        List<Issue> listWithDuplicateIssues = Arrays.asList(ALICE, ALICE);
+        thrown.expect(DuplicateIssueException.class);
+        uniqueIssueList.setIssues(listWithDuplicateIssues);
     }
 
     @Test

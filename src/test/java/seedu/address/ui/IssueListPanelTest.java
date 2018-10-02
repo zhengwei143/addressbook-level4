@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
+import static java.time.Duration.ofMillis;
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
@@ -11,6 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
 
 import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
@@ -59,19 +62,20 @@ public class IssueListPanelTest extends GuiUnitTest {
         assertCardEquals(expectedPerson, selectedPerson);
     }
 
-    //    /**
-    //     * Verifies that creating and deleting large number of persons in {@code PersonListPanel} requires lesser than
-    //     * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
-    //     */
-    //    @Test
-    //    public void performanceTest() throws Exception {
-    //        ObservableList<Issue> backingList = createBackingList(10000);
-    //
-    //        assertTimeoutPreemptively(ofMillis(CARD_CREATION_AND_DELETION_TIMEOUT), () -> {
-    //            initUi(backingList);
-    //            guiRobot.interact(backingList::clear);
-    //        }, "Creation and deletion of issue cards exceeded time limit");
-    //    }
+    /**
+     * Verifies that creating and deleting large number of persons in {@code PersonListPanel} requires lesser than
+     * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
+     */
+    @Test
+    @Disabled
+    public void performanceTest() throws Exception {
+        ObservableList<Issue> backingList = createBackingList(10000);
+
+        assertTimeoutPreemptively(ofMillis(CARD_CREATION_AND_DELETION_TIMEOUT), () -> {
+            initUi(backingList);
+            guiRobot.interact(backingList::clear);
+        }, "Creation and deletion of issue cards exceeded time limit");
+    }
 
     /**
      * Returns a list of persons containing {@code personCount} persons that is used to populate the

@@ -1,10 +1,19 @@
 package seedu.address.storage;
 
+import static org.junit.Assert.*;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.Rule;
+import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
 import org.junit.rules.ExpectedException;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.XmlUtil;
+import seedu.address.model.SaveIt;
+import seedu.address.testutil.TypicalPersons;
 
 public class XmlSerializableSaveItTest {
 
@@ -16,30 +25,33 @@ public class XmlSerializableSaveItTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-//    @Test
-//    public void toModelType_typicalPersonsFile_success() throws Exception {
-//        XmlSerializableSaveIt dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE,
-//                XmlSerializableSaveIt.class);
-//        SaveIt saveItFromFile = dataFromFile.toModelType();
-//        SaveIt typicalPersonsSaveIt = TypicalPersons.getTypicalSaveIt();
-//        assertEquals(saveItFromFile, typicalPersonsSaveIt);
-//    }
+    @Test
+    @Disabled
+    public void toModelType_typicalPersonsFile_success() throws Exception {
+        XmlSerializableSaveIt dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE,
+                XmlSerializableSaveIt.class);
+        SaveIt saveItFromFile = dataFromFile.toModelType();
+        SaveIt typicalPersonsSaveIt = TypicalPersons.getTypicalSaveIt();
+        assertEquals(saveItFromFile, typicalPersonsSaveIt);
+    }
 
-//    @Test
-//    public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {
-//        XmlSerializableSaveIt dataFromFile = XmlUtil.getDataFromFile(INVALID_PERSON_FILE,
-//                XmlSerializableSaveIt.class);
-//        thrown.expect(IllegalValueException.class);
-//        dataFromFile.toModelType();
-//    }
+    @Test
+    @Disabled
+    public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {
+        XmlSerializableSaveIt dataFromFile = XmlUtil.getDataFromFile(INVALID_PERSON_FILE,
+                XmlSerializableSaveIt.class);
+        thrown.expect(IllegalValueException.class);
+        dataFromFile.toModelType();
+    }
 
-//    @Test
-//    public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
-//        XmlSerializableSaveIt dataFromFile = XmlUtil.getDataFromFile(DUPLICATE_PERSON_FILE,
-//                XmlSerializableSaveIt.class);
-//        thrown.expect(IllegalValueException.class);
-//        thrown.expectMessage(XmlSerializableSaveIt.MESSAGE_DUPLICATE_PERSON);
-//        dataFromFile.toModelType();
-//    }
+    @Test
+    @Disabled
+    public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
+        XmlSerializableSaveIt dataFromFile = XmlUtil.getDataFromFile(DUPLICATE_PERSON_FILE,
+                XmlSerializableSaveIt.class);
+        thrown.expect(IllegalValueException.class);
+        thrown.expectMessage(XmlSerializableSaveIt.MESSAGE_DUPLICATE_PERSON);
+        dataFromFile.toModelType();
+    }
 
 }

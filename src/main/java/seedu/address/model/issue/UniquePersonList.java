@@ -13,14 +13,14 @@ import seedu.address.model.issue.exceptions.PersonNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A issue is considered unique by comparing using {@code Issue#isSamePerson(Issue)}. As such, adding and updating of
- * persons uses Issue#isSamePerson(Issue) for equality so as to ensure that the issue being added or updated is
+ * A issue is considered unique by comparing using {@code Issue#isSameIssue(Issue)}. As such, adding and updating of
+ * persons uses Issue#isSameIssue(Issue) for equality so as to ensure that the issue being added or updated is
  * unique in terms of identity in the UniquePersonList. However, the removal of a issue uses Issue#equals(Object) so
  * as to ensure that the issue with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Issue#isSamePerson(Issue)
+ * @see Issue#isSameIssue(Issue)
  */
 public class UniquePersonList implements Iterable<Issue> {
 
@@ -31,7 +31,7 @@ public class UniquePersonList implements Iterable<Issue> {
      */
     public boolean contains(Issue toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::isSameIssue);
     }
 
     /**
@@ -59,7 +59,7 @@ public class UniquePersonList implements Iterable<Issue> {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
+        if (!target.isSameIssue(editedPerson) && contains(editedPerson)) {
             throw new DuplicatePersonException();
         }
 
@@ -125,7 +125,7 @@ public class UniquePersonList implements Iterable<Issue> {
     private boolean personsAreUnique(List<Issue> persons) {
         for (int i = 0; i < persons.size() - 1; i++) {
             for (int j = i + 1; j < persons.size(); j++) {
-                if (persons.get(i).isSamePerson(persons.get(j))) {
+                if (persons.get(i).isSameIssue(persons.get(j))) {
                     return false;
                 }
             }

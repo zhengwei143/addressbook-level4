@@ -37,7 +37,7 @@
 //import seedu.address.logic.commands.RedoCommand;
 //import seedu.address.logic.commands.UndoCommand;
 //import seedu.address.model.Model;
-//import seedu.address.model.issue.Address;
+//import seedu.address.model.issue.Remark;
 //import seedu.address.model.issue.Email;
 //import seedu.address.model.issue.Issue;
 //import seedu.address.model.issue.IssueStatement;
@@ -189,7 +189,7 @@
 //        /* Case: invalid address -> rejected */
 //        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY +
 // INVALID_ADDRESS_DESC;
-//        assertCommandFailure(command, Address.MESSAGE_ADDRESS_CONSTRAINTS);
+//        assertCommandFailure(command, Remark.MESSAGE_ADDRESS_CONSTRAINTS);
 //
 //        /* Case: invalid tag -> rejected */
 //        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY +

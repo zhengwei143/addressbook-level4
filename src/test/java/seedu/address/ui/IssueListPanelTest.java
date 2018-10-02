@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
+import static java.time.Duration.ofMillis;
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
@@ -10,7 +12,9 @@ import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.junit.Ignore;
 import org.junit.Test;
+
 
 import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
@@ -19,7 +23,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.issue.Issue;
+import seedu.address.model.Issue;
 import seedu.address.storage.XmlSerializableSaveIt;
 
 public class IssueListPanelTest extends GuiUnitTest {
@@ -59,19 +63,20 @@ public class IssueListPanelTest extends GuiUnitTest {
         assertCardEquals(expectedPerson, selectedPerson);
     }
 
-    //    /**
-    //     * Verifies that creating and deleting large number of persons in {@code PersonListPanel} requires lesser than
-    //     * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
-    //     */
-    //    @Test
-    //    public void performanceTest() throws Exception {
-    //        ObservableList<Issue> backingList = createBackingList(10000);
-    //
-    //        assertTimeoutPreemptively(ofMillis(CARD_CREATION_AND_DELETION_TIMEOUT), () -> {
-    //            initUi(backingList);
-    //            guiRobot.interact(backingList::clear);
-    //        }, "Creation and deletion of issue cards exceeded time limit");
-    //    }
+    /**
+     * Verifies that creating and deleting large number of persons in {@code PersonListPanel} requires lesser than
+     * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
+     */
+    @Test
+    @Ignore
+    public void performanceTest() throws Exception {
+        ObservableList<Issue> backingList = createBackingList(10000);
+
+        assertTimeoutPreemptively(ofMillis(CARD_CREATION_AND_DELETION_TIMEOUT), () -> {
+            initUi(backingList);
+            guiRobot.interact(backingList::clear);
+        }, "Creation and deletion of issue cards exceeded time limit");
+    }
 
     /**
      * Returns a list of persons containing {@code personCount} persons that is used to populate the

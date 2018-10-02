@@ -7,11 +7,11 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 
 import seedu.address.model.issue.Email;
-import seedu.address.model.issue.Issue;
+import seedu.address.model.Issue;
 import seedu.address.model.issue.IssueStatement;
 import seedu.address.model.issue.Phone;
 import seedu.address.model.issue.Remark;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.issue.Tag;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.

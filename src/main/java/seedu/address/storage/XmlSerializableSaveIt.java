@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.Issue;
 import seedu.address.model.ReadOnlySaveIt;
 import seedu.address.model.SaveIt;
-import seedu.address.model.issue.Issue;
 
 /**
  * An Immutable SaveIt that is serializable to XML format

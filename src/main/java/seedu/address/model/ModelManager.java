@@ -12,7 +12,6 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.SaveItChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.model.issue.Issue;
 
 /**
  * Represents the in-memory model of the address book data.

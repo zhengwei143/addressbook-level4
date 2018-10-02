@@ -6,15 +6,14 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.issue.Address;
 import seedu.address.model.issue.Email;
 import seedu.address.model.issue.Issue;
 import seedu.address.model.issue.IssueStatement;
 import seedu.address.model.issue.Phone;
+import seedu.address.model.issue.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -107,12 +106,12 @@ public class XmlAdaptedPerson {
         final Email modelEmail = new Email(email);
 
         if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
+        if (!Remark.isValidRemark(address)) {
+            throw new IllegalValueException(Remark.MESSAGE_ADDRESS_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        final Remark modelAddress = new Remark(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Issue(modelName, modelPhone, modelEmail, modelAddress, modelTags);

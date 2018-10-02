@@ -39,7 +39,7 @@
 //import seedu.address.logic.commands.RedoCommand;
 //import seedu.address.logic.commands.UndoCommand;
 //import seedu.address.model.Model;
-//import seedu.address.model.issue.Address;
+//import seedu.address.model.issue.Remark;
 //import seedu.address.model.issue.Email;
 //import seedu.address.model.issue.Issue;
 //import seedu.address.model.issue.IssueStatement;
@@ -196,7 +196,7 @@
 //        /* Case: invalid address -> rejected */
 //        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() +
 // INVALID_ADDRESS_DESC,
-//                Address.MESSAGE_ADDRESS_CONSTRAINTS);
+//                Remark.MESSAGE_ADDRESS_CONSTRAINTS);
 //
 //        /* Case: invalid tag -> rejected */
 //        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() +

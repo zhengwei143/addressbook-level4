@@ -30,6 +30,7 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.Test;
+
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.issue.Email;
 import seedu.address.model.issue.Issue;

@@ -8,9 +8,11 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
 import seedu.address.model.issue.NameContainsKeywordsPredicate;
 import seedu.address.testutil.SaveItBuilder;
 

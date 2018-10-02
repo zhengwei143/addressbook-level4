@@ -6,13 +6,13 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 
 /**
- * Lists all issues in the address book to the user.
+ * Lists all persons in the address book to the user.
  */
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all issues";
+    public static final String MESSAGE_SUCCESS = "Listed all persons";
 
 
     @Override

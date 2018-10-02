@@ -1,4 +1,4 @@
-package seedu.address.model.tag;
+package seedu.address.model.issue;
 
 import org.junit.Test;
 

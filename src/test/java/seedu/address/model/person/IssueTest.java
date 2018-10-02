@@ -30,7 +30,7 @@ public class IssueTest {
     }
 
     @Test
-    public void isSamePerson() {
+    public void isSameIssue() {
         // same object -> returns true
         assertTrue(ALICE.isSameIssue(ALICE));
 

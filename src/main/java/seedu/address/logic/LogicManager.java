@@ -10,8 +10,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.SaveItParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
 import seedu.address.model.Issue;
+import seedu.address.model.Model;
 
 /**
  * The main LogicManager of the app.

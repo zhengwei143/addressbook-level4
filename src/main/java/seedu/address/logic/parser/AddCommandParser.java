@@ -13,8 +13,10 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Issue;
-import seedu.address.model.issue.*;
 import seedu.address.model.issue.Email;
+import seedu.address.model.issue.IssueStatement;
+import seedu.address.model.issue.Phone;
+import seedu.address.model.issue.Remark;
 import seedu.address.model.issue.Tag;
 
 /**

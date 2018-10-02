@@ -7,7 +7,7 @@ public class SolutionLink {
 
     public static final String LINK_VALIDATION_REGEX = "";
 
-    public String value;
+    private String value;
 
     /**
      * Construct a new solution link.
@@ -26,6 +26,10 @@ public class SolutionLink {
         return test.matches(LINK_VALIDATION_REGEX);
     }
 
+    public String getValue() {
+        return this.value;
+    }
+
     @Override
     public String toString() {
         return value;
@@ -35,7 +39,7 @@ public class SolutionLink {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof SolutionLink // instanceof handles nulls
-                && value.equals(((SolutionLink) other).value)); // state check
+                && value.equals(((SolutionLink) other).getValue())); // state check
     }
 
     @Override

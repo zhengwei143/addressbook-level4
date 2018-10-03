@@ -4,8 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.Issue;
-import seedu.address.model.issue.*;
 import seedu.address.model.issue.Email;
+import seedu.address.model.issue.IssueStatement;
+import seedu.address.model.issue.Phone;
+import seedu.address.model.issue.Remark;
 import seedu.address.model.issue.Tag;
 import seedu.address.model.util.SampleDataUtil;
 

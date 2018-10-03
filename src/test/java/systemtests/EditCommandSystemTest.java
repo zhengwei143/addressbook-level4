@@ -39,12 +39,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.issue.Remark;
-import seedu.address.model.issue.Email;
 import seedu.address.model.Issue;
+import seedu.address.model.Model;
+import seedu.address.model.issue.Email;
 import seedu.address.model.issue.IssueStatement;
 import seedu.address.model.issue.Phone;
+import seedu.address.model.issue.Remark;
 import seedu.address.model.issue.Tag;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -245,7 +245,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
     }
 
     /**
-     * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index) except that the
+     * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} except that the
      * browser url and selected card remain unchanged.
      * @see EditCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
      */

@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
-import seedu.address.model.SaveIt;
 import seedu.address.model.Issue;
+import seedu.address.model.SaveIt;
 
 /**
  * A utility class to help with building address objects.

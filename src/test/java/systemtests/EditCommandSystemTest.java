@@ -189,11 +189,6 @@ public class EditCommandSystemTest extends SaveItSystemTest {
                 EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_PHONE_DESC,
                 Phone.MESSAGE_PHONE_CONSTRAINTS);
 
-        /* Case: invalid email -> rejected */
-        assertCommandFailure(
-                EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_EMAIL_DESC,
-                Email.MESSAGE_EMAIL_CONSTRAINTS);
-
         /* Case: invalid address -> rejected */
         assertCommandFailure(
                 EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_ADDRESS_DESC,

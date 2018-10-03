@@ -39,7 +39,7 @@ public class PersonBuilder {
      * Initializes the PersonBuilder with the data of {@code issueToCopy}.
      */
     public PersonBuilder(Issue issueToCopy) {
-        name = issueToCopy.getName();
+        name = issueToCopy.getStatement();
         phone = issueToCopy.getPhone();
         email = issueToCopy.getEmail();
         address = issueToCopy.getAddress();
@@ -87,7 +87,7 @@ public class PersonBuilder {
     }
 
     public Issue build() {
-        return new Issue(name, phone, email, address, tags);
+        return new Issue(name, phone, address, tags);
     }
 
 }

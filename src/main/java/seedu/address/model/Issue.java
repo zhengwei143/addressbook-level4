@@ -6,53 +6,46 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.model.issue.Email;
 import seedu.address.model.issue.IssueStatement;
 import seedu.address.model.issue.Phone;
 import seedu.address.model.issue.Remark;
 import seedu.address.model.issue.Tag;
 
 /**
- * Represents a Issue in the address book.
+ * Represents a Issue in the remark book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Issue {
 
     // Identity fields
-    private final IssueStatement name;
+    private final IssueStatement statement;
     private final Phone phone;
-    private final Email email;
 
     // Data fields
-    private final Remark address;
+    private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Issue(IssueStatement name, Phone phone, Email email, Remark address, Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
+    public Issue(IssueStatement statement, Phone phone, Remark remark, Set<Tag> tags) {
+        CollectionUtil.requireAllNonNull(statement, phone, remark, tags);
+        this.statement = statement;
         this.phone = phone;
-        this.email = email;
-        this.address = address;
+        this.remark = remark;
         this.tags.addAll(tags);
     }
 
-    public IssueStatement getName() {
-        return name;
+    public IssueStatement getStatement() {
+        return statement;
     }
 
     public Phone getPhone() {
         return phone;
     }
 
-    public Email getEmail() {
-        return email;
-    }
-
     public Remark getAddress() {
-        return address;
+        return remark;
     }
 
     /**
@@ -64,7 +57,7 @@ public class Issue {
     }
 
     /**
-     * Returns true if both persons of the same name have at least one other identity field that is the same.
+     * Returns true if both persons of the same statement have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two persons.Solution
      */
     public boolean isSameIssue(Issue otherIssue) {
@@ -73,8 +66,8 @@ public class Issue {
         }
 
         return otherIssue != null
-                && otherIssue.getName().equals(getName())
-                && (otherIssue.getPhone().equals(getPhone()) || otherIssue.getEmail().equals(getEmail()));
+                && otherIssue.getStatement().equals(getStatement())
+                && otherIssue.getPhone().equals(getPhone());
     }
 
     /**
@@ -92,9 +85,8 @@ public class Issue {
         }
 
         Issue otherIssue = (Issue) other;
-        return otherIssue.getName().equals(getName())
+        return otherIssue.getStatement().equals(getStatement())
                 && otherIssue.getPhone().equals(getPhone())
-                && otherIssue.getEmail().equals(getEmail())
                 && otherIssue.getAddress().equals(getAddress())
                 && otherIssue.getTags().equals(getTags());
     }
@@ -102,17 +94,15 @@ public class Issue {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(statement, phone, remark, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
+        builder.append(getStatement())
                 .append(" Phone: ")
                 .append(getPhone())
-                .append(" Email: ")
-                .append(getEmail())
                 .append(" Remark: ")
                 .append(getAddress())
                 .append(" Tags: ");

@@ -32,9 +32,8 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder(Issue issue) {
         descriptor = new EditPersonDescriptor();
-        descriptor.setName(issue.getName());
+        descriptor.setName(issue.getStatement());
         descriptor.setPhone(issue.getPhone());
-        descriptor.setEmail(issue.getEmail());
         descriptor.setAddress(issue.getAddress());
         descriptor.setTags(issue.getTags());
     }
@@ -52,14 +51,6 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
         return this;
     }
 

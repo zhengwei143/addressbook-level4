@@ -9,12 +9,12 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.Issue;
 import seedu.address.model.issue.Email;
-import seedu.address.model.issue.Issue;
 import seedu.address.model.issue.IssueStatement;
 import seedu.address.model.issue.Phone;
 import seedu.address.model.issue.Remark;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.issue.Tag;
 
 /**
  * JAXB-friendly version of the Issue.

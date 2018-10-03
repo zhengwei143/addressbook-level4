@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -15,7 +15,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.issue.Issue;
+import seedu.address.model.Issue;
 import seedu.address.testutil.PersonBuilder;
 
 public class IssueTest {
@@ -30,7 +30,7 @@ public class IssueTest {
     }
 
     @Test
-    public void isSamePerson() {
+    public void isSameIssue() {
         // same object -> returns true
         assertTrue(ALICE.isSameIssue(ALICE));
 

@@ -19,8 +19,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.issue.Issue;
-import seedu.address.model.issue.exceptions.DuplicatePersonException;
+import seedu.address.model.issue.exceptions.DuplicateIssueException;
 import seedu.address.testutil.PersonBuilder;
 
 public class SaveItTest {
@@ -56,7 +55,7 @@ public class SaveItTest {
         List<Issue> newIssues = Arrays.asList(ALICE, editedAlice);
         SaveItStub newData = new SaveItStub(newIssues);
 
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicateIssueException.class);
         saveIt.resetData(newData);
     }
 

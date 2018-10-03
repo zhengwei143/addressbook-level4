@@ -20,7 +20,7 @@ import seedu.address.model.issue.Email;
 import seedu.address.model.issue.IssueStatement;
 import seedu.address.model.issue.Phone;
 import seedu.address.model.issue.Remark;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.issue.Tag;
 import seedu.address.testutil.Assert;
 
 public class ParserUtilTest {

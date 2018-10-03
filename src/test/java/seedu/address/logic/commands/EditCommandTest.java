@@ -26,7 +26,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.SaveIt;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.issue.Issue;
+import seedu.address.model.Issue;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 

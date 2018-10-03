@@ -5,8 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.issue.Issue;
-import seedu.address.model.issue.UniquePersonList;
 
 /**
  * Wraps all data at the address-book level
@@ -14,7 +12,7 @@ import seedu.address.model.issue.UniquePersonList;
  */
 public class SaveIt implements ReadOnlySaveIt {
 
-    private final UniquePersonList persons;
+    private final UniqueIssueList persons;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -24,7 +22,7 @@ public class SaveIt implements ReadOnlySaveIt {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        persons = new UniqueIssueList();
     }
 
     public SaveIt() {}
@@ -44,7 +42,7 @@ public class SaveIt implements ReadOnlySaveIt {
      * {@code issues} must not contain duplicate issues.
      */
     public void setPersons(List<Issue> issues) {
-        this.persons.setPersons(issues);
+        this.persons.setIssues(issues);
     }
 
     /**
@@ -82,7 +80,7 @@ public class SaveIt implements ReadOnlySaveIt {
     public void updatePerson(Issue target, Issue editedIssue) {
         requireNonNull(editedIssue);
 
-        persons.setPerson(target, editedIssue);
+        persons.setIssue(target, editedIssue);
     }
 
     /**

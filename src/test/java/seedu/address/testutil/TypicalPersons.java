@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.SaveIt;
-import seedu.address.model.issue.Issue;
+import seedu.address.model.Issue;
 
 /**
  * A utility class containing a list of {@code Issue} objects to be used in tests.

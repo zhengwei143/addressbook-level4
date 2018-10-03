@@ -1,13 +1,19 @@
 package seedu.address.ui;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
+import org.junit.Test;
+
 import org.testfx.api.FxToolkit;
 
 import guitests.guihandles.StageHandle;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import seedu.address.commons.core.Config;
+import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -37,19 +43,21 @@ public class MainWindowCloseTest extends GuiUnitTest {
         FxToolkit.showStage();
     }
 
-    //    @Test
-    //    public void close_menuBarExitButton_exitAppRequestEventPosted() {
-    //        mainWindowHandle.clickOnMenuExitButton();
-    //        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ExitAppRequestEvent);
-    //        assertTrue(eventsCollectorRule.eventsCollector.getSize() == 1);
-    //    }
+    @Test
+    @Ignore
+    public void close_menuBarExitButton_exitAppRequestEventPosted() {
+        mainWindowHandle.clickOnMenuExitButton();
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ExitAppRequestEvent);
+        assertTrue(eventsCollectorRule.eventsCollector.getSize() == 1);
+    }
 
-    //    @Test
-    //    public void close_externalRequest_exitAppRequestEventPosted() {
-    //        mainWindowHandle.closeMainWindowExternally();
-    //        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ExitAppRequestEvent);
-    //        assertTrue(eventsCollectorRule.eventsCollector.getSize() == 1);
-    //    }
+    @Test
+    @Ignore
+    public void close_externalRequest_exitAppRequestEventPosted() {
+        mainWindowHandle.closeMainWindowExternally();
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ExitAppRequestEvent);
+        assertTrue(eventsCollectorRule.eventsCollector.getSize() == 1);
+    }
 
     /**
      * A handle for an empty {@code MainWindow}. The components in {@code MainWindow} are not initialized.

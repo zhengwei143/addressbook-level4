@@ -565,7 +565,7 @@ Do take a look at <<Design-Logic>> before attempting to modify the `Logic` compo
 ** Modify the switch statement in link:{repoURL}/src/main/java/seedu/address/logic/parser/SaveItParser.java[`SaveItParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
 ** Add new tests for each of the aliases that you have added.
 ** Update the user guide to document the new aliases.
-** See this https://github.com/se-edu/saveit-level4/pull/785[PR] for the full solution.
+** See this https://github.com/se-edu/saveit-level4/pull/785[PR] for the full email.
 ****
 
 [discrete]
@@ -587,7 +587,7 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 ** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/saveit.java[`saveit`]. Loop through each issue, and remove the `tag` from each issue.
 ** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`] should call `saveit#removeTag(Tag)`.
 ** Add new tests for each of the new public methods that you have added.
-** See this https://github.com/se-edu/saveit-level4/pull/790[PR] for the full solution.
+** See this https://github.com/se-edu/saveit-level4/pull/790[PR] for the full email.
 ****
 
 [discrete]
@@ -615,7 +615,7 @@ image::getting-started-ui-tag-after.png[width="300"]
 ** You may wish to modify link:{repoURL}/src/main/resources/view/DarkTheme.css[`DarkTheme.css`] to include some pre-defined colors using css, especially if you have experience with web-based css.
 * Solution
 ** You can modify the existing test methods for `PersonCard` 's to include testing the tag's color as well.
-** See this https://github.com/se-edu/saveit-level4/pull/798[PR] for the full solution.
+** See this https://github.com/se-edu/saveit-level4/pull/798[PR] for the full email.
 *** The PR uses the hash code of the tag names to generate a color. This is deliberately designed to ensure consistent colors each time the application runs. You may wish to expand on this design to include additional features, such as allowing users to set their own tag colors, and directly saving the colors to storage, so that tags retain their colors even if the hash code algorithm changes.
 ****
 
@@ -639,7 +639,7 @@ image::getting-started-ui-result-after.png[width="200"]
 ** You can write two different kinds of tests to ensure that the functionality works:
 *** The unit tests for `ResultDisplay` can be modified to include verification of the color.
 *** The system tests link:{repoURL}/src/test/java/systemtests/SaveItSystemTest.java[`SaveItSystemTest#assertCommandBoxShowsDefaultStyle() and SaveItSystemTest#assertCommandBoxShowsErrorStyle()`] to include verification for `ResultDisplay` as well.
-** See this https://github.com/se-edu/saveit-level4/pull/799[PR] for the full solution.
+** See this https://github.com/se-edu/saveit-level4/pull/799[PR] for the full email.
 *** Do read the commits one at a time if you feel overwhelmed.
 ****
 
@@ -662,7 +662,7 @@ image::getting-started-ui-status-after.png[width="500"]
 ** Use link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter#handleSaveItChangedEvent(SaveItChangedEvent)`] to update the number of issues whenever there are new changes to the saveit.
 ** For tests, modify link:{repoURL}/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.
 ** For system tests, modify link:{repoURL}/src/test/java/systemtests/SaveItSystemTest.java[`SaveItSystemTest`] to also verify the new total number of issues status bar.
-** See this https://github.com/se-edu/saveit-level4/pull/803[PR] for the full solution.
+** See this https://github.com/se-edu/saveit-level4/pull/803[PR] for the full email.
 ****
 
 [discrete]
@@ -680,7 +680,7 @@ Do take a look at <<Design-Storage>> before attempting to modify the `Storage` c
 ** Add the API method in link:{repoURL}/src/main/java/seedu/address/storage/SaveItStorage.java[`SaveItStorage`] interface.
 ** Implement the logic in link:{repoURL}/src/main/java/seedu/address/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/src/main/java/seedu/address/storage/XmlSaveItStorage.java[`XmlSaveItStorage`] class.
 * Solution
-** See this https://github.com/se-edu/saveit-level4/pull/594[PR] for the full solution.
+** See this https://github.com/se-edu/saveit-level4/pull/594[PR] for the full email.
 ****
 
 [[GetStartedProgramming-RemarkCommand]]
@@ -808,7 +808,7 @@ We now have everything set up... but we still can't modify the remarks. Let's fi
 
 ==== Full Solution
 
-See this https://github.com/se-edu/saveit-level4/pull/599[PR] for the step-by-step solution.
+See this https://github.com/se-edu/saveit-level4/pull/599[PR] for the step-by-step email.
 
 [appendix]
 == Product Scope
@@ -831,7 +831,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |programmer |record the issue and solution |review it when i encountered it again
+|`* * *` |programmer |record the issue and email |review it when i encountered it again
 
 |`* * *` |programmer using multiple programming languages |search issues of different language easily |fix my code easily
 
@@ -849,9 +849,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |a programmer encounter various issues while coding |add the tag for each issue |collect same tag
 
-|`* *` |a CS student who aims to improve technical skills |store the way I solved certain issue |review it and see if there is a better solution in the future
+|`* *` |a CS student who aims to improve technical skills |store the way I solved certain issue |review it and see if there is a better email in the future
 
-|`*` |a busy programmer dealing with a big project |highlight the certain part of the page |See the most important part of the solution
+|`*` |a busy programmer dealing with a big project |highlight the certain part of the page |See the most important part of the email
 
 |`* *` |a CS student who are learning new techniques |delete the issue after I got familiar with that issue |pay more attention to those I am not familiar with
 
@@ -880,7 +880,7 @@ _{More to be added}_
 
 1. User requests to add a new issue
 2. User add statement in command line
-3. User can choose add issue statement, multiple solution links, remarks and tag.
+3. User can choose add issue statement, multiple email links, remarks and tag.
 4. The ‘Success’ message shown on the screen.
 +
 Use case ends.

@@ -1,4 +1,4 @@
-package seedu.address.model.issue;
+package seedu.address.model;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -6,7 +6,11 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.issue.Email;
+import seedu.address.model.issue.IssueStatement;
+import seedu.address.model.issue.Phone;
+import seedu.address.model.issue.Remark;
+import seedu.address.model.issue.Tag;
 
 /**
  * Represents a Issue in the address book.

@@ -1,7 +1,8 @@
-package seedu.address.model.tag;
+package seedu.address.model.issue;
 
 import org.junit.Test;
 
+import seedu.address.model.issue.Tag;
 import seedu.address.testutil.Assert;
 
 public class TagTest {

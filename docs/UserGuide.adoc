@@ -18,9 +18,9 @@ By: `T2-04`      Since: `Sep 2018`      Licence: `MIT`
 
 == Introduction
 
-Developers usually search google to find solutions to issue/problems, however, bookmarking a certain webpage (where the solution is found) does not tell the user much about what was searched (to find that solution in the first place). It is likely that if the developer encounters the same issue/problem again, instead of searching through their bookmarks, they would search google and go through all of the links again.
+Developers usually search google to find solutions to issue/problems, however, bookmarking a certain webpage (where the email is found) does not tell the user much about what was searched (to find that email in the first place). It is likely that if the developer encounters the same issue/problem again, instead of searching through their bookmarks, they would search google and go through all of the links again.
 
-*SaveIt* is geared at keeping track of the issues that the user finds and to link it with the solution found on google. More importantly, SaveIt is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SaveIt can help you search the same issue that save previously faster than traditional GUI apps.
+*SaveIt* is geared at keeping track of the issues that the user finds and to link it with the email found on google. More importantly, SaveIt is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SaveIt can help you search the same issue that save previously faster than traditional GUI apps.
 
 == Quick Start
 
@@ -128,7 +128,7 @@ Format: `edit INDEX i/NEW_ISSUE s/NEW_SOLUTION_LINK1 s/NEW_SOLUTION_LINK2 t/TAG1
 Examples:
 
 * `edit 1 r/use String instead of Byte[]`
-* `Edits the solution of the 1st bug encountered is to use a string instead of a Byte array.`
+* `Edits the email of the 1st bug encountered is to use a string instead of a Byte array.`
 * `Edit 2 i/solved s/`
 * `Edits the description of the second issue to be marked as solved and clears all existing solutions.`
 
@@ -186,7 +186,7 @@ Format: `select INDEX`
 
 [NOTE]
 ====
-* Selects the issue and loads the first solution link of the issue at the specified `INDEX`.
+* Selects the issue and loads the first email link of the issue at the specified `INDEX`.
 * The index refers to the index number shown in the displayed issue list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ====

@@ -10,8 +10,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Issue;
 import seedu.address.model.Model;
-import seedu.address.model.issue.Issue;
 
 /**
  * Selects a issue identified using it's displayed index from the address book.

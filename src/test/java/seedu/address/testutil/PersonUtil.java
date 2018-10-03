@@ -29,7 +29,6 @@ public class PersonUtil {
      */
     public static String getPersonDetails(Issue issue) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + issue.getStatement().issue + " ");
         sb.append(PREFIX_PHONE + issue.getPhone().value + " ");
         sb.append(PREFIX_REMARK + issue.getAddress().value + " ");
         issue.getTags().stream().forEach(

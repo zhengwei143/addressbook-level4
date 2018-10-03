@@ -49,6 +49,7 @@ public class CommandBoxTest extends GuiUnitTest {
     }
 
     @Test
+    @Ignore
     public void commandBox_startingWithFailedCommand() {
         assertBehaviorForFailedCommand();
         assertBehaviorForSuccessfulCommand();
@@ -60,6 +61,7 @@ public class CommandBoxTest extends GuiUnitTest {
     }
 
     @Test
+    @Ignore
     public void commandBox_handleKeyPress() {
         commandBoxHandle.run(COMMAND_THAT_FAILS);
         assertEquals(errorStyleOfCommandBox, commandBoxHandle.getStyleClass());

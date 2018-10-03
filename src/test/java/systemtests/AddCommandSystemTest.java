@@ -61,8 +61,8 @@ public class AddCommandSystemTest extends SaveItSystemTest {
          */
         Issue toAdd = AMY;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY +
- " "
-                + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
+            " "
+            + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
         assertCommandSuccess(command, toAdd);
 
         /* Case: undo adding Amy to the list -> Amy deleted */
@@ -79,8 +79,8 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         /* Case: add a issue with all fields same as another issue in the address book except name -> added */
         toAdd = new PersonBuilder(AMY).withName(VALID_NAME_BOB).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY +
- ADDRESS_DESC_AMY
-                + TAG_DESC_FRIEND;
+            ADDRESS_DESC_AMY
+            + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a issue with all fields same as another issue in the address book except phone and email
@@ -97,8 +97,8 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         /* Case: add a issue with tags, command with parameters in random order -> added */
         toAdd = BOB;
         command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + PHONE_DESC_BOB + ADDRESS_DESC_BOB +
- NAME_DESC_BOB
-                + TAG_DESC_HUSBAND + EMAIL_DESC_BOB;
+            NAME_DESC_BOB
+            + TAG_DESC_HUSBAND + EMAIL_DESC_BOB;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a issue, missing tags -> added */
@@ -179,22 +179,18 @@ public class AddCommandSystemTest extends SaveItSystemTest {
 
         /* Case: invalid tag -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + INVALID_TAG_DESC;
+            + INVALID_TAG_DESC;
         assertCommandFailure(command, Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
     /**
-     * Executes the {@code AddCommand} that adds {@code toAdd} to the model and asserts that the,<br>
-     * 1. Command box displays an empty string.<br>
-     * 2. Command box has the default style class.<br>
-     * 3. Result display box displays the success message of executing {@code AddCommand} with the details of
-     * {@code toAdd}.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
-     * the current model added with {@code toAdd}.<br>
-     * 5. Browser url and selected card remain unchanged.<br>
-     * 6. Status bar's sync status changes.<br>
-     * Verifications 1, 3 and 4 are performed by
-     * {@code SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * Executes the {@code AddCommand} that adds {@code toAdd} to the model and asserts that the,<br> 1. Command box
+     * displays an empty string.<br> 2. Command box has the default style class.<br> 3. Result display box displays the
+     * success message of executing {@code AddCommand} with the details of {@code toAdd}.<br> 4. {@code Storage} and
+     * {@code PersonListPanel} equal to the corresponding components in the current model added with {@code toAdd}.<br>
+     * 5. Browser url and selected card remain unchanged.<br> 6. Status bar's sync status changes.<br> Verifications 1,
+     * 3 and 4 are performed by {@code SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     *
      * @see SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(Issue toAdd) {
@@ -202,8 +198,8 @@ public class AddCommandSystemTest extends SaveItSystemTest {
     }
 
     /**
-     * Performs the same verification as {@code assertCommandSuccess(Issue)}. Executes {@code command}
-     * instead.
+     * Performs the same verification as {@code assertCommandSuccess(Issue)}. Executes {@code command} instead.
+     *
      * @see AddCommandSystemTest#assertCommandSuccess(Issue)
      */
     private void assertCommandSuccess(String command, Issue toAdd) {
@@ -215,11 +211,10 @@ public class AddCommandSystemTest extends SaveItSystemTest {
     }
 
     /**
-     * Performs the same verification as {@code assertCommandSuccess(String, Issue)} except asserts that
-     * the,<br>
-     * 1. Result display box displays {@code expectedResultMessage}.<br>
-     * 2. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
-     * {@code expectedModel}.<br>
+     * Performs the same verification as {@code assertCommandSuccess(String, Issue)} except asserts that the,<br> 1.
+     * Result display box displays {@code expectedResultMessage}.<br> 2. {@code Storage} and {@code PersonListPanel}
+     * equal to the corresponding components in {@code expectedModel}.<br>
+     *
      * @see AddCommandSystemTest#assertCommandSuccess(String, Issue)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
@@ -231,14 +226,12 @@ public class AddCommandSystemTest extends SaveItSystemTest {
     }
 
     /**
-     * Executes {@code command} and asserts that the,<br>
-     * 1. Command box displays {@code command}.<br>
-     * 2. Command box has the error style class.<br>
-     * 3. Result display box displays {@code expectedResultMessage}.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br>
-     * 5. Browser url, selected card and status bar remain unchanged.<br>
-     * Verifications 1, 3 and 4 are performed by
-     * {@code SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * Executes {@code command} and asserts that the,<br> 1. Command box displays {@code command}.<br> 2. Command box
+     * has the error style class.<br> 3. Result display box displays {@code expectedResultMessage}.<br> 4. {@code
+     * Storage} and {@code PersonListPanel} remain unchanged.<br> 5. Browser url, selected card and status bar remain
+     * unchanged.<br> Verifications 1, 3 and 4 are performed by {@code SaveItSystemTest#assertApplicationDisplaysExpected(String,
+     * String, Model)}.<br>
+     *
      * @see SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {

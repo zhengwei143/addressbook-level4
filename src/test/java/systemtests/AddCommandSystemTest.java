@@ -60,8 +60,8 @@ public class AddCommandSystemTest extends SaveItSystemTest {
          * -> added
          */
         Issue toAdd = AMY;
-        String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY +
-            " "
+        String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY
+            + " "
             + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
         assertCommandSuccess(command, toAdd);
 
@@ -78,8 +78,8 @@ public class AddCommandSystemTest extends SaveItSystemTest {
 
         /* Case: add a issue with all fields same as another issue in the address book except name -> added */
         toAdd = new PersonBuilder(AMY).withName(VALID_NAME_BOB).build();
-        command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY +
-            ADDRESS_DESC_AMY
+        command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
+            + ADDRESS_DESC_AMY
             + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
@@ -96,8 +96,8 @@ public class AddCommandSystemTest extends SaveItSystemTest {
 
         /* Case: add a issue with tags, command with parameters in random order -> added */
         toAdd = BOB;
-        command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + PHONE_DESC_BOB + ADDRESS_DESC_BOB +
-            NAME_DESC_BOB
+        command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + PHONE_DESC_BOB + ADDRESS_DESC_BOB
+            + NAME_DESC_BOB
             + TAG_DESC_HUSBAND + EMAIL_DESC_BOB;
         assertCommandSuccess(command, toAdd);
 
@@ -229,8 +229,8 @@ public class AddCommandSystemTest extends SaveItSystemTest {
      * Executes {@code command} and asserts that the,<br> 1. Command box displays {@code command}.<br> 2. Command box
      * has the error style class.<br> 3. Result display box displays {@code expectedResultMessage}.<br> 4. {@code
      * Storage} and {@code PersonListPanel} remain unchanged.<br> 5. Browser url, selected card and status bar remain
-     * unchanged.<br> Verifications 1, 3 and 4 are performed by {@code SaveItSystemTest#assertApplicationDisplaysExpected(String,
-     * String, Model)}.<br>
+     * unchanged.<br> Verifications 1, 3 and 4 are performed by
+     * {@code SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      *
      * @see SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */

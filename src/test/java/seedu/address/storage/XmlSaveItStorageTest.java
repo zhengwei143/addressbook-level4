@@ -62,12 +62,6 @@ public class XmlSaveItStorageTest {
     }
 
     @Test
-    public void readSaveIt_invalidPersonSaveIt_throwDataConversionException() throws Exception {
-        thrown.expect(DataConversionException.class);
-        readSaveIt("invalidPersonSaveIt.xml");
-    }
-
-    @Test
     public void readSaveIt_invalidAndValidPersonSaveIt_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
         readSaveIt("invalidAndValidPersonSaveIt.xml");

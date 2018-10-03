@@ -3,10 +3,7 @@ package systemtests;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -17,7 +14,6 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -39,7 +35,6 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Issue;
 import seedu.address.model.Model;
-import seedu.address.model.issue.Email;
 import seedu.address.model.issue.IssueStatement;
 import seedu.address.model.issue.Phone;
 import seedu.address.model.issue.Remark;
@@ -63,8 +58,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
          */
         Issue toAdd = AMY;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY
-                + " "
-                + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
+            + " " + ADDRESS_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
         assertCommandSuccess(command, toAdd);
 
         /* Case: undo adding Amy to the list -> Amy deleted */
@@ -80,15 +74,14 @@ public class AddCommandSystemTest extends SaveItSystemTest {
 
         /* Case: add a issue with all fields same as another issue in the address book except name -> added */
         toAdd = new PersonBuilder(AMY).withName(VALID_NAME_BOB).build();
-        command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY
-                + TAG_DESC_FRIEND;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY
+            + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
-        /* Case: add a issue with all fields same as another issue in the address book except phone and email
+        /* Case: add a issue with all fields same as another issue in the address book except phone
          * -> added
          */
-        toAdd = new PersonBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        toAdd = new PersonBuilder(AMY).withPhone(VALID_PHONE_BOB).build();
         command = PersonUtil.getAddCommand(toAdd);
         assertCommandSuccess(command, toAdd);
 
@@ -99,8 +92,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         /* Case: add a issue with tags, command with parameters in random order -> added */
         toAdd = BOB;
         command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + PHONE_DESC_BOB + ADDRESS_DESC_BOB
-                + NAME_DESC_BOB
-                + TAG_DESC_HUSBAND + EMAIL_DESC_BOB;
+            + NAME_DESC_BOB + TAG_DESC_HUSBAND;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a issue, missing tags -> added */
@@ -133,11 +125,6 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         command = PersonUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
-        /* Case: add a duplicate issue except with different email -> rejected */
-        toAdd = new PersonBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
-        command = PersonUtil.getAddCommand(toAdd);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
-
         /* Case: add a duplicate issue except with different address -> rejected */
         toAdd = new PersonBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
         command = PersonUtil.getAddCommand(toAdd);
@@ -148,22 +135,17 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: missing name -> rejected */
-        command = AddCommand.COMMAND_WORD + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + PHONE_DESC_AMY + ADDRESS_DESC_AMY;
         assertCommandFailure(command,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing phone -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        assertCommandFailure(command,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-
-        /* Case: missing email -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + ADDRESS_DESC_AMY;
         assertCommandFailure(command,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing address -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY;
         assertCommandFailure(command,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
@@ -172,48 +154,30 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid name -> rejected */
-        command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + PHONE_DESC_AMY + ADDRESS_DESC_AMY;
         assertCommandFailure(command, IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS);
 
         /* Case: invalid phone -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_PHONE_DESC + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_PHONE_DESC + ADDRESS_DESC_AMY;
         assertCommandFailure(command, Phone.MESSAGE_PHONE_CONSTRAINTS);
 
-        /* Case: invalid email -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + INVALID_EMAIL_DESC
-                + ADDRESS_DESC_AMY;
-        assertCommandFailure(command, Email.MESSAGE_EMAIL_CONSTRAINTS);
-
         /* Case: invalid address -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + INVALID_ADDRESS_DESC;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + INVALID_ADDRESS_DESC;
         assertCommandFailure(command, Remark.MESSAGE_ADDRESS_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY
             + INVALID_TAG_DESC;
         assertCommandFailure(command, Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
     /**
-<<<<<<< HEAD
-     * Executes the {@code AddCommand} that adds {@code toAdd} to the model and asserts that the,<br> 1.
-     * Command box displays an empty string.<br> 2. Command box has the default style class.<br> 3. Result
-     * display box displays the success message of executing {@code AddCommand} with the details of {@code
-     * toAdd}.<br> 4. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in the
-     * current model added with {@code toAdd}.<br> 5. Browser url and selected card remain unchanged.<br> 6.
-     * Status bar's sync status changes.<br> Verifications 1, 3 and 4 are performed by {@code
-     * SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-=======
      * Executes the {@code AddCommand} that adds {@code toAdd} to the model and asserts that the,<br> 1. Command box
      * displays an empty string.<br> 2. Command box has the default style class.<br> 3. Result display box displays the
      * success message of executing {@code AddCommand} with the details of {@code toAdd}.<br> 4. {@code Storage} and
      * {@code PersonListPanel} equal to the corresponding components in the current model added with {@code toAdd}.<br>
      * 5. Browser url and selected card remain unchanged.<br> 6. Status bar's sync status changes.<br> Verifications 1,
      * 3 and 4 are performed by {@code SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
->>>>>>> f4d6c31793ee6df658ab1d616629fc2c69c57edc
      *
      * @see SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
@@ -222,12 +186,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
     }
 
     /**
-<<<<<<< HEAD
-     * Performs the same verification as {@code assertCommandSuccess(Issue)}. Executes {@code command}
-     * instead.
-=======
      * Performs the same verification as {@code assertCommandSuccess(Issue)}. Executes {@code command} instead.
->>>>>>> f4d6c31793ee6df658ab1d616629fc2c69c57edc
      *
      * @see AddCommandSystemTest#assertCommandSuccess(Issue)
      */
@@ -240,15 +199,9 @@ public class AddCommandSystemTest extends SaveItSystemTest {
     }
 
     /**
-<<<<<<< HEAD
-     * Performs the same verification as {@code assertCommandSuccess(String, Issue)} except asserts that
-     * the,<br> 1. Result display box displays {@code expectedResultMessage}.<br> 2. {@code Storage} and
-     * {@code PersonListPanel} equal to the corresponding components in {@code expectedModel}.<br>
-=======
      * Performs the same verification as {@code assertCommandSuccess(String, Issue)} except asserts that the,<br> 1.
      * Result display box displays {@code expectedResultMessage}.<br> 2. {@code Storage} and {@code PersonListPanel}
      * equal to the corresponding components in {@code expectedModel}.<br>
->>>>>>> f4d6c31793ee6df658ab1d616629fc2c69c57edc
      *
      * @see AddCommandSystemTest#assertCommandSuccess(String, Issue)
      */
@@ -261,19 +214,11 @@ public class AddCommandSystemTest extends SaveItSystemTest {
     }
 
     /**
-<<<<<<< HEAD
-     * Executes {@code command} and asserts that the,<br> 1. Command box displays {@code command}.<br> 2.
-     * Command box has the error style class.<br> 3. Result display box displays {@code
-     * expectedResultMessage}.<br> 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br> 5.
-     * Browser url, selected card and status bar remain unchanged.<br> Verifications 1, 3 and 4 are performed
-     * by {@code SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-=======
      * Executes {@code command} and asserts that the,<br> 1. Command box displays {@code command}.<br> 2. Command box
      * has the error style class.<br> 3. Result display box displays {@code expectedResultMessage}.<br> 4. {@code
      * Storage} and {@code PersonListPanel} remain unchanged.<br> 5. Browser url, selected card and status bar remain
      * unchanged.<br> Verifications 1, 3 and 4 are performed by
      * {@code SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
->>>>>>> f4d6c31793ee6df658ab1d616629fc2c69c57edc
      *
      * @see SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */

@@ -13,8 +13,6 @@ import seedu.address.model.issue.Phone;
 import seedu.address.model.issue.Remark;
 import seedu.address.model.issue.Tag;
 
-//import seedu.address.model.issue.*;
-
 /**
  * Contains utility methods for populating {@code SaveIt} with sample data.
  */

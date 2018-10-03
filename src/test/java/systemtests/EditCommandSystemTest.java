@@ -244,7 +244,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
     }
 
     /**
-     * Performs the same verification as {@code assertCommandSuccess(String, Index, Issue, Index)} exceptthat
+     * Performs the same verification as {@code assertCommandSuccess(String, Index, Issue, Index)} except that
      * the browser url and selected card remain unchanged.
      *
      * @param toEdit the index of the current model's filtered list
@@ -276,9 +276,8 @@ public class EditCommandSystemTest extends SaveItSystemTest {
     }
 
     /**
-     * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index) except that
-     * the browser url and selected card remain unchanged.
-     *
+     * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} except that the
+     * browser url and selected card remain unchanged.
      * @see EditCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {

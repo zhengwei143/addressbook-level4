@@ -15,7 +15,6 @@ import java.nio.file.Paths;
 import org.junit.Ignore;
 import org.junit.Test;
 
-
 import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import javafx.collections.FXCollections;

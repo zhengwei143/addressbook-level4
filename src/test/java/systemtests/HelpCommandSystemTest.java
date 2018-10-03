@@ -76,6 +76,7 @@ public class HelpCommandSystemTest extends SaveItSystemTest {
     }
 
     @Test
+    @Ignore
     public void help_multipleCommands_onlyOneHelpWindowOpen() {
         getMainMenu().openHelpWindowUsingMenu();
 

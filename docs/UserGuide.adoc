@@ -12,21 +12,21 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/se-edu/saveit-level4
 
 By: `T2-04`      Since: `Sep 2018`      Licence: `MIT`
 
 == Introduction
 
-Developers usually search google to find solutions to issue/problems, however, bookmarking a certain webpage (where the solution is found) does not tell the user much about what was searched (to find that solution in the first place). It is likely that if the developer encounters the same issue/problem again, instead of searching through their bookmarks, they would search google and go through all of the links again.
+Developers usually search google to find solutions to issue/problems, however, bookmarking a certain webpage (where the email is found) does not tell the user much about what was searched (to find that email in the first place). It is likely that if the developer encounters the same issue/problem again, instead of searching through their bookmarks, they would search google and go through all of the links again.
 
-*SaveIt* is geared at keeping track of the issues that the user finds and to link it with the solution found on google. More importantly, SaveIt is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SaveIt can help you search the same issue that save previously faster than traditional GUI apps.
+*SaveIt* is geared at keeping track of the issues that the user finds and to link it with the email found on google. More importantly, SaveIt is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SaveIt can help you search the same issue that save previously faster than traditional GUI apps.
 
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest `saveit.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Copy the file to the folder you want to use as the home folder for your SaveIt.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 .  Type the command in the command box and press Enter to execute it.
     e.g. typing help and pressing Enter will open the help window.
@@ -46,7 +46,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
+* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the SaveIt.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
 
@@ -60,7 +60,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add i/ISSUE`, `ISSUE` is a parameter which can be used as `add i/Segment Fault`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Items in square brackets are optional e.g `n/ISSUE_STATEMENT [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order e.g. if the command specifies `i/ISSUE_STATEMENT s/SOLUTION_LINK, s/SOUTION_LINK i/ISSUE_STATEMENT` is also acceptable.
 ====
@@ -69,9 +69,9 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
-=== Adding a person: `add`
+=== Adding a issue: `add`
 
-Adds a person to the address book +
+Adds a issue to the address book +
 
 Format: `add i/ISSUE_STATEMENT s/SOLUTION_LINK1 s/SOLUTION_LINK2 r/REMARK t/TAG...`
 
@@ -86,7 +86,7 @@ Examples:
 * `add i/Segment Fault s/www.example2.com t/JAVA`
 
 
-=== Listing all persons : `list`
+=== Listing all issues : `list`
 
 Shows a list of all issues in the issue bookmark according to either chronological order or frequency order. Users can also choose to list part of issues.
 
@@ -110,31 +110,31 @@ Format: `list freq`
 According to frequency order
 ====
 
-=== Editing a person : `edit`
+=== Editing a issue : `edit`
 
-Edits an existing person in the issue list. +
+Edits an existing issue in the issue list. +
 Format: `edit INDEX i/NEW_ISSUE s/NEW_SOLUTION_LINK1 s/NEW_SOLUTION_LINK2 t/TAG1 r/REMARK1​`
 
 [TIP]
 ====
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the issue at the specified `INDEX`. The index refers to the index number shown in the displayed issue list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of solutions is not cumulative.
+* When editing tags, the existing tags of the issue will be removed i.e adding of solutions is not cumulative.
 * You can remove all the issue solutions by typing `s/` without specifying any tags after it.
 ====
 
 Examples:
 
 * `edit 1 r/use String instead of Byte[]`
-* `Edits the solution of the 1st bug encountered is to use a string instead of a Byte array.`
+* `Edits the email of the 1st bug encountered is to use a string instead of a Byte array.`
 * `Edit 2 i/solved s/`
 * `Edits the description of the second issue to be marked as solved and clears all existing solutions.`
 
 
 
-=== Locating persons by name: `serach`
+=== Locating issues by name: `serach`
 
 Search issue by tags, issue statement or remarks.
 Format: `search KEYWORD [MORE_KEYWORDS]`
@@ -156,9 +156,9 @@ Examples:
 * `find John` +
 Returns `john` and `John Doe`
 * `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+Returns any issue having names `Betsy`, `Tim`, or `John`
 
-=== Deleting a person : `delete`
+=== Deleting a issue : `delete`
 
 Deletes the specified issue from the issue tracker. +
 Format: `delete INDEX`
@@ -179,14 +179,14 @@ Examples:
 * `delete 1` +
 ** Deletes the 1st issue in the results of the find command.
 
-=== Selecting a person : `select`
+=== Selecting a issue : `select`
 
 Selects the issue identified by the index number used in the displayed issue list.
 Format: `select INDEX`
 
 [NOTE]
 ====
-* Selects the issue and loads the first solution link of the issue at the specified `INDEX`.
+* Selects the issue and loads the first email link of the issue at the specified `INDEX`.
 * The index refers to the index number shown in the displayed issue list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ====
@@ -341,7 +341,7 @@ _{explain how the user can enable/disable data encryption}_
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SaveIt folder.
 
 == Command Summary
 

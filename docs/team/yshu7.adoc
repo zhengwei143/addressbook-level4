@@ -9,7 +9,7 @@
 
 == Overview
 
-SaveIt​ is geared at keeping track of the issues that the user finds and to link it with the solution found on google.
+SaveIt​ is geared at keeping track of the issues that the user finds and to link it with the email found on google.
 More importantly, SaveIt is ​optimized for those who prefer to work with a Command Line Interface​ (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, SaveIt can help you search the same issue that save previously faster than traditional GUI apps.
 == Summary of contributions

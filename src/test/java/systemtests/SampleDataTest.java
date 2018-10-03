@@ -9,8 +9,8 @@ import java.nio.file.Path;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import seedu.address.model.SaveIt;
 import seedu.address.model.Issue;
+import seedu.address.model.SaveIt;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 

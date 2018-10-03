@@ -28,8 +28,6 @@ public class XmlAdaptedPerson {
     @XmlElement(required = true)
     private String phone;
     @XmlElement(required = true)
-    private String email;
-    @XmlElement(required = true)
     private String address;
 
     @XmlElement

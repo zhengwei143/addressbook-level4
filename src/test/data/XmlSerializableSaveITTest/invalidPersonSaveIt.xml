@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<saveit>
-    <!-- Issue with invalid email field -->
-    <issues>
-        <name>Hans Muster</name>
-        <phone isPrivate="false">9482424</phone>
-        <address isPrivate="false">4th street</address>
-    </issues>
-</saveit>

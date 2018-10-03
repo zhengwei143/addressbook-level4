@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATEMENT;
@@ -13,7 +12,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Issue;
-import seedu.address.model.issue.Email;
 import seedu.address.model.issue.IssueStatement;
 import seedu.address.model.issue.Phone;
 import seedu.address.model.issue.Remark;
@@ -31,21 +29,19 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args,
-                        PREFIX_STATEMENT, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_REMARK, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_STATEMENT, PREFIX_PHONE, PREFIX_REMARK, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_STATEMENT, PREFIX_REMARK, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_STATEMENT, PREFIX_REMARK, PREFIX_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         IssueStatement name = ParserUtil.parseName(argMultimap.getValue(PREFIX_STATEMENT).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Remark address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_REMARK).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Issue issue = new Issue(name, phone, email, address, tagList);
+        Issue issue = new Issue(name, phone, address, tagList);
 
         return new AddCommand(issue);
     }

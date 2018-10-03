@@ -61,7 +61,7 @@ public class Issue {
 
     /**
      * Returns true if both persons of the same name have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two persons.
+     * This defines a weaker notion of equality between two persons.Solution
      */
     public boolean isSameIssue(Issue otherIssue) {
         if (otherIssue == this) {

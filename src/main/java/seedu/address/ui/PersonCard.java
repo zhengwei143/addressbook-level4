@@ -6,6 +6,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.Issue;
+import seedu.address.model.issue.Solution;
 
 /**
  * An UI component that displays information of a {@code Issue}.
@@ -35,6 +36,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
+    private FlowPane solutions;
+    @FXML
     private FlowPane tags;
 
     public PersonCard(Issue issue, int displayedIndex) {
@@ -44,6 +47,7 @@ public class PersonCard extends UiPart<Region> {
         name.setText(issue.getStatement().issue);
         phone.setText(issue.getPhone().value);
         address.setText(issue.getAddress().value);
+        issue.getSolutions().forEach(solution -> solutions.getChildren().add(new Label('['+solution.solutionName+']'+" ")));
         issue.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 

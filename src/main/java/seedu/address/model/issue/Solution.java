@@ -13,6 +13,8 @@ public class Solution {
 
     public static final String SOLUTION_VALIDATION_REGEX = "\\p{Alnum}+";
 
+    public final String solutionName;
+
     public final SolutionLink solutionLink;
 
     public final Remark remark;
@@ -24,6 +26,7 @@ public class Solution {
     public Solution(String solutionLink, String remark) {
         this.solutionLink = new SolutionLink(solutionLink);
         this.remark = new Remark(remark);
+        this.solutionName = solutionLink+" "+remark;
     }
 
     public SolutionLink getLink() {
@@ -43,11 +46,12 @@ public class Solution {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getLink())
-                .append(" Solution Remark: ")
-                .append(getRemark());
-        return builder.toString();
+        return '[' + " link: "+getLink() + " remark: "+getRemark() + ']';
+//        final StringBuilder builder = new StringBuilder();
+//        builder.append(getLink())
+//                .append(" Solution_Remark: ")
+//                .append(getRemark());
+//        return builder.toString();
     }
 
     @Override

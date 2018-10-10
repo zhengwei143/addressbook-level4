@@ -55,10 +55,10 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-            .withDescription(VALID_DESCRIPTION_AMY).withAddress(VALID_ADDRESS_AMY)
+            .withDescription(VALID_DESCRIPTION_AMY)
             .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-            .withDescription(VALID_DESCRIPTION_BOB).withAddress(VALID_ADDRESS_BOB)
+            .withDescription(VALID_DESCRIPTION_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 

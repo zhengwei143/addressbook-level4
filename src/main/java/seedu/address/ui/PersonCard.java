@@ -27,7 +27,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private Label statement;
     @FXML
     private Label id;
     @FXML
@@ -39,7 +39,7 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.issue = issue;
         id.setText(displayedIndex + ". ");
-        name.setText(issue.getStatement().issue);
+        statement.setText(issue.getStatement().issue);
         description.setText(issue.getDescription().value);
         issue.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }

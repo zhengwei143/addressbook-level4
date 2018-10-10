@@ -1,7 +1,6 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -43,7 +42,7 @@ public class PersonUtil {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_STATEMENT).append(name.issue).append(" "));
         descriptor.getDescription().ifPresent(phone -> sb.append(PREFIX_DESCRIPTION).append(phone.value).append(" "));
-        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_REMARK).append(address.value).append(" "));
+        descriptor.getAddress().ifPresent(address -> sb.append(address.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

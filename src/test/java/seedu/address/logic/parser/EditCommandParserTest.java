@@ -5,7 +5,6 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -33,7 +32,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
-import seedu.address.model.issue.Remark;
 import seedu.address.model.issue.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
@@ -80,8 +78,6 @@ public class EditCommandParserTest {
             IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_DESCRIPTION_DESC,
             Description.MESSAGE_DESCRIPTION_CONSTRAINTS); // invalid phone
-        assertParseFailure(parser, "1"
-            + INVALID_ADDRESS_DESC, Remark.MESSAGE_ADDRESS_CONSTRAINTS); // invalid address
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS); // invalid tag
 
         // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone

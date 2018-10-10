@@ -7,12 +7,12 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -60,7 +60,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
          */
         Index index = INDEX_FIRST_PERSON;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  "
-                + NAME_DESC_BOB + "  " + PHONE_DESC_BOB + " "
+                + NAME_DESC_BOB + "  " + DESCRIPTION_DESC_BOB + " "
                 + ADDRESS_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
         Issue editedIssue = new PersonBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
         assertCommandSuccess(command, index, editedIssue);
@@ -78,7 +78,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: edit a issue with new values same as existing values -> edited */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DESCRIPTION_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandSuccess(command, index, BOB);
 
@@ -87,7 +87,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         assertTrue(getModel().getSaveIt().getPersonList().contains(BOB));
         index = INDEX_SECOND_PERSON;
         assertNotEquals(getModel().getFilteredPersonList().get(index.getZeroBased()), BOB);
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_BOB
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + DESCRIPTION_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         editedIssue = new PersonBuilder(BOB).withName(VALID_NAME_AMY).build();
         assertCommandSuccess(command, index, editedIssue);
@@ -96,7 +96,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
          * -> edited
          */
         index = INDEX_SECOND_PERSON;
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_AMY
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DESCRIPTION_DESC_AMY
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         editedIssue = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY).build();
         assertCommandSuccess(command, index, editedIssue);
@@ -138,7 +138,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         showAllPersons();
         index = INDEX_FIRST_PERSON;
         selectPerson(index);
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_AMY
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + DESCRIPTION_DESC_AMY
                 + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
         // this can be misleading: card selection actually remains unchanged but the
         // browser's url is updated to reflect the new issue's name
@@ -175,8 +175,8 @@ public class EditCommandSystemTest extends SaveItSystemTest {
 
         /* Case: invalid phone -> rejected */
         assertCommandFailure(
-                EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_PHONE_DESC,
-                Description.MESSAGE_PHONE_CONSTRAINTS);
+                EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_DESCRIPTION_DESC,
+                Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
 
         /* Case: invalid address -> rejected */
         assertCommandFailure(
@@ -193,22 +193,22 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         assertTrue(getModel().getSaveIt().getPersonList().contains(BOB));
         index = INDEX_FIRST_PERSON;
         assertFalse(getModel().getFilteredPersonList().get(index.getZeroBased()).equals(BOB));
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DESCRIPTION_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: edit a issue with new values same as another issue's values but with different tags -> rejected */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DESCRIPTION_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: edit a issue with new values same as another issue's values but with different address -> rejected */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DESCRIPTION_DESC_BOB
                 + ADDRESS_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: edit a issue with new values same as another issue's values but with different phone -> rejected */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_AMY
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DESCRIPTION_DESC_AMY
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }

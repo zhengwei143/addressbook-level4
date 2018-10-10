@@ -19,7 +19,7 @@ import seedu.address.model.issue.Tag;
 /**
  * JAXB-friendly version of the Issue.
  */
-public class XmlAdaptedPerson {
+public class XmlAdaptedIssue {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Issue's %s field is missing!";
 
@@ -34,15 +34,15 @@ public class XmlAdaptedPerson {
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs an XmlAdaptedPerson.
+     * Constructs an XmlAdaptedIssue.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedPerson() {}
+    public XmlAdaptedIssue() {}
 
     /**
-     * Constructs an {@code XmlAdaptedPerson} with the given issue details.
+     * Constructs an {@code XmlAdaptedIssue} with the given issue details.
      */
-    public XmlAdaptedPerson(String name, String phone, String address, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedIssue(String name, String phone, String address, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.address = address;
@@ -54,9 +54,9 @@ public class XmlAdaptedPerson {
     /**
      * Converts a given Issue into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedPerson
+     * @param source future changes to this will not affect the created XmlAdaptedIssue
      */
-    public XmlAdaptedPerson(Issue source) {
+    public XmlAdaptedIssue(Issue source) {
         name = source.getStatement().issue;
         phone = source.getDescription().value;
         address = source.getAddress().value;
@@ -112,11 +112,11 @@ public class XmlAdaptedPerson {
             return true;
         }
 
-        if (!(other instanceof XmlAdaptedPerson)) {
+        if (!(other instanceof XmlAdaptedIssue)) {
             return false;
         }
 
-        XmlAdaptedPerson otherPerson = (XmlAdaptedPerson) other;
+        XmlAdaptedIssue otherPerson = (XmlAdaptedIssue) other;
         return Objects.equals(name, otherPerson.name)
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(address, otherPerson.address)

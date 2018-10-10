@@ -92,10 +92,9 @@ public class EditCommand extends Command {
 
         IssueStatement updatedName = editIssueDescriptor.getName().orElse(issueToEdit.getStatement());
         Description updatedDescription = editIssueDescriptor.getDescription().orElse(issueToEdit.getDescription());
-        Remark updatedAddress = editIssueDescriptor.getAddress().orElse(issueToEdit.getAddress());
         Set<Tag> updatedTags = editIssueDescriptor.getTags().orElse(issueToEdit.getTags());
 
-        return new Issue(updatedName, updatedDescription, updatedAddress, updatedTags);
+        return new Issue(updatedName, updatedDescription, updatedTags);
     }
 
     @Override

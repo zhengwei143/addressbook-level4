@@ -30,7 +30,6 @@ public class PersonUtil {
     public static String getPersonDetails(Issue issue) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_DESCRIPTION + issue.getDescription().value + " ");
-        sb.append(PREFIX_REMARK + issue.getAddress().value + " ");
         issue.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );

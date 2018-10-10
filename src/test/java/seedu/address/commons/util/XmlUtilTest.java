@@ -82,7 +82,7 @@ public class XmlUtilTest {
         XmlAdaptedIssue actualPerson = XmlUtil.getDataFromFile(
                 MISSING_PERSON_FIELD_FILE, XmlAdaptedIssueWithRootElement.class);
         XmlAdaptedIssue expectedPerson = new XmlAdaptedIssue(
-                null, VALID_PHONE, VALID_ADDRESS, VALID_TAGS);
+                null, VALID_PHONE, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 
@@ -92,7 +92,7 @@ public class XmlUtilTest {
         XmlAdaptedIssue actualPerson = XmlUtil.getDataFromFile(
                 INVALID_PERSON_FIELD_FILE, XmlAdaptedIssueWithRootElement.class);
         XmlAdaptedIssue expectedPerson = new XmlAdaptedIssue(
-                VALID_NAME, INVALID_PHONE, VALID_ADDRESS, VALID_TAGS);
+                VALID_NAME, INVALID_PHONE, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 
@@ -102,7 +102,7 @@ public class XmlUtilTest {
         XmlAdaptedIssue actualPerson = XmlUtil.getDataFromFile(
                 VALID_PERSON_FILE, XmlAdaptedIssueWithRootElement.class);
         XmlAdaptedIssue expectedPerson = new XmlAdaptedIssue(
-                VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_TAGS);
+                VALID_NAME, VALID_PHONE, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 

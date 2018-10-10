@@ -41,7 +41,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Remark address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_REMARK).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Issue issue = new Issue(name, description, address, tagList);
+        Issue issue = new Issue(name, description, tagList);
 
         return new AddCommand(issue);
     }

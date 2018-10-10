@@ -13,7 +13,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Issue;
 import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
-import seedu.address.model.issue.Remark;
 import seedu.address.model.issue.Tag;
 
 /**
@@ -27,8 +26,6 @@ public class XmlAdaptedIssue {
     private String statement;
     @XmlElement(required = true)
     private String description;
-    @XmlElement(required = true)
-    private String address;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -42,10 +39,9 @@ public class XmlAdaptedIssue {
     /**
      * Constructs an {@code XmlAdaptedIssue} with the given issue details.
      */
-    public XmlAdaptedIssue(String statement, String description, String address, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedIssue(String statement, String description, List<XmlAdaptedTag> tagged) {
         this.statement = statement;
         this.description = description;
-        this.address = address;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -59,7 +55,6 @@ public class XmlAdaptedIssue {
     public XmlAdaptedIssue(Issue source) {
         statement = source.getStatement().issue;
         description = source.getDescription().value;
-        address = source.getAddress().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -94,16 +89,8 @@ public class XmlAdaptedIssue {
         }
         final Description modelDescription = new Description(description);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
-        }
-        if (!Remark.isValidRemark(address)) {
-            throw new IllegalValueException(Remark.MESSAGE_ADDRESS_CONSTRAINTS);
-        }
-        final Remark modelAddress = new Remark(address);
-
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Issue(modelName, modelDescription, modelAddress, modelTags);
+        return new Issue(modelName, modelDescription, modelTags);
     }
 
     @Override
@@ -119,7 +106,6 @@ public class XmlAdaptedIssue {
         XmlAdaptedIssue otherPerson = (XmlAdaptedIssue) other;
         return Objects.equals(statement, otherPerson.statement)
                 && Objects.equals(description, otherPerson.description)
-                && Objects.equals(address, otherPerson.address)
                 && tagged.equals(otherPerson.tagged);
     }
 }

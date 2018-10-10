@@ -37,8 +37,8 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Issue;
 import seedu.address.model.Model;
+import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
-import seedu.address.model.issue.Phone;
 import seedu.address.model.issue.Remark;
 import seedu.address.model.issue.Tag;
 import seedu.address.testutil.PersonBuilder;
@@ -176,7 +176,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         /* Case: invalid phone -> rejected */
         assertCommandFailure(
                 EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_PHONE_DESC,
-                Phone.MESSAGE_PHONE_CONSTRAINTS);
+                Description.MESSAGE_PHONE_CONSTRAINTS);
 
         /* Case: invalid address -> rejected */
         assertCommandFailure(

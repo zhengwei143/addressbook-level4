@@ -11,8 +11,8 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Issue;
+import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
-import seedu.address.model.issue.Phone;
 import seedu.address.model.issue.Remark;
 import seedu.address.model.issue.Tag;
 
@@ -58,7 +58,7 @@ public class XmlAdaptedPerson {
      */
     public XmlAdaptedPerson(Issue source) {
         name = source.getStatement().issue;
-        phone = source.getPhone().value;
+        phone = source.getDescription().value;
         address = source.getAddress().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
@@ -86,12 +86,12 @@ public class XmlAdaptedPerson {
         final IssueStatement modelName = new IssueStatement(name);
 
         if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
         }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_PHONE_CONSTRAINTS);
+        if (!Description.isValidDescription(phone)) {
+            throw new IllegalValueException(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
+        final Description modelDescription = new Description(phone);
 
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
@@ -102,7 +102,7 @@ public class XmlAdaptedPerson {
         final Remark modelAddress = new Remark(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Issue(modelName, modelPhone, modelAddress, modelTags);
+        return new Issue(modelName, modelDescription, modelAddress, modelTags);
     }
 
     @Override

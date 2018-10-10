@@ -9,7 +9,6 @@ import seedu.address.model.ReadOnlySaveIt;
 import seedu.address.model.SaveIt;
 import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
-import seedu.address.model.issue.Remark;
 import seedu.address.model.issue.Tag;
 
 /**

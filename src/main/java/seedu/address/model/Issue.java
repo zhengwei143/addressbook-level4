@@ -106,10 +106,12 @@ public class Issue {
         final StringBuilder builder = new StringBuilder();
         builder.append(getStatement())
                 .append(" Phone: ")
+                .append(getPhone())
                 .append(" Remark: ")
                 .append(getAddress())
-                .append(" Tags: ");
+                .append(" Solutions: ");
         getSolutions().forEach(builder::append);
+        builder.append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }

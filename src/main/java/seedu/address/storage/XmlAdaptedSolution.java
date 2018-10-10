@@ -18,10 +18,9 @@ public class XmlAdaptedSolution {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Solution's %s field is missing!";
 
-    @XmlElement(required = true)
-    private String link;
-    @XmlElement(required = true)
-    private String remark;
+    @XmlValue
+    private String solutionName;
+
 
     /**
      * Constructs an XmlAdaptedSolution.
@@ -33,8 +32,7 @@ public class XmlAdaptedSolution {
      * Constructs a {@code XmlAdaptedSolution} with the given {@code solutionName}.
      */
     public XmlAdaptedSolution(String link, String remark) {
-        this.link = link;
-        this.remark = remark;
+        solutionName = link+" "+remark;
     }
 
     /**
@@ -43,8 +41,7 @@ public class XmlAdaptedSolution {
      * @param source future changes to this will not affect the created
      */
     public XmlAdaptedSolution(Solution source) {
-        link = source.solutionLink.value;
-        remark = source.remark.value;
+        solutionName = source.getLink()+" "+source.getRemark();
     }
 
     /**
@@ -53,12 +50,10 @@ public class XmlAdaptedSolution {
      * @throws IllegalValueException if there were any data constraints violated in the adapted issue
      */
     public Solution toModelType() throws IllegalValueException {
-        if (link == null){
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Solution.class.getSimpleName()));
-        }
-        if (remark == null){
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Solution.class.getSimpleName()));
-        }
+
+        String link = solutionName.substring(0, solutionName.indexOf(' '));
+        String remark = solutionName.substring(solutionName.indexOf(' ')+1);
+
         if (!Remark.isValidRemark(remark)) {
             throw new IllegalValueException(Remark.MESSAGE_ADDRESS_CONSTRAINTS);
         }
@@ -79,6 +74,6 @@ public class XmlAdaptedSolution {
             return false;
         }
 
-        return link.equals(((XmlAdaptedSolution) other).link)&&remark.equals(((XmlAdaptedSolution) other).remark);
+        return solutionName.equals(((XmlAdaptedSolution) other).solutionName);
     }
 }

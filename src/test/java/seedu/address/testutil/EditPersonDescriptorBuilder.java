@@ -54,14 +54,6 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Remark} of the {@code EditIssueDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Remark(address));
-        return this;
-    }
-
-    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditIssueDescriptor}
      * that we are building.
      */

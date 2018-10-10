@@ -7,7 +7,6 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -21,7 +20,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -39,7 +38,6 @@ import seedu.address.model.Issue;
 import seedu.address.model.Model;
 import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
-import seedu.address.model.issue.Remark;
 import seedu.address.model.issue.Tag;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -58,7 +56,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         each field
          * -> edited
          */
-        Index index = INDEX_FIRST_PERSON;
+        Index index = INDEX_FIRST_ISSUE;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  "
                 + NAME_DESC_BOB + "  " + DESCRIPTION_DESC_BOB + " "
                 + ADDRESS_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
@@ -74,7 +72,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         model.updatePerson(
-            getModel().getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), editedIssue);
+            getModel().getFilteredPersonList().get(INDEX_FIRST_ISSUE.getZeroBased()), editedIssue);
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: edit a issue with new values same as existing values -> edited */
@@ -102,7 +100,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         assertCommandSuccess(command, index, editedIssue);
 
         /* Case: clear tags -> cleared */
-        index = INDEX_FIRST_PERSON;
+        index = INDEX_FIRST_ISSUE;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
         Issue issueToEdit = getModel().getFilteredPersonList().get(index.getZeroBased());
         editedIssue = new PersonBuilder(issueToEdit).withTags().build();
@@ -113,7 +111,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
 
         /* Case: filtered issue list, edit index within bounds of address book and issue list -> edited */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        index = INDEX_FIRST_PERSON;
+        index = INDEX_FIRST_ISSUE;
         assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB;
         issueToEdit = getModel().getFilteredPersonList().get(index.getZeroBased());
@@ -136,7 +134,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
          * browser url changes
          */
         showAllPersons();
-        index = INDEX_FIRST_PERSON;
+        index = INDEX_FIRST_ISSUE;
         selectPerson(index);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + DESCRIPTION_DESC_AMY
             + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
@@ -165,33 +163,28 @@ public class EditCommandSystemTest extends SaveItSystemTest {
             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 
         /* Case: missing all fields -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_ISSUE.getOneBased(),
             EditCommand.MESSAGE_NOT_EDITED);
 
         /* Case: invalid name -> rejected */
         assertCommandFailure(
-            EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_NAME_DESC,
+            EditCommand.COMMAND_WORD + " " + INDEX_FIRST_ISSUE.getOneBased() + INVALID_NAME_DESC,
             IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS);
 
         /* Case: invalid description -> rejected */
         assertCommandFailure(
-            EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_DESCRIPTION_DESC,
+            EditCommand.COMMAND_WORD + " " + INDEX_FIRST_ISSUE.getOneBased() + INVALID_DESCRIPTION_DESC,
             Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
-
-        /* Case: invalid address -> rejected */
-        assertCommandFailure(
-            EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_ADDRESS_DESC,
-            Remark.MESSAGE_ADDRESS_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
         assertCommandFailure(
-            EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_TAG_DESC,
+            EditCommand.COMMAND_WORD + " " + INDEX_FIRST_ISSUE.getOneBased() + INVALID_TAG_DESC,
             Tag.MESSAGE_TAG_CONSTRAINTS);
 
         /* Case: edit a issue with new values same as another issue's values -> rejected */
         executeCommand(PersonUtil.getAddCommand(BOB));
         assertTrue(getModel().getSaveIt().getPersonList().contains(BOB));
-        index = INDEX_FIRST_PERSON;
+        index = INDEX_FIRST_ISSUE;
         assertFalse(getModel().getFilteredPersonList().get(index.getZeroBased()).equals(BOB));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DESCRIPTION_DESC_BOB
             + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
@@ -242,7 +235,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         assertCommandSuccess(command, expectedModel,
-            String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedIssue),
+            String.format(EditCommand.MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue),
             expectedSelectedCardIndex);
     }
 

@@ -1,8 +1,8 @@
 package seedu.address.model.issue.solution;
 
-import seedu.address.commons.util.AppUtil;
-
 import static java.util.Objects.requireNonNull;
+
+import seedu.address.commons.util.AppUtil;
 
 /**
  * Represents a Issue's remark in saveit.

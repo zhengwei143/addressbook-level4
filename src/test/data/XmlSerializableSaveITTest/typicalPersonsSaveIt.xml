@@ -4,40 +4,33 @@
     <issues>
         <statement>Alice Pauline</statement>
         <description>94351253</description>
-        <address>123, Jurong West Ave 6, #08-111</address>
         <tagged>friends</tagged>
     </issues>
     <issues>
         <statement>Benson Meier</statement>
         <description>98765432</description>
-        <address>311, Clementi Ave 2, #02-25</address>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
     </issues>
     <issues>
         <statement>Carl Kurz</statement>
         <description>95352563</description>
-        <address>wall street</address>
     </issues>
     <issues>
         <statement>Daniel Meier</statement>
         <description>87652533</description>
-        <address>10th street</address>
         <tagged>friends</tagged>
     </issues>
     <issues>
         <statement>Elle Meyer</statement>
         <description>9482224</description>
-        <address>michegan ave</address>
     </issues>
     <issues>
         <statement>Fiona Kunz</statement>
         <description>9482427</description>
-        <address>little tokyo</address>
     </issues>
     <issues>
         <statement>George Best</statement>
         <description>9482442</description>
-        <address>4th street</address>
     </issues>
 </saveit>

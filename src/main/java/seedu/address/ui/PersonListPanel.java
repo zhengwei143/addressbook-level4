@@ -68,7 +68,7 @@ public class PersonListPanel extends UiPart<Region> {
      */
     class PersonListViewCell extends ListCell<Issue> {
         @Override
-        protected void updateItem(Issue issue, boolean empty) {IssueContainsKeywordsPredicateTest
+        protected void updateItem(Issue issue, boolean empty) {
             super.updateItem(issue, empty);
 
             if (empty || issue == null) {

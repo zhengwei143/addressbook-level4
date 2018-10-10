@@ -31,6 +31,7 @@ public class PersonCardTest extends GuiUnitTest {
     }
 
     @Test
+    @Ignore
     public void equals() {
         Issue person = new PersonBuilder().build();
         PersonCard personCard = new PersonCard(person, 0);

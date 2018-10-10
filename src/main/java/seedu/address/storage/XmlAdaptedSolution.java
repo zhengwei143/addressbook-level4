@@ -43,8 +43,8 @@ public class XmlAdaptedSolution {
      * @param source future changes to this will not affect the created
      */
     public XmlAdaptedSolution(Solution source) {
-        link = source.link;
-        remark = source.remark;
+        link = source.solutionLink.value;
+        remark = source.remark.value;
     }
 
     /**
@@ -79,6 +79,6 @@ public class XmlAdaptedSolution {
             return false;
         }
 
-        return solutionName.equals(((XmlAdaptedSolution) other).solutionName);
+        return link.equals(((XmlAdaptedSolution) other).link)&&remark.equals(((XmlAdaptedSolution) other).remark);
     }
 }

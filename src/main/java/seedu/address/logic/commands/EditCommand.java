@@ -22,6 +22,7 @@ import seedu.address.model.Model;
 import seedu.address.model.issue.IssueStatement;
 import seedu.address.model.issue.Phone;
 import seedu.address.model.issue.Remark;
+import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
 
 /**
@@ -93,9 +94,10 @@ public class EditCommand extends Command {
         IssueStatement updatedName = editPersonDescriptor.getName().orElse(issueToEdit.getStatement());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(issueToEdit.getPhone());
         Remark updatedAddress = editPersonDescriptor.getAddress().orElse(issueToEdit.getAddress());
+        Set<Solution> updatedSolutions = editPersonDescriptor.getSolutions().orElse(issueToEdit.getSolutions());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(issueToEdit.getTags());
 
-        return new Issue(updatedName, updatedPhone, updatedAddress, updatedTags);
+        return new Issue(updatedName, updatedPhone, updatedAddress, updatedSolutions, updatedTags);
     }
 
     @Override
@@ -124,6 +126,7 @@ public class EditCommand extends Command {
         private IssueStatement name;
         private Phone phone;
         private Remark address;
+        private Set<Solution> solutions;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -136,6 +139,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setAddress(toCopy.address);
+            setSolutions(toCopy.solutions);
             setTags(toCopy.tags);
         }
 
@@ -168,6 +172,14 @@ public class EditCommand extends Command {
 
         public Optional<Remark> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setSolutions(Set<Solution> solutions) {
+            this.solutions = (solutions != null) ? new HashSet<>(solutions) : null;
+        }
+
+        public Optional<Set<Solution>> getSolutions() {
+            return (solutions != null) ? Optional.of(Collections.unmodifiableSet(solutions)) : Optional.empty();
         }
 
         /**

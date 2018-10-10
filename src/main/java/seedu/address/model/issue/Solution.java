@@ -45,9 +45,8 @@ public class Solution {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getLink())
-                .append(" Link: ")
-                .append(getRemark())
-                .append(" Remark: ");
+                .append(" Solution Remark: ")
+                .append(getRemark());
         return builder.toString();
     }
 

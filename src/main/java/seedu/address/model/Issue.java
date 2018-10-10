@@ -7,6 +7,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.issue.IssueStatement;
+import seedu.address.model.issue.Phone;
 import seedu.address.model.issue.Remark;
 import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
@@ -22,14 +23,16 @@ public class Issue {
 
     // Data fields
     private final Remark remark;
+    private final Phone phone;
     private final Set<Solution> solutions = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Issue(IssueStatement statement, Remark remark, Set<Solution> solutions, Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(statement, remark, solutions, tags);
+    public Issue(IssueStatement statement, Phone phone, Remark remark, Set<Solution> solutions, Set<Tag> tags) {
+        CollectionUtil.requireAllNonNull(statement, phone, remark, solutions, tags);
+        this.phone = phone;
         this.statement = statement;
         this.remark = remark;
         this.solutions.addAll(solutions);
@@ -39,6 +42,8 @@ public class Issue {
     public IssueStatement getStatement() {
         return statement;
     }
+
+    public Phone getPhone() { return phone; }
 
     public Set<Solution> getSolutions() {
         return Collections.unmodifiableSet(solutions);

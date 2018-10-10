@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SOLUTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -23,11 +24,13 @@ public class AddCommand extends Command {
             + PREFIX_STATEMENT + "ISSUE_STATEMENT "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_REMARK + "REMARK "
+            + "[" + PREFIX_SOLUTION + "SOLUTION]...\n"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_STATEMENT + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_REMARK + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_SOLUTION + "StackOverflow new Solution"
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

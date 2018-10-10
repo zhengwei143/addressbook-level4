@@ -12,7 +12,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.issue.IssueStatement;
 import seedu.address.model.issue.Phone;
 import seedu.address.model.issue.Remark;
+import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
+import seedu.address.model.issue.solution.SolutionLink;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -77,6 +79,37 @@ public class ParserUtil {
             throw new ParseException(Remark.MESSAGE_ADDRESS_CONSTRAINTS);
         }
         return new Remark(trimmedAddress);
+    }
+
+    /**
+     * Parses a {@code String solution} into an {@code Solution}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code solution} is invalid.
+     */
+    public static Solution parseSolution (String solution) throws ParseException {
+        requireNonNull(solution);
+        String trimmedSolutionLink = solution.substring(0, solution.indexOf(' ')).trim();
+        String trimmedRemark = solution.substring(solution.indexOf(' ') + 1).trim();
+        if (!Remark.isValidRemark(trimmedRemark)) {
+            throw new ParseException(Remark.MESSAGE_ADDRESS_CONSTRAINTS);
+        }
+        if (!SolutionLink.isValidLink(trimmedSolutionLink)) {
+            throw new ParseException(SolutionLink.MESSAGE_SOLUTION_LINK_CONSTRAINTS);
+        }
+        return new Solution(trimmedSolutionLink, trimmedRemark);
+    }
+
+    /**
+     * Parses {@code Collection<String> solutions} into a {@code Set<Solution>}.
+     */
+    public static Set<Solution> parseSolutions(Collection<String> solutions) throws ParseException {
+        requireNonNull(solutions);
+        final Set<Solution> solutionSet = new HashSet<>();
+        for (String solution : solutions) {
+            solutionSet.add(parseSolution(solution));
+        }
+        return solutionSet;
     }
 
     /**

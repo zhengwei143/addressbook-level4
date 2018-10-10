@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Issue;
 import seedu.address.model.issue.IssueStatement;
+import seedu.address.model.issue.Phone;
 import seedu.address.model.issue.Remark;
 import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
@@ -25,6 +26,8 @@ public class XmlAdaptedIssue {
 
     @XmlElement(required = true)
     private String name;
+    @XmlElement(required = true)
+    private String phone;
     @XmlElement(required = true)
     private String address;
 
@@ -43,9 +46,10 @@ public class XmlAdaptedIssue {
     /**
      * Constructs an {@code XmlAdaptedIssue} with the given issue details.
      */
-    public XmlAdaptedIssue(String name, String address, List<XmlAdaptedSolution> solutions, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedIssue(String name, String address, String phone, List<XmlAdaptedSolution> solutions, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.address = address;
+        this.phone = phone;
         if (solutions != null){
             this.solutions = new ArrayList<>(solutions);
         }
@@ -61,6 +65,7 @@ public class XmlAdaptedIssue {
      */
     public XmlAdaptedIssue(Issue source) {
         name = source.getStatement().issue;
+        phone = source.getPhone().value;
         address = source.getAddress().value;
         solutions = source.getSolutions().stream()
                 .map(XmlAdaptedSolution::new)
@@ -79,6 +84,11 @@ public class XmlAdaptedIssue {
         final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Solution> issueSolutions = new ArrayList<>();
+        for (XmlAdaptedSolution solution : solutions) {
+            issueSolutions.add(solution.toModelType());
         }
 
         if (name == null) {
@@ -106,8 +116,10 @@ public class XmlAdaptedIssue {
         }
         final Remark modelAddress = new Remark(address);
 
+        final Set<Solution> modelSolutions = new HashSet<>(issueSolutions);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Issue(modelName, modelPhone, modelAddress, modelTags);
+        return new Issue(modelName, modelPhone, modelAddress, modelSolutions, modelTags);
     }
 
     @Override
@@ -124,6 +136,7 @@ public class XmlAdaptedIssue {
         return Objects.equals(name, otherPerson.name)
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(address, otherPerson.address)
+                && solutions.equals(otherPerson.solutions)
                 && tagged.equals(otherPerson.tagged);
     }
 }

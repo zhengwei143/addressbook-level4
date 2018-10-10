@@ -17,7 +17,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.SaveIt;
-import seedu.address.storage.XmlAdaptedPerson;
+import seedu.address.storage.XmlAdaptedIssue;
 import seedu.address.storage.XmlAdaptedTag;
 import seedu.address.storage.XmlSerializableSaveIt;
 import seedu.address.testutil.PersonBuilder;
@@ -78,27 +78,27 @@ public class XmlUtilTest {
 
     @Test
     public void xmlAdaptedPersonFromFile_fileWithMissingPersonField_validResult() throws Exception {
-        XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
-                MISSING_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
-        XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
+        XmlAdaptedIssue actualPerson = XmlUtil.getDataFromFile(
+                MISSING_PERSON_FIELD_FILE, XmlAdaptedIssueWithRootElement.class);
+        XmlAdaptedIssue expectedPerson = new XmlAdaptedIssue(
                 null, VALID_PHONE, VALID_ADDRESS, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 
     @Test
     public void xmlAdaptedPersonFromFile_fileWithInvalidPersonField_validResult() throws Exception {
-        XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
-                INVALID_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
-        XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
+        XmlAdaptedIssue actualPerson = XmlUtil.getDataFromFile(
+                INVALID_PERSON_FIELD_FILE, XmlAdaptedIssueWithRootElement.class);
+        XmlAdaptedIssue expectedPerson = new XmlAdaptedIssue(
                 VALID_NAME, INVALID_PHONE, VALID_ADDRESS, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 
     @Test
     public void xmlAdaptedPersonFromFile_fileWithValidPerson_validResult() throws Exception {
-        XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
-                VALID_PERSON_FILE, XmlAdaptedPersonWithRootElement.class);
-        XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
+        XmlAdaptedIssue actualPerson = XmlUtil.getDataFromFile(
+                VALID_PERSON_FILE, XmlAdaptedIssueWithRootElement.class);
+        XmlAdaptedIssue expectedPerson = new XmlAdaptedIssue(
                 VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
@@ -139,9 +139,9 @@ public class XmlUtilTest {
     }
 
     /**
-     * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedPerson}
+     * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedIssue}
      * objects.
      */
     @XmlRootElement(name = "issue")
-    private static class XmlAdaptedPersonWithRootElement extends XmlAdaptedPerson {}
+    private static class XmlAdaptedIssueWithRootElement extends XmlAdaptedIssue {}
 }

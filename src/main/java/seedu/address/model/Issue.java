@@ -7,8 +7,8 @@ import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.issue.IssueStatement;
-import seedu.address.model.issue.Phone;
 import seedu.address.model.issue.Remark;
+import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
 
 /**
@@ -19,20 +19,20 @@ public class Issue {
 
     // Identity fields
     private final IssueStatement statement;
-    private final Phone phone;
 
     // Data fields
     private final Remark remark;
+    private final Set<Solution> solutions = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Issue(IssueStatement statement, Phone phone, Remark remark, Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(statement, phone, remark, tags);
+    public Issue(IssueStatement statement, Remark remark, Set<Solution> solutions, Set<Tag> tags) {
+        CollectionUtil.requireAllNonNull(statement, remark, solutions, tags);
         this.statement = statement;
-        this.phone = phone;
         this.remark = remark;
+        this.solutions.addAll(solutions);
         this.tags.addAll(tags);
     }
 
@@ -40,8 +40,8 @@ public class Issue {
         return statement;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Set<Solution> getSolutions() {
+        return Collections.unmodifiableSet(solutions);
     }
 
     public Remark getAddress() {
@@ -66,8 +66,7 @@ public class Issue {
         }
 
         return otherIssue != null
-                && otherIssue.getStatement().equals(getStatement())
-                && otherIssue.getPhone().equals(getPhone());
+                && otherIssue.getStatement().equals(getStatement());
     }
 
     /**
@@ -86,15 +85,15 @@ public class Issue {
 
         Issue otherIssue = (Issue) other;
         return otherIssue.getStatement().equals(getStatement())
-                && otherIssue.getPhone().equals(getPhone())
                 && otherIssue.getAddress().equals(getAddress())
+                && otherIssue.getSolutions().equals(getSolutions())
                 && otherIssue.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(statement, phone, remark, tags);
+        return Objects.hash(statement, remark, solutions, tags);
     }
 
     @Override
@@ -102,10 +101,10 @@ public class Issue {
         final StringBuilder builder = new StringBuilder();
         builder.append(getStatement())
                 .append(" Phone: ")
-                .append(getPhone())
                 .append(" Remark: ")
                 .append(getAddress())
                 .append(" Tags: ");
+        getSolutions().forEach(builder::append);
         getTags().forEach(builder::append);
         return builder.toString();
     }

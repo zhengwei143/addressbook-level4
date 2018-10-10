@@ -18,15 +18,15 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an issue to the saveIt. "
-            + "Parameters: "
-            + PREFIX_STATEMENT + "ISSUE_STATEMENT "
-            + PREFIX_DESCRIPTION + "DESCRIPTION "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_STATEMENT + "John Doe "
-            + PREFIX_DESCRIPTION + "This is an algorithm problem"
-            + PREFIX_TAG + "algorithm"
-            + PREFIX_TAG + "java";
+        + "Parameters: "
+        + PREFIX_STATEMENT + "ISSUE_STATEMENT "
+        + PREFIX_DESCRIPTION + "DESCRIPTION "
+        + "[" + PREFIX_TAG + "TAG]...\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_STATEMENT + "algorithm "
+        + PREFIX_DESCRIPTION + "This is an algorithm problem "
+        + PREFIX_TAG + "algorithm "
+        + PREFIX_TAG + "java";
 
     public static final String MESSAGE_SUCCESS = "New issue added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This issue already exists in the saveIt";
@@ -57,7 +57,7 @@ public class AddCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
+            || (other instanceof AddCommand // instanceof handles nulls
+            && toAdd.equals(((AddCommand) other).toAdd));
     }
 }

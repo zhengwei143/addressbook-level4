@@ -35,10 +35,10 @@ public class XmlUtilTest {
     private static final Path VALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("validPerson.xml");
     private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("tempSaveIt.xml");
 
-    private static final String INVALID_PHONE = "9482asf424";
+    private static final String INVALID_DESCRIPTION = "9482asf424";
 
     private static final String VALID_NAME = "Hans Muster";
-    private static final String VALID_PHONE = "9482424";
+    private static final String VALID_DESCRIPTION = "9482424";
     private static final String VALID_ADDRESS = "4th street";
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
 
@@ -80,9 +80,9 @@ public class XmlUtilTest {
     @Ignore
     public void xmlAdaptedPersonFromFile_fileWithMissingPersonField_validResult() throws Exception {
         XmlAdaptedIssue actualPerson = XmlUtil.getDataFromFile(
-                MISSING_PERSON_FIELD_FILE, XmlAdaptedIssueWithRootElement.class);
+            MISSING_PERSON_FIELD_FILE, XmlAdaptedIssueWithRootElement.class);
         XmlAdaptedIssue expectedPerson = new XmlAdaptedIssue(
-                null, VALID_PHONE, VALID_TAGS);
+            null, VALID_DESCRIPTION, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 
@@ -90,9 +90,9 @@ public class XmlUtilTest {
     @Ignore
     public void xmlAdaptedPersonFromFile_fileWithInvalidPersonField_validResult() throws Exception {
         XmlAdaptedIssue actualPerson = XmlUtil.getDataFromFile(
-                INVALID_PERSON_FIELD_FILE, XmlAdaptedIssueWithRootElement.class);
+            INVALID_PERSON_FIELD_FILE, XmlAdaptedIssueWithRootElement.class);
         XmlAdaptedIssue expectedPerson = new XmlAdaptedIssue(
-                VALID_NAME, INVALID_PHONE, VALID_TAGS);
+            VALID_NAME, INVALID_DESCRIPTION, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 
@@ -100,9 +100,9 @@ public class XmlUtilTest {
     @Ignore
     public void xmlAdaptedPersonFromFile_fileWithValidPerson_validResult() throws Exception {
         XmlAdaptedIssue actualPerson = XmlUtil.getDataFromFile(
-                VALID_PERSON_FILE, XmlAdaptedIssueWithRootElement.class);
+            VALID_PERSON_FILE, XmlAdaptedIssueWithRootElement.class);
         XmlAdaptedIssue expectedPerson = new XmlAdaptedIssue(
-                VALID_NAME, VALID_PHONE, VALID_TAGS);
+            VALID_NAME, VALID_DESCRIPTION, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 
@@ -134,7 +134,7 @@ public class XmlUtilTest {
 
         SaveItBuilder builder = new SaveItBuilder(new SaveIt());
         dataToWrite = new XmlSerializableSaveIt(
-                builder.withPerson(new PersonBuilder().build()).build());
+            builder.withPerson(new PersonBuilder().build()).build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableSaveIt.class);

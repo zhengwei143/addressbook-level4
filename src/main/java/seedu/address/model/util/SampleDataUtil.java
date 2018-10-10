@@ -18,7 +18,8 @@ public class SampleDataUtil {
     public static Issue[] getSamplePersons() {
         return new Issue[] {
             new Issue(new IssueStatement("Alex Yeoh"), new Description("87438807"), getTagSet("friends")),
-            new Issue(new IssueStatement("Bernice Yu"), new Description("99272758"), getTagSet("colleagues", "friends")),
+            new Issue(new IssueStatement("Bernice Yu"), new Description("99272758"),
+                    getTagSet("colleagues", "friends")),
             new Issue(new IssueStatement("Charlotte Oliveiro"), new Description("93210283"), getTagSet("neighbours")),
             new Issue(new IssueStatement("David Li"), new Description("91031282"), getTagSet("family")),
             new Issue(new IssueStatement("Irfan Ibrahim"), new Description("92492021"), getTagSet("classmates")),

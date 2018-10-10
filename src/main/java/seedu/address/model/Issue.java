@@ -8,7 +8,6 @@ import java.util.Set;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
-import seedu.address.model.issue.Remark;
 import seedu.address.model.issue.Tag;
 
 /**
@@ -21,18 +20,16 @@ public class Issue {
     private final IssueStatement statement;
     private final Description description;
 
-    // Data fields
-    private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Issue(IssueStatement statement, Description description, Remark remark, Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(statement, description, remark, tags);
+
+    public Issue(IssueStatement statement, Description description, Set<Tag> tags) {
+        CollectionUtil.requireAllNonNull(statement, description, tags);
         this.statement = statement;
         this.description = description;
-        this.remark = remark;
         this.tags.addAll(tags);
     }
 
@@ -42,10 +39,6 @@ public class Issue {
 
     public Description getDescription() {
         return description;
-    }
-
-    public Remark getAddress() {
-        return remark;
     }
 
     /**
@@ -87,14 +80,13 @@ public class Issue {
         Issue otherIssue = (Issue) other;
         return otherIssue.getStatement().equals(getStatement())
                 && otherIssue.getDescription().equals(getDescription())
-                && otherIssue.getAddress().equals(getAddress())
                 && otherIssue.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(statement, description, remark, tags);
+        return Objects.hash(statement, description, tags);
     }
 
     @Override
@@ -104,7 +96,6 @@ public class Issue {
                 .append(" Description: ")
                 .append(getDescription())
                 .append(" Remark: ")
-                .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -22,12 +21,10 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_STATEMENT + "ISSUE_STATEMENT "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
-            + PREFIX_REMARK + "REMARK "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_STATEMENT + "John Doe "
-            + PREFIX_DESCRIPTION + "98765432 "
-            + PREFIX_REMARK + "This is an algorithm problem"
+            + PREFIX_DESCRIPTION + "This is an algorithm problem"
             + PREFIX_TAG + "algorithm"
             + PREFIX_TAG + "java";
 

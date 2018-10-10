@@ -43,7 +43,6 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(issue.getStatement().issue);
         description.setText(issue.getDescription().value);
-        address.setText(issue.getAddress().value);
         issue.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 

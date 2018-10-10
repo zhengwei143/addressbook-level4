@@ -8,7 +8,6 @@ public class CliSyntax {
     /* Prefix definitions */
     public static final Prefix PREFIX_STATEMENT = new Prefix("i/");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("d/");
-    public static final Prefix PREFIX_REMARK = new Prefix("r/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
 }

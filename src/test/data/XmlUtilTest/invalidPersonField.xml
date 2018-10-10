@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!-- Issue with an invalid description field -->
 <issue>
-    <name>Hans Muster</name>
+    <statement>Hans Muster</statement>
     <description>9482asf424</description>
-    <address>4th street</address>
     <tagged>friends</tagged>
 </issue>

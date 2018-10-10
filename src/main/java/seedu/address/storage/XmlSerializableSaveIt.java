@@ -21,7 +21,7 @@ public class XmlSerializableSaveIt {
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate issue(s).";
 
     @XmlElement
-    private List<XmlAdaptedPerson> persons;
+    private List<XmlAdaptedIssue> persons;
 
     /**
      * Creates an empty XmlSerializableSaveIt.
@@ -36,18 +36,18 @@ public class XmlSerializableSaveIt {
      */
     public XmlSerializableSaveIt(ReadOnlySaveIt src) {
         this();
-        persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        persons.addAll(src.getPersonList().stream().map(XmlAdaptedIssue::new).collect(Collectors.toList()));
     }
 
     /**
      * Converts this address into the model's {@code SaveIt} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
-     * {@code XmlAdaptedPerson}.
+     * {@code XmlAdaptedIssue}.
      */
     public SaveIt toModelType() throws IllegalValueException {
         SaveIt saveIt = new SaveIt();
-        for (XmlAdaptedPerson p : persons) {
+        for (XmlAdaptedIssue p : persons) {
             Issue issue = p.toModelType();
             if (saveIt.hasPerson(issue)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);

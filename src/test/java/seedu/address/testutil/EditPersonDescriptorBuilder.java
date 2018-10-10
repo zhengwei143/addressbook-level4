@@ -34,7 +34,6 @@ public class EditPersonDescriptorBuilder {
         descriptor = new EditIssueDescriptor();
         descriptor.setName(issue.getStatement());
         descriptor.setDescription(issue.getDescription());
-        descriptor.setAddress(issue.getAddress());
         descriptor.setTags(issue.getTags());
     }
 

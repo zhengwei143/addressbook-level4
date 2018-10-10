@@ -5,7 +5,6 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -37,7 +36,6 @@ import seedu.address.model.Issue;
 import seedu.address.model.Model;
 import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
-import seedu.address.model.issue.Remark;
 import seedu.address.model.issue.Tag;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -160,10 +158,6 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         /* Case: invalid phone -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_DESCRIPTION_DESC + ADDRESS_DESC_AMY;
         assertCommandFailure(command, Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
-
-        /* Case: invalid address -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + DESCRIPTION_DESC_AMY + INVALID_ADDRESS_DESC;
-        assertCommandFailure(command, Remark.MESSAGE_ADDRESS_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + DESCRIPTION_DESC_AMY + ADDRESS_DESC_AMY

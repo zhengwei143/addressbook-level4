@@ -37,7 +37,6 @@ public class PersonBuilder {
     public PersonBuilder(Issue issueToCopy) {
         name = issueToCopy.getStatement();
         description = issueToCopy.getDescription();
-        address = issueToCopy.getAddress();
         tags = new HashSet<>(issueToCopy.getTags());
     }
 
@@ -74,7 +73,7 @@ public class PersonBuilder {
     }
 
     public Issue build() {
-        return new Issue(name, description, address, tags);
+        return new Issue(name, description, tags);
     }
 
 }

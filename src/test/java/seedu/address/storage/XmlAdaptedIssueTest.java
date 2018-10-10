@@ -54,7 +54,7 @@ public class XmlAdaptedIssueTest {
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         XmlAdaptedIssue person =
                 new XmlAdaptedIssue(VALID_NAME, INVALID_PHONE, VALID_ADDRESS, VALID_TAGS);
-        String expectedMessage = Description.MESSAGE_PHONE_CONSTRAINTS;
+        String expectedMessage = Description.MESSAGE_DESCRIPTION_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

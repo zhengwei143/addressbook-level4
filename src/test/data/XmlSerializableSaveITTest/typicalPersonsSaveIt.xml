@@ -2,42 +2,42 @@
 <!-- SaveIt save file which contains the same Issue values as in TypicalPersons#getTypicalSaveIt() -->
 <saveit>
     <issues>
-        <name>Alice Pauline</name>
+        <statement>Alice Pauline</statement>
         <description>94351253</description>
-s        <address>123, Jurong West Ave 6, #08-111</address>
+        <address>123, Jurong West Ave 6, #08-111</address>
         <tagged>friends</tagged>
     </issues>
     <issues>
-        <name>Benson Meier</name>
+        <statement>Benson Meier</statement>
         <description>98765432</description>
-s        <address>311, Clementi Ave 2, #02-25</address>
+        <address>311, Clementi Ave 2, #02-25</address>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
     </issues>
     <issues>
-        <name>Carl Kurz</name>
+        <statement>Carl Kurz</statement>
         <description>95352563</description>
-s        <address>wall street</address>
+        <address>wall street</address>
     </issues>
     <issues>
-        <name>Daniel Meier</name>
+        <statement>Daniel Meier</statement>
         <description>87652533</description>
-s        <address>10th street</address>
+        <address>10th street</address>
         <tagged>friends</tagged>
     </issues>
     <issues>
-        <name>Elle Meyer</name>
+        <statement>Elle Meyer</statement>
         <description>9482224</description>
-s        <address>michegan ave</address>
+        <address>michegan ave</address>
     </issues>
     <issues>
-        <name>Fiona Kunz</name>
+        <statement>Fiona Kunz</statement>
         <description>9482427</description>
-s        <address>little tokyo</address>
+        <address>little tokyo</address>
     </issues>
     <issues>
-        <name>George Best</name>
+        <statement>George Best</statement>
         <description>9482442</description>
-s        <address>4th street</address>
+        <address>4th street</address>
     </issues>
 </saveit>

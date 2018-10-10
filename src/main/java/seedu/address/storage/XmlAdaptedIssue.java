@@ -24,9 +24,9 @@ public class XmlAdaptedIssue {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Issue's %s field is missing!";
 
     @XmlElement(required = true)
-    private String name;
+    private String statement;
     @XmlElement(required = true)
-    private String phone;
+    private String description;
     @XmlElement(required = true)
     private String address;
 
@@ -42,9 +42,9 @@ public class XmlAdaptedIssue {
     /**
      * Constructs an {@code XmlAdaptedIssue} with the given issue details.
      */
-    public XmlAdaptedIssue(String name, String phone, String address, List<XmlAdaptedTag> tagged) {
-        this.name = name;
-        this.phone = phone;
+    public XmlAdaptedIssue(String statement, String description, String address, List<XmlAdaptedTag> tagged) {
+        this.statement = statement;
+        this.description = description;
         this.address = address;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
@@ -57,8 +57,8 @@ public class XmlAdaptedIssue {
      * @param source future changes to this will not affect the created XmlAdaptedIssue
      */
     public XmlAdaptedIssue(Issue source) {
-        name = source.getStatement().issue;
-        phone = source.getDescription().value;
+        statement = source.getStatement().issue;
+        description = source.getDescription().value;
         address = source.getAddress().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
@@ -76,23 +76,23 @@ public class XmlAdaptedIssue {
             personTags.add(tag.toModelType());
         }
 
-        if (name == null) {
+        if (statement == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                 IssueStatement.class.getSimpleName()));
         }
-        if (!IssueStatement.isValidIssueStatement(name)) {
+        if (!IssueStatement.isValidIssueStatement(statement)) {
             throw new IllegalValueException(IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS);
         }
-        final IssueStatement modelName = new IssueStatement(name);
+        final IssueStatement modelName = new IssueStatement(statement);
 
-        if (phone == null) {
+        if (description == null) {
             throw new IllegalValueException(
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
         }
-        if (!Description.isValidDescription(phone)) {
+        if (!Description.isValidDescription(description)) {
             throw new IllegalValueException(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         }
-        final Description modelDescription = new Description(phone);
+        final Description modelDescription = new Description(description);
 
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
@@ -117,8 +117,8 @@ public class XmlAdaptedIssue {
         }
 
         XmlAdaptedIssue otherPerson = (XmlAdaptedIssue) other;
-        return Objects.equals(name, otherPerson.name)
-                && Objects.equals(phone, otherPerson.phone)
+        return Objects.equals(statement, otherPerson.statement)
+                && Objects.equals(description, otherPerson.description)
                 && Objects.equals(address, otherPerson.address)
                 && tagged.equals(otherPerson.tagged);
     }

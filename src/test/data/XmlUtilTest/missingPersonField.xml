@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- Issue with missing name field -->
+<!-- Issue with missing statement field -->
 <issue>
     <description>9482424</description>
     <address>4th street</address>

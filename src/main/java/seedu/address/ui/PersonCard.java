@@ -33,8 +33,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
-    private Label address;
-    @FXML
     private FlowPane tags;
 
     public PersonCard(Issue issue, int displayedIndex) {

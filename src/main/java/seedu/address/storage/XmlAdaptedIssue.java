@@ -56,8 +56,8 @@ public class XmlAdaptedIssue {
         statement = source.getStatement().issue;
         description = source.getDescription().value;
         tagged = source.getTags().stream()
-                .map(XmlAdaptedTag::new)
-                .collect(Collectors.toList());
+            .map(XmlAdaptedTag::new)
+            .collect(Collectors.toList());
     }
 
     /**
@@ -105,7 +105,7 @@ public class XmlAdaptedIssue {
 
         XmlAdaptedIssue otherPerson = (XmlAdaptedIssue) other;
         return Objects.equals(statement, otherPerson.statement)
-                && Objects.equals(description, otherPerson.description)
-                && tagged.equals(otherPerson.tagged);
+            && Objects.equals(description, otherPerson.description)
+            && tagged.equals(otherPerson.tagged);
     }
 }

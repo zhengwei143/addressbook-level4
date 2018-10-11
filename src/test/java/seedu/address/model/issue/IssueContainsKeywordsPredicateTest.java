@@ -26,7 +26,7 @@ public class IssueContainsKeywordsPredicateTest {
 
         // same values -> returns true
         IssueContainsKeywordsPredicate firstPredicateCopy =
-                new IssueContainsKeywordsPredicate(firstPredicateKeywordList);
+            new IssueContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -43,7 +43,7 @@ public class IssueContainsKeywordsPredicateTest {
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
         IssueContainsKeywordsPredicate predicate =
-                new IssueContainsKeywordsPredicate(Collections.singletonList("Alice"));
+            new IssueContainsKeywordsPredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Multiple keywords
@@ -69,9 +69,9 @@ public class IssueContainsKeywordsPredicateTest {
         predicate = new IssueContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
-        // Keywords match phone and address, but does not match name
+        // Keywords match description and address, but does not match name
         predicate = new IssueContainsKeywordsPredicate(Arrays.asList("12345", "Main", "Street"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withDescription("12345")
                 .withAddress("Main Street").build()));
     }
 }

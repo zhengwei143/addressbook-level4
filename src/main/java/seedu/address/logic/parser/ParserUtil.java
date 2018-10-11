@@ -24,8 +24,9 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces
+     * will be trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -37,8 +38,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code IssueStatement}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String name} into a {@code IssueStatement}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
@@ -52,8 +53,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String description} into a {@code Description}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String description} into a {@code Description}. Leading and trailing whitespaces will
+     * be trimmed.
      *
      * @throws ParseException if the given {@code description} is invalid.
      */
@@ -67,8 +68,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Remark}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String address} into an {@code Remark}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
@@ -82,14 +83,14 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String solution} into an {@code Solution}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String solution} into an {@code Solution}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code solution} is invalid.
      */
-    public static Solution parseSolution (String solution) throws ParseException {
+    public static Solution parseSolution(String solution) throws ParseException {
         requireNonNull(solution);
-        if(solution.indexOf(' ')==-1){
+        if (solution.indexOf(' ') == -1) {
             throw new ParseException(Remark.MESSAGE_REMARK_CONSTRAINTS);
         }
         String trimmedSolutionLink = solution.substring(0, solution.indexOf(' ')).trim();
@@ -116,8 +117,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String tag} into a {@code Tag}. Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */

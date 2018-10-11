@@ -17,8 +17,8 @@ import org.junit.rules.ExpectedException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
-import seedu.address.model.issue.Remark;
 import seedu.address.model.issue.Tag;
+import seedu.address.model.issue.solution.Remark;
 import seedu.address.testutil.Assert;
 
 public class ParserUtilTest {

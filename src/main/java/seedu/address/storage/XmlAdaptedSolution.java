@@ -27,8 +27,8 @@ public class XmlAdaptedSolution {
     /**
      * Constructs a {@code XmlAdaptedSolution} with the given {@code solutionName}.
      */
-    public XmlAdaptedSolution(String link, String remark) {
-        solutionName = link+" "+remark;
+    public XmlAdaptedSolution(String solutionName) {
+        this.solutionName = solutionName;
     }
 
     /**

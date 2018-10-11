@@ -2,8 +2,8 @@ package seedu.address.model.issue;
 
 import java.util.Objects;
 
-import seedu.address.model.issue.solution.SolutionLink;
 import seedu.address.model.issue.solution.Remark;
+import seedu.address.model.issue.solution.SolutionLink;
 
 /**
  * Represents a Issue's solution in saveit.

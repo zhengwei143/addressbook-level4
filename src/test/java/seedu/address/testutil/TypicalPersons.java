@@ -1,7 +1,5 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -23,35 +21,36 @@ import seedu.address.model.SaveIt;
 public class TypicalPersons {
 
     public static final Issue ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withDescription("123, Jurong West Ave 6, #08-111").withDescription("94351253")
+            .withDescription("94351253")
             .withSolutions("StackOverflow newSolution")
             .withTags("friends").build();
     public static final Issue BENSON = new PersonBuilder().withName("Benson Meier")
-            .withDescription("311, Clementi Ave 2, #02-25")
+            .withDescription("newDescription")
             .withSolutions("StackOverflow newSolution", "ZhiHu newSol")
             .withTags("owesMoney", "friends").build();
     public static final Issue CARL = new PersonBuilder().withName("Carl Kurz").withDescription("95352563")
-            .withDescription("wall street").build();
+            .withSolutions("wall street").build();
     public static final Issue DANIEL = new PersonBuilder().withName("Daniel Meier").withDescription("87652533")
-            .withDescription("10th street").withSolutions("StackOverflow newSolution", "ZhiHu newSol").withTags("friends").build();
+            .withSolutions("StackOverflow newSolution", "ZhiHu newSol").withTags("friends").build();
     public static final Issue ELLE = new PersonBuilder().withName("Elle Meyer").withDescription("9482224")
-            .withDescription("michegan ave").build();
+            .withSolutions("michegan ave").build();
     public static final Issue FIONA = new PersonBuilder().withName("Fiona Kunz").withDescription("9482427")
-            .withDescription("little tokyo").build();
+            .withSolutions("little tokyo").build();
+
     public static final Issue GEORGE = new PersonBuilder().withName("George Best").withDescription("9482442")
-            .withDescription("4th street").build();
+            .withSolutions("4th street").build();
 
     // Manually added
     public static final Issue HOON = new PersonBuilder().withName("Hoon Meier").withDescription("8482424")
-            .withDescription("little india").build();
+            .withSolutions("little india").build();
     public static final Issue IDA = new PersonBuilder().withName("Ida Mueller").withDescription("8482131")
-            .withDescription("chicago ave").build();
+            .withSolutions("chicago ave").build();
 
     // Manually added - Issue's details found in {@code CommandTestUtil}
     public static final Issue AMY = new PersonBuilder().withName(VALID_NAME_AMY).withDescription(VALID_DESCRIPTION_AMY)
-            .withDescription(VALID_ADDRESS_AMY).withSolutions(VALID_SOLUTION_STACKOVERLOW).withTags(VALID_TAG_FRIEND).build();
+            .withSolutions(VALID_SOLUTION_STACKOVERLOW).withTags(VALID_TAG_FRIEND).build();
     public static final Issue BOB = new PersonBuilder().withName(VALID_NAME_BOB).withDescription(VALID_DESCRIPTION_BOB)
-            .withDescription(VALID_ADDRESS_BOB).withSolutions(VALID_SOLUTION_STACKOVERLOW).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withSolutions(VALID_SOLUTION_STACKOVERLOW).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

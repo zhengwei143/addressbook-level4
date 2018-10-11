@@ -18,6 +18,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.SaveIt;
 import seedu.address.storage.XmlAdaptedIssue;
+import seedu.address.storage.XmlAdaptedSolution;
 import seedu.address.storage.XmlAdaptedTag;
 import seedu.address.storage.XmlSerializableSaveIt;
 import seedu.address.testutil.PersonBuilder;
@@ -37,9 +38,9 @@ public class XmlUtilTest {
 
     private static final String INVALID_DESCRIPTION = "9482asf424";
 
-    private static final String VALID_NAME = "Hans Muster";
+    private static final String VALID_ISSUE = "Hans Muster";
     private static final String VALID_DESCRIPTION = "9482424";
-    private static final String VALID_ADDRESS = "4th street";
+    private static final List<XmlAdaptedSolution> VALID_SOLUTION = Collections.singletonList(new XmlAdaptedSolution("webSite remark"));
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
 
     @Rule
@@ -80,15 +81,9 @@ public class XmlUtilTest {
     @Ignore
     public void xmlAdaptedPersonFromFile_fileWithMissingPersonField_validResult() throws Exception {
         XmlAdaptedIssue actualPerson = XmlUtil.getDataFromFile(
-<<<<<<< HEAD
                 MISSING_PERSON_FIELD_FILE, XmlAdaptedIssueWithRootElement.class);
         XmlAdaptedIssue expectedPerson = new XmlAdaptedIssue(
-                null, VALID_PHONE, VALID_ADDRESS, VALID_TAGS);
-=======
-            MISSING_PERSON_FIELD_FILE, XmlAdaptedIssueWithRootElement.class);
-        XmlAdaptedIssue expectedPerson = new XmlAdaptedIssue(
-            null, VALID_DESCRIPTION, VALID_TAGS);
->>>>>>> 54a1f4aceffa90913b1dc7ea488edaba3db879e1
+                null, VALID_DESCRIPTION, VALID_SOLUTION, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 
@@ -96,15 +91,9 @@ public class XmlUtilTest {
     @Ignore
     public void xmlAdaptedPersonFromFile_fileWithInvalidPersonField_validResult() throws Exception {
         XmlAdaptedIssue actualPerson = XmlUtil.getDataFromFile(
-<<<<<<< HEAD
                 INVALID_PERSON_FIELD_FILE, XmlAdaptedIssueWithRootElement.class);
         XmlAdaptedIssue expectedPerson = new XmlAdaptedIssue(
-                VALID_NAME, INVALID_PHONE, VALID_ADDRESS, VALID_TAGS);
-=======
-            INVALID_PERSON_FIELD_FILE, XmlAdaptedIssueWithRootElement.class);
-        XmlAdaptedIssue expectedPerson = new XmlAdaptedIssue(
-            VALID_NAME, INVALID_DESCRIPTION, VALID_TAGS);
->>>>>>> 54a1f4aceffa90913b1dc7ea488edaba3db879e1
+                VALID_ISSUE, INVALID_DESCRIPTION, VALID_SOLUTION, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 
@@ -112,15 +101,9 @@ public class XmlUtilTest {
     @Ignore
     public void xmlAdaptedPersonFromFile_fileWithValidPerson_validResult() throws Exception {
         XmlAdaptedIssue actualPerson = XmlUtil.getDataFromFile(
-<<<<<<< HEAD
                 VALID_PERSON_FILE, XmlAdaptedIssueWithRootElement.class);
         XmlAdaptedIssue expectedPerson = new XmlAdaptedIssue(
-                VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_TAGS);
-=======
-            VALID_PERSON_FILE, XmlAdaptedIssueWithRootElement.class);
-        XmlAdaptedIssue expectedPerson = new XmlAdaptedIssue(
-            VALID_NAME, VALID_DESCRIPTION, VALID_TAGS);
->>>>>>> 54a1f4aceffa90913b1dc7ea488edaba3db879e1
+                VALID_ISSUE, VALID_DESCRIPTION, VALID_SOLUTION, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 

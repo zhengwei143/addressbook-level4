@@ -26,6 +26,7 @@ public class PersonBuilder {
     public PersonBuilder() {
         name = new IssueStatement(DEFAULT_NAME);
         description = new Description(DEFAULT_DESCRIPTION);;
+        solutions = new HashSet<>();
         tags = new HashSet<>();
     }
 
@@ -35,7 +36,7 @@ public class PersonBuilder {
     public PersonBuilder(Issue issueToCopy) {
         name = issueToCopy.getStatement();
         description = issueToCopy.getDescription();
-        solutions = issueToCopy.getSolutions();
+        solutions = new HashSet<>(issueToCopy.getSolutions());
         tags = new HashSet<>(issueToCopy.getTags());
     }
 

@@ -11,9 +11,9 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
-import seedu.address.model.issue.solution.Remark;
 import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
+import seedu.address.model.issue.solution.Remark;
 import seedu.address.model.issue.solution.SolutionLink;
 
 /**

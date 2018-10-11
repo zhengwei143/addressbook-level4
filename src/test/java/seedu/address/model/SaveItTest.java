@@ -50,7 +50,7 @@ public class SaveItTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two issues with the same identity fields
-        Issue editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Issue editedAlice = new PersonBuilder(ALICE).withDescription(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Issue> newIssues = Arrays.asList(ALICE, editedAlice);
         SaveItStub newData = new SaveItStub(newIssues);
@@ -79,7 +79,7 @@ public class SaveItTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInSaveIt_returnsTrue() {
         saveIt.addPerson(ALICE);
-        Issue editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Issue editedAlice = new PersonBuilder(ALICE).withDescription(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(saveIt.hasPerson(editedAlice));
     }

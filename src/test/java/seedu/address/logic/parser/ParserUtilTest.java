@@ -23,7 +23,7 @@ import seedu.address.testutil.Assert;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_DESCRIPTION = "+651234";
+    private static final String INVALID_DESCRIPTION = " ";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_TAG = "#friend";
 

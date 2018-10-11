@@ -19,7 +19,7 @@ import seedu.address.testutil.Assert;
 
 public class XmlAdaptedIssueTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_DESCRIPTION = "+651234";
+    private static final String INVALID_DESCRIPTION = " ";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_SOLUTION = "StackOverflow";
 

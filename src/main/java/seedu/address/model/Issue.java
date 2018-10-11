@@ -23,7 +23,6 @@ public class Issue {
     // Data fields
     private final Set<Solution> solutions = new HashSet<>();
     private final Description description;
-
     private final Set<Tag> tags = new HashSet<>();
 
     /**

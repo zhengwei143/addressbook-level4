@@ -1,14 +1,10 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.issue.Remark;
 import seedu.address.model.issue.Solution;
+import seedu.address.model.issue.solution.Remark;
 import seedu.address.model.issue.solution.SolutionLink;
 
 /**
@@ -55,7 +51,7 @@ public class XmlAdaptedSolution {
         String remark = solutionName.substring(solutionName.indexOf(' ')+1);
 
         if (!Remark.isValidRemark(remark)) {
-            throw new IllegalValueException(Remark.MESSAGE_ADDRESS_CONSTRAINTS);
+            throw new IllegalValueException(Remark.MESSAGE_REMARK_CONSTRAINTS);
         }
         if (!SolutionLink.isValidLink(link)) {
             throw new IllegalValueException(SolutionLink.MESSAGE_SOLUTION_LINK_CONSTRAINTS);

@@ -11,9 +11,8 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Issue;
+import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
-import seedu.address.model.issue.Phone;
-import seedu.address.model.issue.Remark;
 import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
 
@@ -25,11 +24,9 @@ public class XmlAdaptedIssue {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Issue's %s field is missing!";
 
     @XmlElement(required = true)
-    private String name;
+    private String issue;
     @XmlElement(required = true)
-    private String phone;
-    @XmlElement(required = true)
-    private String address;
+    private String description;
 
     @XmlElement
     private List<XmlAdaptedSolution> solutions = new ArrayList<>();
@@ -46,10 +43,9 @@ public class XmlAdaptedIssue {
     /**
      * Constructs an {@code XmlAdaptedIssue} with the given issue details.
      */
-    public XmlAdaptedIssue(String name, String address, String phone, List<XmlAdaptedSolution> solutions, List<XmlAdaptedTag> tagged) {
-        this.name = name;
-        this.address = address;
-        this.phone = phone;
+    public XmlAdaptedIssue(String issue, String description, List<XmlAdaptedSolution> solutions, List<XmlAdaptedTag> tagged) {
+        this.issue = issue;
+        this.description = description;
         if (solutions != null){
             this.solutions = new ArrayList<>(solutions);
         }
@@ -64,9 +60,8 @@ public class XmlAdaptedIssue {
      * @param source future changes to this will not affect the created XmlAdaptedIssue
      */
     public XmlAdaptedIssue(Issue source) {
-        name = source.getStatement().issue;
-        phone = source.getPhone().value;
-        address = source.getAddress().value;
+        issue = source.getStatement().issue;
+        description = source.getDescription().value;
         solutions = source.getSolutions().stream()
                 .map(XmlAdaptedSolution::new)
                 .collect(Collectors.toList());
@@ -91,35 +86,27 @@ public class XmlAdaptedIssue {
             issueSolutions.add(solution.toModelType());
         }
 
-        if (name == null) {
+        if (issue == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                 IssueStatement.class.getSimpleName()));
         }
-        if (!IssueStatement.isValidIssueStatement(name)) {
+        if (!IssueStatement.isValidIssueStatement(issue)) {
             throw new IllegalValueException(IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS);
         }
-        final IssueStatement modelName = new IssueStatement(name);
+        final IssueStatement modelName = new IssueStatement(issue);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        if (description == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
         }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_PHONE_CONSTRAINTS);
+        if (!Description.isValidDescription(description)) {
+            throw new IllegalValueException(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
-
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
-        }
-        if (!Remark.isValidRemark(address)) {
-            throw new IllegalValueException(Remark.MESSAGE_ADDRESS_CONSTRAINTS);
-        }
-        final Remark modelAddress = new Remark(address);
+        final Description modelDescription = new Description(description);
 
         final Set<Solution> modelSolutions = new HashSet<>(issueSolutions);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Issue(modelName, modelPhone, modelAddress, modelSolutions, modelTags);
+        return new Issue(modelName, modelDescription, modelSolutions, modelTags);
     }
 
     @Override
@@ -133,9 +120,8 @@ public class XmlAdaptedIssue {
         }
 
         XmlAdaptedIssue otherPerson = (XmlAdaptedIssue) other;
-        return Objects.equals(name, otherPerson.name)
-                && Objects.equals(phone, otherPerson.phone)
-                && Objects.equals(address, otherPerson.address)
+        return Objects.equals(issue, otherPerson.issue)
+                && Objects.equals(description, otherPerson.description)
                 && solutions.equals(otherPerson.solutions)
                 && tagged.equals(otherPerson.tagged);
     }

@@ -2,42 +2,35 @@
 <!-- SaveIt save file which contains the same Issue values as in TypicalPersons#getTypicalSaveIt() -->
 <saveit>
     <issues>
-        <name>Alice Pauline</name>
-        <phone>94351253</phone>
-s        <address>123, Jurong West Ave 6, #08-111</address>
+        <statement>Alice Pauline</statement>
+        <description>94351253</description>
         <tagged>friends</tagged>
     </issues>
     <issues>
-        <name>Benson Meier</name>
-        <phone>98765432</phone>
-s        <address>311, Clementi Ave 2, #02-25</address>
+        <statement>Benson Meier</statement>
+        <description>98765432</description>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
     </issues>
     <issues>
-        <name>Carl Kurz</name>
-        <phone>95352563</phone>
-s        <address>wall street</address>
+        <statement>Carl Kurz</statement>
+        <description>95352563</description>
     </issues>
     <issues>
-        <name>Daniel Meier</name>
-        <phone>87652533</phone>
-s        <address>10th street</address>
+        <statement>Daniel Meier</statement>
+        <description>87652533</description>
         <tagged>friends</tagged>
     </issues>
     <issues>
-        <name>Elle Meyer</name>
-        <phone>9482224</phone>
-s        <address>michegan ave</address>
+        <statement>Elle Meyer</statement>
+        <description>9482224</description>
     </issues>
     <issues>
-        <name>Fiona Kunz</name>
-        <phone>9482427</phone>
-s        <address>little tokyo</address>
+        <statement>Fiona Kunz</statement>
+        <description>9482427</description>
     </issues>
     <issues>
-        <name>George Best</name>
-        <phone>9482442</phone>
-s        <address>4th street</address>
+        <statement>George Best</statement>
+        <description>9482442</description>
     </issues>
 </saveit>

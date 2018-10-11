@@ -27,13 +27,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private Label statement;
     @FXML
     private Label id;
     @FXML
-    private Label phone;
-    @FXML
-    private Label address;
+    private Label description;
     @FXML
     private FlowPane solutions;
     @FXML
@@ -43,9 +41,8 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.issue = issue;
         id.setText(displayedIndex + ". ");
-        name.setText(issue.getStatement().issue);
-        phone.setText(issue.getPhone().value);
-        address.setText(issue.getAddress().value);
+        statement.setText(issue.getStatement().issue);
+        description.setText(issue.getDescription().value);
         issue.getSolutions().forEach(solution -> solutions.getChildren().add(new Label('['+solution.solutionName+']'+" ")));
         issue.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }

@@ -263,7 +263,7 @@ Format: `refactorTag java [null]`
 
 * Removes the tag [java] from all the entries
 
-=== Locating issues by name: `serach` [coming in v1.2]
+=== Locating issues by statement: `serach` [coming in v1.2]
 
 Search issue by tags, issue statement or remarks.
 Format: `search KEYWORD [MORE_KEYWORDS]`

@@ -2,17 +2,16 @@
 <saveit>
 
     <issues>
-        <name>Alice Pauline</name>
-        <phone>94351253</phone>
-        <address>123, Jurong West Ave 6, #08-111</address>
+        <issue>Alice Pauline</issue>
+        <statement>Alice Pauline</statement>
+        <description>94351253</description>
         <tagged>friends</tagged>
     </issues>
 
     <!-- Issue with same identity as Alice Pauline -->
     <issues>
-        <name>Alice Pauline</name>
-        <phone>94351253</phone>
-        <address>4th street</address>
+        <statement>Alice Pauline</statement>
+        <description>94351253</description>
     </issues>
 
 </saveit>

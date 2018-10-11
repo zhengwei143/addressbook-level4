@@ -2,14 +2,12 @@
 <saveit>
     <!-- Valid Issue -->
     <issues>
-        <name>Hans Muster</name>
-        <phone isPrivate="false">9482424</phone>
-        <address isPrivate="false">4th street</address>
+        <statement>Hans Muster</statement>
+        <description isPrivate="false">9482424</description>
     </issues>
-    <!-- Issue with invalid phone field -->
+    <!-- Issue with invalid description field -->
     <issues>
-        <name>Hans Muster</name>
-        <phone isPrivate="false">948asdf2424</phone>
-        <address isPrivate="false">4th street</address>
+        <statement>Hans Muster</statement>
+        <description isPrivate="false">948asdf2424</description>
     </issues>
 </saveit>

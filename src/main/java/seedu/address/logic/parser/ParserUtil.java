@@ -9,9 +9,9 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
-import seedu.address.model.issue.Phone;
-import seedu.address.model.issue.Remark;
+import seedu.address.model.issue.solution.Remark;
 import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
 import seedu.address.model.issue.solution.SolutionLink;
@@ -52,18 +52,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
+     * Parses a {@code String description} into a {@code Description}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException if the given {@code description} is invalid.
      */
-    public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_PHONE_CONSTRAINTS);
+    public static Description parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (!Description.isValidDescription(trimmedDescription)) {
+            throw new ParseException(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         }
-        return new Phone(trimmedPhone);
+        return new Description(trimmedDescription);
     }
 
     /**
@@ -76,7 +76,7 @@ public class ParserUtil {
         requireNonNull(address);
         String trimmedAddress = address.trim();
         if (!Remark.isValidRemark(trimmedAddress)) {
-            throw new ParseException(Remark.MESSAGE_ADDRESS_CONSTRAINTS);
+            throw new ParseException(Remark.MESSAGE_REMARK_CONSTRAINTS);
         }
         return new Remark(trimmedAddress);
     }
@@ -92,7 +92,7 @@ public class ParserUtil {
         String trimmedSolutionLink = solution.substring(0, solution.indexOf(' ')).trim();
         String trimmedRemark = solution.substring(solution.indexOf(' ') + 1).trim();
         if (!Remark.isValidRemark(trimmedRemark)) {
-            throw new ParseException(Remark.MESSAGE_ADDRESS_CONSTRAINTS);
+            throw new ParseException(Remark.MESSAGE_REMARK_CONSTRAINTS);
         }
         if (!SolutionLink.isValidLink(trimmedSolutionLink)) {
             throw new ParseException(SolutionLink.MESSAGE_SOLUTION_LINK_CONSTRAINTS);

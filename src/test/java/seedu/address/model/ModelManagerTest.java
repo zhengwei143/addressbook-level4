@@ -13,7 +13,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.issue.NameContainsKeywordsPredicate;
+import seedu.address.model.issue.IssueContainsKeywordsPredicate;
 import seedu.address.testutil.SaveItBuilder;
 
 public class ModelManagerTest {
@@ -70,7 +70,7 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getStatement().issue.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredPersonList(new IssueContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(saveIt, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

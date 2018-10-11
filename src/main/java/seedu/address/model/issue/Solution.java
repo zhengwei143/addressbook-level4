@@ -47,11 +47,6 @@ public class Solution {
     @Override
     public String toString() {
         return '[' + " link: "+getLink() + " remark: "+getRemark() + ']';
-//        final StringBuilder builder = new StringBuilder();
-//        builder.append(getLink())
-//                .append(" Solution_Remark: ")
-//                .append(getRemark());
-//        return builder.toString();
     }
 
     @Override

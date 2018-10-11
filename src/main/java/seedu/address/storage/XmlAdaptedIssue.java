@@ -35,18 +35,19 @@ public class XmlAdaptedIssue {
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs an XmlAdaptedIssue.
-     * This is the no-arg constructor that is required by JAXB.
+     * Constructs an XmlAdaptedIssue. This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedIssue() {}
+    public XmlAdaptedIssue() {
+    }
 
     /**
      * Constructs an {@code XmlAdaptedIssue} with the given issue details.
      */
-    public XmlAdaptedIssue(String issue, String description, List<XmlAdaptedSolution> solutions, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedIssue(String issue, String description, List<XmlAdaptedSolution> solutions,
+            List<XmlAdaptedTag> tagged) {
         this.issue = issue;
         this.description = description;
-        if (solutions != null){
+        if (solutions != null) {
             this.solutions = new ArrayList<>(solutions);
         }
         if (tagged != null) {
@@ -88,7 +89,7 @@ public class XmlAdaptedIssue {
 
         if (issue == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                IssueStatement.class.getSimpleName()));
+                    IssueStatement.class.getSimpleName()));
         }
         if (!IssueStatement.isValidIssueStatement(issue)) {
             throw new IllegalValueException(IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS);
@@ -96,7 +97,8 @@ public class XmlAdaptedIssue {
         final IssueStatement modelName = new IssueStatement(issue);
 
         if (description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
         }
         if (!Description.isValidDescription(description)) {
             throw new IllegalValueException(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);

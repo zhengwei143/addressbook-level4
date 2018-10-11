@@ -19,15 +19,17 @@ public class Solution {
     public final SolutionLink solutionLink;
 
     public final Remark remark;
+
     /**
      * Construct a new Solution.
-     *  @param solutionLink url link to solution website.
+     *
+     * @param solutionLink url link to solution website.
      * @param remark user's notes about this solution.
      */
     public Solution(String solutionLink, String remark) {
         this.solutionLink = new SolutionLink(solutionLink);
         this.remark = new Remark(remark);
-        this.solutionName = solutionLink+" "+remark;
+        this.solutionName = solutionLink + " " + remark;
     }
 
     public SolutionLink getLink() {
@@ -41,13 +43,13 @@ public class Solution {
     /**
      * Returns true if a given string is a valid solution name.
      */
-    public static boolean isValidSolution (String test) {
+    public static boolean isValidSolution(String test) {
         return test.matches(SOLUTION_VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return '[' + " link: "+getLink() + " remark: "+getRemark() + ']';
+        return '[' + " link: " + getLink() + " remark: " + getRemark() + ']';
     }
 
     @Override

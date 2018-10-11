@@ -19,10 +19,10 @@ public class XmlAdaptedSolution {
 
 
     /**
-     * Constructs an XmlAdaptedSolution.
-     * This is the no-arg constructor that is required by JAXB.
+     * Constructs an XmlAdaptedSolution. This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedSolution() {}
+    public XmlAdaptedSolution() {
+    }
 
     /**
      * Constructs a {@code XmlAdaptedSolution} with the given {@code solutionName}.
@@ -37,7 +37,7 @@ public class XmlAdaptedSolution {
      * @param source future changes to this will not affect the created
      */
     public XmlAdaptedSolution(Solution source) {
-        solutionName = source.getLink()+" "+source.getRemark();
+        solutionName = source.getLink() + " " + source.getRemark();
     }
 
     /**
@@ -48,7 +48,7 @@ public class XmlAdaptedSolution {
     public Solution toModelType() throws IllegalValueException {
 
         String link = solutionName.substring(0, solutionName.indexOf(' '));
-        String remark = solutionName.substring(solutionName.indexOf(' ')+1);
+        String remark = solutionName.substring(solutionName.indexOf(' ') + 1);
 
         if (!Remark.isValidRemark(remark)) {
             throw new IllegalValueException(Remark.MESSAGE_REMARK_CONSTRAINTS);
@@ -57,7 +57,7 @@ public class XmlAdaptedSolution {
             throw new IllegalValueException(SolutionLink.MESSAGE_SOLUTION_LINK_CONSTRAINTS);
         }
 
-        return new Solution(link,remark);
+        return new Solution(link, remark);
     }
 
     @Override

@@ -44,7 +44,7 @@ public class PersonCard extends UiPart<Region> {
         statement.setText(issue.getStatement().issue);
         description.setText(issue.getDescription().value);
         issue.getSolutions().forEach(
-                solution -> solutions.getChildren().add(new Label('[' + solution.solutionName + ']' + " ")));
+            solution -> solutions.getChildren().add(new Label('[' + solution.solutionName + ']' + " ")));
         issue.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 

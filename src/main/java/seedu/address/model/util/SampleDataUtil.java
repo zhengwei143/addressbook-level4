@@ -20,19 +20,18 @@ public class SampleDataUtil {
 
     public static Issue[] getSamplePersons() {
         return new Issue[]{
-                new Issue(new IssueStatement("Java NullPointer"), new Description("cannot find object"),
-                        getSolutionSet("StackOverflow newSolution"), getTagSet("solved")),
-                new Issue(new IssueStatement("StackOverflow"), new Description("Cannot run"),
-                        getSolutionSet("IVLE newBug", "Wikipedia remark1"), getTagSet("newBug", "notSolved")),
-                new Issue(new IssueStatement("ArrayIndexOutOfBounds"), new Description("invalid input"),
-                        getSolutionSet("ZhiHu newSolution"), getTagSet("notSolved")),
-                new Issue(new IssueStatement("ClassNotFoundException"), new Description("WrongPackage"),
-                        getSolutionSet("StackOverflow new"),
-                        getTagSet("urgent")),
-                new Issue(new IssueStatement("ExceptionNotHandled"), new Description("Mistake"),
-                        getSolutionSet("Forum solution", "Oracle remark1"), getTagSet("solved")),
-                new Issue(new IssueStatement("UnknownBug"), new Description("Unknown"),
-                        getSolutionSet("NoSolution NoRemark"), getTagSet("Dead"))
+            new Issue(new IssueStatement("Java NullPointer"), new Description("cannot find object"),
+                    getSolutionSet("StackOverflow newSolution"), getTagSet("solved")),
+            new Issue(new IssueStatement("StackOverflow"), new Description("Cannot run"),
+                    getSolutionSet("IVLE newBug", "Wikipedia remark1"), getTagSet("newBug", "notSolved")),
+            new Issue(new IssueStatement("ArrayIndexOutOfBounds"), new Description("invalid input"),
+                    getSolutionSet("ZhiHu newSolution"), getTagSet("notSolved")),
+            new Issue(new IssueStatement("ClassNotFoundException"), new Description("WrongPackage"),
+                    getSolutionSet("StackOverflow new"), getTagSet("urgent")),
+            new Issue(new IssueStatement("ExceptionNotHandled"), new Description("Mistake"),
+                    getSolutionSet("Forum solution", "Oracle remark1"), getTagSet("solved")),
+            new Issue(new IssueStatement("UnknownBug"), new Description("Unknown"),
+                    getSolutionSet("NoSolution NoRemark"), getTagSet("Dead"))
         };
     }
 

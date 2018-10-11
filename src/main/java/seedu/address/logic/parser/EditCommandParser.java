@@ -15,6 +15,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
 
 /**
@@ -41,10 +42,15 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         EditCommand.EditIssueDescriptor editIssueDescriptor = new EditCommand.EditIssueDescriptor();
+        if (argMultimap.getValue(PREFIX_STATEMENT).isPresent()) {
+            editIssueDescriptor
+                .setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_STATEMENT).get()));
+        }
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
             editIssueDescriptor
                 .setDescription(ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
         }
+        parseSolutionsForEdit(argMultimap.getAllValues(PREFIX_SOLUTION)).ifPresent(editIssueDescriptor::setSolutions);
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editIssueDescriptor::setTags);
 
         if (!editIssueDescriptor.isAnyFieldEdited()) {
@@ -52,6 +58,22 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         return new EditCommand(index, editIssueDescriptor);
+    }
+
+    /**
+     * Parses {@code Collection<String> solutions} into a {@code Set<Solution>} if {@code solutions} is
+     * non-empty. If {@code solutions} contain only one element which is an empty string, it will be parsed
+     * into a {@code Set<Solution>} containing zero solutions.
+     */
+    private Optional<Set<Solution>> parseSolutionsForEdit(Collection<String> solutions) throws ParseException {
+        assert solutions != null;
+
+        if (solutions.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> solutionSet =
+            solutions.size() == 1 && solutions.contains("") ? Collections.emptySet() : solutions;
+        return Optional.of(ParserUtil.parseSolutions(solutionSet));
     }
 
     /**

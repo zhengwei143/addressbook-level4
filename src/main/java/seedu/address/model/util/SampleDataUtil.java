@@ -19,13 +19,13 @@ import seedu.address.model.issue.Tag;
 public class SampleDataUtil {
     public static Issue[] getSamplePersons() {
         return new Issue[] {
-            new Issue(new IssueStatement("Alex Yeoh"), new Description("87438807"), getSolutionSet("StackOverflow newSolution"), getTagSet("friends")),
-            new Issue(new IssueStatement("Bernice Yu"), new Description("99272758"), getSolutionSet("IVLE newBug", "WiKiPedia remark1"), getTagSet("colleagues", "friends")),
-            new Issue(new IssueStatement("Charlotte Oliveiro"), new Description("93210283"), getSolutionSet("ZhiHu newSolution"), getTagSet("neighbours")),
-            new Issue(new IssueStatement("David Li"), new Description("91031282"), getSolutionSet("StackOverflow new"),
-                getTagSet("family")),
-            new Issue(new IssueStatement("Irfan Ibrahim"), new Description("92492021"), getSolutionSet("Forum solution"), getTagSet("classmates")),
-            new Issue(new IssueStatement("Roy Balakrishnan"), new Description("92624417"), getSolutionSet("Tutorial new", "NoSolution dead"), getTagSet("colleagues"))
+            new Issue(new IssueStatement("Java NullPointer"), new Description("cannot find object"), getSolutionSet("StackOverflow newSolution"), getTagSet("solved")),
+            new Issue(new IssueStatement("StackOverflow"), new Description("Cannot run"), getSolutionSet("IVLE newBug", "Wikipedia remark1"), getTagSet("newBug", "notSolved")),
+            new Issue(new IssueStatement("ArrayIndexOutOfBounds"), new Description("invalid input"), getSolutionSet("ZhiHu newSolution"), getTagSet("notSolved")),
+            new Issue(new IssueStatement("ClassNotFoundException"), new Description("WrongPackage"), getSolutionSet("StackOverflow new"),
+                getTagSet("urgent")),
+            new Issue(new IssueStatement("ExceptionNotHandled"), new Description("Mistake"), getSolutionSet("Forum solution", "Oracle remark1"), getTagSet("solved")),
+            new Issue(new IssueStatement("UnknownBug"), new Description("Unknown"), getSolutionSet("NoSolution NoRemark"), getTagSet("Dead"))
         };
     }
 

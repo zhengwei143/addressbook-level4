@@ -48,6 +48,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code solutions} into a {@code Set<Solution>} and set it to the {@code Issue} that we are building.
+     */
     public PersonBuilder withSolutions (String ... solutions) {
         this.solutions = SampleDataUtil.getSolutionSet(solutions);
         return this;

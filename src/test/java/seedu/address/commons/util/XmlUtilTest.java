@@ -40,8 +40,10 @@ public class XmlUtilTest {
 
     private static final String VALID_ISSUE = "Hans Muster";
     private static final String VALID_DESCRIPTION = "9482424";
-    private static final List<XmlAdaptedSolution> VALID_SOLUTION = Collections.singletonList(new XmlAdaptedSolution("webSite remark"));
-    private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
+    private static final List<XmlAdaptedSolution> VALID_SOLUTION = Collections
+            .singletonList(new XmlAdaptedSolution("webSite remark"));
+    private static final List<XmlAdaptedTag> VALID_TAGS = Collections
+            .singletonList(new XmlAdaptedTag("friends"));
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -135,7 +137,7 @@ public class XmlUtilTest {
 
         SaveItBuilder builder = new SaveItBuilder(new SaveIt());
         dataToWrite = new XmlSerializableSaveIt(
-            builder.withPerson(new PersonBuilder().build()).build());
+                builder.withPerson(new PersonBuilder().build()).build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableSaveIt.class);
@@ -143,9 +145,11 @@ public class XmlUtilTest {
     }
 
     /**
-     * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedIssue}
-     * objects.
+     * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code
+     * XmlAdaptedIssue} objects.
      */
     @XmlRootElement(name = "issue")
-    private static class XmlAdaptedIssueWithRootElement extends XmlAdaptedIssue {}
+    private static class XmlAdaptedIssueWithRootElement extends XmlAdaptedIssue {
+
+    }
 }

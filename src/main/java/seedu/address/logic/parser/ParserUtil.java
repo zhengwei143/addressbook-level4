@@ -89,6 +89,9 @@ public class ParserUtil {
      */
     public static Solution parseSolution (String solution) throws ParseException {
         requireNonNull(solution);
+        if(solution.indexOf(' ')==-1){
+            throw new ParseException(Remark.MESSAGE_REMARK_CONSTRAINTS);
+        }
         String trimmedSolutionLink = solution.substring(0, solution.indexOf(' ')).trim();
         String trimmedRemark = solution.substring(solution.indexOf(' ') + 1).trim();
         if (!Remark.isValidRemark(trimmedRemark)) {

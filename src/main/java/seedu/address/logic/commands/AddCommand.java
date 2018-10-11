@@ -22,7 +22,7 @@ public class AddCommand extends Command {
         + "Parameters: "
         + PREFIX_STATEMENT + "ISSUE_STATEMENT "
         + PREFIX_DESCRIPTION + "DESCRIPTION "
-        + "[" + PREFIX_SOLUTION + "SOLUTION]...\n"
+        + "[" + PREFIX_SOLUTION + "SOLUTION_LINK REMARK]...\n"
         + "[" + PREFIX_TAG + "TAG]...\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_STATEMENT + "algorithm "

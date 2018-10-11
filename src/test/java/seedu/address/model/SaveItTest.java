@@ -50,8 +50,8 @@ public class SaveItTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two issues with the same identity fields
-        Issue editedAlice = new PersonBuilder(ALICE).withSolutions(VALID_SOLUTION_STACKOVERLOW).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Issue editedAlice = new PersonBuilder(ALICE).withSolutions(VALID_SOLUTION_STACKOVERLOW)
+                .withTags(VALID_TAG_HUSBAND).build();
         List<Issue> newIssues = Arrays.asList(ALICE, editedAlice);
         SaveItStub newData = new SaveItStub(newIssues);
 
@@ -79,8 +79,8 @@ public class SaveItTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInSaveIt_returnsTrue() {
         saveIt.addPerson(ALICE);
-        Issue editedAlice = new PersonBuilder(ALICE).withSolutions(VALID_SOLUTION_STACKOVERLOW).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Issue editedAlice = new PersonBuilder(ALICE).withSolutions(VALID_SOLUTION_STACKOVERLOW)
+                .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(saveIt.hasPerson(editedAlice));
     }
 
@@ -94,6 +94,7 @@ public class SaveItTest {
      * A stub ReadOnlySaveIt whose issues list can violate interface constraints.
      */
     private static class SaveItStub implements ReadOnlySaveIt {
+
         private final ObservableList<Issue> issues = FXCollections.observableArrayList();
 
         SaveItStub(Collection<Issue> issues) {

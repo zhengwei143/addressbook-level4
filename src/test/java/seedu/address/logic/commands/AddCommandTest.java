@@ -89,7 +89,7 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public void addPerson(Issue issue) {
+        public void addIssue(Issue issue) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -104,7 +104,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Issue issue) {
+        public boolean hasIssue(Issue issue) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -166,7 +166,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Issue issue) {
+        public boolean hasIssue(Issue issue) {
             requireNonNull(issue);
             return this.issue.isSameIssue(issue);
         }
@@ -179,13 +179,13 @@ public class AddCommandTest {
         final ArrayList<Issue> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Issue issue) {
+        public boolean hasIssue(Issue issue) {
             requireNonNull(issue);
             return personsAdded.stream().anyMatch(issue::isSameIssue);
         }
 
         @Override
-        public void addPerson(Issue issue) {
+        public void addIssue(Issue issue) {
             requireNonNull(issue);
             personsAdded.add(issue);
         }

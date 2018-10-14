@@ -20,7 +20,7 @@ public interface Model {
     /**
      * Returns true if a issue with the same identity as {@code issue} exists in the address book.
      */
-    boolean hasPerson(Issue issue);
+    boolean hasIssue(Issue issue);
 
     /**
      * Deletes the given issue.
@@ -32,7 +32,7 @@ public interface Model {
      * Adds the given issue.
      * {@code issue} must not already exist in the address book.
      */
-    void addPerson(Issue issue);
+    void addIssue(Issue issue);
 
     /**
      * Replaces the given issue {@code target} with {@code editedIssue}.

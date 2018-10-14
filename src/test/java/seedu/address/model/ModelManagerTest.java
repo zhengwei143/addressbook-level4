@@ -25,18 +25,18 @@ public class ModelManagerTest {
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        modelManager.hasPerson(null);
+        modelManager.hasIssue(null);
     }
 
     @Test
     public void hasPerson_personNotInSaveIt_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+        assertFalse(modelManager.hasIssue(ALICE));
     }
 
     @Test
     public void hasPerson_personInSaveIt_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+        modelManager.addIssue(ALICE);
+        assertTrue(modelManager.hasIssue(ALICE));
     }
 
     @Test

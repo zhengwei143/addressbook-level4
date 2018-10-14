@@ -56,7 +56,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Issue issue) {
+    public boolean hasIssue(Issue issue) {
         requireNonNull(issue);
         return versionedSaveIt.hasPerson(issue);
     }
@@ -68,7 +68,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void addPerson(Issue issue) {
+    public void addIssue(Issue issue) {
         versionedSaveIt.addPerson(issue);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         indicateSaveItChanged();

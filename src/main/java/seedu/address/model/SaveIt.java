@@ -12,7 +12,7 @@ import javafx.collections.ObservableList;
  */
 public class SaveIt implements ReadOnlySaveIt {
 
-    private final UniqueIssueList persons;
+    private final UniqueIssueList issues;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -22,13 +22,13 @@ public class SaveIt implements ReadOnlySaveIt {
      *   among constructors.
      */
     {
-        persons = new UniqueIssueList();
+        issues = new UniqueIssueList();
     }
 
     public SaveIt() {}
 
     /**
-     * Creates an SaveIt using the Persons in the {@code toBeCopied}
+     * Creates an SaveIt using the Issues in the {@code toBeCopied}
      */
     public SaveIt(ReadOnlySaveIt toBeCopied) {
         this();
@@ -41,8 +41,8 @@ public class SaveIt implements ReadOnlySaveIt {
      * Replaces the contents of the issue list with {@code issues}.
      * {@code issues} must not contain duplicate issues.
      */
-    public void setPersons(List<Issue> issues) {
-        this.persons.setIssues(issues);
+    public void setIssues(List<Issue> issues) {
+        this.issues.setIssues(issues);
     }
 
     /**
@@ -51,68 +51,68 @@ public class SaveIt implements ReadOnlySaveIt {
     public void resetData(ReadOnlySaveIt newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getIssueList());
+        setIssues(newData.getIssueList());
     }
 
     //// issue-level operations
 
     /**
-     * Returns true if a issue with the same identity as {@code issue} exists in the address book.
+     * Returns true if a issue with the same identity as {@code issue} exists in the saveIt.
      */
     public boolean hasIssue(Issue issue) {
         requireNonNull(issue);
-        return persons.contains(issue);
+        return issues.contains(issue);
     }
 
     /**
-     * Adds a issue to the address book.
-     * The issue must not already exist in the address book.
+     * Adds a issue to the saveIt.
+     * The issue must not already exist in the saveIt.
      */
     public void addIssue(Issue p) {
-        persons.add(p);
+        issues.add(p);
     }
 
     /**
      * Replaces the given issue {@code target} in the list with {@code editedIssue}.
-     * {@code target} must exist in the address book.
-     * The issue identity of {@code editedIssue} must not be the same as another existing issue in the address book.
+     * {@code target} must exist in the saveIt.
+     * The issue identity of {@code editedIssue} must not be the same as another existing issue in the saveIt.
      */
     public void updateIssue(Issue target, Issue editedIssue) {
         requireNonNull(editedIssue);
 
-        persons.setIssue(target, editedIssue);
+        issues.setIssue(target, editedIssue);
     }
 
     /**
      * Removes {@code key} from this {@code SaveIt}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the saveIt.
      */
     public void removeIssue(Issue key) {
-        persons.remove(key);
+        issues.remove(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return issues.asUnmodifiableObservableList().size() + " issues";
         // TODO: refine later
     }
 
     @Override
     public ObservableList<Issue> getIssueList() {
-        return persons.asUnmodifiableObservableList();
+        return issues.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof SaveIt // instanceof handles nulls
-                && persons.equals(((SaveIt) other).persons));
+                && issues.equals(((SaveIt) other).issues));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return issues.hashCode();
     }
 }

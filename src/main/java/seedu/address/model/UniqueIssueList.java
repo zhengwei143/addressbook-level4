@@ -47,23 +47,23 @@ public class UniqueIssueList implements Iterable<Issue> {
     }
 
     /**
-     * Replaces the issue {@code target} in the list with {@code editedPerson}.
+     * Replaces the issue {@code target} in the list with {@code editedIssue}.
      * {@code target} must exist in the list.
-     * The issue identity of {@code editedPerson} must not be the same as another existing issue in the list.
+     * The issue identity of {@code editedIssue} must not be the same as another existing issue in the list.
      */
-    public void setIssue(Issue target, Issue editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setIssue(Issue target, Issue editedIssue) {
+        requireAllNonNull(target, editedIssue);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new IssueNotFoundException();
         }
 
-        if (!target.isSameIssue(editedPerson) && contains(editedPerson)) {
+        if (!target.isSameIssue(editedIssue) && contains(editedIssue)) {
             throw new DuplicateIssueException();
         }
 
-        internalList.set(index, editedPerson);
+        internalList.set(index, editedIssue);
     }
 
     /**

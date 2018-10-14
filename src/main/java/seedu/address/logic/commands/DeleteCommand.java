@@ -12,7 +12,7 @@ import seedu.address.model.Issue;
 import seedu.address.model.Model;
 
 /**
- * Deletes a issue identified using it's displayed index from the address book.
+ * Deletes a issue identified using it's displayed index from the saveIt.
  */
 public class DeleteCommand extends Command {
 
@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
         List<Issue> lastShownList = model.getFilteredIssueList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_Issue_DISPLAYED_INDEX);
         }
 
         Issue issueToDelete = lastShownList.get(targetIndex.getZeroBased());

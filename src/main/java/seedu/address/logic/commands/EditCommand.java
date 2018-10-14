@@ -26,7 +26,7 @@ import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
 
 /**
- * Edits the details of an existing issue in the address book.
+ * Edits the details of an existing issue in the saveIt.
  */
 public class EditCommand extends Command {
 
@@ -72,11 +72,11 @@ public class EditCommand extends Command {
         List<Issue> lastShownList = model.getFilteredIssueList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_Issue_DISPLAYED_INDEX);
         }
 
         Issue issueToEdit = lastShownList.get(index.getZeroBased());
-        Issue editedIssue = createEditedPerson(issueToEdit, editIssueDescriptor);
+        Issue editedIssue = createEditedIssue(issueToEdit, editIssueDescriptor);
 
         if (!issueToEdit.isSameIssue(editedIssue) && model.hasIssue(editedIssue)) {
             throw new CommandException(MESSAGE_DUPLICATE_ISSUE);
@@ -92,7 +92,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Issue} with the details of {@code issueToEdit}
      * edited with {@code editIssueDescriptor}.
      */
-    private static Issue createEditedPerson(Issue issueToEdit, EditIssueDescriptor editIssueDescriptor) {
+    private static Issue createEditedIssue(Issue issueToEdit, EditIssueDescriptor editIssueDescriptor) {
         assert issueToEdit != null;
 
         IssueStatement updatedName = editIssueDescriptor.getName().orElse(issueToEdit.getStatement());

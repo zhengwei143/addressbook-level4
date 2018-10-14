@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SOLUTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -40,11 +41,15 @@ public class EditCommand extends Command {
         + "[" + PREFIX_SOLUTION + "SOLUTION_LINK REMARK] "
         + "[" + PREFIX_TAG + "TAG]...\n"
         + "Example: " + COMMAND_WORD + " 1 "
-        + PREFIX_DESCRIPTION + "Python ";
+        + PREFIX_STATEMENT + "reducer "
+        + PREFIX_DESCRIPTION + "how to use reducer in python "
+        + PREFIX_SOLUTION + "Stackoverflow link "
+        + PREFIX_REMARK + "performing some computation on a list and returning the result "
+        + PREFIX_TAG + "python ";
 
     public static final String MESSAGE_EDIT_ISSUE_SUCCESS = "Edited Issue: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This issue already exists in the saveIt.";
+    public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt.";
 
     private final Index index;
     private final EditIssueDescriptor editIssueDescriptor;
@@ -74,7 +79,7 @@ public class EditCommand extends Command {
         Issue editedIssue = createEditedPerson(issueToEdit, editIssueDescriptor);
 
         if (!issueToEdit.isSameIssue(editedIssue) && model.hasPerson(editedIssue)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_ISSUE);
         }
 
         model.updatePerson(issueToEdit, editedIssue);
@@ -133,6 +138,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditIssueDescriptor(EditIssueDescriptor toCopy) {
+
             setName(toCopy.name);
             setSolutions(toCopy.solutions);
             setDescription(toCopy.description);

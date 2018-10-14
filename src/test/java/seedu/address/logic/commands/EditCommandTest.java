@@ -111,7 +111,7 @@ public class EditCommandTest {
         EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder(firstIssue).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
 
-        assertCommandFailure(editCommand, model, commandHistory, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, commandHistory, EditCommand.MESSAGE_DUPLICATE_ISSUE);
     }
 
     @Test
@@ -123,7 +123,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ISSUE,
                 new EditPersonDescriptorBuilder(issueInList).build());
 
-        assertCommandFailure(editCommand, model, commandHistory, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, commandHistory, EditCommand.MESSAGE_DUPLICATE_ISSUE);
     }
 
     @Test

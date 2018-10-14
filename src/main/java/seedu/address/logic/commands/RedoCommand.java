@@ -24,7 +24,7 @@ public class RedoCommand extends Command {
         }
 
         model.redoSaveIt();
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

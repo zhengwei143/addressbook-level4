@@ -63,7 +63,7 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
         /* Case: filtered issue list, delete index within bounds of address book and issue list -> deleted */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         Index index = INDEX_FIRST_ISSUE;
-        assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
+        assertTrue(index.getZeroBased() < getModel().getFilteredIssueList().size());
         assertCommandSuccess(index);
 
         /* Case: filtered issue list, delete index within bounds of address book but out of bounds of issue list
@@ -119,7 +119,7 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
      */
     private Issue removePerson(Model model, Index index) {
         Issue targetIssue = getPerson(model, index);
-        model.deletePerson(targetIssue);
+        model.deleteIssue(targetIssue);
         return targetIssue;
     }
 

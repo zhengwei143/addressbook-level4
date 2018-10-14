@@ -46,7 +46,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue);
 
         Model expectedModel = new ModelManager(new SaveIt(model.getSaveIt()), new UserPrefs());
-        expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedIssue);
+        expectedModel.updateIssue(model.getFilteredIssueList().get(0), editedIssue);
         expectedModel.commitSaveIt();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -54,8 +54,8 @@ public class EditCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Issue lastIssue = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredIssueList().size());
+        Issue lastIssue = model.getFilteredIssueList().get(indexLastPerson.getZeroBased());
 
         PersonBuilder personInList = new PersonBuilder(lastIssue);
         Issue editedIssue = personInList.withName(VALID_NAME_BOB).withDescription(VALID_DESCRIPTION_BOB)
@@ -68,7 +68,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue);
 
         Model expectedModel = new ModelManager(new SaveIt(model.getSaveIt()), new UserPrefs());
-        expectedModel.updatePerson(lastIssue, editedIssue);
+        expectedModel.updateIssue(lastIssue, editedIssue);
         expectedModel.commitSaveIt();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -77,7 +77,7 @@ public class EditCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ISSUE, new EditIssueDescriptor());
-        Issue editedIssue = model.getFilteredPersonList().get(INDEX_FIRST_ISSUE.getZeroBased());
+        Issue editedIssue = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue);
 
@@ -91,7 +91,7 @@ public class EditCommandTest {
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_ISSUE);
 
-        Issue issueInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_ISSUE.getZeroBased());
+        Issue issueInFilteredList = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
         Issue editedIssue = new PersonBuilder(issueInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ISSUE,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
@@ -99,7 +99,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue);
 
         Model expectedModel = new ModelManager(new SaveIt(model.getSaveIt()), new UserPrefs());
-        expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedIssue);
+        expectedModel.updateIssue(model.getFilteredIssueList().get(0), editedIssue);
         expectedModel.commitSaveIt();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -107,7 +107,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
-        Issue firstIssue = model.getFilteredPersonList().get(INDEX_FIRST_ISSUE.getZeroBased());
+        Issue firstIssue = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
         EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder(firstIssue).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
 
@@ -128,7 +128,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredIssueList().size() + 1);
         EditCommand.EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
@@ -155,11 +155,11 @@ public class EditCommandTest {
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Issue editedIssue = new PersonBuilder().build();
-        Issue issueToEdit = model.getFilteredPersonList().get(INDEX_FIRST_ISSUE.getZeroBased());
+        Issue issueToEdit = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
         EditCommand.EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder(editedIssue).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ISSUE, descriptor);
         Model expectedModel = new ModelManager(new SaveIt(model.getSaveIt()), new UserPrefs());
-        expectedModel.updatePerson(issueToEdit, editedIssue);
+        expectedModel.updateIssue(issueToEdit, editedIssue);
         expectedModel.commitSaveIt();
 
         // edit -> first issue edited
@@ -176,7 +176,7 @@ public class EditCommandTest {
 
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredIssueList().size() + 1);
         EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
@@ -203,8 +203,8 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new SaveIt(model.getSaveIt()), new UserPrefs());
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
-        Issue issueToEdit = model.getFilteredPersonList().get(INDEX_FIRST_ISSUE.getZeroBased());
-        expectedModel.updatePerson(issueToEdit, editedIssue);
+        Issue issueToEdit = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
+        expectedModel.updateIssue(issueToEdit, editedIssue);
         expectedModel.commitSaveIt();
 
         // edit -> edits second issue in unfiltered issue list / first issue in filtered issue list
@@ -214,7 +214,7 @@ public class EditCommandTest {
         expectedModel.undoSaveIt();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        assertNotEquals(model.getFilteredPersonList().get(INDEX_FIRST_ISSUE.getZeroBased()), issueToEdit);
+        assertNotEquals(model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased()), issueToEdit);
         // redo -> edits same second issue in unfiltered issue list
         expectedModel.redoSaveIt();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);

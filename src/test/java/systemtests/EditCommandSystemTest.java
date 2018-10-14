@@ -82,7 +82,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
 
         /* Case: edit a issue with new values same as another issue's values but with different name ->
         edited */
-        assertTrue(getModel().getSaveIt().getPersonList().contains(BOB));
+        assertTrue(getModel().getSaveIt().getIssueList().contains(BOB));
         index = INDEX_SECOND_PERSON;
         assertNotEquals(getModel().getFilteredIssueList().get(index.getZeroBased()), BOB);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + DESCRIPTION_DESC_BOB
@@ -122,7 +122,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getSaveIt().getPersonList().size();
+        int invalidIndex = getModel().getSaveIt().getIssueList().size();
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
             Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
@@ -183,7 +183,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
 
         /* Case: edit a issue with new values same as another issue's values -> rejected */
         executeCommand(PersonUtil.getAddCommand(BOB));
-        assertTrue(getModel().getSaveIt().getPersonList().contains(BOB));
+        assertTrue(getModel().getSaveIt().getIssueList().contains(BOB));
         index = INDEX_FIRST_ISSUE;
         assertFalse(getModel().getFilteredIssueList().get(index.getZeroBased()).equals(BOB));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DESCRIPTION_DESC_BOB

@@ -70,7 +70,7 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getSaveIt().getPersonList().size();
+        int invalidIndex = getModel().getSaveIt().getIssueList().size();
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
@@ -99,7 +99,7 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
-                getModel().getSaveIt().getPersonList().size() + 1);
+                getModel().getSaveIt().getIssueList().size() + 1);
         command = DeleteCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased();
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 

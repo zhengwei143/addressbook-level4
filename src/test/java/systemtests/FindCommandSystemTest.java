@@ -84,7 +84,7 @@ public class FindCommandSystemTest extends SaveItSystemTest {
 
         /* Case: find same persons in address book after deleting 1 of them -> 1 issue found */
         executeCommand(DeleteCommand.COMMAND_WORD + " 1");
-        assertFalse(getModel().getSaveIt().getPersonList().contains(BENSON));
+        assertFalse(getModel().getSaveIt().getIssueList().contains(BENSON));
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, DANIEL);

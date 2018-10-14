@@ -63,7 +63,7 @@ public class TypicalPersons {
     public static SaveIt getTypicalSaveIt() {
         SaveIt ab = new SaveIt();
         for (Issue issue : getTypicalPersons()) {
-            ab.addPerson(issue);
+            ab.addIssue(issue);
         }
         return ab;
     }

@@ -31,7 +31,7 @@ public class SaveItTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), saveIt.getPersonList());
+        assertEquals(Collections.emptyList(), saveIt.getIssueList());
     }
 
     @Test
@@ -62,32 +62,32 @@ public class SaveItTest {
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        saveIt.hasPerson(null);
+        saveIt.hasIssue(null);
     }
 
     @Test
     public void hasPerson_personNotInSaveIt_returnsFalse() {
-        assertFalse(saveIt.hasPerson(ALICE));
+        assertFalse(saveIt.hasIssue(ALICE));
     }
 
     @Test
     public void hasPerson_personInSaveIt_returnsTrue() {
-        saveIt.addPerson(ALICE);
-        assertTrue(saveIt.hasPerson(ALICE));
+        saveIt.addIssue(ALICE);
+        assertTrue(saveIt.hasIssue(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInSaveIt_returnsTrue() {
-        saveIt.addPerson(ALICE);
+        saveIt.addIssue(ALICE);
         Issue editedAlice = new PersonBuilder(ALICE).withSolutions(VALID_SOLUTION_STACKOVERLOW)
                 .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(saveIt.hasPerson(editedAlice));
+        assertTrue(saveIt.hasIssue(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        saveIt.getPersonList().remove(0);
+        saveIt.getIssueList().remove(0);
     }
 
     /**
@@ -102,7 +102,7 @@ public class SaveItTest {
         }
 
         @Override
-        public ObservableList<Issue> getPersonList() {
+        public ObservableList<Issue> getIssueList() {
             return issues;
         }
     }

@@ -51,7 +51,7 @@ public class SaveIt implements ReadOnlySaveIt {
     public void resetData(ReadOnlySaveIt newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setPersons(newData.getIssueList());
     }
 
     //// issue-level operations
@@ -59,7 +59,7 @@ public class SaveIt implements ReadOnlySaveIt {
     /**
      * Returns true if a issue with the same identity as {@code issue} exists in the address book.
      */
-    public boolean hasPerson(Issue issue) {
+    public boolean hasIssue(Issue issue) {
         requireNonNull(issue);
         return persons.contains(issue);
     }
@@ -68,7 +68,7 @@ public class SaveIt implements ReadOnlySaveIt {
      * Adds a issue to the address book.
      * The issue must not already exist in the address book.
      */
-    public void addPerson(Issue p) {
+    public void addIssue(Issue p) {
         persons.add(p);
     }
 
@@ -77,7 +77,7 @@ public class SaveIt implements ReadOnlySaveIt {
      * {@code target} must exist in the address book.
      * The issue identity of {@code editedIssue} must not be the same as another existing issue in the address book.
      */
-    public void updatePerson(Issue target, Issue editedIssue) {
+    public void updateIssue(Issue target, Issue editedIssue) {
         requireNonNull(editedIssue);
 
         persons.setIssue(target, editedIssue);
@@ -87,7 +87,7 @@ public class SaveIt implements ReadOnlySaveIt {
      * Removes {@code key} from this {@code SaveIt}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Issue key) {
+    public void removeIssue(Issue key) {
         persons.remove(key);
     }
 
@@ -100,7 +100,7 @@ public class SaveIt implements ReadOnlySaveIt {
     }
 
     @Override
-    public ObservableList<Issue> getPersonList() {
+    public ObservableList<Issue> getIssueList() {
         return persons.asUnmodifiableObservableList();
     }
 

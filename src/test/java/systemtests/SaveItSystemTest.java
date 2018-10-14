@@ -143,7 +143,7 @@ public abstract class SaveItSystemTest {
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getSaveIt().getPersonList().size(), getModel().getFilteredIssueList().size());
+        assertEquals(getModel().getSaveIt().getIssueList().size(), getModel().getFilteredIssueList().size());
     }
 
     /**
@@ -151,7 +151,7 @@ public abstract class SaveItSystemTest {
      */
     protected void showPersonsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredIssueList().size() < getModel().getSaveIt().getPersonList().size());
+        assertTrue(getModel().getFilteredIssueList().size() < getModel().getSaveIt().getIssueList().size());
     }
 
     /**
@@ -167,7 +167,7 @@ public abstract class SaveItSystemTest {
      */
     protected void deleteAllPersons() {
         executeCommand(ClearCommand.COMMAND_WORD);
-        assertEquals(0, getModel().getSaveIt().getPersonList().size());
+        assertEquals(0, getModel().getSaveIt().getIssueList().size());
     }
 
     /**

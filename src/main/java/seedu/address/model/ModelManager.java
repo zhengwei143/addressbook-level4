@@ -14,7 +14,7 @@ import seedu.address.commons.events.model.SaveItChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the saveIt data.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -32,7 +32,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with SaveIt: " + saveIt + " and user prefs " + userPrefs);
 
         versionedSaveIt = new VersionedSaveIt(saveIt);
-        filteredIssues = new FilteredList<>(versionedSaveIt.getPersonList());
+        filteredIssues = new FilteredList<>(versionedSaveIt.getIssueList());
     }
 
     public ModelManager() {
@@ -58,18 +58,18 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean hasIssue(Issue issue) {
         requireNonNull(issue);
-        return versionedSaveIt.hasPerson(issue);
+        return versionedSaveIt.hasIssue(issue);
     }
 
     @Override
     public void deleteIssue(Issue target) {
-        versionedSaveIt.removePerson(target);
+        versionedSaveIt.removeIssue(target);
         indicateSaveItChanged();
     }
 
     @Override
     public void addIssue(Issue issue) {
-        versionedSaveIt.addPerson(issue);
+        versionedSaveIt.addIssue(issue);
         updateFilteredIssueList(PREDICATE_SHOW_ALL_ISSUES);
         indicateSaveItChanged();
     }
@@ -78,7 +78,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateIssue(Issue target, Issue editedIssue) {
         CollectionUtil.requireAllNonNull(target, editedIssue);
 
-        versionedSaveIt.updatePerson(target, editedIssue);
+        versionedSaveIt.updateIssue(target, editedIssue);
         indicateSaveItChanged();
     }
 

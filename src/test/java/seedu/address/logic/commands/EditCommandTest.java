@@ -119,7 +119,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_ISSUE);
 
         // edit issue in filtered list into a duplicate in address book
-        Issue issueInList = model.getSaveIt().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Issue issueInList = model.getSaveIt().getIssueList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ISSUE,
                 new EditPersonDescriptorBuilder(issueInList).build());
 
@@ -144,7 +144,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_ISSUE);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getSaveIt().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getSaveIt().getIssueList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());

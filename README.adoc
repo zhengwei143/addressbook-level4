@@ -18,9 +18,9 @@ SaveIt is a desktop application written in Java
 This application is geared towards programmers:
 
 * To help keep track of bugs/error messages encountered and searched on google (or any other search engine).
-* To save the webpage of the corresponding email(s) found
+* To save the webpage of the corresponding issue(s) found
 
-While programming, it is quite often that we run into similar problems that we have encountered before. Yet, we might not always remember the email (or where we found it) and go on searching for it again.
+While programming, it is quite often that we run into similar problems that we have encountered before. Yet, we might not always remember the solutions(and where we found it) and go on searching for it again.
 
 * Traditional browsers have bookmarks which allow you to keep track of webpages that you might want to visit later, however, they have a few drawbacks:
 ** They do not provide enough context to why the page was bookmarked (besides allowing you to set the title for the url)
@@ -30,8 +30,8 @@ While programming, it is quite often that we run into similar problems that we h
 
 SaveIt helps to bridge this gap by:
 
-* Providing a platform to map issues to their email(s)
-* Providing an internal search functionality to find similar issues and their solutions straight away
+* Providing a platform to map issues to their solution(s)
+* Providing an internal search functionality to find similar issues and their solutions straight away(v2.0)
 * The storage and search functionalities are further enhanced with a tagging system for further categorization
 
 == Site Map
@@ -44,6 +44,10 @@ You might find these useful in getting started.
 
 == Acknowledgements
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> milestone-midv1.2
 * The source code for this application was obtained from link:https://github.com/nus-cs2103-AY1819S1/addressbook-level4[Addressbook-level4], and subsequently repackaged as a new application as https://github.com/CS2103-AY1819S1-T12-4/main[SaveIt].
 * Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5]
 

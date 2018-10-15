@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -25,7 +24,6 @@ public class XmlSerializableSaveItTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    @Ignore
     public void toModelType_typicalPersonsFile_success() throws Exception {
         XmlSerializableSaveIt dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE,
                 XmlSerializableSaveIt.class);
@@ -35,7 +33,6 @@ public class XmlSerializableSaveItTest {
     }
 
     @Test
-    @Ignore
     public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
         XmlSerializableSaveIt dataFromFile = XmlUtil.getDataFromFile(DUPLICATE_PERSON_FILE,
                 XmlSerializableSaveIt.class);

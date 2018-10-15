@@ -32,7 +32,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Issue;
 import seedu.address.model.issue.IssueContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.IssueBuilder;
 import seedu.address.testutil.PersonUtil;
 
 public class SaveItParserTest {
@@ -44,7 +44,7 @@ public class SaveItParserTest {
     @Test
     @Ignore
     public void parseCommand_add() throws Exception {
-        Issue issue = new PersonBuilder().build();
+        Issue issue = new IssueBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(issue));
         assertEquals(new AddCommand(issue), command);
     }
@@ -65,7 +65,7 @@ public class SaveItParserTest {
     @Test
     @Ignore
     public void parseCommand_edit() throws Exception {
-        Issue issue = new PersonBuilder().build();
+        Issue issue = new IssueBuilder().build();
         EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder(issue).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_ISSUE.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));

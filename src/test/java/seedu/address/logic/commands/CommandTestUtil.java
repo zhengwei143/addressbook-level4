@@ -24,24 +24,24 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_NAME_AMY = "Amy Bee";
-    public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_DESCRIPTION_AMY = "11111111";
-    public static final String VALID_DESCRIPTION_BOB = "22222222";
-    public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_STATEMENT_JAVA = "Jave Issue";
+    public static final String VALID_STATEMENT_C = "C Issue";
+    public static final String VALID_DESCRIPTION_JAVA = "syntax error";
+    public static final String VALID_DESCRIPTION_C = "94351253";
+    public static final String VALID_SOLUTION_JAVA = "This solution can help you 1.";
+    public static final String VALID_SOLUTION_C = "This solution can help you 2.";
     public static final String VALID_SOLUTION_STACKOVERLOW = "StackOverFlow newSol";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_UI = "ui";
+    public static final String VALID_TAG_SYNTAX = "syntax";
 
-    public static final String NAME_DESC_AMY = " " + PREFIX_STATEMENT + VALID_NAME_AMY;
-    public static final String NAME_DESC_BOB = " " + PREFIX_STATEMENT + VALID_NAME_BOB;
-    public static final String DESCRIPTION_DESC_AMY = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_AMY;
-    public static final String DESCRIPTION_DESC_BOB = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + VALID_ADDRESS_AMY;
-    public static final String ADDRESS_DESC_BOB = " " + VALID_ADDRESS_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String STATEMENT_DESC_JAVA = " " + PREFIX_STATEMENT + VALID_STATEMENT_JAVA;
+    public static final String STATEMENT_DESC_C = " " + PREFIX_STATEMENT + VALID_STATEMENT_C;
+    public static final String DESCRIPTION_DESC_JAVA = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_JAVA;
+    public static final String DESCRIPTION_DESC_C = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_C;
+    public static final String SOLUTION_DESC_JAVA = " " + VALID_SOLUTION_JAVA;
+    public static final String SOLUTION_DESC_C = " " + VALID_SOLUTION_C;
+    public static final String TAG_DESC_SYNTAX = " " + PREFIX_TAG + VALID_TAG_SYNTAX;
+    public static final String TAG_DESC_UI = " " + PREFIX_TAG + VALID_TAG_UI;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_STATEMENT + "James&"; // '&' not allowed in names
     public static final String INVALID_DESCRIPTION_DESC =
@@ -55,12 +55,12 @@ public class CommandTestUtil {
     public static final EditCommand.EditIssueDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-            .withDescription(VALID_DESCRIPTION_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-            .withDescription(VALID_DESCRIPTION_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_STATEMENT_JAVA)
+            .withDescription(VALID_DESCRIPTION_JAVA)
+            .withTags(VALID_TAG_SYNTAX).build();
+        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_STATEMENT_C)
+            .withDescription(VALID_DESCRIPTION_C)
+            .withTags(VALID_TAG_UI, VALID_TAG_SYNTAX).build();
     }
 
     /**

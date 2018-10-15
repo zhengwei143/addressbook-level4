@@ -12,7 +12,7 @@ import seedu.address.model.Issue;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.IssueBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -29,7 +29,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Issue validIssue = new PersonBuilder().build();
+        Issue validIssue = new IssueBuilder().build();
 
         Model expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());
         expectedModel.addIssue(validIssue);

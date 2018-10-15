@@ -21,7 +21,7 @@ import seedu.address.storage.XmlAdaptedIssue;
 import seedu.address.storage.XmlAdaptedSolution;
 import seedu.address.storage.XmlAdaptedTag;
 import seedu.address.storage.XmlSerializableSaveIt;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.IssueBuilder;
 import seedu.address.testutil.SaveItBuilder;
 import seedu.address.testutil.TestUtil;
 
@@ -137,7 +137,7 @@ public class XmlUtilTest {
 
         SaveItBuilder builder = new SaveItBuilder(new SaveIt());
         dataToWrite = new XmlSerializableSaveIt(
-                builder.withPerson(new PersonBuilder().build()).build());
+                builder.withPerson(new IssueBuilder().build()).build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableSaveIt.class);

@@ -15,20 +15,20 @@ import seedu.address.model.SaveIt;
 /**
  * An Immutable SaveIt that is serializable to XML format
  */
-@XmlRootElement(name = "address")
+@XmlRootElement(name = "saveit")
 public class XmlSerializableSaveIt {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate issue(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Issues list contains duplicate issue(s).";
 
     @XmlElement
-    private List<XmlAdaptedIssue> persons;
+    private List<XmlAdaptedIssue> issues;
 
     /**
      * Creates an empty XmlSerializableSaveIt.
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableSaveIt() {
-        persons = new ArrayList<>();
+        issues = new ArrayList<>();
     }
 
     /**
@@ -36,7 +36,7 @@ public class XmlSerializableSaveIt {
      */
     public XmlSerializableSaveIt(ReadOnlySaveIt src) {
         this();
-        persons.addAll(src.getIssueList().stream().map(XmlAdaptedIssue::new).collect(Collectors.toList()));
+        issues.addAll(src.getIssueList().stream().map(XmlAdaptedIssue::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,8 +47,8 @@ public class XmlSerializableSaveIt {
      */
     public SaveIt toModelType() throws IllegalValueException {
         SaveIt saveIt = new SaveIt();
-        for (XmlAdaptedIssue p : persons) {
-            Issue issue = p.toModelType();
+        for (XmlAdaptedIssue i : issues) {
+            Issue issue = i.toModelType();
             if (saveIt.hasIssue(issue)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
@@ -66,6 +66,6 @@ public class XmlSerializableSaveIt {
         if (!(other instanceof XmlSerializableSaveIt)) {
             return false;
         }
-        return persons.equals(((XmlSerializableSaveIt) other).persons);
+        return issues.equals(((XmlSerializableSaveIt) other).issues);
     }
 }

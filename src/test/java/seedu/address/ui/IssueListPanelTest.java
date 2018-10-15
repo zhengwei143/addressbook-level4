@@ -6,16 +6,16 @@ import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
-import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
+import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysIssue;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import guitests.guihandles.IssueCardHandle;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,9 +45,9 @@ public class IssueListPanelTest extends GuiUnitTest {
         for (int i = 0; i < TYPICAL_ISSUES.size(); i++) {
             personListPanelHandle.navigateToCard(TYPICAL_ISSUES.get(i));
             Issue expectedIssue = TYPICAL_ISSUES.get(i);
-            PersonCardHandle actualCard = personListPanelHandle.getPersonCardHandle(i);
+            IssueCardHandle actualCard = personListPanelHandle.getPersonCardHandle(i);
 
-            assertCardDisplaysPerson(expectedIssue, actualCard);
+            assertCardDisplaysIssue(expectedIssue, actualCard);
             assertEquals(Integer.toString(i + 1) + ". ", actualCard.getId());
         }
     }
@@ -59,8 +59,8 @@ public class IssueListPanelTest extends GuiUnitTest {
         postNow(JUMP_TO_SECOND_EVENT);
         guiRobot.pauseForHuman();
 
-        PersonCardHandle expectedPerson = personListPanelHandle.getPersonCardHandle(INDEX_SECOND_PERSON.getZeroBased());
-        PersonCardHandle selectedPerson = personListPanelHandle.getHandleToSelectedCard();
+        IssueCardHandle expectedPerson = personListPanelHandle.getPersonCardHandle(INDEX_SECOND_PERSON.getZeroBased());
+        IssueCardHandle selectedPerson = personListPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedPerson, selectedPerson);
     }
 

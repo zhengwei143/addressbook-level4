@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!-- Issue with missing statement field -->
-<issue>
+<statement>
     <description>9482424</description>
     <tagged>friends</tagged>
-</issue>
+</statement>

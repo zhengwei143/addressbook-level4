@@ -193,7 +193,7 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `SaveItParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
-.  The command execution can affect the `Model` (e.g. adding an issue) and/or raise events.
+.  The command execution can affect the `Model` (e.g. adding a statement) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
@@ -263,18 +263,18 @@ Step 1. The user launches the application for the first time. The `VersionedSave
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete 5` command to delete the 5th issue in the address book. The `delete` command calls `Model#commitSaveIt()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `saveItStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th statement in the address book. The `delete` command calls `Model#commitSaveIt()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `saveItStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `add n/David ...` to add a new issue. The `add` command also calls `Model#commitSaveIt()`, causing another modified address book state to be saved into the `saveItStateList`.
+Step 3. The user executes `add n/David ...` to add a new statement. The `add` command also calls `Model#commitSaveIt()`, causing another modified address book state to be saved into the `saveItStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
 If a command fails its execution, it will not call `Model#commitSaveIt()`, so the address book state will not be saved into the `saveItStateList`.
 
-Step 4. The user now decides that adding the issue was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoSaveIt()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the statement was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoSaveIt()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
@@ -310,7 +310,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Implement redo/undo individually for each of the commands.
-** Pros: Will use less memory (e.g. for `delete`, just save the issue being deleted).
+** Pros: Will use less memory (e.g. for `delete`, just save the statement being deleted).
 ** Cons: We must ensure that the implementation of each individual command are correct.
 
 ===== Aspect: Data structure to support the undo/redo commands
@@ -588,7 +588,7 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 ** Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?
 **  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/address/model/Saveit.java[`Saveit`] and link:{repoURL}/src/main/java/seedu/address/model/Issue.java[`Issue`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/address/model/Saveit.java[`Saveit`] allows you to update an issue, and link:{repoURL}/src/main/java/seedu/address/model/Issue.java[`Issue`] allows you to update the tags.
 * Solution
-** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/saveit.java[`saveit`]. Loop through each issue, and remove the `tag` from each issue.
+** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/saveit.java[`saveit`]. Loop through each statement, and remove the `tag` from each statement.
 ** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`] should call `saveit#removeTag(Tag)`.
 ** Add new tests for each of the new public methods that you have added.
 ** See this https://github.com/se-edu/saveit-level4/pull/790[PR] for the full email.
@@ -597,12 +597,12 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 [discrete]
 ==== `Ui` component
 
-*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your address book application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last issue in the list. Your job is to implement improvements to the UI to solve all these problems.
+*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your address book application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last statement in the list. Your job is to implement improvements to the UI to solve all these problems.
 
 [TIP]
 Do take a look at <<Design-Ui>> before attempting to modify the `UI` component.
 
-. Use different colors for different tags inside issue cards. For example, `friends` tags can be all in brown, and `colleagues` tags can be all in yellow.
+. Use different colors for different tags inside statement cards. For example, `friends` tags can be all in brown, and `colleagues` tags can be all in yellow.
 +
 **Before**
 +
@@ -694,16 +694,15 @@ By creating this command, you will get a chance to learn how to implement a feat
 
 *Scenario:* You are a software maintainer for `saveit`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
 
-==== Description
 Edits the remark for an issue specified in the `INDEX`. +
 Format: `remark INDEX r/[REMARK]`
 
 Examples:
 
 * `remark 1 r/Likes to drink coffee.` +
-Edits the remark for the first issue to `Likes to drink coffee.`
+Edits the remark for the first statement to `Likes to drink coffee.`
 * `remark 1 r/` +
-Removes the remark for the first issue.
+Removes the remark for the first statement.
 
 ==== Step-by-step Instructions
 
@@ -737,7 +736,7 @@ for `RemarkCommandParser`.
 . Modify link:{repoURL}/src/test/java/seedu/address/logic/parser/SaveItParserTest.java[`SaveItParserTest`] to test that the correct command is generated according to the user input.
 
 ===== [Step 3] Ui: Add a placeholder for remark in `PersonCard`
-Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] s to display a remark for each issue later.
+Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] s to display a remark for each statement later.
 
 **Main:**
 
@@ -753,7 +752,7 @@ We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/s
 
 **Main:**
 
-. Add `Remark` to model component (you can copy from link:{repoURL}/src/main/java/seedu/address/model/issue/Remark.java[`Remark`], remove the regex and change the names accordingly).
+. Add `Remark` to model component (you can copy from link:{repoURL}/src/main/java/seedu/address/model/statement/Remark.java[`Remark`], remove the regex and change the names accordingly).
 . Modify `RemarkCommand` to now take in a `Remark` instead of a `String`.
 
 **Tests:**
@@ -766,7 +765,7 @@ Now we have the `Remark` class, we need to actually use it inside link:{repoURL}
 **Main:**
 
 . Add `getRemark()` in link:{repoURL}/src/main/java/seedu/address/model/Issue.java[`Issue`].
-. You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the issue will be created without a remark).
+. You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the statement will be created without a remark).
 . Modify link:{repoURL}/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `saveit.xml` so that the application will load the sample data when you launch it.)
 
 ===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedPerson` class
@@ -780,12 +779,12 @@ We now have `Remark` s for `Issue` s, but they will be gone when we exit the app
 
 . Fix `invalidAndValidPersonSaveIt.xml`, `typicalPersonsSaveIt.xml`, `validSaveIt.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
 
-===== [Step 6b] Test: Add withRemark() for `PersonBuilder`
-Since `Issue` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/Issue.java[`Issue`].
+===== [Step 6b] Test: Add withRemark() for `IssueBuilder`
+Since `Issue` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/address/testutil/IssueBuilder.java[`IssueBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/Issue.java[`Issue`].
 
 **Tests:**
 
-. Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`]. This method will create a new `Remark` for the issue that it is currently building.
+. Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu/address/testutil/IssueBuilder.java[`IssueBuilder`]. This method will create a new `Remark` for the statement that it is currently building.
 . Try and use the method on any sample `Issue` in link:{repoURL}/src/test/java/seedu/address/testutil/TypicalPersons.java[`TypicalPersons`].
 
 ===== [Step 7] Ui: Connect `Remark` field to `PersonCard`
@@ -835,7 +834,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |programmer |record the issue and email |review it when i encountered it again
+|`* * *` |programmer |record the statement and email |review it when i encountered it again
 
 |`* * *` |programmer using multiple programming languages |search issues of different language easily |fix my code easily
 
@@ -845,19 +844,19 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |team member of a SWE team |share solutions to mistakes/bugs that I encountered and found previously with my team |help my team by reducing their time spent in debugging
 
-|`*` |programmer |add remark for the issues |have better understanding of the issue
+|`*` |programmer |add remark for the issues |have better understanding of the statement
 
 |`* *` |a CS student |note common mistakes among my classmates |learn from them and avoid the common mistakes
 
-|`* *` |a programmer dealing with many programs at the same time |search the issue based on the tag or key words |So that i can find the issue easily
+|`* *` |a programmer dealing with many programs at the same time |search the statement based on the tag or key words |So that i can find the statement easily
 
-|`* *` |a programmer encounter various issues while coding |add the tag for each issue |collect same tag
+|`* *` |a programmer encounter various issues while coding |add the tag for each statement |collect same tag
 
-|`* *` |a CS student who aims to improve technical skills |store the way I solved certain issue |review it and see if there is a better email in the future
+|`* *` |a CS student who aims to improve technical skills |store the way I solved certain statement |review it and see if there is a better email in the future
 
 |`*` |a busy programmer dealing with a big project |highlight the certain part of the page |See the most important part of the email
 
-|`* *` |a CS student who are learning new techniques |delete the issue after I got familiar with that issue |pay more attention to those I am not familiar with
+|`* *` |a CS student who are learning new techniques |delete the statement after I got familiar with that statement |pay more attention to those I am not familiar with
 
 |`* *` |a CS student |collect all the mistakes i have made during daily coding |revise them before exam
 
@@ -878,13 +877,13 @@ _{More to be added}_
 (For all use cases below, the *System* is the `saveit` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Add issue
+=== Use case: Add statement
 
 *MSS*
 
-1. User requests to add a new issue
+1. User requests to add a new statement
 2. User add statement in command line
-3. User can choose add issue statement, multiple email links, remarks and tag.
+3. User can choose add statement statement, multiple email links, remarks and tag.
 4. The ‘Success’ message shown on the screen.
 +
 Use case ends.
@@ -892,14 +891,14 @@ Use case ends.
 [none]
 
 [discrete]
-=== Use case: Edit issue
+=== Use case: Edit statement
 
 *MSS*
 
 1. User requests to list issues
 2. SaveIt shows a list of issues
-3. User requests to edit a specific issue in the list
-4. SaveIt updates the issue
+3. User requests to edit a specific statement in the list
+4. SaveIt updates the statement
 5. Use case ends.
 6. The ‘Success’ message shown on the screen.
 +
@@ -927,14 +926,14 @@ Use case resumes at step 2.
 Use case resumes at step 2.
 
 [discrete]
-=== Use case: Delete issue
+=== Use case: Delete statement
 
 *MSS*
 
 1.  User requests to list issues
 2.  SaveIt shows a list of issues
-3.  User requests to delete a specific issue in the list
-4.  SaveIt deletes the issue
+3.  User requests to delete a specific statement in the list
+4.  SaveIt deletes the statement
 5. The "Success" message shown on the screen.
 +
 Use case ends.
@@ -1024,7 +1023,7 @@ _{ more test cases ... }_
 .. Test case: `delete 1` +
    Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
-   Expected: No issue is deleted. Error details shown in the status message. Status bar remains the same.
+   Expected: No statement is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 

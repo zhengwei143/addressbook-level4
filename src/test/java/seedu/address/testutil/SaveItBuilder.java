@@ -24,7 +24,7 @@ public class SaveItBuilder {
      * Adds a new {@code Issue} to the {@code SaveIt} that we are building.
      */
     public SaveItBuilder withPerson(Issue issue) {
-        saveIt.addPerson(issue);
+        saveIt.addIssue(issue);
         return this;
     }
 

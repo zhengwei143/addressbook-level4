@@ -91,7 +91,7 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         SaveIt expectedSaveIt = new SaveIt(actualModel.getSaveIt());
-        List<Issue> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Issue> expectedFilteredList = new ArrayList<>(actualModel.getFilteredIssueList());
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
 
@@ -101,7 +101,7 @@ public class CommandTestUtil {
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
             assertEquals(expectedSaveIt, actualModel.getSaveIt());
-            assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+            assertEquals(expectedFilteredList, actualModel.getFilteredIssueList());
             assertEquals(expectedCommandHistory, actualCommandHistory);
         }
     }
@@ -111,21 +111,21 @@ public class CommandTestUtil {
      * model}'s address book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredIssueList().size());
 
-        Issue issue = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        Issue issue = model.getFilteredIssueList().get(targetIndex.getZeroBased());
         final String[] splitName = issue.getStatement().issue.split("\\s+");
-        model.updateFilteredPersonList(new IssueContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredIssueList(new IssueContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredIssueList().size());
     }
 
     /**
      * Deletes the first issue in {@code model}'s filtered list from {@code model}'s address book.
      */
     public static void deleteFirstPerson(Model model) {
-        Issue firstIssue = model.getFilteredPersonList().get(0);
-        model.deletePerson(firstIssue);
+        Issue firstIssue = model.getFilteredIssueList().get(0);
+        model.deleteIssue(firstIssue);
         model.commitSaveIt();
     }
 

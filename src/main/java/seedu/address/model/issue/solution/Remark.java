@@ -13,7 +13,7 @@ public class Remark {
             "Remarks can take any values, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the remark must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String REMARK_VALIDATION_REGEX = "[^\\s].*";

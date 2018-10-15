@@ -1,7 +1,7 @@
 package systemtests;
 
 import static org.junit.Assert.assertFalse;
-import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.commons.core.Messages.MESSAGE_ISSUES_LISTED_OVERVIEW;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
@@ -84,7 +84,7 @@ public class FindCommandSystemTest extends SaveItSystemTest {
 
         /* Case: find same persons in address book after deleting 1 of them -> 1 issue found */
         executeCommand(DeleteCommand.COMMAND_WORD + " 1");
-        assertFalse(getModel().getSaveIt().getPersonList().contains(BENSON));
+        assertFalse(getModel().getSaveIt().getIssueList().contains(BENSON));
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, DANIEL);
@@ -124,7 +124,7 @@ public class FindCommandSystemTest extends SaveItSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find while a issue is selected -> selected card deselected */
+        /* Case: find while an issue is selected -> selected card deselected */
         showAllPersons();
         selectPerson(Index.fromOneBased(1));
         assertFalse(getPersonListPanel().getHandleToSelectedCard().getName().equals(DANIEL.getStatement().issue));
@@ -148,7 +148,7 @@ public class FindCommandSystemTest extends SaveItSystemTest {
 
     /**
      * Executes {@code command} and verifies that the command box displays an empty string, the resultdisplay
-     * box displays {@code Messages#MESSAGE_PERSONS_LISTED_OVERVIEW} with the number of people in thefiltered list,
+     * box displays {@code Messages#MESSAGE_ISSUES_LISTED_OVERVIEW} with the number of people in thefiltered list,
      * and the model related components equal to {@code expectedModel}.
      * These verifications are done by
      * {@code SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
@@ -158,7 +158,7 @@ public class FindCommandSystemTest extends SaveItSystemTest {
      */
     private void assertCommandSuccess(String command, Model expectedModel) {
         String expectedResultMessage = String.format(
-                MESSAGE_PERSONS_LISTED_OVERVIEW, expectedModel.getFilteredPersonList().size());
+            MESSAGE_ISSUES_LISTED_OVERVIEW, expectedModel.getFilteredIssueList().size());
 
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);

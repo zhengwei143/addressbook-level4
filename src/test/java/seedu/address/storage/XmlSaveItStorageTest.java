@@ -79,14 +79,14 @@ public class XmlSaveItStorageTest {
         assertEquals(original, new SaveIt(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addPerson(HOON);
-        original.removePerson(ALICE);
+        original.addIssue(HOON);
+        original.removeIssue(ALICE);
         xmlSaveItStorage.saveSaveIt(original, filePath);
         readBack = xmlSaveItStorage.readSaveIt(filePath).get();
         assertEquals(original, new SaveIt(readBack));
 
         //Save and read without specifying file path
-        original.addPerson(IDA);
+        original.addIssue(IDA);
         xmlSaveItStorage.saveSaveIt(original); //file path not specified
         readBack = xmlSaveItStorage.readSaveIt().get(); //file path not specified
         assertEquals(original, new SaveIt(readBack));

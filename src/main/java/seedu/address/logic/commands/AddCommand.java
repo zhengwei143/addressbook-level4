@@ -12,7 +12,7 @@ import seedu.address.model.Issue;
 import seedu.address.model.Model;
 
 /**
- * Adds a issue to the address book.
+ * Adds an issue to the saveIt.
  */
 public class AddCommand extends Command {
 
@@ -47,11 +47,11 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasIssue(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
+        model.addIssue(toAdd);
         model.commitSaveIt();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

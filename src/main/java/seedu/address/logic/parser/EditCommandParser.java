@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SOLUTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -14,6 +15,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditCommand.EditIssueDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
@@ -26,12 +28,14 @@ public class EditCommandParser implements Parser<EditCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand and returns an EditCommand object
      * for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_SOLUTION, PREFIX_TAG);
+            ArgumentTokenizer
+                .tokenize(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_SOLUTION, PREFIX_REMARK, PREFIX_TAG);
 
         Index index;
 
@@ -41,7 +45,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        EditCommand.EditIssueDescriptor editIssueDescriptor = new EditCommand.EditIssueDescriptor();
+        EditIssueDescriptor editIssueDescriptor = new EditIssueDescriptor();
         if (argMultimap.getValue(PREFIX_STATEMENT).isPresent()) {
             editIssueDescriptor
                 .setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_STATEMENT).get()));
@@ -61,9 +65,9 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> solutions} into a {@code Set<Solution>} if {@code solutions} is
-     * non-empty. If {@code solutions} contain only one element which is an empty string, it will be parsed
-     * into a {@code Set<Solution>} containing zero solutions.
+     * Parses {@code Collection<String> solutions} into a {@code Set<Solution>} if {@code solutions} is non-empty. If
+     * {@code solutions} contain only one element which is an empty string, it will be parsed into a {@code
+     * Set<Solution>} containing zero solutions.
      */
     private Optional<Set<Solution>> parseSolutionsForEdit(Collection<String> solutions) throws ParseException {
         assert solutions != null;

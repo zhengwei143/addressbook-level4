@@ -1,7 +1,6 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -30,7 +29,6 @@ public class PersonUtil {
     public static String getPersonDetails(Issue issue) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_DESCRIPTION + issue.getDescription().value + " ");
-        sb.append(PREFIX_REMARK + issue.getAddress().value + " ");
         issue.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -43,8 +41,8 @@ public class PersonUtil {
     public static String getEditPersonDescriptorDetails(EditCommand.EditIssueDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_STATEMENT).append(name.issue).append(" "));
-        descriptor.getDescription().ifPresent(phone -> sb.append(PREFIX_DESCRIPTION).append(phone.value).append(" "));
-        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_REMARK).append(address.value).append(" "));
+        descriptor.getDescription()
+            .ifPresent(description -> sb.append(PREFIX_DESCRIPTION).append(description.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

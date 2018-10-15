@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <saveit>
-    <!-- Issue with invalid name field -->
+    <!-- Issue with invalid statement field -->
     <issues>
-        <name>Ha!ns Mu@ster</name>
+        <statement>Ha!ns Mu@ster</statement>
         <description isPrivate="false">9482424</description>
-        <address isPrivate="false">4th street</address>
     </issues>
 </saveit>

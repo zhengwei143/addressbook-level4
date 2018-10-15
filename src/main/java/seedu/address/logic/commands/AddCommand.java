@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SOLUTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -19,18 +19,17 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an issue to the saveIt. "
-            + "Parameters: "
-            + PREFIX_STATEMENT + "ISSUE_STATEMENT "
-            + PREFIX_DESCRIPTION + "DESCRIPTION "
-            + PREFIX_REMARK + "REMARK "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_STATEMENT + "John Doe "
-            + PREFIX_DESCRIPTION + "98765432 "
-            + PREFIX_REMARK + "This is an algorithm problem"
-            + PREFIX_TAG + "algorithm"
-            + PREFIX_TAG + "java";
-
+        + "Parameters: "
+        + PREFIX_STATEMENT + "ISSUE_STATEMENT "
+        + PREFIX_DESCRIPTION + "DESCRIPTION "
+        + "[" + PREFIX_SOLUTION + "SOLUTION_LINK REMARK]...\n"
+        + "[" + PREFIX_TAG + "TAG]...\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_STATEMENT + "algorithm "
+        + PREFIX_DESCRIPTION + "This is an algorithm problem "
+        + PREFIX_SOLUTION + "StackOverflow new Solution"
+        + PREFIX_TAG + "algorithm "
+        + PREFIX_TAG + "java";
     public static final String MESSAGE_SUCCESS = "New issue added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This issue already exists in the saveIt";
 
@@ -60,7 +59,7 @@ public class AddCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
+            || (other instanceof AddCommand // instanceof handles nulls
+            && toAdd.equals(((AddCommand) other).toAdd));
     }
 }

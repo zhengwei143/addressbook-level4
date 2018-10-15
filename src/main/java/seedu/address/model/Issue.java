@@ -8,7 +8,7 @@ import java.util.Set;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
-import seedu.address.model.issue.Remark;
+import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
 
 /**
@@ -19,20 +19,20 @@ public class Issue {
 
     // Identity fields
     private final IssueStatement statement;
-    private final Description description;
 
     // Data fields
-    private final Remark remark;
+    private final Set<Solution> solutions = new HashSet<>();
+    private final Description description;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Issue(IssueStatement statement, Description description, Remark remark, Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(statement, description, remark, tags);
+    public Issue(IssueStatement statement, Description description, Set<Solution> solutions, Set<Tag> tags) {
+        CollectionUtil.requireAllNonNull(statement, description, solutions, tags);
         this.statement = statement;
         this.description = description;
-        this.remark = remark;
+        this.solutions.addAll(solutions);
         this.tags.addAll(tags);
     }
 
@@ -40,12 +40,12 @@ public class Issue {
         return statement;
     }
 
-    public Description getDescription() {
-        return description;
+    public Set<Solution> getSolutions() {
+        return Collections.unmodifiableSet(solutions);
     }
 
-    public Remark getAddress() {
-        return remark;
+    public Description getDescription() {
+        return description;
     }
 
     /**
@@ -86,15 +86,15 @@ public class Issue {
 
         Issue otherIssue = (Issue) other;
         return otherIssue.getStatement().equals(getStatement())
+                && otherIssue.getSolutions().equals(getSolutions())
                 && otherIssue.getDescription().equals(getDescription())
-                && otherIssue.getAddress().equals(getAddress())
                 && otherIssue.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(statement, description, remark, tags);
+        return Objects.hash(statement, description, solutions, tags);
     }
 
     @Override
@@ -103,9 +103,9 @@ public class Issue {
         builder.append(getStatement())
                 .append(" Description: ")
                 .append(getDescription())
-                .append(" Remark: ")
-                .append(getAddress())
-                .append(" Tags: ");
+                .append(" Solutions: ");
+        getSolutions().forEach(builder::append);
+        builder.append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }

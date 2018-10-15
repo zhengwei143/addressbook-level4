@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SOLUTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -21,7 +21,7 @@ import seedu.address.model.Issue;
 import seedu.address.model.Model;
 import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
-import seedu.address.model.issue.Remark;
+import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
 
 /**
@@ -32,19 +32,19 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the issue identified "
-            + "by the index number used in the displayed issue list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_STATEMENT + "ISSUE_STATEMENT] "
-            + "[" + PREFIX_DESCRIPTION + "PHONE] "
-            + "[" + PREFIX_REMARK + "REMARK] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DESCRIPTION + "91234567 ";
+        + "by the index number used in the displayed issue list. "
+        + "Existing values will be overwritten by the input values.\n"
+        + "Parameters: INDEX (must be a positive integer) "
+        + "[" + PREFIX_STATEMENT + "ISSUE_STATEMENT] "
+        + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
+        + "[" + PREFIX_SOLUTION + "SOLUTION_LINK REMARK] "
+        + "[" + PREFIX_TAG + "TAG]...\n"
+        + "Example: " + COMMAND_WORD + " 1 "
+        + PREFIX_DESCRIPTION + "Python ";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Issue: %1$s";
+    public static final String MESSAGE_EDIT_ISSUE_SUCCESS = "Edited Issue: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This issue already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This issue already exists in the saveIt.";
 
     private final Index index;
     private final EditIssueDescriptor editIssueDescriptor;
@@ -80,7 +80,7 @@ public class EditCommand extends Command {
         model.updatePerson(issueToEdit, editedIssue);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         model.commitSaveIt();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedIssue));
+        return new CommandResult(String.format(MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue));
     }
 
     /**
@@ -92,10 +92,10 @@ public class EditCommand extends Command {
 
         IssueStatement updatedName = editIssueDescriptor.getName().orElse(issueToEdit.getStatement());
         Description updatedDescription = editIssueDescriptor.getDescription().orElse(issueToEdit.getDescription());
-        Remark updatedAddress = editIssueDescriptor.getAddress().orElse(issueToEdit.getAddress());
+        Set<Solution> updatedSolutions = editIssueDescriptor.getSolutions().orElse(issueToEdit.getSolutions());
         Set<Tag> updatedTags = editIssueDescriptor.getTags().orElse(issueToEdit.getTags());
 
-        return new Issue(updatedName, updatedDescription, updatedAddress, updatedTags);
+        return new Issue(updatedName, updatedDescription, updatedSolutions, updatedTags);
     }
 
     @Override
@@ -113,7 +113,7 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editIssueDescriptor.equals(e.editIssueDescriptor);
+            && editIssueDescriptor.equals(e.editIssueDescriptor);
     }
 
     /**
@@ -122,8 +122,8 @@ public class EditCommand extends Command {
      */
     public static class EditIssueDescriptor {
         private IssueStatement name;
+        private Set<Solution> solutions;
         private Description description;
-        private Remark address;
         private Set<Tag> tags;
 
         public EditIssueDescriptor() {}
@@ -134,8 +134,8 @@ public class EditCommand extends Command {
          */
         public EditIssueDescriptor(EditIssueDescriptor toCopy) {
             setName(toCopy.name);
+            setSolutions(toCopy.solutions);
             setDescription(toCopy.description);
-            setAddress(toCopy.address);
             setTags(toCopy.tags);
         }
 
@@ -143,7 +143,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, description, address, tags);
+            return CollectionUtil.isAnyNonNull(name, description, solutions, tags);
         }
 
         public void setName(IssueStatement name) {
@@ -162,12 +162,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(description);
         }
 
-        public void setAddress(Remark address) {
-            this.address = address;
+        public void setSolutions(Set<Solution> solutions) {
+            this.solutions = (solutions != null) ? new HashSet<>(solutions) : null;
         }
 
-        public Optional<Remark> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Set<Solution>> getSolutions() {
+            return (solutions != null) ? Optional.of(Collections.unmodifiableSet(solutions)) : Optional.empty();
         }
 
         /**
@@ -203,9 +203,8 @@ public class EditCommand extends Command {
             EditIssueDescriptor e = (EditIssueDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getDescription().equals(e.getDescription())
-                    && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                && getDescription().equals(e.getDescription())
+                && getTags().equals(e.getTags());
         }
     }
 }

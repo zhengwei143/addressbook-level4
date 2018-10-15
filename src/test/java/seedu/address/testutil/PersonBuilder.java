@@ -6,7 +6,7 @@ import java.util.Set;
 import seedu.address.model.Issue;
 import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
-import seedu.address.model.issue.Remark;
+import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -16,18 +16,17 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_DESCRIPTION = "new bug";
 
     private IssueStatement name;
     private Description description;
-    private Remark address;
+    private Set<Solution> solutions;
     private Set<Tag> tags;
 
     public PersonBuilder() {
         name = new IssueStatement(DEFAULT_NAME);
-        description = new Description(DEFAULT_PHONE);
-        address = new Remark(DEFAULT_ADDRESS);
+        description = new Description(DEFAULT_DESCRIPTION);;
+        solutions = new HashSet<>();
         tags = new HashSet<>();
     }
 
@@ -37,7 +36,7 @@ public class PersonBuilder {
     public PersonBuilder(Issue issueToCopy) {
         name = issueToCopy.getStatement();
         description = issueToCopy.getDescription();
-        address = issueToCopy.getAddress();
+        solutions = new HashSet<>(issueToCopy.getSolutions());
         tags = new HashSet<>(issueToCopy.getTags());
     }
 
@@ -50,6 +49,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Parses the {@code solutions} into a {@code Set<Solution>} and set it to the {@code Issue} that we are building.
+     */
+    public PersonBuilder withSolutions (String ... solutions) {
+        this.solutions = SampleDataUtil.getSolutionSet(solutions);
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Issue} that we are building.
      */
     public PersonBuilder withTags(String ... tags) {
@@ -58,23 +65,15 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Remark} of the {@code Issue} that we are building.
-     */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Remark(address);
-        return this;
-    }
-
-    /**
      * Sets the {@code Description} of the {@code Issue} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
-        this.description = new Description(phone);
+    public PersonBuilder withDescription(String description) {
+        this.description = new Description(description);
         return this;
     }
 
     public Issue build() {
-        return new Issue(name, description, address, tags);
+        return new Issue(name, description, solutions, tags);
     }
 
 }

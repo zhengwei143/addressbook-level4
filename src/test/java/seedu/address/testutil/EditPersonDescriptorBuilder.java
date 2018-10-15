@@ -9,7 +9,6 @@ import seedu.address.logic.commands.EditCommand.EditIssueDescriptor;
 import seedu.address.model.Issue;
 import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
-import seedu.address.model.issue.Remark;
 import seedu.address.model.issue.Tag;
 
 /**
@@ -34,7 +33,7 @@ public class EditPersonDescriptorBuilder {
         descriptor = new EditIssueDescriptor();
         descriptor.setName(issue.getStatement());
         descriptor.setDescription(issue.getDescription());
-        descriptor.setAddress(issue.getAddress());
+        descriptor.setSolutions(issue.getSolutions());
         descriptor.setTags(issue.getTags());
     }
 
@@ -49,16 +48,8 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Description} of the {@code EditIssueDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withPhone(String phone) {
-        descriptor.setDescription(new Description(phone));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Remark} of the {@code EditIssueDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Remark(address));
+    public EditPersonDescriptorBuilder withDescription(String descriptions) {
+        descriptor.setDescription(new Description(descriptions));
         return this;
     }
 

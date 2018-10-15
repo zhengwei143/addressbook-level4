@@ -263,7 +263,7 @@ Format: `refactorTag java [null]`
 
 * Removes the tag [java] from all the entries
 
-=== Locating issues by name: `serach` [coming in v1.2]
+=== Locating issues by statement: `serach` [coming in v1.2]
 
 Search issue by tags, issue statement or remarks.
 Format: `search KEYWORD [MORE_KEYWORDS]`
@@ -331,7 +331,7 @@ Highlight the certain part of the page that show on the window, use a annotation
 Format: `highlight`
 
 // tag::dataencryption[]
-=== Encrypting data files [coming in v2.0]
+=== Encrypting data files `[coming in v2.0]`
 
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]

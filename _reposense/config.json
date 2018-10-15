@@ -10,9 +10,9 @@
 	"authors":
 	[
 		{
-			"githubId": "AdityaA1998",
-			"displayName": "Aditya",
-			"authorNames": ["AdityaA1998"]
+			"githubId": "zhengwei143",
+			"displayName": "Tan Zheng Wei",
+			"authorNames": ["zhengwei143", "Tan Zheng Wei", "zhengwei"]
 		},
 		{
 			"githubId": "jasonvank",
@@ -20,21 +20,19 @@
 			"authorNames": ["jasonvank", "Fan Wenkai", "Jason", "[jasonvank]"]
 		},
 		{
-			"githubId": "ongspxm",
-			"displayName": "Metta",
-			"authorNames": ["Metta Ong"]
+			"githubId": "leo-1997",
+			"displayName": "Li Changrui",
+			"authorNames": ["leo-1997", "Li Changrui", "lichangrui", "leo-1997"]
 		},
 		{
-			"githubId": "yamidark",
-			"displayName": "Jun An",
-			"authorNames": ["Jun An"],
-			"ignoreGlobList": ["**.html", "**.jade"]
+			"githubId": "xllliu",
+			"displayName": "Liu Tianyu",
+			"authorNames": ["xllliu", "Liu Tianyu"]
 		},
 		{
-			"githubId": "yong24s",
-			"displayName": "Yong Hao",
-			"authorNames": ["Yong Hao TENG"],
-			"ignoreGlobList": ["**.css", "**.html", "**.jade", "**.js"]
+			"githubId": "yshu7",
+			"displayName": "Yang Shuqi",
+			"authorNames": ["yshu7", "Yang Shuqi"]
 		}
 	]
 }

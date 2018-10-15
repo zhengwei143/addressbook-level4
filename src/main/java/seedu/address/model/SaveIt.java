@@ -57,7 +57,7 @@ public class SaveIt implements ReadOnlySaveIt {
     //// issue-level operations
 
     /**
-     * Returns true if a issue with the same identity as {@code issue} exists in the saveIt.
+     * Returns true if an issue with the same identity as {@code issue} exists in the saveIt.
      */
     public boolean hasIssue(Issue issue) {
         requireNonNull(issue);
@@ -65,7 +65,7 @@ public class SaveIt implements ReadOnlySaveIt {
     }
 
     /**
-     * Adds a issue to the saveIt.
+     * Adds an issue to the saveIt.
      * The issue must not already exist in the saveIt.
      */
     public void addIssue(Issue p) {

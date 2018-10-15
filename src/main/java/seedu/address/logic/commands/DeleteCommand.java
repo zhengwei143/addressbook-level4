@@ -12,7 +12,7 @@ import seedu.address.model.Issue;
 import seedu.address.model.Model;
 
 /**
- * Deletes a issue identified using it's displayed index from the saveIt.
+ * Deletes an issue identified using it's displayed index from the saveIt.
  */
 public class DeleteCommand extends Command {
 

@@ -18,7 +18,7 @@ public interface Model {
     ReadOnlySaveIt getSaveIt();
 
     /**
-     * Returns true if a issue with the same identity as {@code issue} exists in the saveIt.
+     * Returns true if an issue with the same identity as {@code issue} exists in the saveIt.
      */
     boolean hasIssue(Issue issue);
 

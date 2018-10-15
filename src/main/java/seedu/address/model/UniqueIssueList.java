@@ -15,7 +15,7 @@ import seedu.address.model.issue.exceptions.IssueNotFoundException;
  * A list of issues that enforces uniqueness between its elements and does not allow nulls.
  * A issue is considered unique by comparing using {@code Issue#isSameIssue(Issue)}. As such, adding and updating of
  * issues uses Issue#isSameIssue(Issue) for equality so as to ensure that the issue being added or updated is
- * unique in terms of identity in the UniqueIssueList. However, the removal of a issue uses Issue#equals(Object) so
+ * unique in terms of identity in the UniqueIssueList. However, the removal of an issue uses Issue#equals(Object) so
  * as to ensure that the issue with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
@@ -35,7 +35,7 @@ public class UniqueIssueList implements Iterable<Issue> {
     }
 
     /**
-     * Adds a issue to the list.
+     * Adds an issue to the list.
      * The issue must not already exist in the list.
      */
     public void add(Issue toAdd) {

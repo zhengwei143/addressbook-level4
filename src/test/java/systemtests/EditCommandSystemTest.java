@@ -75,12 +75,12 @@ public class EditCommandSystemTest extends SaveItSystemTest {
             getModel().getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased()), editedIssue);
         assertCommandSuccess(command, model, expectedResultMessage);
 
-        /* Case: edit a issue with new values same as existing values -> edited */
+        /* Case: edit an issue with new values same as existing values -> edited */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DESCRIPTION_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandSuccess(command, index, BOB);
 
-        /* Case: edit a issue with new values same as another issue's values but with different name ->
+        /* Case: edit an issue with new values same as another issue's values but with different name ->
         edited */
         assertTrue(getModel().getSaveIt().getIssueList().contains(BOB));
         index = INDEX_SECOND_PERSON;
@@ -90,7 +90,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         editedIssue = new PersonBuilder(BOB).withName(VALID_NAME_AMY).build();
         assertCommandSuccess(command, index, editedIssue);
 
-        /* Case: edit a issue with new values same as another issue's values but with different description
+        /* Case: edit an issue with new values same as another issue's values but with different description
          * -> edited
          */
         index = INDEX_SECOND_PERSON;
@@ -126,10 +126,10 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
             Messages.MESSAGE_INVALID_Issue_DISPLAYED_INDEX);
 
-        /* --------------------- Performing edit operation while a issue card is selected
+        /* --------------------- Performing edit operation while an issue card is selected
         -------------------------- */
 
-        /* Case: selects first card in the issue list, edit a issue -> edited, card selection remains
+        /* Case: selects first card in the issue list, edit an issue -> edited, card selection remains
         unchanged but
          * browser url changes
          */
@@ -181,7 +181,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
             EditCommand.COMMAND_WORD + " " + INDEX_FIRST_ISSUE.getOneBased() + INVALID_TAG_DESC,
             Tag.MESSAGE_TAG_CONSTRAINTS);
 
-        /* Case: edit a issue with new values same as another issue's values -> rejected */
+        /* Case: edit an issue with new values same as another issue's values -> rejected */
         executeCommand(PersonUtil.getAddCommand(BOB));
         assertTrue(getModel().getSaveIt().getIssueList().contains(BOB));
         index = INDEX_FIRST_ISSUE;
@@ -190,12 +190,12 @@ public class EditCommandSystemTest extends SaveItSystemTest {
             + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_ISSUE);
 
-        /* Case: edit a issue with new values same as another issue's values but with different tags -> rejected */
+        /* Case: edit an issue with new values same as another issue's values but with different tags -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DESCRIPTION_DESC_BOB
             + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_ISSUE);
 
-        /* Case: edit a issue with new values same as another issue's values but with different address -> rejected */
+        /* Case: edit an issue with new values same as another issue's values but with different address -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DESCRIPTION_DESC_BOB
             + ADDRESS_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_ISSUE);

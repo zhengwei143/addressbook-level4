@@ -50,7 +50,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         /* ------------------------ Perform add operations on the shown unfiltered list
         ----------------------------- */
 
-        /* Case: add a issue without tags to a non-empty address book, command with leading spaces and
+        /* Case: add an issue without tags to a non-empty address book, command with leading spaces and
         trailing spaces
          * -> added
          */
@@ -70,13 +70,13 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
-        /* Case: add a issue with all fields same as another issue in the address book except name -> added */
+        /* Case: add an issue with all fields same as another issue in the address book except name -> added */
         toAdd = new PersonBuilder(AMY).withName(VALID_NAME_BOB).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + DESCRIPTION_DESC_AMY
             + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
-        /* Case: add a issue with all fields same as another issue in the address book except description
+        /* Case: add an issue with all fields same as another issue in the address book except description
          * -> added
          */
         toAdd = new PersonBuilder(AMY).withDescription(VALID_DESCRIPTION_BOB).build();
@@ -87,13 +87,13 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         deleteAllPersons();
         assertCommandSuccess(ALICE);
 
-        /* Case: add a issue with tags, command with parameters in random order -> added */
+        /* Case: add an issue with tags, command with parameters in random order -> added */
         toAdd = BOB;
         command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + DESCRIPTION_DESC_BOB + ADDRESS_DESC_BOB
             + NAME_DESC_BOB + TAG_DESC_HUSBAND;
         assertCommandSuccess(command, toAdd);
 
-        /* Case: add a issue, missing tags -> added */
+        /* Case: add an issue, missing tags -> added */
         assertCommandSuccess(HOON);
 
         /* -------------------------- Perform add operation on the shown filtered list
@@ -103,10 +103,10 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         assertCommandSuccess(IDA);
 
-        /* ------------------------ Perform add operation while a issue card is selected
+        /* ------------------------ Perform add operation while an issue card is selected
         --------------------------- */
 
-        /* Case: selects first card in the issue list, add a issue -> added, card selection remains
+        /* Case: selects first card in the issue list, add an issue -> added, card selection remains
         unchanged */
         selectPerson(Index.fromOneBased(1));
         assertCommandSuccess(CARL);

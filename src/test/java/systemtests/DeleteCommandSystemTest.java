@@ -74,7 +74,7 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_Issue_DISPLAYED_INDEX);
 
-        /* --------------------- Performing delete operation while a issue card is selected ------------------------ */
+        /* --------------------- Performing delete operation while an issue card is selected ------------------------ */
 
         /* Case: delete the selected issue -> issue list panel selects the issue before the deleted issue */
         showAllPersons();

@@ -188,9 +188,9 @@ Format: `help`
 Issue bookmark data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-=== Adding a issue: `add` [coming in v1.2]
+=== Adding an issue: `add` [coming in v1.2]
 
-Adds a issue to the address book +
+Adds an issue to the address book +
 
 Format: `add i/ISSUE_STATEMENT s/SOLUTION_LINK1 s/SOLUTION_LINK2 r/REMARK t/TAG...`
 
@@ -229,7 +229,7 @@ Format: `list freq`
 According to frequency order
 ====
 
-=== Editing a issue : `edit` [coming in v1.2]
+=== Editing an issue : `edit` [coming in v1.2]
 
 Edits an existing issue in the issue list. +
 Format: `edit INDEX i/NEW_ISSUE s/NEW_SOLUTION_LINK1 s/NEW_SOLUTION_LINK2 t/TAG1 r/REMARK1​`

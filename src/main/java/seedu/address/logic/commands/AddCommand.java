@@ -12,7 +12,7 @@ import seedu.address.model.Issue;
 import seedu.address.model.Model;
 
 /**
- * Adds a issue to the saveIt.
+ * Adds an issue to the saveIt.
  */
 public class AddCommand extends Command {
 

@@ -23,9 +23,6 @@ import seedu.address.model.issue.Solution;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
-    private final String dummyStatement = "dummyStatement";
-    private final String dummyDescription = "dummyDescription";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an issue to the saveIt. "
             + "Parameters: "
             + PREFIX_STATEMENT + "ISSUE_STATEMENT "
@@ -40,6 +37,9 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "java";
     public static final String MESSAGE_ISSUE_SUCCESS = "New issue added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This issue already exists in the saveIt";
+
+    private static final String dummyStatement = "dummyStatement";
+    private static final String dummyDescription = "dummyDescription";
     private static final String MESSAGE_FAILED_ISSUE =
             "Issue has to be selected first before adding " + "solution";
     private static final String MESSAGE_SOLUTION_SUCCESS = "New solution added: %1$s";

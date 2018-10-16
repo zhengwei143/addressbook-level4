@@ -54,7 +54,7 @@ public class EditCommandTest {
         Issue editedIssue = personInList.withStatement(VALID_STATEMENT_C).withDescription(VALID_DESCRIPTION_C)
                 .withTags(VALID_TAG_UI).build();
 
-        EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_STATEMENT_C)
+        EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder().withStatement(VALID_STATEMENT_C)
                 .withDescription(VALID_DESCRIPTION_C).withTags(VALID_TAG_UI).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
@@ -89,7 +89,7 @@ public class EditCommandTest {
         Issue editedIssue = new IssueBuilder(issueInFilteredList).withStatement(VALID_STATEMENT_C).build();
 
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ISSUE,
-                new EditPersonDescriptorBuilder().withName(VALID_STATEMENT_C).build());
+                new EditPersonDescriptorBuilder().withStatement(VALID_STATEMENT_C).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue);
 
@@ -124,8 +124,7 @@ public class EditCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredIssueList().size() + 1);
-        EditCommand.EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_STATEMENT_C).build();
-
+        EditCommand.EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder().withStatement(VALID_STATEMENT_C).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
@@ -143,7 +142,7 @@ public class EditCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getSaveIt().getIssueList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditPersonDescriptorBuilder().withName(VALID_STATEMENT_C).build());
+                new EditPersonDescriptorBuilder().withStatement(VALID_STATEMENT_C).build());
 
         assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
     }
@@ -173,8 +172,7 @@ public class EditCommandTest {
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredIssueList().size() + 1);
-        EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_STATEMENT_C).build();
-
+        EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder().withStatement(VALID_STATEMENT_C).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         // execution failed -> address book state not added into model

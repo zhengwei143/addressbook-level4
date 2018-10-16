@@ -47,13 +47,19 @@ public class XmlAdaptedSolution {
      */
     public Solution toModelType() throws IllegalValueException {
 
-        String link = solutionName.substring(0, solutionName.indexOf(' '));
-        String remark = solutionName.substring(solutionName.indexOf(' ') + 1);
+        int index = solutionName.indexOf(' ');
+        String link = solutionName;
+        String remark = solutionName;
 
-        if (!Remark.isValidRemark(remark)) {
+        if(index != -1) {
+            link = solutionName.substring(0, index);
+            remark = solutionName.substring(solutionName.indexOf(' ') + 1);
+        }
+
+        if (link != null && !Remark.isValidRemark(remark)) {
             throw new IllegalValueException(Remark.MESSAGE_REMARK_CONSTRAINTS);
         }
-        if (!SolutionLink.isValidLink(link)) {
+        if (remark != null && !SolutionLink.isValidLink(link)) {
             throw new IllegalValueException(SolutionLink.MESSAGE_SOLUTION_LINK_CONSTRAINTS);
         }
 

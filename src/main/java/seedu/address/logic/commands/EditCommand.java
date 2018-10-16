@@ -211,6 +211,7 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                 && getDescription().equals(e.getDescription())
+                && getSolutions().equals(e.getSolutions())
                 && getTags().equals(e.getTags());
         }
     }

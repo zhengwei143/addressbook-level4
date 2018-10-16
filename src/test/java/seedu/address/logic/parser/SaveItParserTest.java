@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -33,7 +32,7 @@ import seedu.address.model.Issue;
 import seedu.address.model.issue.IssueContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.IssueBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.IssueUtil;
 
 public class SaveItParserTest {
     @Rule
@@ -42,10 +41,9 @@ public class SaveItParserTest {
     private final SaveItParser parser = new SaveItParser();
 
     @Test
-    @Ignore
     public void parseCommand_add() throws Exception {
         Issue issue = new IssueBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(issue));
+        AddCommand command = (AddCommand) parser.parseCommand(IssueUtil.getAddCommand(issue));
         assertEquals(new AddCommand(issue), command);
     }
 
@@ -63,12 +61,11 @@ public class SaveItParserTest {
     }
 
     @Test
-    @Ignore
     public void parseCommand_edit() throws Exception {
         Issue issue = new IssueBuilder().build();
         EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder(issue).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_ISSUE.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST_ISSUE.getOneBased() + " " + IssueUtil.getEditIssueDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_ISSUE, descriptor), command);
     }
 

@@ -27,7 +27,6 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
 
     @Test
-    @Ignore
     public void delete() {
         /* ----------------- Performing delete operation while an unfiltered list is being shown -------------------- */
 

@@ -21,7 +21,6 @@ import seedu.address.model.Model;
 
 public class SelectCommandSystemTest extends SaveItSystemTest {
     @Test
-    @Ignore
     public void select() {
         /* ------------------------ Perform select operations on the shown unfiltered list -------------------------- */
 

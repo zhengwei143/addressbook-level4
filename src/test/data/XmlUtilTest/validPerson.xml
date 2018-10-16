@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<statement>
+<issue>
     <statement>Hans Muster</statement>
     <description>9482424</description>
+    <solutions>webSite remark</solutions>
     <tagged>friends</tagged>
-</statement>
+</issue>

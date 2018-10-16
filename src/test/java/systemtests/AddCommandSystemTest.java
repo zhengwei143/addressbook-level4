@@ -38,12 +38,11 @@ import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
 import seedu.address.model.issue.Tag;
 import seedu.address.testutil.IssueBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.IssueUtil;
 
 public class AddCommandSystemTest extends SaveItSystemTest {
 
     @Test
-    @Ignore
     public void add() {
         Model model = getModel();
 
@@ -80,7 +79,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
          * -> added
          */
         toAdd = new IssueBuilder(AMY).withDescription(VALID_DESCRIPTION_C).build();
-        command = PersonUtil.getAddCommand(toAdd);
+        command = IssueUtil.getAddCommand(toAdd);
         assertCommandSuccess(command, toAdd);
 
         /* Case: add to empty address book -> added */
@@ -115,24 +114,23 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         --------------------------------------- */
 
         /* Case: add a duplicate issue -> rejected */
-        command = PersonUtil.getAddCommand(HOON);
+        command = IssueUtil.getAddCommand(HOON);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
-        /* Case: add a duplicate issue except with different description -> rejected */
+        /* Case: add a duplicate issue except with different description -> added */
         toAdd = new IssueBuilder(HOON).withDescription(VALID_DESCRIPTION_C).build();
-        command = PersonUtil.getAddCommand(toAdd);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandSuccess(toAdd);
 
-        /* Case: add a duplicate issue except with different address -> rejected */
-        toAdd = new IssueBuilder(HOON).withDescription(VALID_SOLUTION_C).build();
-        command = PersonUtil.getAddCommand(toAdd);
+        /* Case: add a duplicate issue except with different solution -> rejected */
+        toAdd = new IssueBuilder(HOON).withSolutions(VALID_SOLUTION_C).build();
+        command = IssueUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: add a duplicate issue except with different tags -> rejected */
-        command = PersonUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
+        command = IssueUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
-        /* Case: missing name -> rejected */
+        /* Case: missing statement -> rejected */
         command = AddCommand.COMMAND_WORD + DESCRIPTION_DESC_JAVA + SOLUTION_DESC_JAVA;
         assertCommandFailure(command,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -142,13 +140,8 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         assertCommandFailure(command,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
-        /* Case: missing address -> rejected */
-        command = AddCommand.COMMAND_WORD + STATEMENT_DESC_JAVA + DESCRIPTION_DESC_JAVA;
-        assertCommandFailure(command,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-
         /* Case: invalid keyword -> rejected */
-        command = "adds " + PersonUtil.getPersonDetails(toAdd);
+        command = "adds " + IssueUtil.getIssueDetails(toAdd);
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid name -> rejected */
@@ -176,7 +169,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
      * @see SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(Issue toAdd) {
-        assertCommandSuccess(PersonUtil.getAddCommand(toAdd), toAdd);
+        assertCommandSuccess(IssueUtil.getAddCommand(toAdd), toAdd);
     }
 
     /**

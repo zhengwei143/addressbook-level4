@@ -6,9 +6,9 @@ package seedu.address.model.issue.solution;
 public class SolutionLink {
 
     public static final String MESSAGE_SOLUTION_LINK_CONSTRAINTS =
-            "Solution links should be a link, and it should not be blank";
+            "SolutionLinks can take a validate url.";
 
-    public static final String LINK_VALIDATION_REGEX = "[^\\s].*";
+    public static final String LINK_VALIDATION_REGEX = "[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
 
     public final String value;
 

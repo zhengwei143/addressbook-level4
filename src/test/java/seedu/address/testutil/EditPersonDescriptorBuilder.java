@@ -9,6 +9,7 @@ import seedu.address.logic.commands.EditCommand.EditIssueDescriptor;
 import seedu.address.model.Issue;
 import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
+import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
 
 /**
@@ -40,7 +41,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code IssueStatement} of the {@code EditIssueDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withName(String name) {
+    public EditPersonDescriptorBuilder withStatement(String name) {
         descriptor.setName(new IssueStatement(name));
         return this;
     }
@@ -50,6 +51,16 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withDescription(String descriptions) {
         descriptor.setDescription(new Description(descriptions));
+        return this;
+    }
+
+    /**
+     * Parses the {@code solutions} into a {@code Set<Solution>} and set it to the {@code EditIssueDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withSolutions(String... solutions) {
+        Set<Solution> solutionSet = Stream.of(solutions).map(Solution::new).collect(Collectors.toSet());
+        descriptor.setSolutions(solutionSet);
         return this;
     }
 

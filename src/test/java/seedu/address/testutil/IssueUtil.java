@@ -1,34 +1,37 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STATEMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.Issue;
+import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
+
+import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
  * A utility class for Issue.
  */
-public class PersonUtil {
+public class IssueUtil {
 
     /**
      * Returns an add command string for adding the {@code issue}.
      */
     public static String getAddCommand(Issue issue) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(issue);
+        return AddCommand.COMMAND_WORD + " " + getIssueDetails(issue);
     }
 
     /**
      * Returns the part of command string for the given {@code issue}'s details.
      */
-    public static String getPersonDetails(Issue issue) {
+    public static String getIssueDetails(Issue issue) {
         StringBuilder sb = new StringBuilder();
+        sb.append(PREFIX_STATEMENT + issue.getStatement().issue + " ");
         sb.append(PREFIX_DESCRIPTION + issue.getDescription().value + " ");
+        issue.getSolutions().stream().forEach(
+            s -> sb.append(PREFIX_SOLUTION + s.getLink().value + " " + s.getRemark().value + " ")
+        );
         issue.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -38,11 +41,22 @@ public class PersonUtil {
     /**
      * Returns the part of command string for the given {@code EditIssueDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditCommand.EditIssueDescriptor descriptor) {
+    public static String getEditIssueDescriptorDetails(EditCommand.EditIssueDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_STATEMENT).append(name.issue).append(" "));
         descriptor.getDescription()
             .ifPresent(description -> sb.append(PREFIX_DESCRIPTION).append(description.value).append(" "));
+        if (descriptor.getSolutions().isPresent()) {
+            Set<Solution> solutions = descriptor.getSolutions().get();
+            if (solutions.isEmpty()) {
+                sb.append(PREFIX_SOLUTION).append(" ");
+            } else {
+                solutions.forEach(
+                    s -> sb.append(PREFIX_SOLUTION).append(s.getLink().value).append(s.getRemark().value).append(" ")
+                );
+            }
+        }
+
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

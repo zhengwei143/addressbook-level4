@@ -13,7 +13,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import guitests.guihandles.IssueCardHandle;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import guitests.guihandles.PersonListPanelHandle;
@@ -38,7 +37,6 @@ public class IssueListPanelTest extends GuiUnitTest {
     private PersonListPanelHandle personListPanelHandle;
 
     @Test
-    @Ignore
     public void display() {
         initUi(TYPICAL_ISSUES);
 
@@ -53,7 +51,6 @@ public class IssueListPanelTest extends GuiUnitTest {
     }
 
     @Test
-    @Ignore
     public void handleJumpToListRequestEvent() {
         initUi(TYPICAL_ISSUES);
         postNow(JUMP_TO_SECOND_EVENT);
@@ -69,7 +66,6 @@ public class IssueListPanelTest extends GuiUnitTest {
      * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
      */
     @Test
-    @Ignore
     public void performanceTest() throws Exception {
         ObservableList<Issue> backingList = createBackingList(10000);
 
@@ -80,33 +76,33 @@ public class IssueListPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Returns a list of persons containing {@code personCount} persons that is used to populate the
+     * Returns a list of persons containing {@code issueCount} persons that is used to populate the
      * {@code PersonListPanel}.
      */
-    private ObservableList<Issue> createBackingList(int personCount) throws Exception {
-        Path xmlFile = createXmlFileWithPersons(personCount);
+    private ObservableList<Issue> createBackingList(int issueCount) throws Exception {
+        Path xmlFile = createXmlFileWithIssues(issueCount);
         XmlSerializableSaveIt xmlSaveIt =
                 XmlUtil.getDataFromFile(xmlFile, XmlSerializableSaveIt.class);
         return FXCollections.observableArrayList(xmlSaveIt.toModelType().getIssueList());
     }
 
     /**
-     * Returns a .xml file containing {@code personCount} persons. This file will be deleted when the JVM terminates.
+     * Returns a .xml file containing {@code issueCount} persons. This file will be deleted when the JVM terminates.
      */
-    private Path createXmlFileWithPersons(int personCount) throws Exception {
+    private Path createXmlFileWithIssues(int issueCount) throws Exception {
         StringBuilder builder = new StringBuilder();
         builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n");
-        builder.append("<saveIt>\n");
-        for (int i = 0; i < personCount; i++) {
-            builder.append("<persons>\n");
-            builder.append("<name>").append(i).append("a</name>\n");
+        builder.append("<saveit>\n");
+        for (int i = 0; i < issueCount; i++) {
+            builder.append("<issues>\n");
+            builder.append("<statement>").append(i).append("a</statement>\n");
             builder.append("<description>000</description>\n");
-            builder.append("<address>a</address>\n");
-            builder.append("</persons>\n");
+            builder.append("<solutions>www.example.com remark</solutions>\n");
+            builder.append("</issues>\n");
         }
-        builder.append("</saveIt>\n");
+        builder.append("</saveit>\n");
 
-        Path manyPersonsFile = Paths.get(TEST_DATA_FOLDER + "manyPersons.xml");
+        Path manyPersonsFile = Paths.get(TEST_DATA_FOLDER + "manyIssues.xml");
         FileUtil.createFile(manyPersonsFile);
         FileUtil.writeToFile(manyPersonsFile, builder.toString());
         manyPersonsFile.toFile().deleteOnExit();

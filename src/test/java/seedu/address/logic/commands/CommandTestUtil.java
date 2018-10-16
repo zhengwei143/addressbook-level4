@@ -2,9 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STATEMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,8 +26,8 @@ public class CommandTestUtil {
     public static final String VALID_STATEMENT_C = "C Issue";
     public static final String VALID_DESCRIPTION_JAVA = "syntax error";
     public static final String VALID_DESCRIPTION_C = "94351253";
-    public static final String VALID_SOLUTION_JAVA = "This solution can help you 1.";
-    public static final String VALID_SOLUTION_C = "This solution can help you 2.";
+    public static final String VALID_SOLUTION_JAVA = "LinkJava RemarkJava";
+    public static final String VALID_SOLUTION_C = "LinkC RemarkC";
     public static final String VALID_SOLUTION_STACKOVERLOW = "StackOverFlow newSol";
     public static final String VALID_TAG_UI = "ui";
     public static final String VALID_TAG_SYNTAX = "syntax";
@@ -38,14 +36,14 @@ public class CommandTestUtil {
     public static final String STATEMENT_DESC_C = " " + PREFIX_STATEMENT + VALID_STATEMENT_C;
     public static final String DESCRIPTION_DESC_JAVA = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_JAVA;
     public static final String DESCRIPTION_DESC_C = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_C;
-    public static final String SOLUTION_DESC_JAVA = " " + VALID_SOLUTION_JAVA;
-    public static final String SOLUTION_DESC_C = " " + VALID_SOLUTION_C;
+    public static final String SOLUTION_DESC_JAVA = " " + PREFIX_SOLUTION + VALID_SOLUTION_JAVA;
+    public static final String SOLUTION_DESC_C = " " + PREFIX_SOLUTION + VALID_SOLUTION_C;
     public static final String TAG_DESC_SYNTAX = " " + PREFIX_TAG + VALID_TAG_SYNTAX;
     public static final String TAG_DESC_UI = " " + PREFIX_TAG + VALID_TAG_UI;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_STATEMENT + "James&"; // '&' not allowed in names
     public static final String INVALID_DESCRIPTION_DESC =
-        " " + PREFIX_DESCRIPTION + "9a"; // 'a' not allowed in descriptionss
+        " " + PREFIX_DESCRIPTION + " "; // 'a' not allowed in descriptionss
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -55,11 +53,13 @@ public class CommandTestUtil {
     public static final EditCommand.EditIssueDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_STATEMENT_JAVA)
+        DESC_AMY = new EditPersonDescriptorBuilder().withStatement(VALID_STATEMENT_JAVA)
             .withDescription(VALID_DESCRIPTION_JAVA)
+            .withSolutions(VALID_SOLUTION_JAVA)
             .withTags(VALID_TAG_SYNTAX).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_STATEMENT_C)
+        DESC_BOB = new EditPersonDescriptorBuilder().withStatement(VALID_STATEMENT_C)
             .withDescription(VALID_DESCRIPTION_C)
+            .withSolutions(VALID_SOLUTION_C)
             .withTags(VALID_TAG_UI, VALID_TAG_SYNTAX).build();
     }
 

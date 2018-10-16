@@ -30,7 +30,6 @@ public class HelpCommandSystemTest extends SaveItSystemTest {
     private final GuiRobot guiRobot = new GuiRobot();
 
     @Test
-    @Ignore
     public void openHelpWindow() {
         //use accelerator
         getCommandBox().click();
@@ -76,7 +75,6 @@ public class HelpCommandSystemTest extends SaveItSystemTest {
     }
 
     @Test
-    @Ignore
     public void help_multipleCommands_onlyOneHelpWindowOpen() {
         getMainMenu().openHelpWindowUsingMenu();
 

@@ -21,7 +21,6 @@ public class ErrorDialogGuiTest extends SaveItSystemTest {
     private final GuiRobot guiRobot = new GuiRobot();
 
     @Test
-    @Ignore
     public void showErrorDialogs() {
         postLater(new DataSavingExceptionEvent(IO_EXCEPTION_STUB));
 

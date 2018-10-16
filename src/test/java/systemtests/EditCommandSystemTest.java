@@ -24,7 +24,6 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
@@ -39,12 +38,11 @@ import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
 import seedu.address.model.issue.Tag;
 import seedu.address.testutil.IssueBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.IssueUtil;
 
 public class EditCommandSystemTest extends SaveItSystemTest {
 
     @Test
-    @Ignore
     public void edit() {
         Model model = getModel();
 
@@ -57,7 +55,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
          */
         Index index = INDEX_FIRST_ISSUE;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  "
-                + STATEMENT_DESC_C + "  " + DESCRIPTION_DESC_C + " "
+                + STATEMENT_DESC_C + " " + DESCRIPTION_DESC_C + " "
                 + SOLUTION_DESC_C + " " + TAG_DESC_UI + " ";
         Issue editedIssue = new IssueBuilder(BOB).withTags(VALID_TAG_UI).build();
         assertCommandSuccess(command, index, editedIssue);
@@ -185,8 +183,8 @@ public class EditCommandSystemTest extends SaveItSystemTest {
             EditCommand.COMMAND_WORD + " " + INDEX_FIRST_ISSUE.getOneBased() + INVALID_TAG_DESC,
             Tag.MESSAGE_TAG_CONSTRAINTS);
 
-        /* Case: edit an issue with new values same as another issue's values -> rejected */
-        executeCommand(PersonUtil.getAddCommand(BOB));
+        /* Case: edit a issue with new values same as another issue's values -> rejected */
+        executeCommand(IssueUtil.getAddCommand(BOB));
         assertTrue(getModel().getSaveIt().getIssueList().contains(BOB));
         index = INDEX_FIRST_ISSUE;
         assertFalse(getModel().getFilteredIssueList().get(index.getZeroBased()).equals(BOB));

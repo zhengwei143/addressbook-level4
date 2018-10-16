@@ -14,10 +14,10 @@ import java.nio.file.Paths;
 
 import org.junit.Test;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import guitests.guihandles.IssueCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;

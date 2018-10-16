@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SOLUTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -30,7 +30,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_SOLUTION, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_SOLUTION_LINK, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_STATEMENT, PREFIX_DESCRIPTION)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -39,7 +39,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         IssueStatement name = ParserUtil.parseName(argMultimap.getValue(PREFIX_STATEMENT).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
-        List<Solution> solutionList = ParserUtil.parseSolutions(argMultimap.getAllValues(PREFIX_SOLUTION));
+        List<Solution> solutionList = ParserUtil.parseSolutions(argMultimap.getAllValues(PREFIX_SOLUTION_LINK));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Issue issue = new Issue(name, description, solutionList, tagList);

@@ -47,13 +47,11 @@ public class PersonCard extends UiPart<Region> {
         statement.setText(issue.getStatement().issue);
         description.setText(issue.getDescription().value);
         int index = 1;
-        List<Solution>solutionList=issue.getSolutions();
-        for (Solution solution: solutionList){
+        List<Solution>solutionList = issue.getSolutions();
+        for (Solution solution: solutionList) {
             solutions.getChildren().add(new Label(index + ". " + "[ " + solution.solutionName + ']' + " "));
             index++;
         }
-//        issue.getSolutions().forEach(
-//            solution -> solutions.getChildren().add(new Label('[' + solution.solutionName + ']' + " ")));
         issue.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 

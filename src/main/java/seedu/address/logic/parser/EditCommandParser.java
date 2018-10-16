@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SOLUTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -32,7 +32,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_SOLUTION, PREFIX_TAG);
+            ArgumentTokenizer.tokenize(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_SOLUTION_LINK, PREFIX_TAG);
 
         Index index;
 
@@ -51,7 +51,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editIssueDescriptor
                 .setDescription(ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
         }
-        parseSolutionsForEdit(argMultimap.getAllValues(PREFIX_SOLUTION)).ifPresent(editIssueDescriptor::setSolutions);
+        parseSolutionsForEdit(argMultimap.getAllValues(PREFIX_SOLUTION_LINK)).ifPresent(editIssueDescriptor::setSolutions);
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editIssueDescriptor::setTags);
 
         if (!editIssueDescriptor.isAnyFieldEdited()) {

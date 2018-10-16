@@ -43,6 +43,7 @@ public class CommandBoxTest extends GuiUnitTest {
     }
 
     @Test
+    @Ignore
     public void commandBox_startingWithSuccessfulCommand() {
         assertBehaviorForSuccessfulCommand();
         assertBehaviorForFailedCommand();

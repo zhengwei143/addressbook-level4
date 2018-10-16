@@ -1,11 +1,14 @@
 package seedu.address.ui;
 
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.Issue;
+import seedu.address.model.issue.Solution;
 
 /**
  * An UI component that displays information of a {@code Issue}.
@@ -43,10 +46,17 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         statement.setText(issue.getStatement().issue);
         description.setText(issue.getDescription().value);
-        issue.getSolutions().forEach(
-            solution -> solutions.getChildren().add(new Label('[' + solution.solutionName + ']' + " ")));
+        int index = 1;
+        List<Solution>solutionList=issue.getSolutions();
+        for (Solution solution: solutionList){
+            solutions.getChildren().add(new Label(index + ". " + "[ " + solution.solutionName + ']' + " "));
+            index++;
+        }
+//        issue.getSolutions().forEach(
+//            solution -> solutions.getChildren().add(new Label('[' + solution.solutionName + ']' + " ")));
         issue.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
+
 
     @Override
     public boolean equals(Object other) {

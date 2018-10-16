@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SOLUTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -38,11 +39,12 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         IssueStatement name = ParserUtil.parseName(argMultimap.getValue(PREFIX_STATEMENT).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
-        Set<Solution> solutionList = ParserUtil.parseSolutions(argMultimap.getAllValues(PREFIX_SOLUTION));
+        List<Solution> solutionList = ParserUtil.parseSolutions(argMultimap.getAllValues(PREFIX_SOLUTION));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Issue issue = new Issue(name, description, solutionList, tagList);
 
+        solutionList.forEach(System.out::println);
         return new AddCommand(issue);
     }
 

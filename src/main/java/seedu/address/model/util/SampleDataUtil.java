@@ -1,7 +1,9 @@
 package seedu.address.model.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -46,14 +48,14 @@ public class SampleDataUtil {
     /**
      * Returns a solution set containing the list of strings given.
      */
-    public static Set<Solution> getSolutionSet(String... strings) {
-        Set<Solution> solutionSet = new HashSet<>();
+    public static List<Solution> getSolutionSet(String... strings) {
+        List<Solution> solutionList = new ArrayList<>();
         for (String solutions : strings) {
             String link = solutions.substring(0, solutions.indexOf(' '));
             String remark = solutions.substring(solutions.indexOf(' ') + 1);
-            solutionSet.add(new Solution(link, remark));
+            solutionList.add(new Solution(link, remark));
         }
-        return solutionSet;
+        return solutionList;
     }
 
     /**

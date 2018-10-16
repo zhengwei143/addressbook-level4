@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -65,15 +66,15 @@ public class EditCommandParser implements Parser<EditCommand> {
      * non-empty. If {@code solutions} contain only one element which is an empty string, it will be parsed
      * into a {@code Set<Solution>} containing zero solutions.
      */
-    private Optional<Set<Solution>> parseSolutionsForEdit(Collection<String> solutions) throws ParseException {
+    private Optional<List<Solution>> parseSolutionsForEdit(Collection<String> solutions) throws ParseException {
         assert solutions != null;
 
         if (solutions.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> solutionSet =
+        Collection<String> solutionList =
             solutions.size() == 1 && solutions.contains("") ? Collections.emptySet() : solutions;
-        return Optional.of(ParserUtil.parseSolutions(solutionSet));
+        return Optional.of(ParserUtil.parseSolutions(solutionList));
     }
 
     /**

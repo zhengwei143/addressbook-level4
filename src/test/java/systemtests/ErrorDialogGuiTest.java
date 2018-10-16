@@ -8,7 +8,6 @@ import static seedu.address.ui.UiManager.FILE_OPS_ERROR_DIALOG_STAGE_TITLE;
 
 import java.io.IOException;
 
-import ;
 import org.junit.Test;
 
 import guitests.GuiRobot;

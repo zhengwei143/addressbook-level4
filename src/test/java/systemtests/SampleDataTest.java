@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import ;
 import org.junit.Test;
 
 import seedu.address.model.Issue;

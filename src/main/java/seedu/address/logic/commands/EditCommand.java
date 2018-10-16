@@ -2,10 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SOLUTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -25,7 +27,7 @@ import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
 
 /**
- * Edits the details of an existing issue in the address book.
+ * Edits the details of an existing issue in the saveIt.
  */
 public class EditCommand extends Command {
 
@@ -37,14 +39,18 @@ public class EditCommand extends Command {
         + "Parameters: INDEX (must be a positive integer) "
         + "[" + PREFIX_STATEMENT + "ISSUE_STATEMENT] "
         + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
-        + "[" + PREFIX_SOLUTION + "SOLUTION_LINK REMARK] "
+        + "[" + PREFIX_SOLUTION_LINK + "SOLUTION_LINK REMARK] "
         + "[" + PREFIX_TAG + "TAG]...\n"
         + "Example: " + COMMAND_WORD + " 1 "
-        + PREFIX_DESCRIPTION + "Python ";
+        + PREFIX_STATEMENT + "reducer "
+        + PREFIX_DESCRIPTION + "how to use reducer in python "
+        + PREFIX_SOLUTION_LINK + "Stackoverflow link "
+        + PREFIX_REMARK + "performing some computation on a list and returning the result "
+        + PREFIX_TAG + "python ";
 
     public static final String MESSAGE_EDIT_ISSUE_SUCCESS = "Edited Issue: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This issue already exists in the saveIt.";
+    public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt."; //TODO: necessary?
 
     private final Index index;
     private final EditIssueDescriptor editIssueDescriptor;
@@ -64,21 +70,21 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Issue> lastShownList = model.getFilteredPersonList();
+        List<Issue> lastShownList = model.getFilteredIssueList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_Issue_DISPLAYED_INDEX);
         }
 
         Issue issueToEdit = lastShownList.get(index.getZeroBased());
-        Issue editedIssue = createEditedPerson(issueToEdit, editIssueDescriptor);
+        Issue editedIssue = createEditedIssue(issueToEdit, editIssueDescriptor);
 
-        if (!issueToEdit.isSameIssue(editedIssue) && model.hasPerson(editedIssue)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!issueToEdit.isSameIssue(editedIssue) && model.hasIssue(editedIssue)) {
+            throw new CommandException(MESSAGE_DUPLICATE_ISSUE);
         }
 
-        model.updatePerson(issueToEdit, editedIssue);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.updateIssue(issueToEdit, editedIssue);
+        model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
         model.commitSaveIt();
         return new CommandResult(String.format(MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue));
     }
@@ -87,12 +93,12 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Issue} with the details of {@code issueToEdit}
      * edited with {@code editIssueDescriptor}.
      */
-    private static Issue createEditedPerson(Issue issueToEdit, EditIssueDescriptor editIssueDescriptor) {
+    private static Issue createEditedIssue(Issue issueToEdit, EditIssueDescriptor editIssueDescriptor) {
         assert issueToEdit != null;
 
         IssueStatement updatedName = editIssueDescriptor.getName().orElse(issueToEdit.getStatement());
         Description updatedDescription = editIssueDescriptor.getDescription().orElse(issueToEdit.getDescription());
-        Set<Solution> updatedSolutions = editIssueDescriptor.getSolutions().orElse(issueToEdit.getSolutions());
+        List<Solution> updatedSolutions = editIssueDescriptor.getSolutions().orElse(issueToEdit.getSolutions());
         Set<Tag> updatedTags = editIssueDescriptor.getTags().orElse(issueToEdit.getTags());
 
         return new Issue(updatedName, updatedDescription, updatedSolutions, updatedTags);
@@ -122,7 +128,7 @@ public class EditCommand extends Command {
      */
     public static class EditIssueDescriptor {
         private IssueStatement name;
-        private Set<Solution> solutions;
+        private List<Solution> solutions;
         private Description description;
         private Set<Tag> tags;
 
@@ -133,6 +139,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditIssueDescriptor(EditIssueDescriptor toCopy) {
+
             setName(toCopy.name);
             setSolutions(toCopy.solutions);
             setDescription(toCopy.description);
@@ -162,12 +169,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(description);
         }
 
-        public void setSolutions(Set<Solution> solutions) {
-            this.solutions = (solutions != null) ? new HashSet<>(solutions) : null;
+        public void setSolutions(List<Solution> solutions) {
+            this.solutions = (solutions != null) ? new ArrayList<>(solutions) : null;
         }
 
-        public Optional<Set<Solution>> getSolutions() {
-            return (solutions != null) ? Optional.of(Collections.unmodifiableSet(solutions)) : Optional.empty();
+        public Optional<List<Solution>> getSolutions() {
+            return (solutions != null) ? Optional.of(Collections.unmodifiableList(solutions)) : Optional.empty();
         }
 
         /**

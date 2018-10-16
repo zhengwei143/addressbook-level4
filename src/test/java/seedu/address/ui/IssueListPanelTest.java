@@ -87,7 +87,7 @@ public class IssueListPanelTest extends GuiUnitTest {
         Path xmlFile = createXmlFileWithPersons(personCount);
         XmlSerializableSaveIt xmlSaveIt =
                 XmlUtil.getDataFromFile(xmlFile, XmlSerializableSaveIt.class);
-        return FXCollections.observableArrayList(xmlSaveIt.toModelType().getPersonList());
+        return FXCollections.observableArrayList(xmlSaveIt.toModelType().getIssueList());
     }
 
     /**

@@ -36,7 +36,7 @@ public class XmlSerializableSaveIt {
      */
     public XmlSerializableSaveIt(ReadOnlySaveIt src) {
         this();
-        persons.addAll(src.getPersonList().stream().map(XmlAdaptedIssue::new).collect(Collectors.toList()));
+        persons.addAll(src.getIssueList().stream().map(XmlAdaptedIssue::new).collect(Collectors.toList()));
     }
 
     /**
@@ -49,10 +49,10 @@ public class XmlSerializableSaveIt {
         SaveIt saveIt = new SaveIt();
         for (XmlAdaptedIssue p : persons) {
             Issue issue = p.toModelType();
-            if (saveIt.hasPerson(issue)) {
+            if (saveIt.hasIssue(issue)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            saveIt.addPerson(issue);
+            saveIt.addIssue(issue);
         }
         return saveIt;
     }

@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SOLUTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -12,7 +12,7 @@ import seedu.address.model.Issue;
 import seedu.address.model.Model;
 
 /**
- * Adds a issue to the address book.
+ * Adds an issue to the saveIt.
  */
 public class AddCommand extends Command {
 
@@ -22,12 +22,12 @@ public class AddCommand extends Command {
         + "Parameters: "
         + PREFIX_STATEMENT + "ISSUE_STATEMENT "
         + PREFIX_DESCRIPTION + "DESCRIPTION "
-        + "[" + PREFIX_SOLUTION + "SOLUTION_LINK REMARK]...\n"
+        + "[" + PREFIX_SOLUTION_LINK + "SOLUTION_LINK REMARK]...\n"
         + "[" + PREFIX_TAG + "TAG]...\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_STATEMENT + "algorithm "
         + PREFIX_DESCRIPTION + "This is an algorithm problem "
-        + PREFIX_SOLUTION + "StackOverflow new Solution"
+        + PREFIX_SOLUTION_LINK + "StackOverflow new Solution"
         + PREFIX_TAG + "algorithm "
         + PREFIX_TAG + "java";
     public static final String MESSAGE_SUCCESS = "New issue added: %1$s";
@@ -47,11 +47,11 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasIssue(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
+        model.addIssue(toAdd);
         model.commitSaveIt();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

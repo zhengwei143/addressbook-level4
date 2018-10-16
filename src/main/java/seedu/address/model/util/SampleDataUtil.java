@@ -1,7 +1,8 @@
 package seedu.address.model.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -18,7 +19,7 @@ import seedu.address.model.issue.Tag;
  */
 public class SampleDataUtil {
 
-    public static Issue[] getSamplePersons() {
+    public static Issue[] getSampleIssues() {
         return new Issue[]{
             new Issue(new IssueStatement("Java NullPointer"), new Description("cannot find object"),
                     getSolutionSet("StackOverflow newSolution"), getTagSet("solved")),
@@ -37,8 +38,8 @@ public class SampleDataUtil {
 
     public static ReadOnlySaveIt getSampleSaveIt() {
         SaveIt sampleAb = new SaveIt();
-        for (Issue sampleIssue : getSamplePersons()) {
-            sampleAb.addPerson(sampleIssue);
+        for (Issue sampleIssue : getSampleIssues()) {
+            sampleAb.addIssue(sampleIssue);
         }
         return sampleAb;
     }
@@ -46,14 +47,14 @@ public class SampleDataUtil {
     /**
      * Returns a solution set containing the list of strings given.
      */
-    public static Set<Solution> getSolutionSet(String... strings) {
-        Set<Solution> solutionSet = new HashSet<>();
+    public static List<Solution> getSolutionSet(String... strings) {
+        List<Solution> solutionList = new ArrayList<>();
         for (String solutions : strings) {
             String link = solutions.substring(0, solutions.indexOf(' '));
             String remark = solutions.substring(solutions.indexOf(' ') + 1);
-            solutionSet.add(new Solution(link, remark));
+            solutionList.add(new Solution(link, remark));
         }
-        return solutionSet;
+        return solutionList;
     }
 
     /**

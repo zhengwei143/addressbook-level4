@@ -31,13 +31,13 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Issue issueToDelete = model.getFilteredPersonList().get(INDEX_FIRST_ISSUE.getZeroBased());
+        Issue issueToDelete = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ISSUE);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, issueToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());
-        expectedModel.deletePerson(issueToDelete);
+        expectedModel.deleteIssue(issueToDelete);
         expectedModel.commitSaveIt();
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -45,23 +45,23 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredIssueList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_Issue_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_ISSUE);
 
-        Issue issueToDelete = model.getFilteredPersonList().get(INDEX_FIRST_ISSUE.getZeroBased());
+        Issue issueToDelete = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ISSUE);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, issueToDelete);
 
         Model expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());
-        expectedModel.deletePerson(issueToDelete);
+        expectedModel.deleteIssue(issueToDelete);
         expectedModel.commitSaveIt();
         showNoPerson(expectedModel);
 
@@ -74,19 +74,19 @@ public class DeleteCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getSaveIt().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getSaveIt().getIssueList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_Issue_DISPLAYED_INDEX);
     }
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
-        Issue issueToDelete = model.getFilteredPersonList().get(INDEX_FIRST_ISSUE.getZeroBased());
+        Issue issueToDelete = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ISSUE);
         Model expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());
-        expectedModel.deletePerson(issueToDelete);
+        expectedModel.deleteIssue(issueToDelete);
         expectedModel.commitSaveIt();
 
         // delete -> first issue deleted
@@ -103,11 +103,11 @@ public class DeleteCommandTest {
 
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredIssueList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         // execution failed -> address book state not added into model
-        assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_Issue_DISPLAYED_INDEX);
 
         // single address book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
@@ -127,8 +127,8 @@ public class DeleteCommandTest {
         Model expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
-        Issue issueToDelete = model.getFilteredPersonList().get(INDEX_FIRST_ISSUE.getZeroBased());
-        expectedModel.deletePerson(issueToDelete);
+        Issue issueToDelete = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
+        expectedModel.deleteIssue(issueToDelete);
         expectedModel.commitSaveIt();
 
         // delete -> deletes second issue in unfiltered issue list / first issue in filtered issue list
@@ -138,7 +138,7 @@ public class DeleteCommandTest {
         expectedModel.undoSaveIt();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        assertNotEquals(issueToDelete, model.getFilteredPersonList().get(INDEX_FIRST_ISSUE.getZeroBased()));
+        assertNotEquals(issueToDelete, model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased()));
         // redo -> deletes same second issue in unfiltered issue list
         expectedModel.redoSaveIt();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
@@ -170,8 +170,8 @@ public class DeleteCommandTest {
      * Updates {@code model}'s filtered list to show no one.
      */
     private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
+        model.updateFilteredIssueList(p -> false);
 
-        assertTrue(model.getFilteredPersonList().isEmpty());
+        assertTrue(model.getFilteredIssueList().isEmpty());
     }
 }

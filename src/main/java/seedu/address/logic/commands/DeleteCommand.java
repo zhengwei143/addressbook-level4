@@ -12,7 +12,7 @@ import seedu.address.model.Issue;
 import seedu.address.model.Model;
 
 /**
- * Deletes a issue identified using it's displayed index from the address book.
+ * Deletes an issue identified using it's displayed index from the saveIt.
  */
 public class DeleteCommand extends Command {
 
@@ -34,14 +34,14 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Issue> lastShownList = model.getFilteredPersonList();
+        List<Issue> lastShownList = model.getFilteredIssueList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_Issue_DISPLAYED_INDEX);
         }
 
         Issue issueToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(issueToDelete);
+        model.deleteIssue(issueToDelete);
         model.commitSaveIt();
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, issueToDelete));
     }

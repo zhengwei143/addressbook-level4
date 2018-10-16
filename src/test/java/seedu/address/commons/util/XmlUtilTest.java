@@ -76,7 +76,7 @@ public class XmlUtilTest {
     @Ignore
     public void getDataFromFile_validFile_validResult() throws Exception {
         SaveIt dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableSaveIt.class).toModelType();
-        assertEquals(9, dataFromFile.getPersonList().size());
+        assertEquals(9, dataFromFile.getIssueList().size());
     }
 
     @Test

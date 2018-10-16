@@ -13,16 +13,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import guitests.guihandles.IssueCardHandle;
+
 import org.junit.Test;
 
-import guitests.guihandles.PersonListPanelHandle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.Issue;
 import seedu.address.storage.XmlSerializableSaveIt;
+
+import guitests.guihandles.PersonListPanelHandle;
 
 public class IssueListPanelTest extends GuiUnitTest {
     private static final ObservableList<Issue> TYPICAL_ISSUES =

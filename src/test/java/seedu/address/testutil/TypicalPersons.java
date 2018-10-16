@@ -1,13 +1,19 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SOLUTION_JAVA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATEMENT_JAVA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UI;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.Issue;
 import seedu.address.model.SaveIt;
-
-import static seedu.address.logic.commands.CommandTestUtil.*;
 
 /**
  * A utility class containing a list of {@code Issue} objects to be used in tests.
@@ -39,11 +45,12 @@ public class TypicalPersons {
             .withSolutions("chicago ave").build();
 
     // Manually added - Issue's details found in {@code CommandTestUtil}
-    public static final Issue AMY = new IssueBuilder().withStatement(VALID_STATEMENT_JAVA).withDescription(VALID_DESCRIPTION_JAVA)
+    public static final Issue AMY = new IssueBuilder().withStatement(VALID_STATEMENT_JAVA)
+            .withDescription(VALID_DESCRIPTION_JAVA)
             .withSolutions(VALID_SOLUTION_JAVA).withTags(VALID_TAG_UI).build();
-    public static final Issue BOB = new IssueBuilder().withStatement(VALID_STATEMENT_C).withDescription(VALID_DESCRIPTION_C)
-            .withSolutions(VALID_SOLUTION_C).withTags(VALID_TAG_UI)
-            .build();
+    public static final Issue BOB = new IssueBuilder().withStatement(VALID_STATEMENT_C)
+            .withDescription(VALID_DESCRIPTION_C)
+            .withSolutions(VALID_SOLUTION_C).withTags(VALID_TAG_UI).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

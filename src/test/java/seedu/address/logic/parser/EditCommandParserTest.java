@@ -1,7 +1,22 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_UI;
+import static seedu.address.logic.commands.CommandTestUtil.SOLUTION_DESC_C;
+import static seedu.address.logic.commands.CommandTestUtil.SOLUTION_DESC_JAVA;
+import static seedu.address.logic.commands.CommandTestUtil.STATEMENT_DESC_JAVA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SOLUTION_JAVA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATEMENT_JAVA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UI;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SYNTAX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -89,10 +104,11 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_C + TAG_DESC_UI
             + SOLUTION_DESC_JAVA + STATEMENT_DESC_JAVA + CommandTestUtil.TAG_DESC_SYNTAX;
 
-        EditCommand.EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder().withStatement(VALID_STATEMENT_JAVA)
-            .withDescription(VALID_DESCRIPTION_C)
-            .withSolutions(VALID_SOLUTION_JAVA)
-            .withTags(VALID_TAG_UI, VALID_TAG_SYNTAX).build();
+        EditCommand.EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withStatement(VALID_STATEMENT_JAVA)
+                .withDescription(VALID_DESCRIPTION_C)
+                .withSolutions(VALID_SOLUTION_JAVA)
+                .withTags(VALID_TAG_UI, VALID_TAG_SYNTAX).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -104,7 +120,7 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_C;
 
         EditCommand.EditIssueDescriptor descriptor =
-            new EditPersonDescriptorBuilder().withDescription(VALID_DESCRIPTION_C).build();
+                new EditPersonDescriptorBuilder().withDescription(VALID_DESCRIPTION_C).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -115,7 +131,8 @@ public class EditCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + STATEMENT_DESC_JAVA;
-        EditCommand.EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder().withStatement(VALID_STATEMENT_JAVA).build();
+        EditCommand.EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withStatement(VALID_STATEMENT_JAVA).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -142,14 +159,15 @@ public class EditCommandParserTest {
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_ISSUE;
         String userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_JAVA + SOLUTION_DESC_JAVA
-            + CommandTestUtil.TAG_DESC_UI + DESCRIPTION_DESC_JAVA + SOLUTION_DESC_JAVA + CommandTestUtil.TAG_DESC_SYNTAX
-            + DESCRIPTION_DESC_C + SOLUTION_DESC_C + TAG_DESC_UI;
+                + CommandTestUtil.TAG_DESC_UI + DESCRIPTION_DESC_JAVA + SOLUTION_DESC_JAVA
+                + CommandTestUtil.TAG_DESC_SYNTAX
+                + DESCRIPTION_DESC_C + SOLUTION_DESC_C + TAG_DESC_UI;
 
         EditCommand.EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder()
-            .withDescription(VALID_DESCRIPTION_C)
-            .withSolutions(VALID_SOLUTION_JAVA, VALID_SOLUTION_C)
-            .withTags(VALID_TAG_SYNTAX, VALID_TAG_UI)
-            .build();
+                .withDescription(VALID_DESCRIPTION_C)
+                .withSolutions(VALID_SOLUTION_JAVA, VALID_SOLUTION_C)
+                .withTags(VALID_TAG_SYNTAX, VALID_TAG_UI)
+                .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -167,8 +185,9 @@ public class EditCommandParserTest {
 
         // other valid values specified
         userInput = targetIndex.getOneBased() + INVALID_DESCRIPTION_DESC + SOLUTION_DESC_C
-            + DESCRIPTION_DESC_C;
-        descriptor = new EditPersonDescriptorBuilder().withSolutions(VALID_SOLUTION_C).withDescription(VALID_DESCRIPTION_C).build();
+                + DESCRIPTION_DESC_C;
+        descriptor = new EditPersonDescriptorBuilder().withSolutions(VALID_SOLUTION_C)
+                .withDescription(VALID_DESCRIPTION_C).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

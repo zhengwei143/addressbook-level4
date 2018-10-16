@@ -2,7 +2,11 @@ package seedu.address.model;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SOLUTION_STACKOVERLOW;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UI;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 

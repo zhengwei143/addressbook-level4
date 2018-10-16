@@ -1,7 +1,25 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_SYNTAX;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_UI;
+import static seedu.address.logic.commands.CommandTestUtil.SOLUTION_DESC_C;
+import static seedu.address.logic.commands.CommandTestUtil.SOLUTION_DESC_JAVA;
+import static seedu.address.logic.commands.CommandTestUtil.STATEMENT_DESC_C;
+import static seedu.address.logic.commands.CommandTestUtil.STATEMENT_DESC_JAVA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SOLUTION_JAVA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UI;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SYNTAX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -37,8 +55,8 @@ public class AddCommandParserTest {
                 + SOLUTION_DESC_C + CommandTestUtil.TAG_DESC_UI, new AddCommand(expectedIssue));
 
         // multiple solutions - all accepted
-        Issue expectedIssueMultipleSolutions = new IssueBuilder(BOB).withSolutions(VALID_SOLUTION_JAVA, VALID_SOLUTION_C)
-                .build();
+        Issue expectedIssueMultipleSolutions = new IssueBuilder(BOB)
+                .withSolutions(VALID_SOLUTION_JAVA, VALID_SOLUTION_C).build();
         assertParseSuccess(parser, STATEMENT_DESC_C + DESCRIPTION_DESC_C + SOLUTION_DESC_JAVA
                 + SOLUTION_DESC_C + CommandTestUtil.TAG_DESC_UI, new AddCommand(expectedIssueMultipleSolutions));
 

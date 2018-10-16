@@ -1,5 +1,10 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SOLUTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATEMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
@@ -7,8 +12,6 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.Issue;
 import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
-
-import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
  * A utility class for Issue.

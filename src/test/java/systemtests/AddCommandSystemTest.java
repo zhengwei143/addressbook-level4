@@ -1,13 +1,13 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.SOLUTION_DESC_JAVA;
-import static seedu.address.logic.commands.CommandTestUtil.SOLUTION_DESC_C;
-import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA;
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.SOLUTION_DESC_C;
+import static seedu.address.logic.commands.CommandTestUtil.SOLUTION_DESC_JAVA;
 import static seedu.address.logic.commands.CommandTestUtil.STATEMENT_DESC_JAVA;
 import static seedu.address.logic.commands.CommandTestUtil.STATEMENT_DESC_C;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_UI;
@@ -23,7 +23,6 @@ import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;

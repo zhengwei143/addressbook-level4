@@ -2,7 +2,12 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UI;
 
 import org.junit.Test;
 
@@ -30,7 +35,8 @@ public class EditIssueDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        EditIssueDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withStatement(VALID_STATEMENT_C).build();
+        EditIssueDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY)
+                .withStatement(VALID_STATEMENT_C).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different description -> returns false

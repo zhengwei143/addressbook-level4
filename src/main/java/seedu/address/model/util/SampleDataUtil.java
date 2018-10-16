@@ -12,8 +12,8 @@ import seedu.address.model.SaveIt;
 import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
 import seedu.address.model.issue.Solution;
-import seedu.address.model.issue.solution.SolutionLink;
 import seedu.address.model.issue.Tag;
+import seedu.address.model.issue.solution.SolutionLink;
 
 /**
  * Contains utility methods for populating {@code SaveIt} with sample data.

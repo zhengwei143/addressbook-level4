@@ -13,12 +13,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import guitests.guihandles.IssueCardHandle;
-
 import org.junit.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;

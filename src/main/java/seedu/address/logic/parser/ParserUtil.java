@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -107,13 +109,13 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> solutions} into a {@code Set<Solution>}.
      */
-    public static Set<Solution> parseSolutions(Collection<String> solutions) throws ParseException {
+    public static List<Solution> parseSolutions(Collection<String> solutions) throws ParseException {
         requireNonNull(solutions);
-        final Set<Solution> solutionSet = new HashSet<>();
+        final List<Solution> solutionList = new ArrayList<>();
         for (String solution : solutions) {
-            solutionSet.add(parseSolution(solution));
+            solutionList.add(parseSolution(solution));
         }
-        return solutionSet;
+        return solutionList;
     }
 
     /**

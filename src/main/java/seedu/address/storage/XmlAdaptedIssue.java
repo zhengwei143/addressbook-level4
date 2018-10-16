@@ -105,7 +105,7 @@ public class XmlAdaptedIssue {
         }
         final Description modelDescription = new Description(description);
 
-        final Set<Solution> modelSolutions = new HashSet<>(issueSolutions);
+        final List<Solution> modelSolutions = new ArrayList<>(issueSolutions);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Issue(modelName, modelDescription, modelSolutions, modelTags);

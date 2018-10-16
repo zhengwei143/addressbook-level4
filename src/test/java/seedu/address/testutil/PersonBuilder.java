@@ -1,6 +1,8 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.Issue;
@@ -20,13 +22,13 @@ public class PersonBuilder {
 
     private IssueStatement name;
     private Description description;
-    private Set<Solution> solutions;
+    private List<Solution> solutions;
     private Set<Tag> tags;
 
     public PersonBuilder() {
         name = new IssueStatement(DEFAULT_NAME);
         description = new Description(DEFAULT_DESCRIPTION);;
-        solutions = new HashSet<>();
+        solutions = new ArrayList<>();
         tags = new HashSet<>();
     }
 
@@ -36,7 +38,7 @@ public class PersonBuilder {
     public PersonBuilder(Issue issueToCopy) {
         name = issueToCopy.getStatement();
         description = issueToCopy.getDescription();
-        solutions = new HashSet<>(issueToCopy.getSolutions());
+        solutions = new ArrayList<>(issueToCopy.getSolutions());
         tags = new HashSet<>(issueToCopy.getTags());
     }
 

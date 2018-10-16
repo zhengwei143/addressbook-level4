@@ -1,7 +1,9 @@
 package seedu.address.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -21,14 +23,14 @@ public class Issue {
     private final IssueStatement statement;
 
     // Data fields
-    private final Set<Solution> solutions = new HashSet<>();
+    private final List<Solution> solutions = new ArrayList<>();
     private final Description description;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Issue(IssueStatement statement, Description description, Set<Solution> solutions, Set<Tag> tags) {
+    public Issue(IssueStatement statement, Description description, List<Solution> solutions, Set<Tag> tags) {
         CollectionUtil.requireAllNonNull(statement, description, solutions, tags);
         this.statement = statement;
         this.description = description;
@@ -41,11 +43,11 @@ public class Issue {
     }
 
     /**
-     * Returns an immutable solution set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable solution List, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Solution> getSolutions() {
-        return Collections.unmodifiableSet(solutions);
+    public List<Solution> getSolutions() {
+        return Collections.unmodifiableList(solutions);
     }
 
     public Description getDescription() {

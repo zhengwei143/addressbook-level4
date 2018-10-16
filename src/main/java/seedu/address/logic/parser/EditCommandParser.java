@@ -4,12 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SOLUTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -19,6 +20,7 @@ import seedu.address.logic.commands.EditCommand.EditIssueDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
+
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -35,7 +37,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
             ArgumentTokenizer
-                .tokenize(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_SOLUTION, PREFIX_REMARK, PREFIX_TAG);
+                .tokenize(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_SOLUTION_LINK, PREFIX_REMARK, PREFIX_TAG);
 
         Index index;
 
@@ -54,7 +56,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editIssueDescriptor
                 .setDescription(ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
         }
-        parseSolutionsForEdit(argMultimap.getAllValues(PREFIX_SOLUTION)).ifPresent(editIssueDescriptor::setSolutions);
+        parseSolutionsForEdit(argMultimap.getAllValues(PREFIX_SOLUTION_LINK))
+                .ifPresent(editIssueDescriptor::setSolutions);
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editIssueDescriptor::setTags);
 
         if (!editIssueDescriptor.isAnyFieldEdited()) {
@@ -69,15 +72,15 @@ public class EditCommandParser implements Parser<EditCommand> {
      * {@code solutions} contain only one element which is an empty string, it will be parsed into a {@code
      * Set<Solution>} containing zero solutions.
      */
-    private Optional<Set<Solution>> parseSolutionsForEdit(Collection<String> solutions) throws ParseException {
+    private Optional<List<Solution>> parseSolutionsForEdit(Collection<String> solutions) throws ParseException {
         assert solutions != null;
 
         if (solutions.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> solutionSet =
+        Collection<String> solutionList =
             solutions.size() == 1 && solutions.contains("") ? Collections.emptySet() : solutions;
-        return Optional.of(ParserUtil.parseSolutions(solutionSet));
+        return Optional.of(ParserUtil.parseSolutions(solutionList));
     }
 
     /**

@@ -3,19 +3,7 @@ package systemtests;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.SOLUTION_DESC_JAVA;
-import static seedu.address.logic.commands.CommandTestUtil.SOLUTION_DESC_C;
-import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA;
-import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.STATEMENT_DESC_JAVA;
-import static seedu.address.logic.commands.CommandTestUtil.STATEMENT_DESC_C;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_UI;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STATEMENT_JAVA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UI;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ISSUES;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
@@ -115,7 +103,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         assertTrue(index.getZeroBased() < getModel().getFilteredIssueList().size());
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + STATEMENT_DESC_C;
         issueToEdit = getModel().getFilteredIssueList().get(index.getZeroBased());
-
+        editedIssue = new IssueBuilder(issueToEdit).withStatement(VALID_STATEMENT_C).build();
         assertCommandSuccess(command, index, editedIssue);
 
         /* Case: filtered issue list, edit index within bounds of address book but out of bounds of issue list

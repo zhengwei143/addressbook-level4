@@ -51,7 +51,7 @@ public class XmlAdaptedSolution {
         String link = solutionName;
         String remark = solutionName;
 
-        if(index != -1) {
+        if (index != -1) {
             link = solutionName.substring(0, index);
             remark = solutionName.substring(solutionName.indexOf(' ') + 1);
         }

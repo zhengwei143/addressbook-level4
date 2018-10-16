@@ -149,7 +149,7 @@ public class EditCommandTest {
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
-        Issue editedIssue = new PersonBuilder().build();
+        Issue editedIssue = new IssueBuilder().build();
         Issue issueToEdit = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
         EditCommand.EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder(editedIssue).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ISSUE, descriptor);

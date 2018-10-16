@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -8,6 +9,9 @@ import seedu.address.model.Model;
  * Represents a command with hidden internal logic and the ability to be executed.
  */
 public abstract class Command {
+
+
+    public static final int rootDirectory = 0;
 
     /**
      * Executes the command and returns the result message.

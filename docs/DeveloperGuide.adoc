@@ -777,7 +777,7 @@ We now have `Remark` s for `Issue` s, but they will be gone when we exit the app
 
 **Tests:**
 
-. Fix `invalidAndValidPersonSaveIt.xml`, `typicalPersonsSaveIt.xml`, `validSaveIt.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
+. Fix `invalidAndValidPersonSaveIt.xml`, `typicalIssuesSaveIt.xml`, `validSaveIt.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
 
 ===== [Step 6b] Test: Add withRemark() for `IssueBuilder`
 Since `Issue` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/address/testutil/IssueBuilder.java[`IssueBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/Issue.java[`Issue`].

@@ -18,6 +18,9 @@ public interface Model {
     /** Reset the current directory. */
     void resetDirectory(Index targetIndex);
 
+    /** Return the current directory. */
+    int getCurrentDirectory();
+
     /** Returns the SaveIt */
     ReadOnlySaveIt getSaveIt();
 

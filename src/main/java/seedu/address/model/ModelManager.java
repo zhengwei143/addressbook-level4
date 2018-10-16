@@ -53,6 +53,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public int getCurrentDirectory() {
+        return versionedSaveIt.getCurrentDirectory();
+    }
+
+    @Override
     public ReadOnlySaveIt getSaveIt() {
         return versionedSaveIt;
     }

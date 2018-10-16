@@ -18,7 +18,7 @@ public class HomeCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
-        model.resetDirectory(Index.fromZeroBased(rootDirectory));
+        model.resetDirectory(Index.fromZeroBased(ROOT_DIRECTORY));
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

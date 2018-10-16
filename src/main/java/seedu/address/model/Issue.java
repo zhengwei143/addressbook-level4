@@ -42,6 +42,10 @@ public class Issue {
         return statement;
     }
 
+    /**
+     * Returns an immutable solution List, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
     public List<Solution> getSolutions() {
         return Collections.unmodifiableList(solutions);
     }
@@ -59,8 +63,8 @@ public class Issue {
     }
 
     /**
-     * Returns true if both persons of the same statement have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two persons.Solution
+     * Returns true if both issues of the same statement have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two issues.Solution
      */
     public boolean isSameIssue(Issue otherIssue) {
         if (otherIssue == this) {
@@ -73,8 +77,8 @@ public class Issue {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both issues have the same identity and data fields.
+     * This defines a stronger notion of equality between two issues.
      */
     @Override
     public boolean equals(Object other) {

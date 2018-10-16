@@ -19,7 +19,7 @@ import seedu.address.model.issue.Tag;
  */
 public class SampleDataUtil {
 
-    public static Issue[] getSamplePersons() {
+    public static Issue[] getSampleIssues() {
         return new Issue[]{
             new Issue(new IssueStatement("Java NullPointer"), new Description("cannot find object"),
                     getSolutionSet("StackOverflow newSolution"), getTagSet("solved")),
@@ -38,8 +38,8 @@ public class SampleDataUtil {
 
     public static ReadOnlySaveIt getSampleSaveIt() {
         SaveIt sampleAb = new SaveIt();
-        for (Issue sampleIssue : getSamplePersons()) {
-            sampleAb.addPerson(sampleIssue);
+        for (Issue sampleIssue : getSampleIssues()) {
+            sampleAb.addIssue(sampleIssue);
         }
         return sampleAb;
     }

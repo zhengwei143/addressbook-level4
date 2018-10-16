@@ -11,7 +11,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.Issue;
 
 /**
- * Provides a handle to a issue card in the issue list panel.
+ * Provides a handle to an issue card in the issue list panel.
  */
 public class PersonCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";

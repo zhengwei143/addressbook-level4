@@ -32,7 +32,7 @@ public class AddCommandIntegrationTest {
         Issue validIssue = new PersonBuilder().build();
 
         Model expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());
-        expectedModel.addPerson(validIssue);
+        expectedModel.addIssue(validIssue);
         expectedModel.commitSaveIt();
 
         assertCommandSuccess(new AddCommand(validIssue), model, commandHistory,
@@ -41,7 +41,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Issue issueInList = model.getSaveIt().getPersonList().get(0);
+        Issue issueInList = model.getSaveIt().getIssueList().get(0);
         assertCommandFailure(new AddCommand(issueInList), model, commandHistory,
                 AddCommand.MESSAGE_DUPLICATE_PERSON);
     }

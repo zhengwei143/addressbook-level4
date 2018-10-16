@@ -14,7 +14,7 @@ import seedu.address.model.Issue;
 import seedu.address.model.Model;
 
 /**
- * Selects a issue identified using it's displayed index from the address book.
+ * Selects an issue identified using it's displayed index from the saveIt.
  */
 public class SelectCommand extends Command {
 
@@ -37,10 +37,10 @@ public class SelectCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        List<Issue> filteredIssueList = model.getFilteredPersonList();
+        List<Issue> filteredIssueList = model.getFilteredIssueList();
 
         if (targetIndex.getZeroBased() >= filteredIssueList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_Issue_DISPLAYED_INDEX);
         }
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));

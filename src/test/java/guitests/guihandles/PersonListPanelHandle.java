@@ -98,7 +98,7 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Issue>> {
     }
 
     /**
-     * Returns the issue card handle of a issue associated with the {@code index} in the list.
+     * Returns the issue card handle of an issue associated with the {@code index} in the list.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
     public PersonCardHandle getPersonCardHandle(int index) {

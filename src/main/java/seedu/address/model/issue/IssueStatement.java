@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.AppUtil;
 
 /**
- * Represents a Issue's name in the address book.
+ * Represents a Issue's name in the saveIt.
  * Guarantees: immutable; is valid as declared in {@link #isValidIssueStatement(String)}
  */
 public class IssueStatement {

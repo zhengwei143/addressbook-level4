@@ -19,7 +19,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ISSUES;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -71,26 +71,26 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         /* Case: redo editing the last issue in the list -> last issue edited again */
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
-        model.updatePerson(
-            getModel().getFilteredPersonList().get(INDEX_FIRST_ISSUE.getZeroBased()), editedIssue);
+        model.updateIssue(
+            getModel().getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased()), editedIssue);
         assertCommandSuccess(command, model, expectedResultMessage);
 
-        /* Case: edit a issue with new values same as existing values -> edited */
+        /* Case: edit an issue with new values same as existing values -> edited */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DESCRIPTION_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandSuccess(command, index, BOB);
 
-        /* Case: edit a issue with new values same as another issue's values but with different name ->
+        /* Case: edit an issue with new values same as another issue's values but with different name ->
         edited */
-        assertTrue(getModel().getSaveIt().getPersonList().contains(BOB));
+        assertTrue(getModel().getSaveIt().getIssueList().contains(BOB));
         index = INDEX_SECOND_PERSON;
-        assertNotEquals(getModel().getFilteredPersonList().get(index.getZeroBased()), BOB);
+        assertNotEquals(getModel().getFilteredIssueList().get(index.getZeroBased()), BOB);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + DESCRIPTION_DESC_BOB
             + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         editedIssue = new PersonBuilder(BOB).withName(VALID_NAME_AMY).build();
         assertCommandSuccess(command, index, editedIssue);
 
-        /* Case: edit a issue with new values same as another issue's values but with different description
+        /* Case: edit an issue with new values same as another issue's values but with different description
          * -> edited
          */
         index = INDEX_SECOND_PERSON;
@@ -102,7 +102,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         /* Case: clear tags -> cleared */
         index = INDEX_FIRST_ISSUE;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
-        Issue issueToEdit = getModel().getFilteredPersonList().get(index.getZeroBased());
+        Issue issueToEdit = getModel().getFilteredIssueList().get(index.getZeroBased());
         editedIssue = new PersonBuilder(issueToEdit).withTags().build();
         assertCommandSuccess(command, index, editedIssue);
 
@@ -112,9 +112,9 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         /* Case: filtered issue list, edit index within bounds of address book and issue list -> edited */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         index = INDEX_FIRST_ISSUE;
-        assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
+        assertTrue(index.getZeroBased() < getModel().getFilteredIssueList().size());
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB;
-        issueToEdit = getModel().getFilteredPersonList().get(index.getZeroBased());
+        issueToEdit = getModel().getFilteredIssueList().get(index.getZeroBased());
         editedIssue = new PersonBuilder(issueToEdit).withName(VALID_NAME_BOB).build();
         assertCommandSuccess(command, index, editedIssue);
 
@@ -122,14 +122,14 @@ public class EditCommandSystemTest extends SaveItSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getSaveIt().getPersonList().size();
+        int invalidIndex = getModel().getSaveIt().getIssueList().size();
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
-            Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            Messages.MESSAGE_INVALID_Issue_DISPLAYED_INDEX);
 
-        /* --------------------- Performing edit operation while a issue card is selected
+        /* --------------------- Performing edit operation while an issue card is selected
         -------------------------- */
 
-        /* Case: selects first card in the issue list, edit a issue -> edited, card selection remains
+        /* Case: selects first card in the issue list, edit an issue -> edited, card selection remains
         unchanged but
          * browser url changes
          */
@@ -154,9 +154,9 @@ public class EditCommandSystemTest extends SaveItSystemTest {
             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 
         /* Case: invalid index (size + 1) -> rejected */
-        invalidIndex = getModel().getFilteredPersonList().size() + 1;
+        invalidIndex = getModel().getFilteredIssueList().size() + 1;
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
-            Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            Messages.MESSAGE_INVALID_Issue_DISPLAYED_INDEX);
 
         /* Case: missing index -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + NAME_DESC_BOB,
@@ -181,30 +181,30 @@ public class EditCommandSystemTest extends SaveItSystemTest {
             EditCommand.COMMAND_WORD + " " + INDEX_FIRST_ISSUE.getOneBased() + INVALID_TAG_DESC,
             Tag.MESSAGE_TAG_CONSTRAINTS);
 
-        /* Case: edit a issue with new values same as another issue's values -> rejected */
+        /* Case: edit an issue with new values same as another issue's values -> rejected */
         executeCommand(PersonUtil.getAddCommand(BOB));
-        assertTrue(getModel().getSaveIt().getPersonList().contains(BOB));
+        assertTrue(getModel().getSaveIt().getIssueList().contains(BOB));
         index = INDEX_FIRST_ISSUE;
-        assertFalse(getModel().getFilteredPersonList().get(index.getZeroBased()).equals(BOB));
+        assertFalse(getModel().getFilteredIssueList().get(index.getZeroBased()).equals(BOB));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DESCRIPTION_DESC_BOB
             + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_ISSUE);
 
-        /* Case: edit a issue with new values same as another issue's values but with different tags -> rejected */
+        /* Case: edit an issue with new values same as another issue's values but with different tags -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DESCRIPTION_DESC_BOB
             + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_ISSUE);
 
-        /* Case: edit a issue with new values same as another issue's values but with different address -> rejected */
+        /* Case: edit an issue with new values same as another issue's values but with different address -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DESCRIPTION_DESC_BOB
             + ADDRESS_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_ISSUE);
 
         /* Case: edit an issue with new values same as another issue's values but with different description ->
          rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DESCRIPTION_DESC_AMY
             + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_ISSUE);
     }
 
     /**
@@ -230,9 +230,9 @@ public class EditCommandSystemTest extends SaveItSystemTest {
     private void assertCommandSuccess(String command, Index toEdit, Issue editedIssue,
         Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
-        expectedModel.updatePerson(expectedModel.getFilteredPersonList().get(toEdit.getZeroBased()),
+        expectedModel.updateIssue(expectedModel.getFilteredIssueList().get(toEdit.getZeroBased()),
             editedIssue);
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredIssueList(PREDICATE_SHOW_ALL_ISSUES);
 
         assertCommandSuccess(command, expectedModel,
             String.format(EditCommand.MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue),
@@ -263,7 +263,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
         Index expectedSelectedCardIndex) {
         executeCommand(command);
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredIssueList(PREDICATE_SHOW_ALL_ISSUES);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
         if (expectedSelectedCardIndex != null) {

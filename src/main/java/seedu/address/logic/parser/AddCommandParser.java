@@ -40,13 +40,13 @@ public class AddCommandParser implements Parser<AddCommand> {
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        IssueStatement name = ParserUtil.parseName(argMultimap.getValue(PREFIX_STATEMENT).get());
+        IssueStatement statement = ParserUtil.parseName(argMultimap.getValue(PREFIX_STATEMENT).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         List<Solution> solutionList = ParserUtil
                 .parseSolutions(argMultimap.getAllValues(PREFIX_SOLUTION_LINK));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Issue issue = new Issue(name, description, solutionList, tagList);
+        Issue issue = new Issue(statement, description, solutionList, tagList);
 
         solutionList.forEach(System.out::println);
         return new AddCommand(issue);

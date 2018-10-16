@@ -24,6 +24,9 @@ import seedu.address.model.issue.Tag;
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
+    private final String dummyStatement = "dummyStatement";
+    private final String dummyDescription = "dummyDescription";
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand and returns an AddCommand
      * object for execution.
@@ -37,8 +40,21 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_SOLUTION_LINK, PREFIX_REMARK)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            if (arePrefixesPresent(argMultimap, PREFIX_SOLUTION_LINK, PREFIX_REMARK) && !arePrefixesPresent(argMultimap,
+                    PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_TAG)) {
+                List<Solution> solutionList = ParserUtil
+                        .parseSolutions(argMultimap.getValue(PREFIX_SOLUTION_LINK).get(),
+                                argMultimap.getValue(PREFIX_REMARK).get());
+                Set<Tag> dummyTagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+                Issue issue = new Issue(new IssueStatement(dummyStatement), new Description(dummyDescription), solutionList, dummyTagList);
+
+                return new AddCommand(issue);
+            }
+            else {
+                throw new ParseException(
+                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            }
         }
 
         IssueStatement statement = ParserUtil.parseName(argMultimap.getValue(PREFIX_STATEMENT).get());
@@ -50,7 +66,6 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Issue issue = new Issue(statement, description, solutionList, tagList);
 
-        solutionList.forEach(System.out::println);
         return new AddCommand(issue);
     }
 

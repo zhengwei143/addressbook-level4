@@ -12,6 +12,7 @@ import seedu.address.model.SaveIt;
 import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
 import seedu.address.model.issue.Solution;
+import seedu.address.model.issue.solution.SolutionLink;
 import seedu.address.model.issue.Tag;
 
 /**
@@ -50,8 +51,19 @@ public class SampleDataUtil {
     public static List<Solution> getSolutionSet(String... strings) {
         List<Solution> solutionList = new ArrayList<>();
         for (String solutions : strings) {
-            String link = solutions.substring(0, solutions.indexOf(' '));
-            String remark = solutions.substring(solutions.indexOf(' ') + 1);
+            int index = solutions.indexOf(' ');
+            String link = "";
+            String remark = "";
+            if (index != -1) {
+                link = solutions.substring(0, solutions.indexOf(' '));
+                remark = solutions.substring(solutions.indexOf(' ') + 1);
+            } else {
+                if (SolutionLink.isValidLink(solutions)) {
+                    link = solutions;
+                } else {
+                    remark = solutions;
+                }
+            }
             solutionList.add(new Solution(link, remark));
         }
         return solutionList;

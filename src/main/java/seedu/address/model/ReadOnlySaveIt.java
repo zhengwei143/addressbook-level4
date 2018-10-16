@@ -13,4 +13,5 @@ public interface ReadOnlySaveIt {
      */
     ObservableList<Issue> getIssueList();
 
+    int getCurrentDirectory();
 }

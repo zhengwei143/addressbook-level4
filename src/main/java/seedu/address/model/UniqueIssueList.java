@@ -46,8 +46,12 @@ public class UniqueIssueList implements Iterable<Issue> {
         internalList.add(toAdd);
     }
 
+    public int size() {
+        return internalList.size();
+    }
+
     /**
-     * Replaces the issue {@code target} in the list with {@code editedIssue}.
+     * * Replaces the issue {@code target} in the list with {@code editedIssue}.
      * {@code target} must exist in the list.
      * The issue identity of {@code editedIssue} must not be the same as another existing issue in the list.
      */

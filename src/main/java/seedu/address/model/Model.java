@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 
 /**
  * The API of the Model component.
@@ -13,6 +14,9 @@ public interface Model {
 
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlySaveIt newData);
+
+    /** Reset the current directory. */
+    void resetDirectory(Index targetIndex);
 
     /** Returns the SaveIt */
     ReadOnlySaveIt getSaveIt();

@@ -20,7 +20,7 @@ import seedu.address.commons.util.CollectionUtil;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private static final int ROOT_DIRECTORY = 0;
+    private static final Index ROOT_DIRECTORY = Index.fromZeroBased(0);
     private final VersionedSaveIt versionedSaveIt;
     private final FilteredList<Issue> filteredIssues;
 
@@ -50,7 +50,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetDirectory(Index targetIndex) {
         if (targetIndex.equals(ROOT_DIRECTORY)) {
-            versionedSaveIt.setCurrentDirectory(ROOT_DIRECTORY);
+            versionedSaveIt.setCurrentDirectory(ROOT_DIRECTORY.getZeroBased());
         } else {
             versionedSaveIt.setCurrentDirectory(targetIndex.getOneBased());
         }

@@ -260,17 +260,17 @@ Since list should not modify the sorting inside storage, IndicateSaveItChanged s
 There will only be 3 kinds of order that the list can be shown in, as proposed in the following paragraph.
 
 * List by chronological order **(default)** +
-  This order follows how the data is stored in Model, reflecting the user's learning journey.
+  This order follows how the data is stored in Model, reflecting the user's learning journey. +
   There is no need to implement new Comparator for that.
 
 * List by Tag +
-  Tag is mainly used as a way to distinguish different kind of problems, such as Java problems and C problems. This order can help users to identify the issues quickly.
-  This order requires the tag attribute of every issue to be tracked. A simple idea is to get the TagList and sort all issues according to the tags.
+  Tag is mainly used as a way to distinguish different kind of problems, such as Java problems and C problems. This order can help users to identify the issues quickly. +
+  This order requires the tag attribute of every issue to be tracked. A simple idea is to get the TagList and sort all issues according to the tags. +
   Those issues without a tag should be put at the end of the lists.
 
 * List by search frequency +
   Search frequency can reflect the importance of different issues. This order can help users to review important issues more easily.
-  Search frequency tracker is needed for this list order. It can be considered as an attribute just like tags, thus a Comparator which is similar to that used in List by Tag can be used here.
+  Search frequency tracker is needed for this list order. It can be considered as an attribute just like tags, thus a Comparator which is similar to that used in List by Tag can be used here. +
 
 The following sequence diagram illustrates how the mechanism works:
 

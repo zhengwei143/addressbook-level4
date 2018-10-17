@@ -8,7 +8,6 @@ import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.Prefix;
 
 /**

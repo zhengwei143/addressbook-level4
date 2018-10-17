@@ -13,7 +13,7 @@ import seedu.address.model.issue.Solution;
 /**
  * An UI component that displays information of a {@code Issue}.
  */
-public class PersonCard extends UiPart<Region> {
+public class IssueCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
@@ -40,7 +40,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public PersonCard(Issue issue, int displayedIndex) {
+    public IssueCard(Issue issue, int displayedIndex) {
         super(FXML);
         this.issue = issue;
         id.setText(displayedIndex + ". ");
@@ -64,12 +64,12 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof IssueCard)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
+        IssueCard card = (IssueCard) other;
         return id.getText().equals(card.id.getText())
                 && issue.equals(card.issue);
     }

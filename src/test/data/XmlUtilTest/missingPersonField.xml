@@ -2,5 +2,6 @@
 <!-- Issue with missing statement field -->
 <issue>
     <description>9482424</description>
+    <solutions>webSite remark</solutions>
     <tagged>friends</tagged>
 </issue>

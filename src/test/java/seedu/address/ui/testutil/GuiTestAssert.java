@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.IssueCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import seedu.address.model.Issue;
@@ -17,10 +17,10 @@ public class GuiTestAssert {
     /**
      * Asserts that {@code actualCard} displays the same values as {@code expectedCard}.
      */
-    public static void assertCardEquals(PersonCardHandle expectedCard, PersonCardHandle actualCard) {
+    public static void assertCardEquals(IssueCardHandle expectedCard, IssueCardHandle actualCard) {
         assertEquals(expectedCard.getId(), actualCard.getId());
-        assertEquals(expectedCard.getAddress(), actualCard.getAddress());
-        assertEquals(expectedCard.getName(), actualCard.getName());
+        assertEquals(expectedCard.getSolutions(), actualCard.getSolutions());
+        assertEquals(expectedCard.getStatement(), actualCard.getStatement());
         assertEquals(expectedCard.getDescription(), actualCard.getDescription());
         assertEquals(expectedCard.getTags(), actualCard.getTags());
     }
@@ -28,8 +28,8 @@ public class GuiTestAssert {
     /**
      * Asserts that {@code actualCard} displays the details of {@code expectedIssue}.
      */
-    public static void assertCardDisplaysPerson(Issue expectedIssue, PersonCardHandle actualCard) {
-        assertEquals(expectedIssue.getStatement().issue, actualCard.getName());
+    public static void assertCardDisplaysIssue(Issue expectedIssue, IssueCardHandle actualCard) {
+        assertEquals(expectedIssue.getStatement().issue, actualCard.getStatement());
         assertEquals(expectedIssue.getDescription().value, actualCard.getDescription());
         assertEquals(expectedIssue.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
                 actualCard.getTags());
@@ -42,7 +42,7 @@ public class GuiTestAssert {
     public static void assertListMatching(PersonListPanelHandle personListPanelHandle, Issue... issues) {
         for (int i = 0; i < issues.length; i++) {
             personListPanelHandle.navigateToCard(i);
-            assertCardDisplaysPerson(issues[i], personListPanelHandle.getPersonCardHandle(i));
+            assertCardDisplaysIssue(issues[i], personListPanelHandle.getPersonCardHandle(i));
         }
     }
 

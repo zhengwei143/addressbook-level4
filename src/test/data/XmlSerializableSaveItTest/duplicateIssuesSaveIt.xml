@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <saveit>
-
     <issues>
-        <issue>Alice Pauline</issue>
         <statement>Alice Pauline</statement>
         <description>94351253</description>
         <tagged>friends</tagged>
@@ -13,5 +11,4 @@
         <statement>Alice Pauline</statement>
         <description>94351253</description>
     </issues>
-
 </saveit>

@@ -34,7 +34,7 @@ public class IssueUtil {
         sb.append(PREFIX_STATEMENT + issue.getStatement().issue + " ");
         sb.append(PREFIX_DESCRIPTION + issue.getDescription().value + " ");
         issue.getSolutions().stream().forEach(
-            s -> sb.append(PREFIX_SOLUTION_LINK + s.getLink().value + " " + s.getRemark().value + " ")
+            s -> sb.append(PREFIX_SOLUTION_LINK + s.getLink().value + " " + PREFIX_REMARK + s.getRemark().value + " ")
         );
         issue.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
@@ -57,7 +57,9 @@ public class IssueUtil {
             } else {
                 solutions.forEach(
                     s -> sb.append(PREFIX_SOLUTION_LINK)
-                            .append(s.getLink().value).append(s.getRemark().value).append(" ")
+                            .append(s.getLink().value).append(" ")
+                            .append(PREFIX_REMARK)
+                            .append(s.getRemark().value).append(" ")
                 );
             }
         }

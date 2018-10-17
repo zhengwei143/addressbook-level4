@@ -78,10 +78,13 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (solutions.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> solutionList =
-            solutions.size() == 1 && solutions.contains("") ? Collections.emptySet() : solutions;
         //TODO:
-        return Optional.of(ParserUtil.parseSolutions("ew", "ewe"));
+        if(solutions.size() == 1 && solutions.contains("")) {
+            return Optional.empty();
+        } else {
+            List<String> solutionList = new ArrayList<>(solutions);
+            return Optional.of(ParserUtil.parseSolutions(solutionList.get(0), solutionList.get(1)));
+        }
     }
 
     /**

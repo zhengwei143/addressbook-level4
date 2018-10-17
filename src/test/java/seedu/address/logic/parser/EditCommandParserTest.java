@@ -102,17 +102,18 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_C + TAG_DESC_UI
-            + SOLUTION_DESC_JAVA + STATEMENT_DESC_JAVA + CommandTestUtil.TAG_DESC_SYNTAX;
+            + STATEMENT_DESC_JAVA + CommandTestUtil.TAG_DESC_SYNTAX;
 
         EditCommand.EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder()
                 .withStatement(VALID_STATEMENT_JAVA)
                 .withDescription(VALID_DESCRIPTION_C)
-                .withSolutions(VALID_SOLUTION_JAVA)
                 .withTags(VALID_TAG_UI, VALID_TAG_SYNTAX).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
+
+    // TODO: test solution-level edit
 
     @Test
     public void parse_someFieldsSpecified_success() {
@@ -142,11 +143,7 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // solution
-        userInput = targetIndex.getOneBased() + SOLUTION_DESC_JAVA;
-        descriptor = new EditPersonDescriptorBuilder().withSolutions(VALID_SOLUTION_JAVA).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        // TODO: solution
 
         // tags
         userInput = targetIndex.getOneBased() + CommandTestUtil.TAG_DESC_UI;
@@ -158,20 +155,21 @@ public class EditCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_ISSUE;
-        String userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_JAVA + SOLUTION_DESC_JAVA
-                + CommandTestUtil.TAG_DESC_UI + DESCRIPTION_DESC_JAVA + SOLUTION_DESC_JAVA
+        String userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_JAVA
+                + CommandTestUtil.TAG_DESC_UI + DESCRIPTION_DESC_JAVA
                 + CommandTestUtil.TAG_DESC_SYNTAX
-                + DESCRIPTION_DESC_C + SOLUTION_DESC_C + TAG_DESC_UI;
+                + DESCRIPTION_DESC_C + TAG_DESC_UI;
 
         EditCommand.EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder()
                 .withDescription(VALID_DESCRIPTION_C)
-                .withSolutions(VALID_SOLUTION_JAVA, VALID_SOLUTION_JAVA, VALID_SOLUTION_C)
                 .withTags(VALID_TAG_SYNTAX, VALID_TAG_UI)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
+
+    // TODO: test solution-level multiple repeated fields edit
 
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
@@ -184,10 +182,8 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + INVALID_DESCRIPTION_DESC + SOLUTION_DESC_C
-                + DESCRIPTION_DESC_C;
-        descriptor = new EditPersonDescriptorBuilder().withSolutions(VALID_SOLUTION_C)
-                .withDescription(VALID_DESCRIPTION_C).build();
+        userInput = targetIndex.getOneBased() + INVALID_DESCRIPTION_DESC + DESCRIPTION_DESC_C + TAG_DESC_UI;
+        descriptor = new EditPersonDescriptorBuilder().withDescription(VALID_DESCRIPTION_C).withTags(VALID_TAG_UI).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

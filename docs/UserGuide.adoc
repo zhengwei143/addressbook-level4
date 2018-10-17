@@ -219,7 +219,6 @@ Find issues whose statement and description contains any of the given search que
 
 Format: `find [KEYWORDS...]`
 
-
 [TIP]
 ====
 * The issue statement and description contain the KEYWORD will be shown in the displayed issue list
@@ -236,11 +235,11 @@ Examples:
 ====
 * The search is case insensitive. e.g hans will match Hans
 * The order of the keywords does not matter. e.g. ‘kill port’ will match ‘port kill’
-* The Search will search through all the issue statement and description.
-* Issues matching at least one keyword will be returned (i.e. OR search).
-* Search results will be ordered based on the chronological order.
-====
-
+* Searches through the issue statement or description.
+* The keywords can partially match the statement or description.
+* Issues matching at least one keyword will be returned.
+* Searching the keyword will increment the search frequency of the issue (so that it can be ordered accordingly later on).
+=====
 
 === Returning to home directory  : `home`
 
@@ -415,7 +414,19 @@ Examples:
 
 
 
+=== Autosuggestion of (existing) Tags [coming in v1.3]
 
+To prevent the user from creating many similar tags / duplicates, whenever the user creates a record with a tag, or modifies a record’s tag, the application searches for similar tags in the system and prompts the user with a list of similar tags.
+
+Example:
+
+*   add i/NEW_ISSUE t/java
+*   Similar tags have been found that have matched with [java], do you mean?
+**   Javascript
+**   Java9
+**   No, i would like to create a new tag [java]
+*   tag 1 : chooses to replace [java] with [javascript]
+*   tag 3 : chooses to create a new tag [java]
 
 === Team based - Creating / Switching projects [coming in v2.0]
 Records are organized into projects, that way, each project only stores information (bugs/issues) relevant to that project.

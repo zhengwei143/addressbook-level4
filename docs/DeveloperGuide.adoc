@@ -243,6 +243,30 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::list[]
+=== List feature
+==== Current Implementation
+
+The current list mechanism inherits the same implementation from AddressBook.
+
+==== Design Considerations
+
+===== List by a specific order
+
+This mechanism relies most on the logic component. ListCommandParser.java need to be implemented to identify if there is a sorting requirement.
+
+Since list should not modify the sorting inside storage, IndicateSaveItChanged should not be raised and this command should not change Model.
+
+There will only be 3 kinds of order that the list can be shown in, as proposed in the following paragraph.
+
+* List by chronological order **(default)**
+* List by Tag
+* List by search frequency
+
+The following sequence diagram illustrates how the mechanism works:
+
+image::ListByOrderCommandSequenceDiagram.png[width="800"]
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation

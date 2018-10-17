@@ -48,12 +48,12 @@ public class EditCommand extends Command {
         + PREFIX_STATEMENT + "reducer "
         + PREFIX_DESCRIPTION + "how to use reducer in python "
         + PREFIX_SOLUTION_LINK + "Stackoverflow link "
-        + PREFIX_REMARK + "performing some computation on a list and returning the result "
+        + PREFIX_REMARK + "performing/**/ some computation on a list and returning the result "
         + PREFIX_TAG + "python ";
 
-    public static final String MESSAGE_EDIT_ISSUE_SUCCESS = "Edited Issue: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt."; //TODO: necessary?
+    private static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt."; //TODO: necessary?
+    private static final String MESSAGE_EDIT_ISSUE_SUCCESS = "Edited Issue: %1$s";
+    private static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final Index index;
     private final EditIssueDescriptor editIssueDescriptor;
@@ -74,18 +74,20 @@ public class EditCommand extends Command {
         Issue issueToEdit;
         requireNonNull(model);
         List<Issue> lastShownList = model.getFilteredIssueList();
-        int solutionListSize = lastShownList.get(model.getCurrentDirectory()-1).getSolutions().size();
-        if (index.getZeroBased() >= solutionListSize) {
-            throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
-        }
-
         int currentDirectory = model.getCurrentDirectory();
-        if (currentDirectory == 0 ){
+
+
+
+        if (currentDirectory == 0) {
             issueToEdit = lastShownList.get(index.getZeroBased());
         } else {
-            issueToEdit = lastShownList.get(model.getCurrentDirectory()-1);
+            int solutionListSize = lastShownList.get(model.getCurrentDirectory() - 1).getSolutions().size();
+            if (index.getZeroBased() >= solutionListSize) {
+                throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
+            }
+            issueToEdit = lastShownList.get(model.getCurrentDirectory() - 1);
         }
-        Issue editedIssue = createEditedIssue(index, issueToEdit, editIssueDescriptor);
+        Issue editedIssue = createEditedIssue(issueToEdit, editIssueDescriptor);
 
         if (!issueToEdit.isSameIssue(editedIssue) && model.hasIssue(editedIssue)) {
             throw new CommandException(MESSAGE_DUPLICATE_ISSUE);
@@ -101,7 +103,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Issue} with the details of {@code issueToEdit} edited with {@code
      * editIssueDescriptor}.
      */
-    private static Issue createEditedIssue(Index index, Issue issueToEdit, EditIssueDescriptor editIssueDescriptor) {
+    private static Issue createEditedIssue(Issue issueToEdit, EditIssueDescriptor editIssueDescriptor) {
         assert issueToEdit != null;
 
         List<Solution> updatedSolutions;
@@ -121,6 +123,10 @@ public class EditCommand extends Command {
         return new Issue(updatedName, updatedDescription, updatedSolutions, updatedTags);
     }
 
+    /**
+     * Creates and returns a {@code index} with the details of {@code issueToEdit} edited with {@code
+     * editIssueDescriptor}.
+     */
     private static Solution processNewSolution(int index, Issue issueToEdit, Solution newSolution) {
         Solution oldSolution = issueToEdit.getSolutions().get(index);
         Solution updatedSolution;

@@ -4,7 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_STATEMENT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.SOLUTION_DESC_C;
 import static seedu.address.logic.commands.CommandTestUtil.SOLUTION_DESC_JAVA;
@@ -146,7 +146,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid name -> rejected */
-        command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + DESCRIPTION_DESC_JAVA + SOLUTION_DESC_JAVA;
+        command = AddCommand.COMMAND_WORD + INVALID_STATEMENT_DESC + DESCRIPTION_DESC_JAVA + SOLUTION_DESC_JAVA;
         assertCommandFailure(command, IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS);
 
         /* Case: invalid descriptions -> rejected */

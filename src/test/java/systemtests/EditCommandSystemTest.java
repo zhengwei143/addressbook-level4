@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_STATEMENT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.SOLUTION_DESC_C;
 import static seedu.address.logic.commands.CommandTestUtil.SOLUTION_DESC_JAVA;
@@ -173,7 +173,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
 
         /* Case: invalid name -> rejected */
         assertCommandFailure(
-            EditCommand.COMMAND_WORD + " " + INDEX_FIRST_ISSUE.getOneBased() + INVALID_NAME_DESC,
+            EditCommand.COMMAND_WORD + " " + INDEX_FIRST_ISSUE.getOneBased() + INVALID_STATEMENT_DESC,
             IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS);
 
         /* Case: invalid description -> rejected */

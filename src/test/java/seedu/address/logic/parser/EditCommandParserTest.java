@@ -4,7 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_STATEMENT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.STATEMENT_DESC_JAVA;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_UI;
@@ -69,7 +69,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC,
+        assertParseFailure(parser, "1" + INVALID_STATEMENT_DESC,
             IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_DESCRIPTION_DESC,
             Description.MESSAGE_DESCRIPTION_CONSTRAINTS); // invalid description
@@ -91,7 +91,7 @@ public class EditCommandParserTest {
             Tag.MESSAGE_TAG_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + VALID_SOLUTION_JAVA + VALID_DESCRIPTION_JAVA,
+        assertParseFailure(parser, "1" + INVALID_STATEMENT_DESC + VALID_SOLUTION_JAVA + VALID_DESCRIPTION_JAVA,
             IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS);
     }
 

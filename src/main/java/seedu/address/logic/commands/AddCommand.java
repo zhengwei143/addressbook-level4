@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -27,12 +25,6 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_STATEMENT + "ISSUE_STATEMENT "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
-            + "[" + PREFIX_SOLUTION_LINK + "SOLUTION_LINK " + PREFIX_REMARK + "SOLUTION_REMARK ]...\n"
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_STATEMENT + "algorithm "
-            + PREFIX_DESCRIPTION + "This is an algorithm problem "
-            + PREFIX_SOLUTION_LINK + "StackOverflow new Solution"
             + PREFIX_TAG + "algorithm "
             + PREFIX_TAG + "java";
     public static final String MESSAGE_ISSUE_SUCCESS = "New issue added: %1$s";

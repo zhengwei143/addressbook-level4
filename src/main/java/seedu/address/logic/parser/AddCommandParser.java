@@ -24,8 +24,10 @@ import seedu.address.model.issue.Tag;
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
-    private final String dummyStatement = "dummyStatement";
-    private final String dummyDescription = "dummyDescription";
+    private static final String dummyStatement = "dummyStatement";
+    private static final String dummyDescription = "dummyDescription";
+    private static final String dummySolutionLink = "dummySolutionLink";
+    private static final String dummySolutionRemark = "dummySolutionRemark";
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand and returns an AddCommand
@@ -38,8 +40,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_SOLUTION_LINK,
                         PREFIX_REMARK, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_SOLUTION_LINK,
-                PREFIX_REMARK) || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_STATEMENT, PREFIX_DESCRIPTION) || !argMultimap.getPreamble().isEmpty()) {
             if (arePrefixesPresent(argMultimap, PREFIX_SOLUTION_LINK, PREFIX_REMARK) && !arePrefixesPresent(
                     argMultimap, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_TAG)) {
                 List<Solution> solutionList = ParserUtil.parseSolutions(argMultimap.getValue(PREFIX_SOLUTION_LINK)
@@ -55,11 +56,16 @@ public class AddCommandParser implements Parser<AddCommand> {
                         String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
         }
+        else {
+            if (arePrefixesPresent(argMultimap, PREFIX_SOLUTION_LINK, PREFIX_REMARK)) {
+                throw new ParseException(
+                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            }
+        }
 
         IssueStatement statement = ParserUtil.parseName(argMultimap.getValue(PREFIX_STATEMENT).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
-        List<Solution> solutionList = ParserUtil.parseSolutions(argMultimap.getValue(PREFIX_SOLUTION_LINK).get(),
-                        argMultimap.getValue(PREFIX_REMARK).get());
+        List<Solution> solutionList = ParserUtil.parseSolutions(dummySolutionLink,dummySolutionRemark);
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Issue issue = new Issue(statement, description, solutionList, tagList);

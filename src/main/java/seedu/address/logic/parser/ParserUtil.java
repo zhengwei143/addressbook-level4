@@ -26,6 +26,9 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
+    private static final String dummySolutionLink = "dummySolutionLink";
+    private static final String dummySolutionRemark = "dummySolutionRemark";
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces
      * will be trimmed.
@@ -93,6 +96,9 @@ public class ParserUtil {
     public static List<Solution> parseSolutions(String solutionLink, String solutionRemark) throws ParseException {
         requireAllNonNull(solutionLink, solutionRemark);
         final List<Solution> solutionList = new ArrayList<>();
+        if (solutionLink.equals(dummySolutionLink) && solutionRemark.equals(dummySolutionRemark)){
+            return solutionList;
+        }
         String trimmedSolutionLink = solutionLink.trim();
         String trimmedRemark = solutionRemark.trim();
         if (!SolutionLink.isValidLink(trimmedSolutionLink)) {

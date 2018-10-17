@@ -2,7 +2,6 @@ package seedu.address.commons.util;
 
 import static org.junit.Assert.assertNotNull;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -13,9 +12,8 @@ public class AppUtilTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    @Ignore
     public void getImage_exitingImage() {
-        assertNotNull(AppUtil.getImage("/images/SaveIt_logo.png"));
+        assertNotNull(AppUtil.getImage("/images/saveIt_logo.png"));
     }
 
     @Test

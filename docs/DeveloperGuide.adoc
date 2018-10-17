@@ -12,7 +12,7 @@ ifdef::env-github[]
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/CS2103-AY1819S1-T12-4/main
+:repoURL: https://github.com/CS2103-AY1819S1-T12-4/tree/master
 
 By: `Team T12-4`      Since: `Sep 2018`      Licence: `MIT`
 
@@ -144,7 +144,7 @@ Events-Driven nature of the design
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command `delete 1`.
 
 .Component interactions for `delete 1` command (part 1)
-image::SDforDeletePerson.png[width="800"]
+image::SDforDeleteIssue.png[width="800"]
 
 [NOTE]
 Note how `Model` simply raises a `SaveItChangedEvent` when the SaveIt data is changed, instead of asking the `Storage` to save the updates to the hard disk.
@@ -152,7 +152,7 @@ Note how `Model` simply raises a `SaveItChangedEvent` when the SaveIt data is ch
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
 .Component interactions for `delete 1` command (part 2)
-image::SDforDeletePersonEventHandling.png[width="800"]
+image::SDforDeleteIssueEventHandling.png[width="800"]
 
 [NOTE]
 Note how event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
@@ -874,33 +874,75 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `saveit` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `SaveIt` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Add statement
+=== Use case: Add issue
 
 *MSS*
 
-1. User requests to add a new statement
-2. User add statement in command line
-3. User can choose add statement statement, multiple email links, remarks and tag.
-4. The ‘Success’ message shown on the screen.
+1. User requests to add a new issue
+2. SaveIt add the issue to its storage
+3. The ‘Success’ message shown on the screen.
 +
 Use case ends.
 
+*Extensions*
+
 [none]
+* 2a. Command is invalid.
++
+[none]
+** 2a1. The 'Invalid Command' message shown on the screen.
++
+Use case resumes at step 1.
 
 [discrete]
-=== Use case: Edit statement
+=== Use case: Add solution
+
+*MSS*
+
+1. User request to list issues
+2. SaveIt shows a list of issues
+3. User select a specific issue in the list
+4. SaveIt shows the solution lists of the selected issue
+5. User requests to add a new solution to this issue
+6. SaveIt adds the solution
+7. The 'Success' message shown on the screen.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. The 'Invalid Index' message shown on the screen.
++
+Use case resumes at step 2.
+
+* 5a. Command is invalid.
++
+[none]
+** 5a1. The 'Invalid Command' message shown on the screen.
++
+Use case resumes at step 4.
+
+[discrete]
+=== Use case: Edit issue
 
 *MSS*
 
 1. User requests to list issues
 2. SaveIt shows a list of issues
-3. User requests to edit a specific statement in the list
-4. SaveIt updates the statement
-5. Use case ends.
-6. The ‘Success’ message shown on the screen.
+3. User requests to edit a specific issue in the list
+4. SaveIt updates the issue
+5. The ‘Success’ message shown on the screen.
 +
 Use case ends.
 
@@ -1013,6 +1055,40 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
+=== Adding an issue
+
+. Adding an issue in root directory
+
+.. Prerequisites: User is in root directory
+.. Test case: `add i/problem d/description t/UI`
+   Expected: A new issue with statement and description is added, tagged with UI.
+.. Test case: `add t/UI d/description d/newdescription i/problem`
+   Expected: A new issue with statement and newdescription is added, tagged with UI.
+.. Test case: `add i/proπblem d/description`
+   Expected: No issue is added. Error details shown in the status message. Status bar remains the same.
+.. Test case: `add s/www.example.com r/remark`
+   Expected: No issue is added. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect add commands to try: `add i/problem`, `add i/problem s/link` _{give more}_ +
+   Expected: Similar to previous.
+
+_{ more test cases ... }_
+
+=== Editing an issue
+
+. Editing an issue in root directory
+
+.. Prerequisites: User is in root directory
+.. Test case: `edit 1 i/problem`
+   Expected: First issue is edited. Its new issue statement is problem.
+.. Test case: `edit 1 d/description d/newdescription`
+   Expected: First issue is edited. Its new description is newdescription.
+.. Test case: `edit 1 i/proπblem`
+   Expected: No issue is edited. Error details shown in the status message. Status bar remains the same.
+.. Test case: `edit 1 s/www.example.com r/remark`
+   Expected: No issue is edited. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect add commands to try: `edit i/problem s/link`, `edit x i/problem` (where x is larger than the list size) _{give more}_ +
+   Expected: Similar to previous.
+
 _{ more test cases ... }_
 
 === Deleting an issue
@@ -1023,6 +1099,8 @@ _{ more test cases ... }_
 .. Test case: `delete 1` +
    Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
+   Expected: No statement is deleted. Error details shown in the status message. Status bar remains the same.
+.. Test case: `delete a` +
    Expected: No statement is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.

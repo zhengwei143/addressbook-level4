@@ -32,7 +32,7 @@ SaveIt helps to bridge this gap by:
 
 * Providing a platform to map issues to their solution(s)
 * Providing an internal search functionality to find similar issues and their solutions straight away(v2.0)
-* The storage and search functionalities are further enhanced with a tagging system for further categorization
+* The storage and search functionality are further enhanced with a tagging system for further categorization
 
 == Site Map
 You might find these useful in getting started.

@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.model.SaveItChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
 
@@ -43,6 +44,17 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetData(ReadOnlySaveIt newData) {
         versionedSaveIt.resetData(newData);
         indicateSaveItChanged();
+    }
+
+    @Override
+    public void resetDirectory(Index targetIndex) {
+        versionedSaveIt.setCurrentDirectory(targetIndex.getOneBased());
+        indicateSaveItChanged();
+    }
+
+    @Override
+    public int getCurrentDirectory() {
+        return versionedSaveIt.getCurrentDirectory();
     }
 
     @Override

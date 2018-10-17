@@ -105,6 +105,11 @@ public class SaveItTest {
         public ObservableList<Issue> getIssueList() {
             return issues;
         }
+
+        @Override
+        public int getCurrentDirectory() {
+            return 0;
+        }
     }
 
 }

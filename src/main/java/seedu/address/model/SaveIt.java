@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
  * Wraps all data at the address-book level
@@ -13,6 +14,7 @@ import javafx.collections.ObservableList;
 public class SaveIt implements ReadOnlySaveIt {
 
     private final UniqueIssueList issues;
+    private int currentDirectory;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -23,6 +25,7 @@ public class SaveIt implements ReadOnlySaveIt {
      */
     {
         issues = new UniqueIssueList();
+        currentDirectory = 0;
     }
 
     public SaveIt() {}
@@ -46,12 +49,28 @@ public class SaveIt implements ReadOnlySaveIt {
     }
 
     /**
+     * Update the current directory.
+     * {@code CurrentDirectory} must not exceeds the length of {@code issues}.
+     */
+    public void setCurrentDirectory(int directory) {
+        try {
+            if (currentDirectory > issues.size()) {
+                throw new IllegalValueException("Refer to non-existent directory.");
+            }
+            currentDirectory = directory;
+        } catch (IllegalValueException e) {
+            e.getMessage();
+        }
+    }
+
+    /**
      * Resets the existing data of this {@code SaveIt} with {@code newData}.
      */
     public void resetData(ReadOnlySaveIt newData) {
         requireNonNull(newData);
 
         setIssues(newData.getIssueList());
+        setCurrentDirectory(newData.getCurrentDirectory());
     }
 
     //// issue-level operations
@@ -102,6 +121,11 @@ public class SaveIt implements ReadOnlySaveIt {
     @Override
     public ObservableList<Issue> getIssueList() {
         return issues.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public int getCurrentDirectory() {
+        return currentDirectory;
     }
 
     @Override

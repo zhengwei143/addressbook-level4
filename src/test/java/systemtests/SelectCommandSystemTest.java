@@ -61,8 +61,7 @@ public class SelectCommandSystemTest extends SaveItSystemTest {
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getSaveIt().getIssueList().size();
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex,
-                MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
+        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
 
         /* Case: filtered issue list, select index within bounds of address book and issue list -> selected */
         Index validIndex = Index.fromOneBased(1);
@@ -82,8 +81,7 @@ public class SelectCommandSystemTest extends SaveItSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         invalidIndex = getModel().getFilteredIssueList().size() + 1;
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex,
-                MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
+        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */
         assertCommandFailure(SelectCommand.COMMAND_WORD + " abc",

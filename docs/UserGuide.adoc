@@ -67,13 +67,13 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 === Selecting an issue : `select`
 
-Selects the issue identified by the index number used in the displayed issue list.
+Selects the issue identified by the index number used in the displayed issue list and change the current editing directory to the issue selected.
 Format: `select INDEX`
 
 
 [NOTE]
 ====
-* Selects the issue and loads the first email link of the issue at the specified `INDEX`.
+* Selects the issue and loads the first solution link of the issue at the specified `INDEX`.
 * The index refers to the index number shown in the displayed issue list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ====
@@ -229,6 +229,17 @@ Format: `list freq`
 According to frequency order
 ====
 
+=== Returning to home directory : `home` [coming in v1.2]
+
+Changes the current editing directory to the root directory. Besides, Shows a list of all issues in the issue bookmark by index.
+
+Format: `home`
+
+[TIP]
+====
+All issues are listed in chronological order by default.
+====
+
 === Editing an issue : `edit` [coming in v1.2]
 
 Edits an existing issue in the issue list. +
@@ -350,6 +361,7 @@ e.g. `edit 2 i/exception thrown not handled s/issue solved`
 * *Refactor Tag* `refactor [OLDTAG] [NEWTAG]` +
 e.g. `refactorTag java [null]`
 * *List* : `list`
+* *Home* : `home`
 * *Search* : `search KEYWORD [MORE_KEYWORDS]` +
 e.g. `Search BST`
 * *Select* : `select INDEX` +

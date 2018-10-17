@@ -46,7 +46,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code IssueStatement} of the {@code EditIssueDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withStatement(String name) {
-        descriptor.setName(new IssueStatement(name));
+//        descriptor.setName(new IssueStatement(name));
         return this;
     }
 

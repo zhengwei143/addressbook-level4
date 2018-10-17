@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Ignore;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -66,6 +68,7 @@ public class CommandTestUtil {
             .withTags(VALID_TAG_UI, VALID_TAG_SYNTAX).build();
     }
 
+    @Ignore
     /**
      * Executes the given {@code command}, confirms that <br> - the result message matches {@code expectedMessage} <br>
      * - the {@code actualModel} matches {@code expectedModel} <br> - the {@code actualCommandHistory} remains

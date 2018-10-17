@@ -66,8 +66,7 @@ public class AddCommand extends Command {
         List<Solution> newSolutionList = new ArrayList<>(originalIssue.getSolutions());
         newSolutionList.add(solutionToBeAdded);
         Issue newIssue = new Issue(originalIssue.getStatement(), originalIssue.getDescription(),
-                newSolutionList,
-                originalIssue.getTags());
+                newSolutionList, originalIssue.getTags());
         model.updateIssue(originalIssue, newIssue);
         model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
         model.commitSaveIt();
@@ -79,12 +78,9 @@ public class AddCommand extends Command {
 
         if (addSolution) {
             try {
-                String selectCommand = history.getLastCommand();
-                if (selectCommand.contains("select")) {
-                    int index = Integer.parseInt(
-                            selectCommand.substring(selectCommand.indexOf(" "), selectCommand.length())
-                                    .trim());
-                    addSolutionToIssue(model, index - 1);
+                int issueIndex = model.getCurrentDirectory();
+                if (issueIndex != 0) {
+                    addSolutionToIssue(model, issueIndex);
                     return new CommandResult(String.format(MESSAGE_SOLUTION_SUCCESS, solutionToBeAdded));
                 } else {
                     throw new CommandException(MESSAGE_FAILED_ISSUE);

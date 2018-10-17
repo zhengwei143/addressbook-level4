@@ -207,6 +207,10 @@ image::DeletePersonSdForLogic.png[width="800"]
 .Structure of the Model Component
 image::ModelClassDiagram.png[width="800"]
 
+.Structure of the Model Component
+image::ModelComponentClassBetterOopDiagram.png[width="900"]
+
+
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
 The `Model`,
@@ -219,7 +223,12 @@ The `Model`,
 [NOTE]
 As a more OOP model, we can store a `Tag` list in `SaveIt`, which `Issue` can reference. This would allow `SaveIt` to only require one `Tag` object per unique `Tag`, instead of each `Issue` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
-image:ModelClassBetterOopDiagram.png[width="800"]
+image:ModelComponentClassBetterOopDiagram.png[width="800"]
+
+[NOTE]
+The current model implements a `currentDirectory` to difference edition of issue
+ and edition of solution with the same edit command. Besides, `AddCommand`, `ClearCommand`
+  may also work differently for issues and solutions.
 
 [[Design-Storage]]
 === Storage component
@@ -349,6 +358,34 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 === Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
+
+=== New Command: Home
+
+A new command--`home` is implemented to allow users to return to the root directory after editing a certain issue.
+
+=== GUI Enhancement[Coming in v1.3]
+The  figure below shows the expected GUI for SaveIt v1.3.
+
+.GUI Draft 1
+image::UI_Design.png[width="800"]
+
+In the above figure, it is shown the left column displays the list of all issues,
+ The column in the middle displays solutions of the selected issue. The blank part
+  at bottom right displays the web page of the url as in the solution link.
+
+  *The web page should be able to be accessed via the Internet as well as loaded locally.
+
+For SaveIt v1.4, The list of issues and list of solutions can be displayed in the same
+ column, as shown below, Besides, the display panel will be used to display the website
+ or the content of issue remark.
+
+.GUI Draft 2, scenario 1
+image::UI_Design1.png[width="800"]
+
+.GUI Draft 2, scenario 2
+image::UI_Design2.png[width="800"]
+
+
 
 == Documentation
 

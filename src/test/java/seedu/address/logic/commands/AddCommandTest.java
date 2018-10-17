@@ -105,7 +105,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void resetDirectory(Index targetIndex) {
+        public void resetDirectory(Index targetIndex, boolean rootDirectory) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -136,6 +136,11 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Issue> getFilteredIssueList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void filterIssues(Predicate<Issue> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 

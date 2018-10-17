@@ -80,7 +80,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             return Optional.empty();
         }
         //TODO:
-        if(solutions.size() == 1 && solutions.contains("")) {
+        if (solutions.size() == 1 && solutions.contains("")) {
             return Optional.empty();
         } else {
             List<String> solutionList = new ArrayList<>(solutions);

@@ -62,12 +62,11 @@ public class AddCommand extends Command {
      */
     private void addSolutionToIssue(Model model, int index) {
         List<Issue> lastShownList = model.getFilteredIssueList();
-        Issue originalIssue = lastShownList.get(index);
+        Issue originalIssue = lastShownList.get(index - 1);
         List<Solution> newSolutionList = new ArrayList<>(originalIssue.getSolutions());
         newSolutionList.add(solutionToBeAdded);
         Issue newIssue = new Issue(originalIssue.getStatement(), originalIssue.getDescription(),
-                newSolutionList,
-                originalIssue.getTags());
+                newSolutionList, originalIssue.getTags());
         model.updateIssue(originalIssue, newIssue);
         model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
         model.commitSaveIt();
@@ -76,15 +75,11 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
+        int issueIndex = model.getCurrentDirectory();
         if (addSolution) {
             try {
-                String selectCommand = history.getLastCommand();
-                if (selectCommand.contains("select")) {
-                    int index = Integer.parseInt(
-                            selectCommand.substring(selectCommand.indexOf(" "), selectCommand.length())
-                                    .trim());
-                    addSolutionToIssue(model, index - 1);
+                if (issueIndex != 0) {
+                    addSolutionToIssue(model, issueIndex);
                     return new CommandResult(String.format(MESSAGE_SOLUTION_SUCCESS, solutionToBeAdded));
                 } else {
                     throw new CommandException(MESSAGE_FAILED_ISSUE);

@@ -42,8 +42,8 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_STATEMENT, PREFIX_DESCRIPTION) || !argMultimap
                 .getPreamble().isEmpty()) {
-            if (arePrefixesPresent(argMultimap, PREFIX_SOLUTION_LINK, PREFIX_REMARK) && !arePrefixesPresent(
-                    argMultimap, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_TAG)) {
+            if (arePrefixesPresent(argMultimap, PREFIX_SOLUTION_LINK, PREFIX_REMARK)
+                    && !argMultimap.getValue(PREFIX_TAG).isPresent()) {
                 List<Solution> solutionList = ParserUtil.parseSolutions(argMultimap.getValue(PREFIX_SOLUTION_LINK)
                         .get(), argMultimap.getValue(PREFIX_REMARK).get());
                 Set<Tag> dummyTagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));

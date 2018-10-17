@@ -52,32 +52,47 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt."; //TODO: necessary?
 
-    private final Index index;
+    private Index index;
+    private int dir;
     private final EditIssueDescriptor editIssueDescriptor;
 
     /**
-     * @param index of the issue in the filtered issue list to edit
+     * @param index
      * @param editIssueDescriptor details to edit the issue with
      */
     public EditCommand(Index index, EditIssueDescriptor editIssueDescriptor) {
-        requireNonNull(index);
         requireNonNull(editIssueDescriptor);
-
         this.index = index;
-        this.editIssueDescriptor = new EditIssueDescriptor(editIssueDescriptor);
+        this.editIssueDescriptor = editIssueDescriptor;
     }
+
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Issue> lastShownList = model.getFilteredIssueList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
+        System.out.println("current direcotry1: "  + model.getCurrentDirectory());
+
+        List<Issue> lastShownList = model.getFilteredIssueList();
+        System.out.println("check size in execute " + lastShownList.size());
+        int directory = model.getCurrentDirectory();
+        EditIssueDescriptor newEditDescriptor;
+
+        if(dir == 0) {
+            // in the home directory, only change the statement and description
+            System.out.println("dir ===== 0");
+            if (index.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
+            }
+        } else {
+            System.out.println("dir !!!!==== 0");
+            // change solution and remark
+//            newEditDescriptor = new EditIssueDescriptor(directory, , editIssueDescriptor);
         }
+        newEditDescriptor = new EditIssueDescriptor(editIssueDescriptor);
 
         Issue issueToEdit = lastShownList.get(index.getZeroBased());
-        Issue editedIssue = createEditedIssue(issueToEdit, editIssueDescriptor);
+        Issue editedIssue = createEditedIssue(issueToEdit, newEditDescriptor);
 
         if (!issueToEdit.isSameIssue(editedIssue) && model.hasIssue(editedIssue)) {
             throw new CommandException(MESSAGE_DUPLICATE_ISSUE);
@@ -86,6 +101,7 @@ public class EditCommand extends Command {
         model.updateIssue(issueToEdit, editedIssue);
         model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
         model.commitSaveIt();
+
         return new CommandResult(String.format(MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue));
     }
 
@@ -96,7 +112,7 @@ public class EditCommand extends Command {
     private static Issue createEditedIssue(Issue issueToEdit, EditIssueDescriptor editIssueDescriptor) {
         assert issueToEdit != null;
 
-        IssueStatement updatedName = editIssueDescriptor.getName().orElse(issueToEdit.getStatement());
+        IssueStatement updatedName = editIssueDescriptor.getStatement().orElse(issueToEdit.getStatement());
         Description updatedDescription = editIssueDescriptor.getDescription().orElse(issueToEdit.getDescription());
         List<Solution> updatedSolutions = editIssueDescriptor.getSolutions().orElse(issueToEdit.getSolutions());
         Set<Tag> updatedTags = editIssueDescriptor.getTags().orElse(issueToEdit.getTags());
@@ -127,8 +143,12 @@ public class EditCommand extends Command {
      * corresponding field value of the issue.
      */
     public static class EditIssueDescriptor {
-        private IssueStatement name;
+
+        private Index index;
+        private List<Issue> lastShownList;
+        private IssueStatement statement;
         private List<Solution> solutions;
+        private Solution solution;
         private Description description;
         private Set<Tag> tags;
 
@@ -139,26 +159,30 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditIssueDescriptor(EditIssueDescriptor toCopy) {
-
-            setName(toCopy.name);
-            setSolutions(toCopy.solutions);
+            setStatement(toCopy.statement);
+            setSolution(toCopy.solution);
             setDescription(toCopy.description);
             setTags(toCopy.tags);
+        }
+
+        public EditIssueDescriptor(Index index, Solution solution) {
+            this.index = index;
+            this.solution = solution;
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, description, solutions, tags);
+            return CollectionUtil.isAnyNonNull(statement, description, solutions, tags);
         }
 
-        public void setName(IssueStatement name) {
-            this.name = name;
+        public void setStatement(IssueStatement statement) {
+            this.statement = statement;
         }
 
-        public Optional<IssueStatement> getName() {
-            return Optional.ofNullable(name);
+        public Optional<IssueStatement> getStatement() {
+            return Optional.ofNullable(statement);
         }
 
         public void setDescription(Description description) {
@@ -169,8 +193,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(description);
         }
 
-        public void setSolutions(List<Solution> solutions) {
-            this.solutions = (solutions != null) ? new ArrayList<>(solutions) : null;
+        public void setSolution(Solution solution) {
+            if (solution == null) {
+                this.solutions = null;
+            } else {
+                List<Solution> updatedSolution = new ArrayList<>();
+                updatedSolution.add(solution);
+                this.solutions = new ArrayList<>(updatedSolution);
+            }
         }
 
         public Optional<List<Solution>> getSolutions() {
@@ -209,7 +239,7 @@ public class EditCommand extends Command {
             // state check
             EditIssueDescriptor e = (EditIssueDescriptor) other;
 
-            return getName().equals(e.getName())
+            return getStatement().equals(e.getStatement())
                 && getDescription().equals(e.getDescription())
                 && getTags().equals(e.getTags());
         }

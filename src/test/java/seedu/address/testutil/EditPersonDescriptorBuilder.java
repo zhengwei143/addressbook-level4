@@ -31,7 +31,7 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder(Issue issue) {
         descriptor = new EditIssueDescriptor();
-        descriptor.setName(issue.getStatement());
+        descriptor.setStatement(issue.getStatement());
         descriptor.setDescription(issue.getDescription());
         descriptor.setSolutions(issue.getSolutions());
         descriptor.setTags(issue.getTags());
@@ -41,7 +41,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code IssueStatement} of the {@code EditIssueDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withName(String name) {
-        descriptor.setName(new IssueStatement(name));
+        descriptor.setStatement(new IssueStatement(name));
         return this;
     }
 

@@ -125,7 +125,8 @@ public class StringUtilTest {
         // The word has to be a partial string of the sentence in order to correctly partially match
         assertFalse(StringUtil.partialMatchIgnoreCase("aaa bbb ccc", "bbbb"));
         assertFalse(StringUtil.partialMatchIgnoreCase("aaa bbb ccc", "AAAA"));
-        assertFalse(StringUtil.partialMatchIgnoreCase("aaabB ccC", "bbc")); // partial match does not match with spaces between
+        // partial match does not match with spaces between
+        assertFalse(StringUtil.partialMatchIgnoreCase("aaabB ccC", "bbc"));
 
         // Sentence partially matched with the word correctly, case is ignored
         assertTrue(StringUtil.partialMatchIgnoreCase("aaabbbccc", "bb")); // Sentence word bigger than query word

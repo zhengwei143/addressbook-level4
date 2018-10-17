@@ -57,7 +57,6 @@ public class EditCommand extends Command {
     private final EditIssueDescriptor editIssueDescriptor;
 
     /**
-     * @param index
      * @param editIssueDescriptor details to edit the issue with
      */
     public EditCommand(Index index, EditIssueDescriptor editIssueDescriptor) {
@@ -71,16 +70,15 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        System.out.println("current direcotry1: "  + model.getCurrentDirectory());
+        System.out.println("current direcotry1: " + model.getCurrentDirectory());
 
         List<Issue> lastShownList = model.getFilteredIssueList();
         dir = model.getCurrentDirectory();
         EditIssueDescriptor newEditDescriptor;
 
-
         Issue issueToEdit = lastShownList.get(index.getZeroBased());
 
-        if(dir == 0) {
+        if (dir == 0) {
             // in the home directory, only change the statement and description
             System.out.println("dir ===== 0");
             if (index.getZeroBased() >= lastShownList.size()) {
@@ -108,8 +106,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Issue} with the details of {@code issueToEdit}
-     * edited with {@code editIssueDescriptor}.
+     * Creates and returns a {@code Issue} with the details of {@code issueToEdit} edited with {@code
+     * editIssueDescriptor}.
      */
     private static Issue createEditedIssue(Issue issueToEdit, EditIssueDescriptor editIssueDescriptor) {
         assert issueToEdit != null;
@@ -141,8 +139,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the issue with. Each non-empty field value will replace the
-     * corresponding field value of the issue.
+     * Stores the details to edit the issue with. Each non-empty field value will replace the corresponding field value
+     * of the issue.
      */
     public static class EditIssueDescriptor {
 
@@ -154,11 +152,11 @@ public class EditCommand extends Command {
         private Description description;
         private Set<Tag> tags;
 
-        public EditIssueDescriptor() {}
+        public EditIssueDescriptor() {
+        }
 
         /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * Copy constructor. A defensive copy of {@code tags} is used internally.
          */
         public EditIssueDescriptor(EditIssueDescriptor toCopy) {
             setStatement(toCopy.statement);
@@ -224,7 +222,7 @@ public class EditCommand extends Command {
             try {
                 newSolutionList.set(index.getZeroBased(), solution);
                 this.solutions = newSolutionList;
-            } catch (Exception e){
+            } catch (Exception e) {
                 System.err.println("Error");
             }
         }
@@ -234,17 +232,15 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code tags} to this object's {@code tags}. A defensive copy of {@code tags} is used internally.
          */
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException} if modification is
+         * attempted. Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();

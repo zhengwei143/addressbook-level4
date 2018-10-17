@@ -275,21 +275,20 @@ Format: `refactorTag java [null]`
 
 * Removes the tag [java] from all the entries
 
-=== Locating issues by statement: `serach` [coming in v1.2]
+=== Locating issues by statement: `find`
 
-Search statement by tags, statement statement or remarks.
-Format: `search KEYWORD [MORE_KEYWORDS]`
+Search issue by statement or description.
+Format: `find KEYWORD [MORE_KEYWORDS]`
 
 [TIP]
 ====
 
 * The search is case insensitive. e.g hans will match Hans
 * The order of the keywords does not matter. e.g. ‘kill port’ will match ‘port kill’
-* Searches through the statement statement, tags or remarks.
-* Only full words will be matched e.g. Han will not match Hans
-* Issues matching at least one keyword will be returned (i.e. OR search). e.g. Hans Bo will return the page and relevant remarks
-* Search results will be ordered based on the following priority:
-** Issue match > Tag match
+* Searches through the issue statement or description.
+* The keywords can partially match the statement or description.
+* Issues matching at least one keyword will be returned.
+* Searching the keyword will increment the search frequency of the issue (so that it can be ordered accordingly later on).
 ====
 
 Examples:

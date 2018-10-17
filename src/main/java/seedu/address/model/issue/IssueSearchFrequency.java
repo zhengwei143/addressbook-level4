@@ -1,7 +1,14 @@
 package seedu.address.model.issue;
 
+/**
+ * Represents an Issue's Search Frequency
+ *      Each time an issue is successfully filtered through a predicate
+ *      Its search frequency increments by 1
+ *      Used to display search terms in order of their search frequency
+ *      So that the most frequently searched issues are listed at the top
+ */
 public class IssueSearchFrequency {
-    public int value;
+    private int value;
 
     public IssueSearchFrequency(int frequency) {
         value = frequency;

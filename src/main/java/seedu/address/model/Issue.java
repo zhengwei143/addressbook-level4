@@ -44,7 +44,8 @@ public class Issue {
     /**
      * Overloaded constructor with additional {@code frequency} field
      */
-    public Issue(IssueStatement statement, Description description, List<Solution> solutions, Set<Tag> tags, IssueSearchFrequency frequency) {
+    public Issue(IssueStatement statement, Description description, List<Solution> solutions,
+                 Set<Tag> tags, IssueSearchFrequency frequency) {
         CollectionUtil.requireAllNonNull(statement, description, solutions, tags);
         this.statement = statement;
         this.description = description;

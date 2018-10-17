@@ -47,11 +47,10 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        EditIssueDescriptor editIssueDescriptor = new EditIssueDescriptor();
-
         // check if the command is correct
         if (arePrefixesPresent(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION) && arePrefixesNotPresent(args,
             PREFIX_SOLUTION_LINK, PREFIX_REMARK)) {
+            EditIssueDescriptor editIssueDescriptor = new EditIssueDescriptor();
             if (argMultimap.getValue(PREFIX_STATEMENT).isPresent()) {
                 editIssueDescriptor
                     .setStatement(ParserUtil.parseStatement(argMultimap.getValue(PREFIX_STATEMENT).get()));

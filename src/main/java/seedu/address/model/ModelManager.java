@@ -8,11 +8,13 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+//import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.model.SaveItChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
+//import seedu.address.model.issue.IssueSort;
 
 /**
  * Represents the in-memory model of the saveIt data.
@@ -22,7 +24,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private static final Index ROOT_DIRECTORY = Index.fromZeroBased(0);
     private final VersionedSaveIt versionedSaveIt;
-    private final FilteredList<Issue> filteredIssues;
+    private FilteredList<Issue> filteredIssues;
 
     /**
      * Initializes a ModelManager with the given saveIt and userPrefs.
@@ -97,6 +99,17 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedSaveIt.updateIssue(target, editedIssue);
         indicateSaveItChanged();
+    }
+
+    public void filterIssues(Predicate<Issue> predicate) {
+        updateFilteredIssueList(predicate);
+        // Update the search frequencies after filtering
+        for (Issue issue : filteredIssues) {
+            issue.updateFrequency();
+        }
+
+        // Sorts properly but the UI is not listing properly
+        // SortedList sortedFilteredList = new SortedList<>(filteredIssues, new IssueSort());
     }
 
     //=========== Filtered Issue List Accessors =============================================================

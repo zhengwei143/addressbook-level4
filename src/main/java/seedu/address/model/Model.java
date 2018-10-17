@@ -52,6 +52,11 @@ public interface Model {
     ObservableList<Issue> getFilteredIssueList();
 
     /**
+     * Filters the issues given the predicate and sorts them based on the search frequency
+     */
+    void filterIssues(Predicate<Issue> predicate);
+
+    /**
      * Updates the filter of the filtered issue list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */

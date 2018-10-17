@@ -18,7 +18,7 @@ import seedu.address.model.issue.Tag;
  * Represents a Issue in the remark book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Issue implements Comparable<Issue> {
+public class Issue {
 
     // Identity fields
     private final IssueStatement statement;
@@ -77,7 +77,15 @@ public class Issue implements Comparable<Issue> {
         return Collections.unmodifiableSet(tags);
     }
 
+    /**
+     * Returns the IssueSearchFrequency of the Issue
+     */
     public IssueSearchFrequency getFrequency() { return frequency; }
+
+    /**
+     * Updates the search frequency of the current issue
+     */
+    public void updateFrequency() { frequency.increment(); }
 
     /**
      * Returns true if both issues of the same statement have at least one other identity field that is the same.
@@ -131,12 +139,5 @@ public class Issue implements Comparable<Issue> {
         builder.append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
-    }
-
-    /**
-     * Used to sort the Issues in order of frequency
-     */
-    public int compareTo(Issue other) {
-        return frequency.compare(other.getFrequency());
     }
 }

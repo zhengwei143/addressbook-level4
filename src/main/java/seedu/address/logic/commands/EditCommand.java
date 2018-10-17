@@ -70,8 +70,6 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        System.out.println("current direcotry1: " + model.getCurrentDirectory());
-
         List<Issue> lastShownList = model.getFilteredIssueList();
         dir = model.getCurrentDirectory();
         EditIssueDescriptor newEditDescriptor;
@@ -80,14 +78,11 @@ public class EditCommand extends Command {
 
         if (dir == 0) {
             // in the home directory, only change the statement and description
-            System.out.println("dir ===== 0");
             if (index.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
             }
             newEditDescriptor = new EditIssueDescriptor(editIssueDescriptor);
         } else {
-            System.out.println("dir !!!!==== 0 " + dir);
-
             // change solution and remark
             newEditDescriptor = new EditIssueDescriptor(issueToEdit.getSolutions(), editIssueDescriptor);
         }
@@ -177,7 +172,6 @@ public class EditCommand extends Command {
             editSolutions(toCopy.solutions);
             setTags(toCopy.tags);
             this.solution = toCopy.solution;
-            System.out.println("solution size " + solutions.size());
         }
 
         /**

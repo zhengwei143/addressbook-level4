@@ -52,20 +52,14 @@ public class EditCommandParser implements Parser<EditCommand> {
         // check if the command is correct
         if (arePrefixesPresent(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION) && arePrefixesNotPresent(args,
             PREFIX_SOLUTION_LINK, PREFIX_REMARK)) {
-            System.out.println("valid issue command");
             if (argMultimap.getValue(PREFIX_STATEMENT).isPresent()) {
                 editIssueDescriptor
                     .setStatement(ParserUtil.parseStatement(argMultimap.getValue(PREFIX_STATEMENT).get()));
-                System.out.println(
-                    "statement " + ParserUtil.parseStatement(argMultimap.getValue(PREFIX_STATEMENT).get()).toString());
-
             }
 
             if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
                 editIssueDescriptor
                     .setDescription(ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
-                System.out.println(
-                    "des " + ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()).toString());
             }
 
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editIssueDescriptor::setTags);
@@ -74,7 +68,6 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         } else if (arePrefixesNotPresent(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION) && arePrefixesPresent(args,
             PREFIX_SOLUTION_LINK, PREFIX_REMARK)) {
-            System.out.println("valid solution command");
             EditIssueDescriptor editIssueDescriptorForSolution = null;
             if (argMultimap.getValue(PREFIX_SOLUTION_LINK).isPresent() && argMultimap.getValue(PREFIX_REMARK)
                 .isPresent()) {
@@ -96,22 +89,11 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
             return new EditCommand(index, editIssueDescriptorForSolution);
         } else {
-            System.out.println("invalid format");
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        // TODO: Check Exceptio
-        //        System.out.println("args " + args);
-        //
-        //
-        //
-        //        System.out.println("before edit solution");
-        //
-        //        if (!editIssueDescriptor.isAnyFieldEdited()) {
-        //            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
-        //        }
-        //        System.out.println("before edit");
+        // TODO: Check Exception
     }
 
     /**

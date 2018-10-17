@@ -32,10 +32,9 @@ import seedu.address.model.issue.Tag;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-
-    private static final String DUMMY_SOLUTION_REMARK = "dummySolutionRemark";
-    private static final String DUMMY_SOLUTION_LINK = "dummySolutionLink";
-
+    public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt."; //TODO: necessary?
+    public static final String MESSAGE_EDIT_ISSUE_SUCCESS = "Edited Issue: %1$s";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the issue identified "
         + "by the index number used in the displayed issue list. "
         + "Existing values will be overwritten by the input values.\n"
@@ -51,9 +50,8 @@ public class EditCommand extends Command {
         + PREFIX_REMARK + "performing/**/ some computation on a list and returning the result "
         + PREFIX_TAG + "python ";
 
-    private static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt."; //TODO: necessary?
-    private static final String MESSAGE_EDIT_ISSUE_SUCCESS = "Edited Issue: %1$s";
-    private static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    private static final String DUMMY_SOLUTION_REMARK = "dummySolutionRemark";
+    private static final String DUMMY_SOLUTION_LINK = "dummySolutionLink";
 
     private final Index index;
     private final EditIssueDescriptor editIssueDescriptor;
@@ -116,7 +114,7 @@ public class EditCommand extends Command {
         } else {
             updatedSolutions = editIssueDescriptor.getSolutions().orElse(issueToEdit.getSolutions());
         }
-        IssueStatement updatedName = editIssueDescriptor.getName().orElse(issueToEdit.getStatement());
+        IssueStatement updatedName = editIssueDescriptor.getStatement().orElse(issueToEdit.getStatement());
         Description updatedDescription = editIssueDescriptor.getDescription().orElse(issueToEdit.getDescription());
         Set<Tag> updatedTags = editIssueDescriptor.getTags().orElse(issueToEdit.getTags());
 
@@ -166,7 +164,7 @@ public class EditCommand extends Command {
      */
     public static class EditIssueDescriptor {
 
-        private IssueStatement name;
+        private IssueStatement statement;
         private List<Solution> solutions;
         private Description description;
         private Set<Tag> tags;
@@ -186,7 +184,7 @@ public class EditCommand extends Command {
          */
         public EditIssueDescriptor(EditIssueDescriptor toCopy) {
             this.index = toCopy.getIndex();
-            setStatement(toCopy.name);
+            setStatement(toCopy.statement);
             setSolutions(toCopy.solutions);
             setDescription(toCopy.description);
             setTags(toCopy.tags);
@@ -200,15 +198,15 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, description, solutions, tags);
+            return CollectionUtil.isAnyNonNull(statement, description, solutions, tags);
         }
 
-        public void setStatement(IssueStatement name) {
-            this.name = name;
+        public void setStatement(IssueStatement statement) {
+            this.statement = statement;
         }
 
-        public Optional<IssueStatement> getName() {
-            return Optional.ofNullable(name);
+        public Optional<IssueStatement> getStatement() {
+            return Optional.ofNullable(statement);
         }
 
         public void setDescription(Description description) {
@@ -261,7 +259,7 @@ public class EditCommand extends Command {
             // state check
             EditIssueDescriptor e = (EditIssueDescriptor) other;
 
-            return getName().equals(e.getName())
+            return getStatement().equals(e.getStatement())
                 && getDescription().equals(e.getDescription())
                 && getSolutions().equals(e.getSolutions())
                 && getTags().equals(e.getTags());

@@ -96,7 +96,7 @@ public class ParserUtil {
     public static List<Solution> parseSolutions(String solutionLink, String solutionRemark) throws ParseException {
         requireAllNonNull(solutionLink, solutionRemark);
         final List<Solution> solutionList = new ArrayList<>();
-        if (solutionLink.equals(dummySolutionLink) && solutionRemark.equals(dummySolutionRemark)){
+        if (solutionLink.equals(dummySolutionLink) && solutionRemark.equals(dummySolutionRemark)) {
             return solutionList;
         }
         String trimmedSolutionLink = solutionLink.trim();

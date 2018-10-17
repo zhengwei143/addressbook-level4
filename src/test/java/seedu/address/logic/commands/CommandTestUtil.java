@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SOLUTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -39,8 +39,8 @@ public class CommandTestUtil {
     public static final String STATEMENT_DESC_C = " " + PREFIX_STATEMENT + VALID_STATEMENT_C;
     public static final String DESCRIPTION_DESC_JAVA = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_JAVA;
     public static final String DESCRIPTION_DESC_C = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_C;
-    public static final String SOLUTION_DESC_JAVA = " " + PREFIX_SOLUTION + VALID_SOLUTION_JAVA;
-    public static final String SOLUTION_DESC_C = " " + PREFIX_SOLUTION + VALID_SOLUTION_C;
+    public static final String SOLUTION_DESC_JAVA = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_JAVA;
+    public static final String SOLUTION_DESC_C = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_C;
     public static final String TAG_DESC_SYNTAX = " " + PREFIX_TAG + VALID_TAG_SYNTAX;
     public static final String TAG_DESC_UI = " " + PREFIX_TAG + VALID_TAG_UI;
 

@@ -165,7 +165,7 @@ public class EditCommandParserTest {
 
         EditCommand.EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder()
                 .withDescription(VALID_DESCRIPTION_C)
-                .withSolutions(VALID_SOLUTION_JAVA, VALID_SOLUTION_C)
+                .withSolutions(VALID_SOLUTION_JAVA, VALID_SOLUTION_JAVA, VALID_SOLUTION_C)
                 .withTags(VALID_TAG_SYNTAX, VALID_TAG_UI)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);

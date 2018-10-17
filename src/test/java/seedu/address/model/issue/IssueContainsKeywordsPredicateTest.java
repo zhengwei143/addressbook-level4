@@ -40,7 +40,7 @@ public class IssueContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_nameContainsKeywords_returnsTrue() {
+    public void test_issueStatementContainsKeywords_returnsTrue() {
         // One keyword
         IssueContainsKeywordsPredicate predicate =
             new IssueContainsKeywordsPredicate(Collections.singletonList("Alice"));
@@ -57,10 +57,14 @@ public class IssueContainsKeywordsPredicateTest {
         // Mixed-case keywords
         predicate = new IssueContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
         assertTrue(predicate.test(new IssueBuilder().withStatement("Alice Bob").build()));
+
+        // Partial matching keywords
+        predicate = new IssueContainsKeywordsPredicate(Arrays.asList("lice", "bO"));
+        assertTrue(predicate.test(new IssueBuilder().withStatement("Alice Bob").build()));
     }
 
     @Test
-    public void test_nameDoesNotContainKeywords_returnsFalse() {
+    public void test_issueStatementDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         IssueContainsKeywordsPredicate predicate = new IssueContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new IssueBuilder().withStatement("Alice").build()));
@@ -68,10 +72,24 @@ public class IssueContainsKeywordsPredicateTest {
         // Non-matching keyword
         predicate = new IssueContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new IssueBuilder().withStatement("Alice Bob").build()));
+    }
 
-        // Keywords match description and address, but does not match name
-        predicate = new IssueContainsKeywordsPredicate(Arrays.asList("12345", "Main", "Street"));
-        assertFalse(predicate.test(new IssueBuilder().withStatement("Alice").withDescription("12345")
-                .withDescription("Main Street").build()));
+    @Test
+    public void test_descriptionContainsKeywords_returnsTrue() {
+        // Keywords match description
+        IssueContainsKeywordsPredicate predicate = new IssueContainsKeywordsPredicate(Arrays.asList("12345", "Main", "Street"));
+        assertTrue(predicate.test(new IssueBuilder().withDescription("12345").build()));
+
+        // Keywords partially matches description
+        predicate = new IssueContainsKeywordsPredicate(Arrays.asList("null"));
+        assertTrue(predicate.test(new IssueBuilder().withDescription("has NULL pointer").build()));
+    }
+
+    @Test
+    public void test_descriptionAndIssueStatementDoNotContainKeywords_returnsFalse() {
+        // Keywords do not match description or issue statement
+        IssueContainsKeywordsPredicate predicate = new IssueContainsKeywordsPredicate(Arrays.asList("java", "c++", "exception"));
+        assertFalse(predicate.test(new IssueBuilder().withStatement("ruby")
+                .withDescription("null pointer").build()));
     }
 }

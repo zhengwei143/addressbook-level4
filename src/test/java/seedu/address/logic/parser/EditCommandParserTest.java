@@ -6,13 +6,10 @@ import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.SOLUTION_DESC_C;
-import static seedu.address.logic.commands.CommandTestUtil.SOLUTION_DESC_JAVA;
 import static seedu.address.logic.commands.CommandTestUtil.STATEMENT_DESC_JAVA;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_UI;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SOLUTION_JAVA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATEMENT_JAVA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SYNTAX;
@@ -183,7 +180,8 @@ public class EditCommandParserTest {
 
         // other valid values specified
         userInput = targetIndex.getOneBased() + INVALID_DESCRIPTION_DESC + DESCRIPTION_DESC_C + TAG_DESC_UI;
-        descriptor = new EditPersonDescriptorBuilder().withDescription(VALID_DESCRIPTION_C).withTags(VALID_TAG_UI).build();
+        descriptor = new EditPersonDescriptorBuilder()
+                .withDescription(VALID_DESCRIPTION_C).withTags(VALID_TAG_UI).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

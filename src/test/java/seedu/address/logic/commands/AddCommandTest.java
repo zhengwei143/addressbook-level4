@@ -140,6 +140,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void filterIssues(Predicate<Issue> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredIssueList(Predicate<Issue> predicate) {
             throw new AssertionError("This method should not be called.");
         }

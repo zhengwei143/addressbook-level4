@@ -16,7 +16,7 @@ public class Index {
      * {@link Index#fromOneBased(int)}.
      */
     private Index(int zeroBasedIndex) {
-        if (zeroBasedIndex < 0) {
+        if (zeroBasedIndex < -1) {
             throw new IndexOutOfBoundsException();
         }
 

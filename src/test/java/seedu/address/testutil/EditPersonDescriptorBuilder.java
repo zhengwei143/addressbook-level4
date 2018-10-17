@@ -5,6 +5,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.junit.Ignore;
+
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditIssueDescriptor;
 import seedu.address.model.Issue;
@@ -39,6 +41,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setTags(issue.getTags());
     }
 
+    @Ignore
     /**
      * Sets the {@code IssueStatement} of the {@code EditIssueDescriptor} that we are building.
      */
@@ -47,6 +50,7 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    @Ignore
     /**
      * Sets the {@code Description} of the {@code EditIssueDescriptor} that we are building.
      */

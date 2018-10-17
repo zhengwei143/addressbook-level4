@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -21,6 +22,7 @@ import seedu.address.model.issue.Tag;
 import seedu.address.model.issue.solution.Remark;
 import seedu.address.testutil.Assert;
 
+@Ignore
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_DESCRIPTION = " ";

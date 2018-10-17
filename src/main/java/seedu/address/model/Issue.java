@@ -81,12 +81,16 @@ public class Issue {
     /**
      * Returns the IssueSearchFrequency of the Issue
      */
-    public IssueSearchFrequency getFrequency() { return frequency; }
+    public IssueSearchFrequency getFrequency() {
+        return frequency;
+    }
 
     /**
      * Updates the search frequency of the current issue
      */
-    public void updateFrequency() { frequency.increment(); }
+    public void updateFrequency() {
+        frequency.increment();
+    }
 
     /**
      * Returns true if both issues of the same statement have at least one other identity field that is the same.

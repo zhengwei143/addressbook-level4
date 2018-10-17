@@ -101,7 +101,9 @@ public class ModelManager extends ComponentManager implements Model {
         indicateSaveItChanged();
     }
 
-    @Override
+    /**
+     * Filters the issues given a predicate
+     */
     public void filterIssues(Predicate<Issue> predicate) {
         updateFilteredIssueList(predicate);
         // Update the search frequencies after filtering

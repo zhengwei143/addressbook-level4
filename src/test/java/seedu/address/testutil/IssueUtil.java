@@ -56,7 +56,8 @@ public class IssueUtil {
                 sb.append(PREFIX_SOLUTION_LINK).append(" ");
             } else {
                 solutions.forEach(
-                    s -> sb.append(PREFIX_SOLUTION_LINK).append(s.getLink().value).append(s.getRemark().value).append(" ")
+                    s -> sb.append(PREFIX_SOLUTION_LINK)
+                            .append(s.getLink().value).append(s.getRemark().value).append(" ")
                 );
             }
         }

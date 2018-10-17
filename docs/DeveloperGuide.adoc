@@ -139,7 +139,7 @@ For example, the `Logic` component (see the class diagram given below) defines i
 image::LogicClassDiagram.png[width="800"]
 
 [discrete]
-Events-Driven nature of the design
+Events-Driven nature of the design.
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command `delete 1`.
 
@@ -1020,8 +1020,8 @@ Use case resumes at step 4.
 1. User requests to list issues
 2. User request to edit an issue statement and description
 3. SaveIt updates the statement
-5. Use case ends.
-6. The ‘Success’ message shown on the screen.
+4. Use case ends.
+5. The ‘Success’ message shown on the screen.
 +
 Use case ends.
 

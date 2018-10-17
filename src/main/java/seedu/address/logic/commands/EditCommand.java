@@ -217,6 +217,10 @@ public class EditCommand extends Command {
             this.solutions = (solutions != null) ? new ArrayList<>(solutions) : null;
         }
 
+        /**
+         * Sets {@code solutions} to this object's {@code solutions}. A defensive copy of {@code solutions} is used
+         * internally.
+         */
         public void editSolutions(List<Solution> solutions) {
             List<Solution> newSolutionList = new ArrayList<>(solutions);
             try {

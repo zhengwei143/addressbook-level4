@@ -50,9 +50,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetDirectory(Index targetIndex) {
-        if (targetIndex.equals(ROOT_DIRECTORY)) {
-            versionedSaveIt.setCurrentDirectory(ROOT_DIRECTORY.getZeroBased());
+    public void resetDirectory(Index targetIndex, boolean rootDirectory) {
+        if (rootDirectory) {
+            versionedSaveIt.setCurrentDirectory(targetIndex.getZeroBased());
         } else {
             versionedSaveIt.setCurrentDirectory(targetIndex.getOneBased());
         }

@@ -43,7 +43,7 @@ public class SelectCommand extends Command {
         if (targetIndex.getZeroBased() >= filteredIssueList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
         }
-        model.resetDirectory(targetIndex);
+        model.resetDirectory(targetIndex, false);
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
         return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
 

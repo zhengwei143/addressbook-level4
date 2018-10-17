@@ -105,7 +105,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void resetDirectory(Index targetIndex) {
+        public void resetDirectory(Index targetIndex, boolean rootDirectory) {
             throw new AssertionError("This method should not be called.");
         }
 

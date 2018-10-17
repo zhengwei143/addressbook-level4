@@ -16,7 +16,7 @@ public interface Model {
     void resetData(ReadOnlySaveIt newData);
 
     /** Reset the current directory. */
-    void resetDirectory(Index targetIndex);
+    void resetDirectory(Index targetIndex, boolean rootDirectory);
 
     /** Return the current directory. */
     int getCurrentDirectory();

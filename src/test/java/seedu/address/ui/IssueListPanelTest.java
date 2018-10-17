@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
-import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
+import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysIssue;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 
 import java.nio.file.Path;
@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.IssueCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,6 +24,7 @@ import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.Issue;
 import seedu.address.storage.XmlSerializableSaveIt;
+
 
 public class IssueListPanelTest extends GuiUnitTest {
     private static final ObservableList<Issue> TYPICAL_ISSUES =
@@ -44,9 +45,9 @@ public class IssueListPanelTest extends GuiUnitTest {
         for (int i = 0; i < TYPICAL_ISSUES.size(); i++) {
             personListPanelHandle.navigateToCard(TYPICAL_ISSUES.get(i));
             Issue expectedIssue = TYPICAL_ISSUES.get(i);
-            PersonCardHandle actualCard = personListPanelHandle.getPersonCardHandle(i);
+            IssueCardHandle actualCard = personListPanelHandle.getPersonCardHandle(i);
 
-            assertCardDisplaysPerson(expectedIssue, actualCard);
+            assertCardDisplaysIssue(expectedIssue, actualCard);
             assertEquals(Integer.toString(i + 1) + ". ", actualCard.getId());
         }
     }
@@ -57,8 +58,8 @@ public class IssueListPanelTest extends GuiUnitTest {
         postNow(JUMP_TO_SECOND_EVENT);
         guiRobot.pauseForHuman();
 
-        PersonCardHandle expectedPerson = personListPanelHandle.getPersonCardHandle(INDEX_SECOND_PERSON.getZeroBased());
-        PersonCardHandle selectedPerson = personListPanelHandle.getHandleToSelectedCard();
+        IssueCardHandle expectedPerson = personListPanelHandle.getPersonCardHandle(INDEX_SECOND_PERSON.getZeroBased());
+        IssueCardHandle selectedPerson = personListPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedPerson, selectedPerson);
     }
 
@@ -78,33 +79,33 @@ public class IssueListPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Returns a list of persons containing {@code personCount} persons that is used to populate the
+     * Returns a list of persons containing {@code issueCount} persons that is used to populate the
      * {@code PersonListPanel}.
      */
-    private ObservableList<Issue> createBackingList(int personCount) throws Exception {
-        Path xmlFile = createXmlFileWithPersons(personCount);
+    private ObservableList<Issue> createBackingList(int issueCount) throws Exception {
+        Path xmlFile = createXmlFileWithIssues(issueCount);
         XmlSerializableSaveIt xmlSaveIt =
                 XmlUtil.getDataFromFile(xmlFile, XmlSerializableSaveIt.class);
-        return FXCollections.observableArrayList(xmlSaveIt.toModelType().getPersonList());
+        return FXCollections.observableArrayList(xmlSaveIt.toModelType().getIssueList());
     }
 
     /**
-     * Returns a .xml file containing {@code personCount} persons. This file will be deleted when the JVM terminates.
+     * Returns a .xml file containing {@code issueCount} persons. This file will be deleted when the JVM terminates.
      */
-    private Path createXmlFileWithPersons(int personCount) throws Exception {
+    private Path createXmlFileWithIssues(int issueCount) throws Exception {
         StringBuilder builder = new StringBuilder();
         builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n");
-        builder.append("<saveIt>\n");
-        for (int i = 0; i < personCount; i++) {
-            builder.append("<persons>\n");
-            builder.append("<name>").append(i).append("a</name>\n");
-            builder.append("<phone>000</phone>\n");
-            builder.append("<address>a</address>\n");
-            builder.append("</persons>\n");
+        builder.append("<saveit>\n");
+        for (int i = 0; i < issueCount; i++) {
+            builder.append("<issues>\n");
+            builder.append("<statement>").append(i).append("a</statement>\n");
+            builder.append("<description>000</description>\n");
+            builder.append("<solutions>www.example.com remark</solutions>\n");
+            builder.append("</issues>\n");
         }
-        builder.append("</saveIt>\n");
+        builder.append("</saveit>\n");
 
-        Path manyPersonsFile = Paths.get(TEST_DATA_FOLDER + "manyPersons.xml");
+        Path manyPersonsFile = Paths.get(TEST_DATA_FOLDER + "manyIssues.xml");
         FileUtil.createFile(manyPersonsFile);
         FileUtil.writeToFile(manyPersonsFile, builder.toString());
         manyPersonsFile.toFile().deleteOnExit();

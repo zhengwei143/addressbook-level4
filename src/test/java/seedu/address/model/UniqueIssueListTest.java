@@ -3,8 +3,10 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SYNTAX;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UI;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -18,7 +20,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.issue.exceptions.DuplicateIssueException;
 import seedu.address.model.issue.exceptions.IssueNotFoundException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.IssueBuilder;
 
 public class UniqueIssueListTest {
     @Rule
@@ -46,7 +48,7 @@ public class UniqueIssueListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniqueIssueList.add(ALICE);
-        Issue editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Issue editedAlice = new IssueBuilder(ALICE).withDescription(VALID_DESCRIPTION_C).withTags(VALID_TAG_SYNTAX)
                 .build();
         assertTrue(uniqueIssueList.contains(editedAlice));
     }
@@ -94,7 +96,7 @@ public class UniqueIssueListTest {
     @Test
     public void setIssue_editedIssueHasSameIdentity_success() {
         uniqueIssueList.add(ALICE);
-        Issue editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Issue editedAlice = new IssueBuilder(ALICE).withDescription(VALID_SOLUTION_C).withTags(VALID_TAG_UI)
                 .build();
         uniqueIssueList.setIssue(ALICE, editedAlice);
         UniqueIssueList expectedUniqueIssueList = new UniqueIssueList();

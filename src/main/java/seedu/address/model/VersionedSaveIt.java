@@ -34,7 +34,7 @@ public class VersionedSaveIt extends SaveIt {
     }
 
     /**
-     * Restores the address book to its previous state.
+     * Restores the saveIt to its previous state.
      */
     public void undo() {
         if (!canUndo()) {
@@ -45,7 +45,7 @@ public class VersionedSaveIt extends SaveIt {
     }
 
     /**
-     * Restores the address book to its previously undone state.
+     * Restores the saveIt to its previously undone state.
      */
     public void redo() {
         if (!canRedo()) {
@@ -56,14 +56,14 @@ public class VersionedSaveIt extends SaveIt {
     }
 
     /**
-     * Returns true if {@code undo()} has address book states to undo.
+     * Returns true if {@code undo()} has saveIt states to undo.
      */
     public boolean canUndo() {
         return currentStatePointer > 0;
     }
 
     /**
-     * Returns true if {@code redo()} has address book states to redo.
+     * Returns true if {@code redo()} has saveIt states to redo.
      */
     public boolean canRedo() {
         return currentStatePointer < saveItStateList.size() - 1;

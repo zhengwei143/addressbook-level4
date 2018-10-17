@@ -9,6 +9,9 @@ import seedu.address.model.Model;
  */
 public abstract class Command {
 
+
+    public static final int ROOT_DIRECTORY = 0;
+
     /**
      * Executes the command and returns the result message.
      *

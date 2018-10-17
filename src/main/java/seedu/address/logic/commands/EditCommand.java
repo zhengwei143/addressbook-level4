@@ -1,11 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -19,83 +21,87 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Issue;
 import seedu.address.model.Model;
+import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
-import seedu.address.model.issue.Phone;
-import seedu.address.model.issue.Remark;
+import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
 
 /**
- * Edits the details of an existing issue in the address book.
+ * Edits the details of an existing issue in the saveIt.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the issue identified "
-            + "by the index number used in the displayed issue list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_STATEMENT + "ISSUE_STATEMENT] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_REMARK + "REMARK] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 ";
+        + "by the index number used in the displayed issue list. "
+        + "Existing values will be overwritten by the input values.\n"
+        + "Parameters: INDEX (must be a positive integer) "
+        + "[" + PREFIX_STATEMENT + "ISSUE_STATEMENT] "
+        + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
+        + "[" + PREFIX_SOLUTION_LINK + "SOLUTION_LINK REMARK] "
+        + "[" + PREFIX_TAG + "TAG]...\n"
+        + "Example: " + COMMAND_WORD + " 1 "
+        + PREFIX_STATEMENT + "reducer "
+        + PREFIX_DESCRIPTION + "how to use reducer in python "
+        + PREFIX_SOLUTION_LINK + "Stackoverflow link "
+        + PREFIX_REMARK + "performing some computation on a list and returning the result "
+        + PREFIX_TAG + "python ";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Issue: %1$s";
+    public static final String MESSAGE_EDIT_ISSUE_SUCCESS = "Edited Issue: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This issue already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt."; //TODO: necessary?
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditIssueDescriptor editIssueDescriptor;
 
     /**
      * @param index of the issue in the filtered issue list to edit
-     * @param editPersonDescriptor details to edit the issue with
+     * @param editIssueDescriptor details to edit the issue with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditIssueDescriptor editIssueDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editIssueDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editIssueDescriptor = new EditIssueDescriptor(editIssueDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Issue> lastShownList = model.getFilteredPersonList();
+        List<Issue> lastShownList = model.getFilteredIssueList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
         }
 
         Issue issueToEdit = lastShownList.get(index.getZeroBased());
-        Issue editedIssue = createEditedPerson(issueToEdit, editPersonDescriptor);
+        Issue editedIssue = createEditedIssue(issueToEdit, editIssueDescriptor);
 
-        if (!issueToEdit.isSameIssue(editedIssue) && model.hasPerson(editedIssue)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!issueToEdit.isSameIssue(editedIssue) && model.hasIssue(editedIssue)) {
+            throw new CommandException(MESSAGE_DUPLICATE_ISSUE);
         }
 
-        model.updatePerson(issueToEdit, editedIssue);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.updateIssue(issueToEdit, editedIssue);
+        model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
         model.commitSaveIt();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedIssue));
+        return new CommandResult(String.format(MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue));
     }
 
     /**
      * Creates and returns a {@code Issue} with the details of {@code issueToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * edited with {@code editIssueDescriptor}.
      */
-    private static Issue createEditedPerson(Issue issueToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Issue createEditedIssue(Issue issueToEdit, EditIssueDescriptor editIssueDescriptor) {
         assert issueToEdit != null;
 
-        IssueStatement updatedName = editPersonDescriptor.getName().orElse(issueToEdit.getStatement());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(issueToEdit.getPhone());
-        Remark updatedAddress = editPersonDescriptor.getAddress().orElse(issueToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(issueToEdit.getTags());
+        IssueStatement updatedName = editIssueDescriptor.getName().orElse(issueToEdit.getStatement());
+        Description updatedDescription = editIssueDescriptor.getDescription().orElse(issueToEdit.getDescription());
+        List<Solution> updatedSolutions = editIssueDescriptor.getSolutions().orElse(issueToEdit.getSolutions());
+        Set<Tag> updatedTags = editIssueDescriptor.getTags().orElse(issueToEdit.getTags());
 
-        return new Issue(updatedName, updatedPhone, updatedAddress, updatedTags);
+        return new Issue(updatedName, updatedDescription, updatedSolutions, updatedTags);
     }
 
     @Override
@@ -113,29 +119,30 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+            && editIssueDescriptor.equals(e.editIssueDescriptor);
     }
 
     /**
      * Stores the details to edit the issue with. Each non-empty field value will replace the
      * corresponding field value of the issue.
      */
-    public static class EditPersonDescriptor {
+    public static class EditIssueDescriptor {
         private IssueStatement name;
-        private Phone phone;
-        private Remark address;
+        private List<Solution> solutions;
+        private Description description;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditIssueDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditIssueDescriptor(EditIssueDescriptor toCopy) {
+
             setName(toCopy.name);
-            setPhone(toCopy.phone);
-            setAddress(toCopy.address);
+            setSolutions(toCopy.solutions);
+            setDescription(toCopy.description);
             setTags(toCopy.tags);
         }
 
@@ -143,7 +150,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, address, tags);
+            return CollectionUtil.isAnyNonNull(name, description, solutions, tags);
         }
 
         public void setName(IssueStatement name) {
@@ -154,20 +161,20 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setDescription(Description description) {
+            this.description = description;
         }
 
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+        public Optional<Description> getDescription() {
+            return Optional.ofNullable(description);
         }
 
-        public void setAddress(Remark address) {
-            this.address = address;
+        public void setSolutions(List<Solution> solutions) {
+            this.solutions = (solutions != null) ? new ArrayList<>(solutions) : null;
         }
 
-        public Optional<Remark> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<List<Solution>> getSolutions() {
+            return (solutions != null) ? Optional.of(Collections.unmodifiableList(solutions)) : Optional.empty();
         }
 
         /**
@@ -195,17 +202,17 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditIssueDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditIssueDescriptor e = (EditIssueDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
-                    && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                && getDescription().equals(e.getDescription())
+                && getSolutions().equals(e.getSolutions())
+                && getTags().equals(e.getTags());
         }
     }
 }

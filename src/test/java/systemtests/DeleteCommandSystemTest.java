@@ -1,13 +1,13 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TestUtil.getPerson;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Ignore;
@@ -33,8 +33,8 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
 
         /* Case: delete the first issue in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
-        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased() + "       ";
-        Issue deletedIssue = removePerson(expectedModel, INDEX_FIRST_PERSON);
+        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_ISSUE.getOneBased() + "       ";
+        Issue deletedIssue = removePerson(expectedModel, INDEX_FIRST_ISSUE);
         String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedIssue);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
@@ -62,19 +62,19 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
 
         /* Case: filtered issue list, delete index within bounds of address book and issue list -> deleted */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        Index index = INDEX_FIRST_PERSON;
-        assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
+        Index index = INDEX_FIRST_ISSUE;
+        assertTrue(index.getZeroBased() < getModel().getFilteredIssueList().size());
         assertCommandSuccess(index);
 
         /* Case: filtered issue list, delete index within bounds of address book but out of bounds of issue list
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getSaveIt().getPersonList().size();
+        int invalidIndex = getModel().getSaveIt().getIssueList().size();
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
-        assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
 
-        /* --------------------- Performing delete operation while a issue card is selected ------------------------ */
+        /* --------------------- Performing delete operation while an issue card is selected ------------------------ */
 
         /* Case: delete the selected issue -> issue list panel selects the issue before the deleted issue */
         showAllPersons();
@@ -99,9 +99,9 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
-                getModel().getSaveIt().getPersonList().size() + 1);
+                getModel().getSaveIt().getIssueList().size() + 1);
         command = DeleteCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased();
-        assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */
         assertCommandFailure(DeleteCommand.COMMAND_WORD + " abc", MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
@@ -119,7 +119,7 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
      */
     private Issue removePerson(Model model, Index index) {
         Issue targetIssue = getPerson(model, index);
-        model.deletePerson(targetIssue);
+        model.deleteIssue(targetIssue);
         return targetIssue;
     }
 

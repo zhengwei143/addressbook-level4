@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- Issue with an invalid phone field -->
+<!-- Issue with an invalid description field -->
 <issue>
-    <name>Hans Muster</name>
-    <phone>9482asf424</phone>
-    <address>4th street</address>
+    <statement>Hans Muster</statement>
+    <description> </description>
+    <solutions>webSite remark</solutions>
     <tagged>friends</tagged>
 </issue>

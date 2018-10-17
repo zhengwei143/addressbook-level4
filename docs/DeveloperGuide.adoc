@@ -12,7 +12,7 @@ ifdef::env-github[]
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/CS2103-AY1819S1-T12-4/main
+:repoURL: https://github.com/CS2103-AY1819S1-T12-4/main/tree/master
 
 By: `Team T12-4`      Since: `Sep 2018`      Licence: `MIT`
 
@@ -56,14 +56,14 @@ This will generate all resources required by the application and tests.
 
 ==== Configuring the coding style
 
-This project follows https://github.com/oss-generic/process/blob/master/docs/CodingStandards.adoc[oss-generic coding standards]. IntelliJ's default style is mostly compliant with ours but it uses a different import order from ours. To rectify,
+This project follows https://github.com/oss-generic/process/blob/master/docs/CodingStandards.adoc[oss-generic coding standards]. IntelliJ's default style is mostly compliant with ours but it uses a different import order from ours. To rectify:
 
 . Go to `File` > `Settings...` (Windows/Linux), or `IntelliJ IDEA` > `Preferences...` (macOS)
 . Select `Editor` > `Code Style` > `Java`
 . Click on the `Imports` tab to set the order
 
 * For `Class count to use import with '\*'` and `Names count to use static import with '*'`: Set to `999` to prevent IntelliJ from contracting the import statements
-* For `Import Layout`: The order is `import static all other imports`, `import java.\*`, `import javax.*`, `import org.\*`, `import com.*`, `import all other imports`. Add a `<blank line>` between each `import`
+* For `Import Layout`: The order is `import static all other imports`, `import java.\*`, `import javax.*`, `import org.\*`, `import com.* `, `import all other imports`. Add a `<blank line>` between each `import`
 
 Optionally, you can follow the <<UsingCheckstyle#, UsingCheckstyle.adoc>> document to configure Intellij to check style-compliance as you write code.
 
@@ -111,51 +111,51 @@ The *_Architecture Diagram_* given above explains the high-level design of the A
 [TIP]
 The `.pptx` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp`]. It is responsible for,
+`Main` has only one class called link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp`]. It is responsible for:
 
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup method where necessary.
+* At app launch: Initializing the components in the correct sequence, and connects them up with each other.
+* At shut down: Shutting down the components and invokes cleanup method where necessary.
 
-<<Design-Commons,*`Commons`*>> represents a collection of classes used by multiple other components. Two of those classes play important roles at the architecture level.
+<<Design-Commons,*`Commons`*>> represents a collection of classes used by multiple other components. Two of those classes play important roles at the architecture level:
 
 * `EventsCenter` : This class (written using https://github.com/google/guava/wiki/EventBusExplained[Google's Event Bus library]) is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
-* `LogsCenter` : Used by many classes to write log messages to the App's log file.
+* `LogsCenter` : This class is used by other classes to write log messages to the App's log file.
 
-The rest of the App consists of four components.
+The rest of the App consists of four components:
 
 * <<Design-Ui,*`UI`*>>: The UI of the App.
 * <<Design-Logic,*`Logic`*>>: The command executor.
-* <<Design-Model,*`Model`*>>: Holds the data of the App in-memory.
-* <<Design-Storage,*`Storage`*>>: Reads data from, and writes data to, the hard disk.
+* <<Design-Model,*`Model`*>>: The model holds the data of the App in-memory.
+* <<Design-Storage,*`Storage`*>>: The storage reads data from, and writes data to, the hard disk.
 
-Each of the four components
+Each of the four components:
 
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
-For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
+For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
 
 .Class Diagram of the Logic Component
 image::LogicClassDiagram.png[width="800"]
 
 [discrete]
-==== Events-Driven nature of the design
+Events-Driven nature of the design
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command `delete 1`.
 
 .Component interactions for `delete 1` command (part 1)
-image::SDforDeletePerson.png[width="800"]
+image::SDforDeleteIssue.png[width="800"]
 
 [NOTE]
-Note how the `Model` simply raises a `SaveItChangedEvent` when the SaveIt data are changed, instead of asking the `Storage` to save the updates to the hard disk.
+Note how `Model` simply raises a `SaveItChangedEvent` when the SaveIt data is changed, instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
 .Component interactions for `delete 1` command (part 2)
-image::SDforDeletePersonEventHandling.png[width="800"]
+image::SDforDeleteIssueEventHandling.png[width="800"]
 
 [NOTE]
-Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
+Note how event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
 
 The sections below give more details of each component.
 
@@ -164,6 +164,8 @@ The sections below give more details of each component.
 
 .Structure of the UI Component
 image::UiClassDiagram.png[width="800"]
+
+(TODO: No discription of diagram)
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
@@ -184,12 +186,14 @@ The `UI` component,
 .Structure of the Logic Component
 image::LogicClassDiagram.png[width="800"]
 
+(TODO: No description of numbers below)
+
 *API* :
 link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `SaveItParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
-.  The command execution can affect the `Model` (e.g. adding a issue) and/or raise events.
+.  The command execution can affect the `Model` (e.g. adding a statement) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
@@ -203,19 +207,28 @@ image::DeletePersonSdForLogic.png[width="800"]
 .Structure of the Model Component
 image::ModelClassDiagram.png[width="800"]
 
+.Structure of the Model Component
+image::ModelComponentClassBetterOopDiagram.png[width="900"]
+
+
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the SaveIt data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* exposes an unmodifiable `ObservableList<Issue>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `SaveIt`, which `Person` can reference. This would allow `SaveIt` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
+As a more OOP model, we can store a `Tag` list in `SaveIt`, which `Issue` can reference. This would allow `SaveIt` to only require one `Tag` object per unique `Tag`, instead of each `Issue` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
-image:ModelClassBetterOopDiagram.png[width="800"]
+image:ModelComponentClassBetterOopDiagram.png[width="800"]
+
+[NOTE]
+The current model implements a `currentDirectory` to difference edition of issue
+ and edition of solution with the same edit command. Besides, `AddCommand`, `ClearCommand`
+  may also work differently for issues and solutions.
 
 [[Design-Storage]]
 === Storage component
@@ -239,6 +252,45 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::list[]
+=== List feature
+==== Current Implementation
+
+The current list mechanism inherits the same implementation from AddressBook.
+
+* `ModelManager#updateFilteredIssueList()` -- Predicate is set to be unused. Indicate no change is required.
+* `FXCollections.unmodifiableObservableList()` -- Return a ObservableList of all issues.
+
+==== Design Considerations
+
+===== List by a specific order
+
+This mechanism relies most on the logic component. ListCommandParser.java need to be implemented to identify if there is a sorting requirement.
+
+Since list should not modify the sorting inside storage, IndicateSaveItChanged should not be raised and this command should not change Model.
+
+There will only be 3 kinds of order that the list can be shown in, as proposed in the following paragraph.
+
+* List by chronological order **(default)** +
+  **Command:** list chr` +
+  This order follows how the data is stored in Model, reflecting the user's learning journey. +
+  There is no need to implement new Comparator for that.
+
+* List by Tag +
+  **Command:** `list tag` +
+  Tag is mainly used as a way to distinguish different kind of problems, such as Java problems and C problems. This order can help users to identify the issues quickly. +
+  This order requires the tag attribute of every issue to be tracked. A simple idea is to get the TagList and sort all issues according to the tags. +
+  Those issues without a tag should be put at the end of the lists.
+
+* List by search frequency +
+  **Command** `list freq` +
+  Search frequency can reflect the importance of different issues. This order can help users to review important issues more easily.
+  Search frequency tracker is needed for this list order. It can be considered as an attribute just like tags, thus a Comparator which is similar to that used in List by Tag can be used here. +
+
+The following sequence diagram illustrates how the mechanism works:
+
+image::ListByOrderCommandSequenceDiagram.png[width="800"]
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
@@ -259,25 +311,25 @@ Step 1. The user launches the application for the first time. The `VersionedSave
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete 5` command to delete the 5th issue in the address book. The `delete` command calls `Model#commitSaveIt()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `saveItStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th statement in the address book. The `delete` command calls `Model#commitSaveIt()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `saveItStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `add n/David ...` to add a new issue. The `add` command also calls `Model#commitSaveIt()`, causing another modified address book state to be saved into the `saveItStateList`.
+Step 3. The user executes `add n/David ...` to add a new statement. The `add` command also calls `Model#commitSaveIt()`, causing another modified address book state to be saved into the `saveItStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
 If a command fails its execution, it will not call `Model#commitSaveIt()`, so the address book state will not be saved into the `saveItStateList`.
 
-Step 4. The user now decides that adding the issue was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoSaveIt()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the statement was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoSaveIt()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
 [NOTE]
 If the `currentStatePointer` is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The `undo` command uses `Model#canUndoSaveIt()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
 
-The following sequence diagram shows how the undo operation works:
+.The above sequence diagram shows how the undo operation works:
 
 image::UndoRedoSequenceDiagram.png[width="800"]
 
@@ -294,7 +346,7 @@ Step 6. The user executes `clear`, which calls `Model#commitSaveIt()`. Since the
 
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 
-The following activity diagram summarizes what happens when a user executes a new command:
+.The above activity diagram summarizes what happens when a user executes a new command:
 
 image::UndoRedoActivityDiagram.png[width="650"]
 
@@ -302,11 +354,11 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Save the entire address book.
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
-* **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the issue being deleted).
+* **Alternative 2:** Implement redo/undo individually for each of the commands.
+** Pros: Will use less memory (e.g. for `delete`, just save the statement being deleted).
 ** Cons: We must ensure that the implementation of each individual command are correct.
 
 ===== Aspect: Data structure to support the undo/redo commands
@@ -345,6 +397,34 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 === Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
+
+=== New Command: Home
+
+A new command--`home` is implemented to allow users to return to the root directory after editing a certain issue.
+
+=== GUI Enhancement[Coming in v1.3]
+The  figure below shows the expected GUI for SaveIt v1.3.
+
+.GUI Draft 1
+image::UI_Design.png[width="800"]
+
+In the above figure, it is shown the left column displays the list of all issues,
+ The column in the middle displays solutions of the selected issue. The blank part
+  at bottom right displays the web page of the url as in the solution link.
+
+  *The web page should be able to be accessed via the Internet as well as loaded locally.
+
+For SaveIt v1.4, The list of issues and list of solutions can be displayed in the same
+ column, as shown below, Besides, the display panel will be used to display the website
+ or the content of issue remark.
+
+.GUI Draft 2, scenario 1
+image::UI_Design1.png[width="800"]
+
+.GUI Draft 2, scenario 2
+image::UI_Design2.png[width="800"]
+
+
 
 == Documentation
 
@@ -582,9 +662,9 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 * Hints
 ** The link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/address/model/saveit.java[`saveit`] API need to be updated.
 ** Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?
-**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/address/model/saveit.java[`saveit`] and link:{repoURL}/src/main/java/seedu/address/model/issue/Person.java[`Person`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/address/model/saveit.java[`saveit`] allows you to update a issue, and link:{repoURL}/src/main/java/seedu/address/model/issue/Person.java[`Person`] allows you to update the tags.
+**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/address/model/Saveit.java[`Saveit`] and link:{repoURL}/src/main/java/seedu/address/model/Issue.java[`Issue`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/address/model/Saveit.java[`Saveit`] allows you to update an issue, and link:{repoURL}/src/main/java/seedu/address/model/Issue.java[`Issue`] allows you to update the tags.
 * Solution
-** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/saveit.java[`saveit`]. Loop through each issue, and remove the `tag` from each issue.
+** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/saveit.java[`saveit`]. Loop through each statement, and remove the `tag` from each statement.
 ** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`] should call `saveit#removeTag(Tag)`.
 ** Add new tests for each of the new public methods that you have added.
 ** See this https://github.com/se-edu/saveit-level4/pull/790[PR] for the full email.
@@ -593,12 +673,12 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 [discrete]
 ==== `Ui` component
 
-*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your address book application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last issue in the list. Your job is to implement improvements to the UI to solve all these problems.
+*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your address book application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last statement in the list. Your job is to implement improvements to the UI to solve all these problems.
 
 [TIP]
 Do take a look at <<Design-Ui>> before attempting to modify the `UI` component.
 
-. Use different colors for different tags inside issue cards. For example, `friends` tags can be all in brown, and `colleagues` tags can be all in yellow.
+. Use different colors for different tags inside statement cards. For example, `friends` tags can be all in brown, and `colleagues` tags can be all in yellow.
 +
 **Before**
 +
@@ -690,16 +770,15 @@ By creating this command, you will get a chance to learn how to implement a feat
 
 *Scenario:* You are a software maintainer for `saveit`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
 
-==== Description
-Edits the remark for a issue specified in the `INDEX`. +
+Edits the remark for an issue specified in the `INDEX`. +
 Format: `remark INDEX r/[REMARK]`
 
 Examples:
 
 * `remark 1 r/Likes to drink coffee.` +
-Edits the remark for the first issue to `Likes to drink coffee.`
+Edits the remark for the first statement to `Likes to drink coffee.`
 * `remark 1 r/` +
-Removes the remark for the first issue.
+Removes the remark for the first statement.
 
 ==== Step-by-step Instructions
 
@@ -733,7 +812,7 @@ for `RemarkCommandParser`.
 . Modify link:{repoURL}/src/test/java/seedu/address/logic/parser/SaveItParserTest.java[`SaveItParserTest`] to test that the correct command is generated according to the user input.
 
 ===== [Step 3] Ui: Add a placeholder for remark in `PersonCard`
-Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] s to display a remark for each issue later.
+Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] s to display a remark for each statement later.
 
 **Main:**
 
@@ -745,28 +824,28 @@ Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/address/ui
 . Modify link:{repoURL}/src/test/java/guitests/guihandles/PersonCardHandle.java[`PersonCardHandle`] so that future tests can read the contents of the remark label.
 
 ===== [Step 4] Model: Add `Remark` class
-We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/seedu/address/model/issue/Person.java[`Person`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
+We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/seedu/address/model/Issue.java[`Issue`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
 
 **Main:**
 
-. Add `Remark` to model component (you can copy from link:{repoURL}/src/main/java/seedu/address/model/issue/Remark.java[`Remark`], remove the regex and change the names accordingly).
+. Add `Remark` to model component (you can copy from link:{repoURL}/src/main/java/seedu/address/model/statement/Remark.java[`Remark`], remove the regex and change the names accordingly).
 . Modify `RemarkCommand` to now take in a `Remark` instead of a `String`.
 
 **Tests:**
 
 . Add test for `Remark`, to test the `Remark#equals()` method.
 
-===== [Step 5] Model: Modify `Person` to support a `Remark` field
-Now we have the `Remark` class, we need to actually use it inside link:{repoURL}/src/main/java/seedu/address/model/issue/Person.java[`Person`].
+===== [Step 5] Model: Modify `Issue` to support a `Remark` field
+Now we have the `Remark` class, we need to actually use it inside link:{repoURL}/src/main/java/seedu/address/model/Issue.java[`Issue`].
 
 **Main:**
 
-. Add `getRemark()` in link:{repoURL}/src/main/java/seedu/address/model/issue/Person.java[`Person`].
-. You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the issue will be created without a remark).
+. Add `getRemark()` in link:{repoURL}/src/main/java/seedu/address/model/Issue.java[`Issue`].
+. You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the statement will be created without a remark).
 . Modify link:{repoURL}/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `saveit.xml` so that the application will load the sample data when you launch it.)
 
 ===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedPerson` class
-We now have `Remark` s for `Person` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/address/storage/XmlAdaptedPerson.java[`XmlAdaptedPerson`] to include a `Remark` field so that it will be saved.
+We now have `Remark` s for `Issue` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/address/storage/XmlAdaptedPerson.java[`XmlAdaptedPerson`] to include a `Remark` field so that it will be saved.
 
 **Main:**
 
@@ -774,22 +853,22 @@ We now have `Remark` s for `Person` s, but they will be gone when we exit the ap
 
 **Tests:**
 
-. Fix `invalidAndValidPersonSaveIt.xml`, `typicalPersonsSaveIt.xml`, `validSaveIt.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
+. Fix `invalidAndValidPersonSaveIt.xml`, `typicalIssuesSaveIt.xml`, `validSaveIt.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
 
-===== [Step 6b] Test: Add withRemark() for `PersonBuilder`
-Since `Person` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/issue/Person.java[`Person`].
+===== [Step 6b] Test: Add withRemark() for `IssueBuilder`
+Since `Issue` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/address/testutil/IssueBuilder.java[`IssueBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/Issue.java[`Issue`].
 
 **Tests:**
 
-. Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`]. This method will create a new `Remark` for the issue that it is currently building.
-. Try and use the method on any sample `Person` in link:{repoURL}/src/test/java/seedu/address/testutil/TypicalPersons.java[`TypicalPersons`].
+. Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu/address/testutil/IssueBuilder.java[`IssueBuilder`]. This method will create a new `Remark` for the statement that it is currently building.
+. Try and use the method on any sample `Issue` in link:{repoURL}/src/test/java/seedu/address/testutil/TypicalPersons.java[`TypicalPersons`].
 
 ===== [Step 7] Ui: Connect `Remark` field to `PersonCard`
 Our remark label in link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
 
 **Main:**
 
-. Modify link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`]'s constructor to bind the `Remark` field to the `Person` 's remark.
+. Modify link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`]'s constructor to bind the `Remark` field to the `Issue` 's remark.
 
 **Tests:**
 
@@ -800,7 +879,7 @@ We now have everything set up... but we still can't modify the remarks. Let's fi
 
 **Main:**
 
-. Replace the logic in `RemarkCommand#execute()` (that currently just throws an `Exception`), with the actual logic to modify the remarks of a issue.
+. Replace the logic in `RemarkCommand#execute()` (that currently just throws an `Exception`), with the actual logic to modify the remarks of an issue.
 
 **Tests:**
 
@@ -831,7 +910,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |programmer |record the issue and email |review it when i encountered it again
+|`* * *` |programmer |record the statement and email |review it when i encountered it again
 
 |`* * *` |programmer using multiple programming languages |search issues of different language easily |fix my code easily
 
@@ -841,19 +920,19 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |team member of a SWE team |share solutions to mistakes/bugs that I encountered and found previously with my team |help my team by reducing their time spent in debugging
 
-|`*` |programmer |add remark for the issues |have better understanding of the issue
+|`*` |programmer |add remark for the issues |have better understanding of the statement
 
 |`* *` |a CS student |note common mistakes among my classmates |learn from them and avoid the common mistakes
 
-|`* *` |a programmer dealing with many programs at the same time |search the issue based on the tag or key words |So that i can find the issue easily
+|`* *` |a programmer dealing with many programs at the same time |search the statement based on the tag or key words |So that i can find the statement easily
 
-|`* *` |a programmer encounter various issues while coding |add the tag for each issue |collect same tag
+|`* *` |a programmer encounter various issues while coding |add the tag for each statement |collect same tag
 
-|`* *` |a CS student who aims to improve technical skills |store the way I solved certain issue |review it and see if there is a better email in the future
+|`* *` |a CS student who aims to improve technical skills |store the way I solved certain statement |review it and see if there is a better email in the future
 
 |`*` |a busy programmer dealing with a big project |highlight the certain part of the page |See the most important part of the email
 
-|`* *` |a CS student who are learning new techniques |delete the issue after I got familiar with that issue |pay more attention to those I am not familiar with
+|`* *` |a CS student who are learning new techniques |delete the statement after I got familiar with that statement |pay more attention to those I am not familiar with
 
 |`* *` |a CS student |collect all the mistakes i have made during daily coding |revise them before exam
 
@@ -871,7 +950,7 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `saveit` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `SaveIt` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
 === Use case: Add issue
@@ -879,13 +958,56 @@ _{More to be added}_
 *MSS*
 
 1. User requests to add a new issue
-2. User add statement in command line
-3. User can choose add issue statement, multiple email links, remarks and tag.
-4. The ‘Success’ message shown on the screen.
+2. SaveIt add the issue to its storage
+3. The ‘Success’ message shown on the screen.
 +
 Use case ends.
 
+*Extensions*
+
 [none]
+* 2a. Command is invalid.
++
+[none]
+** 2a1. The 'Invalid Command' message shown on the screen.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Add solution
+
+*MSS*
+
+1. User request to list issues
+2. SaveIt shows a list of issues
+3. User select a specific issue in the list
+4. SaveIt shows the solution lists of the selected issue
+5. User requests to add a new solution to this issue
+6. SaveIt adds the solution
+7. The 'Success' message shown on the screen.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. The 'Invalid Index' message shown on the screen.
++
+Use case resumes at step 2.
+
+* 5a. Command is invalid.
++
+[none]
+** 5a1. The 'Invalid Command' message shown on the screen.
++
+Use case resumes at step 4.
 
 [discrete]
 === Use case: Edit issue
@@ -896,8 +1018,7 @@ Use case ends.
 2. SaveIt shows a list of issues
 3. User requests to edit a specific issue in the list
 4. SaveIt updates the issue
-5. Use case ends.
-6. The ‘Success’ message shown on the screen.
+5. The ‘Success’ message shown on the screen.
 +
 Use case ends.
 
@@ -923,14 +1044,14 @@ Use case resumes at step 2.
 Use case resumes at step 2.
 
 [discrete]
-=== Use case: Delete issue
+=== Use case: Delete statement
 
 *MSS*
 
 1.  User requests to list issues
 2.  SaveIt shows a list of issues
-3.  User requests to delete a specific issue in the list
-4.  SaveIt deletes the issue
+3.  User requests to delete a specific statement in the list
+4.  SaveIt deletes the statement
 5. The "Success" message shown on the screen.
 +
 Use case ends.
@@ -1010,17 +1131,53 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
+=== Adding an issue
+
+. Adding an issue in root directory
+
+.. Prerequisites: User is in root directory
+.. Test case: `add i/problem d/description t/UI`
+   Expected: A new issue with statement and description is added, tagged with UI.
+.. Test case: `add t/UI d/description d/newdescription i/problem`
+   Expected: A new issue with statement and newdescription is added, tagged with UI.
+.. Test case: `add i/proπblem d/description`
+   Expected: No issue is added. Error details shown in the status message. Status bar remains the same.
+.. Test case: `add s/www.example.com r/remark`
+   Expected: No issue is added. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect add commands to try: `add i/problem`, `add i/problem s/link` _{give more}_ +
+   Expected: Similar to previous.
+
 _{ more test cases ... }_
 
-=== Deleting a issue
+=== Editing an issue
 
-. Deleting a issue while all issues are listed
+. Editing an issue in root directory
+
+.. Prerequisites: User is in root directory
+.. Test case: `edit 1 i/problem`
+   Expected: First issue is edited. Its new issue statement is problem.
+.. Test case: `edit 1 d/description d/newdescription`
+   Expected: First issue is edited. Its new description is newdescription.
+.. Test case: `edit 1 i/proπblem`
+   Expected: No issue is edited. Error details shown in the status message. Status bar remains the same.
+.. Test case: `edit 1 s/www.example.com r/remark`
+   Expected: No issue is edited. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect add commands to try: `edit i/problem s/link`, `edit x i/problem` (where x is larger than the list size) _{give more}_ +
+   Expected: Similar to previous.
+
+_{ more test cases ... }_
+
+=== Deleting an issue
+
+. Deleting an issue while all issues are listed
 
 .. Prerequisites: List all issues using the `list` command. Multiple issues in the list.
 .. Test case: `delete 1` +
    Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
-   Expected: No issue is deleted. Error details shown in the status message. Status bar remains the same.
+   Expected: No statement is deleted. Error details shown in the status message. Status bar remains the same.
+.. Test case: `delete a` +
+   Expected: No statement is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 

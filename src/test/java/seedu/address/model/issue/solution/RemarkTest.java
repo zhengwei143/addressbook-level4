@@ -1,4 +1,4 @@
-package seedu.address.model.issue;
+package seedu.address.model.issue.solution;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -21,17 +21,16 @@ public class RemarkTest {
     }
 
     @Test
-    public void isValidAddress() {
-        // null address
+    public void isValidRemark() {
+        // null remark
         Assert.assertThrows(NullPointerException.class, () -> Remark.isValidRemark(null));
 
-        // invalid addresses
+        // invalid remarks
         assertFalse(Remark.isValidRemark("")); // empty string
         assertFalse(Remark.isValidRemark(" ")); // spaces only
 
-        // valid addresses
-        assertTrue(Remark.isValidRemark("Blk 456, Den Road, #01-355"));
-        assertTrue(Remark.isValidRemark("-")); // one character
+        // valid remarks
+        assertTrue(Remark.isValidRemark("Blk 456, Den Road, 01-355"));
         assertTrue(Remark.isValidRemark("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
     }
 }

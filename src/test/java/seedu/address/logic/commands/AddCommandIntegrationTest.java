@@ -12,7 +12,7 @@ import seedu.address.model.Issue;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.IssueBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -29,19 +29,19 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Issue validIssue = new PersonBuilder().build();
+        Issue validIssue = new IssueBuilder().build();
 
         Model expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());
-        expectedModel.addPerson(validIssue);
+        expectedModel.addIssue(validIssue);
         expectedModel.commitSaveIt();
 
         assertCommandSuccess(new AddCommand(validIssue), model, commandHistory,
-                String.format(AddCommand.MESSAGE_SUCCESS, validIssue), expectedModel);
+                String.format(AddCommand.MESSAGE_ISSUE_SUCCESS, validIssue), expectedModel);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Issue issueInList = model.getSaveIt().getPersonList().get(0);
+        Issue issueInList = model.getSaveIt().getIssueList().get(0);
         assertCommandFailure(new AddCommand(issueInList), model, commandHistory,
                 AddCommand.MESSAGE_DUPLICATE_PERSON);
     }

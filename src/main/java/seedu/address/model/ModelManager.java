@@ -8,19 +8,23 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+//import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.model.SaveItChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
+//import seedu.address.model.issue.IssueSort;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the saveIt data.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
+    private static final Index ROOT_DIRECTORY = Index.fromZeroBased(0);
     private final VersionedSaveIt versionedSaveIt;
-    private final FilteredList<Issue> filteredIssues;
+    private FilteredList<Issue> filteredIssues;
 
     /**
      * Initializes a ModelManager with the given saveIt and userPrefs.
@@ -32,7 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with SaveIt: " + saveIt + " and user prefs " + userPrefs);
 
         versionedSaveIt = new VersionedSaveIt(saveIt);
-        filteredIssues = new FilteredList<>(versionedSaveIt.getPersonList());
+        filteredIssues = new FilteredList<>(versionedSaveIt.getIssueList());
     }
 
     public ModelManager() {
@@ -46,6 +50,21 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void resetDirectory(Index targetIndex) {
+        if (targetIndex.equals(ROOT_DIRECTORY)) {
+            versionedSaveIt.setCurrentDirectory(ROOT_DIRECTORY.getZeroBased());
+        } else {
+            versionedSaveIt.setCurrentDirectory(targetIndex.getOneBased());
+        }
+        indicateSaveItChanged();
+    }
+
+    @Override
+    public int getCurrentDirectory() {
+        return versionedSaveIt.getCurrentDirectory();
+    }
+
+    @Override
     public ReadOnlySaveIt getSaveIt() {
         return versionedSaveIt;
     }
@@ -56,30 +75,44 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Issue issue) {
+    public boolean hasIssue(Issue issue) {
         requireNonNull(issue);
-        return versionedSaveIt.hasPerson(issue);
+        return versionedSaveIt.hasIssue(issue);
     }
 
     @Override
-    public void deletePerson(Issue target) {
-        versionedSaveIt.removePerson(target);
+    public void deleteIssue(Issue target) {
+        versionedSaveIt.removeIssue(target);
         indicateSaveItChanged();
     }
 
     @Override
-    public void addPerson(Issue issue) {
-        versionedSaveIt.addPerson(issue);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addIssue(Issue issue) {
+        versionedSaveIt.addIssue(issue);
+        updateFilteredIssueList(PREDICATE_SHOW_ALL_ISSUES);
         indicateSaveItChanged();
     }
 
     @Override
-    public void updatePerson(Issue target, Issue editedIssue) {
+    public void updateIssue(Issue target, Issue editedIssue) {
         CollectionUtil.requireAllNonNull(target, editedIssue);
 
-        versionedSaveIt.updatePerson(target, editedIssue);
+        versionedSaveIt.updateIssue(target, editedIssue);
         indicateSaveItChanged();
+    }
+
+    /**
+     * Filters the issues given a predicate
+     */
+    public void filterIssues(Predicate<Issue> predicate) {
+        updateFilteredIssueList(predicate);
+        // Update the search frequencies after filtering
+        for (Issue issue : filteredIssues) {
+            issue.updateFrequency();
+        }
+
+        // Sorts properly but the UI is not listing properly
+        // SortedList sortedFilteredList = new SortedList<>(filteredIssues, new IssueSort());
     }
 
     //=========== Filtered Issue List Accessors =============================================================
@@ -89,12 +122,12 @@ public class ModelManager extends ComponentManager implements Model {
      * {@code versionedSaveIt}
      */
     @Override
-    public ObservableList<Issue> getFilteredPersonList() {
+    public ObservableList<Issue> getFilteredIssueList() {
         return FXCollections.unmodifiableObservableList(filteredIssues);
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Issue> predicate) {
+    public void updateFilteredIssueList(Predicate<Issue> predicate) {
         requireNonNull(predicate);
         filteredIssues.setPredicate(predicate);
     }

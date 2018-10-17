@@ -13,6 +13,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.HomeCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -66,6 +67,9 @@ public class SaveItParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case HomeCommand.COMMAND_WORD:
+            return new HomeCommand();
 
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();

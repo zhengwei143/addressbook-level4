@@ -77,9 +77,9 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s saveIt and {@code userPrefs}. <br>
+     * The data from the sample saveIt will be used instead if {@code storage}'s saveIt is not found,
+     * or an empty saveIt will be used instead if errors occur when reading {@code storage}'s saveIt.
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlySaveIt> saveItOptional;

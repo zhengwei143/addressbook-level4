@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.issue.Description;
+import seedu.address.model.issue.IssueSearchFrequency;
 import seedu.address.model.issue.IssueStatement;
 import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
@@ -17,10 +18,11 @@ import seedu.address.model.issue.Tag;
  * Represents a Issue in the remark book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Issue {
+public class Issue implements Comparable<Issue> {
 
     // Identity fields
     private final IssueStatement statement;
+    private final IssueSearchFrequency frequency;
 
     // Data fields
     private final List<Solution> solutions = new ArrayList<>();
@@ -36,6 +38,19 @@ public class Issue {
         this.description = description;
         this.solutions.addAll(solutions);
         this.tags.addAll(tags);
+        this.frequency = new IssueSearchFrequency(0);
+    }
+
+    /**
+     * Overloaded constructor with additional {@code frequency} field
+     */
+    public Issue(IssueStatement statement, Description description, List<Solution> solutions, Set<Tag> tags, IssueSearchFrequency frequency) {
+        CollectionUtil.requireAllNonNull(statement, description, solutions, tags);
+        this.statement = statement;
+        this.description = description;
+        this.solutions.addAll(solutions);
+        this.tags.addAll(tags);
+        this.frequency = frequency;
     }
 
     public IssueStatement getStatement() {
@@ -61,6 +76,8 @@ public class Issue {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
+
+    public IssueSearchFrequency getFrequency() { return frequency; }
 
     /**
      * Returns true if both issues of the same statement have at least one other identity field that is the same.
@@ -116,4 +133,10 @@ public class Issue {
         return builder.toString();
     }
 
+    /**
+     * Used to sort the Issues in order of frequency
+     */
+    public int compareTo(Issue other) {
+        return frequency.compare(other.getFrequency());
+    }
 }

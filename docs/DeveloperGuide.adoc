@@ -891,14 +891,13 @@ Use case ends.
 [none]
 
 [discrete]
-=== Use case: Edit statement
+=== Use case: Edit statement and description
 
 *MSS*
 
 1. User requests to list issues
-2. SaveIt shows a list of issues
-3. User requests to edit a specific statement in the list
-4. SaveIt updates the statement
+2. User request to edit an issue statement and description
+3. SaveIt updates the statement
 5. Use case ends.
 6. The ‘Success’ message shown on the screen.
 +

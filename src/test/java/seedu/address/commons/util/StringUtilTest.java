@@ -125,12 +125,13 @@ public class StringUtilTest {
         // The word has to be a partial string of the sentence in order to correctly partially match
         assertFalse(StringUtil.partialMatchIgnoreCase("aaa bbb ccc", "bbbb"));
         assertFalse(StringUtil.partialMatchIgnoreCase("aaa bbb ccc", "AAAA"));
+        assertFalse(StringUtil.partialMatchIgnoreCase("aaabB ccC", "bbc")); // partial match does not match with spaces between
 
         // Sentence partially matched with the word correctly, case is ignored
-        assertTrue(StringUtil.partialMatchIgnoreCase("aaa bbb ccc", "bb")); // Sentence word bigger than query word
-        assertTrue(StringUtil.partialMatchIgnoreCase("aaa bBb ccc", "Bbb")); // First word (boundary case)
-        assertTrue(StringUtil.partialMatchIgnoreCase("aaa bBb ccc@1", "CCc@1")); // Last word (boundary case)
-        assertTrue(StringUtil.partialMatchIgnoreCase("  AAA   bBb   ccc  ", "aaa")); // Sentence has extra spaces
+        assertTrue(StringUtil.partialMatchIgnoreCase("aaabbbccc", "bb")); // Sentence word bigger than query word
+        assertTrue(StringUtil.partialMatchIgnoreCase("aaabBbccc", "Bbb")); // First word (boundary case)
+        assertTrue(StringUtil.partialMatchIgnoreCase("aaabBb ccc@1", "CCc@1")); // Last word (boundary case)
+        assertTrue(StringUtil.partialMatchIgnoreCase("  AAAbBb   ccc  ", "aaa")); // Sentence has extra spaces
         assertTrue(StringUtil.partialMatchIgnoreCase("Aaa", "aaa")); // Only one word in sentence (boundary case)
         assertTrue(StringUtil.partialMatchIgnoreCase("aaa bbb ccc", "  ccc  ")); // Leading/trailing spaces
 

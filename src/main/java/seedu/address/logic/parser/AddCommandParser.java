@@ -57,7 +57,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                         String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
         } else {
-            if (arePrefixesPresent(argMultimap, PREFIX_SOLUTION_LINK, PREFIX_REMARK)) {
+            if (argMultimap.getValue(PREFIX_SOLUTION_LINK).isPresent()
+                    || argMultimap.getValue(PREFIX_REMARK).isPresent()) {
                 throw new ParseException(
                         String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }

@@ -29,7 +29,7 @@ public class ParserUtilTest {
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_DESCRIPTION = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
+    private static final String VALID_REMARK = "This is a remark; this remark is #1.";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -118,14 +118,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
-        Remark expectedAddress = new Remark(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
+        Remark expectedAddress = new Remark(VALID_REMARK);
+        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_REMARK));
     }
 
     @Test
     public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
-        Remark expectedAddress = new Remark(VALID_ADDRESS);
+        String addressWithWhitespace = WHITESPACE + VALID_REMARK + WHITESPACE;
+        Remark expectedAddress = new Remark(VALID_REMARK);
         assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
     }
 

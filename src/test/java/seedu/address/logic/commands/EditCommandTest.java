@@ -3,11 +3,12 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UI;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -27,7 +28,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.SaveIt;
 import seedu.address.model.UserPrefs;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.IssueBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
@@ -39,7 +40,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Issue editedIssue = new PersonBuilder().build();
+        Issue editedIssue = new IssueBuilder().build();
         EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder(editedIssue).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ISSUE, descriptor);
 
@@ -57,12 +58,12 @@ public class EditCommandTest {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredIssueList().size());
         Issue lastIssue = model.getFilteredIssueList().get(indexLastPerson.getZeroBased());
 
-        PersonBuilder personInList = new PersonBuilder(lastIssue);
-        Issue editedIssue = personInList.withName(VALID_NAME_BOB).withDescription(VALID_DESCRIPTION_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        IssueBuilder personInList = new IssueBuilder(lastIssue);
+        Issue editedIssue = personInList.withStatement(VALID_STATEMENT_C).withDescription(VALID_DESCRIPTION_C)
+                .withTags(VALID_TAG_UI).build();
 
-        EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withDescription(VALID_DESCRIPTION_BOB).withTags(VALID_TAG_HUSBAND).build();
+        EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder().withStatement(VALID_STATEMENT_C)
+                .withDescription(VALID_DESCRIPTION_C).withTags(VALID_TAG_UI).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue);
@@ -91,10 +92,12 @@ public class EditCommandTest {
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_ISSUE);
 
+
         Issue issueInFilteredList = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
-        Issue editedIssue = new PersonBuilder(issueInFilteredList).withName(VALID_NAME_BOB).build();
+        Issue editedIssue = new IssueBuilder(issueInFilteredList).withStatement(VALID_STATEMENT_C).build();
+
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ISSUE,
-                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditPersonDescriptorBuilder().withStatement(VALID_STATEMENT_C).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue);
 
@@ -129,7 +132,8 @@ public class EditCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredIssueList().size() + 1);
-        EditCommand.EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditCommand.EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withStatement(VALID_STATEMENT_C).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
@@ -147,14 +151,14 @@ public class EditCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getSaveIt().getIssueList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditPersonDescriptorBuilder().withStatement(VALID_STATEMENT_C).build());
 
         assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
     }
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
-        Issue editedIssue = new PersonBuilder().build();
+        Issue editedIssue = new IssueBuilder().build();
         Issue issueToEdit = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
         EditCommand.EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder(editedIssue).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ISSUE, descriptor);
@@ -177,7 +181,7 @@ public class EditCommandTest {
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredIssueList().size() + 1);
-        EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder().withStatement(VALID_STATEMENT_C).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         // execution failed -> address book state not added into model
@@ -197,7 +201,7 @@ public class EditCommandTest {
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonEdited() throws Exception {
-        Issue editedIssue = new PersonBuilder().build();
+        Issue editedIssue = new IssueBuilder().build();
         EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder(editedIssue).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ISSUE, descriptor);
         Model expectedModel = new ModelManager(new SaveIt(model.getSaveIt()), new UserPrefs());

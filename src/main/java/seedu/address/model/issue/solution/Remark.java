@@ -10,7 +10,7 @@ import seedu.address.commons.util.AppUtil;
 public class Remark {
 
     public static final String MESSAGE_REMARK_CONSTRAINTS =
-            "Remarks can take any values, and it should not be blank";
+            "Remarks can take in any values and it shouldn't be blank.";
 
     /*
      * The first character of the remark must not be a whitespace,

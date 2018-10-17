@@ -24,7 +24,7 @@ public class XmlAdaptedIssue {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Issue's %s field is missing!";
 
     @XmlElement(required = true)
-    private String issue;
+    private String statement;
     @XmlElement(required = true)
     private String description;
 
@@ -41,11 +41,11 @@ public class XmlAdaptedIssue {
     }
 
     /**
-     * Constructs an {@code XmlAdaptedIssue} with the given issue details.
+     * Constructs an {@code XmlAdaptedIssue} with the given statement details.
      */
-    public XmlAdaptedIssue(String issue, String description, List<XmlAdaptedSolution> solutions,
-            List<XmlAdaptedTag> tagged) {
-        this.issue = issue;
+    public XmlAdaptedIssue(String statement, String description, List<XmlAdaptedSolution> solutions,
+                           List<XmlAdaptedTag> tagged) {
+        this.statement = statement;
         this.description = description;
         if (solutions != null) {
             this.solutions = new ArrayList<>(solutions);
@@ -61,7 +61,7 @@ public class XmlAdaptedIssue {
      * @param source future changes to this will not affect the created XmlAdaptedIssue
      */
     public XmlAdaptedIssue(Issue source) {
-        issue = source.getStatement().issue;
+        statement = source.getStatement().issue;
         description = source.getDescription().value;
         solutions = source.getSolutions().stream()
                 .map(XmlAdaptedSolution::new)
@@ -72,14 +72,14 @@ public class XmlAdaptedIssue {
     }
 
     /**
-     * Converts this jaxb-friendly adapted issue object into the model's Issue object.
+     * Converts this jaxb-friendly adapted statement object into the model's Issue object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted issue
+     * @throws IllegalValueException if there were any data constraints violated in the adapted statement
      */
     public Issue toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> issueTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            issueTags.add(tag.toModelType());
         }
 
         final List<Solution> issueSolutions = new ArrayList<>();
@@ -87,14 +87,14 @@ public class XmlAdaptedIssue {
             issueSolutions.add(solution.toModelType());
         }
 
-        if (issue == null) {
+        if (statement == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     IssueStatement.class.getSimpleName()));
         }
-        if (!IssueStatement.isValidIssueStatement(issue)) {
+        if (!IssueStatement.isValidIssueStatement(statement)) {
             throw new IllegalValueException(IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS);
         }
-        final IssueStatement modelName = new IssueStatement(issue);
+        final IssueStatement modelName = new IssueStatement(statement);
 
         if (description == null) {
             throw new IllegalValueException(
@@ -107,7 +107,7 @@ public class XmlAdaptedIssue {
 
         final List<Solution> modelSolutions = new ArrayList<>(issueSolutions);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Tag> modelTags = new HashSet<>(issueTags);
         return new Issue(modelName, modelDescription, modelSolutions, modelTags);
     }
 
@@ -122,7 +122,7 @@ public class XmlAdaptedIssue {
         }
 
         XmlAdaptedIssue otherPerson = (XmlAdaptedIssue) other;
-        return Objects.equals(issue, otherPerson.issue)
+        return Objects.equals(statement, otherPerson.statement)
                 && Objects.equals(description, otherPerson.description)
                 && solutions.equals(otherPerson.solutions)
                 && tagged.equals(otherPerson.tagged);

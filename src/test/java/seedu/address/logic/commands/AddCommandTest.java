@@ -21,7 +21,7 @@ import seedu.address.model.Issue;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlySaveIt;
 import seedu.address.model.SaveIt;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.IssueBuilder;
 
 public class AddCommandTest {
 
@@ -41,7 +41,7 @@ public class AddCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Issue validIssue = new PersonBuilder().build();
+        Issue validIssue = new IssueBuilder().build();
 
         CommandResult commandResult = new AddCommand(validIssue).execute(modelStub, commandHistory);
 
@@ -52,7 +52,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        Issue validIssue = new PersonBuilder().build();
+        Issue validIssue = new IssueBuilder().build();
         AddCommand addCommand = new AddCommand(validIssue);
         ModelStub modelStub = new ModelStubWithPerson(validIssue);
 
@@ -63,8 +63,8 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Issue alice = new PersonBuilder().withName("Alice").build();
-        Issue bob = new PersonBuilder().withName("Bob").build();
+        Issue alice = new IssueBuilder().withStatement("Alice").build();
+        Issue bob = new IssueBuilder().withStatement("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 

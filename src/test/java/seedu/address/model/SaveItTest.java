@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SOLUTION_STACKOVERLOW;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UI;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalSaveIt;
 
@@ -20,7 +20,7 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.issue.exceptions.DuplicateIssueException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.IssueBuilder;
 
 public class SaveItTest {
 
@@ -50,8 +50,8 @@ public class SaveItTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two issues with the same identity fields
-        Issue editedAlice = new PersonBuilder(ALICE).withSolutions(VALID_SOLUTION_STACKOVERLOW)
-                .withTags(VALID_TAG_HUSBAND).build();
+        Issue editedAlice = new IssueBuilder(ALICE).withSolutions(VALID_SOLUTION_STACKOVERLOW)
+                .withTags(VALID_TAG_UI).build();
         List<Issue> newIssues = Arrays.asList(ALICE, editedAlice);
         SaveItStub newData = new SaveItStub(newIssues);
 
@@ -79,8 +79,8 @@ public class SaveItTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInSaveIt_returnsTrue() {
         saveIt.addIssue(ALICE);
-        Issue editedAlice = new PersonBuilder(ALICE).withSolutions(VALID_SOLUTION_STACKOVERLOW)
-                .withTags(VALID_TAG_HUSBAND).build();
+        Issue editedAlice = new IssueBuilder(ALICE).withSolutions(VALID_SOLUTION_STACKOVERLOW)
+                .withTags(VALID_TAG_UI).build();
         assertTrue(saveIt.hasIssue(editedAlice));
     }
 

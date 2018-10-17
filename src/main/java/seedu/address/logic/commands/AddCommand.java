@@ -78,7 +78,7 @@ public class AddCommand extends Command {
         int issueIndex = model.getCurrentDirectory();
         if (addSolution) {
             try {
-                if (issueIndex != 0) {
+                if (issueIndex > 0) {
                     addSolutionToIssue(model, issueIndex);
                     return new CommandResult(String.format(MESSAGE_SOLUTION_SUCCESS, solutionToBeAdded));
                 } else {

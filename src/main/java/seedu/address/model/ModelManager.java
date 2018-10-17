@@ -8,12 +8,13 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-//import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.model.SaveItChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
+
+//import javafx.collections.transformation.SortedList;
 //import seedu.address.model.issue.IssueSort;
 
 /**
@@ -50,9 +51,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetDirectory(Index targetIndex) {
-        if (targetIndex.equals(ROOT_DIRECTORY)) {
-            versionedSaveIt.setCurrentDirectory(ROOT_DIRECTORY.getZeroBased());
+    public void resetDirectory(Index targetIndex, boolean rootDirectory) {
+        if (rootDirectory) {
+            versionedSaveIt.setCurrentDirectory(targetIndex.getZeroBased());
         } else {
             versionedSaveIt.setCurrentDirectory(targetIndex.getOneBased());
         }
@@ -101,9 +102,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateSaveItChanged();
     }
 
-    /**
-     * Filters the issues given a predicate
-     */
+    @Override
     public void filterIssues(Predicate<Issue> predicate) {
         updateFilteredIssueList(predicate);
         // Update the search frequencies after filtering

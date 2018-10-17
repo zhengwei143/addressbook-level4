@@ -32,7 +32,9 @@ import seedu.address.model.issue.Tag;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-
+    public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt."; //TODO: necessary?
+    public static final String MESSAGE_EDIT_ISSUE_SUCCESS = "Edited Issue: %1$s";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the issue identified "
         + "by the index number used in the displayed issue list. "
         + "Existing values will be overwritten by the input values.\n"
@@ -45,12 +47,11 @@ public class EditCommand extends Command {
         + PREFIX_STATEMENT + "reducer "
         + PREFIX_DESCRIPTION + "how to use reducer in python "
         + PREFIX_SOLUTION_LINK + "Stackoverflow link "
-        + PREFIX_REMARK + "performing some computation on a list and returning the result "
+        + PREFIX_REMARK + "performing/**/ some computation on a list and returning the result "
         + PREFIX_TAG + "python ";
 
-    public static final String MESSAGE_EDIT_ISSUE_SUCCESS = "Edited Issue: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt."; //TODO: necessary?
+    private static final String DUMMY_SOLUTION_REMARK = "dummySolutionRemark";
+    private static final String DUMMY_SOLUTION_LINK = "dummySolutionLink";
 
     private final Index index;
     private final EditIssueDescriptor editIssueDescriptor;
@@ -62,21 +63,28 @@ public class EditCommand extends Command {
     public EditCommand(Index index, EditIssueDescriptor editIssueDescriptor) {
         requireNonNull(index);
         requireNonNull(editIssueDescriptor);
-
         this.index = index;
-        this.editIssueDescriptor = new EditIssueDescriptor(editIssueDescriptor);
+        this.editIssueDescriptor = editIssueDescriptor;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        Issue issueToEdit;
         requireNonNull(model);
         List<Issue> lastShownList = model.getFilteredIssueList();
+        int currentDirectory = model.getCurrentDirectory();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
+
+
+        if (currentDirectory == 0) {
+            issueToEdit = lastShownList.get(index.getZeroBased());
+        } else {
+            int solutionListSize = lastShownList.get(model.getCurrentDirectory() - 1).getSolutions().size();
+            if (index.getZeroBased() >= solutionListSize) {
+                throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
+            }
+            issueToEdit = lastShownList.get(model.getCurrentDirectory() - 1);
         }
-
-        Issue issueToEdit = lastShownList.get(index.getZeroBased());
         Issue editedIssue = createEditedIssue(issueToEdit, editIssueDescriptor);
 
         if (!issueToEdit.isSameIssue(editedIssue) && model.hasIssue(editedIssue)) {
@@ -90,18 +98,46 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Issue} with the details of {@code issueToEdit}
-     * edited with {@code editIssueDescriptor}.
+     * Creates and returns a {@code Issue} with the details of {@code issueToEdit} edited with {@code
+     * editIssueDescriptor}.
      */
     private static Issue createEditedIssue(Issue issueToEdit, EditIssueDescriptor editIssueDescriptor) {
         assert issueToEdit != null;
 
-        IssueStatement updatedName = editIssueDescriptor.getName().orElse(issueToEdit.getStatement());
+        List<Solution> updatedSolutions;
+        if (editIssueDescriptor.getIndex() != -1) {
+            updatedSolutions = new ArrayList<>(issueToEdit.getSolutions());
+            assert (editIssueDescriptor.getSolution() != null);
+            Solution updatedSolution = processNewSolution(editIssueDescriptor.getIndex(), issueToEdit,
+                editIssueDescriptor.getSolution().get());
+            updatedSolutions.set(editIssueDescriptor.getIndex(), updatedSolution);
+        } else {
+            updatedSolutions = editIssueDescriptor.getSolutions().orElse(issueToEdit.getSolutions());
+        }
+        IssueStatement updatedName = editIssueDescriptor.getStatement().orElse(issueToEdit.getStatement());
         Description updatedDescription = editIssueDescriptor.getDescription().orElse(issueToEdit.getDescription());
-        List<Solution> updatedSolutions = editIssueDescriptor.getSolutions().orElse(issueToEdit.getSolutions());
         Set<Tag> updatedTags = editIssueDescriptor.getTags().orElse(issueToEdit.getTags());
 
         return new Issue(updatedName, updatedDescription, updatedSolutions, updatedTags);
+    }
+
+    /**
+     * Creates and returns a {@code index} with the details of {@code issueToEdit} edited with {@code
+     * editIssueDescriptor}.
+     */
+    private static Solution processNewSolution(int index, Issue issueToEdit, Solution newSolution) {
+        Solution oldSolution = issueToEdit.getSolutions().get(index);
+        Solution updatedSolution;
+        if (newSolution.getRemark().equals(DUMMY_SOLUTION_REMARK) && !newSolution.getLink()
+            .equals(DUMMY_SOLUTION_LINK)) {
+            updatedSolution = new Solution(newSolution.getLink().value, oldSolution.getRemark().value);
+        } else if (!newSolution.getRemark().equals(DUMMY_SOLUTION_REMARK) && newSolution.getLink()
+            .equals(DUMMY_SOLUTION_LINK)) {
+            updatedSolution = new Solution(oldSolution.getLink().value, newSolution.getRemark().value);
+        } else {
+            updatedSolution = new Solution(newSolution.getLink().value, newSolution.getRemark().value);
+        }
+        return updatedSolution;
     }
 
     @Override
@@ -123,46 +159,62 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the issue with. Each non-empty field value will replace the
-     * corresponding field value of the issue.
+     * Stores the details to edit the issue with. Each non-empty field value will replace the corresponding field value
+     * of the issue.
      */
     public static class EditIssueDescriptor {
-        private IssueStatement name;
+
+        private IssueStatement statement;
         private List<Solution> solutions;
         private Description description;
         private Set<Tag> tags;
+        private int index = -1;
+        private Solution solution;
 
-        public EditIssueDescriptor() {}
+        public EditIssueDescriptor() {
+        }
+
+        public EditIssueDescriptor(Index index, Solution solution) {
+            this.solution = solution;
+            this.index = index.getZeroBased();
+        }
 
         /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * Copy constructor. A defensive copy of {@code tags} is used internally.
          */
         public EditIssueDescriptor(EditIssueDescriptor toCopy) {
-
-            setName(toCopy.name);
+            this.index = toCopy.getIndex();
+            setStatement(toCopy.statement);
             setSolutions(toCopy.solutions);
             setDescription(toCopy.description);
             setTags(toCopy.tags);
+        }
+
+        public int getIndex() {
+            return index;
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, description, solutions, tags);
+            return CollectionUtil.isAnyNonNull(statement, description, solutions, tags);
         }
 
-        public void setName(IssueStatement name) {
-            this.name = name;
+        public void setStatement(IssueStatement statement) {
+            this.statement = statement;
         }
 
-        public Optional<IssueStatement> getName() {
-            return Optional.ofNullable(name);
+        public Optional<IssueStatement> getStatement() {
+            return Optional.ofNullable(statement);
         }
 
         public void setDescription(Description description) {
             this.description = description;
+        }
+
+        public Optional<Solution> getSolution() {
+            return Optional.ofNullable(solution);
         }
 
         public Optional<Description> getDescription() {
@@ -178,17 +230,15 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code tags} to this object's {@code tags}. A defensive copy of {@code tags} is used internally.
          */
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException} if modification is
+         * attempted. Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
@@ -209,7 +259,7 @@ public class EditCommand extends Command {
             // state check
             EditIssueDescriptor e = (EditIssueDescriptor) other;
 
-            return getName().equals(e.getName())
+            return getStatement().equals(e.getStatement())
                 && getDescription().equals(e.getDescription())
                 && getSolutions().equals(e.getSolutions())
                 && getTags().equals(e.getTags());

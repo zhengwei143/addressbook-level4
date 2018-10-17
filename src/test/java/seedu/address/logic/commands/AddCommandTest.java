@@ -93,6 +93,7 @@ public class AddCommandTest {
     /**
      * A default model stub that have all of the methods failing.
      */
+    @Ignore
     private class ModelStub implements Model {
         @Override
         public void addIssue(Issue issue) {

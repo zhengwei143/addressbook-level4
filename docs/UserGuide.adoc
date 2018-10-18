@@ -29,39 +29,13 @@ To get started with SaveIt, please follow the  instructions below:
 
 .  Ensure that Java version `9` or later is installed in your Computer.
 .  Download the latest `saveit.jar` link:{repoURL}/releases[here].
-<<<<<<< HEAD
-.  Copy the file to the folder you want to use as the home folder for your SaveIt.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
-.  Type the command in the command box and press Enter to execute it.
-    e.g. typing help and pressing Enter will open the help window.
-.  Some example commands you can try:
-* *`list`* : lists all issues recorded
-* *`add`* : add i/ISSUE_STATEMENT s/SOLUTION_LINK1 s/SOLUTION_LINK2 t/TAG1 t/TAG2 : records an statement with the following links where solutions to the statement were found. The issues can be tagged to help with organization and ease of search.
-* *`search`* :  Search ISSUE : searches the records for a certain statement (case-insensitive)
-* *`edit`* : edit INDEX i/NEW_ISSUE s/NEW_SOLUTION_LINK1 s/NEW_SOLUTION_LINK2…  : edits the details of the 2nd statement in the current list
-* *`delete`* : delete 3 : deletes the 3rd statement shown in the current list
-* *`exit`* : exits the app
-.  Refer to Section 3, “Features” for details of each command.
-=======
 .  Copy the file to a folder as the home folder for your SaveIt.
 .  Double-click the file to start the app. The GUI should appear in a few seconds, as shown below.
->>>>>>> 8b1519595dce11262ff6ad7439d5b8eb6a93d724
 +
 .Applacation Interface
 image::UI_Design.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
-<<<<<<< HEAD
-e.g. typing `help` and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
-
-// * *`list`* : lists all contacts
-// * *`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`* : adds a contact named `John Doe` to the SaveIt.
-// * *`delete 3`* : deletes the 3rd contact shown in the current list
-// * *`exit`* : exits the app
-
-// .  Refer to <<Features>> for details of each command.
-=======
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Try some example commands:
 
@@ -69,15 +43,9 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * **`add`**`i/Bug d/Input Error t/java` : records a bug with description "Input Error" tagged as "java"
 * **`delete`**`3` : deletes the 3rd issue shown in the current list
 * *`exit`* : exits the app
->>>>>>> 8b1519595dce11262ff6ad7439d5b8eb6a93d724
-
-
-<<<<<<< HEAD
-=======
 
 
 [[Features]]
->>>>>>> 8b1519595dce11262ff6ad7439d5b8eb6a93d724
 == Features
 The following is a list of commands that you can use in the application.
 

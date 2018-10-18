@@ -128,10 +128,10 @@ public class EditCommand extends Command {
     private static Solution processNewSolution(int index, Issue issueToEdit, Solution newSolution) {
         Solution oldSolution = issueToEdit.getSolutions().get(index);
         Solution updatedSolution;
-        if (newSolution.getRemark().equals(DUMMY_SOLUTION_REMARK) && !newSolution.getLink()
-            .equals(DUMMY_SOLUTION_LINK)) {
+        if (newSolution.getRemark().value.equals(DUMMY_SOLUTION_REMARK) && !newSolution.getLink()
+            .value.equals(DUMMY_SOLUTION_LINK)) {
             updatedSolution = new Solution(newSolution.getLink().value, oldSolution.getRemark().value);
-        } else if (!newSolution.getRemark().equals(DUMMY_SOLUTION_REMARK) && newSolution.getLink()
+        } else if (!newSolution.getRemark().value.equals(DUMMY_SOLUTION_REMARK) && newSolution.getLink().value
             .equals(DUMMY_SOLUTION_LINK)) {
             updatedSolution = new Solution(oldSolution.getLink().value, newSolution.getRemark().value);
         } else {

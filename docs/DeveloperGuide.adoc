@@ -299,50 +299,50 @@ The undo/redo mechanism is facilitated by `VersionedSaveIt`.
 It extends `saveit` with an undo/redo history, stored internally as an `saveItStateList` and `currentStatePointer`.
 Additionally, it implements the following operations:
 
-* `VersionedSaveIt#commit()` -- Saves the current address book state in its history.
-* `VersionedSaveIt#undo()` -- Restores the previous address book state from its history.
-* `VersionedSaveIt#redo()` -- Restores a previously undone address book state from its history.
+* `VersionedSaveIt#commit()` -- Saves the current SaveIt state in its history.
+* `VersionedSaveIt#undo()` -- Restores the previous SaveIt state from its history.
+* `VersionedSaveIt#redo()` -- Restores a previously undone SaveIt state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitSaveIt()`, `Model#undoSaveIt()` and `Model#redoSaveIt()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedSaveIt` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedSaveIt` will be initialized with the initial SaveIt state, and the `currentStatePointer` pointing to that single SaveIt state.
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete 5` command to delete the 5th statement in the address book. The `delete` command calls `Model#commitSaveIt()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `saveItStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th statement in the SaveIt. The `delete` command calls `Model#commitSaveIt()`, causing the modified state of the SaveIt after the `delete 5` command executes to be saved in the `saveItStateList`, and the `currentStatePointer` is shifted to the newly inserted SaveIt state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `add n/David ...` to add a new statement. The `add` command also calls `Model#commitSaveIt()`, causing another modified address book state to be saved into the `saveItStateList`.
+Step 3. The user executes `add n/David ...` to add a new statement. The `add` command also calls `Model#commitSaveIt()`, causing another modified SaveIt state to be saved into the `saveItStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
-If a command fails its execution, it will not call `Model#commitSaveIt()`, so the address book state will not be saved into the `saveItStateList`.
+If a command fails its execution, it will not call `Model#commitSaveIt()`, so the SaveIt state will not be saved into the `saveItStateList`.
 
-Step 4. The user now decides that adding the statement was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoSaveIt()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the statement was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoSaveIt()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous SaveIt state, and restores the SaveIt to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
 [NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The `undo` command uses `Model#canUndoSaveIt()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the `currentStatePointer` is at index 0, pointing to the initial SaveIt state, then there are no previous SaveIt states to restore. The `undo` command uses `Model#canUndoSaveIt()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
 
 .The above sequence diagram shows how the undo operation works:
 
 image::UndoRedoSequenceDiagram.png[width="800"]
 
-The `redo` command does the opposite -- it calls `Model#redoSaveIt()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite -- it calls `Model#redoSaveIt()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the SaveIt to that state.
 
 [NOTE]
-If the `currentStatePointer` is at index `saveItStateList.size() - 1`, pointing to the latest address book state, then there are no undone address book states to restore. The `redo` command uses `Model#canRedoSaveIt()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the `currentStatePointer` is at index `saveItStateList.size() - 1`, pointing to the latest SaveIt state, then there are no undone SaveIt states to restore. The `redo` command uses `Model#canRedoSaveIt()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitSaveIt()`, `Model#undoSaveIt()` or `Model#redoSaveIt()`. Thus, the `saveItStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the SaveIt, such as `list`, will usually not call `Model#commitSaveIt()`, `Model#undoSaveIt()` or `Model#redoSaveIt()`. Thus, the `saveItStateList` remains unchanged.
 
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 
-Step 6. The user executes `clear`, which calls `Model#commitSaveIt()`. Since the `currentStatePointer` is not pointing at the end of the `saveItStateList`, all address book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitSaveIt()`. Since the `currentStatePointer` is not pointing at the end of the `saveItStateList`, all SaveIt states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 
@@ -354,7 +354,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Save the entire address book.
+* **Alternative 1 (current choice):** Save the entire SaveIt.
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Implement redo/undo individually for each of the commands.
@@ -363,7 +363,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: Data structure to support the undo/redo commands
 
-* **Alternative 1 (current choice):** Use a list to store the history of address book states.
+* **Alternative 1 (current choice):** Use a list to store the history of SaveIt states.
 ** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
 ** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedSaveIt`.
 * **Alternative 2:** Use `HistoryManager` for undo/redo
@@ -651,12 +651,12 @@ Do take a look at <<Design-Logic>> before attempting to modify the `Logic` compo
 [discrete]
 ==== `Model` component
 
-*Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the address book, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
+*Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the SaveIt, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
 
 [TIP]
 Do take a look at <<Design-Model>> before attempting to modify the `Model` component.
 
-. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the address book.
+. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the SaveIt.
 +
 ****
 * Hints
@@ -673,7 +673,7 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 [discrete]
 ==== `Ui` component
 
-*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your address book application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last statement in the list. Your job is to implement improvements to the UI to solve all these problems.
+*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your SaveIt application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last statement in the list. Your job is to implement improvements to the UI to solve all these problems.
 
 [TIP]
 Do take a look at <<Design-Ui>> before attempting to modify the `UI` component.
@@ -690,11 +690,11 @@ image::getting-started-ui-tag-after.png[width="300"]
 +
 ****
 * Hints
-** The tag labels are created inside link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[the `PersonCard` constructor] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
+** The tag labels are created inside link:{repoURL}/src/main/java/seedu/address/ui/IssueCard.java[the `IssueCard` constructor] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
 ** Use the .css attribute `-fx-background-color` to add a color.
 ** You may wish to modify link:{repoURL}/src/main/resources/view/DarkTheme.css[`DarkTheme.css`] to include some pre-defined colors using css, especially if you have experience with web-based css.
 * Solution
-** You can modify the existing test methods for `PersonCard` 's to include testing the tag's color as well.
+** You can modify the existing test methods for `IssueCard` 's to include testing the tag's color as well.
 ** See this https://github.com/se-edu/saveit-level4/pull/798[PR] for the full email.
 *** The PR uses the hash code of the tag names to generate a color. This is deliberately designed to ensure consistent colors each time the application runs. You may wish to expand on this design to include additional features, such as allowing users to set their own tag colors, and directly saving the colors to storage, so that tags retain their colors even if the hash code algorithm changes.
 ****
@@ -723,7 +723,7 @@ image::getting-started-ui-result-after.png[width="200"]
 *** Do read the commits one at a time if you feel overwhelmed.
 ****
 
-. Modify the link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the address book.
+. Modify the link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of issues in the SaveIt.
 +
 **Before**
 +
@@ -736,11 +736,11 @@ image::getting-started-ui-status-after.png[width="500"]
 ****
 * Hints
 ** link:{repoURL}/src/main/resources/view/StatusBarFooter.fxml[`StatusBarFooter.fxml`] will need a new `StatusBar`. Be sure to set the `GridPane.columnIndex` properly for each `StatusBar` to avoid misalignment!
-** link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the address book is updated.
+** link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the SaveIt is updated.
 * Solution
 ** Modify the constructor of link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of issues when the application just started.
 ** Use link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter#handleSaveItChangedEvent(SaveItChangedEvent)`] to update the number of issues whenever there are new changes to the saveit.
-** For tests, modify link:{repoURL}/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.
+** For tests, modify link:{repoURL}/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of issues status, just like what we did for save location and sync status.
 ** For system tests, modify link:{repoURL}/src/test/java/systemtests/SaveItSystemTest.java[`SaveItSystemTest`] to also verify the new total number of issues status bar.
 ** See this https://github.com/se-edu/saveit-level4/pull/803[PR] for the full email.
 ****
@@ -748,12 +748,12 @@ image::getting-started-ui-status-after.png[width="500"]
 [discrete]
 ==== `Storage` component
 
-*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the address book to the cloud. However, the current implementation of the application constantly saves the address book after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the address book storage.
+*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the SaveIt to the cloud. However, the current implementation of the application constantly saves the SaveIt after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the SaveIt storage.
 
 [TIP]
 Do take a look at <<Design-Storage>> before attempting to modify the `Storage` component.
 
-. Add a new method `backupSaveIt(ReadOnlySaveIt)`, so that the address book can be saved in a fixed temporary location.
+. Add a new method `backupSaveIt(ReadOnlySaveIt)`, so that the SaveIt can be saved in a fixed temporary location.
 +
 ****
 * Hint
@@ -811,17 +811,17 @@ Let's teach the application to parse arguments that our `remark` command will ac
 for `RemarkCommandParser`.
 . Modify link:{repoURL}/src/test/java/seedu/address/logic/parser/SaveItParserTest.java[`SaveItParserTest`] to test that the correct command is generated according to the user input.
 
-===== [Step 3] Ui: Add a placeholder for remark in `PersonCard`
-Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] s to display a remark for each statement later.
+===== [Step 3] Ui: Add a placeholder for remark in `IssueCard`
+Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/address/ui/IssueCard.java[`IssueCard`] s to display a remark for each statement later.
 
 **Main:**
 
 . Add a `Label` with any random text inside link:{repoURL}/src/main/resources/view/PersonListCard.fxml[`PersonListCard.fxml`].
-. Add FXML annotation in link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] to tie the variable to the actual label.
+. Add FXML annotation in link:{repoURL}/src/main/java/seedu/address/ui/IssueCard.java[`IssueCard`] to tie the variable to the actual label.
 
 **Tests:**
 
-. Modify link:{repoURL}/src/test/java/guitests/guihandles/PersonCardHandle.java[`PersonCardHandle`] so that future tests can read the contents of the remark label.
+. Modify link:{repoURL}/src/test/java/guitests/guihandles/IssueCardHandle.java[`IssueCardHandle`] so that future tests can read the contents of the remark label.
 
 ===== [Step 4] Model: Add `Remark` class
 We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/seedu/address/model/Issue.java[`Issue`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
@@ -844,8 +844,8 @@ Now we have the `Remark` class, we need to actually use it inside link:{repoURL}
 . You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the statement will be created without a remark).
 . Modify link:{repoURL}/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `saveit.xml` so that the application will load the sample data when you launch it.)
 
-===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedPerson` class
-We now have `Remark` s for `Issue` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/address/storage/XmlAdaptedPerson.java[`XmlAdaptedPerson`] to include a `Remark` field so that it will be saved.
+===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedIssue` class
+We now have `Remark` s for `Issue` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/address/storage/XmlAdaptedIssue.java[`XmlAdaptedIssue`] to include a `Remark` field so that it will be saved.
 
 **Main:**
 
@@ -853,7 +853,7 @@ We now have `Remark` s for `Issue` s, but they will be gone when we exit the app
 
 **Tests:**
 
-. Fix `invalidAndValidPersonSaveIt.xml`, `typicalIssuesSaveIt.xml`, `validSaveIt.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
+. Fix `invalidAndValidIssueSaveIt.xml`, `typicalIssuesSaveIt.xml`, `validSaveIt.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
 
 ===== [Step 6b] Test: Add withRemark() for `IssueBuilder`
 Since `Issue` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/address/testutil/IssueBuilder.java[`IssueBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/Issue.java[`Issue`].
@@ -863,16 +863,16 @@ Since `Issue` can now have a `Remark`, we should add a helper method to link:{re
 . Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu/address/testutil/IssueBuilder.java[`IssueBuilder`]. This method will create a new `Remark` for the statement that it is currently building.
 . Try and use the method on any sample `Issue` in link:{repoURL}/src/test/java/seedu/address/testutil/TypicalPersons.java[`TypicalPersons`].
 
-===== [Step 7] Ui: Connect `Remark` field to `PersonCard`
-Our remark label in link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
+===== [Step 7] Ui: Connect `Remark` field to `IssueCard`
+Our remark label in link:{repoURL}/src/main/java/seedu/address/ui/IssueCard.java[`IssueCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
 
 **Main:**
 
-. Modify link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`]'s constructor to bind the `Remark` field to the `Issue` 's remark.
+. Modify link:{repoURL}/src/main/java/seedu/address/ui/IssueCard.java[`IssueCard`]'s constructor to bind the `Remark` field to the `Issue` 's remark.
 
 **Tests:**
 
-. Modify link:{repoURL}/src/test/java/seedu/address/ui/testutil/GuiTestAssert.java[`GuiTestAssert#assertCardDisplaysPerson(...)`] so that it will compare the now-functioning remark label.
+. Modify link:{repoURL}/src/test/java/seedu/address/ui/testutil/GuiTestAssert.java[`GuiTestAssert#assertCardDisplaysIssue(...)`] so that it will compare the now-functioning remark label.
 
 ===== [Step 8] Logic: Implement `RemarkCommand#execute()` logic
 We now have everything set up... but we still can't modify the remarks. Let's finish it up by adding in actual logic for our `remark` command.
@@ -910,39 +910,39 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |programmer |record the statement and email |review it when i encountered it again
+|`* * *` |programmer |record the statement and email |review it when I encounter it again
 
 |`* * *` |programmer using multiple programming languages |search issues of different language easily |fix my code easily
 
-|`* * *` |a learner of programming |record the technical details |refer to it in the future
+|`* * *` |learner of programming |record the technical details |refer to it in the future
 
-|`* * *` |CS Professor |record the common mistakes that students tend to make |reinforce/spend more time covering those areas
+|`* * *` |CS Professor |record the common mistakes that students tend to make |reinforce or spend more time covering those areas
 
-|`* *` |team member of a SWE team |share solutions to mistakes/bugs that I encountered and found previously with my team |help my team by reducing their time spent in debugging
+|`* *` |team member of a SWE team |share solutions which I have found previously for each bug I encountered with my team |help my team by reducing their time spent on debugging
 
 |`*` |programmer |add remark for the issues |have better understanding of the statement
 
-|`* *` |a CS student |note common mistakes among my classmates |learn from them and avoid the common mistakes
+|`* *` |a CS student |note common mistakes among my classmates |learn from their mistakes and avoid the those mistakes
 
-|`* *` |a programmer dealing with many programs at the same time |search the statement based on the tag or key words |So that i can find the statement easily
+|`* *` |a programmer dealing with many programs at the same time |search the issue based on the tag or key words |So that i can find the issue easily
 
 |`* *` |a programmer encounter various issues while coding |add the tag for each statement |collect same tag
 
-|`* *` |a CS student who aims to improve technical skills |store the way I solved certain statement |review it and see if there is a better email in the future
+|`* *` |a CS student who aims to improve technical skills |store the way I solved certain technical issue |review it and see if there is a better solution in the future
 
-|`*` |a busy programmer dealing with a big project |highlight the certain part of the page |See the most important part of the email
+|`*` |a busy programmer dealing with a big project |highlight the certain part of the page |See the most important part of the solution
 
 |`* *` |a CS student who are learning new techniques |delete the statement after I got familiar with that statement |pay more attention to those I am not familiar with
 
-|`* *` |a CS student |collect all the mistakes i have made during daily coding |revise them before exam
+|`* *` |a CS student |collect all the mistakes i have made during daily coding practice|revise them before exam
 
-|`* *` |developer maintaining an open source project |allow external developers who might be working on PRs of the project to have access to the mistakes/bugs encountered during development |Help them with any bugs that they encountered
+|`* *` |developer maintaining an open source project |allow external developers who might be working on PRs of the project to have access to the mistakes or bugs encountered during development |help them with any bugs that they encountered
 
-|`* *` |normal user |have a autocomplete command |Type faster and do not needs to memorise command format
+|`* *` |normal user |have a autocomplete command |type faster and do not needd to memorise command format
 
 |`* *` |normal user |have a autosuggestion tag |type faster
 
-|`* *` |normal user |have different color in different parameters in commands |distinguish different information I input
+|`* *` |normal user |have different color for different parameters in each command |distinguish different fields I entered easily
 |=======================================================================
 
 _{More to be added}_
@@ -958,18 +958,18 @@ _{More to be added}_
 *MSS*
 
 1. User requests to add a new issue
-2. SaveIt add the issue to its storage
-3. The ‘Success’ message shown on the screen.
+2. SaveIt adds the issue to its storage
+3. The ‘Success’ message is shown on the screen.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. Command is invalid.
+* 1a. The command entered is invalid.
 +
 [none]
-** 2a1. The 'Invalid Command' message shown on the screen.
+** 1a1. The 'Invalid Command' message shown on the screen.
 +
 Use case resumes at step 1.
 
@@ -978,13 +978,13 @@ Use case resumes at step 1.
 
 *MSS*
 
-1. User request to list issues
+1. User requests to list issues
 2. SaveIt shows a list of issues
-3. User select a specific issue in the list
+3. User selects a specific issue in the list
 4. SaveIt shows the solution lists of the selected issue
 5. User requests to add a new solution to this issue
 6. SaveIt adds the solution
-7. The 'Success' message shown on the screen.
+7. The 'Success' message is shown on the screen.
 +
 Use case ends.
 
@@ -1002,26 +1002,28 @@ Use case ends.
 +
 Use case resumes at step 2.
 
-* 5a. Command is invalid.
+* 5a. The command entered is invalid.
 +
 [none]
 ** 5a1. The 'Invalid Command' message shown on the screen.
 +
 Use case resumes at step 4.
+* 5b. None of the optional field is provided
++
+[none]
+** 5b1. SaveIt shows an error message
++
+Use case resumes at step 4.
 
 [discrete]
-
-=== Use case: Edit statement and description
-
-
+=== Use case: Select issue
 
 *MSS*
 
 1. User requests to list issues
-2. User request to edit an issue statement and description
-3. SaveIt updates the statement
-4. Use case ends.
-5. The ‘Success’ message shown on the screen.
+2. SaveIt shows a list of issues
+3. User requests to select a specific issue in the list
+4. SaveIt selects the issue
 +
 Use case ends.
 
@@ -1035,7 +1037,34 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. SaveIt shows an error message.
+** 3a1. The 'Invalid Index' message shown on the screen.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Edit statement and description
+
+*MSS*
+
+1. User requests to list issues
+2. SaveIt shows a list of issues
+3. User requests to edit the issue statement and description of a issue
+4. SaveIt updates the statement and description
+5. The ‘Success’ message is shown on the screen.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. The 'Invalid Index' message shown on the screen.
 +
 Use case resumes at step 2.
 
@@ -1047,15 +1076,56 @@ Use case resumes at step 2.
 Use case resumes at step 2.
 
 [discrete]
-=== Use case: Delete statement
+=== Use case: Edit solution
+
+*MSS*
+
+1. User requests to list issues
+2. SaveIt shows a list of issues
+3. User selects a specific issue in the list
+4. SaveIt shows the solution lists of the selected issue
+5. User requests to edit a specific solution in the selected issue
+6. SaveIt updates the solution
+7. The ‘Success’ message is shown on the screen
++
+Use case ends.
+
+*Extensions*
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. The 'Invalid Index' message shown on the screen.
++
+Use case resumes at step 2.
+
+* 5a. The given index is invalid.
++
+[none]
+** 5a1. The 'Invalid Index' message shown on the screen.
++
+Use case resumes at step 4.
+* 5b. None of the optional fields is provided
++
+[none]
+** 5b1. SaveIt shows an error message.
++
+Use case resumes at step 4.
+
+[discrete]
+=== Use case: Delete issue
 
 *MSS*
 
 1.  User requests to list issues
 2.  SaveIt shows a list of issues
-3.  User requests to delete a specific statement in the list
-4.  SaveIt deletes the statement
-5. The "Success" message shown on the screen.
+3.  User requests to delete a specific issue in the list
+4.  SaveIt deletes the issue
+5.  The "Success" message is shown on the screen.
 +
 Use case ends.
 
@@ -1069,7 +1139,7 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. SaveIt shows an error message.
+** 3a1. The 'Invalid Index' message shown on the screen.
 +
 Use case resumes at step 2.
 

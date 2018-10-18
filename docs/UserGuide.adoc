@@ -419,14 +419,20 @@ Examples:
 To prevent the user from creating many similar tags / duplicates, whenever the user creates a record with a tag, or modifies a record’s tag, the application searches for similar tags in the system and prompts the user with a list of similar tags.
 
 Example:
-
+****
 *   add i/NEW_ISSUE t/java
-*   Similar tags have been found that have matched with [java], do you mean?
-**   Javascript
-**   Java9
-**   No, i would like to create a new tag [java]
-*   tag 1 : chooses to replace [java] with [javascript]
-*   tag 3 : chooses to create a new tag [java]
+
+====
+Similar tags have been found that have matched with [java], do you mean?
+
+1.   Javascript
+2.   Java9
+3.   No, i would like to create a new tag [java]
+====
+
+*   tag 1 (chooses to replace [java] with [javascript])
+*   tag 3 (chooses to create a new tag [java])
+****
 
 === Team based - Creating / Switching projects [coming in v2.0]
 Records are organized into projects, that way, each project only stores information (bugs/issues) relevant to that project.

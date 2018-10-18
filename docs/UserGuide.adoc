@@ -40,7 +40,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Try some example commands:
 
 * *`list`* : lists all issues
-* **`add`**`i/Bug d/Input Error t/java` : records a bug with description "Input Error" tagged as "java"
+* **`add`**`i/map_function d/How to use map function in python t/python` : records a issue of map function with description "How to use map function in python" tagged as "python"
 * **`delete`**`3` : deletes the 3rd issue shown in the current list
 * *`exit`* : exits the app
 

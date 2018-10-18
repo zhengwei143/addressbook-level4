@@ -213,7 +213,7 @@ Examples: +
 
 [NOTE]
 ====
-* The index refers to the index number shown in the displayed statement list.
+* The index refers to the index number shown in the displayed issue list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * The index cannot be bigger than the number of issues.
 ====
@@ -221,21 +221,22 @@ Examples: +
 
 === Locating issues by statement: `find`
 
-find statement by tag, statement or remark.
+Find issues whose statement and description contains any of the given search queries. 
 
-Format: `find KEYWORD`
+Format: 
+****
+*`find KEYWORD`
+****
 
 [TIP]
-****
-* TODO
-****
+=====
+* The issue statement and description contain the KEYWORD will be shown in the displayed issue list
+=====
 
 Examples:
 ****
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any statement having names `Betsy`, `Tim`, or `John`
+* `find python`
+* `find how to use`
 ****
 
 [NOTE]
@@ -246,9 +247,7 @@ Returns any statement having names `Betsy`, `Tim`, or `John`
 * Only full words will be matched e.g. Han will not match Hans
 * Issues matching at least one keyword will be returned (i.e. OR search). e.g. Hans Bo will return the page and relevant remarks
 * Search results will be ordered based on the following priority:
-** Issue match > Tag match
 =====
-
 
 
 === Returning to home directory  : `home`

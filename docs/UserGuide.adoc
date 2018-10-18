@@ -256,7 +256,7 @@ Examples:
 
 Changes the current editing directory to the root directory. Besides, Shows a list of all issues in the issue list by index.
 
-Format: 
+.Format: 
 
 * `home`
 

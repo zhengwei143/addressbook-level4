@@ -910,39 +910,39 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |programmer |record the statement and email |review it when i encountered it again
+|`* * *` |programmer |record the statement and email |review it when I encounter it again
 
 |`* * *` |programmer using multiple programming languages |search issues of different language easily |fix my code easily
 
-|`* * *` |a learner of programming |record the technical details |refer to it in the future
+|`* * *` |learner of programming |record the technical details |refer to it in the future
 
-|`* * *` |CS Professor |record the common mistakes that students tend to make |reinforce/spend more time covering those areas
+|`* * *` |CS Professor |record the common mistakes that students tend to make |reinforce or spend more time covering those areas
 
-|`* *` |team member of a SWE team |share solutions to mistakes/bugs that I encountered and found previously with my team |help my team by reducing their time spent in debugging
+|`* *` |team member of a SWE team |share solutions which I have found previously for each bug I encountered with my team |help my team by reducing their time spent on debugging
 
 |`*` |programmer |add remark for the issues |have better understanding of the statement
 
-|`* *` |a CS student |note common mistakes among my classmates |learn from them and avoid the common mistakes
+|`* *` |a CS student |note common mistakes among my classmates |learn from their mistakes and avoid the those mistakes
 
-|`* *` |a programmer dealing with many programs at the same time |search the statement based on the tag or key words |So that i can find the statement easily
+|`* *` |a programmer dealing with many programs at the same time |search the issue based on the tag or key words |So that i can find the issue easily
 
 |`* *` |a programmer encounter various issues while coding |add the tag for each statement |collect same tag
 
-|`* *` |a CS student who aims to improve technical skills |store the way I solved certain statement |review it and see if there is a better email in the future
+|`* *` |a CS student who aims to improve technical skills |store the way I solved certain technical issue |review it and see if there is a better solution in the future
 
-|`*` |a busy programmer dealing with a big project |highlight the certain part of the page |See the most important part of the email
+|`*` |a busy programmer dealing with a big project |highlight the certain part of the page |See the most important part of the solution
 
 |`* *` |a CS student who are learning new techniques |delete the statement after I got familiar with that statement |pay more attention to those I am not familiar with
 
-|`* *` |a CS student |collect all the mistakes i have made during daily coding |revise them before exam
+|`* *` |a CS student |collect all the mistakes i have made during daily coding practice|revise them before exam
 
-|`* *` |developer maintaining an open source project |allow external developers who might be working on PRs of the project to have access to the mistakes/bugs encountered during development |Help them with any bugs that they encountered
+|`* *` |developer maintaining an open source project |allow external developers who might be working on PRs of the project to have access to the mistakes or bugs encountered during development |help them with any bugs that they encountered
 
-|`* *` |normal user |have a autocomplete command |Type faster and do not needs to memorise command format
+|`* *` |normal user |have a autocomplete command |type faster and do not needd to memorise command format
 
 |`* *` |normal user |have a autosuggestion tag |type faster
 
-|`* *` |normal user |have different color in different parameters in commands |distinguish different information I input
+|`* *` |normal user |have different color for different parameters in each command |distinguish different fields I entered easily
 |=======================================================================
 
 _{More to be added}_
@@ -958,7 +958,7 @@ _{More to be added}_
 *MSS*
 
 1. User requests to add a new issue
-2. SaveIt add the issue to its storage
+2. SaveIt adds the issue to its storage
 3. The ‘Success’ message is shown on the screen.
 +
 Use case ends.
@@ -978,9 +978,9 @@ Use case resumes at step 1.
 
 *MSS*
 
-1. User request to list issues
+1. User requests to list issues
 2. SaveIt shows a list of issues
-3. User select a specific issue in the list
+3. User selects a specific issue in the list
 4. SaveIt shows the solution lists of the selected issue
 5. User requests to add a new solution to this issue
 6. SaveIt adds the solution
@@ -1016,14 +1016,39 @@ Use case resumes at step 4.
 Use case resumes at step 4.
 
 [discrete]
+=== Use case: Select issue
 
+*MSS*
+
+1. User requests to list issues
+2. SaveIt shows a list of issues
+3. User requests to select a specific issue in the list
+4. SaveIt selects the issue
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. The 'Invalid Index' message shown on the screen.
++
+Use case resumes at step 2.
+
+[discrete]
 === Use case: Edit statement and description
 
 *MSS*
 
 1. User requests to list issues
 2. SaveIt shows a list of issues
-3. User request to edit the issue statement and description of a issue
+3. User requests to edit the issue statement and description of a issue
 4. SaveIt updates the statement and description
 5. The ‘Success’ message is shown on the screen.
 +

@@ -10,15 +10,34 @@ import seedu.address.model.issue.solution.SolutionLink;
  */
 public class Solution {
 
-    public static final String MESSAGE_SOLUTION_CONSTRAINTS = "Solutions names should be alphanumeric";
-
-    public static final String SOLUTION_VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String SOLUTION_VALIDATION_REGEX = "[^\\s].*+";
 
     public final String solutionName;
 
     public final SolutionLink solutionLink;
 
     public final Remark remark;
+
+    /**
+     * Construct a new Solution.
+     */
+    public Solution(String solutionName) {
+        int index = solutionName.indexOf(' ');
+        if (index != -1) {
+            this.solutionLink = new SolutionLink(solutionName.substring(0, index));
+            this.remark = new Remark(solutionName.substring(index + 1));
+        } else {
+            if (SolutionLink.isValidLink(solutionName)) {
+                this.solutionLink = new SolutionLink(solutionName);
+                this.remark = null;
+            } else {
+                this.solutionLink = null;
+                this.remark = new Remark(solutionName);
+            }
+        }
+
+        this.solutionName = solutionName;
+    }
 
     /**
      * Construct a new Solution.

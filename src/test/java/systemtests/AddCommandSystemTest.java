@@ -1,20 +1,19 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_STATEMENT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.SOLUTION_DESC_C;
+import static seedu.address.logic.commands.CommandTestUtil.SOLUTION_DESC_JAVA;
+import static seedu.address.logic.commands.CommandTestUtil.STATEMENT_DESC_C;
+import static seedu.address.logic.commands.CommandTestUtil.STATEMENT_DESC_JAVA;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_UI;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -30,6 +29,7 @@ import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Issue;
@@ -37,8 +37,8 @@ import seedu.address.model.Model;
 import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
 import seedu.address.model.issue.Tag;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.IssueBuilder;
+import seedu.address.testutil.IssueUtil;
 
 public class AddCommandSystemTest extends SaveItSystemTest {
 
@@ -55,8 +55,8 @@ public class AddCommandSystemTest extends SaveItSystemTest {
          * -> added
          */
         Issue toAdd = AMY;
-        String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + DESCRIPTION_DESC_AMY
-            + " " + ADDRESS_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
+        String command = "   " + AddCommand.COMMAND_WORD + "  " + STATEMENT_DESC_JAVA + "  " + DESCRIPTION_DESC_JAVA
+            + " " + SOLUTION_DESC_JAVA + "   " + CommandTestUtil.TAG_DESC_UI + " ";
         assertCommandSuccess(command, toAdd);
 
         /* Case: undo adding Amy to the list -> Amy deleted */
@@ -70,17 +70,17 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
-        /* Case: add an issue with all fields same as another issue in the address book except name -> added */
-        toAdd = new PersonBuilder(AMY).withName(VALID_NAME_BOB).build();
-        command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + DESCRIPTION_DESC_AMY
-            + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
+        /* Case: add a issue with all fields same as another issue in the address book except name -> added */
+        toAdd = new IssueBuilder(AMY).withStatement(VALID_STATEMENT_C).build();
+        command = AddCommand.COMMAND_WORD + STATEMENT_DESC_C + DESCRIPTION_DESC_JAVA
+            + SOLUTION_DESC_JAVA + CommandTestUtil.TAG_DESC_UI;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add an issue with all fields same as another issue in the address book except description
          * -> added
          */
-        toAdd = new PersonBuilder(AMY).withDescription(VALID_DESCRIPTION_BOB).build();
-        command = PersonUtil.getAddCommand(toAdd);
+        toAdd = new IssueBuilder(AMY).withDescription(VALID_DESCRIPTION_C).build();
+        command = IssueUtil.getAddCommand(toAdd);
         assertCommandSuccess(command, toAdd);
 
         /* Case: add to empty address book -> added */
@@ -89,8 +89,8 @@ public class AddCommandSystemTest extends SaveItSystemTest {
 
         /* Case: add an issue with tags, command with parameters in random order -> added */
         toAdd = BOB;
-        command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + DESCRIPTION_DESC_BOB + ADDRESS_DESC_BOB
-            + NAME_DESC_BOB + TAG_DESC_HUSBAND;
+        command = AddCommand.COMMAND_WORD + CommandTestUtil.TAG_DESC_UI + DESCRIPTION_DESC_C + SOLUTION_DESC_C
+            + STATEMENT_DESC_C + TAG_DESC_UI;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add an issue, missing tags -> added */
@@ -115,52 +115,46 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         --------------------------------------- */
 
         /* Case: add a duplicate issue -> rejected */
-        command = PersonUtil.getAddCommand(HOON);
+        command = IssueUtil.getAddCommand(HOON);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
-        /* Case: add a duplicate issue except with different description -> rejected */
-        toAdd = new PersonBuilder(HOON).withDescription(VALID_DESCRIPTION_BOB).build();
-        command = PersonUtil.getAddCommand(toAdd);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        /* Case: add a duplicate issue except with different description -> added */
+        toAdd = new IssueBuilder(HOON).withDescription(VALID_DESCRIPTION_C).build();
+        assertCommandSuccess(toAdd);
 
-        /* Case: add a duplicate issue except with different address -> rejected */
-        toAdd = new PersonBuilder(HOON).withDescription(VALID_ADDRESS_BOB).build();
-        command = PersonUtil.getAddCommand(toAdd);
+        /* Case: add a duplicate issue except with different solution -> rejected */
+        toAdd = new IssueBuilder(HOON).withSolutions(VALID_SOLUTION_C).build();
+        command = IssueUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: add a duplicate issue except with different tags -> rejected */
-        command = PersonUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
+        command = IssueUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
-        /* Case: missing name -> rejected */
-        command = AddCommand.COMMAND_WORD + DESCRIPTION_DESC_AMY + ADDRESS_DESC_AMY;
+        /* Case: missing statement -> rejected */
+        command = AddCommand.COMMAND_WORD + DESCRIPTION_DESC_JAVA + SOLUTION_DESC_JAVA;
         assertCommandFailure(command,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing description -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + ADDRESS_DESC_AMY;
-        assertCommandFailure(command,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-
-        /* Case: missing address -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + DESCRIPTION_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + STATEMENT_DESC_JAVA + SOLUTION_DESC_JAVA;
         assertCommandFailure(command,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: invalid keyword -> rejected */
-        command = "adds " + PersonUtil.getPersonDetails(toAdd);
+        command = "adds " + IssueUtil.getIssueDetails(toAdd);
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid name -> rejected */
-        command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + DESCRIPTION_DESC_AMY + ADDRESS_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + INVALID_STATEMENT_DESC + DESCRIPTION_DESC_JAVA + SOLUTION_DESC_JAVA;
         assertCommandFailure(command, IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS);
 
         /* Case: invalid descriptions -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_DESCRIPTION_DESC + ADDRESS_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + STATEMENT_DESC_JAVA + INVALID_DESCRIPTION_DESC + SOLUTION_DESC_JAVA;
         assertCommandFailure(command, Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + DESCRIPTION_DESC_AMY + ADDRESS_DESC_AMY
+        command = AddCommand.COMMAND_WORD + STATEMENT_DESC_JAVA + DESCRIPTION_DESC_JAVA + SOLUTION_DESC_JAVA
             + INVALID_TAG_DESC;
         assertCommandFailure(command, Tag.MESSAGE_TAG_CONSTRAINTS);
     }
@@ -176,7 +170,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
      * @see SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(Issue toAdd) {
-        assertCommandSuccess(PersonUtil.getAddCommand(toAdd), toAdd);
+        assertCommandSuccess(IssueUtil.getAddCommand(toAdd), toAdd);
     }
 
     /**
@@ -187,7 +181,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
     private void assertCommandSuccess(String command, Issue toAdd) {
         Model expectedModel = getModel();
         expectedModel.addIssue(toAdd);
-        String expectedResultMessage = String.format(AddCommand.MESSAGE_SUCCESS, toAdd);
+        String expectedResultMessage = String.format(AddCommand.MESSAGE_ISSUE_SUCCESS, toAdd);
 
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
     }

@@ -15,28 +15,28 @@ import seedu.address.model.util.SampleDataUtil;
 /**
  * A utility class to help with building Issue objects.
  */
-public class PersonBuilder {
+public class IssueBuilder {
 
-    public static final String DEFAULT_NAME = "Alice Pauline";
+    public static final String DEFAULT_STATEMENT = "Java Problem";
     public static final String DEFAULT_DESCRIPTION = "new bug";
 
-    private IssueStatement name;
+    private IssueStatement statement;
     private Description description;
     private List<Solution> solutions;
     private Set<Tag> tags;
 
-    public PersonBuilder() {
-        name = new IssueStatement(DEFAULT_NAME);
+    public IssueBuilder() {
+        statement = new IssueStatement(DEFAULT_STATEMENT);
         description = new Description(DEFAULT_DESCRIPTION);;
         solutions = new ArrayList<>();
         tags = new HashSet<>();
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code issueToCopy}.
+     * Initializes the IssueBuilder with the data of {@code issueToCopy}.
      */
-    public PersonBuilder(Issue issueToCopy) {
-        name = issueToCopy.getStatement();
+    public IssueBuilder(Issue issueToCopy) {
+        statement = issueToCopy.getStatement();
         description = issueToCopy.getDescription();
         solutions = new ArrayList<>(issueToCopy.getSolutions());
         tags = new HashSet<>(issueToCopy.getTags());
@@ -45,15 +45,15 @@ public class PersonBuilder {
     /**
      * Sets the {@code IssueStatement} of the {@code Issue} that we are building.
      */
-    public PersonBuilder withName(String name) {
-        this.name = new IssueStatement(name);
+    public IssueBuilder withStatement(String statement) {
+        this.statement = new IssueStatement(statement);
         return this;
     }
 
     /**
      * Parses the {@code solutions} into a {@code Set<Solution>} and set it to the {@code Issue} that we are building.
      */
-    public PersonBuilder withSolutions (String ... solutions) {
+    public IssueBuilder withSolutions (String ... solutions) {
         this.solutions = SampleDataUtil.getSolutionSet(solutions);
         return this;
     }
@@ -61,7 +61,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Issue} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public IssueBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -69,13 +69,13 @@ public class PersonBuilder {
     /**
      * Sets the {@code Description} of the {@code Issue} that we are building.
      */
-    public PersonBuilder withDescription(String description) {
+    public IssueBuilder withDescription(String description) {
         this.description = new Description(description);
         return this;
     }
 
     public Issue build() {
-        return new Issue(name, description, solutions, tags);
+        return new Issue(statement, description, solutions, tags);
     }
 
 }

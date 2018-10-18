@@ -14,14 +14,18 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.model.SaveItChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
 
+//import javafx.collections.transformation.SortedList;
+//import seedu.address.model.issue.IssueSort;
+
 /**
  * Represents the in-memory model of the saveIt data.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
+    private static final Index ROOT_DIRECTORY = Index.fromZeroBased(0);
     private final VersionedSaveIt versionedSaveIt;
-    private final FilteredList<Issue> filteredIssues;
+    private FilteredList<Issue> filteredIssues;
 
     /**
      * Initializes a ModelManager with the given saveIt and userPrefs.
@@ -47,8 +51,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetDirectory(Index targetIndex) {
-        versionedSaveIt.setCurrentDirectory(targetIndex.getOneBased());
+    public void resetDirectory(Index targetIndex, boolean rootDirectory) {
+        if (rootDirectory) {
+            versionedSaveIt.setCurrentDirectory(targetIndex.getZeroBased());
+        } else {
+            versionedSaveIt.setCurrentDirectory(targetIndex.getOneBased());
+        }
         indicateSaveItChanged();
     }
 
@@ -92,6 +100,18 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedSaveIt.updateIssue(target, editedIssue);
         indicateSaveItChanged();
+    }
+
+    @Override
+    public void filterIssues(Predicate<Issue> predicate) {
+        updateFilteredIssueList(predicate);
+        // Update the search frequencies after filtering
+        for (Issue issue : filteredIssues) {
+            issue.updateFrequency();
+        }
+
+        // Sorts properly but the UI is not listing properly
+        // SortedList sortedFilteredList = new SortedList<>(filteredIssues, new IssueSort());
     }
 
     //=========== Filtered Issue List Accessors =============================================================

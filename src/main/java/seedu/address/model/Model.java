@@ -16,7 +16,7 @@ public interface Model {
     void resetData(ReadOnlySaveIt newData);
 
     /** Reset the current directory. */
-    void resetDirectory(Index targetIndex);
+    void resetDirectory(Index targetIndex, boolean rootDirectory);
 
     /** Return the current directory. */
     int getCurrentDirectory();
@@ -50,6 +50,11 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered issue list */
     ObservableList<Issue> getFilteredIssueList();
+
+    /**
+     * Filters the issues given the predicate and sorts them based on the search frequency
+     */
+    void filterIssues(Predicate<Issue> predicate);
 
     /**
      * Updates the filter of the filtered issue list to filter by the given {@code predicate}.

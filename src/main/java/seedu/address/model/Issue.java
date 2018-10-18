@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.issue.Description;
+import seedu.address.model.issue.IssueSearchFrequency;
 import seedu.address.model.issue.IssueStatement;
 import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
@@ -21,6 +22,7 @@ public class Issue {
 
     // Identity fields
     private final IssueStatement statement;
+    private final IssueSearchFrequency frequency;
 
     // Data fields
     private final List<Solution> solutions = new ArrayList<>();
@@ -36,6 +38,20 @@ public class Issue {
         this.description = description;
         this.solutions.addAll(solutions);
         this.tags.addAll(tags);
+        this.frequency = new IssueSearchFrequency(0);
+    }
+
+    /**
+     * Overloaded constructor with additional {@code frequency} field
+     */
+    public Issue(IssueStatement statement, Description description, List<Solution> solutions,
+                 Set<Tag> tags, IssueSearchFrequency frequency) {
+        CollectionUtil.requireAllNonNull(statement, description, solutions, tags);
+        this.statement = statement;
+        this.description = description;
+        this.solutions.addAll(solutions);
+        this.tags.addAll(tags);
+        this.frequency = frequency;
     }
 
     public IssueStatement getStatement() {
@@ -60,6 +76,20 @@ public class Issue {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns the IssueSearchFrequency of the Issue
+     */
+    public IssueSearchFrequency getFrequency() {
+        return frequency;
+    }
+
+    /**
+     * Updates the search frequency of the current issue
+     */
+    public void updateFrequency() {
+        frequency.increment();
     }
 
     /**
@@ -115,5 +145,4 @@ public class Issue {
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
 }

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,9 +26,12 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
+    private static final String dummySolutionLink = "dummySolutionLink";
+    private static final String dummySolutionRemark = "dummySolutionRemark";
+
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces
-     * will be trimmed.
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
@@ -40,23 +44,22 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code IssueStatement}. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses a {@code String name} into a {@code IssueStatement}. Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static IssueStatement parseName(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!IssueStatement.isValidIssueStatement(trimmedName)) {
+    public static IssueStatement parseStatement(String statement) throws ParseException {
+        requireNonNull(statement);
+        String trimmedStatementName = statement.trim();
+        if (!IssueStatement.isValidIssueStatement(trimmedStatementName)) {
             throw new ParseException(IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS);
         }
-        return new IssueStatement(trimmedName);
+        return new IssueStatement(trimmedStatementName);
     }
 
     /**
-     * Parses a {@code String description} into a {@code Description}. Leading and trailing whitespaces will
-     * be trimmed.
+     * Parses a {@code String description} into a {@code Description}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code description} is invalid.
      */
@@ -70,52 +73,45 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Remark}. Leading and trailing whitespaces will be
-     * trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
+     * Parses {@code Collection<String> solutions} into a {@code Set<Solution>}.
      */
-    public static Remark parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Remark.isValidRemark(trimmedAddress)) {
-            throw new ParseException(Remark.MESSAGE_REMARK_CONSTRAINTS);
+    public static List<Solution> parseSolutions(String solutionLink, String solutionRemark) throws ParseException {
+        requireAllNonNull(solutionLink, solutionRemark);
+        final List<Solution> solutionList = new ArrayList<>();
+        if (solutionLink.equals(dummySolutionLink) && solutionRemark.equals(dummySolutionRemark)) {
+            return solutionList;
         }
-        return new Remark(trimmedAddress);
-    }
-
-    /**
-     * Parses a {@code String solution} into an {@code Solution}. Leading and trailing whitespaces will be
-     * trimmed.
-     *
-     * @throws ParseException if the given {@code solution} is invalid.
-     */
-    public static Solution parseSolution(String solution) throws ParseException {
-        requireNonNull(solution);
-        if (solution.indexOf(' ') == -1) {
-            throw new ParseException(Remark.MESSAGE_REMARK_CONSTRAINTS);
-        }
-        String trimmedSolutionLink = solution.substring(0, solution.indexOf(' ')).trim();
-        String trimmedRemark = solution.substring(solution.indexOf(' ') + 1).trim();
-        if (!Remark.isValidRemark(trimmedRemark)) {
-            throw new ParseException(Remark.MESSAGE_REMARK_CONSTRAINTS);
-        }
+        String trimmedSolutionLink = solutionLink.trim();
+        String trimmedRemark = solutionRemark.trim();
         if (!SolutionLink.isValidLink(trimmedSolutionLink)) {
             throw new ParseException(SolutionLink.MESSAGE_SOLUTION_LINK_CONSTRAINTS);
         }
-        return new Solution(trimmedSolutionLink, trimmedRemark);
+        if (!Remark.isValidRemark(trimmedRemark)) {
+            throw new ParseException(Remark.MESSAGE_REMARK_CONSTRAINTS);
+        }
+        solutionList.add(new Solution(solutionLink, solutionRemark));
+        return solutionList;
     }
 
     /**
      * Parses {@code Collection<String> solutions} into a {@code Set<Solution>}.
      */
-    public static List<Solution> parseSolutions(Collection<String> solutions) throws ParseException {
-        requireNonNull(solutions);
-        final List<Solution> solutionList = new ArrayList<>();
-        for (String solution : solutions) {
-            solutionList.add(parseSolution(solution));
+    public static Solution parseSolution(String solutionLink, String solutionRemark) throws ParseException {
+        requireAllNonNull(solutionLink, solutionRemark);
+        Solution solution = new Solution(solutionLink, solutionRemark);
+        if (solutionLink.equals(dummySolutionLink) && solutionRemark.equals(dummySolutionRemark)) {
+            // TODO: check
+            throw new ParseException("SOlution cannit be both null");
         }
-        return solutionList;
+        String trimmedSolutionLink = solutionLink.trim();
+        String trimmedRemark = solutionRemark.trim();
+        if (!SolutionLink.isValidLink(trimmedSolutionLink)) {
+            throw new ParseException(SolutionLink.MESSAGE_SOLUTION_LINK_CONSTRAINTS);
+        }
+        if (!Remark.isValidRemark(trimmedRemark)) {
+            throw new ParseException(Remark.MESSAGE_REMARK_CONSTRAINTS);
+        }
+        return solution;
     }
 
     /**

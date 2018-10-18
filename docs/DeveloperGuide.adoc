@@ -246,7 +246,7 @@ The `Model` Component contains the classes which are representations of the data
 [[Design-Storage]]
 === Storage component
 
-The `Storage` Component is the interface that involves reading and storing the data objects in XML files, which allows data to persist across multiple sessions. 
+The `Storage` Component is the interface that involves reading and storing the data objects in XML files, which allows data to persist across multiple sessions.
 
 .Structure of the Storage Component
 image::StorageClassDiagram.png[width="800"]

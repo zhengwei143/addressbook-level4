@@ -185,7 +185,7 @@ The sections below give more details of each component.
 .Structure of the UI Component
 image::UiClassDiagram.png[width="800"]
 
-(TODO: No discription of diagram)
+The figure above shows the breakdown of the smaller components involved in the `UI` Component. The `UI` Component is the interface (abstraction barrier) between the user and the underlying components - `Model` and `Logic`.
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
@@ -206,7 +206,7 @@ The `UI` component,
 .Structure of the Logic Component
 image::LogicClassDiagram.png[width="800"]
 
-(TODO: No description of numbers below)
+The `Logic` Component encapsulates the execution of all commands. Each command is represented its own class (e.g. `FindCommand.java`, `AddCommand.java`) which all inherit from an abstract `Command.java` class.
 
 *API* :
 link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
@@ -225,15 +225,11 @@ image::DeletePersonSdForLogic.png[width="800"]
 === Model component
 
 .Structure of the Model Component
-image::ModelClassDiagram.png[width="800"]
+image::ModelComponentClassDiagram.png[width="900"]
 
-.Structure of the Model Component
-image::ModelComponentClassBetterOopDiagram.png[width="900"]
-
+The `Model` Component contains the classes which are representations of the data stored by the application, and how each data objects are linked with each other.
 
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
-
-The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the SaveIt data.
@@ -241,24 +237,21 @@ The `Model`,
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `SaveIt`, which `Issue` can reference. This would allow `SaveIt` to only require one `Tag` object per unique `Tag`, instead of each `Issue` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:ModelComponentClassBetterOopDiagram.png[width="800"]
+====
+* As a more OOP model, we can store a `Tag` list in `SaveIt`, which `Issue` can reference. This would allow `SaveIt` to only require one `Tag` object per unique `Tag`, instead of each `Issue` needing their own `Tag` object.
 
-[NOTE]
-The current model implements a `currentDirectory` to difference edition of issue
- and edition of solution with the same edit command. Besides, `AddCommand`, `ClearCommand`
-  may also work differently for issues and solutions.
+* The current model implements a `currentDirectory` to difference edition of issue and edition of solution with the same edit command. Besides, `AddCommand`, `ClearCommand` may also work differently for issues and solutions.
+====
 
 [[Design-Storage]]
 === Storage component
+
+The `Storage` Component is the interface that involves reading and storing the data objects in XML files, which allows data to persist across multiple sessions. 
 
 .Structure of the Storage Component
 image::StorageClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
-
-The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
 * can save the SaveIt data in xml format and read it back.

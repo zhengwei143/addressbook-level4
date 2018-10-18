@@ -20,11 +20,12 @@ By: `Team T12-4`      Since: `Sep 2018`      Licence: `MIT`
 
 This Developer Guide is written by the SaveIt team for the benefits of future developers and maintainers of the application.
 
-* This guide includes instructions for setting up the development environment.
-
-* This guide explains design details and provides related unified model diagrams (UMLs) for reference.
-
-* This guide offers various test methods and test cases for debugging.
+* *Setup*: The steps you need in order to set up your development environment for the application, as well as any prerequisites required by your system.
+* *Design*: Information on the underlying structure of the code, and how the logic of each model / component interact with each other through Unified Model Diagrams (UMLs).
+* *Implementation*: Contains a detailed explanation on how our core features implemented, and any considerations made behind the implementation.
+* *Documentation*: A general guide of the documentation process of the application.
+* *Testing*: Documentation for the coverage tests of the application and how to set up your testing environment.
+* *Dev Ops*: The general processes used during development phase, and documentation on how to set it up.
 
 **SaveIt** is an open-source project, should any developers be interested, see Contact Us page for more information.
 
@@ -269,7 +270,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 == Implementation
 
-This section describes some noteworthy details on how certain features are implemented.
+This section describes some noteworthy details on how certain features are implemented. Note that this section does not fully encompass all the features, but the more core features of the application.
 
 // tag::list[]
 === List feature

@@ -90,9 +90,7 @@ Examples:
 
 Selects an issue identified by the index number used in the displayed issue list and change the current editing directory to the issue selected.
 
-Format: 
-
-* `select INDEX`
+Format: `select INDEX`
 
 [TIP]
 ====
@@ -116,16 +114,14 @@ Examples:
 
 Adds an issue to the SaveIt App.
 
-Format: 
-
-* `add i/ISSUE_STATEMENT d/DESCRIPTION [t/TAG]`
+Format: `add i/ISSUE_STATEMENT d/DESCRIPTION [t/TAG]`
 
 [TIP]
 ====
 * Add an issue (issue statement and description, tags are opitonal).
 ====
 
-* `add s/SOLUTION_LINK2 r/REMARK`
+Format: `add s/SOLUTION_LINK2 r/REMARK`
 
 [TIP]
 ====
@@ -158,9 +154,7 @@ Examples: +
 
 Edits an existing issue or solutions in an issue. 
 
-Format:
-
-* `edit INDEX [i/NEW_ISSUE] [d/NEW_DESCRIPTION] [t/TAG1...]`
+Format: `edit INDEX [i/NEW_ISSUE] [d/NEW_DESCRIPTION] [t/TAG1...]`
 
 [TIP]
 ====
@@ -168,7 +162,7 @@ Format:
 * Allow to edit any field of the issue(at least one field provided)
 ====
 
-* `edit INDEX s/NEW_SOLUTION_LINK s/NEW_SOLUTION_REMARK`
+Format: * `edit INDEX s/NEW_SOLUTION_LINK s/NEW_SOLUTION_REMARK`
 
 
 [TIP]
@@ -198,9 +192,7 @@ Examples: +
 === Deleting an statement : `delete`
 Deletes the specified issue from SaveIt App.
 
-Format:
-
-* `delete INDEX`
+Format: `delete INDEX`
 
 
 [TIP]
@@ -225,9 +217,7 @@ Examples: +
 
 Find issues whose statement and description contains any of the given search queries. 
 
-Format: 
-
-* `find [KEYWORDS...]`
+Format: `find [KEYWORDS...]`
 
 
 [TIP]
@@ -256,9 +246,7 @@ Examples:
 
 Changes the current editing directory to the root directory. Besides, Shows a list of all issues in the issue list by index.
 
-.Format: 
-
-* `home`
+Format: `home`
 
 [TIP]
 ====
@@ -279,9 +267,7 @@ Examples:
 
 Restores the SaveIt App to the state before the previous undoable command was executed.
 
-Format: 
-
-* `undo`
+Format: `undo`
 
 [TIP]
 ====
@@ -314,9 +300,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 
 Reverses the most recent `undo` command.
 
-Format: 
-
-* `redo`
+Format: `redo`
 
 Examples:
 ****
@@ -342,9 +326,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 Clears all issues from the saveIt App.
 
-Format: 
-
-* `clear`
+Format:  `clear`
 
 Example:
 ****
@@ -360,9 +342,7 @@ Example:
 
 Lists all the commands that you have entered in reverse chronological order.
 
-Format: 
-
-* `history`
+Format: `history`
 
 [NOTE]
 ====
@@ -373,9 +353,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 
 Exits the SaveIt App.
 
-Format: 
-
-* `exit`
+Format: `exit`
 
 
 Examples:
@@ -388,9 +366,7 @@ Examples:
 
 Shows a list of all issues in the statement bookmark according to either chronological order or frequency order. Users can also choose to list part of issues.
 
-Format: 
-
-* `list`
+Format: `list`
 
 [TIP]
 ====
@@ -398,13 +374,13 @@ Format:
 ====
 
 
-* `list freq`
+Format: `list freq`
 [NOTE]
 ====
 * Listing issues that are most find by users.
 ====
 
-* `list tag`
+Format: `list tag`
 [TIP]
 ====
 * List all the issues that are taged by [].
@@ -423,9 +399,7 @@ Examples:
 
 To rename or remove a certain tag for all entries with that tag.
 
-Format: 
-
-* `refactorTag t/OLD_TAG [t/NEW_TAG]`
+Format: `refactorTag t/OLD_TAG [t/NEW_TAG]`
 
 [TIP]
 ====
@@ -477,6 +451,7 @@ Due to the immaturity of our product, There may be some minor problems when you 
 Here is a summary of all command formats for your reference. Please
  note that some commands may implement more than one format.
 
+* *Help* : `help`
 * *Select* : `select INDEX` +
 e.g.`select 2`
 * *Add*  +
@@ -499,7 +474,6 @@ e.g. `Search BST`
 * *Redo* : `redo`
 * *History* : `history`
 * *Exit* : `exit`
-* *Help* : `help`
 * *List* : `list`
 * *Refactor Tag* : `refactor [OLDTAG] [NEWTAG]` +
 e.g. `refactorTag java C++`

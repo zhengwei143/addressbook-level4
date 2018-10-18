@@ -48,7 +48,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         // check if the command is correct
-        if (arePrefixesPresent(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION) && arePrefixesNotPresent(args,
+        if ((arePrefixesPresent(args, PREFIX_STATEMENT) || arePrefixesPresent(args, PREFIX_DESCRIPTION)
+            || arePrefixesPresent(args, PREFIX_TAG)) && arePrefixesNotPresent(args,
             PREFIX_SOLUTION_LINK, PREFIX_REMARK)) {
             EditIssueDescriptor editIssueDescriptor = new EditIssueDescriptor();
             if (argMultimap.getValue(PREFIX_STATEMENT).isPresent()) {
@@ -65,8 +66,9 @@ public class EditCommandParser implements Parser<EditCommand> {
 
             return new EditCommand(index, editIssueDescriptor);
 
-        } else if (arePrefixesNotPresent(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION) && arePrefixesPresent(args,
-            PREFIX_SOLUTION_LINK, PREFIX_REMARK)) {
+        } else if (arePrefixesNotPresent(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_TAG) && (
+            arePrefixesPresent(args,
+                PREFIX_SOLUTION_LINK) || arePrefixesPresent(args, PREFIX_REMARK))) {
             EditIssueDescriptor editIssueDescriptorForSolution = null;
             if (argMultimap.getValue(PREFIX_SOLUTION_LINK).isPresent() && argMultimap.getValue(PREFIX_REMARK)
                 .isPresent()) {
@@ -76,14 +78,15 @@ public class EditCommandParser implements Parser<EditCommand> {
 
 
             } else if (argMultimap.getValue(PREFIX_SOLUTION_LINK).isPresent()) {
-                Solution solution = parseSolutionForEdit("dummySolutionLink",
-                    argMultimap.getValue(PREFIX_REMARK).get());
+                System.out.println("test here");
+                Solution solution = parseSolutionForEdit(argMultimap.getValue(PREFIX_SOLUTION_LINK).get(),
+                    "dummySolutionRemark");
                 editIssueDescriptorForSolution = new EditIssueDescriptor(index, solution);
 
 
             } else if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
-                Solution solution = parseSolutionForEdit(argMultimap.getValue(PREFIX_SOLUTION_LINK).get(),
-                    "dummySolutionRemark");
+                Solution solution = parseSolutionForEdit("dummySolutionLink",
+                    argMultimap.getValue(PREFIX_REMARK).get());
                 editIssueDescriptorForSolution = new EditIssueDescriptor(index, solution);
             }
             return new EditCommand(index, editIssueDescriptorForSolution);

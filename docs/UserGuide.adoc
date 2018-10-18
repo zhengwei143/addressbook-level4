@@ -49,46 +49,57 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 == Features
 The following is a list of commands that you can use in the application.
 
-====
 *Command Format*
 
+====
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add i/ISSUE d/DESCRIPTION`, `ISSUE` is a parameter which can be used as `add i/Segment Fault`.
 * Items in square brackets are optional e.g `n/ISSUE_STATEMENT [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order e.g. if the command specifies `i/ISSUE_STATEMENT s/SOLUTION_LINK, s/SOUTION_LINK i/ISSUE_STATEMENT` is also acceptable.
 ====
 
-====
 *Command Features*
-
+====
 * Highlight: Commands get highlighed with different cololr as you type.
 
 ** Examples:
 *** [red]#add# [aqua]#i/[ISSUE_STATEMENT]# [fuchsia]#d/[DESCRIPTION]#
 *** [red]#edit# [blue]#12# [green]#s/[SOLUTION_LINK]# [maroon]#r/[REMARK]#
-*** [red]#select# [blue]#4#
+*** [red]#select# [blue]#4# 
 *** [red]#list# [yellow]#freq#
-
-
 
 * Auto-complete: When you start typing a command, SaveIt will provide you with command word suggestions. Press kbd:[TAB] to accept the first suggestion.
 
 * Command History: Use kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 
 ====
+
+=== Viewing help : `help`
+
+Feeling a little lost? Simply type `help` to view the handy help page! 
+
+Format: `help`
+
+Examples:
+****
+* `help`
+****
+
+
 === Selecting an statement : `select`
 
 Selects an issue identified by the index number used in the displayed issue list and change the current editing directory to the issue selected.
 
-Format: `select INDEX` +
+Format: 
 
-[NOTE]
+* `select INDEX`
+
+[TIP]
 ====
 * Selects the issue [INDEX] and loads the lists of the solutions.
 ====
 
 Examples:
-
 ****
 * `select 5`
 ****
@@ -105,30 +116,27 @@ Examples:
 
 Adds an issue to the SaveIt App.
 
-Format: +
-****
+Format: 
+
 * `add i/ISSUE_STATEMENT d/DESCRIPTION [t/TAG]`
-****
 
 [TIP]
 ====
-* Add an issue(issue statement and description, tags are opitonal).
+* Add an issue (issue statement and description, tags are opitonal).
 ====
 
-****
 * `add s/SOLUTION_LINK2 r/REMARK`
-****
 
 [TIP]
-=====
-* Add a solution(solution link and remark) to a specific issue
-=====
+====
+* Add a solution (solution link and remark) to a specific issue  
+====
 
 Examples: +
 
 ****
 * `add i/map_function d/how to use map function in python t/python`
-* `select 3`
+* `select 3` 
 * `add s/www.example1a.com r/use functional programming`
 ****
 
@@ -148,37 +156,32 @@ Examples: +
 
 === Editing an issue : `edit`
 
-Edits an existing issue or solutions in an issue.
+Edits an existing issue or solutions in an issue. 
 
-Format: +
-****
+Format:
+
 * `edit INDEX [i/NEW_ISSUE] [d/NEW_DESCRIPTION] [t/TAG1...]`
-****
 
 [TIP]
-=====
+====
 * Edit an issue statement, description or tag
 * Allow to edit any field of the issue(at least one field provided)
-=====
+====
 
-Format: +
-****
 * `edit INDEX s/NEW_SOLUTION_LINK s/NEW_SOLUTION_REMARK`
-****
+
 
 [TIP]
-=====
-****
+====
 * Select the solution before editing
 * Edit the solution or solution remark
 * Allow to edit any field of the solution(at least one field provided)
-****
-=====
+====
 
 Examples: +
 ****
 * `edit 1 i/filter_function d/how to use filter function in python t/python`
-* `select 1`
+* `select 1` 
 * `edit 3 s/www.example2a.com r/refer the link explanation`
 ****
 
@@ -193,20 +196,19 @@ Examples: +
 
 
 === Deleting an statement : `delete`
-
 Deletes the specified issue from SaveIt App.
 
 Format:
-****
+
 * `delete INDEX`
-****
+
 
 [TIP]
-=====
-* The issue [1] will be deleted
-=====
+====
+* The issue [1] will be deleted 
+====
 
-Examples: +
+Examples: + 
 ****
 * `delete 5`
 ****
@@ -221,40 +223,42 @@ Examples: +
 
 === Locating issues by statement: `find`
 
-Find issues whose statement and description contains any of the given search queries.
+Find issues whose statement and description contains any of the given search queries. 
 
-Format:
-****
-*`find KEYWORD`
-****
+Format: 
+
+* `find [KEYWORDS...]`
+
 
 [TIP]
-=====
+====
 * The issue statement and description contain the KEYWORD will be shown in the displayed issue list
-=====
+* The Keywords can be more than 1
+====
 
 Examples:
 ****
 * `find python`
-* `find how to use`
+* `find python java`
 ****
 
 [NOTE]
-=====
+====
 * The search is case insensitive. e.g hans will match Hans
 * The order of the keywords does not matter. e.g. ‘kill port’ will match ‘port kill’
-* Searches through the statement statement, tags or remarks.
-* Only full words will be matched e.g. Han will not match Hans
-* Issues matching at least one keyword will be returned (i.e. OR search). e.g. Hans Bo will return the page and relevant remarks
-* Search results will be ordered based on the following priority:
-=====
+* The Search will search through all the issue statement and description.
+* Issues matching at least one keyword will be returned (i.e. OR search).
+* Search results will be ordered based on the chronological order.
+====
 
 
 === Returning to home directory  : `home`
 
 Changes the current editing directory to the root directory. Besides, Shows a list of all issues in the issue list by index.
 
-Format: `home`
+Format: 
+
+* `home`
 
 [TIP]
 ====
@@ -271,13 +275,13 @@ Examples:
 * All issues are listed in chronological order by default in home directory.
 ====
 
-
-
 === Undoing previous command : `undo`
 
 Restores the SaveIt App to the state before the previous undoable command was executed.
 
-Format: `undo`
+Format: 
+
+* `undo`
 
 [TIP]
 ====
@@ -303,14 +307,16 @@ The `undo` command fails as there are no undoable commands executed previously.
 
 [NOTE]
 ====
-* Users can use link:#redo[*`redo`*] to restore their changes if they regret `undo` a command.
+* Users can use `redo` (refer to next command) to restore their changes if they regret `undo` a command.
 ====
 
 === Redoing the previously undone command : `redo`
 
 Reverses the most recent `undo` command.
 
-Format: `redo`
+Format: 
+
+* `redo`
 
 Examples:
 ****
@@ -329,7 +335,6 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `undo` (reverses the `delete 1` command) +
 `redo` (reapplies the `delete 1` command) +
 `redo` (reapplies the `clear` command)
-
 ****
 
 
@@ -337,7 +342,9 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 Clears all issues from the saveIt App.
 
-Format: `clear`
+Format: 
+
+* `clear`
 
 Example:
 ****
@@ -352,7 +359,10 @@ Example:
 === Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order.
-Format: `history`
+
+Format: 
+
+* `history`
 
 [NOTE]
 ====
@@ -363,74 +373,73 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 
 Exits the SaveIt App.
 
-Format: `exit`
+Format: 
+
+* `exit`
+
 
 Examples:
 ****
 * `exit`
 ****
 
-=== Viewing help : `help`
-
-Feeling a little lost? Simply type help to view the handy help page!
-
-Format: `help`
-[TIP]
-====
-*
-====
-
-Examples:
-****
-* `help`
-****
 
 === Listing all issues : `list` [coming in v1.3]
 
 Shows a list of all issues in the statement bookmark according to either chronological order or frequency order. Users can also choose to list part of issues.
 
-Format: `list`
+Format: 
+
+* `list`
 
 [TIP]
 ====
-The default result of list command is listing all issues in a chronological order.
+* The default result of list command is listing all issues in a chronological order.
 ====
 
 
-Format: `list p2 chr`
+* `list freq`
 [NOTE]
 ====
-Listing issues from page 2 (No.11 - No.20) in a chronological order.
+* Listing issues that are most find by users.
 ====
 
-Format: `list freq`
+* `list tag`
 [TIP]
 ====
-According to frequency order
+* List all the issues that are taged by [].
+* List blank issue list if the tag provided is not tagged by any issue
 ====
 
 Examples:
 ****
-* TODO
+* list
+* list freq
+* list t/python
 ****
-
-[NOTE]
-=====
-*
-=====
 
 
 === Refactor Tag: `refactorTag` [coming in v1.3]
 
-To rename or remove a certain tag (for all entries with that tag).
+To rename or remove a certain tag for all entries with that tag.
 
-Format: `refactorTag java javascript`
+Format: 
 
-* Changes all entries tagged [java] to be tagged [javascript]
+* `refactorTag t/OLD_TAG [t/NEW_TAG]`
 
-Format: `refactorTag java [null]`
+[TIP]
+====
+* Replace the old tag with the new tag provided
+* Remove the old tag if user does not provide new tag
+====
 
-* Removes the tag [java] from all the entries
+Examples:
+****
+* refactorTag t/python t/java (Changes all entries tagged [python] to be tagged [java])
+* refactorTag t/python (Removes the tag [java] from all the entries)
+****
+
+
 
 
 
@@ -468,7 +477,6 @@ Due to the immaturity of our product, There may be some minor problems when you 
 Here is a summary of all command formats for your reference. Please
  note that some commands may implement more than one format.
 
-* *Help* : `help`
 * *Select* : `select INDEX` +
 e.g.`select 2`
 * *Add*  +
@@ -486,11 +494,12 @@ e.g. `delete 3`
 * *Search* : `search KEYWORD [MORE_KEYWORDS]` +
 e.g. `Search BST`
 * *Home* : `home`
-* *Redo* : `redo`
-* *Undo* : `undo`
 * *Clear* : `clear`
+* *Undo* : `undo`
+* *Redo* : `redo`
 * *History* : `history`
 * *Exit* : `exit`
+* *Help* : `help`
 * *List* : `list`
 * *Refactor Tag* : `refactor [OLDTAG] [NEWTAG]` +
 e.g. `refactorTag java C++`

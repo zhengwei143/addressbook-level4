@@ -18,15 +18,18 @@ By: `T12-04`      Since: `Sep 2018`      Licence: `MIT`
 
 == Introduction
 
-Developers usually search google to find solutions to statement/problems, however, bookmarking a certain webpage (where the email is found) does not tell the user much about what was searched (to find that email in the first place). It is likely that if the developer encounters the same statement/problem again, instead of searching through their bookmarks, they would search google and go through all of the links again.
+Developers usually search google to find solutions to technical problems. However, bookmarking a certain web-page does not tell developers much about for which problem they searched. If developers encounter the same problem again, instead of searching through their bookmarks, it is likely for them to search on google again.
 
-*SaveIt* is geared at keeping track of the issues that the user finds and to link it with the email found on google. More importantly, SaveIt is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SaveIt can help you search the same statement that save previously faster than traditional GUI apps.
+*SaveIt* is geared at keeping track of the issues that users find and linking it with solution web-page found on google. More importantly, SaveIt is *optimized for those who prefer to work with a Command Line Interface (CLI)* while still has the benefits of a Graphical User Interface (GUI). If you can type fast, SaveIt can help you search the entry saved previously faster than traditional GUI apps.
 
 
 == Quick Start
 
-.  Ensure you have Java version `9` or later installed in your Computer.
+To get started with SaveIt, please follow the  instructions below:
+
+.  Ensure that Java version `9` or later is installed in your Computer.
 .  Download the latest `saveit.jar` link:{repoURL}/releases[here].
+<<<<<<< HEAD
 .  Copy the file to the folder you want to use as the home folder for your SaveIt.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 .  Type the command in the command box and press Enter to execute it.
@@ -39,10 +42,16 @@ Developers usually search google to find solutions to statement/problems, howeve
 * *`delete`* : delete 3 : deletes the 3rd statement shown in the current list
 * *`exit`* : exits the app
 .  Refer to Section 3, “Features” for details of each command.
+=======
+.  Copy the file to a folder as the home folder for your SaveIt.
+.  Double-click the file to start the app. The GUI should appear in a few seconds, as shown below.
+>>>>>>> 8b1519595dce11262ff6ad7439d5b8eb6a93d724
 +
-image::Ui.png[width="790"]
+.Applacation Interface
+image::UI_Design.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
+<<<<<<< HEAD
 e.g. typing `help` and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
@@ -52,8 +61,23 @@ e.g. typing `help` and pressing kbd:[Enter] will open the help window.
 // * *`exit`* : exits the app
 
 // .  Refer to <<Features>> for details of each command.
+=======
+e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
+.  Try some example commands:
+
+* *`list`* : lists all issues
+* **`add`**`i/Bug d/Input Error t/java` : records a bug with description "Input Error" tagged as "java"
+* **`delete`**`3` : deletes the 3rd issue shown in the current list
+* *`exit`* : exits the app
+>>>>>>> 8b1519595dce11262ff6ad7439d5b8eb6a93d724
 
 
+<<<<<<< HEAD
+=======
+
+
+[[Features]]
+>>>>>>> 8b1519595dce11262ff6ad7439d5b8eb6a93d724
 == Features
 The following is a list of commands that you can use in the application.
 
@@ -463,30 +487,44 @@ Format: `highlight`
 
 
 == FAQ
+Due to the immaturity of our product, There may be some minor problems when you use SaveIt in unintended situations.
+ Here are questions that may arise during your usage.
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SaveIt folder.
 
-== Command Summary
+*Q*: Can I use the app without Internet Connection? +
+*A*: For our current version of SaveIt, you will need to store all the web-page locally if there is not Internet connection.
+ Otherwise the web-page will not be displayed correctly.
 
-* *Add* `add i/ISSUE_STATEMENT s/SOLUTION_LINK1 s/SOLUTION_LINK2 [r/REMARK] [t/TAG]...` +
-e.g. `add i/exception thrown not handled s/add catch statement below it s/Link:www.https://stackoverflow.com/questions/…`
-* *Edit* : `edit INDEX [i/ISSUE_STATEMENT] [s/SOLUTION_LINK1] [s/SOLUTION_LINK2]` +
-e.g. `edit 2 i/exception thrown not handled s/statement solved`
-* *Refactor Tag* `refactor [OLDTAG] [NEWTAG]` +
-e.g. `refactorTag java [null]`
-* *List* : `list`
-* *Home* : `home`
-* *Search* : `search KEYWORD [MORE_KEYWORDS]` +
-e.g. `Search BST`
+== Command Summary
+Here is a summary of all command formats for your reference. Please
+ note that some commands may implement more than one format.
+
 * *Select* : `select INDEX` +
 e.g.`select 2`
+* *Add*  +
+For issues: `add i/[ISSUE_STATEMENT] d/[DESCRIPTION] t/[Tag]` +
+e.g. `add i/Bug d/exception thrown not handled t/java` +
+For solutions: `add s/[SOLUTION_LINK] r/[REMARK]` +
+e.g. `add s/www.github.com r/A git website`
+* *Edit* +
+For issues: `edit INDEX i/[ISSUE_STATEMENT] d/[DESCRIPTION]` +
+e.g. `edit 2 i/exception thrown not handled d/statement solved` +
+For solutions: `edit INDEX s/[SOLUTION_LINK] r/[REMARK]` +
+e.g. `edit 3 s/www.google.com r/add a catch block`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
+* *Search* : `search KEYWORD [MORE_KEYWORDS]` +
+e.g. `Search BST`
+* *Home* : `home`
 * *Clear* : `clear`
 * *Undo* : `undo`
 * *Redo* : `redo`
 * *History* : `history`
-* *Highlight* : `highlight`
-* *Exit* : exit
+* *Exit* : `exit`
 * *Help* : `help`
+* *List* : `list`
+* *Refactor Tag* : `refactor [OLDTAG] [NEWTAG]` +
+e.g. `refactorTag java C++`
+* *Highlight* : `highlight`

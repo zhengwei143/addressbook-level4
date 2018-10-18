@@ -66,7 +66,7 @@ The following is a list of commands that you can use in the application.
 ** Examples:
 *** [red]#add# [aqua]#i/[ISSUE_STATEMENT]# [fuchsia]#d/[DESCRIPTION]#
 *** [red]#edit# [blue]#12# [green]#s/[SOLUTION_LINK]# [maroon]#r/[REMARK]#
-*** [red]#select# [blue]#4# 
+*** [red]#select# [blue]#4#
 *** [red]#list# [yellow]#freq#
 
 
@@ -121,14 +121,14 @@ Format: +
 
 [TIP]
 =====
-* Add a solution(solution link and remark) to a specific issue  
+* Add a solution(solution link and remark) to a specific issue
 =====
 
 Examples: +
 
 ****
 * `add i/map_function d/how to use map function in python t/python`
-* `select 3` 
+* `select 3`
 * `add s/www.example1a.com r/use functional programming`
 ****
 
@@ -148,7 +148,7 @@ Examples: +
 
 === Editing an issue : `edit`
 
-Edits an existing issue or solutions in an issue. 
+Edits an existing issue or solutions in an issue.
 
 Format: +
 ****
@@ -178,7 +178,7 @@ Format: +
 Examples: +
 ****
 * `edit 1 i/filter_function d/how to use filter function in python t/python`
-* `select 1` 
+* `select 1`
 * `edit 3 s/www.example2a.com r/refer the link explanation`
 ****
 
@@ -196,17 +196,17 @@ Examples: +
 
 Deletes the specified issue from SaveIt App.
 
-Format: 
+Format:
 ****
 * `delete INDEX`
 ****
 
 [TIP]
 =====
-* The issue [1] will be deleted 
+* The issue [1] will be deleted
 =====
 
-Examples: + 
+Examples: +
 ****
 * `delete 5`
 ****
@@ -221,9 +221,9 @@ Examples: +
 
 === Locating issues by statement: `find`
 
-Find issues whose statement and description contains any of the given search queries. 
+Find issues whose statement and description contains any of the given search queries.
 
-Format: 
+Format:
 ****
 *`find KEYWORD`
 ****
@@ -372,7 +372,7 @@ Examples:
 
 === Viewing help : `help`
 
-Feeling a little lost? Simply type help to view the handy help page! 
+Feeling a little lost? Simply type help to view the handy help page!
 
 Format: `help`
 [TIP]

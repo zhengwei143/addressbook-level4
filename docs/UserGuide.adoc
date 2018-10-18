@@ -65,7 +65,7 @@ The following is a list of commands that you can use in the application.
 ** Examples:
 *** [red]#add# [aqua]#i/[ISSUE_STATEMENT]# [fuchsia]#d/[DESCRIPTION]#
 *** [red]#edit# [blue]#12# [green]#s/[SOLUTION_LINK]# [maroon]#r/[REMARK]#
-*** [red]#select# [blue]#4# 
+*** [red]#select# [blue]#4#
 *** [red]#list# [yellow]#freq#
 
 * Auto-complete: When you start typing a command, SaveIt will provide you with command word suggestions. Press kbd:[TAB] to accept the first suggestion.
@@ -76,7 +76,7 @@ The following is a list of commands that you can use in the application.
 
 === Viewing help : `help`
 
-Feeling a little lost? Simply type `help` to view the handy help page! 
+Feeling a little lost? Simply type `help` to view the handy help page!
 
 Format: `help`
 
@@ -125,14 +125,14 @@ Format: `add s/SOLUTION_LINK2 r/REMARK`
 
 [TIP]
 ====
-* Add a solution (solution link and remark) to a specific issue  
+* Add a solution (solution link and remark) to a specific issue
 ====
 
 Examples: +
 
 ****
 * `add i/map_function d/how to use map function in python t/python`
-* `select 3` 
+* `select 3`
 * `add s/www.example1a.com r/use functional programming`
 ****
 
@@ -152,7 +152,7 @@ Examples: +
 
 === Editing an issue : `edit`
 
-Edits an existing issue or solutions in an issue. 
+Edits an existing issue or solutions in an issue.
 
 Format: `edit INDEX [i/NEW_ISSUE] [d/NEW_DESCRIPTION] [t/TAG1...]`
 
@@ -175,7 +175,7 @@ Format: * `edit INDEX s/NEW_SOLUTION_LINK s/NEW_SOLUTION_REMARK`
 Examples: +
 ****
 * `edit 1 i/filter_function d/how to use filter function in python t/python`
-* `select 1` 
+* `select 1`
 * `edit 3 s/www.example2a.com r/refer the link explanation`
 ****
 
@@ -197,10 +197,10 @@ Format: `delete INDEX`
 
 [TIP]
 ====
-* The issue [1] will be deleted 
+* The issue [1] will be deleted
 ====
 
-Examples: + 
+Examples: +
 ****
 * `delete 5`
 ****
@@ -215,10 +215,9 @@ Examples: +
 
 === Locating issues by statement: `find`
 
-Find issues whose statement and description contains any of the given search queries. 
+Find issues whose statement and description contains any of the given search queries.
 
 Format: `find [KEYWORDS...]`
-
 
 [TIP]
 ====
@@ -236,11 +235,11 @@ Examples:
 ====
 * The search is case insensitive. e.g hans will match Hans
 * The order of the keywords does not matter. e.g. ‘kill port’ will match ‘port kill’
-* The Search will search through all the issue statement and description.
-* Issues matching at least one keyword will be returned (i.e. OR search).
-* Search results will be ordered based on the chronological order.
-====
-
+* Searches through the issue statement or description.
+* The keywords can partially match the statement or description.
+* Issues matching at least one keyword will be returned.
+* Searching the keyword will increment the search frequency of the issue (so that it can be ordered accordingly later on).
+=====
 
 === Returning to home directory  : `home`
 
@@ -415,7 +414,25 @@ Examples:
 
 
 
+=== Autosuggestion of (existing) Tags [coming in v1.3]
 
+To prevent the user from creating many similar tags / duplicates, whenever the user creates a record with a tag, or modifies a record’s tag, the application searches for similar tags in the system and prompts the user with a list of similar tags.
+
+Example:
+****
+*   add i/NEW_ISSUE t/java
+
+====
+Similar tags have been found that have matched with [java], do you mean?
+
+1.   Javascript
+2.   Java9
+3.   No, i would like to create a new tag [java]
+====
+
+*   tag 1 (chooses to replace [java] with [javascript])
+*   tag 3 (chooses to create a new tag [java])
+****
 
 === Team based - Creating / Switching projects [coming in v2.0]
 Records are organized into projects, that way, each project only stores information (bugs/issues) relevant to that project.

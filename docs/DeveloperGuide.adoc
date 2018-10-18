@@ -959,17 +959,17 @@ _{More to be added}_
 
 1. User requests to add a new issue
 2. SaveIt add the issue to its storage
-3. The ‘Success’ message shown on the screen.
+3. The ‘Success’ message is shown on the screen.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. Command is invalid.
+* 1a. The command entered is invalid.
 +
 [none]
-** 2a1. The 'Invalid Command' message shown on the screen.
+** 1a1. The 'Invalid Command' message shown on the screen.
 +
 Use case resumes at step 1.
 
@@ -984,7 +984,7 @@ Use case resumes at step 1.
 4. SaveIt shows the solution lists of the selected issue
 5. User requests to add a new solution to this issue
 6. SaveIt adds the solution
-7. The 'Success' message shown on the screen.
+7. The 'Success' message is shown on the screen.
 +
 Use case ends.
 
@@ -1002,10 +1002,16 @@ Use case ends.
 +
 Use case resumes at step 2.
 
-* 5a. Command is invalid.
+* 5a. The command entered is invalid.
 +
 [none]
 ** 5a1. The 'Invalid Command' message shown on the screen.
++
+Use case resumes at step 4.
+* 5b. None of the optional field is provided
++
+[none]
+** 5b1. SaveIt shows an error message
 +
 Use case resumes at step 4.
 
@@ -1013,15 +1019,13 @@ Use case resumes at step 4.
 
 === Use case: Edit statement and description
 
-
-
 *MSS*
 
 1. User requests to list issues
-2. User request to edit an issue statement and description
-3. SaveIt updates the statement
-4. Use case ends.
-5. The ‘Success’ message shown on the screen.
+2. SaveIt shows a list of issues
+3. User request to edit the issue statement and description of a issue
+4. SaveIt updates the statement and description
+5. The ‘Success’ message is shown on the screen.
 +
 Use case ends.
 
@@ -1035,7 +1039,7 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. SaveIt shows an error message.
+** 3a1. The 'Invalid Index' message shown on the screen.
 +
 Use case resumes at step 2.
 
@@ -1047,15 +1051,56 @@ Use case resumes at step 2.
 Use case resumes at step 2.
 
 [discrete]
-=== Use case: Delete statement
+=== Use case: Edit solution
+
+*MSS*
+
+1. User requests to list issues
+2. SaveIt shows a list of issues
+3. User selects a specific issue in the list
+4. SaveIt shows the solution lists of the selected issue
+5. User requests to edit a specific solution in the selected issue
+6. SaveIt updates the solution
+7. The ‘Success’ message is shown on the screen
++
+Use case ends.
+
+*Extensions*
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. The 'Invalid Index' message shown on the screen.
++
+Use case resumes at step 2.
+
+* 5a. The given index is invalid.
++
+[none]
+** 5a1. The 'Invalid Index' message shown on the screen.
++
+Use case resumes at step 4.
+* 5b. None of the optional fields is provided
++
+[none]
+** 5b1. SaveIt shows an error message.
++
+Use case resumes at step 4.
+
+[discrete]
+=== Use case: Delete issue
 
 *MSS*
 
 1.  User requests to list issues
 2.  SaveIt shows a list of issues
-3.  User requests to delete a specific statement in the list
-4.  SaveIt deletes the statement
-5. The "Success" message shown on the screen.
+3.  User requests to delete a specific issue in the list
+4.  SaveIt deletes the issue
+5.  The "Success" message is shown on the screen.
 +
 Use case ends.
 
@@ -1069,7 +1114,7 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. SaveIt shows an error message.
+** 3a1. The 'Invalid Index' message shown on the screen.
 +
 Use case resumes at step 2.
 

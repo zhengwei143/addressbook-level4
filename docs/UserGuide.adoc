@@ -468,6 +468,7 @@ Due to the immaturity of our product, There may be some minor problems when you 
 Here is a summary of all command formats for your reference. Please
  note that some commands may implement more than one format.
 
+* *Help* : `help`
 * *Select* : `select INDEX` +
 e.g.`select 2`
 * *Add*  +
@@ -485,12 +486,11 @@ e.g. `delete 3`
 * *Search* : `search KEYWORD [MORE_KEYWORDS]` +
 e.g. `Search BST`
 * *Home* : `home`
-* *Clear* : `clear`
-* *Undo* : `undo`
 * *Redo* : `redo`
+* *Undo* : `undo`
+* *Clear* : `clear`
 * *History* : `history`
 * *Exit* : `exit`
-* *Help* : `help`
 * *List* : `list`
 * *Refactor Tag* : `refactor [OLDTAG] [NEWTAG]` +
 e.g. `refactorTag java C++`

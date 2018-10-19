@@ -60,7 +60,7 @@ The following is a list of commands that you can use in the application.
 
 *Command Features*
 ====
-* Highlight: Commands get highlighted with different color as you type.
+* Highlight: highlight commands with different color as you type.
 
 ** Examples:
 *** [red]#add# [aqua]#i/[ISSUE_STATEMENT]# [fuchsia]#d/[DESCRIPTION]#
@@ -68,9 +68,26 @@ The following is a list of commands that you can use in the application.
 *** [red]#select# [blue]#4#
 *** [red]#list# [yellow]#freq#
 
-* Auto-complete: When you start typing a command, SaveIt will provide you with command word suggestions. Press kbd:[TAB] to accept the first suggestion.
+* Auto-complete: provide the user word suggestions when the user start to type a command. Press kbd:[TAB] to accept the first suggestion.
+
+* Auto-suggestion of (existing) Tags: prevent the user from creating many similar tags/duplicates, whenever the user creates a record with a tag or modifies a record’s tag, the application searches for similar tags in the system and prompts the user with a list of similar tags.
+
+**  Example:
+
+***   add i/NEW_ISSUE t/java
+
+****
+  Similar tags have been found that have matched with [java], do you mean?
+  1.   Javascript
+  2.   Java9
+  3.   No, I would like to create a new tag [java]
+
+  type 1 (chooses to replace [java] with [javascript])
+  type 3 (chooses to create a new tag [java])
+****
 
 * Command History: Use kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
+
 
 ====
 
@@ -414,25 +431,6 @@ Examples:
 
 
 
-=== Autosuggestion of (existing) Tags [coming in v1.3]
-
-To prevent the user from creating many similar tags/duplicates, whenever the user creates a record with a tag or modifies a record’s tag, the application searches for similar tags in the system and prompts the user with a list of similar tags.
-
-Example:
-****
-*   add i/NEW_ISSUE t/java
-
-====
-Similar tags have been found that have matched with [java], do you mean?
-
-1.   Javascript
-2.   Java9
-3.   No, I would like to create a new tag [java]
-====
-
-*   tag 1 (chooses to replace [java] with [javascript])
-*   tag 3 (chooses to create a new tag [java])
-****
 
 === Team based - Creating / Switching projects [coming in v2.0]
 Records are organized into projects, that way, each project only stores information (bugs/issues) relevant to that project.

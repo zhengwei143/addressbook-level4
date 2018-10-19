@@ -52,10 +52,10 @@ The following is a list of commands that you can use in the application.
 *Command Format*
 
 ====
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add i/ISSUE d/DESCRIPTION`, `ISSUE` is a parameter which can be used as `add i/Segment Fault`.
-* Items in square brackets are optional e.g `n/ISSUE_STATEMENT [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `i/ISSUE_STATEMENT s/SOLUTION_LINK, s/SOUTION_LINK i/ISSUE_STATEMENT` is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add i/ISSUE_STATEMENT d/DESCRIPTION`, `ISSUE_STATEMENT` and `DESCRIPTION` are parameters which can be used as `add i/Segment_Fault d/java`.
+* Items in square brackets are optional e.g `i/ISSUE_STATEMENT d/DESCRIPTION [t/TAG]` can be used as `i/map_function d/how to use map in python t/python` or as `i/map_function d/how to use in python`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/python`, `t/python t/java` etc.
+* Parameters can be in any order e.g. if the command specifies `t/TAG, d/DESCRIPTION i/ISSUE_STATEMENT` is also acceptable.
 ====
 
 *Command Features*
@@ -131,7 +131,7 @@ Examples:
 
 Adds an issue to the SaveIt App.
 
-Format: `add i/ISSUE_STATEMENT d/DESCRIPTION [t/TAG]`
+Format: `add i/ISSUE_STATEMENT d/DESCRIPTION [t/TAG]...`
 
 [TIP]
 ====
@@ -171,7 +171,7 @@ Examples: +
 
 Edits an existing issue or solutions in the SaveIt App.
 
-Format: `edit INDEX [i/NEW_ISSUE] [d/NEW_DESCRIPTION] [t/TAG1...]`
+Format: `edit INDEX [i/NEW_ISSUE] [d/NEW_DESCRIPTION] [t/TAG]...`
 
 [TIP]
 ====

@@ -74,13 +74,28 @@ public class EditCommand extends Command {
         List<Issue> lastShownList = model.getFilteredIssueList();
         int currentDirectory = model.getCurrentDirectory();
 
-
-
         if (currentDirectory == 0) {
-            issueToEdit = lastShownList.get(index.getZeroBased());
+            System.out.println("only allowed to edit issue");
+            if(editIssueDescriptor.getStatement().isPresent() || editIssueDescriptor.getDescription().isPresent() || editIssueDescriptor.getTags().isPresent()) {
+                System.out.println("check if home directory editor is present");
+                issueToEdit = lastShownList.get(index.getZeroBased());
+                System.out.println("Edit issue Solution" + issueToEdit.getSolutions().get(index.getZeroBased()));
+            } else {
+                throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
+            }
+
+            // if it edits solution or remark, then throw Exception
         } else {
+            System.out.println("only allowed to edit solution");
             int solutionListSize = lastShownList.get(model.getCurrentDirectory() - 1).getSolutions().size();
-            if (index.getZeroBased() >= solutionListSize) {
+            // if it edits issue or description, then throw Exception
+//            System.out.println(editIssueDescriptor.get);
+            if(editIssueDescriptor.getSolution().isPresent() && index.getZeroBased() < solutionListSize) {
+                System.out.println("check if home directory editor is present");
+                issueToEdit = lastShownList.get(index.getZeroBased());
+                System.out.println("Edit issue Solution" + issueToEdit.getSolutions().get(index.getZeroBased()));
+            } else {
+//            if (index.getZeroBased() >= solutionListSize) {
                 throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
             }
             issueToEdit = lastShownList.get(model.getCurrentDirectory() - 1);
@@ -126,6 +141,8 @@ public class EditCommand extends Command {
      * editIssueDescriptor}.
      */
     private static Solution processNewSolution(int index, Issue issueToEdit, Solution newSolution) {
+        // if in the home directory, should not process this
+
         Solution oldSolution = issueToEdit.getSolutions().get(index);
         Solution updatedSolution;
         if (newSolution.getRemark().value.equals(DUMMY_SOLUTION_REMARK) && !newSolution.getLink()

@@ -58,42 +58,9 @@ The following is a list of commands that you can use in the application.
 * Parameters can be in any order e.g. if the command specifies `t/TAG, d/DESCRIPTION i/ISSUE_STATEMENT` is also acceptable.
 ====
 
-*Command Features*
-====
-* Highlight: highlight commands with different color as you type.
-
-** Examples:
-*** [red]#add# [aqua]#i/[ISSUE_STATEMENT]# [fuchsia]#d/[DESCRIPTION]#
-*** [red]#edit# [blue]#12# [green]#s/[SOLUTION_LINK]# [maroon]#r/[REMARK]#
-*** [red]#select# [blue]#4#
-*** [red]#list# [yellow]#freq#
-
-* Auto-complete: provide the user word suggestions when the user start to type a command. Press kbd:[TAB] to accept the first suggestion.
-
-* Auto-suggestion of (existing) Tags: prevent the user from creating many similar tags/duplicates, whenever the user creates a record with a tag or modifies a record’s tag, the application searches for similar tags in the system and prompts the user with a list of similar tags.
-
-**  Example:
-
-***   add i/NEW_ISSUE t/java
-
-****
-  Similar tags have been found that have matched with [java], do you mean?
-  1.   Javascript
-  2.   Java9
-  3.   No, I would like to create a new tag [java]
-
-  type 1 (chooses to replace [java] with [javascript])
-  type 3 (chooses to create a new tag [java])
-****
-
-* Command History: Use kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
-
-
-====
-
 === Viewing help : `help`
 
-Feeling a little lost? Simply type `help` to view the handy help page!
+Types `help` to view the handy help page!
 
 Format: `help`
 
@@ -411,7 +378,7 @@ Examples:
 ****
 
 
-=== Refactor Tag: `refactorTag` [coming in v1.3]
+=== Refactoring tag: `refactorTag` [coming in v1.3]
 
 To rename or remove a spcific tag for all entries with that tag.
 
@@ -429,7 +396,33 @@ Examples:
 * refactorTag t/python (Removes the tag [java] from all the entries)
 ****
 
+=== Autosuggesting existing tags [coming in v1.3]
+To prevent the user from creating many similar tags / duplicates, whenever the user creates a record with a tag, or modifies a record’s tag, the application searches for similar tags in the system and prompts the user with a list of similar tags.
 
+Example:
+****
+*   add i/NEW_ISSUE t/java
+====
+*   Similar tags have been found that have matched with [java], do you mean?
+**   Javascript
+**   Java9
+**   No, i would like to create a new tag [java]
+====
+*   tag 1 : chooses to replace [java] with [javascript]
+*   tag 3 : chooses to create a new tag [java]
+****
+
+=== Highlighting command parameters [coming in v1.3]
+
+To distinguish user command for different parameters, commands get highlighted with different color as you type.
+
+Examples:
+****
+*** [red]#add# [aqua]#i/[ISSUE_STATEMENT]# [fuchsia]#d/[DESCRIPTION]#
+*** [red]#edit# [blue]#12# [green]#s/[SOLUTION_LINK]# [maroon]#r/[REMARK]#
+*** [red]#select# [blue]#4#
+*** [red]#list# [yellow]#freq#
+****
 
 
 === Team based - Creating / Switching projects [coming in v2.0]

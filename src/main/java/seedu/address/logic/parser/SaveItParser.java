@@ -44,9 +44,7 @@ public class SaveItParser {
         }
 
         final String commandWord = matcher.group("commandWord");
-        System.out.println("commandWord " + commandWord);
         final String arguments = matcher.group("arguments");
-        System.out.println("group " + arguments);
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:

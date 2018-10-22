@@ -71,11 +71,9 @@ public class EditCommand extends Command {
         List<Issue> lastShownList = model.getFilteredIssueList();
         int currentDirectory = model.getCurrentDirectory();
 
-        System.out.println("index: " + index.getZeroBased());
         if (currentDirectory == 0 && (editIssueDescriptor.getStatement().isPresent() || editIssueDescriptor
             .getDescription().isPresent()
             || editIssueDescriptor.getTags().isPresent())) {
-            System.out.println("only allowed to edit issue");
             if (index.getZeroBased() <= lastShownList.size()) {
                 issueToEdit = lastShownList.get(index.getZeroBased());
             } else {
@@ -83,10 +81,8 @@ public class EditCommand extends Command {
             }
             // if it edits solution or remark, then throw Exception
         } else if (currentDirectory != 0 && editIssueDescriptor.getSolution().isPresent()) {
-            System.out.println("only allowed to edit solution");
             int solutionListSize = lastShownList.get(model.getCurrentDirectory() - 1).getSolutions().size();
             if (index.getZeroBased() <= solutionListSize) {
-                System.out.println("check if home directory editor is present");
                 issueToEdit = lastShownList.get(model.getCurrentDirectory() - 1);
             } else {
                 throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);

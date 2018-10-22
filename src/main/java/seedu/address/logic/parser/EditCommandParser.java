@@ -80,12 +80,12 @@ public class EditCommandParser implements Parser<EditCommand> {
             } else if (argMultimap.getValue(PREFIX_SOLUTION_LINK).isPresent()) {
                 System.out.println("test here");
                 Solution solution = parseSolutionForEdit(argMultimap.getValue(PREFIX_SOLUTION_LINK).get(),
-                    "dummySolutionRemark");
+                    EditCommand.DUMMY_SOLUTION_REMARK);
                 editIssueDescriptorForSolution = new EditIssueDescriptor(index, solution);
 
 
             } else if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
-                Solution solution = parseSolutionForEdit("dummySolutionLink",
+                Solution solution = parseSolutionForEdit(EditCommand.DUMMY_SOLUTION_LINK,
                     argMultimap.getValue(PREFIX_REMARK).get());
                 editIssueDescriptorForSolution = new EditIssueDescriptor(index, solution);
             }

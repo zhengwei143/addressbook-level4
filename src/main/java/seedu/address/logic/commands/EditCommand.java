@@ -47,8 +47,8 @@ public class EditCommand extends Command {
         + "[" + PREFIX_REMARK + "NEW_SOLUTION_REMARK] \n";
 
 
-    private static final String DUMMY_SOLUTION_REMARK = "dummySolutionRemark";
-    private static final String DUMMY_SOLUTION_LINK = "dummySolutionLink";
+    public static final String DUMMY_SOLUTION_REMARK = "dummySolutionRemark";
+    public static final String DUMMY_SOLUTION_LINK = "dummySolutionLink";
 
     private final Index index;
     private final EditIssueDescriptor editIssueDescriptor;

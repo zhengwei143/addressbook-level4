@@ -42,7 +42,7 @@ public class EditCommand extends Command {
         + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
         + "[" + PREFIX_TAG + "TAG]...\n"
         + "Edit solution by the index number used in the displayed solution list: \n"
-        +  "******  edit INDEX (must be a positive integer) "
+        + "******  edit INDEX (must be a positive integer) "
         + "[" + PREFIX_SOLUTION_LINK + "NEW_SOLUTION_LINK] "
         + "[" + PREFIX_REMARK + "NEW_SOLUTION_REMARK] \n";
 
@@ -71,31 +71,28 @@ public class EditCommand extends Command {
         List<Issue> lastShownList = model.getFilteredIssueList();
         int currentDirectory = model.getCurrentDirectory();
 
-        if (currentDirectory == 0) {
+        System.out.println("index: " + index.getZeroBased());
+        if (currentDirectory == 0 && (editIssueDescriptor.getStatement().isPresent() || editIssueDescriptor
+            .getDescription().isPresent()
+            || editIssueDescriptor.getTags().isPresent())) {
             System.out.println("only allowed to edit issue");
-            if(editIssueDescriptor.getStatement().isPresent() || editIssueDescriptor.getDescription().isPresent() || editIssueDescriptor.getTags().isPresent()) {
-                System.out.println("check if home directory editor is present");
+            if (index.getZeroBased() <= lastShownList.size()) {
                 issueToEdit = lastShownList.get(index.getZeroBased());
-                System.out.println("Edit issue Solution" + issueToEdit.getSolutions().get(index.getZeroBased()));
             } else {
-                throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
             }
-
             // if it edits solution or remark, then throw Exception
-        } else {
+        } else if (currentDirectory != 0 && editIssueDescriptor.getSolution().isPresent()) {
             System.out.println("only allowed to edit solution");
             int solutionListSize = lastShownList.get(model.getCurrentDirectory() - 1).getSolutions().size();
-            // if it edits issue or description, then throw Exception
-//            System.out.println(editIssueDescriptor.get);
-            if(editIssueDescriptor.getSolution().isPresent() && index.getZeroBased() < solutionListSize) {
+            if (index.getZeroBased() <= solutionListSize) {
                 System.out.println("check if home directory editor is present");
-                issueToEdit = lastShownList.get(index.getZeroBased());
-                System.out.println("Edit issue Solution" + issueToEdit.getSolutions().get(index.getZeroBased()));
+                issueToEdit = lastShownList.get(model.getCurrentDirectory() - 1);
             } else {
-//            if (index.getZeroBased() >= solutionListSize) {
                 throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
             }
-            issueToEdit = lastShownList.get(model.getCurrentDirectory() - 1);
+        } else {
+            throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
         }
         Issue editedIssue = createEditedIssue(issueToEdit, editIssueDescriptor);
 

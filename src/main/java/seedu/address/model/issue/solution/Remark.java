@@ -1,20 +1,19 @@
-package seedu.address.model.issue;
+package seedu.address.model.issue.solution;
 
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.AppUtil;
 
 /**
- * Represents a Issue's address in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidRemark(String)}
+ * Represents a Issue's remark in saveit.
  */
 public class Remark {
 
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS =
-            "Remarks can take any values, and it should not be blank";
+    public static final String MESSAGE_REMARK_CONSTRAINTS =
+            "Remarks can take in any values and it shouldn't be blank.";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the remark must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String REMARK_VALIDATION_REGEX = "[^\\s].*";
@@ -28,7 +27,7 @@ public class Remark {
      */
     public Remark(String remark) {
         requireNonNull(remark);
-        AppUtil.checkArgument(isValidRemark(remark), MESSAGE_ADDRESS_CONSTRAINTS);
+        AppUtil.checkArgument(isValidRemark(remark), MESSAGE_REMARK_CONSTRAINTS);
         value = remark;
     }
 

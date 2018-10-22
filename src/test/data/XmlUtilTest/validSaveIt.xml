@@ -1,48 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <saveit>
     <issues>
-        <name>Hans Muster</name>
-        <phone isPrivate="false">9482424</phone>
-        <address isPrivate="false">4th street</address>
+        <statement>Hans Muster</statement>
+        <description isPrivate="false">9482424</description>
     </issues>
     <issues>
-        <name>Ruth Mueller</name>
-        <phone isPrivate="false">87249245</phone>
-        <address isPrivate="false">81th street</address>
+        <statement>Ruth Mueller</statement>
+        <description isPrivate="false">87249245</description>
     </issues>
     <issues>
-        <name>Heinz Kurz</name>
-        <phone isPrivate="false">95352563</phone>
-        <address isPrivate="false">wall street</address>
+        <statement>Heinz Kurz</statement>
+        <description isPrivate="false">95352563</description>
     </issues>
     <issues>
-        <name>Cornelia Meier</name>
-        <phone isPrivate="false">87652533</phone>
-        <address isPrivate="false">10th street</address>
+        <statement>Cornelia Meier</statement>
+        <description isPrivate="false">87652533</description>
     </issues>
     <issues>
-        <name>Werner Meyer</name>
-        <phone isPrivate="false">9482224</phone>
-        <address isPrivate="false">michegan ave</address>
+        <statement>Werner Meyer</statement>
+        <description isPrivate="false">9482224</description>
     </issues>
     <issues>
-        <name>Lydia Kunz</name>
-        <phone isPrivate="false">9482427</phone>
-        <address isPrivate="false">little tokyo</address>
+        <statement>Lydia Kunz</statement>
+        <description isPrivate="false">9482427</description>
     </issues>
     <issues>
-        <name>Anna Best</name>
-        <phone isPrivate="false">9482442</phone>
-        <address isPrivate="false">4th street</address>
+        <statement>Anna Best</statement>
+        <description isPrivate="false">9482442</description>
     </issues>
     <issues>
-        <name>Stefan Meier</name>
-        <phone isPrivate="false">8482424</phone>
-        <address isPrivate="false">little india</address>
+        <statement>Stefan Meier</statement>
+        <description isPrivate="false">8482424</description>
     </issues>
     <issues>
-        <name>Martin Mueller</name>
-        <phone isPrivate="false">8482131</phone>
-        <address isPrivate="false">chicago ave</address>
+        <statement>Martin Mueller</statement>
+        <description isPrivate="false">8482131</description>
     </issues>
 </saveit>

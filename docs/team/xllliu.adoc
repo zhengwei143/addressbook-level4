@@ -11,7 +11,7 @@
 
 SaveIt​ is geared at keeping track of the issues that the user finds and to link it with the email found on google.
 More importantly, SaveIt is ​optimized for those who prefer to work with a Command Line Interface​ (CLI) while still having the benefits of a Graphical User Interface (GUI).
-If you can type fast, SaveIt can help you search the same issue that save previously faster than traditional GUI apps.
+If you can type fast, SaveIt can help you search the same statement that save previously faster than traditional GUI apps.
 == Summary of contributions
 
 * *Major enhancement*: added *the ability to undo/redo previous commands*
@@ -51,20 +51,11 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc
-
-include::../UserGuide.adoc[tag=dataencryption]
-
 == Contributions to the Developer Guide
 
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
-
-include::../DeveloperGuide.adoc
-
-include::../DeveloperGuide.adoc[tag=dataencryption]
-
 
 == PROJECT: PowerPointLabs
 

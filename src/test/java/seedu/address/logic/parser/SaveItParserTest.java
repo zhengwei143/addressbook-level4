@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +19,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditIssueDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -30,10 +30,10 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Issue;
-import seedu.address.model.issue.NameContainsKeywordsPredicate;
+import seedu.address.model.issue.IssueContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.IssueBuilder;
+import seedu.address.testutil.IssueUtil;
 
 public class SaveItParserTest {
     @Rule
@@ -42,10 +42,9 @@ public class SaveItParserTest {
     private final SaveItParser parser = new SaveItParser();
 
     @Test
-    @Ignore
     public void parseCommand_add() throws Exception {
-        Issue issue = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(issue));
+        Issue issue = new IssueBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(IssueUtil.getAddCommand(issue));
         assertEquals(new AddCommand(issue), command);
     }
 
@@ -58,18 +57,19 @@ public class SaveItParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_ISSUE.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_ISSUE), command);
     }
 
     @Test
     @Ignore
+    // TODO: there should be two ways for edit to be parsed
     public void parseCommand_edit() throws Exception {
-        Issue issue = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(issue).build();
+        Issue issue = new IssueBuilder().build();
+        EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder(issue).withSolutions().build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST_ISSUE.getOneBased() + " " + IssueUtil.getEditIssueDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_ISSUE, descriptor), command);
     }
 
     @Test
@@ -83,7 +83,7 @@ public class SaveItParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(new IssueContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -114,8 +114,8 @@ public class SaveItParserTest {
     @Test
     public void parseCommand_select() throws Exception {
         SelectCommand command = (SelectCommand) parser.parseCommand(
-                SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new SelectCommand(INDEX_FIRST_PERSON), command);
+                SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_ISSUE.getOneBased());
+        assertEquals(new SelectCommand(INDEX_FIRST_ISSUE), command);
     }
 
     @Test

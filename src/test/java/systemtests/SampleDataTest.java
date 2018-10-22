@@ -47,7 +47,7 @@ public class SampleDataTest extends SaveItSystemTest {
     @Test
     @Ignore
     public void saveIt_dataFileDoesNotExist_loadSampleData() {
-        Issue[] expectedList = SampleDataUtil.getSamplePersons();
+        Issue[] expectedList = SampleDataUtil.getSampleIssues();
         assertListMatching(getPersonListPanel(), expectedList);
     }
 }

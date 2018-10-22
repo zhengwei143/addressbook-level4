@@ -3,8 +3,8 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SOLUTION_STACKOVERLOW;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UI;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalSaveIt;
 
@@ -20,7 +20,7 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.issue.exceptions.DuplicateIssueException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.IssueBuilder;
 
 public class SaveItTest {
 
@@ -31,7 +31,7 @@ public class SaveItTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), saveIt.getPersonList());
+        assertEquals(Collections.emptyList(), saveIt.getIssueList());
     }
 
     @Test
@@ -50,8 +50,8 @@ public class SaveItTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two issues with the same identity fields
-        Issue editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Issue editedAlice = new IssueBuilder(ALICE).withSolutions(VALID_SOLUTION_STACKOVERLOW)
+                .withTags(VALID_TAG_UI).build();
         List<Issue> newIssues = Arrays.asList(ALICE, editedAlice);
         SaveItStub newData = new SaveItStub(newIssues);
 
@@ -62,38 +62,39 @@ public class SaveItTest {
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        saveIt.hasPerson(null);
+        saveIt.hasIssue(null);
     }
 
     @Test
     public void hasPerson_personNotInSaveIt_returnsFalse() {
-        assertFalse(saveIt.hasPerson(ALICE));
+        assertFalse(saveIt.hasIssue(ALICE));
     }
 
     @Test
     public void hasPerson_personInSaveIt_returnsTrue() {
-        saveIt.addPerson(ALICE);
-        assertTrue(saveIt.hasPerson(ALICE));
+        saveIt.addIssue(ALICE);
+        assertTrue(saveIt.hasIssue(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInSaveIt_returnsTrue() {
-        saveIt.addPerson(ALICE);
-        Issue editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
-        assertTrue(saveIt.hasPerson(editedAlice));
+        saveIt.addIssue(ALICE);
+        Issue editedAlice = new IssueBuilder(ALICE).withSolutions(VALID_SOLUTION_STACKOVERLOW)
+                .withTags(VALID_TAG_UI).build();
+        assertTrue(saveIt.hasIssue(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        saveIt.getPersonList().remove(0);
+        saveIt.getIssueList().remove(0);
     }
 
     /**
      * A stub ReadOnlySaveIt whose issues list can violate interface constraints.
      */
     private static class SaveItStub implements ReadOnlySaveIt {
+
         private final ObservableList<Issue> issues = FXCollections.observableArrayList();
 
         SaveItStub(Collection<Issue> issues) {
@@ -101,8 +102,13 @@ public class SaveItTest {
         }
 
         @Override
-        public ObservableList<Issue> getPersonList() {
+        public ObservableList<Issue> getIssueList() {
             return issues;
+        }
+
+        @Override
+        public int getCurrentDirectory() {
+            return 0;
         }
     }
 

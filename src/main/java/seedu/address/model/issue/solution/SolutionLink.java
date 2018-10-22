@@ -5,9 +5,12 @@ package seedu.address.model.issue.solution;
  */
 public class SolutionLink {
 
-    public static final String LINK_VALIDATION_REGEX = "";
+    public static final String MESSAGE_SOLUTION_LINK_CONSTRAINTS =
+            "SolutionLinks can only take a validate url.";
 
-    private String value;
+    public static final String LINK_VALIDATION_REGEX = "[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+
+    public final String value;
 
     /**
      * Construct a new solution link.

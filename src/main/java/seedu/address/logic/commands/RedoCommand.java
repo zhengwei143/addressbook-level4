@@ -7,7 +7,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Reverts the {@code model}'s address book to its previously undone state.
+ * Reverts the {@code model}'s saveIt to its previously undone state.
  */
 public class RedoCommand extends Command {
 
@@ -24,7 +24,7 @@ public class RedoCommand extends Command {
         }
 
         model.redoSaveIt();
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

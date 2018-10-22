@@ -12,6 +12,8 @@ import seedu.address.model.SaveIt;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
+    public static final String COMMAND_ALIAS = "c";
+
     public static final String MESSAGE_SUCCESS = "SaveIt has been cleared!";
 
 

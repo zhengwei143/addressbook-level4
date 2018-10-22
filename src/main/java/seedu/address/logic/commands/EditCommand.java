@@ -32,7 +32,8 @@ import seedu.address.model.issue.Tag;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-    public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt.";
+    public static final String COMMAND_ALIAS = "e";
+    public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt."; //TODO: necessary?
     public static final String MESSAGE_EDIT_ISSUE_SUCCESS = "Edited Issue: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " command format: \n"

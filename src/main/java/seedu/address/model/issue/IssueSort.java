@@ -1,17 +1,20 @@
 package seedu.address.model.issue;
 
+import java.util.Comparator;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Issue;
 
-import java.util.Comparator;
-
+/**
+ * Create respective Comparator based on the command inputted.
+ */
 public class IssueSort {
-    private final Comparator<Issue> comparator;
     private static final String FREQUENCY_SORT = "freq";
     private static final String CHRONOLOGICAL_SORT = "chro";
     private static final String TAG_SORT = "tag";
+  private final Comparator<Issue> comparator;
 
     public IssueSort(String sort_type) throws ParseException {
         switch (sort_type) {

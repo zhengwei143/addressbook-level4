@@ -14,7 +14,7 @@ public class IssueSort {
     private static final String FREQUENCY_SORT = "freq";
     private static final String CHRONOLOGICAL_SORT = "chro";
     private static final String TAG_SORT = "tag";
-  private final Comparator<Issue> comparator;
+    private final Comparator<Issue> comparator;
 
     public IssueSort(String sort_type) throws ParseException {
         switch (sort_type) {

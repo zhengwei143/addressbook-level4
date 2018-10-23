@@ -18,14 +18,14 @@ import seedu.address.model.Issue;
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class IssueListPanel extends UiPart<Region> {
+    private static final String FXML = "IssueListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(IssueListPanel.class);
 
     @FXML
     private ListView<Issue> personListView;
 
-    public PersonListPanel(ObservableList<Issue> issueList) {
+    public IssueListPanel(ObservableList<Issue> issueList) {
         super(FXML);
         setConnections(issueList);
         registerAsAnEventHandler(this);

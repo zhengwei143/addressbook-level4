@@ -34,7 +34,7 @@ public class AddCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullIssue_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         new AddCommand(null);
     }
@@ -42,24 +42,24 @@ public class AddCommandTest {
     @Test
     @Ignore
     //TODO: fix the override method below getCurrentDirectory
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+    public void execute_issueAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingIssueAdded modelStub = new ModelStubAcceptingIssueAdded();
         Issue validIssue = new IssueBuilder().build();
 
         CommandResult commandResult = new AddCommand(validIssue).execute(modelStub, commandHistory);
 
         assertEquals(String.format(AddCommand.MESSAGE_ISSUE_SUCCESS, validIssue), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validIssue), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validIssue), modelStub.issuesAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
     @Ignore
     //TODO: fix the override method below getCurrentDirectory
-    public void execute_duplicatePerson_throwsCommandException() throws Exception {
+    public void execute_duplicateIssue_throwsCommandException() throws Exception {
         Issue validIssue = new IssueBuilder().build();
         AddCommand addCommand = new AddCommand(validIssue);
-        ModelStub modelStub = new ModelStubWithPerson(validIssue);
+        ModelStub modelStub = new ModelStubWithIssue(validIssue);
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
@@ -179,10 +179,10 @@ public class AddCommandTest {
     /**
      * A Model stub that contains a single issue.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithIssue extends ModelStub {
         private final Issue issue;
 
-        ModelStubWithPerson(Issue issue) {
+        ModelStubWithIssue(Issue issue) {
             requireNonNull(issue);
             this.issue = issue;
         }
@@ -197,19 +197,19 @@ public class AddCommandTest {
     /**
      * A Model stub that always accept the issue being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Issue> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingIssueAdded extends ModelStub {
+        final ArrayList<Issue> issuesAdded = new ArrayList<>();
 
         @Override
         public boolean hasIssue(Issue issue) {
             requireNonNull(issue);
-            return personsAdded.stream().anyMatch(issue::isSameIssue);
+            return issuesAdded.stream().anyMatch(issue::isSameIssue);
         }
 
         @Override
         public void addIssue(Issue issue) {
             requireNonNull(issue);
-            personsAdded.add(issue);
+            issuesAdded.add(issue);
         }
 
         @Override

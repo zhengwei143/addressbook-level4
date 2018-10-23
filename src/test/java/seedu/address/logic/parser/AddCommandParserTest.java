@@ -22,8 +22,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SYNTAX;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UI;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalIssues.AMY;
+import static seedu.address.testutil.TypicalIssues.BOB;
 
 import org.junit.Ignore;
 import org.junit.Test;

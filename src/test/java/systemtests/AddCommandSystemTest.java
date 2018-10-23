@@ -15,13 +15,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalIssues.ALICE;
+import static seedu.address.testutil.TypicalIssues.AMY;
+import static seedu.address.testutil.TypicalIssues.BOB;
+import static seedu.address.testutil.TypicalIssues.CARL;
+import static seedu.address.testutil.TypicalIssues.HOON;
+import static seedu.address.testutil.TypicalIssues.IDA;
+import static seedu.address.testutil.TypicalIssues.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -84,7 +84,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         assertCommandSuccess(command, toAdd);
 
         /* Case: add to empty address book -> added */
-        deleteAllPersons();
+        deleteAllIssues();
         assertCommandSuccess(ALICE);
 
         /* Case: add an issue with tags, command with parameters in random order -> added */
@@ -100,7 +100,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         ------------------------------ */
 
         /* Case: filters the issue list before adding -> added */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showIssuesWithName(KEYWORD_MATCHING_MEIER);
         assertCommandSuccess(IDA);
 
         /* ------------------------ Perform add operation while an issue card is selected
@@ -108,7 +108,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
 
         /* Case: selects first card in the issue list, add an issue -> added, card selection remains
         unchanged */
-        selectPerson(Index.fromOneBased(1));
+        selectIssue(Index.fromOneBased(1));
         assertCommandSuccess(CARL);
 
         /* ----------------------------------- Perform invalid add operations

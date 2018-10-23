@@ -13,7 +13,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.address.logic.commands.EditCommand.EditIssueDescriptor;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditIssueDescriptorBuilder;
 
 public class EditIssueDescriptorTest {
 
@@ -37,20 +37,20 @@ public class EditIssueDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        EditIssueDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY)
+        EditIssueDescriptor editedAmy = new EditIssueDescriptorBuilder(DESC_AMY)
                 .withStatement(VALID_STATEMENT_C).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different description -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withDescription(VALID_DESCRIPTION_C).build();
+        editedAmy = new EditIssueDescriptorBuilder(DESC_AMY).withDescription(VALID_DESCRIPTION_C).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different solutions -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withSolutions(VALID_SOLUTION_C).build();
+        editedAmy = new EditIssueDescriptorBuilder(DESC_AMY).withSolutions(VALID_SOLUTION_C).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_UI).build();
+        editedAmy = new EditIssueDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_UI).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }

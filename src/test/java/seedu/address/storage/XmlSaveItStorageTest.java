@@ -2,10 +2,10 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.getTypicalSaveIt;
+import static seedu.address.testutil.TypicalIssues.ALICE;
+import static seedu.address.testutil.TypicalIssues.HOON;
+import static seedu.address.testutil.TypicalIssues.IDA;
+import static seedu.address.testutil.TypicalIssues.getTypicalSaveIt;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -62,9 +62,9 @@ public class XmlSaveItStorageTest {
     }
 
     @Test
-    public void readSaveIt_invalidAndValidPersonSaveIt_throwDataConversionException() throws Exception {
+    public void readSaveIt_invalidAndValidIssueSaveIt_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
-        readSaveIt("invalidAndValidPersonSaveIt.xml");
+        readSaveIt("invalidAndValidIssueSaveIt.xml");
     }
 
     @Test

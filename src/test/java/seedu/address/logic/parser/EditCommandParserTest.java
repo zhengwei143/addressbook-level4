@@ -30,7 +30,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
 import seedu.address.model.issue.Tag;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditIssueDescriptorBuilder;
 
 public class EditCommandParserTest {
 
@@ -105,7 +105,7 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_C + TAG_DESC_UI
             + STATEMENT_DESC_JAVA + CommandTestUtil.TAG_DESC_SYNTAX;
 
-        EditCommand.EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder()
+        EditCommand.EditIssueDescriptor descriptor = new EditIssueDescriptorBuilder()
                 .withStatement(VALID_STATEMENT_JAVA)
                 .withDescription(VALID_DESCRIPTION_C)
                 .withTags(VALID_TAG_UI, VALID_TAG_SYNTAX).build();
@@ -123,7 +123,7 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_C;
 
         EditCommand.EditIssueDescriptor descriptor =
-                new EditPersonDescriptorBuilder().withDescription(VALID_DESCRIPTION_C).build();
+                new EditIssueDescriptorBuilder().withDescription(VALID_DESCRIPTION_C).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -135,14 +135,14 @@ public class EditCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + STATEMENT_DESC_JAVA;
-        EditCommand.EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder()
+        EditCommand.EditIssueDescriptor descriptor = new EditIssueDescriptorBuilder()
                 .withStatement(VALID_STATEMENT_JAVA).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // description
         userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_JAVA;
-        descriptor = new EditPersonDescriptorBuilder().withDescription(VALID_DESCRIPTION_JAVA).build();
+        descriptor = new EditIssueDescriptorBuilder().withDescription(VALID_DESCRIPTION_JAVA).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -150,7 +150,7 @@ public class EditCommandParserTest {
 
         // tags
         userInput = targetIndex.getOneBased() + CommandTestUtil.TAG_DESC_UI;
-        descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_UI).build();
+        descriptor = new EditIssueDescriptorBuilder().withTags(VALID_TAG_UI).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -164,7 +164,7 @@ public class EditCommandParserTest {
                 + CommandTestUtil.TAG_DESC_SYNTAX
                 + DESCRIPTION_DESC_C + TAG_DESC_UI;
 
-        EditCommand.EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder()
+        EditCommand.EditIssueDescriptor descriptor = new EditIssueDescriptorBuilder()
                 .withDescription(VALID_DESCRIPTION_C)
                 .withTags(VALID_TAG_SYNTAX, VALID_TAG_UI)
                 .build();
@@ -182,13 +182,13 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_FIRST_ISSUE;
         String userInput = targetIndex.getOneBased() + INVALID_DESCRIPTION_DESC + DESCRIPTION_DESC_C;
         EditCommand.EditIssueDescriptor descriptor =
-            new EditPersonDescriptorBuilder().withDescription(VALID_DESCRIPTION_C).build();
+            new EditIssueDescriptorBuilder().withDescription(VALID_DESCRIPTION_C).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
         userInput = targetIndex.getOneBased() + INVALID_DESCRIPTION_DESC + DESCRIPTION_DESC_C + TAG_DESC_UI;
-        descriptor = new EditPersonDescriptorBuilder()
+        descriptor = new EditIssueDescriptorBuilder()
                 .withDescription(VALID_DESCRIPTION_C).withTags(VALID_TAG_UI).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -200,7 +200,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
-        EditCommand.EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
+        EditCommand.EditIssueDescriptor descriptor = new EditIssueDescriptorBuilder().withTags().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

@@ -48,6 +48,6 @@ public class SampleDataTest extends SaveItSystemTest {
     @Ignore
     public void saveIt_dataFileDoesNotExist_loadSampleData() {
         Issue[] expectedList = SampleDataUtil.getSampleIssues();
-        assertListMatching(getPersonListPanel(), expectedList);
+        assertListMatching(getIssueListPanel(), expectedList);
     }
 }

@@ -30,9 +30,9 @@ public class XmlUtilTest {
     private static final Path EMPTY_FILE = TEST_DATA_FOLDER.resolve("empty.xml");
     private static final Path MISSING_FILE = TEST_DATA_FOLDER.resolve("missing.xml");
     private static final Path VALID_FILE = TEST_DATA_FOLDER.resolve("validSaveIt.xml");
-    private static final Path MISSING_PERSON_FIELD_FILE = TEST_DATA_FOLDER.resolve("missingPersonField.xml");
-    private static final Path INVALID_PERSON_FIELD_FILE = TEST_DATA_FOLDER.resolve("invalidPersonField.xml");
-    private static final Path VALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("validPerson.xml");
+    private static final Path MISSING_PERSON_FIELD_FILE = TEST_DATA_FOLDER.resolve("missingIssueField.xml");
+    private static final Path INVALID_PERSON_FIELD_FILE = TEST_DATA_FOLDER.resolve("invalidIssueField.xml");
+    private static final Path VALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("validIssue.xml");
     private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("tempSaveIt.xml");
 
     private static final String INVALID_DESCRIPTION = " ";
@@ -78,30 +78,30 @@ public class XmlUtilTest {
     }
 
     @Test
-    public void xmlAdaptedPersonFromFile_fileWithMissingPersonField_validResult() throws Exception {
-        XmlAdaptedIssue actualPerson = XmlUtil.getDataFromFile(
+    public void xmlAdaptedIssueFromFile_fileWithMissingIssueField_validResult() throws Exception {
+        XmlAdaptedIssue actualIssue = XmlUtil.getDataFromFile(
                 MISSING_PERSON_FIELD_FILE, XmlAdaptedIssueWithRootElement.class);
-        XmlAdaptedIssue expectedPerson = new XmlAdaptedIssue(
+        XmlAdaptedIssue expectedIssue = new XmlAdaptedIssue(
                 null, VALID_DESCRIPTION, VALID_SOLUTIONS, VALID_TAGS);
-        assertEquals(expectedPerson, actualPerson);
+        assertEquals(expectedIssue, actualIssue);
     }
 
     @Test
-    public void xmlAdaptedPersonFromFile_fileWithInvalidPersonField_validResult() throws Exception {
-        XmlAdaptedIssue actualPerson = XmlUtil.getDataFromFile(
+    public void xmlAdaptedIssueFromFile_fileWithInvalidIssueField_validResult() throws Exception {
+        XmlAdaptedIssue actualIssue = XmlUtil.getDataFromFile(
                 INVALID_PERSON_FIELD_FILE, XmlAdaptedIssueWithRootElement.class);
-        XmlAdaptedIssue expectedPerson = new XmlAdaptedIssue(
+        XmlAdaptedIssue expectedIssue = new XmlAdaptedIssue(
                 VALID_STATEMENT, INVALID_DESCRIPTION, VALID_SOLUTIONS, VALID_TAGS);
-        assertEquals(expectedPerson, actualPerson);
+        assertEquals(expectedIssue, actualIssue);
     }
 
     @Test
-    public void xmlAdaptedPersonFromFile_fileWithValidPerson_validResult() throws Exception {
-        XmlAdaptedIssue actualPerson = XmlUtil.getDataFromFile(
+    public void xmlAdaptedIssueFromFile_fileWithValidIssue_validResult() throws Exception {
+        XmlAdaptedIssue actualIssue = XmlUtil.getDataFromFile(
                 VALID_PERSON_FILE, XmlAdaptedIssueWithRootElement.class);
-        XmlAdaptedIssue expectedPerson = new XmlAdaptedIssue(
+        XmlAdaptedIssue expectedIssue = new XmlAdaptedIssue(
                 VALID_STATEMENT, VALID_DESCRIPTION, VALID_SOLUTIONS, VALID_TAGS);
-        assertEquals(expectedPerson, actualPerson);
+        assertEquals(expectedIssue, actualIssue);
     }
 
     @Test
@@ -132,7 +132,7 @@ public class XmlUtilTest {
 
         SaveItBuilder builder = new SaveItBuilder(new SaveIt());
         dataToWrite = new XmlSerializableSaveIt(
-                builder.withPerson(new IssueBuilder().build()).build());
+                builder.withIssue(new IssueBuilder().build()).build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableSaveIt.class);

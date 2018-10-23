@@ -5,10 +5,10 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showIssueAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalSaveIt;
+import static seedu.address.testutil.TypicalIssues.getTypicalSaveIt;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -56,7 +56,7 @@ public class DeleteCommandTest {
     @Test
     @Ignore
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_ISSUE);
+        showIssueAtIndex(model, INDEX_FIRST_ISSUE);
 
         Issue issueToDelete = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ISSUE);
@@ -66,14 +66,14 @@ public class DeleteCommandTest {
         Model expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());
         expectedModel.deleteIssue(issueToDelete);
         expectedModel.commitSaveIt();
-        showNoPerson(expectedModel);
+        showNoIssue(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_ISSUE);
+        showIssueAtIndex(model, INDEX_FIRST_ISSUE);
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
@@ -95,7 +95,7 @@ public class DeleteCommandTest {
         // delete -> first issue deleted
         deleteCommand.execute(model, commandHistory);
 
-        // undo -> reverts address back to previous state and filtered issue list to show all persons
+        // undo -> reverts address back to previous state and filtered issue list to show all issues
         expectedModel.undoSaveIt();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
@@ -126,11 +126,11 @@ public class DeleteCommandTest {
      */
     @Test
     @Ignore
-    public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {
+    public void executeUndoRedo_validIndexFilteredList_sameIssueDeleted() throws Exception {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ISSUE);
         Model expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());
 
-        showPersonAtIndex(model, INDEX_SECOND_PERSON);
+        showIssueAtIndex(model, INDEX_SECOND_PERSON);
         Issue issueToDelete = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
         expectedModel.deleteIssue(issueToDelete);
         expectedModel.commitSaveIt();
@@ -138,7 +138,7 @@ public class DeleteCommandTest {
         // delete -> deletes second issue in unfiltered issue list / first issue in filtered issue list
         deleteCommand.execute(model, commandHistory);
 
-        // undo -> reverts address back to previous state and filtered issue list to show all persons
+        // undo -> reverts address back to previous state and filtered issue list to show all issues
         expectedModel.undoSaveIt();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
@@ -173,7 +173,7 @@ public class DeleteCommandTest {
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoPerson(Model model) {
+    private void showNoIssue(Model model) {
         model.updateFilteredIssueList(p -> false);
 
         assertTrue(model.getFilteredIssueList().isEmpty());

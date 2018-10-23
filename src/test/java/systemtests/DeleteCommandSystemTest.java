@@ -6,9 +6,9 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
-import static seedu.address.testutil.TestUtil.getPerson;
+import static seedu.address.testutil.TestUtil.getIssue;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalIssues.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -34,14 +34,14 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
         /* Case: delete the first issue in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
         String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_ISSUE.getOneBased() + "       ";
-        Issue deletedIssue = removePerson(expectedModel, INDEX_FIRST_ISSUE);
+        Issue deletedIssue = removeIssue(expectedModel, INDEX_FIRST_ISSUE);
         String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedIssue);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
         /* Case: delete the last issue in the list -> deleted */
         Model modelBeforeDeletingLast = getModel();
-        Index lastPersonIndex = getLastIndex(modelBeforeDeletingLast);
-        assertCommandSuccess(lastPersonIndex);
+        Index lastIssueIndex = getLastIndex(modelBeforeDeletingLast);
+        assertCommandSuccess(lastIssueIndex);
 
         /* Case: undo deleting the last issue in the list -> last issue restored */
         command = UndoCommand.COMMAND_WORD;
@@ -50,18 +50,18 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
 
         /* Case: redo deleting the last issue in the list -> last issue deleted again */
         command = RedoCommand.COMMAND_WORD;
-        removePerson(modelBeforeDeletingLast, lastPersonIndex);
+        removeIssue(modelBeforeDeletingLast, lastIssueIndex);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeDeletingLast, expectedResultMessage);
 
         /* Case: delete the middle issue in the list -> deleted */
-        Index middlePersonIndex = getMidIndex(getModel());
-        assertCommandSuccess(middlePersonIndex);
+        Index middleIssueIndex = getMidIndex(getModel());
+        assertCommandSuccess(middleIssueIndex);
 
         /* ------------------ Performing delete operation while a filtered list is being shown ---------------------- */
 
         /* Case: filtered issue list, delete index within bounds of address book and issue list -> deleted */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showIssuesWithName(KEYWORD_MATCHING_MEIER);
         Index index = INDEX_FIRST_ISSUE;
         assertTrue(index.getZeroBased() < getModel().getFilteredIssueList().size());
         assertCommandSuccess(index);
@@ -69,7 +69,7 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
         /* Case: filtered issue list, delete index within bounds of address book but out of bounds of issue list
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showIssuesWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getSaveIt().getIssueList().size();
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
@@ -77,13 +77,13 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
         /* --------------------- Performing delete operation while an issue card is selected ------------------------ */
 
         /* Case: delete the selected issue -> issue list panel selects the issue before the deleted issue */
-        showAllPersons();
+        showAllIssues();
         expectedModel = getModel();
         Index selectedIndex = getLastIndex(expectedModel);
         Index expectedIndex = Index.fromZeroBased(selectedIndex.getZeroBased() - 1);
-        selectPerson(selectedIndex);
+        selectIssue(selectedIndex);
         command = DeleteCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
-        deletedIssue = removePerson(expectedModel, selectedIndex);
+        deletedIssue = removeIssue(expectedModel, selectedIndex);
         expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedIssue);
         assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
 
@@ -117,8 +117,8 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
      * Removes the {@code Issue} at the specified {@code index} in {@code model}'s address book.
      * @return the removed issue
      */
-    private Issue removePerson(Model model, Index index) {
-        Issue targetIssue = getPerson(model, index);
+    private Issue removeIssue(Model model, Index index) {
+        Issue targetIssue = getIssue(model, index);
         model.deleteIssue(targetIssue);
         return targetIssue;
     }
@@ -130,7 +130,7 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
      */
     private void assertCommandSuccess(Index toDelete) {
         Model expectedModel = getModel();
-        Issue deletedIssue = removePerson(expectedModel, toDelete);
+        Issue deletedIssue = removeIssue(expectedModel, toDelete);
         String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedIssue);
 
         assertCommandSuccess(

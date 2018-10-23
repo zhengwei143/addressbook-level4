@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
-import org.hamcrest.core.Is;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;

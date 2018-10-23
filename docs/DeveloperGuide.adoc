@@ -20,7 +20,7 @@ By: `Team T12-4`      Since: `Sep 2018`      Licence: `MIT`
 
 This Developer Guide is written by the SaveIt team for the benefits of future developers and maintainers of the application.
 
-* *Setup*: The steps you need in sort_type to set up your development environment for the application, as well as any prerequisites required by your system.
+* *Setup*: The steps you need in order to set up your development environment for the application, as well as any prerequisites required by your system.
 * *Design*: Information on the underlying structure of the code, and how the logic of each model / component interact with each other through Unified Model Diagrams (UMLs).
 * *Implementation*: Contains a detailed explanation on how our core features implemented, and any considerations made behind the implementation.
 * *Documentation*: A general guide of the documentation process of the application.
@@ -73,14 +73,14 @@ This section provides suggested configurations to check before start coding, inc
 
 ==== Configuring the coding style
 
-This project follows https://github.com/oss-generic/process/blob/master/docs/CodingStandards.adoc[oss-generic coding standards]. IntelliJ's default style is mostly compliant with ours but it uses a different import sort_type from ours. To rectify:
+This project follows https://github.com/oss-generic/process/blob/master/docs/CodingStandards.adoc[oss-generic coding standards]. IntelliJ's default style is mostly compliant with ours but it uses a different import order from ours. To rectify:
 
 . Go to `File` > `Settings...` (Windows/Linux), or `IntelliJ IDEA` > `Preferences...` (macOS)
 . Select `Editor` > `Code Style` > `Java`
-. Click on the `Imports` tab to set the sort_type
+. Click on the `Imports` tab to set the order
 
 * For `Class count to use import with '\*'` and `Names count to use static import with '*'`: Set to `999` to prevent IntelliJ from contracting the import statements
-* For `Import Layout`: The sort_type is `import static all other imports`, `import java.\*`, `import javax.*`, `import org.\*`, `import com.* `, `import all other imports`. Add a `<blank line>` between each `import`
+* For `Import Layout`: The order is `import static all other imports`, `import java.\*`, `import javax.*`, `import org.\*`, `import com.* `, `import all other imports`. Add a `<blank line>` between each `import`
 
 Optionally, you can follow the <<UsingCheckstyle#, UsingCheckstyle.adoc>> document to configure Intellij to check style-compliance as you write code.
 
@@ -275,29 +275,29 @@ The current list mechanism inherits the same implementation from AddressBook.
 
 ==== Design Considerations
 
-===== List by a specific sort_type
+===== List by a specific order
 
 This mechanism relies most on the logic component. ListCommandParser.java need to be implemented to identify if there is a sorting requirement.
 
 Since list should not modify the sorting inside storage, IndicateSaveItChanged should not be raised and this command should not change Model.
 
-There will only be 3 kinds of sort_type that the list can be shown in, as proposed in the following paragraph.
+There will only be 3 kinds of order that the list can be shown in, as proposed in the following paragraph.
 
-* List by chronological sort_type **(default)** +
+* List by chronological order **(default)** +
   **Command:** `list chr` +
-  This sort_type follows how the data is stored in Model, reflecting the user's learning journey. +
+  This order follows how the data is stored in Model, reflecting the user's learning journey. +
   There is no need to implement new Comparator for that.
 
 * List by Tag +
   **Command:** `list tag` +
-  Tag is mainly used as a way to distinguish different kind of problems, such as Java problems and C problems. This sort_type can help users to identify the issues quickly. +
-  This sort_type requires the tag attribute of every issue to be tracked. A simple idea is to get the TagList and sort all issues according to the tags. +
+  Tag is mainly used as a way to distinguish different kind of problems, such as Java problems and C problems. This order can help users to identify the issues quickly. +
+  This order requires the tag attribute of every issue to be tracked. A simple idea is to get the TagList and sort all issues according to the tags. +
   Those issues without a tag should be put at the end of the lists.
 
 * List by search frequency +
   **Command** `list freq` +
-  Search frequency can reflect the importance of different issues. This sort_type can help users to review important issues more easily.
-  Search frequency tracker is needed for this list sort_type. It can be considered as an attribute just like tags, thus a Comparator which is similar to that used in List by Tag can be used here. +
+  Search frequency can reflect the importance of different issues. This order can help users to review important issues more easily.
+  Search frequency tracker is needed for this list order. It can be considered as an attribute just like tags, thus a Comparator which is similar to that used in List by Tag can be used here. +
 
 The following sequence diagram illustrates how the mechanism works:
 
@@ -639,7 +639,7 @@ Each individual exercise in this section is component-based (i.e. you would not 
 [discrete]
 ==== `Logic` component
 
-*Scenario:* You are in charge of `logic`. During dog-fooding, your team realize that it is troublesome for the user to type the whole command in sort_type to execute a command. Your team devise some strategies to help cut down the amount of typing necessary, and one of the suggestions was to implement aliases for the command words. Your job is to implement such aliases.
+*Scenario:* You are in charge of `logic`. During dog-fooding, your team realize that it is troublesome for the user to type the whole command in order to execute a command. Your team devise some strategies to help cut down the amount of typing necessary, and one of the suggestions was to implement aliases for the command words. Your job is to implement such aliases.
 
 [TIP]
 Do take a look at <<Design-Logic>> before attempting to modify the `Logic` component.

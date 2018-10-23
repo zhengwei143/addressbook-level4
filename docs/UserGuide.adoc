@@ -55,7 +55,7 @@ The following is a list of commands that you can use in the application.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add i/ISSUE_STATEMENT d/DESCRIPTION`, `ISSUE_STATEMENT` and `DESCRIPTION` are parameters which can be used as `add i/Segment_Fault d/java`.
 * Items in square brackets are optional e.g `i/ISSUE_STATEMENT d/DESCRIPTION [t/TAG]` can be used as `i/map_function d/how to use map in python t/python` or as `i/map_function d/how to use in python`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/python`, `t/python t/java` etc.
-* Parameters can be in any sort_type e.g. if the command specifies `t/TAG, d/DESCRIPTION i/ISSUE_STATEMENT` is also acceptable.
+* Parameters can be in any order e.g. if the command specifies `t/TAG, d/DESCRIPTION i/ISSUE_STATEMENT` is also acceptable.
 ====
 
 === Viewing help : `help`
@@ -218,7 +218,7 @@ Examples:
 [NOTE]
 ====
 * The search is case-insensitive. e.g hans will match Hans
-* The sort_type of the keywords does not matter. e.g. ‘kill port’ will match ‘port kill’
+* The order of the keywords does not matter. e.g. ‘kill port’ will match ‘port kill’
 * Searches through the issue statement or description.
 * The keywords can partially match the statement or description.
 * Issues matching at least one keyword will be returned.
@@ -243,7 +243,7 @@ Examples:
 
 [NOTE]
 ====
-* All issues are listed in chronological sort_type by default in home directory.
+* All issues are listed in chronological order by default in home directory.
 ====
 
 === Undoing previous command : `undo`
@@ -323,7 +323,7 @@ Example:
 
 === Listing entered commands : `history`
 
-Lists all the commands that you have entered in reverse chronological sort_type.
+Lists all the commands that you have entered in reverse chronological order.
 
 Format: `history`
 
@@ -347,13 +347,13 @@ Examples:
 
 === Listing all issues : `list` [coming in v1.3]
 
-Shows a list of all issues in the statement bookmark according to either chronological sort_type or frequency sort_type. Users can also choose to list part of issues.
+Shows a list of all issues in the statement bookmark according to either chronological order or frequency order. Users can also choose to list part of issues.
 
 Format: `list chr`
 
 [TIP]
 ====
-* List all the issues by chronological sort_type.
+* List all the issues by chronological order.
 ====
 
 
@@ -366,7 +366,7 @@ Format: `list freq`
 Format: `list tag`
 [TIP]
 ====
-* List all the issues in alphabetical sort_type.
+* List all the issues in alphabetical order.
 * List the issues without tags at the end of the display issue list.
 ====
 

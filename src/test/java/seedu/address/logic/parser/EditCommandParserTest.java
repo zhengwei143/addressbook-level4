@@ -18,7 +18,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import org.junit.Ignore;
@@ -101,7 +101,7 @@ public class EditCommandParserTest {
     @Test
     @Ignore
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
+        Index targetIndex = INDEX_SECOND_ISSUE;
         String userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_C + TAG_DESC_UI
             + STATEMENT_DESC_JAVA + CommandTestUtil.TAG_DESC_SYNTAX;
 

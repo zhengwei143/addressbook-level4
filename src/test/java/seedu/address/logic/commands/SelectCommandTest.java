@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showIssueAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalIssues.getTypicalSaveIt;
 
@@ -66,7 +66,7 @@ public class SelectCommandTest {
         showIssueAtIndex(model, INDEX_FIRST_ISSUE);
         showIssueAtIndex(expectedModel, INDEX_FIRST_ISSUE);
 
-        Index outOfBoundsIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundsIndex = INDEX_SECOND_ISSUE;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundsIndex.getZeroBased() < model.getSaveIt().getIssueList().size());
 
@@ -76,7 +76,7 @@ public class SelectCommandTest {
     @Test
     public void equals() {
         SelectCommand selectFirstCommand = new SelectCommand(INDEX_FIRST_ISSUE);
-        SelectCommand selectSecondCommand = new SelectCommand(INDEX_SECOND_PERSON);
+        SelectCommand selectSecondCommand = new SelectCommand(INDEX_SECOND_ISSUE);
 
         // same object -> returns true
         assertTrue(selectFirstCommand.equals(selectFirstCommand));

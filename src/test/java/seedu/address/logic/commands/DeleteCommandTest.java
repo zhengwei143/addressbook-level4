@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showIssueAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
 import static seedu.address.testutil.TypicalIssues.getTypicalSaveIt;
 
 import org.junit.Ignore;
@@ -75,7 +75,7 @@ public class DeleteCommandTest {
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showIssueAtIndex(model, INDEX_FIRST_ISSUE);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = INDEX_SECOND_ISSUE;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getSaveIt().getIssueList().size());
 
@@ -130,7 +130,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ISSUE);
         Model expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());
 
-        showIssueAtIndex(model, INDEX_SECOND_PERSON);
+        showIssueAtIndex(model, INDEX_SECOND_ISSUE);
         Issue issueToDelete = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
         expectedModel.deleteIssue(issueToDelete);
         expectedModel.commitSaveIt();
@@ -151,7 +151,7 @@ public class DeleteCommandTest {
     @Test
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_ISSUE);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_ISSUE);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));

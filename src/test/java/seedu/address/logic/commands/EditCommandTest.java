@@ -12,7 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showIssueAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
 import static seedu.address.testutil.TypicalIssues.getTypicalSaveIt;
 
 import org.junit.Test;
@@ -111,7 +111,7 @@ public class EditCommandTest {
     public void execute_duplicateIssueUnfilteredList_failure() {
         Issue firstIssue = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
         EditIssueDescriptor descriptor = new EditIssueDescriptorBuilder(firstIssue).build();
-        EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_ISSUE, descriptor);
 
         assertCommandFailure(editCommand, model, commandHistory, EditCommand.MESSAGE_DUPLICATE_ISSUE);
     }
@@ -121,7 +121,7 @@ public class EditCommandTest {
         showIssueAtIndex(model, INDEX_FIRST_ISSUE);
 
         // edit issue in filtered list into a duplicate in address book
-        Issue issueInList = model.getSaveIt().getIssueList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Issue issueInList = model.getSaveIt().getIssueList().get(INDEX_SECOND_ISSUE.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ISSUE,
                 new EditIssueDescriptorBuilder(issueInList).build());
 
@@ -145,7 +145,7 @@ public class EditCommandTest {
     @Test
     public void execute_invalidIssueIndexFilteredList_failure() {
         showIssueAtIndex(model, INDEX_FIRST_ISSUE);
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = INDEX_SECOND_ISSUE;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getSaveIt().getIssueList().size());
 
@@ -205,7 +205,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ISSUE, descriptor);
         Model expectedModel = new ModelManager(new SaveIt(model.getSaveIt()), new UserPrefs());
 
-        showIssueAtIndex(model, INDEX_SECOND_PERSON);
+        showIssueAtIndex(model, INDEX_SECOND_ISSUE);
         Issue issueToEdit = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
         expectedModel.updateIssue(issueToEdit, editedIssue);
         expectedModel.commitSaveIt();
@@ -242,7 +242,7 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_PERSON, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_ISSUE, DESC_AMY)));
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_ISSUE, DESC_BOB)));

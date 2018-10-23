@@ -30,9 +30,9 @@ public class XmlUtilTest {
     private static final Path EMPTY_FILE = TEST_DATA_FOLDER.resolve("empty.xml");
     private static final Path MISSING_FILE = TEST_DATA_FOLDER.resolve("missing.xml");
     private static final Path VALID_FILE = TEST_DATA_FOLDER.resolve("validSaveIt.xml");
-    private static final Path MISSING_PERSON_FIELD_FILE = TEST_DATA_FOLDER.resolve("missingIssueField.xml");
-    private static final Path INVALID_PERSON_FIELD_FILE = TEST_DATA_FOLDER.resolve("invalidIssueField.xml");
-    private static final Path VALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("validIssue.xml");
+    private static final Path MISSING_ISSUE_FIELD_FILE = TEST_DATA_FOLDER.resolve("missingIssueField.xml");
+    private static final Path INVALID_ISSUE_FIELD_FILE = TEST_DATA_FOLDER.resolve("invalidIssueField.xml");
+    private static final Path VALID_ISSUE_FILE = TEST_DATA_FOLDER.resolve("validIssue.xml");
     private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("tempSaveIt.xml");
 
     private static final String INVALID_DESCRIPTION = " ";
@@ -80,7 +80,7 @@ public class XmlUtilTest {
     @Test
     public void xmlAdaptedIssueFromFile_fileWithMissingIssueField_validResult() throws Exception {
         XmlAdaptedIssue actualIssue = XmlUtil.getDataFromFile(
-                MISSING_PERSON_FIELD_FILE, XmlAdaptedIssueWithRootElement.class);
+            MISSING_ISSUE_FIELD_FILE, XmlAdaptedIssueWithRootElement.class);
         XmlAdaptedIssue expectedIssue = new XmlAdaptedIssue(
                 null, VALID_DESCRIPTION, VALID_SOLUTIONS, VALID_TAGS);
         assertEquals(expectedIssue, actualIssue);
@@ -89,7 +89,7 @@ public class XmlUtilTest {
     @Test
     public void xmlAdaptedIssueFromFile_fileWithInvalidIssueField_validResult() throws Exception {
         XmlAdaptedIssue actualIssue = XmlUtil.getDataFromFile(
-                INVALID_PERSON_FIELD_FILE, XmlAdaptedIssueWithRootElement.class);
+            INVALID_ISSUE_FIELD_FILE, XmlAdaptedIssueWithRootElement.class);
         XmlAdaptedIssue expectedIssue = new XmlAdaptedIssue(
                 VALID_STATEMENT, INVALID_DESCRIPTION, VALID_SOLUTIONS, VALID_TAGS);
         assertEquals(expectedIssue, actualIssue);
@@ -98,7 +98,7 @@ public class XmlUtilTest {
     @Test
     public void xmlAdaptedIssueFromFile_fileWithValidIssue_validResult() throws Exception {
         XmlAdaptedIssue actualIssue = XmlUtil.getDataFromFile(
-                VALID_PERSON_FILE, XmlAdaptedIssueWithRootElement.class);
+            VALID_ISSUE_FILE, XmlAdaptedIssueWithRootElement.class);
         XmlAdaptedIssue expectedIssue = new XmlAdaptedIssue(
                 VALID_STATEMENT, VALID_DESCRIPTION, VALID_SOLUTIONS, VALID_TAGS);
         assertEquals(expectedIssue, actualIssue);

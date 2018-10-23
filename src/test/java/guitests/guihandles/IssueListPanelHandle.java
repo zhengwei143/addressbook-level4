@@ -12,7 +12,7 @@ import seedu.address.model.Issue;
  * Provides a handle for {@code IssueListPanel} containing the list of {@code IssueCard}.
  */
 public class IssueListPanelHandle extends NodeHandle<ListView<Issue>> {
-    public static final String PERSON_LIST_VIEW_ID = "#issueListView";
+    public static final String ISSUE_LIST_VIEW_ID = "#issueListView";
 
     private static final String CARD_PANE_ID = "#cardPane";
 

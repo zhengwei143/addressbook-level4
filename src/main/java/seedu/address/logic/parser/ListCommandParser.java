@@ -10,7 +10,7 @@ import seedu.address.model.issue.IssueSort;
 /**
  * Parses input arguments and creates a new ListCommand object
  */
-public class ListCommandParser implements Parser<ListCommand>{
+public class ListCommandParser implements Parser<ListCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -19,7 +19,7 @@ public class ListCommandParser implements Parser<ListCommand>{
      */
     public ListCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        if(Arrays.asList(trimmedArgs.isEmpty()).size() > 1) {
+        if (Arrays.asList(trimmedArgs.isEmpty()).size() > 1) {
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE)
             );

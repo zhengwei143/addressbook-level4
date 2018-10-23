@@ -37,12 +37,12 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " command format: \n"
         + "Edit issue by the index number used in the displayed list: \n"
-        + "******  " + COMMAND_WORD + "INDEX (must be a positive integer) "
+        + "******  " + COMMAND_WORD + " INDEX (must be a positive integer) "
         + "[" + PREFIX_STATEMENT + "ISSUE_STATEMENT] "
         + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
         + "[" + PREFIX_TAG + "TAG]...\n"
         + "Edit solution by the index number used in the displayed solution list: \n"
-        + "******  " + COMMAND_WORD + "INDEX (must be a positive integer) "
+        + "******  " + COMMAND_WORD + " INDEX (must be a positive integer) "
         + "[" + PREFIX_SOLUTION_LINK + "NEW_SOLUTION_LINK] "
         + "[" + PREFIX_REMARK + "NEW_SOLUTION_REMARK] \n";
 

@@ -33,6 +33,13 @@ public class Tag {
         return test.matches(TAG_VALIDATION_REGEX);
     }
 
+    /**
+     * Compare two Tag regarding to their tagName.
+     */
+    public int compare(Tag other) {
+        return tagName.compareTo(other.tagName);
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

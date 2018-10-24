@@ -13,6 +13,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Issue;
 import seedu.address.model.Model;
 
+/**
+ * Retrieves the solution link of an existing solution in a issue in the saveIt.
+ */
 public class RetrieveCommand extends Command {
 
     public static final String COMMAND_WORD = "retrieve";
@@ -31,6 +34,9 @@ public class RetrieveCommand extends Command {
 
     private final Index targetedIndex;
 
+    /**
+     * @param targetedIndex of the solution in the selected issue.
+     */
     public RetrieveCommand(Index targetedIndex) {
         this.targetedIndex = targetedIndex;
     }
@@ -60,6 +66,9 @@ public class RetrieveCommand extends Command {
         }
     }
 
+    /**
+     * Copy the solution link {@code String} to the system clipboard.
+     */
     private void copyToClipBoard(String solution) {
         Clipboard clipBoard = Toolkit.getDefaultToolkit().getSystemClipboard();
         StringSelection selection = new StringSelection(solution);

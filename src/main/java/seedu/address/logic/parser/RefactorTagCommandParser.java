@@ -27,7 +27,7 @@ public class RefactorTagCommandParser implements Parser<RefactorTagCommand> {
         ArgumentMultimap argMultimap =
             ArgumentTokenizer
                 .tokenize(args, PREFIX_TAG, PREFIX_NEW_TAG);
-        Tag newTag = new Tag("dummyTag");
+        Tag newTag = new Tag(RefactorTagCommand.dummyTag);
         if (!arePrefixesValuePresent(argMultimap, PREFIX_TAG)) {
             throw new ParseException(
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, RefactorTagCommand.MESSAGE_USAGE));

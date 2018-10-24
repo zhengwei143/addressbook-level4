@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.address.storage.XmlAdaptedIssue.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalIssues.BENSON;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ public class XmlAdaptedIssueTest {
         .collect(Collectors.toList());
 
     @Test
-    public void toModelType_validPersonDetails_returnsPerson() throws Exception {
+    public void toModelType_validIssueDetails_returnsIssue() throws Exception {
         XmlAdaptedIssue issue = new XmlAdaptedIssue(BENSON);
         assertEquals(BENSON, issue.toModelType());
     }

@@ -106,7 +106,8 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Issue} with the details of {@code issueToEdit} edited with {@code
      * editIssueDescriptor}.
      */
-    private static Issue createEditedIssue(Issue issueToEdit, EditIssueDescriptor editIssueDescriptor) {
+    private static Issue createEditedIssue(Issue issueToEdit, EditIssueDescriptor editIssueDescriptor)
+        throws CommandException {
         assert issueToEdit != null;
 
         List<Solution> updatedSolutions;
@@ -130,21 +131,25 @@ public class EditCommand extends Command {
      * Creates and returns a {@code index} with the details of {@code issueToEdit} edited with {@code
      * editIssueDescriptor}.
      */
-    private static Solution processNewSolution(int index, Issue issueToEdit, Solution newSolution) {
+    private static Solution processNewSolution(int index, Issue issueToEdit, Solution newSolution)
+        throws CommandException {
         // if in the home directory, should not process this
-
-        Solution oldSolution = issueToEdit.getSolutions().get(index);
-        Solution updatedSolution;
-        if (newSolution.getRemark().value.equals(DUMMY_SOLUTION_REMARK) && !newSolution.getLink()
-            .value.equals(DUMMY_SOLUTION_LINK)) {
-            updatedSolution = new Solution(newSolution.getLink().value, oldSolution.getRemark().value);
-        } else if (!newSolution.getRemark().value.equals(DUMMY_SOLUTION_REMARK) && newSolution.getLink().value
-            .equals(DUMMY_SOLUTION_LINK)) {
-            updatedSolution = new Solution(oldSolution.getLink().value, newSolution.getRemark().value);
+        if (index > issueToEdit.getSolutions().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
         } else {
-            updatedSolution = new Solution(newSolution.getLink().value, newSolution.getRemark().value);
+            Solution oldSolution = issueToEdit.getSolutions().get(index);
+            Solution updatedSolution;
+            if (newSolution.getRemark().value.equals(DUMMY_SOLUTION_REMARK) && !newSolution.getLink()
+                .value.equals(DUMMY_SOLUTION_LINK)) {
+                updatedSolution = new Solution(newSolution.getLink().value, oldSolution.getRemark().value);
+            } else if (!newSolution.getRemark().value.equals(DUMMY_SOLUTION_REMARK) && newSolution.getLink().value
+                .equals(DUMMY_SOLUTION_LINK)) {
+                updatedSolution = new Solution(oldSolution.getLink().value, newSolution.getRemark().value);
+            } else {
+                updatedSolution = new Solution(newSolution.getLink().value, newSolution.getRemark().value);
+            }
+            return updatedSolution;
         }
-        return updatedSolution;
     }
 
     @Override

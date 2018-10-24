@@ -3,8 +3,8 @@ package seedu.address.model;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ISSUES;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalIssues.ALICE;
+import static seedu.address.testutil.TypicalIssues.BENSON;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -23,31 +23,31 @@ public class ModelManagerTest {
     private ModelManager modelManager = new ModelManager();
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasIssue_nullIssue_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         modelManager.hasIssue(null);
     }
 
     @Test
-    public void hasPerson_personNotInSaveIt_returnsFalse() {
+    public void hasIssue_issueNotInSaveIt_returnsFalse() {
         assertFalse(modelManager.hasIssue(ALICE));
     }
 
     @Test
-    public void hasPerson_personInSaveIt_returnsTrue() {
+    public void hasIssue_issueInSaveIt_returnsTrue() {
         modelManager.addIssue(ALICE);
         assertTrue(modelManager.hasIssue(ALICE));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredIssueList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredIssueList().remove(0);
     }
 
     @Test
     public void equals() {
-        SaveIt saveIt = new SaveItBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        SaveIt saveIt = new SaveItBuilder().withIssue(ALICE).withIssue(BENSON).build();
         SaveIt differentSaveIt = new SaveIt();
         UserPrefs userPrefs = new UserPrefs();
 

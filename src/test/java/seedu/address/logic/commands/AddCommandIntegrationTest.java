@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalSaveIt;
+import static seedu.address.testutil.TypicalIssues.getTypicalSaveIt;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +28,7 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
+    public void execute_newIssue_success() {
         Issue validIssue = new IssueBuilder().build();
 
         Model expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());
@@ -40,7 +40,7 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateIssue_throwsCommandException() {
         Issue issueInList = model.getSaveIt().getIssueList().get(0);
         assertCommandFailure(new AddCommand(issueInList), model, commandHistory,
                 AddCommand.MESSAGE_DUPLICATE_PERSON);

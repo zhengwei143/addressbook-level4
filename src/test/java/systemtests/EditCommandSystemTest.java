@@ -20,10 +20,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UI;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ISSUES;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
+import static seedu.address.testutil.TypicalIssues.AMY;
+import static seedu.address.testutil.TypicalIssues.BOB;
+import static seedu.address.testutil.TypicalIssues.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -84,7 +84,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         /* Case: edit an issue with new values same as another issue's values but with different name ->
         edited */
         assertTrue(getModel().getSaveIt().getIssueList().contains(BOB));
-        index = INDEX_SECOND_PERSON;
+        index = INDEX_SECOND_ISSUE;
 
         assertNotEquals(getModel().getFilteredIssueList().get(index.getZeroBased()), BOB);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + STATEMENT_DESC_JAVA + DESCRIPTION_DESC_C
@@ -95,7 +95,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         /* Case: edit an issue with new values same as another issue's values but with different description
          * -> edited
          */
-        index = INDEX_SECOND_PERSON;
+        index = INDEX_SECOND_ISSUE;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + STATEMENT_DESC_C + DESCRIPTION_DESC_JAVA
                 + SOLUTION_DESC_C + CommandTestUtil.TAG_DESC_UI + TAG_DESC_UI;
         editedIssue = new IssueBuilder(BOB).withDescription(VALID_DESCRIPTION_JAVA).build();
@@ -112,7 +112,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         ------------------------ */
 
         /* Case: filtered issue list, edit index within bounds of address book and issue list -> edited */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showIssuesWithName(KEYWORD_MATCHING_MEIER);
         index = INDEX_FIRST_ISSUE;
 
         assertTrue(index.getZeroBased() < getModel().getFilteredIssueList().size());
@@ -124,7 +124,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         /* Case: filtered issue list, edit index within bounds of address book but out of bounds of issue list
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showIssuesWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getSaveIt().getIssueList().size();
 
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + STATEMENT_DESC_C,
@@ -137,9 +137,9 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         unchanged but
          * browser url changes
          */
-        showAllPersons();
+        showAllIssues();
         index = INDEX_FIRST_ISSUE;
-        selectPerson(index);
+        selectIssue(index);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + STATEMENT_DESC_JAVA + DESCRIPTION_DESC_JAVA
             + SOLUTION_DESC_JAVA + CommandTestUtil.TAG_DESC_UI;
         // this can be misleading: card selection actually remains unchanged but the

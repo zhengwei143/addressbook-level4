@@ -15,13 +15,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalIssues.ALICE;
+import static seedu.address.testutil.TypicalIssues.AMY;
+import static seedu.address.testutil.TypicalIssues.BOB;
+import static seedu.address.testutil.TypicalIssues.CARL;
+import static seedu.address.testutil.TypicalIssues.HOON;
+import static seedu.address.testutil.TypicalIssues.IDA;
+import static seedu.address.testutil.TypicalIssues.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -84,7 +84,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         assertCommandSuccess(command, toAdd);
 
         /* Case: add to empty address book -> added */
-        deleteAllPersons();
+        deleteAllIssues();
         assertCommandSuccess(ALICE);
 
         /* Case: add an issue with tags, command with parameters in random order -> added */
@@ -100,7 +100,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         ------------------------------ */
 
         /* Case: filters the issue list before adding -> added */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showIssuesWithName(KEYWORD_MATCHING_MEIER);
         assertCommandSuccess(IDA);
 
         /* ------------------------ Perform add operation while an issue card is selected
@@ -108,7 +108,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
 
         /* Case: selects first card in the issue list, add an issue -> added, card selection remains
         unchanged */
-        selectPerson(Index.fromOneBased(1));
+        selectIssue(Index.fromOneBased(1));
         assertCommandSuccess(CARL);
 
         /* ----------------------------------- Perform invalid add operations
@@ -163,7 +163,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
      * Executes the {@code AddCommand} that adds {@code toAdd} to the model and asserts that the,<br> 1. Command box
      * displays an empty string.<br> 2. Command box has the default style class.<br> 3. Result display box displays the
      * success message of executing {@code AddCommand} with the details of {@code toAdd}.<br> 4. {@code Storage} and
-     * {@code PersonListPanel} equal to the corresponding components in the current model added with {@code toAdd}.<br>
+     * {@code IssueListPanel} equal to the corresponding components in the current model added with {@code toAdd}.<br>
      * 5. Browser url and selected card remain unchanged.<br> 6. Status bar's sync status changes.<br> Verifications 1,
      * 3 and 4 are performed by {@code SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      *
@@ -188,7 +188,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
 
     /**
      * Performs the same verification as {@code assertCommandSuccess(String, Issue)} except asserts that the,<br> 1.
-     * Result display box displays {@code expectedResultMessage}.<br> 2. {@code Storage} and {@code PersonListPanel}
+     * Result display box displays {@code expectedResultMessage}.<br> 2. {@code Storage} and {@code IssueListPanel}
      * equal to the corresponding components in {@code expectedModel}.<br>
      *
      * @see AddCommandSystemTest#assertCommandSuccess(String, Issue)
@@ -204,7 +204,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
     /**
      * Executes {@code command} and asserts that the,<br> 1. Command box displays {@code command}.<br> 2. Command box
      * has the error style class.<br> 3. Result display box displays {@code expectedResultMessage}.<br> 4. {@code
-     * Storage} and {@code PersonListPanel} remain unchanged.<br> 5. Browser url, selected card and status bar remain
+     * Storage} and {@code IssueListPanel} remain unchanged.<br> 5. Browser url, selected card and status bar remain
      * unchanged.<br> Verifications 1, 3 and 4 are performed by
      * {@code SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      *

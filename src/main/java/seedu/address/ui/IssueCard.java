@@ -14,7 +14,6 @@ import seedu.address.model.issue.Solution;
  * An UI component that displays information of a {@code Issue}.
  */
 public class IssueCard extends UiPart<Region> {
-
     private static final String FXML = "IssueListCard.fxml";
 
     /**

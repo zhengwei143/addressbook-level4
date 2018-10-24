@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- SaveIt save file which contains the same Issue values as in TypicalPersons#getTypicalSaveIt() -->
+<!-- SaveIt save file which contains the same Issue values as in TypicalIssues#getTypicalSaveIt() -->
 <saveit>
     <issues>
         <statement>Alice Pauline</statement>

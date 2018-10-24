@@ -9,17 +9,21 @@ import javafx.scene.control.ListView;
 import seedu.address.model.Issue;
 
 /**
+<<<<<<< HEAD:src/test/java/guitests/guihandles/PersonListPanelHandle.java
  * Provides a handle for {@code IssueListPanel} containing the list of {@code PersonCard}.
+=======
+ * Provides a handle for {@code IssueListPanel} containing the list of {@code IssueCard}.
+>>>>>>> Documentation:src/test/java/guitests/guihandles/IssueListPanelHandle.java
  */
-public class PersonListPanelHandle extends NodeHandle<ListView<Issue>> {
-    public static final String PERSON_LIST_VIEW_ID = "#personListView";
+public class IssueListPanelHandle extends NodeHandle<ListView<Issue>> {
+    public static final String ISSUE_LIST_VIEW_ID = "#issueListView";
 
     private static final String CARD_PANE_ID = "#cardPane";
 
-    private Optional<Issue> lastRememberedSelectedPersonCard;
+    private Optional<Issue> lastRememberedSelectedIssueCard;
 
-    public PersonListPanelHandle(ListView<Issue> personListPanelNode) {
-        super(personListPanelNode);
+    public IssueListPanelHandle(ListView<Issue> issueListPanelNode) {
+        super(issueListPanelNode);
     }
 
     /**
@@ -91,7 +95,7 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Issue>> {
     }
 
     /**
-     * Selects the {@code PersonCard} at {@code index} in the list.
+     * Selects the {@code IssueCard} at {@code index} in the list.
      */
     public void select(int index) {
         getRootNode().getSelectionModel().select(index);
@@ -101,15 +105,15 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Issue>> {
      * Returns the issue card handle of an issue associated with the {@code index} in the list.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
-    public IssueCardHandle getPersonCardHandle(int index) {
+    public IssueCardHandle getIssueCardHandle(int index) {
         return getAllCardNodes().stream()
                 .map(IssueCardHandle::new)
-                .filter(handle -> handle.equals(getPerson(index)))
+                .filter(handle -> handle.equals(getIssue(index)))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
     }
 
-    private Issue getPerson(int index) {
+    private Issue getIssue(int index) {
         return getRootNode().getItems().get(index);
     }
 
@@ -123,30 +127,30 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Issue>> {
     }
 
     /**
-     * Remembers the selected {@code PersonCard} in the list.
+     * Remembers the selected {@code IssueCard} in the list.
      */
-    public void rememberSelectedPersonCard() {
+    public void rememberSelectedIssueCard() {
         List<Issue> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
-            lastRememberedSelectedPersonCard = Optional.empty();
+            lastRememberedSelectedIssueCard = Optional.empty();
         } else {
-            lastRememberedSelectedPersonCard = Optional.of(selectedItems.get(0));
+            lastRememberedSelectedIssueCard = Optional.of(selectedItems.get(0));
         }
     }
 
     /**
-     * Returns true if the selected {@code PersonCard} is different from the value remembered by the most recent
-     * {@code rememberSelectedPersonCard()} call.
+     * Returns true if the selected {@code IssueCard} is different from the value remembered by the most recent
+     * {@code rememberSelectedIssueCard()} call.
      */
-    public boolean isSelectedPersonCardChanged() {
+    public boolean isSelectedIssueCardChanged() {
         List<Issue> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
-            return lastRememberedSelectedPersonCard.isPresent();
+            return lastRememberedSelectedIssueCard.isPresent();
         } else {
-            return !lastRememberedSelectedPersonCard.isPresent()
-                    || !lastRememberedSelectedPersonCard.get().equals(selectedItems.get(0));
+            return !lastRememberedSelectedIssueCard.isPresent()
+                    || !lastRememberedSelectedIssueCard.get().equals(selectedItems.get(0));
         }
     }
 

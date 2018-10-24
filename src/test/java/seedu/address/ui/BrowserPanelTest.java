@@ -3,7 +3,7 @@ package seedu.address.ui;
 import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.EventsUtil.postNow;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalIssues.ALICE;
 import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
 
@@ -40,10 +40,10 @@ public class BrowserPanelTest extends GuiUnitTest {
 
         // associated web page of an issue
         postNow(selectionChangedEventStub);
-        URL expectedPersonUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + ALICE.getStatement().issue
+        URL expectedIssueUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + ALICE.getStatement().issue
                 .replaceAll(" ", "%20"));
 
         waitUntilBrowserLoaded(browserPanelHandle);
-        assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());
+        assertEquals(expectedIssueUrl, browserPanelHandle.getLoadedUrl());
     }
 }

@@ -7,8 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SOLUTION_STACKOVERLOW;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UI;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalIssues.ALICE;
+import static seedu.address.testutil.TypicalIssues.BOB;
 
 import org.junit.Rule;
 import org.junit.Test;

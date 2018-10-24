@@ -19,6 +19,7 @@ import seedu.saveit.model.Model;
 public class RetrieveCommand extends Command {
 
     public static final String COMMAND_WORD = "retrieve";
+    public static final String COMMAND_ALIAS = "rv";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Retrieves the solution which is identified by the index number in the selected issue and "

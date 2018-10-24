@@ -79,6 +79,7 @@ public class SaveItParser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+        case ListCommand.COMMAND_ALIAS:
             return new ListCommandParser().parse(arguments);
 
 
@@ -91,6 +92,7 @@ public class SaveItParser {
             return new HistoryCommand();
 
         case RetrieveCommand.COMMAND_WORD:
+        case RetrieveCommand.COMMAND_ALIAS:
             return new RetrieveCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:

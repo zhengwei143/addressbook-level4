@@ -73,8 +73,7 @@ public class EditCommand extends Command {
         int currentDirectory = model.getCurrentDirectory();
 
         if (currentDirectory == 0 && (editIssueDescriptor.getStatement().isPresent() || editIssueDescriptor
-            .getDescription().isPresent()
-            || editIssueDescriptor.getTags().isPresent())) {
+            .getDescription().isPresent() || editIssueDescriptor.getTags().isPresent())) {
             if (index.getZeroBased() <= lastShownList.size()) {
                 issueToEdit = lastShownList.get(index.getZeroBased());
             } else {
@@ -135,20 +134,21 @@ public class EditCommand extends Command {
     private static Solution processNewSolution(int index, Issue issueToEdit, Solution newSolution)
         throws CommandException {
         // if in the home directory, should not process this
-        if (index > issueToEdit.getSolutions().size()) {
+        if (index >= issueToEdit.getSolutions().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
         } else {
             Solution oldSolution = issueToEdit.getSolutions().get(index);
             Solution updatedSolution;
-            if (newSolution.getRemark().value.equals(DUMMY_SOLUTION_REMARK) && !newSolution.getLink()
-                .value.equals(DUMMY_SOLUTION_LINK)) {
-                updatedSolution = new Solution(newSolution.getLink().value, oldSolution.getRemark().value);
-            } else if (!newSolution.getRemark().value.equals(DUMMY_SOLUTION_REMARK) && newSolution.getLink().value
-                .equals(DUMMY_SOLUTION_LINK)) {
-                updatedSolution = new Solution(oldSolution.getLink().value, newSolution.getRemark().value);
-            } else {
-                updatedSolution = new Solution(newSolution.getLink().value, newSolution.getRemark().value);
-            }
+
+            String updatedSolutionLink =
+                newSolution.getLink().value.equals(DUMMY_SOLUTION_LINK) ? oldSolution.getLink().value
+                    : newSolution.getLink().value;
+            String updatedSolutionRemark =
+                newSolution.getRemark().value.equals(DUMMY_SOLUTION_REMARK) ? oldSolution.getRemark().value
+                    : newSolution.getRemark().value;
+
+            updatedSolution = new Solution(updatedSolutionLink, updatedSolutionRemark);
+
             return updatedSolution;
         }
     }

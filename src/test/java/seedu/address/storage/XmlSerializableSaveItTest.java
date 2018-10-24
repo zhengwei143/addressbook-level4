@@ -37,7 +37,7 @@ public class XmlSerializableSaveItTest {
         XmlSerializableSaveIt dataFromFile = XmlUtil.getDataFromFile(DUPLICATE_ISSUE_FILE,
                 XmlSerializableSaveIt.class);
         thrown.expect(IllegalValueException.class);
-        thrown.expectMessage(XmlSerializableSaveIt.MESSAGE_DUPLICATE_PERSON);
+        thrown.expectMessage(XmlSerializableSaveIt.MESSAGE_DUPLICATE_ISSUE);
         dataFromFile.toModelType();
     }
 

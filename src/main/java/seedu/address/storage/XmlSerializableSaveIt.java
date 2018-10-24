@@ -18,7 +18,7 @@ import seedu.address.model.SaveIt;
 @XmlRootElement(name = "saveit")
 public class XmlSerializableSaveIt {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Issues list contains duplicate issue(s).";
+    public static final String MESSAGE_DUPLICATE_ISSUE = "Issues list contains duplicate issue(s).";
 
     @XmlElement
     private List<XmlAdaptedIssue> issues;
@@ -50,7 +50,7 @@ public class XmlSerializableSaveIt {
         for (XmlAdaptedIssue i : issues) {
             Issue issue = i.toModelType();
             if (saveIt.hasIssue(issue)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_ISSUE);
             }
             saveIt.addIssue(issue);
         }

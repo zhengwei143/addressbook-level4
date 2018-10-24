@@ -197,7 +197,7 @@ Examples: +
 ====
 
 
-=== Locating issues by statement: `find`
+=== Locating issues by statement or description: `find`
 
 Find issues whose statement and description contains any of the given search queries.
 
@@ -205,8 +205,8 @@ Format: `find [KEYWORDS...]`
 
 [TIP]
 ====
-* The issue statement and description contain the KEYWORD will be shown in the displayed issue list
-* The Keywords can be more than 1
+* The issues matching the keywords (based on their statements or descriptions) will be displayed on the issue list.
+* There can be more than 1 keywords
 ====
 
 Examples:
@@ -223,6 +223,31 @@ Examples:
 * The keywords can partially match the statement or description.
 * Issues matching at least one keyword will be returned.
 * Searching the keyword will increment the search frequency of the issue (so that it can be ordered accordingly later on).
+====
+
+=== Locating issues by tags: `findtag`
+
+Find issues that contains the tags entered in the search queries.
+
+[TIP]
+====
+* The issues with matching tags (given the keywords) will be displayed on the issue list.
+* There can be more than 1 keywords representing multiple tags
+====
+
+Examples:
+****
+* `findtag java`
+* `findtag cplusplus segmentationFault`
+****
+
+[NOTE]
+====
+* The search is case-sensitive
+* The keywords must match exactly to the tag names of the issue's tags
+* If multiple tags are searched, only issues containing *all* the searched tags will be displayed
+* A matched issue can have other tags (aside from the ones searched).
+e.g `issue[cplusplus][segmentation]` will match with a single searched tag `[cplusplus]`
 ====
 
 === Returning to home directory  : `home`

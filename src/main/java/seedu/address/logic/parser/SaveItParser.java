@@ -88,6 +88,7 @@ public class SaveItParser {
             return new RedoCommand();
 
         case RefactorTagCommand.COMMAND_WORD:
+        case RefactorTagCommand.COMMAND_ALIAS:
             return new RefactorTagCommandParser().parse(arguments);
 
         default:

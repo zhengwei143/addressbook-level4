@@ -12,7 +12,6 @@ import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import guitests.guihandles.IssueCardHandle;
@@ -39,7 +38,6 @@ public class IssueListPanelTest extends GuiUnitTest {
     private IssueListPanelHandle issueListPanelHandle;
 
     @Test
-    @Ignore
     public void display() {
         initUi(TYPICAL_ISSUES);
 
@@ -54,7 +52,6 @@ public class IssueListPanelTest extends GuiUnitTest {
     }
 
     @Test
-    @Ignore
     public void handleJumpToListRequestEvent() {
         initUi(TYPICAL_ISSUES);
         postNow(JUMP_TO_SECOND_EVENT);
@@ -66,15 +63,10 @@ public class IssueListPanelTest extends GuiUnitTest {
     }
 
     /**
-<<<<<<< HEAD
-     * Verifies that creating and deleting large number of persons in {@code IssueListPanel} requires lesser than
-=======
      * Verifies that creating and deleting large number of issues in {@code IssueListPanel} requires lesser than
->>>>>>> Documentation
      * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
      */
     @Test
-    @Ignore
     public void performanceTest() throws Exception {
         ObservableList<Issue> backingList = createBackingList(10000);
 
@@ -85,11 +77,7 @@ public class IssueListPanelTest extends GuiUnitTest {
     }
 
     /**
-<<<<<<< HEAD
-     * Returns a list of persons containing {@code issueCount} persons that is used to populate the
-=======
      * Returns a list of issues containing {@code issueCount} issues that is used to populate the
->>>>>>> Documentation
      * {@code IssueListPanel}.
      */
     private ObservableList<Issue> createBackingList(int issueCount) throws Exception {
@@ -123,23 +111,13 @@ public class IssueListPanelTest extends GuiUnitTest {
     }
 
     /**
-<<<<<<< HEAD
-     * Initializes {@code personListPanelHandle} with a {@code IssueListPanel} backed by {@code backingList}.
-=======
      * Initializes {@code issueListPanelHandle} with a {@code IssueListPanel} backed by {@code backingList}.
->>>>>>> Documentation
      * Also shows the {@code Stage} that displays only {@code IssueListPanel}.
      */
     private void initUi(ObservableList<Issue> backingList) {
         IssueListPanel issueListPanel = new IssueListPanel(backingList);
         uiPartRule.setUiPart(issueListPanel);
-
-<<<<<<< HEAD
-        personListPanelHandle = new PersonListPanelHandle(getChildNode(issueListPanel.getRoot(),
-                PersonListPanelHandle.PERSON_LIST_VIEW_ID));
-=======
         issueListPanelHandle = new IssueListPanelHandle(getChildNode(issueListPanel.getRoot(),
                 IssueListPanelHandle.ISSUE_LIST_VIEW_ID));
->>>>>>> Documentation
     }
 }

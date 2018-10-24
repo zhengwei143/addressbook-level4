@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Issue;
 import seedu.address.model.issue.Description;
+import seedu.address.model.issue.IssueSearchFrequency;
 import seedu.address.model.issue.IssueStatement;
 import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
@@ -34,11 +35,13 @@ public class XmlAdaptedIssue {
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
+    @XmlElement(required = true)
+    private Integer frequency;
+
     /**
      * Constructs an XmlAdaptedIssue. This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedIssue() {
-    }
+    public XmlAdaptedIssue() {}
 
     /**
      * Constructs an {@code XmlAdaptedIssue} with the given statement details.
@@ -53,6 +56,23 @@ public class XmlAdaptedIssue {
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
+        this.frequency = 0;
+    }
+
+    /**
+     * Constructs an {@code XmlAdaptedIssue} with the given statement details.
+     */
+    public XmlAdaptedIssue(String statement, String description, List<XmlAdaptedSolution> solutions,
+                           List<XmlAdaptedTag> tagged, Integer frequency) {
+        this.statement = statement;
+        this.description = description;
+        if (solutions != null) {
+            this.solutions = new ArrayList<>(solutions);
+        }
+        if (tagged != null) {
+            this.tagged = new ArrayList<>(tagged);
+        }
+        this.frequency = frequency;
     }
 
     /**
@@ -69,6 +89,7 @@ public class XmlAdaptedIssue {
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
+        frequency = source.getFrequency().getValue();
     }
 
     /**
@@ -108,7 +129,10 @@ public class XmlAdaptedIssue {
         final List<Solution> modelSolutions = new ArrayList<>(issueSolutions);
 
         final Set<Tag> modelTags = new HashSet<>(issueTags);
-        return new Issue(modelName, modelDescription, modelSolutions, modelTags);
+
+        final IssueSearchFrequency searchFrequency = new IssueSearchFrequency(frequency);
+
+        return new Issue(modelName, modelDescription, modelSolutions, modelTags, searchFrequency);
     }
 
     @Override

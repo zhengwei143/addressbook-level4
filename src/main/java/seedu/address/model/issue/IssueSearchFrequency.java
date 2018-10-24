@@ -8,7 +8,7 @@ package seedu.address.model.issue;
  *      So that the most frequently searched issues are listed at the top
  */
 public class IssueSearchFrequency {
-    private int value;
+    private Integer value;
 
     public IssueSearchFrequency(int frequency) {
         value = frequency;
@@ -16,6 +16,10 @@ public class IssueSearchFrequency {
 
     public void increment() {
         value = value + 1;
+    }
+
+    public Integer getValue() {
+        return value;
     }
 
     public int compare(IssueSearchFrequency other) {

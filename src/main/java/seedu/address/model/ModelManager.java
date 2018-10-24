@@ -17,9 +17,6 @@ import seedu.address.commons.events.model.SaveItChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.issue.IssueSort;
 
-//import javafx.collections.transformation.SortedList;
-//import seedu.address.model.issue.IssueFreqSort;
-
 /**
  * Represents the in-memory model of the saveIt data.
  */
@@ -114,9 +111,6 @@ public class ModelManager extends ComponentManager implements Model {
         for (Issue issue : filteredIssues) {
             issue.updateFrequency();
         }
-
-        // Sorts properly but the UI is not listing properly
-        // SortedList sortedFilteredList = new SortedList<>(filteredIssues, new IssueFreqSort());
     }
 
     @Override

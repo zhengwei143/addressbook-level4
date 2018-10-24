@@ -21,6 +21,8 @@ import seedu.address.model.issue.Solution;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_ALIAS = "a";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an issue to the saveIt. "
             + "Parameters: "
             + PREFIX_STATEMENT + "ISSUE_STATEMENT "

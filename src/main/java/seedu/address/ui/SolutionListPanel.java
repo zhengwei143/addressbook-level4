@@ -18,7 +18,7 @@ import seedu.address.model.issue.Solution;
  * Panel containing the list of solutions.
  */
 public class SolutionListPanel extends UiPart<Region> {
-    private static final String FXML = "SolutionListPanel.fxml";
+    private static final String FXML = "IssueListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(SolutionListPanel.class);
 
     @FXML

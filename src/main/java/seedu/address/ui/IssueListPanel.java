@@ -18,27 +18,27 @@ import seedu.address.model.Issue;
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class IssueListPanel extends UiPart<Region> {
+    private static final String FXML = "IssueListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(IssueListPanel.class);
 
     @FXML
-    private ListView<Issue> personListView;
+    private ListView<Issue> issueListView;
 
-    public PersonListPanel(ObservableList<Issue> issueList) {
+    public IssueListPanel(ObservableList<Issue> issueList) {
         super(FXML);
         setConnections(issueList);
         registerAsAnEventHandler(this);
     }
 
     private void setConnections(ObservableList<Issue> issueList) {
-        personListView.setItems(issueList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        issueListView.setItems(issueList);
+        issueListView.setCellFactory(listView -> new PersonListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        personListView.getSelectionModel().selectedItemProperty()
+        issueListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in issue list panel changed to : '" + newValue + "'");
@@ -52,8 +52,8 @@ public class PersonListPanel extends UiPart<Region> {
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
-            personListView.scrollTo(index);
-            personListView.getSelectionModel().clearAndSelect(index);
+            issueListView.scrollTo(index);
+            issueListView.getSelectionModel().clearAndSelect(index);
         });
     }
 

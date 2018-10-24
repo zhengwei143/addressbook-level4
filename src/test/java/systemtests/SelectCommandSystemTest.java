@@ -1,23 +1,23 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS;
-import static seedu.address.testutil.TestUtil.getLastIndex;
-import static seedu.address.testutil.TestUtil.getMidIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
-import static seedu.address.testutil.TypicalIssues.KEYWORD_MATCHING_MEIER;
+import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX;
+import static seedu.saveit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.saveit.logic.commands.SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS;
+import static seedu.saveit.testutil.TestUtil.getLastIndex;
+import static seedu.saveit.testutil.TestUtil.getMidIndex;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
+import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
+import seedu.saveit.commons.core.index.Index;
+import seedu.saveit.logic.commands.RedoCommand;
+import seedu.saveit.logic.commands.SelectCommand;
+import seedu.saveit.logic.commands.UndoCommand;
+import seedu.saveit.model.Model;
 
 public class SelectCommandSystemTest extends SaveItSystemTest {
     @Test
@@ -56,14 +56,14 @@ public class SelectCommandSystemTest extends SaveItSystemTest {
 
         /* ------------------------ Perform select operations on the shown filtered list ---------------------------- */
 
-        /* Case: filtered issue list, select index within bounds of address book but out of bounds of issue list
+        /* Case: filtered issue list, select index within bounds of saveit book but out of bounds of issue list
          * -> rejected
          */
         showIssuesWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getSaveIt().getIssueList().size();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
 
-        /* Case: filtered issue list, select index within bounds of address book and issue list -> selected */
+        /* Case: filtered issue list, select index within bounds of saveit book and issue list -> selected */
         Index validIndex = Index.fromOneBased(1);
         assertTrue(validIndex.getZeroBased() < getModel().getFilteredIssueList().size());
         command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased();
@@ -94,7 +94,7 @@ public class SelectCommandSystemTest extends SaveItSystemTest {
         /* Case: mixed case command word -> rejected */
         assertCommandFailure("SeLeCt 1", MESSAGE_UNKNOWN_COMMAND);
 
-        /* Case: select from empty address book -> rejected */
+        /* Case: select from empty saveit book -> rejected */
         deleteAllIssues();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_ISSUE.getOneBased(),
                 MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);

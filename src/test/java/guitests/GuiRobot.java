@@ -12,9 +12,7 @@ import javafx.stage.Stage;
  * Robot used to simulate user actions on the GUI.
  * Extends {@link FxRobot} by adding some customized functionality and workarounds.
  */
-public class
-
-GuiRobot extends FxRobot {
+public class GuiRobot extends FxRobot {
 
 
     private static final int PAUSE_FOR_HUMAN_DELAY_MILLISECONDS = 250;

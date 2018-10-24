@@ -35,7 +35,6 @@ public class Solution {
                 this.remark = new Remark(solutionName);
             }
         }
-
         this.solutionName = solutionName;
     }
 
@@ -62,8 +61,8 @@ public class Solution {
     /**
      * Returns true if a given string is a valid solution name.
      */
-    public static boolean isValidSolution(String test) {
-        return test.matches(SOLUTION_VALIDATION_REGEX);
+    public static boolean isValidSolution(String solutionLink, String solutionRemark) {
+        return false;
     }
 
     @Override

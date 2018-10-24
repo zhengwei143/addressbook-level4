@@ -1,7 +1,10 @@
 package seedu.saveit.model.issue.solution;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Scanner;
 
 /**
  * Represents a Issue's solution link in saveit.
@@ -13,13 +16,21 @@ public class SolutionLink {
 
     public final String value;
 
+    private URL url = null;
+
     /**
      * Construct a new solution link.
-     *
+     * Since the the link value will always be checked before creating new solution link, MalformedURLException
+     * is redundant.
      * @param value url to the solution website.
      */
     public SolutionLink(String value) {
         this.value = value;
+        try {
+            this.url = new URL(value);
+        } catch (MalformedURLException e) {
+            // redundant
+        }
     }
 
     /**

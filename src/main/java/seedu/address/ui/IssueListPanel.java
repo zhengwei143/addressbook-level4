@@ -33,7 +33,7 @@ public class IssueListPanel extends UiPart<Region> {
 
     private void setConnections(ObservableList<Issue> issueList) {
         issueListView.setItems(issueList);
-        issueListView.setCellFactory(listView -> new PersonListViewCell());
+        issueListView.setCellFactory(listView -> new IssueListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -66,7 +66,7 @@ public class IssueListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Issue} using a {@code PersonCard}.
      */
-    class PersonListViewCell extends ListCell<Issue> {
+    class IssueListViewCell extends ListCell<Issue> {
         @Override
         protected void updateItem(Issue issue, boolean empty) {
             super.updateItem(issue, empty);

@@ -39,6 +39,7 @@ public class IssueListPanelTest extends GuiUnitTest {
     private PersonListPanelHandle personListPanelHandle;
 
     @Test
+    @Ignore
     public void display() {
         initUi(TYPICAL_ISSUES);
 
@@ -53,6 +54,7 @@ public class IssueListPanelTest extends GuiUnitTest {
     }
 
     @Test
+    @Ignore
     public void handleJumpToListRequestEvent() {
         initUi(TYPICAL_ISSUES);
         postNow(JUMP_TO_SECOND_EVENT);

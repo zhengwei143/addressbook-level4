@@ -18,7 +18,7 @@ import seedu.address.model.issue.Solution;
  * Panel containing the list of solutions.
  */
 public class SolutionListPanel extends UiPart<Region> {
-    private static final String FXML = "IssueListPanel.fxml";
+    private static final String FXML = "SolutionListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(SolutionListPanel.class);
 
     @FXML
@@ -41,7 +41,7 @@ public class SolutionListPanel extends UiPart<Region> {
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in issue list panel changed to : '" + newValue + "'");
-                        //raise(new PersonPanelSelectionChangedEvent(newValue));
+                        //raise(new IssuePanelSelectionChangedEvent(newValue));
                     }
                 });
     }

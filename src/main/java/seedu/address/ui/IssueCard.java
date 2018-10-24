@@ -15,7 +15,7 @@ import seedu.address.model.issue.Solution;
  */
 public class IssueCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "IssueCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX. As a

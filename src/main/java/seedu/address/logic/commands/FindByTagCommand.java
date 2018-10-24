@@ -15,7 +15,7 @@ public class FindByTagCommand extends Command {
     public static final String COMMAND_ALIAS = "ft";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all issues that contain all the tags "
-            + "represented by the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "represented by the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " java IndexOutOfBounds";
 

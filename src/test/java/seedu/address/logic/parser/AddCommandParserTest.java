@@ -26,7 +26,6 @@ import static seedu.address.testutil.TypicalIssues.AMY;
 import static seedu.address.testutil.TypicalIssues.BOB;
 import static seedu.address.testutil.TypicalIssues.COMMON_ISSUE_FREQUENCY;
 
-
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -76,6 +75,7 @@ public class AddCommandParserTest {
         // zero tags
         Issue expectedIssue = new IssueBuilder(AMY).withTags().withSolutions()
                 .withFrequency(COMMON_ISSUE_FREQUENCY).build();
+
         assertParseSuccess(parser, STATEMENT_DESC_JAVA + DESCRIPTION_DESC_JAVA,
                 new AddCommand(expectedIssue));
     }

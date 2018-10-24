@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.stream.Stream;
 
+import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.Prefix;
 
 /**
@@ -66,7 +67,7 @@ public class StringUtil {
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given {@code
+     * Returns true if all the CliSyntax prfix contains in the  given {@code
      * ArgumentMultimap}.
      */
     public static boolean arePrefixesPresent(String args, Prefix... prefixes) {
@@ -74,10 +75,18 @@ public class StringUtil {
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given {@code
+     * Returns true if there is at least one of the CliSyntax prefix not contain in the  given {@code
      * ArgumentMultimap}.
      */
     public static boolean arePrefixesNotPresent(String args, Prefix... prefixes) {
         return Stream.of(prefixes).noneMatch(prefix -> args.contains(prefix.getPrefix()));
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given {@code
+     * ArgumentMultimap}.
+     */
+    public static boolean arePrefixesValuePresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

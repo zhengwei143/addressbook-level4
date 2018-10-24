@@ -49,7 +49,7 @@ public class TestUtil {
     /**
      * Returns the issue in the {@code model}'s issue list at {@code index}.
      */
-    public static Issue getPerson(Model model, Index index) {
+    public static Issue getIssue(Model model, Index index) {
         return model.getFilteredIssueList().get(index.getZeroBased());
     }
 }

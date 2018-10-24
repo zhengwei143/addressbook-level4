@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showIssueAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
-import static seedu.address.testutil.TypicalPersons.getTypicalSaveIt;
+import static seedu.address.testutil.TypicalIssues.getTypicalSaveIt;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -39,7 +39,6 @@ public class ListCommandTest {
     }
 
     @Test
-    @Ignore
     public void execute_listIsFiltered_showsEverything() throws ParseException {
         showPersonAtIndex(model, INDEX_FIRST_ISSUE);
         assertCommandSuccess(new ListCommand(

@@ -11,21 +11,21 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.IssuePanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.Issue;
 
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class IssueListPanel extends UiPart<Region> {
+    private static final String FXML = "IssueListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(IssueListPanel.class);
 
     @FXML
     private ListView<Issue> personListView;
 
-    public PersonListPanel(ObservableList<Issue> issueList) {
+    public IssueListPanel(ObservableList<Issue> issueList) {
         super(FXML);
         setConnections(issueList);
         registerAsAnEventHandler(this);
@@ -42,7 +42,7 @@ public class PersonListPanel extends UiPart<Region> {
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in issue list panel changed to : '" + newValue + "'");
-                        raise(new PersonPanelSelectionChangedEvent(newValue));
+                        raise(new IssuePanelSelectionChangedEvent(newValue));
                     }
                 });
     }

@@ -17,7 +17,7 @@ import seedu.address.model.Issue;
 import seedu.address.model.Model;
 import seedu.address.model.SaveIt;
 import seedu.address.model.issue.IssueContainsKeywordsPredicate;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditIssueDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -55,11 +55,11 @@ public class CommandTestUtil {
     public static final EditCommand.EditIssueDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withStatement(VALID_STATEMENT_JAVA)
+        DESC_AMY = new EditIssueDescriptorBuilder().withStatement(VALID_STATEMENT_JAVA)
             .withDescription(VALID_DESCRIPTION_JAVA)
             .withSolutions(VALID_SOLUTION_JAVA)
             .withTags(VALID_TAG_SYNTAX).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withStatement(VALID_STATEMENT_C)
+        DESC_BOB = new EditIssueDescriptorBuilder().withStatement(VALID_STATEMENT_C)
             .withDescription(VALID_DESCRIPTION_C)
             .withSolutions(VALID_SOLUTION_C)
             .withTags(VALID_TAG_UI, VALID_TAG_SYNTAX).build();
@@ -112,7 +112,7 @@ public class CommandTestUtil {
      * Updates {@code model}'s filtered list to show only the issue at the given {@code targetIndex} in the {@code
      * model}'s address book.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
+    public static void showIssueAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredIssueList().size());
 
         Issue issue = model.getFilteredIssueList().get(targetIndex.getZeroBased());
@@ -125,7 +125,7 @@ public class CommandTestUtil {
     /**
      * Deletes the first issue in {@code model}'s filtered list from {@code model}'s address book.
      */
-    public static void deleteFirstPerson(Model model) {
+    public static void deleteFirstIssue(Model model) {
         Issue firstIssue = model.getFilteredIssueList().get(0);
         model.deleteIssue(firstIssue);
         model.commitSaveIt();

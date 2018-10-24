@@ -18,7 +18,7 @@ import seedu.address.model.SaveIt;
 /**
  * A utility class containing a list of {@code Issue} objects to be used in tests.
  */
-public class TypicalPersons {
+public class TypicalIssues {
 
     public static final Issue ALICE = new IssueBuilder().withStatement("Alice Pauline")
             .withDescription("94351253")
@@ -54,20 +54,20 @@ public class TypicalPersons {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPersons() {} // prevents instantiation
+    private TypicalIssues() {} // prevents instantiation
 
     /**
-     * Returns an {@code SaveIt} with all the typical persons.
+     * Returns an {@code SaveIt} with all the typical issues.
      */
     public static SaveIt getTypicalSaveIt() {
         SaveIt ab = new SaveIt();
-        for (Issue issue : getTypicalPersons()) {
+        for (Issue issue : getTypicalIssues()) {
             ab.addIssue(issue);
         }
         return ab;
     }
 
-    public static List<Issue> getTypicalPersons() {
+    public static List<Issue> getTypicalIssues() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

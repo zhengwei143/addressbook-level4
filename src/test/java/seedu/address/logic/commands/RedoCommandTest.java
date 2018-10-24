@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.deleteFirstPerson;
-import static seedu.address.testutil.TypicalPersons.getTypicalSaveIt;
+import static seedu.address.logic.commands.CommandTestUtil.deleteFirstIssue;
+import static seedu.address.testutil.TypicalIssues.getTypicalSaveIt;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,13 +22,13 @@ public class RedoCommandTest {
     @Before
     public void setUp() {
         // set up of both models' undo/redo history
-        deleteFirstPerson(model);
-        deleteFirstPerson(model);
+        deleteFirstIssue(model);
+        deleteFirstIssue(model);
         model.undoSaveIt();
         model.undoSaveIt();
 
-        deleteFirstPerson(expectedModel);
-        deleteFirstPerson(expectedModel);
+        deleteFirstIssue(expectedModel);
+        deleteFirstIssue(expectedModel);
         expectedModel.undoSaveIt();
         expectedModel.undoSaveIt();
     }

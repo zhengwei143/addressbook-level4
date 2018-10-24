@@ -31,7 +31,7 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Issue;
 import seedu.address.model.issue.IssueContainsKeywordsPredicate;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditIssueDescriptorBuilder;
 import seedu.address.testutil.IssueBuilder;
 import seedu.address.testutil.IssueUtil;
 
@@ -66,7 +66,7 @@ public class SaveItParserTest {
     // TODO: there should be two ways for edit to be parsed
     public void parseCommand_edit() throws Exception {
         Issue issue = new IssueBuilder().build();
-        EditIssueDescriptor descriptor = new EditPersonDescriptorBuilder(issue).withSolutions().build();
+        EditIssueDescriptor descriptor = new EditIssueDescriptorBuilder(issue).withSolutions().build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_ISSUE.getOneBased() + " " + IssueUtil.getEditIssueDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_ISSUE, descriptor), command);

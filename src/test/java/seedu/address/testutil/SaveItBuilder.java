@@ -6,7 +6,7 @@ import seedu.address.model.SaveIt;
 /**
  * A utility class to help with building address objects.
  * Example usage: <br>
- *     {@code SaveIt ab = new SaveItBuilder().withPerson("John", "Doe").build();}
+ *     {@code SaveIt ab = new SaveItBuilder().withIssue("John", "Doe").build();}
  */
 public class SaveItBuilder {
 
@@ -23,7 +23,7 @@ public class SaveItBuilder {
     /**
      * Adds a new {@code Issue} to the {@code SaveIt} that we are building.
      */
-    public SaveItBuilder withPerson(Issue issue) {
+    public SaveItBuilder withIssue(Issue issue) {
         saveIt.addIssue(issue);
         return this;
     }

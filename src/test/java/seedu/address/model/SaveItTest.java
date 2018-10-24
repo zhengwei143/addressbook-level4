@@ -5,8 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SOLUTION_STACKOVERLOW;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UI;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalSaveIt;
+import static seedu.address.testutil.TypicalIssues.ALICE;
+import static seedu.address.testutil.TypicalIssues.getTypicalSaveIt;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -48,7 +48,7 @@ public class SaveItTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+    public void resetData_withDuplicateIssues_throwsDuplicateIssueException() {
         // Two issues with the same identity fields
         Issue editedAlice = new IssueBuilder(ALICE).withSolutions(VALID_SOLUTION_STACKOVERLOW)
                 .withTags(VALID_TAG_UI).build();
@@ -60,24 +60,24 @@ public class SaveItTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasIssue_nullIssue_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         saveIt.hasIssue(null);
     }
 
     @Test
-    public void hasPerson_personNotInSaveIt_returnsFalse() {
+    public void hasIssue_issueNotInSaveIt_returnsFalse() {
         assertFalse(saveIt.hasIssue(ALICE));
     }
 
     @Test
-    public void hasPerson_personInSaveIt_returnsTrue() {
+    public void hasIssue_issueInSaveIt_returnsTrue() {
         saveIt.addIssue(ALICE);
         assertTrue(saveIt.hasIssue(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInSaveIt_returnsTrue() {
+    public void hasIssue_issueWithSameIdentityFieldsInSaveIt_returnsTrue() {
         saveIt.addIssue(ALICE);
         Issue editedAlice = new IssueBuilder(ALICE).withSolutions(VALID_SOLUTION_STACKOVERLOW)
                 .withTags(VALID_TAG_UI).build();
@@ -85,7 +85,7 @@ public class SaveItTest {
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getIssueList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         saveIt.getIssueList().remove(0);
     }

@@ -12,7 +12,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.SaveIt;
-import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.TypicalIssues;
 
 public class XmlSerializableSaveItTest {
 
@@ -24,16 +24,16 @@ public class XmlSerializableSaveItTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void toModelType_typicalPersonsFile_success() throws Exception {
+    public void toModelType_typicalIssuesFile_success() throws Exception {
         XmlSerializableSaveIt dataFromFile = XmlUtil.getDataFromFile(TYPICAL_ISSUES_FILE,
                 XmlSerializableSaveIt.class);
         SaveIt saveItFromFile = dataFromFile.toModelType();
-        SaveIt typicalIssuesSaveIt = TypicalPersons.getTypicalSaveIt();
+        SaveIt typicalIssuesSaveIt = TypicalIssues.getTypicalSaveIt();
         assertEquals(saveItFromFile, typicalIssuesSaveIt);
     }
 
     @Test
-    public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
+    public void toModelType_duplicateIssues_throwsIllegalValueException() throws Exception {
         XmlSerializableSaveIt dataFromFile = XmlUtil.getDataFromFile(DUPLICATE_ISSUE_FILE,
                 XmlSerializableSaveIt.class);
         thrown.expect(IllegalValueException.class);

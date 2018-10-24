@@ -7,8 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SYNTAX;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UI;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalIssues.ALICE;
+import static seedu.address.testutil.TypicalIssues.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -35,18 +35,18 @@ public class UniqueIssueListTest {
     }
 
     @Test
-    public void contains_personNotInList_returnsFalse() {
+    public void contains_issueNotInList_returnsFalse() {
         assertFalse(uniqueIssueList.contains(ALICE));
     }
 
     @Test
-    public void contains_personInList_returnsTrue() {
+    public void contains_issueInList_returnsTrue() {
         uniqueIssueList.add(ALICE);
         assertTrue(uniqueIssueList.contains(ALICE));
     }
 
     @Test
-    public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_issueWithSameIdentityFieldsInList_returnsTrue() {
         uniqueIssueList.add(ALICE);
         Issue editedAlice = new IssueBuilder(ALICE).withDescription(VALID_DESCRIPTION_C).withTags(VALID_TAG_SYNTAX)
                 .build();
@@ -128,7 +128,7 @@ public class UniqueIssueListTest {
     }
 
     @Test
-    public void remove_personDoesNotExist_throwsIssueNotFoundException() {
+    public void remove_issueDoesNotExist_throwsIssueNotFoundException() {
         thrown.expect(IssueNotFoundException.class);
         uniqueIssueList.remove(ALICE);
     }
@@ -165,8 +165,8 @@ public class UniqueIssueListTest {
     @Test
     public void setIssues_list_replacesOwnListWithProvidedList() {
         uniqueIssueList.add(ALICE);
-        List<Issue> personList = Collections.singletonList(BOB);
-        uniqueIssueList.setIssues(personList);
+        List<Issue> issueList = Collections.singletonList(BOB);
+        uniqueIssueList.setIssues(issueList);
         UniqueIssueList expectedUniqueIssueList = new UniqueIssueList();
         expectedUniqueIssueList.add(BOB);
         assertEquals(expectedUniqueIssueList, uniqueIssueList);

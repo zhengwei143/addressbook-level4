@@ -19,6 +19,9 @@ import seedu.address.model.SaveIt;
  * A utility class containing a list of {@code Issue} objects to be used in tests.
  */
 public class TypicalIssues {
+    // {@code IssueSearchFrequency} value when first initialized
+    public static final Integer INITIALIZED_ISSUE_FREQUENCY = 0;
+    // {@code IssueSearchFrequency} value commonly used across the test cases
     public static final Integer COMMON_ISSUE_FREQUENCY = 1;
 
     public static final Issue ALICE = new IssueBuilder().withStatement("Alice Pauline")

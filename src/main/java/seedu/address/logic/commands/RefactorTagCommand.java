@@ -27,7 +27,7 @@ public class RefactorTagCommand extends Command {
             + "Parameters: KEYWORD t/OLD_TAG [nt/NEW_TAG]...\n"
             + "Example: " + COMMAND_WORD + " t/python nt/java";
 
-    public static final String DUMMY_TAG = "DUMMY_TAG";
+    public static final String DUMMY_TAG = "dummyTag";
 
     private final Tag oldTag;
     private final Tag newTag;

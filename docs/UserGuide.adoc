@@ -380,9 +380,9 @@ Examples:
 
 === Refactoring tag: `refactorTag` [coming in v1.3]
 
-To rename or remove a spcific tag for all entries with that tag.
+To rename or remove a specific tag for all entries with that tag.
 
-Format: `refactorTag t/OLD_TAG [t/NEW_TAG]`
+Format: `refactorTag t/OLD_TAG [nt/NEW_TAG]`
 
 [TIP]
 ====
@@ -392,10 +392,14 @@ Format: `refactorTag t/OLD_TAG [t/NEW_TAG]`
 
 Examples:
 ****
-* refactorTag t/python t/java (Changes all entries tagged [python] to be tagged [java])
-* refactorTag t/python (Removes the tag [java] from all the entries)
+* refactorTag t/python nt/java (Changes all entries tagged [python] to be tagged [java])
+* refactorTag t/python (Removes the tag [python] from all the entries)
 ****
 
+[NOTE]
+====
+* If the new tag exits in the issue already, it is the same as remove the old tag.
+====
 === Autosuggesting existing tags [coming in v1.3]
 To prevent the user from creating many similar tags / duplicates, whenever the user creates a record with a tag, or modifies a record’s tag, the application searches for similar tags in the system and prompts the user with a list of similar tags.
 

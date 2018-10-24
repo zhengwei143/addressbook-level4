@@ -2,20 +2,20 @@ package seedu.saveit.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.saveit.commons.core.ComponentManager;
 import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.events.model.SaveItChangedEvent;
 import seedu.saveit.commons.util.CollectionUtil;
-
-//import javafx.collections.transformation.SortedList;
-//import seedu.saveit.model.issue.IssueSort;
+import seedu.saveit.model.issue.IssueSort;
 
 /**
  * Represents the in-memory model of the saveIt data.
@@ -26,6 +26,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Index ROOT_DIRECTORY = Index.fromZeroBased(0);
     private final VersionedSaveIt versionedSaveIt;
     private FilteredList<Issue> filteredIssues;
+    private SortedList<Issue> sortedList;
 
     /**
      * Initializes a ModelManager with the given saveIt and userPrefs.
@@ -38,6 +39,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedSaveIt = new VersionedSaveIt(saveIt);
         filteredIssues = new FilteredList<>(versionedSaveIt.getIssueList());
+        sortedList = new SortedList<>(versionedSaveIt.getIssueList());
     }
 
     public ModelManager() {
@@ -111,7 +113,12 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         // Sorts properly but the UI is not listing properly
-        // SortedList sortedFilteredList = new SortedList<>(filteredIssues, new IssueSort());
+        // SortedList sortedFilteredList = new SortedList<>(filteredIssues, new IssueFreqSort());
+    }
+
+    @Override
+    public void sortIssues(IssueSort sort_type) {
+        updateSortedIssueList(sort_type.getComparator());
     }
 
     //=========== Filtered Issue List Accessors =============================================================
@@ -129,6 +136,23 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredIssueList(Predicate<Issue> predicate) {
         requireNonNull(predicate);
         filteredIssues.setPredicate(predicate);
+    }
+
+    //=========== Filtered Issue List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Issue} backed by the internal list of
+     * {@code versionedSaveIt}
+     */
+    @Override
+    public ObservableList<Issue> getSortedIssueList() {
+        return FXCollections.unmodifiableObservableList(sortedList);
+    }
+
+    @Override
+    public void updateSortedIssueList(Comparator<Issue> comparator) {
+        requireNonNull(comparator);
+        sortedList.setComparator(comparator);
     }
 
     //=========== Undo/Redo =================================================================================

@@ -74,8 +74,8 @@ public class SaveItParser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-        case ListCommand.COMMAND_ALIAS:
-            return new ListCommand();
+            return new ListCommandParser().parse(arguments);
+
 
         case HomeCommand.COMMAND_WORD:
         case HomeCommand.COMMAND_ALIAS:

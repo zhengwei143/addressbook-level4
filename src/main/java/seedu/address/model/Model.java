@@ -1,9 +1,11 @@
 package seedu.address.model;
 
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
+import seedu.address.model.issue.IssueSort;
 
 /**
  * The API of the Model component.
@@ -56,11 +58,25 @@ public interface Model {
      */
     void filterIssues(Predicate<Issue> predicate);
 
+    /** Returns an unmodifiable view of the sorted issue list */
+    ObservableList<Issue> getSortedIssueList();
+
+    /**
+     * Sorts the issues given the order.
+     * @param sort_type
+     */
+    void sortIssues(IssueSort sort_type);
+
     /**
      * Updates the filter of the filtered issue list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredIssueList(Predicate<Issue> predicate);
+
+    /**
+     * Updates the sorting of the sorted issue list to sort by the give {@code sort_type}.
+     */
+    void updateSortedIssueList(Comparator<Issue> sort_type);
 
     /**
      * Returns true if the model has previous saveIt states to restore.

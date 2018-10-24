@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.Ignore;
@@ -22,6 +23,7 @@ import seedu.address.model.Issue;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlySaveIt;
 import seedu.address.model.SaveIt;
+import seedu.address.model.issue.IssueSort;
 import seedu.address.testutil.IssueBuilder;
 
 public class AddCommandTest {
@@ -141,12 +143,27 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Issue> getSortedIssueList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void filterIssues(Predicate<Issue> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredIssueList(Predicate<Issue> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortIssues(IssueSort sort_type) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSortedIssueList(Comparator<Issue> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 

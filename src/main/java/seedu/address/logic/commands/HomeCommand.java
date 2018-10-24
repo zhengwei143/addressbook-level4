@@ -11,6 +11,7 @@ import seedu.address.model.Model;
 public class HomeCommand extends Command {
 
     public static final String COMMAND_WORD = "home";
+    public static final String COMMAND_ALIAS = "hm";
 
     public static final String MESSAGE_SUCCESS = "Return to the home directory.";
 

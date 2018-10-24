@@ -17,6 +17,7 @@ import seedu.address.logic.commands.HomeCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RefactorTagCommand;
+import seedu.address.logic.commands.RetrieveCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -49,42 +50,58 @@ public class SaveItParser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
+        case AddCommand.COMMAND_ALIAS:
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
+        case EditCommand.COMMAND_ALIAS:
             return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
+        case SelectCommand.COMMAND_ALIAS:
             return new SelectCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
+        case DeleteCommand.COMMAND_ALIAS:
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
+        case ClearCommand.COMMAND_ALIAS:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
+        case FindCommand.COMMAND_ALIAS:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+        case ListCommand.COMMAND_ALIAS:
             return new ListCommand();
 
         case HomeCommand.COMMAND_WORD:
+        case HomeCommand.COMMAND_ALIAS:
             return new HomeCommand();
 
         case HistoryCommand.COMMAND_WORD:
+        case HistoryCommand.COMMAND_ALIAS:
             return new HistoryCommand();
 
+        case RetrieveCommand.COMMAND_WORD:
+            return new RetrieveCommandParser().parse(arguments);
+
         case ExitCommand.COMMAND_WORD:
+        case ExitCommand.COMMAND_ALIAS:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
+        case HelpCommand.COMMAND_ALIAS:
             return new HelpCommand();
 
         case UndoCommand.COMMAND_WORD:
+        case UndoCommand.COMMAND_ALIAS:
             return new UndoCommand();
 
         case RedoCommand.COMMAND_WORD:
+        case RedoCommand.COMMAND_ALIAS:
             return new RedoCommand();
 
         case RefactorTagCommand.COMMAND_WORD:

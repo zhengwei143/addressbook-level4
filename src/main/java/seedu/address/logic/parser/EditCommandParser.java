@@ -19,6 +19,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditIssueDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.issue.Description;
+import seedu.address.model.issue.IssueStatement;
 import seedu.address.model.issue.Solution;
 import seedu.address.model.issue.Tag;
 
@@ -53,13 +55,14 @@ public class EditCommandParser implements Parser<EditCommand> {
             PREFIX_SOLUTION_LINK, PREFIX_REMARK)) {
             EditIssueDescriptor editIssueDescriptor = new EditIssueDescriptor();
             if (argMultimap.getValue(PREFIX_STATEMENT).isPresent()) {
+                IssueStatement statement = ParserUtil.parseStatement(argMultimap.getValue(PREFIX_STATEMENT).get());
                 editIssueDescriptor
-                    .setStatement(ParserUtil.parseStatement(argMultimap.getValue(PREFIX_STATEMENT).get()));
+                    .setStatement(statement);
             }
 
             if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-                editIssueDescriptor
-                    .setDescription(ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
+                Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+                editIssueDescriptor.setDescription(description);
             }
 
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editIssueDescriptor::setTags);
@@ -68,32 +71,22 @@ public class EditCommandParser implements Parser<EditCommand> {
         } else if (arePrefixesNotPresent(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_TAG) && (
             arePrefixesPresent(args,
                 PREFIX_SOLUTION_LINK) || arePrefixesPresent(args, PREFIX_REMARK))) {
-            EditIssueDescriptor editIssueDescriptorForSolution = null;
-            if (argMultimap.getValue(PREFIX_SOLUTION_LINK).isPresent() && argMultimap.getValue(PREFIX_REMARK)
-                .isPresent()) {
-                Solution solution = parseSolutionForEdit(argMultimap.getValue(PREFIX_SOLUTION_LINK).get(),
-                    argMultimap.getValue(PREFIX_REMARK).get());
-                editIssueDescriptorForSolution = new EditIssueDescriptor(index, solution);
 
+            String solutionLink =
+                argMultimap.getValue(PREFIX_SOLUTION_LINK).isPresent() ? argMultimap.getValue(PREFIX_SOLUTION_LINK)
+                    .get() : EditCommand.DUMMY_SOLUTION_LINK;
+            String solutionRemark =
+                argMultimap.getValue(PREFIX_REMARK).isPresent() ? argMultimap.getValue(PREFIX_REMARK).get()
+                    : EditCommand.DUMMY_SOLUTION_REMARK;
 
-            } else if (argMultimap.getValue(PREFIX_SOLUTION_LINK).isPresent()) {
-                Solution solution = parseSolutionForEdit(argMultimap.getValue(PREFIX_SOLUTION_LINK).get(),
-                    EditCommand.DUMMY_SOLUTION_REMARK);
-                editIssueDescriptorForSolution = new EditIssueDescriptor(index, solution);
+            Solution solution = parseSolutionForEdit(solutionLink, solutionRemark);
+            EditIssueDescriptor editIssueDescriptorForSolution = new EditIssueDescriptor(index, solution);
 
-
-            } else if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
-                Solution solution = parseSolutionForEdit(EditCommand.DUMMY_SOLUTION_LINK,
-                    argMultimap.getValue(PREFIX_REMARK).get());
-                editIssueDescriptorForSolution = new EditIssueDescriptor(index, solution);
-            }
             return new EditCommand(index, editIssueDescriptorForSolution);
         } else {
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
-
-        // TODO: Check Exception
     }
 
     /**

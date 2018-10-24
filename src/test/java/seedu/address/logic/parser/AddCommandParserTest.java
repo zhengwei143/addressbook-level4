@@ -24,7 +24,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIssues.AMY;
 import static seedu.address.testutil.TypicalIssues.BOB;
-import static seedu.address.testutil.TypicalIssues.COMMON_ISSUE_FREQUENCY;
 import static seedu.address.testutil.TypicalIssues.INITIALIZED_ISSUE_FREQUENCY;
 
 import org.junit.Ignore;

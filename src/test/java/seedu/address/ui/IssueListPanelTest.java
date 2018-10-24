@@ -12,7 +12,6 @@ import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import guitests.guihandles.IssueCardHandle;
@@ -39,7 +38,6 @@ public class IssueListPanelTest extends GuiUnitTest {
     private IssueListPanelHandle issueListPanelHandle;
 
     @Test
-    @Ignore
     public void display() {
         initUi(TYPICAL_ISSUES);
 
@@ -54,7 +52,6 @@ public class IssueListPanelTest extends GuiUnitTest {
     }
 
     @Test
-    @Ignore
     public void handleJumpToListRequestEvent() {
         initUi(TYPICAL_ISSUES);
         postNow(JUMP_TO_SECOND_EVENT);
@@ -70,7 +67,6 @@ public class IssueListPanelTest extends GuiUnitTest {
      * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
      */
     @Test
-    @Ignore
     public void performanceTest() throws Exception {
         ObservableList<Issue> backingList = createBackingList(10000);
 
@@ -121,7 +117,6 @@ public class IssueListPanelTest extends GuiUnitTest {
     private void initUi(ObservableList<Issue> backingList) {
         IssueListPanel issueListPanel = new IssueListPanel(backingList);
         uiPartRule.setUiPart(issueListPanel);
-
         issueListPanelHandle = new IssueListPanelHandle(getChildNode(issueListPanel.getRoot(),
                 IssueListPanelHandle.ISSUE_LIST_VIEW_ID));
     }

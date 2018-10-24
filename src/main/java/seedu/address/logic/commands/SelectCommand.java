@@ -20,6 +20,7 @@ import seedu.address.model.Model;
 public class SelectCommand extends Command {
 
     public static final String COMMAND_WORD = "select";
+    public static final String COMMAND_ALIAS = "s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Selects the issue identified by the index number used in the displayed issue list.\n"

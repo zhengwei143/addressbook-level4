@@ -415,7 +415,8 @@ image::UI_Design.png[width="800"]
 
 In the above figure, it is shown the left column displays the list of all issues,
  The column in the middle displays solutions of the selected issue. The blank part
-  at bottom right displays the web page of the url as in the solution link.
+  at bottom right displays the web page of the url as in the solution link. The SolutionListPanel
+   is added in the new PR. It is also planned to redesign the GUI with ScreenBuilder 2.0.
 
   *The web page should be able to be accessed via the Internet as well as loaded locally.
 

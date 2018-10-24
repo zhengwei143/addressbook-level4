@@ -23,7 +23,7 @@ public class IssueListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(IssueListPanel.class);
 
     @FXML
-    private ListView<Issue> issueListView;
+    private ListView<Issue> personListView;
 
     public IssueListPanel(ObservableList<Issue> issueList) {
         super(FXML);
@@ -32,13 +32,13 @@ public class IssueListPanel extends UiPart<Region> {
     }
 
     private void setConnections(ObservableList<Issue> issueList) {
-        issueListView.setItems(issueList);
-        issueListView.setCellFactory(listView -> new IssueListViewCell());
+        personListView.setItems(issueList);
+        personListView.setCellFactory(listView -> new PersonListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        issueListView.getSelectionModel().selectedItemProperty()
+        personListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in issue list panel changed to : '" + newValue + "'");
@@ -52,9 +52,8 @@ public class IssueListPanel extends UiPart<Region> {
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
-            issueListView.scrollTo(index);
-            issueListView.getSelectionModel().clearAndSelect(index);
-
+            personListView.scrollTo(index);
+            personListView.getSelectionModel().clearAndSelect(index);
         });
     }
 
@@ -67,7 +66,7 @@ public class IssueListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Issue} using a {@code PersonCard}.
      */
-    class IssueListViewCell extends ListCell<Issue> {
+    class PersonListViewCell extends ListCell<Issue> {
         @Override
         protected void updateItem(Issue issue, boolean empty) {
             super.updateItem(issue, empty);

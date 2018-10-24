@@ -113,7 +113,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseSolution_null_throwsNullPointerException() {
-                Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseSolution((String) null, (String) null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseSolution((String) null, (String) null));
     }
 
     @Ignore
@@ -125,7 +125,7 @@ public class ParserUtilTest {
     @Test
     public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
         Solution expectedSolution = new Solution(VALID_LINK, VALID_REMARK);
-                assertEquals(expectedSolution, ParserUtil.parseSolution(VALID_LINK, VALID_REMARK));
+        assertEquals(expectedSolution, ParserUtil.parseSolution(VALID_LINK, VALID_REMARK));
     }
 
     @Test

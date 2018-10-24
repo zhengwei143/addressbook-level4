@@ -29,7 +29,8 @@ public class TypicalIssues {
     public static final Issue CARL = new IssueBuilder().withStatement("Carl Kurz").withDescription("95352563")
             .withSolutions("https://github.com/CS2103-AY1819S1-T12-4/main repoPage").build();
     public static final Issue DANIEL = new IssueBuilder().withStatement("Daniel Meier").withDescription("87652533")
-            .withSolutions("https://stackoverflow.com/ newSolution", "http://www.ZhiHu.com newSol").withTags("friends").build();
+            .withSolutions("https://stackoverflow.com/ newSolution",
+                    "http://www.ZhiHu.com newSol").withTags("friends").build();
     public static final Issue ELLE = new IssueBuilder().withStatement("Elle Meyer").withDescription("9482224")
             .withSolutions("http://www.google.com ave").build();
     public static final Issue FIONA = new IssueBuilder().withStatement("Fiona Kunz").withDescription("9482427")

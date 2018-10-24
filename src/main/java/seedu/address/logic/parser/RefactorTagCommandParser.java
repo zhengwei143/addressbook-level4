@@ -28,7 +28,8 @@ public class RefactorTagCommandParser implements Parser<RefactorTagCommand> {
             ArgumentTokenizer
                 .tokenize(args, PREFIX_TAG, PREFIX_NEW_TAG);
 
-        Tag newTag, oldTag;
+        Tag newTag;
+        Tag oldTag;
         System.out.println(argMultimap.getValue(PREFIX_TAG).isPresent());
 
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
@@ -42,7 +43,6 @@ public class RefactorTagCommandParser implements Parser<RefactorTagCommand> {
         } else {
             newTag = parseTag(RefactorTagCommand.DUMMY_TAG);
         }
-
 
         return new RefactorTagCommand(oldTag, newTag);
     }

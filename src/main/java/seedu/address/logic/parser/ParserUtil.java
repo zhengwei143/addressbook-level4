@@ -11,6 +11,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.issue.Description;
 import seedu.address.model.issue.IssueStatement;
@@ -97,10 +98,9 @@ public class ParserUtil {
      * Parses {@code Collection<String> solutions} into a {@code Set<Solution>}.
      */
     public static Solution parseSolution(String solutionLink, String solutionRemark) throws ParseException {
+        System.out.println("link " + solutionLink + " "  + "remark " + solutionRemark);
         requireAllNonNull(solutionLink, solutionRemark);
-        Solution solution = new Solution(solutionLink, solutionRemark);
-        if (solutionLink.equals(dummySolutionLink) && solutionRemark.equals(dummySolutionRemark)) {
-            // TODO: check
+        if (solutionLink.equals(EditCommand.DUMMY_SOLUTION_LINK) && solutionRemark.equals(EditCommand.DUMMY_SOLUTION_REMARK)) {
             throw new ParseException("Solution cannot be both null");
         }
         String trimmedSolutionLink = solutionLink.trim();
@@ -111,6 +111,7 @@ public class ParserUtil {
         if (!Remark.isValidRemark(trimmedRemark)) {
             throw new ParseException(Remark.MESSAGE_REMARK_CONSTRAINTS);
         }
+        Solution solution = new Solution(trimmedSolutionLink, trimmedRemark);
         return solution;
     }
 

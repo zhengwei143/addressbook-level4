@@ -27,7 +27,7 @@ public class RefactorTagCommand extends Command {
             + "Parameters: KEYWORD t/OLD_TAG [nt/NEW_TAG]...\n"
             + "Example: " + COMMAND_WORD + " t/python nt/java";
 
-    public static final String dummyTag = "dummyTag";
+    public static final String DUMMY_TAG = "DUMMY_TAG";
 
     private final Tag oldTag;
     private final Tag newTag;
@@ -51,7 +51,7 @@ public class RefactorTagCommand extends Command {
             Set<Tag> updatedTags = new HashSet<Tag>(issue.getTags());
             if (updatedTags.contains(oldTag)) {
                 updatedTags.remove(oldTag);
-                if (!newTag.tagName.equals(dummyTag)) {
+                if (!newTag.tagName.equals(DUMMY_TAG)) {
                     updatedTags.add(newTag);
                 }
             }

@@ -1,10 +1,7 @@
 package seedu.saveit.model.issue.solution;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Scanner;
 
 /**
  * Represents a Issue's solution link in saveit.

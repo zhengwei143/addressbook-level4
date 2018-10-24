@@ -25,13 +25,16 @@ public class SampleDataUtil {
             new Issue(new IssueStatement("Java NullPointer"), new Description("cannot find object"),
                     getSolutionSet("https://stackoverflow.com/ remark"), getTagSet("solved")),
             new Issue(new IssueStatement("StackOverflow"), new Description("Cannot run"),
-                    getSolutionSet("https://ivle.nus.edu.sg/v1/workspace.aspx newRemark", "https://www.wikipedia.org/ remark"), getTagSet("newBug", "notSolved")),
+                    getSolutionSet("https://ivle.nus.edu.sg/v1/workspace.aspx newRemark",
+                            "https://www.wikipedia.org/ remark"), getTagSet("newBug", "notSolved")),
             new Issue(new IssueStatement("ArrayIndexOutOfBounds"), new Description("invalid input"),
                     getSolutionSet("https://www.zhihu.com/ solutionIsHere"), getTagSet("notSolved")),
             new Issue(new IssueStatement("ClassNotFoundException"), new Description("WrongPackage"),
                     getSolutionSet("https://stackoverflow.com/ solution"), getTagSet("urgent")),
             new Issue(new IssueStatement("ExceptionNotHandled"), new Description("Mistake"),
-                    getSolutionSet("https://www.reddit.com/ yes", "https://docs.oracle.com/javase/7/docs/api/overview-summary.html remark"), getTagSet("solved")),
+                    getSolutionSet("https://www.reddit.com/ yes",
+                            "https://docs.oracle.com/javase/7/docs/api/overview-summary.html remark"),
+                    getTagSet("solved")),
             new Issue(new IssueStatement("UnknownBug"), new Description("Unknown"),
                     getSolutionSet("https://www.google.com.sg/ newRemark"), getTagSet("Dead"))
         };

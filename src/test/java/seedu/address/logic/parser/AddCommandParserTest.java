@@ -24,6 +24,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIssues.AMY;
 import static seedu.address.testutil.TypicalIssues.BOB;
+import static seedu.address.testutil.TypicalIssues.COMMON_ISSUE_FREQUENCY;
+
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -72,7 +74,8 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Issue expectedIssue = new IssueBuilder(AMY).withTags().withSolutions().build();
+        Issue expectedIssue = new IssueBuilder(AMY).withTags().withSolutions()
+                .withFrequency(COMMON_ISSUE_FREQUENCY).build();
         assertParseSuccess(parser, STATEMENT_DESC_JAVA + DESCRIPTION_DESC_JAVA,
                 new AddCommand(expectedIssue));
     }

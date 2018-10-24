@@ -101,7 +101,7 @@ public class ParserUtil {
         Solution solution = new Solution(solutionLink, solutionRemark);
         if (solutionLink.equals(dummySolutionLink) && solutionRemark.equals(dummySolutionRemark)) {
             // TODO: check
-            throw new ParseException("SOlution cannit be both null");
+            throw new ParseException("Solution cannot be both null");
         }
         String trimmedSolutionLink = solutionLink.trim();
         String trimmedRemark = solutionRemark.trim();

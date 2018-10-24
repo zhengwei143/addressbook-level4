@@ -32,26 +32,23 @@ import seedu.address.model.issue.Tag;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-    public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt."; //TODO: necessary?
+    public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt.";
     public static final String MESSAGE_EDIT_ISSUE_SUCCESS = "Edited Issue: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the issue identified "
-        + "by the index number used in the displayed issue list. "
-        + "Existing values will be overwritten by the input values.\n"
-        + "Parameters: INDEX (must be a positive integer) "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " command format: \n"
+        + "Edit issue by the index number used in the displayed list: \n"
+        + "******  " + COMMAND_WORD + " INDEX (must be a positive integer) "
         + "[" + PREFIX_STATEMENT + "ISSUE_STATEMENT] "
         + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
-        + "[" + PREFIX_SOLUTION_LINK + "SOLUTION_LINK REMARK] "
         + "[" + PREFIX_TAG + "TAG]...\n"
-        + "Example: " + COMMAND_WORD + " 1 "
-        + PREFIX_STATEMENT + "reducer "
-        + PREFIX_DESCRIPTION + "how to use reducer in python "
-        + PREFIX_SOLUTION_LINK + "Stackoverflow link "
-        + PREFIX_REMARK + "performing/**/ some computation on a list and returning the result "
-        + PREFIX_TAG + "python ";
+        + "Edit solution by the index number used in the displayed solution list: \n"
+        + "******  " + COMMAND_WORD + " INDEX (must be a positive integer) "
+        + "[" + PREFIX_SOLUTION_LINK + "NEW_SOLUTION_LINK] "
+        + "[" + PREFIX_REMARK + "NEW_SOLUTION_REMARK] \n";
 
-    private static final String DUMMY_SOLUTION_REMARK = "dummySolutionRemark";
-    private static final String DUMMY_SOLUTION_LINK = "dummySolutionLink";
+
+    public static final String DUMMY_SOLUTION_REMARK = "dummySolutionRemark";
+    public static final String DUMMY_SOLUTION_LINK = "dummySolutionLink";
 
     private final Index index;
     private final EditIssueDescriptor editIssueDescriptor;
@@ -74,16 +71,24 @@ public class EditCommand extends Command {
         List<Issue> lastShownList = model.getFilteredIssueList();
         int currentDirectory = model.getCurrentDirectory();
 
-
-
-        if (currentDirectory == 0) {
-            issueToEdit = lastShownList.get(index.getZeroBased());
-        } else {
+        if (currentDirectory == 0 && (editIssueDescriptor.getStatement().isPresent() || editIssueDescriptor
+            .getDescription().isPresent()
+            || editIssueDescriptor.getTags().isPresent())) {
+            if (index.getZeroBased() <= lastShownList.size()) {
+                issueToEdit = lastShownList.get(index.getZeroBased());
+            } else {
+                throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
+            }
+            // if it edits solution or remark, then throw Exception
+        } else if (currentDirectory != 0 && editIssueDescriptor.getSolution().isPresent()) {
             int solutionListSize = lastShownList.get(model.getCurrentDirectory() - 1).getSolutions().size();
-            if (index.getZeroBased() >= solutionListSize) {
+            if (index.getZeroBased() <= solutionListSize) {
+                issueToEdit = lastShownList.get(model.getCurrentDirectory() - 1);
+            } else {
                 throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
             }
-            issueToEdit = lastShownList.get(model.getCurrentDirectory() - 1);
+        } else {
+            throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
         }
         Issue editedIssue = createEditedIssue(issueToEdit, editIssueDescriptor);
 
@@ -101,7 +106,8 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Issue} with the details of {@code issueToEdit} edited with {@code
      * editIssueDescriptor}.
      */
-    private static Issue createEditedIssue(Issue issueToEdit, EditIssueDescriptor editIssueDescriptor) {
+    private static Issue createEditedIssue(Issue issueToEdit, EditIssueDescriptor editIssueDescriptor)
+        throws CommandException {
         assert issueToEdit != null;
 
         List<Solution> updatedSolutions;
@@ -125,19 +131,25 @@ public class EditCommand extends Command {
      * Creates and returns a {@code index} with the details of {@code issueToEdit} edited with {@code
      * editIssueDescriptor}.
      */
-    private static Solution processNewSolution(int index, Issue issueToEdit, Solution newSolution) {
-        Solution oldSolution = issueToEdit.getSolutions().get(index);
-        Solution updatedSolution;
-        if (newSolution.getRemark().value.equals(DUMMY_SOLUTION_REMARK) && !newSolution.getLink()
-            .value.equals(DUMMY_SOLUTION_LINK)) {
-            updatedSolution = new Solution(newSolution.getLink().value, oldSolution.getRemark().value);
-        } else if (!newSolution.getRemark().value.equals(DUMMY_SOLUTION_REMARK) && newSolution.getLink().value
-            .equals(DUMMY_SOLUTION_LINK)) {
-            updatedSolution = new Solution(oldSolution.getLink().value, newSolution.getRemark().value);
+    private static Solution processNewSolution(int index, Issue issueToEdit, Solution newSolution)
+        throws CommandException {
+        // if in the home directory, should not process this
+        if (index > issueToEdit.getSolutions().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
         } else {
-            updatedSolution = new Solution(newSolution.getLink().value, newSolution.getRemark().value);
+            Solution oldSolution = issueToEdit.getSolutions().get(index);
+            Solution updatedSolution;
+            if (newSolution.getRemark().value.equals(DUMMY_SOLUTION_REMARK) && !newSolution.getLink()
+                .value.equals(DUMMY_SOLUTION_LINK)) {
+                updatedSolution = new Solution(newSolution.getLink().value, oldSolution.getRemark().value);
+            } else if (!newSolution.getRemark().value.equals(DUMMY_SOLUTION_REMARK) && newSolution.getLink().value
+                .equals(DUMMY_SOLUTION_LINK)) {
+                updatedSolution = new Solution(oldSolution.getLink().value, newSolution.getRemark().value);
+            } else {
+                updatedSolution = new Solution(newSolution.getLink().value, newSolution.getRemark().value);
+            }
+            return updatedSolution;
         }
-        return updatedSolution;
     }
 
     @Override

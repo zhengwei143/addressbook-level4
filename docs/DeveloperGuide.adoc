@@ -16,7 +16,22 @@ endif::[]
 
 By: `Team T12-4`      Since: `Sep 2018`      Licence: `MIT`
 
+== Introduction
+
+This Developer Guide is written by the SaveIt team for the benefits of future developers and maintainers of the application.
+
+* *Setup*: The steps you need in order to set up your development environment for the application, as well as any prerequisites required by your system.
+* *Design*: Information on the underlying structure of the code, and how the logic of each model / component interact with each other through Unified Model Diagrams (UMLs).
+* *Implementation*: Contains a detailed explanation on how our core features implemented, and any considerations made behind the implementation.
+* *Documentation*: A general guide of the documentation process of the application.
+* *Testing*: Documentation for the coverage tests of the application and how to set up your testing environment.
+* *Dev Ops*: The general processes used during development phase, and documentation on how to set it up.
+
+**SaveIt** is an open-source project, should any developers be interested, see Contact Us page for more information.
+
 == Setting up
+
+This section provides the prerequisites and steps to set up development environment. The way to verify the set up and essential configurations are also included.
 
 === Prerequisites
 
@@ -53,6 +68,8 @@ This will generate all resources required by the application and tests.
 . <<Testing,Run the tests>> to ensure they all pass.
 
 === Configurations to do before writing code
+
+This section provides suggested configurations to check before start coding, including coding style set up, documentation update, as well as Continuous Integration set up.
 
 ==== Configuring the coding style
 
@@ -100,6 +117,9 @@ When you are ready to start coding,
 
 == Design
 
+This section provides the overview of this application, including the design of architecture, UI, logic, model, storage and common classes.
+Diagrams are also provided for the better understanding.
+
 [[Design-Architecture]]
 === Architecture
 
@@ -138,7 +158,6 @@ For example, the `Logic` component (see the class diagram given below) defines i
 .Class Diagram of the Logic Component
 image::LogicClassDiagram.png[width="800"]
 
-[discrete]
 Events-Driven nature of the design.
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command `delete 1`.
@@ -165,7 +184,7 @@ The sections below give more details of each component.
 .Structure of the UI Component
 image::UiClassDiagram.png[width="800"]
 
-(TODO: No discription of diagram)
+The figure above shows the breakdown of the smaller components involved in the `UI` Component. The `UI` Component is the interface (abstraction barrier) between the user and the underlying components - `Model` and `Logic`.
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
@@ -186,7 +205,7 @@ The `UI` component,
 .Structure of the Logic Component
 image::LogicClassDiagram.png[width="800"]
 
-(TODO: No description of numbers below)
+The `Logic` Component encapsulates the execution of all commands. Each command is represented its own class (e.g. `FindCommand.java`, `AddCommand.java`) which all inherit from an abstract `Command.java` class.
 
 *API* :
 link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
@@ -205,15 +224,11 @@ image::DeletePersonSdForLogic.png[width="800"]
 === Model component
 
 .Structure of the Model Component
-image::ModelClassDiagram.png[width="800"]
+image::ModelComponentClassDiagram.png[width="900"]
 
-.Structure of the Model Component
-image::ModelComponentClassBetterOopDiagram.png[width="900"]
-
+The `Model` Component contains the classes which are representations of the data stored by the application, and how each data objects are linked with each other.
 
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
-
-The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the SaveIt data.
@@ -221,24 +236,21 @@ The `Model`,
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `SaveIt`, which `Issue` can reference. This would allow `SaveIt` to only require one `Tag` object per unique `Tag`, instead of each `Issue` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:ModelComponentClassBetterOopDiagram.png[width="800"]
+====
+* As a more OOP model, we can store a `Tag` list in `SaveIt`, which `Issue` can reference. This would allow `SaveIt` to only require one `Tag` object per unique `Tag`, instead of each `Issue` needing their own `Tag` object.
 
-[NOTE]
-The current model implements a `currentDirectory` to difference edition of issue
- and edition of solution with the same edit command. Besides, `AddCommand`, `ClearCommand`
-  may also work differently for issues and solutions.
+* The current model implements a `currentDirectory` to difference edition of issue and edition of solution with the same edit command. Besides, `AddCommand`, `ClearCommand` may also work differently for issues and solutions.
+====
 
 [[Design-Storage]]
 === Storage component
+
+The `Storage` Component is the interface that involves reading and storing the data objects in XML files, which allows data to persist across multiple sessions.
 
 .Structure of the Storage Component
 image::StorageClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
-
-The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
 * can save the SaveIt data in xml format and read it back.
@@ -250,7 +262,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 == Implementation
 
-This section describes some noteworthy details on how certain features are implemented.
+This section describes some noteworthy details on how certain features are implemented. Note that this section does not fully encompass all the features, but the more core features of the application.
 
 // tag::list[]
 === List feature
@@ -272,7 +284,7 @@ Since list should not modify the sorting inside storage, IndicateSaveItChanged s
 There will only be 3 kinds of order that the list can be shown in, as proposed in the following paragraph.
 
 * List by chronological order **(default)** +
-  **Command:** list chr` +
+  **Command:** `list chr` +
   This order follows how the data is stored in Model, reflecting the user's learning journey. +
   There is no need to implement new Comparator for that.
 
@@ -371,13 +383,6 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
-
-// end::dataencryption[]
-
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
@@ -428,7 +433,7 @@ image::UI_Design2.png[width="800"]
 
 == Documentation
 
-We use asciidoc for writing documentation.
+We use asciidoc for writing documentation. The following sections will provide common knowledge about how to use asciidoc for documentation.
 
 [NOTE]
 We chose asciidoc over Markdown because asciidoc, although a bit more complex than Markdown, provides more flexibility in formatting.
@@ -533,6 +538,8 @@ The SE-EDU team does not provide support for modified template files.
 [[Testing]]
 == Testing
 
+This section provides information related to testing, including three ways of testing, types of tests as well as troubleshooting testing.
+
 === Running Tests
 
 There are three ways to run tests.
@@ -581,6 +588,8 @@ e.g. `seedu.address.logic.LogicManagerTest`
 * Solution: Execute Gradle task `processResources`.
 
 == Dev Ops
+
+This section provides a summary of useful development operations and brief information about them.
 
 === Build Automation
 

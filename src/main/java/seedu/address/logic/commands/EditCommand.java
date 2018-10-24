@@ -135,7 +135,9 @@ public class EditCommand extends Command {
     private static Solution processNewSolution(int index, Issue issueToEdit, Solution newSolution)
         throws CommandException {
         // if in the home directory, should not process this
-        if (index > issueToEdit.getSolutions().size()) {
+        System.out.println("index " + index);
+        System.out.println("issue size " + issueToEdit.getSolutions().size());
+        if (index >= issueToEdit.getSolutions().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
         } else {
             Solution oldSolution = issueToEdit.getSolutions().get(index);

@@ -98,9 +98,10 @@ public class ParserUtil {
      * Parses {@code Collection<String> solutions} into a {@code Set<Solution>}.
      */
     public static Solution parseSolution(String solutionLink, String solutionRemark) throws ParseException {
-        System.out.println("link " + solutionLink + " "  + "remark " + solutionRemark);
+        System.out.println("link " + solutionLink + " " + "remark " + solutionRemark);
         requireAllNonNull(solutionLink, solutionRemark);
-        if (solutionLink.equals(EditCommand.DUMMY_SOLUTION_LINK) && solutionRemark.equals(EditCommand.DUMMY_SOLUTION_REMARK)) {
+        if (solutionLink.equals(EditCommand.DUMMY_SOLUTION_LINK) && solutionRemark
+            .equals(EditCommand.DUMMY_SOLUTION_REMARK)) {
             throw new ParseException("Solution cannot be both null");
         }
         String trimmedSolutionLink = solutionLink.trim();

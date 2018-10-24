@@ -5,17 +5,20 @@
         <statement>Alice Pauline</statement>
         <description>94351253</description>
         <tagged>syntax</tagged>
+        <frequency>1</frequency>
     </issues>
     <issues>
         <statement>Benson Meier</statement>
         <description>98765432</description>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
+        <frequency>1</frequency>
     </issues>
     <issues>
         <statement>Carl Kurz</statement>
         <description>95352563</description>
         <solutions>https://github.com/CS2103-AY1819S1-T12-4/main repoPage</solutions>
+        <frequency>1</frequency>
     </issues>
     <issues>
         <statement>Daniel Meier</statement>
@@ -23,20 +26,24 @@
         <solutions>https://stackoverflow.com/ newSolution</solutions>
         <solutions>http://www.ZhiHu.com newSol</solutions>
         <tagged>friends</tagged>
+        <frequency>1</frequency>
     </issues>
     <issues>
         <statement>Elle Meyer</statement>
         <description>9482224</description>
         <solutions>http://www.google.com ave</solutions>
+        <frequency>1</frequency>
     </issues>
     <issues>
         <statement>Fiona Kunz</statement>
         <description>9482427</description>
         <solutions>http://www.reddit.com tokyo</solutions>
+        <frequency>1</frequency>
     </issues>
     <issues>
         <statement>George Best</statement>
         <description>9482442</description>
         <solutions>http://www.yahoo.com street</solutions>
+        <frequency>1</frequency>
     </issues>
 </saveit>

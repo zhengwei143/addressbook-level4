@@ -24,6 +24,7 @@ import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseFailure
 import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.saveit.testutil.TypicalIssues.AMY;
 import static seedu.saveit.testutil.TypicalIssues.BOB;
+import static seedu.saveit.testutil.TypicalIssues.INITIALIZED_ISSUE_FREQUENCY;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -72,7 +73,9 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Issue expectedIssue = new IssueBuilder(AMY).withTags().withSolutions().build();
+        Issue expectedIssue = new IssueBuilder(AMY).withTags().withSolutions()
+                .withFrequency(INITIALIZED_ISSUE_FREQUENCY).build();
+
         assertParseSuccess(parser, STATEMENT_DESC_JAVA + DESCRIPTION_DESC_JAVA,
                 new AddCommand(expectedIssue));
     }

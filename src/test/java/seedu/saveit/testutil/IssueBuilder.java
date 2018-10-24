@@ -7,6 +7,7 @@ import java.util.Set;
 
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.issue.Description;
+import seedu.saveit.model.issue.IssueSearchFrequency;
 import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;
@@ -24,12 +25,14 @@ public class IssueBuilder {
     private Description description;
     private List<Solution> solutions;
     private Set<Tag> tags;
+    private IssueSearchFrequency frequency;
 
     public IssueBuilder() {
         statement = new IssueStatement(DEFAULT_STATEMENT);
         description = new Description(DEFAULT_DESCRIPTION);;
         solutions = new ArrayList<>();
         tags = new HashSet<>();
+        frequency = new IssueSearchFrequency(TypicalIssues.COMMON_ISSUE_FREQUENCY);
     }
 
     /**
@@ -40,6 +43,7 @@ public class IssueBuilder {
         description = issueToCopy.getDescription();
         solutions = new ArrayList<>(issueToCopy.getSolutions());
         tags = new HashSet<>(issueToCopy.getTags());
+        frequency = issueToCopy.getFrequency();
     }
 
     /**
@@ -74,8 +78,16 @@ public class IssueBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code IssueSearchFrequency} of the {@code Issue} that we are building.
+     */
+    public IssueBuilder withFrequency(Integer frequency) {
+        this.frequency = new IssueSearchFrequency(frequency);
+        return this;
+    }
+
     public Issue build() {
-        return new Issue(statement, description, solutions, tags);
+        return new Issue(statement, description, solutions, tags, frequency);
     }
 
 }

@@ -22,11 +22,11 @@ public class Issue {
 
     // Identity fields
     private final IssueStatement statement;
-    private final IssueSearchFrequency frequency;
 
     // Data fields
     private final List<Solution> solutions = new ArrayList<>();
     private final Description description;
+    private final IssueSearchFrequency frequency;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -124,7 +124,8 @@ public class Issue {
         return otherIssue.getStatement().equals(getStatement())
                 && otherIssue.getSolutions().equals(getSolutions())
                 && otherIssue.getDescription().equals(getDescription())
-                && otherIssue.getTags().equals(getTags());
+                && otherIssue.getTags().equals(getTags())
+                && otherIssue.getFrequency().equals(getFrequency());
     }
 
     @Override

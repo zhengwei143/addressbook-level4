@@ -10,6 +10,7 @@ import seedu.saveit.logic.commands.Command;
 import seedu.saveit.logic.commands.DeleteCommand;
 import seedu.saveit.logic.commands.EditCommand;
 import seedu.saveit.logic.commands.ExitCommand;
+import seedu.saveit.logic.commands.FindByTagCommand;
 import seedu.saveit.logic.commands.FindCommand;
 import seedu.saveit.logic.commands.HelpCommand;
 import seedu.saveit.logic.commands.HistoryCommand;
@@ -68,6 +69,10 @@ public class SaveItParser {
         case ClearCommand.COMMAND_WORD:
         case ClearCommand.COMMAND_ALIAS:
             return new ClearCommand();
+
+        case FindByTagCommand.COMMAND_WORD:
+        case FindByTagCommand.COMMAND_ALIAS:
+            return new FindByTagCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
         case FindCommand.COMMAND_ALIAS:

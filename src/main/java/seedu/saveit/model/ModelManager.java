@@ -111,9 +111,6 @@ public class ModelManager extends ComponentManager implements Model {
         for (Issue issue : filteredIssues) {
             issue.updateFrequency();
         }
-
-        // Sorts properly but the UI is not listing properly
-        // SortedList sortedFilteredList = new SortedList<>(filteredIssues, new IssueFreqSort());
     }
 
     @Override

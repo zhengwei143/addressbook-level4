@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.saveit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
+import static seedu.saveit.testutil.TypicalIssues.INITIALIZED_ISSUE_FREQUENCY;
 
 import java.util.Arrays;
 import java.util.List;
@@ -43,7 +44,7 @@ public class SaveItParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Issue issue = new IssueBuilder().build();
+        Issue issue = new IssueBuilder().withFrequency(INITIALIZED_ISSUE_FREQUENCY).build();
         AddCommand command = (AddCommand) parser.parseCommand(IssueUtil.getAddCommand(issue));
         assertEquals(new AddCommand(issue), command);
     }

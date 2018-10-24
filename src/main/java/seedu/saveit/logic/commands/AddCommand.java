@@ -68,7 +68,7 @@ public class AddCommand extends Command {
         List<Solution> newSolutionList = new ArrayList<>(originalIssue.getSolutions());
         newSolutionList.add(solutionToBeAdded);
         Issue newIssue = new Issue(originalIssue.getStatement(), originalIssue.getDescription(),
-                newSolutionList, originalIssue.getTags());
+                newSolutionList, originalIssue.getTags(), originalIssue.getFrequency());
         model.updateIssue(originalIssue, newIssue);
         model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
         model.commitSaveIt();

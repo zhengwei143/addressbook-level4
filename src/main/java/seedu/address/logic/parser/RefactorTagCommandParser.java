@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.StringUtil.arePrefixesValuePresent;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.ParserUtil.parseTag;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.RefactorTagCommand;
@@ -27,14 +27,26 @@ public class RefactorTagCommandParser implements Parser<RefactorTagCommand> {
         ArgumentMultimap argMultimap =
             ArgumentTokenizer
                 .tokenize(args, PREFIX_TAG, PREFIX_NEW_TAG);
-        Tag newTag = new Tag(RefactorTagCommand.DUMMY_TAG);
-        if (!arePrefixesValuePresent(argMultimap, PREFIX_TAG)) {
+
+        Tag newTag, oldTag;
+        System.out.println(argMultimap.getValue(PREFIX_TAG).isPresent());
+
+        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            oldTag = parseTag(argMultimap.getValue(PREFIX_TAG).get());
+        } else {
             throw new ParseException(
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, RefactorTagCommand.MESSAGE_USAGE));
-        } else if (arePrefixesValuePresent(argMultimap, PREFIX_NEW_TAG)) {
-            newTag = new Tag(argMultimap.getValue(PREFIX_NEW_TAG).get());
         }
-        Tag oldTag = new Tag(argMultimap.getValue(PREFIX_TAG).get());
+        if (argMultimap.getValue(PREFIX_NEW_TAG).isPresent()) {
+            newTag = parseTag(argMultimap.getValue(PREFIX_NEW_TAG).get());
+        } else {
+            newTag = parseTag(RefactorTagCommand.DUMMY_TAG);
+        }
+
+
         return new RefactorTagCommand(oldTag, newTag);
     }
+
+
 }
+

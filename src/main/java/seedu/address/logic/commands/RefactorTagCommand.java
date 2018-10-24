@@ -24,7 +24,7 @@ public class RefactorTagCommand extends Command {
 
     public static final String MESSAGE_USAGE =
         COMMAND_WORD + ": To rename or remove a specific tag for all entries with that tag.\n"
-            + "Parameters: KEYWORD t/OLD_TAG [nt/NEW_TAG]...\n"
+            + "Parameters: t/OLD_TAG [nt/NEW_TAG] \n"
             + "Example: " + COMMAND_WORD + " t/python nt/java";
 
     public static final String DUMMY_TAG = "dummyTag";
@@ -63,6 +63,12 @@ public class RefactorTagCommand extends Command {
             model.commitSaveIt();
         }
         return new CommandResult(MESSAGE_REFACTOR_TAG_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || (other instanceof RefactorTagCommand); // instanceof handles nulls
     }
 }
 

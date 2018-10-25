@@ -6,14 +6,10 @@ import java.util.Set;
 
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
-import seedu.address.model.Issue;
+import seedu.saveit.model.Issue;
 
 /**
-<<<<<<< HEAD:src/test/java/guitests/guihandles/PersonListPanelHandle.java
- * Provides a handle for {@code IssueListPanel} containing the list of {@code PersonCard}.
-=======
  * Provides a handle for {@code IssueListPanel} containing the list of {@code IssueCard}.
->>>>>>> Documentation:src/test/java/guitests/guihandles/IssueListPanelHandle.java
  */
 public class IssueListPanelHandle extends NodeHandle<ListView<Issue>> {
     public static final String ISSUE_LIST_VIEW_ID = "#issueListView";

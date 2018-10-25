@@ -1,6 +1,6 @@
 package systemtests;
 
-import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
+import static seedu.saveit.ui.testutil.GuiTestAssert.assertListMatching;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,10 +9,10 @@ import java.nio.file.Path;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import seedu.address.model.Issue;
-import seedu.address.model.SaveIt;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.testutil.TestUtil;
+import seedu.saveit.model.Issue;
+import seedu.saveit.model.SaveIt;
+import seedu.saveit.model.util.SampleDataUtil;
+import seedu.saveit.testutil.TestUtil;
 
 public class SampleDataTest extends SaveItSystemTest {
     /**

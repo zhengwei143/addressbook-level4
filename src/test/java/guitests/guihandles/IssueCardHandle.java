@@ -8,7 +8,7 @@ import com.google.common.collect.ImmutableMultiset;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.address.model.Issue;
+import seedu.saveit.model.Issue;
 
 /**
  * Provides a handle to an issue card in the issue list panel.

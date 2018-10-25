@@ -3,44 +3,44 @@ package systemtests;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
-import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_STATEMENT_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.SOLUTION_DESC_C;
-import static seedu.address.logic.commands.CommandTestUtil.SOLUTION_DESC_JAVA;
-import static seedu.address.logic.commands.CommandTestUtil.STATEMENT_DESC_C;
-import static seedu.address.logic.commands.CommandTestUtil.STATEMENT_DESC_JAVA;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_UI;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STATEMENT_JAVA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UI;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ISSUES;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
-import static seedu.address.testutil.TypicalIssues.AMY;
-import static seedu.address.testutil.TypicalIssues.BOB;
-import static seedu.address.testutil.TypicalIssues.KEYWORD_MATCHING_MEIER;
+import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
+import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
+import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_STATEMENT_DESC;
+import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.saveit.logic.commands.CommandTestUtil.SOLUTION_DESC_C;
+import static seedu.saveit.logic.commands.CommandTestUtil.SOLUTION_DESC_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.STATEMENT_DESC_C;
+import static seedu.saveit.logic.commands.CommandTestUtil.STATEMENT_DESC_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_UI;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.saveit.model.Model.PREDICATE_SHOW_ALL_ISSUES;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
+import static seedu.saveit.testutil.TypicalIssues.AMY;
+import static seedu.saveit.testutil.TypicalIssues.BOB;
+import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.CommandTestUtil;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Issue;
-import seedu.address.model.Model;
-import seedu.address.model.issue.Description;
-import seedu.address.model.issue.IssueStatement;
-import seedu.address.model.issue.Tag;
-import seedu.address.testutil.IssueBuilder;
-import seedu.address.testutil.IssueUtil;
+import seedu.saveit.commons.core.Messages;
+import seedu.saveit.commons.core.index.Index;
+import seedu.saveit.logic.commands.CommandTestUtil;
+import seedu.saveit.logic.commands.EditCommand;
+import seedu.saveit.logic.commands.RedoCommand;
+import seedu.saveit.logic.commands.UndoCommand;
+import seedu.saveit.model.Issue;
+import seedu.saveit.model.Model;
+import seedu.saveit.model.issue.Description;
+import seedu.saveit.model.issue.IssueStatement;
+import seedu.saveit.model.issue.Tag;
+import seedu.saveit.testutil.IssueBuilder;
+import seedu.saveit.testutil.IssueUtil;
 
 public class EditCommandSystemTest extends SaveItSystemTest {
 
@@ -111,7 +111,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         /* ------------------ Performing edit operation while a filtered list is being shown
         ------------------------ */
 
-        /* Case: filtered issue list, edit index within bounds of address book and issue list -> edited */
+        /* Case: filtered issue list, edit index within bounds of saveit book and issue list -> edited */
         showIssuesWithName(KEYWORD_MATCHING_MEIER);
         index = INDEX_FIRST_ISSUE;
 
@@ -121,7 +121,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         editedIssue = new IssueBuilder(issueToEdit).withStatement(VALID_STATEMENT_C).build();
         assertCommandSuccess(command, index, editedIssue);
 
-        /* Case: filtered issue list, edit index within bounds of address book but out of bounds of issue list
+        /* Case: filtered issue list, edit index within bounds of saveit book but out of bounds of issue list
          * -> rejected
          */
         showIssuesWithName(KEYWORD_MATCHING_MEIER);
@@ -200,7 +200,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
             + SOLUTION_DESC_C + TAG_DESC_UI;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_ISSUE);
 
-        /* Case: edit a issue with new values same as another issue's values but with different address -> rejected */
+        /* Case: edit a issue with new values same as another issue's values but with different saveit -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + STATEMENT_DESC_C + DESCRIPTION_DESC_C
             + SOLUTION_DESC_JAVA + CommandTestUtil.TAG_DESC_UI + TAG_DESC_UI;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_ISSUE);

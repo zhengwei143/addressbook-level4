@@ -16,6 +16,7 @@ import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.events.model.SaveItChangedEvent;
 import seedu.saveit.commons.util.CollectionUtil;
 import seedu.saveit.model.issue.IssueSort;
+import seedu.saveit.model.issue.Solution;
 
 /**
  * Represents the in-memory model of the saveIt data.
@@ -113,6 +114,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+
     @Override
     public void sortIssues(IssueSort sort_type) {
         updateSortedIssueList(sort_type.getComparator());
@@ -127,6 +129,16 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public ObservableList<Issue> getFilteredIssueList() {
         return FXCollections.unmodifiableObservableList(filteredIssues);
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Solution} backed by the internal list of
+     * {@code Issue}
+     */
+    @Override
+    public ObservableList<Solution> getFilteredSolutionList() {
+        return FXCollections.unmodifiableObservableList
+                    (filteredIssues.get(1).getObservableSolutions());
     }
 
     @Override

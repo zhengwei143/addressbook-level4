@@ -24,6 +24,7 @@ import seedu.saveit.model.Model;
 import seedu.saveit.model.ReadOnlySaveIt;
 import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.issue.IssueSort;
+import seedu.saveit.model.issue.Solution;
 import seedu.saveit.testutil.IssueBuilder;
 
 public class AddCommandTest {
@@ -139,6 +140,11 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Issue> getFilteredIssueList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Solution> getFilteredSolutionList() {
             throw new AssertionError("This method should not be called.");
         }
 

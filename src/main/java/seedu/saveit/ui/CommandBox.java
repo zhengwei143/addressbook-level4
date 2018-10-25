@@ -1,5 +1,7 @@
 package seedu.saveit.ui;
 
+import java.util.LinkedList;
+import java.util.TreeSet;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -26,6 +28,8 @@ public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
+    private TreeSet<String> entries;
+    private String keyEntered = "";
 
     @FXML
     private TextField commandTextField;
@@ -35,7 +39,17 @@ public class CommandBox extends UiPart<Region> {
         this.logic = logic;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        this.entries = new TreeSet<>();
+        String[] keyWords = {"add", "select", "delete", "find", "list", "edit", "find", "refactor", "retrieve",
+                "issue", "description", "remark", "solution", "solutionLink", "tag"};
+        addAll(keyWords);
         historySnapshot = logic.getHistorySnapshot();
+    }
+
+    private void addAll (String[] arr) {
+        for (String str : arr) {
+            entries.add(str);
+        }
     }
 
     /**
@@ -58,6 +72,31 @@ public class CommandBox extends UiPart<Region> {
         default:
             // let JavaFx handle the keypress
         }
+        suggestKeyWord(commandTextField.getText(), keyEvent.getText());
+    }
+
+    private void suggestKeyWord(String mainText, String firstChar) {
+        (mainText += firstChar).trim();
+        String text;
+        int whiteSpaceIndex =  mainText.lastIndexOf(" ");
+        int slashIndex = mainText.lastIndexOf("/");
+
+//        System.out.println("white space index: " + whiteSpaceIndex);
+//        System.out.println("slash index: " + slashIndex);
+
+        if (whiteSpaceIndex != -1 || slashIndex != -1) {
+            if (whiteSpaceIndex > slashIndex) {
+                text = mainText.substring(whiteSpaceIndex, mainText.length()).trim();
+            } else {
+                text = mainText.substring(slashIndex+1, mainText.length()).trim();
+            }
+        } else {
+            text = mainText.trim();
+        }
+
+        LinkedList<String> searchResult = new LinkedList<>();
+        searchResult.addAll(entries.subSet(text, text + Character.MAX_VALUE));
+        System.out.println(searchResult);
     }
 
     /**

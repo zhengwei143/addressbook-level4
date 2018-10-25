@@ -7,7 +7,7 @@ import seedu.saveit.model.Model;
 import seedu.saveit.model.issue.IssueSort;
 
 /**
- * Lists all persons in the saveIt to the user.
+ * Lists all issues in the saveIt to the user.
  */
 public class ListCommand extends Command {
 

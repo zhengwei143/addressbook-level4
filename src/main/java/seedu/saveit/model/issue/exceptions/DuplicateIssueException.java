@@ -1,11 +1,11 @@
 package seedu.saveit.model.issue.exceptions;
 
 /**
- * Signals that the operation will result in duplicate Persons (Persons are considered duplicates if they have the same
+ * Signals that the operation will result in duplicate Issues (Issues are considered duplicates if they have the same
  * identity).
  */
 public class DuplicateIssueException extends RuntimeException {
     public DuplicateIssueException() {
-        super("Operation would result in duplicate persons");
+        super("Operation would result in duplicate issues");
     }
 }

@@ -30,7 +30,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "algorithm "
             + PREFIX_TAG + "java";
     public static final String MESSAGE_ISSUE_SUCCESS = "New issue added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This issue already exists in the saveIt";
+    public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt";
 
     private static final String dummyStatement = "dummyStatement";
     private static final String dummyDescription = "dummyDescription";
@@ -92,7 +92,7 @@ public class AddCommand extends Command {
         }
 
         if (model.hasIssue(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_ISSUE);
         }
 
         model.addIssue(toAdd);

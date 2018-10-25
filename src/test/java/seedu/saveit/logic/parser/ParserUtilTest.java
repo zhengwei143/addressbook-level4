@@ -119,20 +119,20 @@ public class ParserUtilTest {
     @Ignore
     @Test
     public void parseSolutionLink_invalidValue_throwsParseException() {
-        //        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
+        //        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseRemark(INVALID_REMARK));
     }
 
     @Test
-    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
+    public void parseRemark_validValueWithoutWhitespace_returnsRemark() throws Exception {
         Solution expectedSolution = new Solution(VALID_LINK, VALID_REMARK);
         assertEquals(expectedSolution, ParserUtil.parseSolution(VALID_LINK, VALID_REMARK));
     }
 
     @Test
-    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_REMARK + WHITESPACE;
-        Remark expectedAddress = new Remark(VALID_REMARK);
-        //        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
+    public void parseRemark_validValueWithWhitespace_returnsTrimmedRemark() throws Exception {
+        String remarkWithWhitespace = WHITESPACE + VALID_REMARK + WHITESPACE;
+        Remark expectedRemark = new Remark(VALID_REMARK);
+        //        assertEquals(expectedRemark, ParserUtil.parseRemark(remarkWithWhitespace));
     }
 
     @Test

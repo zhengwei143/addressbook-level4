@@ -19,7 +19,7 @@ import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseFailure
 import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
-import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_ISSUE;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -133,7 +133,7 @@ public class EditCommandParserTest {
     @Ignore
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_PERSON;
+        Index targetIndex = INDEX_THIRD_ISSUE;
         String userInput = targetIndex.getOneBased() + STATEMENT_DESC_JAVA;
         EditCommand.EditIssueDescriptor descriptor = new EditIssueDescriptorBuilder()
                 .withStatement(VALID_STATEMENT_JAVA).build();
@@ -197,7 +197,7 @@ public class EditCommandParserTest {
     @Test
     @Ignore
     public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_PERSON;
+        Index targetIndex = INDEX_THIRD_ISSUE;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
         EditCommand.EditIssueDescriptor descriptor = new EditIssueDescriptorBuilder().withTags().build();

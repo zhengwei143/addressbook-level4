@@ -16,14 +16,14 @@ import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.model.Issue;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of issues.
  */
 public class IssueListPanel extends UiPart<Region> {
     private static final String FXML = "IssueListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(IssueListPanel.class);
 
     @FXML
-    private ListView<Issue> personListView;
+    private ListView<Issue> issueListView;
 
     public IssueListPanel(ObservableList<Issue> issueList) {
         super(FXML);
@@ -32,13 +32,13 @@ public class IssueListPanel extends UiPart<Region> {
     }
 
     private void setConnections(ObservableList<Issue> issueList) {
-        personListView.setItems(issueList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        issueListView.setItems(issueList);
+        issueListView.setCellFactory(listView -> new IssueListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        personListView.getSelectionModel().selectedItemProperty()
+        issueListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in issue list panel changed to : '" + newValue + "'");
@@ -48,12 +48,12 @@ public class IssueListPanel extends UiPart<Region> {
     }
 
     /**
-     * Scrolls to the {@code PersonCard} at the {@code index} and selects it.
+     * Scrolls to the {@code IssueCard} at the {@code index} and selects it.
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
-            personListView.scrollTo(index);
-            personListView.getSelectionModel().clearAndSelect(index);
+            issueListView.scrollTo(index);
+            issueListView.getSelectionModel().clearAndSelect(index);
         });
     }
 
@@ -64,9 +64,9 @@ public class IssueListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Issue} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Issue} using a {@code IssueCard}.
      */
-    class PersonListViewCell extends ListCell<Issue> {
+    class IssueListViewCell extends ListCell<Issue> {
         @Override
         protected void updateItem(Issue issue, boolean empty) {
             super.updateItem(issue, empty);

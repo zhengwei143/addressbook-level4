@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Issue: %1$s";
+    public static final String MESSAGE_DELETE_ISSUE_SUCCESS = "Deleted Issue: %1$s";
 
     private final Index targetIndex;
 
@@ -45,7 +45,7 @@ public class DeleteCommand extends Command {
         Issue issueToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteIssue(issueToDelete);
         model.commitSaveIt();
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, issueToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_ISSUE_SUCCESS, issueToDelete));
     }
 
     @Override

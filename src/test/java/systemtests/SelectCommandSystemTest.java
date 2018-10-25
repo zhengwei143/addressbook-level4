@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX;
 import static seedu.saveit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.saveit.logic.commands.SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS;
+import static seedu.saveit.logic.commands.SelectCommand.MESSAGE_SELECT_ISSUE_SUCCESS;
 import static seedu.saveit.testutil.TestUtil.getLastIndex;
 import static seedu.saveit.testutil.TestUtil.getMidIndex;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
@@ -117,7 +117,7 @@ public class SelectCommandSystemTest extends SaveItSystemTest {
     private void assertCommandSuccess(String command, Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
         String expectedResultMessage = String.format(
-                MESSAGE_SELECT_PERSON_SUCCESS, expectedSelectedCardIndex.getOneBased());
+                MESSAGE_SELECT_ISSUE_SUCCESS, expectedSelectedCardIndex.getOneBased());
         int preExecutionSelectedCardIndex = getIssueListPanel().getSelectedCardIndex();
 
         executeCommand(command);

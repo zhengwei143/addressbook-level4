@@ -29,7 +29,6 @@ public class CommandBox extends UiPart<Region> {
     private final Logic logic;
     private ListElementPointer historySnapshot;
     private TreeSet<String> entries;
-    private String keyEntered = "";
 
     @FXML
     private TextField commandTextField;
@@ -75,6 +74,11 @@ public class CommandBox extends UiPart<Region> {
         suggestKeyWord(commandTextField.getText(), keyEvent.getText());
     }
 
+    /**
+     * Detects the user's input in the command text field and prints out the matched keywords.
+     * @param mainText is behind one character during the input.
+     * @param firstChar is used to be added to the mainText so as to get the full user's input.
+     */
     private void suggestKeyWord(String mainText, String firstChar) {
         (mainText += firstChar).trim();
         String text;

@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private IssueListPanel issueListPanel;
+    private IssueListPanel solutionListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
@@ -50,7 +51,10 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane issueListPanelPlaceholder;
+
+    @FXML
+    private StackPane solutionListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -123,7 +127,10 @@ public class MainWindow extends UiPart<Stage> {
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
         issueListPanel = new IssueListPanel(logic.getFilteredIssueList());
-        personListPanelPlaceholder.getChildren().add(issueListPanel.getRoot());
+        issueListPanelPlaceholder.getChildren().add(issueListPanel.getRoot());
+
+        solutionListPanel = new IssueListPanel(logic.getFilteredIssueList());
+        solutionListPanelPlaceholder.getChildren().add(solutionListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

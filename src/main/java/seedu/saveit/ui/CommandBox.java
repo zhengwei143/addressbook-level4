@@ -2,9 +2,11 @@ package seedu.saveit.ui;
 
 import java.util.logging.Logger;
 
+import org.fxmisc.richtext.InlineCssTextArea;
+
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.saveit.commons.core.LogsCenter;
@@ -15,45 +17,89 @@ import seedu.saveit.logic.commands.CommandResult;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.logic.parser.exceptions.ParseException;
 
+
 /**
  * The UI component that is responsible for receiving user command inputs.
  */
 public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
+    public static final String SUCCESS_STYLE_CLASS = "error";
+
     private static final String FXML = "CommandBox.fxml";
+
+    private static final String COMMAND_WORD_STYLE = "-fx-fill: #ff4444;";
+    private static final String PARAMETER_KEY_STYLE = "-fx-fill: #ffffff;";
+    private static final String NORMAL_STYLE = "-fx-fill: #f9ed02;";
 
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
 
+
     @FXML
-    private TextField commandTextField;
+    private InlineCssTextArea commandTextField;
 
     public CommandBox(Logic logic) {
         super(FXML);
         this.logic = logic;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
-        commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        commandTextField.textProperty().addListener((observable, oldValue, newValue)
+            -> highlight(observable, oldValue, newValue));
+
         historySnapshot = logic.getHistorySnapshot();
     }
+
+    /**
+     * highlight different parameters for user friendly input command line
+     * @param value
+     * @param oldValue
+     * @param newValue
+     */
+    private void highlight(ObservableValue<?> value, String oldValue, String newValue) {
+        String userInput = newValue;
+        int i = 0;
+        while (i < userInput.length() && userInput.charAt(i) != ' ') {
+            commandTextField.setStyle(i, i + 1, COMMAND_WORD_STYLE);
+            i++;
+        }
+        while (i < userInput.length()) {
+            if (userInput.charAt(i) == '\\') {
+                System.out.println(userInput.charAt(i));
+                while (i < userInput.length() && userInput.charAt(i) != ' ') {
+                    commandTextField.setStyle(i, i + 1, PARAMETER_KEY_STYLE);
+                    i++;
+                }
+            }
+            if (i >= userInput.length()) {
+                break;
+            }
+            commandTextField.setStyle(i, i + 1, NORMAL_STYLE);
+            i++;
+        }
+    }
+
 
     /**
      * Handles the key press event, {@code keyEvent}.
      */
     @FXML
     private void handleKeyPress(KeyEvent keyEvent) {
+        System.out.println(keyEvent.getCode());
         switch (keyEvent.getCode()) {
         case UP:
             // As up and down buttons will alter the position of the caret,
             // consuming it causes the caret's position to remain unchanged
             keyEvent.consume();
-
             navigateToPreviousInput();
             break;
         case DOWN:
             keyEvent.consume();
             navigateToNextInput();
+            break;
+        case ENTER:
+            keyEvent.consume();
+            handleCommandEntered();
             break;
         default:
             // let JavaFx handle the keypress
@@ -61,21 +107,20 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Updates the text field with the previous input in {@code historySnapshot},
-     * if there exists a previous input in {@code historySnapshot}
+     * Updates the text field with the previous input in {@code historySnapshot}, if there exists a previous input in
+     * {@code historySnapshot}
      */
     private void navigateToPreviousInput() {
         assert historySnapshot != null;
         if (!historySnapshot.hasPrevious()) {
             return;
         }
-
-        replaceText(historySnapshot.previous());
+        setCommandInput(historySnapshot.previous().trim().replaceAll("\\r|\\n", "").replaceAll("\\r|\\n", ""));
     }
 
     /**
-     * Updates the text field with the next input in {@code historySnapshot},
-     * if there exists a next input in {@code historySnapshot}
+     * Updates the text field with the next input in {@code historySnapshot}, if there exists a next input in {@code
+     * historySnapshot}
      */
     private void navigateToNextInput() {
         assert historySnapshot != null;
@@ -83,39 +128,44 @@ public class CommandBox extends UiPart<Region> {
             return;
         }
 
-        replaceText(historySnapshot.next());
+        setCommandInput(historySnapshot.next().trim().replaceAll("\\r|\\n", ""));
     }
 
-    /**
-     * Sets {@code CommandBox}'s text field with {@code text} and
-     * positions the caret to the end of the {@code text}.
-     */
-    private void replaceText(String text) {
-        commandTextField.setText(text);
-        commandTextField.positionCaret(commandTextField.getText().length());
-    }
 
     /**
      * Handles the Enter button pressed event.
      */
     @FXML
     private void handleCommandEntered() {
+        System.out.println("show previous command. it should not allowed to move to the next line");
         try {
-            CommandResult commandResult = logic.execute(commandTextField.getText());
+            CommandResult commandResult = logic.execute(commandTextField.getText().trim().replaceAll("\\r|\\n", ""));
             initHistory();
             historySnapshot.next();
             // process result of the command
-            commandTextField.setText("");
+            setCommandInput("");
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
 
         } catch (CommandException | ParseException e) {
+            System.out.println("inlv so I should restrict user to go next line here");
             initHistory();
             // handle command failure
+            setCommandInput(commandTextField.getText().trim().replaceAll("\\r|\\n", ""));
             setStyleToIndicateCommandFailure();
             logger.info("Invalid command: " + commandTextField.getText());
             raise(new NewResultAvailableEvent(e.getMessage()));
+
+
         }
+    }
+
+    private void setCommandInput(String string) {
+        commandTextField.clear();
+        commandTextField.appendText(string.trim().replaceAll("\\r|\\n", ""));
+
+        // move the cursor to the end of the input string
+        commandTextField.moveTo(commandTextField.getText().length());
     }
 
     /**
@@ -140,11 +190,9 @@ public class CommandBox extends UiPart<Region> {
      */
     private void setStyleToIndicateCommandFailure() {
         ObservableList<String> styleClass = commandTextField.getStyleClass();
-
         if (styleClass.contains(ERROR_STYLE_CLASS)) {
             return;
         }
-
         styleClass.add(ERROR_STYLE_CLASS);
     }
 

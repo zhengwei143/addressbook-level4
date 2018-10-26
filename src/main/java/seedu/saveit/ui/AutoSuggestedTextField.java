@@ -36,7 +36,6 @@ public class AutoSuggestedTextField extends TextField {
         popUpWindow = new ContextMenu();
         storageSet = new TreeSet<>();
         addAllKeyWord();
-        System.out.println(storageSet);
         this.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
@@ -57,7 +56,6 @@ public class AutoSuggestedTextField extends TextField {
             this.keyWords.add(issue.getStatement().issue);
         }
         addAllKeyWord();
-        System.out.println(storageSet);
     }
 
     private void showResult(TextField textField) {
@@ -79,7 +77,7 @@ public class AutoSuggestedTextField extends TextField {
         LinkedList<String> searchResult = new LinkedList<>();
         searchResult.addAll(storageSet.subSet(text, text + Character.MAX_VALUE));
         if (storageSet.size() > 0) {
-            int maxNum = 5;
+            int maxNum = 8;
             int count = Math.min(searchResult.size(), maxNum);
             List<CustomMenuItem> menuItems = new LinkedList<>();
             for (int i = 0; i < count; i++) {

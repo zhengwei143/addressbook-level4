@@ -1,5 +1,6 @@
 package seedu.saveit.ui;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeSet;
@@ -13,38 +14,50 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import seedu.saveit.logic.Logic;
+import seedu.saveit.model.Issue;
 
 public class AutoSuggestedTextField extends TextField {
 
     private static ContextMenu popUpWindow;
     private static TreeSet<String> storageSet;
-    private String[] keyWords = {"add", "select", "delete", "find", "list", "edit", "find", "refactor",
-            "retrieve", "issue", "description", "remark", "solution", "solutionLink", "tag", "exit"};
+    private static Logic logic;
+    private List<String> keyWords = new ArrayList<>();
 
     public AutoSuggestedTextField() {
         super();
+    }
+
+    public void initialise(Logic logic) {
+        this.logic = logic;
+        for (Issue issue: logic.getFilteredIssueList()) {
+            this.keyWords.add(issue.getStatement().issue);
+        }
         popUpWindow = new ContextMenu();
         storageSet = new TreeSet<>();
         addAllKeyWord();
+        System.out.println(storageSet);
         this.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                     String newValue) {
-                if (getText().length() == 0) {
+                if (getText().length() == 0 || !getText().contains("find")) {
                     popUpWindow.hide();
                 } else {
                     showResult(AutoSuggestedTextField.this);
-//                    if (storageSet.size() > 0) {
-//                        fillResult(AutoSuggestedTextField.this);
-//                        if (!popUpWindow.isShowing()) {
-//                            popUpWindow.show(AutoSuggestedTextField.this, Side.BOTTOM, 0, 0);
-//                        }
-//                    } else {
-//                        popUpWindow.hide();
-//                    }
                 }
             }
         });
+    }
+
+    public void update(Logic logic) {
+        this.logic = logic;
+        keyWords.clear();
+        for (Issue issue: logic.getFilteredIssueList()) {
+            this.keyWords.add(issue.getStatement().issue);
+        }
+        addAllKeyWord();
+        System.out.println(storageSet);
     }
 
     private void showResult(TextField textField) {
@@ -52,12 +65,14 @@ public class AutoSuggestedTextField extends TextField {
         String text;
         int whiteSpaceIndex = mainText.lastIndexOf(" ");
         int slashIndex = mainText.lastIndexOf("/");
+        int startingIndex = 0;
         if (whiteSpaceIndex != -1 || slashIndex != -1) {
             if (whiteSpaceIndex > slashIndex) {
-                text = mainText.substring(whiteSpaceIndex, mainText.length()).trim();
+                startingIndex = whiteSpaceIndex;
             } else {
-                text = mainText.substring(slashIndex + 1, mainText.length()).trim();
+                startingIndex = slashIndex;
             }
+            text = mainText.substring(startingIndex, mainText.length()).trim();
         } else {
             text = mainText.trim();
         }
@@ -73,10 +88,11 @@ public class AutoSuggestedTextField extends TextField {
                 Label entryLabel = new Label(result);
                 textField.requestFocus();
                 CustomMenuItem item = new CustomMenuItem(entryLabel, true);
+                int initIndex = startingIndex+1;
                 item.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
-                        textField.setText(previousText + result);
+                        textField.setText(previousText.substring(0, initIndex) + result);
                         textField.positionCaret(textField.getLength());
                         popUpWindow.hide();
                     }
@@ -92,6 +108,7 @@ public class AutoSuggestedTextField extends TextField {
     }
 
     private void addAllKeyWord() {
+        storageSet.clear();
         for (String str : keyWords) {
             storageSet.add(str);
         }

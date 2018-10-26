@@ -33,6 +33,7 @@ public class CommandBox extends UiPart<Region> {
         super(FXML);
         this.logic = logic;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
+        commandTextField.initialise(logic);
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         historySnapshot = logic.getHistorySnapshot();
     }
@@ -107,6 +108,9 @@ public class CommandBox extends UiPart<Region> {
     private void handleCommandEntered() {
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
+            if (! commandTextField.getText().contains("find")) {
+                commandTextField.update(logic);
+            }
             initHistory();
             historySnapshot.next();
             // process result of the command

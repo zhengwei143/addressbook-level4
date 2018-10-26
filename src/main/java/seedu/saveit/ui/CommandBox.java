@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.saveit.commons.core.LogsCenter;
@@ -28,7 +27,7 @@ public class CommandBox extends UiPart<Region> {
     private ListElementPointer historySnapshot;
 
     @FXML
-    private TextField commandTextField;
+    private AutoSuggestedTextField commandTextField;
 
     public CommandBox(Logic logic) {
         super(FXML);
@@ -58,7 +57,6 @@ public class CommandBox extends UiPart<Region> {
         default:
             // let JavaFx handle the keypress
         }
-        AutoSuggester.showSuggestion(commandTextField, keyEvent.getText());
     }
 
     /**

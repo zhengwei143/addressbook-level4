@@ -17,6 +17,9 @@ import javafx.scene.control.TextField;
 import seedu.saveit.logic.Logic;
 import seedu.saveit.model.Issue;
 
+/**
+ * The TextField component which supports auto key word suggestion
+ */
 public class AutoSuggestedTextField extends TextField {
 
     private static ContextMenu popUpWindow;
@@ -28,6 +31,9 @@ public class AutoSuggestedTextField extends TextField {
         super();
     }
 
+    /**
+     * Adds new listener to the text field to handle the key suggestion
+     */
     public void initialise(Logic logic) {
         this.logic = logic;
         for (Issue issue: logic.getFilteredIssueList()) {
@@ -49,6 +55,9 @@ public class AutoSuggestedTextField extends TextField {
         });
     }
 
+    /**
+     * Updates the keywords stored in the class whenever there is a change on issue list in the storage.
+     */
     public void update(Logic logic) {
         this.logic = logic;
         keyWords.clear();
@@ -58,19 +67,15 @@ public class AutoSuggestedTextField extends TextField {
         addAllKeyWord();
     }
 
+    /**
+     * Analyses the input string and suggests the key words
+     */
     private void showResult(TextField textField) {
         String mainText = textField.getText();
         String text;
-        int whiteSpaceIndex = mainText.lastIndexOf(" ");
-        int slashIndex = mainText.lastIndexOf("/");
-        int startingIndex = 0;
-        if (whiteSpaceIndex != -1 || slashIndex != -1) {
-            if (whiteSpaceIndex > slashIndex) {
-                startingIndex = whiteSpaceIndex;
-            } else {
-                startingIndex = slashIndex;
-            }
-            text = mainText.substring(startingIndex, mainText.length()).trim();
+        int whiteSpaceIndex = mainText.indexOf(" ")+1;
+        if (whiteSpaceIndex != -1) {
+            text = mainText.substring(whiteSpaceIndex, mainText.length()).trim();
         } else {
             text = mainText.trim();
         }
@@ -86,7 +91,7 @@ public class AutoSuggestedTextField extends TextField {
                 Label entryLabel = new Label(result);
                 textField.requestFocus();
                 CustomMenuItem item = new CustomMenuItem(entryLabel, true);
-                int initIndex = startingIndex+1;
+                int initIndex = whiteSpaceIndex;
                 item.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {

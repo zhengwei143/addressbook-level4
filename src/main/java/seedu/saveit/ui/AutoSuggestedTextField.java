@@ -34,7 +34,7 @@ public class AutoSuggestedTextField extends TextField {
             this.keyWords.add(issue.getStatement().issue);
         }
         popUpWindow = new ContextMenu();
-        storageSet = new TreeSet<>();
+        storageSet = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
         addAllKeyWord();
         this.textProperty().addListener(new ChangeListener<String>() {
             @Override

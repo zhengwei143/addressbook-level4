@@ -28,10 +28,6 @@ public class CommandBox extends UiPart<Region> {
 
     private static final String FXML = "CommandBox.fxml";
 
-    private static final String COMMAND_WORD_STYLE = "-fx-fill: #ff4444;";
-    private static final String PARAMETER_KEY_STYLE = "-fx-fill: #ffffff;";
-    private static final String NORMAL_STYLE = "-fx-fill: #f9ed02;";
-
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
@@ -58,25 +54,8 @@ public class CommandBox extends UiPart<Region> {
      */
     private void highlight(ObservableValue<?> value, String oldValue, String newValue) {
         String userInput = newValue;
-        int i = 0;
-        while (i < userInput.length() && userInput.charAt(i) != ' ') {
-            commandTextField.setStyle(i, i + 1, COMMAND_WORD_STYLE);
-            i++;
-        }
-        while (i < userInput.length()) {
-            if (userInput.charAt(i) == '\\') {
-                System.out.println(userInput.charAt(i));
-                while (i < userInput.length() && userInput.charAt(i) != ' ') {
-                    commandTextField.setStyle(i, i + 1, PARAMETER_KEY_STYLE);
-                    i++;
-                }
-            }
-            if (i >= userInput.length()) {
-                break;
-            }
-            commandTextField.setStyle(i, i + 1, NORMAL_STYLE);
-            i++;
-        }
+        CommandHighlightManager highlightManager = CommandHighlightManager.getInstance();
+        highlightManager.highlight(commandTextField, userInput);
     }
 
 

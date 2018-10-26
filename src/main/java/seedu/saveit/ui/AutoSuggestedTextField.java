@@ -73,7 +73,7 @@ public class AutoSuggestedTextField extends TextField {
     private void showResult(TextField textField) {
         String mainText = textField.getText();
         String text;
-        int whiteSpaceIndex = mainText.indexOf(" ")+1;
+        int whiteSpaceIndex = mainText.indexOf(" ") + 1;
         if (whiteSpaceIndex != -1) {
             text = mainText.substring(whiteSpaceIndex, mainText.length()).trim();
         } else {
@@ -110,6 +110,9 @@ public class AutoSuggestedTextField extends TextField {
         }
     }
 
+    /**
+     * Adds all the stored key words to the treeSet
+     */
     private void addAllKeyWord() {
         storageSet.clear();
         for (String str : keyWords) {

@@ -108,7 +108,7 @@ public class CommandBox extends UiPart<Region> {
     private void handleCommandEntered() {
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
-            if (! commandTextField.getText().contains("find")) {
+            if (!commandTextField.getText().contains("find")) {
                 commandTextField.update(logic);
             }
             initHistory();

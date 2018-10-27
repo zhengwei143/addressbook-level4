@@ -33,7 +33,7 @@ public class CommandBox extends UiPart<Region> {
 
 
     @FXML
-    private InlineCssTextArea commandTextField;
+    private AutoSuggestedTextField commandTextField;
 
     public CommandBox(Logic logic) {
         super(FXML);
@@ -42,6 +42,8 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.textProperty().addListener((observable, oldValue, newValue)
             -> highlight(observable, oldValue, newValue));
 
+        commandTextField.initialise(logic);
+//        commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         historySnapshot = logic.getHistorySnapshot();
     }
 
@@ -83,10 +85,21 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
-    /**
-     * Updates the text field with the previous input in {@code historySnapshot}, if there exists a previous input in
-     * {@code historySnapshot}
-     */
+//    /**
+//<<<<<<< HEAD
+//     * Updates the text field with the previous input in {@code historySnapshot}, if there exists a previous input in
+//     * {@code historySnapshot}
+//=======
+//     * Detects the user's input in the command text field and prints out the matched keywords.
+//     * @param mainText is behind one character during the input.
+//     * @param firstChar is used to be added to the mainText so as to get the full user's input.
+//     */
+//
+//    /**
+//     * Updates the text field with the previous input in {@code historySnapshot},
+//     * if there exists a previous input in {@code historySnapshot}
+//>>>>>>> autocomplete
+//     */
     private void navigateToPreviousInput() {
         assert historySnapshot != null;
         if (!historySnapshot.hasPrevious()) {
@@ -116,6 +129,9 @@ public class CommandBox extends UiPart<Region> {
     private void handleCommandEntered() {
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText().trim().replaceAll("\\r|\\n", ""));
+            if (!commandTextField.getText().contains("find")) {
+                commandTextField.update(logic);
+            }
             initHistory();
             historySnapshot.next();
             // process result of the command

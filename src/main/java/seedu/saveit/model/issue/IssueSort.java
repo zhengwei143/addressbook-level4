@@ -16,8 +16,8 @@ public class IssueSort {
     private static final String TAG_SORT = "tag";
     private final Comparator<Issue> comparator;
 
-    public IssueSort(String sort_type) throws ParseException {
-        switch (sort_type) {
+    public IssueSort(String sortType) throws ParseException {
+        switch (sortType) {
         case FREQUENCY_SORT:
             this.comparator = new IssueFreqSort();
             break;

@@ -55,7 +55,7 @@ public class CommandBox extends UiPart<Region> {
     private void highlight(ObservableValue<?> value, String oldValue, String newValue) {
         String userInput = newValue;
         CommandHighlightManager highlightManager = CommandHighlightManager.getInstance();
-        highlightManager.highlight(commandTextField, userInput);
+        highlightManager.highlight(commandTextField);
     }
 
 

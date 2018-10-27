@@ -114,8 +114,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void sortIssues(IssueSort sort_type) {
-        updateSortedIssueList(sort_type.getComparator());
+    public void sortIssues(IssueSort sortType) {
+        updateSortedIssueList(sortType.getComparator());
     }
 
     //=========== Filtered Issue List Accessors =============================================================
@@ -147,9 +147,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateSortedIssueList(Comparator<Issue> comparator) {
-        requireNonNull(comparator);
-        sortedList.setComparator(comparator);
+    public void updateSortedIssueList(Comparator<Issue> sortType) {
+        requireNonNull(sortType);
+        sortedList.setComparator(sortType);
     }
 
     //=========== Undo/Redo =================================================================================

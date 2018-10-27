@@ -158,12 +158,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void sortIssues(IssueSort sort_type) {
+        public void sortIssues(IssueSort sortType) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateSortedIssueList(Comparator<Issue> comparator) {
+        public void updateSortedIssueList(Comparator<Issue> sortType) {
             throw new AssertionError("This method should not be called.");
         }
 

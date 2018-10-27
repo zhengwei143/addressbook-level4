@@ -17,7 +17,7 @@ public class CommandHighlightManager {
     public static final String STYLE_COMMAND_WORD = "-fx-fill: #f4ad42;";
     public static final String STYLE_PARAMETER_KEY = "-fx-fill: #ffff00;";
     public static final String STYLE_INDEX = "-fx-fill: #55ae47;";
-    public static final String STYLE_NORMAL_VALUE = "-fx-fill: #aaf9ff;";
+    public static final String STYLE_NORMAL_VALUE = "-fx-fill: #42c3f4;";
     private static CommandHighlightManager instance;
 
     static CommandHighlightManager getInstance() {

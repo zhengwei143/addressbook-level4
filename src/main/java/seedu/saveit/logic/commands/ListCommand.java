@@ -25,8 +25,8 @@ public class ListCommand extends Command {
 
     private final IssueSort sort_type;
 
-    public ListCommand(IssueSort sort_type) {
-        this.sort_type = sort_type;
+    public ListCommand(IssueSort sortType) {
+        this.sort_type = sortType;
     }
 
     @Override

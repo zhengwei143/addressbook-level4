@@ -63,9 +63,9 @@ public interface Model {
 
     /**
      * Sorts the issues given the order.
-     * @param sort_type
+     * @param sortType
      */
-    void sortIssues(IssueSort sort_type);
+    void sortIssues(IssueSort sortType);
 
     /**
      * Updates the filter of the filtered issue list to filter by the given {@code predicate}.
@@ -74,9 +74,9 @@ public interface Model {
     void updateFilteredIssueList(Predicate<Issue> predicate);
 
     /**
-     * Updates the sorting of the sorted issue list to sort by the give {@code sort_type}.
+     * Updates the sorting of the sorted issue list to sort by the give {@code sortType}.
      */
-    void updateSortedIssueList(Comparator<Issue> sort_type);
+    void updateSortedIssueList(Comparator<Issue> sortType);
 
     /**
      * Returns true if the model has previous saveIt states to restore.

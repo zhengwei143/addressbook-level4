@@ -12,14 +12,14 @@ import org.fxmisc.richtext.InlineCssTextArea;
 public class CommandHighlightManager {
 
     public static final String COMMAND_WORD_STYLE = "-fx-fill: #f4ad42;";
-    public static final String PARAMETER_KEY_STYLE = "-fx-fill: #ffffff;";
+    public static final String PARAMETER_KEY_STYLE = "-fx-fill: #ffff00;";
     public static final String SOLUTION_LINK_STYLE = "-fx-fill: #1a75ff;";  // blue"
     public static final String SOLUTION_REMARK_STYLE = "-fx-fill: #55ae47;";  // green
     public static final String DESCRIPTION_STYLE = "-fx-fill: #e68a00;";  // orange
     public static final String STATEMENT_STYLE = "-fx-fill: #cd5c5c;";  // red
     public static final String TAGS_STYLE = "-fx-fill: #9febf2;";  // another blue
     public static final String NEW_TAG_STYLE = "-fx-fill: #289096;";  // some blue
-    public static final String NORMAL_STYLE = "-fx-fill: #f9ed02;";
+    public static final String NORMAL_STYLE = "-fx-fill: #3dd9e2;";
     private static CommandHighlightManager instance;
 
     static CommandHighlightManager getInstance() {
@@ -43,8 +43,9 @@ public class CommandHighlightManager {
         while (position < userInput.length()) {
             if (userInput.charAt(position) == '/') {
                 StringBuilder keyBuilder = new StringBuilder();
-                while (position < userInput.length() && userInput.charAt(position) != ' ') {
-                    commandTextField.setStyle(position, position + 1, NEW_TAG_STYLE);
+                // TODO: Replace magic parameters
+                while (isParameter(userInput, position)) {
+                    commandTextField.setStyle(position - 1, position + 1, PARAMETER_KEY_STYLE);
                     keyBuilder.append(userInput.charAt(position));
                     position++;
                 }
@@ -57,6 +58,13 @@ public class CommandHighlightManager {
             highlightCharacterOfParameterValue(position, key, commandTextField);
             position++;
         }
+    }
+
+    private boolean isParameter(String userInput, int position) {
+        return position < userInput.length() && (userInput.charAt(position - 1) == 'i'
+            || userInput.charAt(position - 1) == 's' || userInput.charAt(position - 1) == 'r'
+            || userInput.charAt(position - 1) == 'd' || userInput.charAt(position - 1) == 't')
+            && userInput.charAt(position) == '/';
     }
 
     private void highlightCharacterOfParameterValue(int start, String key, InlineCssTextArea commandTextField) {

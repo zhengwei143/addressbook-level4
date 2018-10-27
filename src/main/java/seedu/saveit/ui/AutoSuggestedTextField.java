@@ -81,7 +81,7 @@ public class AutoSuggestedTextField extends TextField {
         }
         LinkedList<String> searchResult = new LinkedList<>();
         searchResult.addAll(storageSet.subSet(text, text + Character.MAX_VALUE));
-        if (searchResult.size() > 0) {
+        if (searchResult.size() > 0 && text.length() > 0) {
             int maxNum = 8;
             int count = Math.min(searchResult.size(), maxNum);
             List<CustomMenuItem> menuItems = new LinkedList<>();

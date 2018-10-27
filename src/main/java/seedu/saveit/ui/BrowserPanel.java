@@ -42,7 +42,7 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
 
-    private void loadPersonPage(Issue issue) {
+    private void loadIssuePage(Issue issue) {
         //loadPage(issue.getStatement().issue);
         loadPage("http://www.google.com");
     }

@@ -1,8 +1,10 @@
 package seedu.saveit.ui;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 
 import org.fxmisc.richtext.InlineCssTextArea;
@@ -16,17 +18,22 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Label;
 import seedu.saveit.logic.Logic;
-import seedu.saveit.model.Issue;
 
 /**
  * The TextField component which supports auto key word suggestion
  */
 public class AutoSuggestedManager extends InlineCssTextArea {
 
+    public static final String WORD_FIND = "find";
+    public static final String WORD_TAG = "tag";
+
     private static ContextMenu popUpWindow;
-    private static TreeSet<String> storageSet;
+    private static TreeSet<String> issueStatementSet;
+    private static TreeSet<String> tagSet;
     private static Logic logic;
-    private List<String> keyWords = new ArrayList<>();
+    private List<String> issueKeyWords = new ArrayList<>();
+    private Set<String> tagKeyWords = new HashSet<>();
+
 
     public AutoSuggestedManager() {
         super();
@@ -37,20 +44,28 @@ public class AutoSuggestedManager extends InlineCssTextArea {
      */
     public void initialise(Logic logic) {
         this.logic = logic;
-        for (Issue issue : logic.getFilteredIssueList()) {
-            this.keyWords.add(issue.getStatement().issue);
-        }
+
+        fillIssueKeyWords();
+        issueStatementSet = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        addAllIssueKeyWord();
+
+        fillTagKeyWords();
+        tagSet = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        addAllTagKeyWord();
+
         popUpWindow = new ContextMenu();
-        storageSet = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
-        addAllKeyWord();
         this.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                     String newValue) {
-                if (getText().length() == 0 || !getText().contains("find")) {
+                if (getText().length() == 0 || !getText().contains(WORD_FIND)) {
                     popUpWindow.hide();
                 } else {
-                    showResult(AutoSuggestedManager.this);
+                    if (getText().contains(WORD_TAG)) {
+                        showResult(AutoSuggestedManager.this, tagSet);
+                    } else {
+                        showResult(AutoSuggestedManager.this, issueStatementSet);
+                    }
                 }
             }
         });
@@ -61,17 +76,16 @@ public class AutoSuggestedManager extends InlineCssTextArea {
      */
     public void update(Logic logic) {
         this.logic = logic;
-        keyWords.clear();
-        for (Issue issue : logic.getFilteredIssueList()) {
-            this.keyWords.add(issue.getStatement().issue);
-        }
-        addAllKeyWord();
+        fillIssueKeyWords();
+        fillTagKeyWords();
+        addAllIssueKeyWord();
+        addAllTagKeyWord();
     }
 
     /**
      * Analyses the input string and suggests the key words
      */
-    private void showResult(InlineCssTextArea textField) {
+    private void showResult(InlineCssTextArea textField, TreeSet<String> matchSet) {
         String mainText = textField.getText();
         String text;
         int whiteSpaceIndex = mainText.indexOf(" ") + 1;
@@ -81,7 +95,7 @@ public class AutoSuggestedManager extends InlineCssTextArea {
             text = mainText.trim();
         }
         LinkedList<String> searchResult = new LinkedList<>();
-        searchResult.addAll(storageSet.subSet(text, text + Character.MAX_VALUE));
+        searchResult.addAll(matchSet.subSet(text, text + Character.MAX_VALUE));
         if (searchResult.size() > 0 && text.length() > 0) {
             //hide the suggestion window if the issue statement is already entered completely
             if (searchResult.size() == 1 && searchResult.get(0).equals(text)) {
@@ -120,10 +134,27 @@ public class AutoSuggestedManager extends InlineCssTextArea {
     /**
      * Adds all the stored key words to the treeSet
      */
-    private void addAllKeyWord() {
-        storageSet.clear();
-        for (String str : keyWords) {
-            storageSet.add(str);
+    private void addAllIssueKeyWord() {
+        issueStatementSet.clear();
+        for (String str : issueKeyWords) {
+            issueStatementSet.add(str);
         }
+    }
+
+    private void addAllTagKeyWord() {
+        tagSet.clear();
+        for (String str: tagKeyWords) {
+            tagSet.add(str);
+        }
+    }
+
+    private void fillIssueKeyWords() {
+        this.issueKeyWords.clear();
+        logic.getFilteredIssueList().forEach(issue -> this.issueKeyWords.add(issue.getStatement().issue));
+    }
+
+    private void fillTagKeyWords() {
+        this.tagKeyWords.clear();
+        logic.getFilteredIssueList().forEach(issue -> issue.getTags().forEach(tag -> this.tagKeyWords.add(tag.tagName)));
     }
 }

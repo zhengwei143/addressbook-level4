@@ -127,7 +127,7 @@ public class CommandBox extends UiPart<Region> {
     private void handleCommandEntered() {
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText().trim().replaceAll("\\r|\\n", ""));
-            if (!commandTextField.getText().contains("find")) {
+            if (!commandTextField.getText().contains(AutoSuggestedManager.WORD_FIND)) {
                 commandTextField.update(logic);
             }
             initHistory();

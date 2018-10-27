@@ -25,9 +25,8 @@
                     </minWidth>
                 </Label>
             </HBox>
-            <FlowPane fx:id="link" />
             <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
-            <FlowPane/>
+            <Label fx:id="link" styleClass="cell_small_label" text="\$link" />
         </VBox>
     </GridPane>
 </HBox>

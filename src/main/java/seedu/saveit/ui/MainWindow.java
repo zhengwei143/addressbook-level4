@@ -142,6 +142,7 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
+
     void hide() {
         primaryStage.hide();
     }
@@ -185,6 +186,8 @@ public class MainWindow extends UiPart<Stage> {
     void show() {
         primaryStage.show();
     }
+
+
 
     /**
      * Closes the application.

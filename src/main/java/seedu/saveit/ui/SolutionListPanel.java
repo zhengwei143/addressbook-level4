@@ -19,7 +19,7 @@ import seedu.saveit.model.issue.Solution;
  */
 public class SolutionListPanel extends UiPart<Region> {
     private static final String FXML = "SolutionListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(IssueListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(SolutionListPanel.class);
 
     @FXML
     private ListView<Solution> solutionListView;

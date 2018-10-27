@@ -137,8 +137,13 @@ public class ModelManager extends ComponentManager implements Model {
      */
     @Override
     public ObservableList<Solution> getFilteredSolutionList() {
-        return FXCollections.unmodifiableObservableList
-                    (filteredIssues.get(1).getObservableSolutions());
+        int directory = getCurrentDirectory();
+        if (directory == 0) {
+            return FXCollections.unmodifiableObservableList(FXCollections.emptyObservableList());
+        } else {
+            return FXCollections.unmodifiableObservableList
+                    (filteredIssues.get(getCurrentDirectory()).getObservableSolutions());
+        }
     }
 
     @Override

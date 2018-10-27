@@ -14,6 +14,6 @@ public class SaveItChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "number of persons " + data.getIssueList().size();
+        return "number of issues " + data.getIssueList().size();
     }
 }

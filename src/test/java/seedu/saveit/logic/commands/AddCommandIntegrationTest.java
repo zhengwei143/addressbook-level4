@@ -43,7 +43,7 @@ public class AddCommandIntegrationTest {
     public void execute_duplicateIssue_throwsCommandException() {
         Issue issueInList = model.getSaveIt().getIssueList().get(0);
         assertCommandFailure(new AddCommand(issueInList), model, commandHistory,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+                AddCommand.MESSAGE_DUPLICATE_ISSUE);
     }
 
 }

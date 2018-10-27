@@ -36,7 +36,7 @@ public class DeleteCommandTest {
         Issue issueToDelete = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ISSUE);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, issueToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ISSUE_SUCCESS, issueToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());
         expectedModel.deleteIssue(issueToDelete);
@@ -61,7 +61,7 @@ public class DeleteCommandTest {
         Issue issueToDelete = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ISSUE);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, issueToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ISSUE_SUCCESS, issueToDelete);
 
         Model expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());
         expectedModel.deleteIssue(issueToDelete);

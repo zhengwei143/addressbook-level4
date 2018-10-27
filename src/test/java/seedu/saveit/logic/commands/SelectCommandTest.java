@@ -8,7 +8,7 @@ import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.saveit.logic.commands.CommandTestUtil.showIssueAtIndex;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
-import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
 
 import org.junit.Ignore;
@@ -41,7 +41,7 @@ public class SelectCommandTest {
         Index lastIssueIndex = Index.fromOneBased(model.getFilteredIssueList().size());
 
         assertExecutionSuccess(INDEX_FIRST_ISSUE);
-        assertExecutionSuccess(INDEX_THIRD_PERSON);
+        assertExecutionSuccess(INDEX_THIRD_ISSUE);
         assertExecutionSuccess(lastIssueIndex);
     }
 
@@ -101,7 +101,7 @@ public class SelectCommandTest {
      */
     private void assertExecutionSuccess(Index index) {
         SelectCommand selectCommand = new SelectCommand(index);
-        String expectedMessage = String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, index.getOneBased());
+        String expectedMessage = String.format(SelectCommand.MESSAGE_SELECT_ISSUE_SUCCESS, index.getOneBased());
 
         assertCommandSuccess(selectCommand, model, commandHistory, expectedMessage, expectedModel);
 

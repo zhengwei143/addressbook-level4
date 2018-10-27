@@ -116,7 +116,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
 
         /* Case: add a duplicate issue -> rejected */
         command = IssueUtil.getAddCommand(HOON);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_ISSUE);
 
         /* Case: add a duplicate issue except with different description -> added */
         toAdd = new IssueBuilder(HOON).withDescription(VALID_DESCRIPTION_C).build();
@@ -125,11 +125,11 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         /* Case: add a duplicate issue except with different solution -> rejected */
         toAdd = new IssueBuilder(HOON).withSolutions(VALID_SOLUTION_C).build();
         command = IssueUtil.getAddCommand(toAdd);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_ISSUE);
 
         /* Case: add a duplicate issue except with different tags -> rejected */
         command = IssueUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_ISSUE);
 
         /* Case: missing statement -> rejected */
         command = AddCommand.COMMAND_WORD + DESCRIPTION_DESC_JAVA + SOLUTION_DESC_JAVA;

@@ -145,10 +145,10 @@ public class XmlAdaptedIssue {
             return false;
         }
 
-        XmlAdaptedIssue otherPerson = (XmlAdaptedIssue) other;
-        return Objects.equals(statement, otherPerson.statement)
-                && Objects.equals(description, otherPerson.description)
-                && solutions.equals(otherPerson.solutions)
-                && tagged.equals(otherPerson.tagged);
+        XmlAdaptedIssue otherIssue = (XmlAdaptedIssue) other;
+        return Objects.equals(statement, otherIssue.statement)
+                && Objects.equals(description, otherIssue.description)
+                && solutions.equals(otherIssue.solutions)
+                && tagged.equals(otherIssue.tagged);
     }
 }

@@ -41,6 +41,7 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+
     private void loadPersonPage(Issue issue) {
         //loadPage(issue.getStatement().issue);
         loadPage("http://www.google.com");
@@ -66,8 +67,8 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(IssuePanelSelectionChangedEvent event) {
+    private void handleIssuePanelSelectionChangedEvent(IssuePanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadPersonPage(event.getNewSelection());
+        loadIssuePage(event.getNewSelection());
     }
 }

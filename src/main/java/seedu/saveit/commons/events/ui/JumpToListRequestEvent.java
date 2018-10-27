@@ -4,7 +4,7 @@ import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.events.BaseEvent;
 
 /**
- * Indicates a request to jump to the list of persons
+ * Indicates a request to jump to the list of issues
  */
 public class JumpToListRequestEvent extends BaseEvent {
 

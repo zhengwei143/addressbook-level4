@@ -137,7 +137,7 @@ public class CommandBox extends UiPart<Region> {
 
     private void setCommandInput(String string) {
         commandTextField.clear();
-        commandTextField.appendText(string.trim().replaceAll("\\r|\\n", ""));
+        commandTextField.appendText(string.replaceAll("\\r|\\n", ""));
 
         // move the cursor to the end of the input string
         commandTextField.moveTo(commandTextField.getText().length());

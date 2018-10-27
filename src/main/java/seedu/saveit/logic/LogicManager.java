@@ -12,6 +12,7 @@ import seedu.saveit.logic.parser.SaveItParser;
 import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
+import seedu.saveit.model.issue.Solution;
 
 /**
  * The main LogicManager of the app.
@@ -43,6 +44,12 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ObservableList<Issue> getFilteredIssueList() {
         return model.getFilteredIssueList();
+    }
+
+    @Override
+    public ObservableList<Solution> getFilteredSolutionList() {
+        ObservableList<Solution> k = model.getFilteredSolutionList();
+        return k;
     }
 
     @Override

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.saveit.commons.util.CollectionUtil;
 import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueSearchFrequency;
@@ -64,6 +66,13 @@ public class Issue {
      */
     public List<Solution> getSolutions() {
         return Collections.unmodifiableList(solutions);
+    }
+
+    /**
+     * Returns ab observableList of solutions.
+     */
+    public ObservableList<Solution> getObservableSolutions() {
+        return FXCollections.observableList(solutions);
     }
 
     public Description getDescription() {

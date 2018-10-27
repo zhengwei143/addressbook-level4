@@ -92,7 +92,7 @@ public class CommandBox extends UiPart<Region> {
         if (!historySnapshot.hasPrevious()) {
             return;
         }
-        setCommandInput(historySnapshot.previous().trim().replaceAll("\\r|\\n", "").replaceAll("\\r|\\n", ""));
+        setCommandInput(historySnapshot.previous());
     }
 
     /**
@@ -105,7 +105,7 @@ public class CommandBox extends UiPart<Region> {
             return;
         }
 
-        setCommandInput(historySnapshot.next().trim().replaceAll("\\r|\\n", ""));
+        setCommandInput(historySnapshot.next());
     }
 
 
@@ -126,7 +126,7 @@ public class CommandBox extends UiPart<Region> {
         } catch (CommandException | ParseException e) {
             initHistory();
             // handle command failure
-            setCommandInput(commandTextField.getText().trim().replaceAll("\\r|\\n", ""));
+            setCommandInput(commandTextField.getText());
             setStyleToIndicateCommandFailure();
             logger.info("Invalid command: " + commandTextField.getText());
             raise(new NewResultAvailableEvent(e.getMessage()));
@@ -164,6 +164,7 @@ public class CommandBox extends UiPart<Region> {
      * Sets the command box style to indicate a failed command.
      */
     private void setStyleToIndicateCommandFailure() {
+        // TODO: Check why it does not set style successfully?
         ObservableList<String> styleClass = commandTextField.getStyleClass();
         if (styleClass.contains(ERROR_STYLE_CLASS)) {
             return;

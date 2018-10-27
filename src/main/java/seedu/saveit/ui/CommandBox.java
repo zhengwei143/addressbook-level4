@@ -2,8 +2,6 @@ package seedu.saveit.ui;
 
 import java.util.logging.Logger;
 
-import org.fxmisc.richtext.InlineCssTextArea;
-
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,7 +31,7 @@ public class CommandBox extends UiPart<Region> {
 
 
     @FXML
-    private AutoSuggestedTextField commandTextField;
+    private AutoSuggestedManager commandTextField;
 
     public CommandBox(Logic logic) {
         super(FXML);

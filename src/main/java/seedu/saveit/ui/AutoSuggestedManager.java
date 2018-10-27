@@ -15,21 +15,20 @@ import javafx.geometry.Side;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import seedu.saveit.logic.Logic;
 import seedu.saveit.model.Issue;
 
 /**
  * The TextField component which supports auto key word suggestion
  */
-public class AutoSuggestedTextField extends InlineCssTextArea {
+public class AutoSuggestedManager extends InlineCssTextArea {
 
     private static ContextMenu popUpWindow;
     private static TreeSet<String> storageSet;
     private static Logic logic;
     private List<String> keyWords = new ArrayList<>();
 
-    public AutoSuggestedTextField() {
+    public AutoSuggestedManager() {
         super();
     }
 
@@ -51,7 +50,7 @@ public class AutoSuggestedTextField extends InlineCssTextArea {
                 if (getText().length() == 0 || !getText().contains("find")) {
                     popUpWindow.hide();
                 } else {
-                    showResult(AutoSuggestedTextField.this);
+                    showResult(AutoSuggestedManager.this);
                 }
             }
         });
@@ -110,6 +109,7 @@ public class AutoSuggestedTextField extends InlineCssTextArea {
                 }
                 popUpWindow.getItems().clear();
                 popUpWindow.getItems().addAll(menuItems);
+                popUpWindow.hide();
                 popUpWindow.show(textField, Side.BOTTOM, (double) textField.getCaretPosition() * 8, 0);
             }
         } else {

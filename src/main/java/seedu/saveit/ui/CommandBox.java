@@ -21,7 +21,7 @@ import seedu.saveit.logic.parser.exceptions.ParseException;
  */
 public class CommandBox extends UiPart<Region> {
 
-    public static final String ERROR_STYLE_CLASS = "error";
+    public static final String ERROR_STYLE_CLASS = "-fx-fill: #ff6060";
 
     private static final String FXML = "CommandBox.fxml";
 
@@ -41,7 +41,6 @@ public class CommandBox extends UiPart<Region> {
             -> highlight(observable, oldValue, newValue));
 
         commandTextField.initialise(logic);
-//        commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         historySnapshot = logic.getHistorySnapshot();
     }
 
@@ -83,21 +82,11 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
-//    /**
-//<<<<<<< HEAD
-//     * Updates the text field with the previous input in {@code historySnapshot}, if there exists a previous input in
-//     * {@code historySnapshot}
-//=======
-//     * Detects the user's input in the command text field and prints out the matched keywords.
-//     * @param mainText is behind one character during the input.
-//     * @param firstChar is used to be added to the mainText so as to get the full user's input.
-//     */
-//
-//    /**
-//     * Updates the text field with the previous input in {@code historySnapshot},
-//     * if there exists a previous input in {@code historySnapshot}
-//>>>>>>> autocomplete
-//     */
+
+    /**
+     * Updates the text field with the previous input in {@code historySnapshot},
+     * if there exists a previous input in {@code historySnapshot}
+     */
     private void navigateToPreviousInput() {
         assert historySnapshot != null;
         if (!historySnapshot.hasPrevious()) {
@@ -168,22 +157,13 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Sets the command box style to use the default style.
-     */
-    private void setStyleToDefault() {
-        commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
-    }
-
-    /**
      * Sets the command box style to indicate a failed command.
      */
     private void setStyleToIndicateCommandFailure() {
-        // TODO: Check why it does not set style successfully?
         ObservableList<String> styleClass = commandTextField.getStyleClass();
         if (styleClass.contains(ERROR_STYLE_CLASS)) {
             return;
         }
-        styleClass.add(ERROR_STYLE_CLASS);
+        commandTextField.setStyle(0, commandTextField.getText().length(), ERROR_STYLE_CLASS);
     }
-
 }

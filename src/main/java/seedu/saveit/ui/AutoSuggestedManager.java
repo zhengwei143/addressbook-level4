@@ -101,7 +101,7 @@ public class AutoSuggestedManager extends InlineCssTextArea {
             if (searchResult.size() == 1 && searchResult.get(0).equals(text)) {
                 popUpWindow.hide();
             } else {
-                int maxNum = 8;
+                int maxNum = 5;
                 int count = Math.min(searchResult.size(), maxNum);
                 List<CustomMenuItem> menuItems = new LinkedList<>();
                 for (int i = 0; i < count; i++) {
@@ -123,7 +123,7 @@ public class AutoSuggestedManager extends InlineCssTextArea {
                 }
                 popUpWindow.getItems().clear();
                 popUpWindow.getItems().addAll(menuItems);
-                popUpWindow.hide();
+                getFocused();
                 popUpWindow.show(textField, Side.BOTTOM, (double) textField.getCaretPosition() * 8, 0);
             }
         } else {
@@ -166,5 +166,14 @@ public class AutoSuggestedManager extends InlineCssTextArea {
         this.tagKeyWords.clear();
         logic.getFilteredIssueList().forEach(issue -> issue.getTags().
                 forEach(tag -> this.tagKeyWords.add(tag.tagName)));
+    }
+
+    /**
+     * Makes the popup window get ready to get focused before next showing
+     */
+    private void getFocused() {
+        popUpWindow.show(AutoSuggestedManager.this, Side.BOTTOM, (double) AutoSuggestedManager
+                .this.getCaretPosition() * 8, 0);
+        popUpWindow.hide();
     }
 }

@@ -24,7 +24,6 @@ import seedu.saveit.logic.parser.exceptions.ParseException;
 public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
-    public static final String SUCCESS_STYLE_CLASS = "error";
 
     private static final String FXML = "CommandBox.fxml";
 

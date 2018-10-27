@@ -14,15 +14,10 @@ import org.fxmisc.richtext.InlineCssTextArea;
  */
 public class CommandHighlightManager {
 
-    public static final String COMMAND_WORD_STYLE = "-fx-fill: #f4ad42;";
-    public static final String PARAMETER_KEY_STYLE = "-fx-fill: #ffff00;";
-    public static final String SOLUTION_LINK_STYLE = "-fx-fill: #1a75ff;"; // blue"
-    public static final String SOLUTION_REMARK_STYLE = "-fx-fill: #55ae47;"; // green
-    public static final String DESCRIPTION_STYLE = "-fx-fill: #e68a00;"; // orange
-    public static final String STATEMENT_STYLE = "-fx-fill: #cd5c5c;"; // red
-    public static final String TAGS_STYLE = "-fx-fill: #9febf2;"; // another blue
-    public static final String NEW_TAG_STYLE = "-fx-fill: #289096;"; // some blue
-    public static final String NORMAL_STYLE = "-fx-fill: #aaf9ff;";
+    public static final String STYLE_COMMAND_WORD = "-fx-fill: #f4ad42;";
+    public static final String STYLE_PARAMETER_KEY = "-fx-fill: #ffff00;";
+    public static final String STYLE_INDEX = "-fx-fill: #55ae47;";
+    public static final String STYLE_NORMAL_VALUE = "-fx-fill: #aaf9ff;";
     private static CommandHighlightManager instance;
 
     static CommandHighlightManager getInstance() {
@@ -40,7 +35,7 @@ public class CommandHighlightManager {
         int position = 0;
 
         while (position < userInput.length() && userInput.charAt(position) != ' ') {
-            commandTextField.setStyle(position, position + 1, COMMAND_WORD_STYLE);
+            commandTextField.setStyle(position, position + 1, STYLE_COMMAND_WORD);
             position++;
         }
 
@@ -48,12 +43,12 @@ public class CommandHighlightManager {
         while (position < userInput.length()) {
             // TODO: differentiate index
             if (userInput.charAt(position) == '2') {
-                commandTextField.setStyle(position, position + 1, SOLUTION_REMARK_STYLE);
+                commandTextField.setStyle(position, position + 1, STYLE_INDEX);
             }
 
             if (isParameter(userInput, position)) {
                 StringBuilder keyBuilder = new StringBuilder();
-                commandTextField.setStyle(position - 1, position + 1, PARAMETER_KEY_STYLE);
+                commandTextField.setStyle(position - 1, position + 1, STYLE_PARAMETER_KEY);
                 keyBuilder.append(userInput.charAt(position));
                 position++;
             }
@@ -62,7 +57,7 @@ public class CommandHighlightManager {
                 break;
             }
 
-            commandTextField.setStyle(position, position + 1, NORMAL_STYLE);
+            commandTextField.setStyle(position, position + 1, STYLE_NORMAL_VALUE);
             position++;
         }
     }

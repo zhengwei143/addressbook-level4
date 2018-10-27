@@ -1,5 +1,12 @@
 package seedu.saveit.ui;
 
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_NEW_TAG;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
+
 import org.fxmisc.richtext.InlineCssTextArea;
 
 public class CommandHighlightManager {
@@ -22,28 +29,58 @@ public class CommandHighlightManager {
         return instance;
     }
 
-    public void highlight(InlineCssTextArea commandTextField, String userInput) {
-        int i = 0;
-        while (i < userInput.length() && userInput.charAt(i) != ' ') {
-            commandTextField.setStyle(i, i + 1, COMMAND_WORD_STYLE);
-            i++;
+    public void highlight(InlineCssTextArea commandTextField) {
+        String userInput = commandTextField.getText();
+        int position = 0;
+
+        while (position < userInput.length() && userInput.charAt(position) != ' ') {
+            commandTextField.setStyle(position, position + 1, COMMAND_WORD_STYLE);
+            position++;
         }
 
-        while (i < userInput.length()) {
-            commandTextField.setStyle(i, i + 1, PARAMETER_KEY_STYLE);
-
-            if (userInput.charAt(i) == '\\') {
-                System.out.println(userInput.charAt(i));
-                while (i < userInput.length() && userInput.charAt(i) != ' ') {
-                    commandTextField.setStyle(i, i + 1, PARAMETER_KEY_STYLE);
-                    i++;
+        // highlight the following parameters, which are key-value pairs
+        String key = "";
+        while (position < userInput.length()) {
+            if (userInput.charAt(position) == '/') {
+                StringBuilder keyBuilder = new StringBuilder();
+                while (position < userInput.length() && userInput.charAt(position) != ' ') {
+                    commandTextField.setStyle(position, position + 1, NEW_TAG_STYLE);
+                    keyBuilder.append(userInput.charAt(position));
+                    position++;
                 }
+                key = keyBuilder.toString();
             }
-            if (i >= userInput.length()) {
+            if (position >= userInput.length()) {
                 break;
             }
-            commandTextField.setStyle(i, i + 1, NORMAL_STYLE);
-            i++;
+
+            highlightCharacterOfParameterValue(position, key, commandTextField);
+            position++;
+        }
+    }
+
+    private void highlightCharacterOfParameterValue(int start, String key, InlineCssTextArea commandTextField) {
+        System.out.println("key " + key);
+        if (key.equals(PREFIX_STATEMENT.toString())) {
+            commandTextField.setStyle(start, start + 1, STATEMENT_STYLE);
+        } else if (key.equals(PREFIX_DESCRIPTION.toString())) {
+            System.out.println("PREFIX_DESCRIPTION");
+            commandTextField.setStyle(start, start + 1, DESCRIPTION_STYLE);
+        } else if (key.equals(PREFIX_SOLUTION_LINK.toString())) {
+            System.out.println("PREFIX_SOLUTION_LINK");
+            commandTextField.setStyle(start, start + 1, SOLUTION_LINK_STYLE);
+        } else if (key.equals(PREFIX_REMARK.toString())) {
+            System.out.println("PREFIX_REMARK");
+            commandTextField.setStyle(start, start + 1, SOLUTION_REMARK_STYLE);
+        } else if (key.equals(PREFIX_NEW_TAG.toString())) {
+            System.out.println("PREFIX_NEW_TAG");
+            commandTextField.setStyle(start, start + 1, TAGS_STYLE);
+        } else if (key.equals(PREFIX_TAG.toString())) {
+            System.out.println("PREFIX_TAG");
+            commandTextField.setStyle(start, start + 1, NEW_TAG_STYLE);
+        } else {
+            System.out.println();
+            commandTextField.setStyle(start, start + 1, NORMAL_STYLE);
         }
     }
 

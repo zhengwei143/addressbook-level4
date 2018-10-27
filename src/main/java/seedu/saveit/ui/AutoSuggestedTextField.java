@@ -36,7 +36,7 @@ public class AutoSuggestedTextField extends TextField {
      */
     public void initialise(Logic logic) {
         this.logic = logic;
-        for (Issue issue: logic.getFilteredIssueList()) {
+        for (Issue issue : logic.getFilteredIssueList()) {
             this.keyWords.add(issue.getStatement().issue);
         }
         popUpWindow = new ContextMenu();
@@ -61,7 +61,7 @@ public class AutoSuggestedTextField extends TextField {
     public void update(Logic logic) {
         this.logic = logic;
         keyWords.clear();
-        for (Issue issue: logic.getFilteredIssueList()) {
+        for (Issue issue : logic.getFilteredIssueList()) {
             this.keyWords.add(issue.getStatement().issue);
         }
         addAllKeyWord();
@@ -82,29 +82,34 @@ public class AutoSuggestedTextField extends TextField {
         LinkedList<String> searchResult = new LinkedList<>();
         searchResult.addAll(storageSet.subSet(text, text + Character.MAX_VALUE));
         if (searchResult.size() > 0 && text.length() > 0) {
-            int maxNum = 8;
-            int count = Math.min(searchResult.size(), maxNum);
-            List<CustomMenuItem> menuItems = new LinkedList<>();
-            for (int i = 0; i < count; i++) {
-                final String result = searchResult.get(i);
-                final String previousText = textField.getText();
-                Label entryLabel = new Label(result);
-                textField.requestFocus();
-                CustomMenuItem item = new CustomMenuItem(entryLabel, true);
-                int initIndex = whiteSpaceIndex;
-                item.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent actionEvent) {
-                        textField.setText(previousText.substring(0, initIndex) + result);
-                        textField.positionCaret(textField.getLength());
-                        popUpWindow.hide();
-                    }
-                });
-                menuItems.add(item);
+            //hide the suggestion window if the issue statement is already entered completely
+            if (searchResult.size() == 1 && searchResult.get(0).equals(text)) {
+                popUpWindow.hide();
+            } else {
+                int maxNum = 8;
+                int count = Math.min(searchResult.size(), maxNum);
+                List<CustomMenuItem> menuItems = new LinkedList<>();
+                for (int i = 0; i < count; i++) {
+                    final String result = searchResult.get(i);
+                    final String previousText = textField.getText();
+                    Label entryLabel = new Label(result);
+                    textField.requestFocus();
+                    CustomMenuItem item = new CustomMenuItem(entryLabel, true);
+                    int initIndex = whiteSpaceIndex;
+                    item.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent actionEvent) {
+                            textField.setText(previousText.substring(0, initIndex) + result);
+                            textField.positionCaret(textField.getLength());
+                            popUpWindow.hide();
+                        }
+                    });
+                    menuItems.add(item);
+                }
+                popUpWindow.getItems().clear();
+                popUpWindow.getItems().addAll(menuItems);
+                popUpWindow.show(textField, Side.BOTTOM, (double) textField.getCaretPosition() * 8, 0);
             }
-            popUpWindow.getItems().clear();
-            popUpWindow.getItems().addAll(menuItems);
-            popUpWindow.show(textField, Side.BOTTOM, (double) textField.getCaretPosition() * 8, 0);
         } else {
             popUpWindow.hide();
         }

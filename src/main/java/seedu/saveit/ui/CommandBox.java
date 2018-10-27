@@ -64,7 +64,6 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleKeyPress(KeyEvent keyEvent) {
-        System.out.println(keyEvent.getCode());
         switch (keyEvent.getCode()) {
         case UP:
             // As up and down buttons will alter the position of the caret,
@@ -116,7 +115,6 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleCommandEntered() {
-        System.out.println("show previous command. it should not allowed to move to the next line");
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText().trim().replaceAll("\\r|\\n", ""));
             initHistory();
@@ -127,7 +125,6 @@ public class CommandBox extends UiPart<Region> {
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
 
         } catch (CommandException | ParseException e) {
-            System.out.println("inlv so I should restrict user to go next line here");
             initHistory();
             // handle command failure
             setCommandInput(commandTextField.getText().trim().replaceAll("\\r|\\n", ""));

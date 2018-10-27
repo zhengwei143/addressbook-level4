@@ -141,6 +141,9 @@ public class AutoSuggestedManager extends InlineCssTextArea {
         }
     }
 
+    /**
+     * Adds all the stored key words to the treeSet
+     */
     private void addAllTagKeyWord() {
         tagSet.clear();
         for (String str: tagKeyWords) {
@@ -148,13 +151,20 @@ public class AutoSuggestedManager extends InlineCssTextArea {
         }
     }
 
+    /**
+     * Stores all the issue statements to the key word list
+     */
     private void fillIssueKeyWords() {
         this.issueKeyWords.clear();
         logic.getFilteredIssueList().forEach(issue -> this.issueKeyWords.add(issue.getStatement().issue));
     }
 
+    /**
+     * Stores all the tag names to the key word set
+     */
     private void fillTagKeyWords() {
         this.tagKeyWords.clear();
-        logic.getFilteredIssueList().forEach(issue -> issue.getTags().forEach(tag -> this.tagKeyWords.add(tag.tagName)));
+        logic.getFilteredIssueList().forEach(issue -> issue.getTags().
+                forEach(tag -> this.tagKeyWords.add(tag.tagName)));
     }
 }

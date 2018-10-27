@@ -42,8 +42,9 @@ public class CommandHighlightManager {
         // highlight the following parameters, which are key-value pairs
         while (position < userInput.length()) {
             // TODO: differentiate index
-            if (userInput.charAt(position) == '2') {
-                commandTextField.setStyle(position, position + 1, STYLE_INDEX);
+            if (isIndex(userInput, position)) {
+                commandTextField.setStyle(position-2, position-1, STYLE_INDEX);
+                position++;
             }
 
             if (isParameter(userInput, position)) {
@@ -62,6 +63,10 @@ public class CommandHighlightManager {
         }
     }
 
+    private boolean isIndex(String userInput, int position) {
+        return userInput.charAt(position-1) == ' ' && userInput.charAt(position) == '2';
+    }
+
     /**
      * check if user input parameters
      *
@@ -72,7 +77,7 @@ public class CommandHighlightManager {
         input.append(userInput.charAt(position - 1));
         input.append(userInput.charAt(position));
         String inputCheck = input.toString();
-        if (isParamter(inputCheck)) {
+        if (isParameter(inputCheck)) {
             return true;
         }
         return false;
@@ -84,7 +89,7 @@ public class CommandHighlightManager {
      * @param inputCheck every two consecutive characters.
      * @return true if parameter, otherwise false
      */
-    private boolean isParamter(String inputCheck) {
+    private boolean isParameter(String inputCheck) {
         return inputCheck.equals(PREFIX_STATEMENT.toString()) || inputCheck.equals(PREFIX_SOLUTION_LINK.toString())
             || inputCheck.equals(PREFIX_REMARK.toString()) || inputCheck.equals(PREFIX_DESCRIPTION.toString())
             || inputCheck.equals(PREFIX_TAG.toString()) || inputCheck.equals(PREFIX_NEW_TAG.toString());

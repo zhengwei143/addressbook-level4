@@ -32,6 +32,8 @@ public class RefactorTagCommand extends Command {
     private final Tag oldTag;
     private final Tag newTag;
 
+    private final Issue editedIssue;
+
     /**
      * @param oldTag the tag will be replaced
      * @param newTag the new tag that will replace original one
@@ -40,6 +42,7 @@ public class RefactorTagCommand extends Command {
         requireNonNull(oldTag);
         this.oldTag = oldTag;
         this.newTag = newTag;
+        editedIssue = null;
     }
 
     @Override
@@ -68,7 +71,8 @@ public class RefactorTagCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof RefactorTagCommand); // instanceof handles nulls
+            || (other instanceof RefactorTagCommand) // instanceof handles nulls
+            || (editedIssue.equals(((RefactorTagCommand) other).editedIssue)); //state check
     }
 }
 

@@ -35,7 +35,7 @@ public class SolutionCard extends UiPart<Region> {
     public SolutionCard(Solution solution, int displayedIndex) {
         super(FXML);
         this.solution = solution;
-        id.setText("Solution" + String.valueOf(displayedIndex));
+        id.setText("Solution " + String.valueOf(displayedIndex));
         link.setText(solution.getLink().getValue());
         remark.setText(solution.getRemark().toString());
     }

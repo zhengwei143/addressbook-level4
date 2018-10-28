@@ -6,7 +6,6 @@ import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.saveit.logic.CommandHistory;
@@ -31,14 +30,12 @@ public class ListCommandTest {
     }
 
     @Test
-    @Ignore
-    public void execute_listIsNotFiltered_showsSameList() throws ParseException {
+    public void execute_listIsNotFiltered_showsSameList() {
         assertCommandSuccess(new ListCommand(), model, commandHistory, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
-    @Ignore
-    public void execute_listIsFiltered_showsEverything() throws ParseException {
+    public void execute_listIsFiltered_showsEverything() {
         showIssueAtIndex(model, INDEX_FIRST_ISSUE);
         assertCommandSuccess(new ListCommand(), model, commandHistory, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }

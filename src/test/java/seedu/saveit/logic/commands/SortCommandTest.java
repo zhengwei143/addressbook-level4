@@ -1,17 +1,5 @@
 package seedu.saveit.logic.commands;
 
-import org.junit.Before;
-import org.junit.Test;
-import seedu.saveit.logic.CommandHistory;
-import seedu.saveit.model.Model;
-import seedu.saveit.model.ModelManager;
-import seedu.saveit.model.UserPrefs;
-import seedu.saveit.model.issue.IssueContainsKeywordsPredicate;
-import seedu.saveit.model.issue.IssueSort;
-
-import java.util.Arrays;
-import java.util.List;
-
 import static junit.framework.TestCase.assertEquals;
 import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.saveit.testutil.TypicalIssues.ALICE;
@@ -22,6 +10,19 @@ import static seedu.saveit.testutil.TypicalIssues.ELLE;
 import static seedu.saveit.testutil.TypicalIssues.FIONA;
 import static seedu.saveit.testutil.TypicalIssues.GEORGE;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import seedu.saveit.logic.CommandHistory;
+import seedu.saveit.model.Model;
+import seedu.saveit.model.ModelManager;
+import seedu.saveit.model.UserPrefs;
+import seedu.saveit.model.issue.IssueContainsKeywordsPredicate;
+import seedu.saveit.model.issue.IssueSort;
 
 public class SortCommandTest {
     private Model model;
@@ -35,7 +36,7 @@ public class SortCommandTest {
     }
 
     @Test
-    public void execute_sortIsNotFiltered_success() throws Exception{
+    public void execute_sortIsNotFiltered_success() {
         IssueSort issueSort = prepareIssueSort(IssueSort.TAG_SORT);
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, issueSort.getSortType());
         expectedModel.updateSortedIssueList(issueSort.getComparator());

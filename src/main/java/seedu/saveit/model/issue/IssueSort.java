@@ -2,7 +2,6 @@ package seedu.saveit.model.issue;
 
 import java.util.Comparator;
 
-import seedu.saveit.commons.util.AppUtil;
 import seedu.saveit.model.Issue;
 
 /**

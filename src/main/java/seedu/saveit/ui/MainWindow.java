@@ -16,6 +16,7 @@ import seedu.saveit.commons.core.Config;
 import seedu.saveit.commons.core.GuiSettings;
 import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.events.ui.ExitAppRequestEvent;
+import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.commons.events.ui.ShowHelpRequestEvent;
 import seedu.saveit.logic.Logic;
 import seedu.saveit.model.UserPrefs;
@@ -209,5 +210,11 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+    @Subscribe
+    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        solutionListPanel.setSolutionList(logic.getFilteredSolutionList());
     }
 }

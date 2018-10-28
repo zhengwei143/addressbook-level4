@@ -14,7 +14,6 @@ import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_SYNTAX;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
-import static seedu.saveit.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -23,7 +22,6 @@ import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_ISSUE;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.saveit.commons.core.index.Index;
@@ -37,7 +35,6 @@ import seedu.saveit.testutil.EditIssueDescriptorBuilder;
 public class EditCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
-    private static final String DESCRIPTION_EMPTY = " " + PREFIX_DESCRIPTION;
     private static final String STATEMENT_EMPTY = " " + PREFIX_STATEMENT;
 
 
@@ -74,7 +71,6 @@ public class EditCommandParserTest {
     }
 
     @Test
-    @Ignore
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_STATEMENT_DESC,
             IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS); // invalid name
@@ -103,7 +99,6 @@ public class EditCommandParserTest {
     }
 
     @Test
-    @Ignore
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_ISSUE;
         String userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_C + TAG_DESC_UI
@@ -121,7 +116,6 @@ public class EditCommandParserTest {
     // TODO: test solution-level edit
 
     @Test
-    @Ignore
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_ISSUE;
         String userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_C;
@@ -134,9 +128,8 @@ public class EditCommandParserTest {
     }
 
     @Test
-    @Ignore
     public void parse_oneFieldSpecified_success() {
-        // name
+        // statement
         Index targetIndex = INDEX_THIRD_ISSUE;
         String userInput = targetIndex.getOneBased() + STATEMENT_DESC_JAVA;
         EditCommand.EditIssueDescriptor descriptor = new EditIssueDescriptorBuilder()
@@ -160,7 +153,6 @@ public class EditCommandParserTest {
     }
 
     @Test
-    @Ignore
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_ISSUE;
         String userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_JAVA
@@ -180,7 +172,6 @@ public class EditCommandParserTest {
     // TODO: test solution-level multiple repeated fields edit
 
     @Test
-    @Ignore
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_ISSUE;
@@ -199,7 +190,6 @@ public class EditCommandParserTest {
     }
 
     @Test
-    @Ignore
     public void parse_resetTags_success() {
         Index targetIndex = INDEX_THIRD_ISSUE;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;

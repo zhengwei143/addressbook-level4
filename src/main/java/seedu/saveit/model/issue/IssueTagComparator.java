@@ -12,14 +12,14 @@ public class IssueTagComparator implements Comparator<Issue> {
      * Compare Issue a and b with their first tag in the tag set. Tag is compared based on String tagName.
      */
     public int compare(Issue a, Issue b) {
-        Tag tag_b = b.getTags().stream().findFirst().orElse(null);
-        Tag tag_a = a.getTags().stream().findFirst().orElse(null);
+        Tag tagB = b.getTags().stream().findFirst().orElse(null);
+        Tag tagA = a.getTags().stream().findFirst().orElse(null);
 
-        if (tag_a == null) {
+        if (tagA == null) {
             return 1;
         }
 
-        int result = tag_a.compare(tag_b);
+        int result = tagA.compare(tagB);
 
         if (result == 0) {
             return a.getTags().size() - b.getTags().size();

@@ -2,9 +2,7 @@ package seedu.saveit.model.issue;
 
 import java.util.Comparator;
 
-import seedu.saveit.commons.core.Messages;
-import seedu.saveit.logic.commands.SortCommand;
-import seedu.saveit.logic.parser.exceptions.ParseException;
+import seedu.saveit.commons.util.AppUtil;
 import seedu.saveit.model.Issue;
 
 /**
@@ -20,25 +18,25 @@ public class IssueSort {
     private static final String TAG = "first tag";
     private static final String DEFAULT = "adding order";
     private final Comparator<Issue> comparator;
-    private final String sort_type;
+    private final String sortType;
     
-    public IssueSort(String sort_type) {
-        switch (sort_type) {
+    public IssueSort(String sortType) {
+        switch (sortType) {
         case FREQUENCY_SORT:
             this.comparator = new IssueFreqComparator();
-            this.sort_type = FREQUENCY;
+            this.sortType = FREQUENCY;
             break;
         case CHRONOLOGICAL_SORT:
             this.comparator = new IssueChroComparator();
-            this.sort_type = CHRONOLOGICAL;
+            this.sortType = CHRONOLOGICAL;
             break;
         case TAG_SORT:
             this.comparator = new IssueTagComparator();
-            this.sort_type = TAG;
+            this.sortType = TAG;
             break;
         case EMPTY_SORT:default:
             this.comparator = null;
-            this.sort_type = DEFAULT;
+            this.sortType = DEFAULT;
         }
     }
 
@@ -47,13 +45,20 @@ public class IssueSort {
     }
 
     public String getSortType() {
-        return this.sort_type;
+        return this.sortType;
+    }
+
+    /**
+     * Returns true if a given string is a valid IssueSort sort_tyep.
+     */
+    public static boolean isValidTagName(String test) {
+        return test.matches(ISSUE_SORT_VALIDATION_REGEX);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof IssueSort // instanceof handles nulls
-                && sort_type.equals(((IssueSort) other).sort_type));
+                && sortType.equals(((IssueSort) other).sortType));
     }
 }

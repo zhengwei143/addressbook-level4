@@ -2,16 +2,12 @@ package seedu.saveit.logic.parser;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.saveit.commons.core.Messages;
 import seedu.saveit.logic.commands.SortCommand;
 import seedu.saveit.logic.parser.exceptions.ParseException;
-import seedu.saveit.model.Issue;
 import seedu.saveit.model.issue.IssueSort;
-
-import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 
 /**
  * Parses input arguments and creates a new SortCommand object

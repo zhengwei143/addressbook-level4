@@ -3,6 +3,7 @@ package seedu.saveit.commons.core.directory;
 /**
  * Represent the directory of current edition by user. It can be passed as parameters to communicate with other
  * components as the directory design is rather complicated. There are three levels: root/issue/solution.
+ * issue and solution are all one based index. Zero value denotes root directory.
  */
 public class Directory {
     private int issue;
@@ -18,6 +19,27 @@ public class Directory {
 
     public static Directory formDirectory(int newIssue, int newSolution) {
         return new Directory(newIssue, newSolution);
+    }
+
+    /**
+     * Judge whether the directory is at Root level.
+    */
+    public boolean isRootLevel() {
+        return issue == 0;
+    }
+
+    /**
+     * Judge whether the directory is at Issue level.
+     */
+    public boolean isIssueLevel() {
+        return issue != 0 && solution == 0;
+    }
+
+    /**
+     * Judge whether the directory is at Solution level.
+     */
+    public boolean isSolutionlevel() {
+        return issue != 0 && solution != 0;
     }
 
     @Override

@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.saveit.logic.CommandHistory;
-import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.UserPrefs;

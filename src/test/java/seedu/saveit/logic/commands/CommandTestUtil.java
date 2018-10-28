@@ -13,6 +13,7 @@ import java.util.List;
 
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.CommandHistory;
+import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.SaveIt;
@@ -73,14 +74,14 @@ public class CommandTestUtil {
     public static void assertCommandSuccess(Command command, Model actualModel, CommandHistory actualCommandHistory,
         String expectedMessage, Model expectedModel) {
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
-        //        try {
-        //            CommandResult result = command.execute(actualModel, actualCommandHistory);
-        //            assertEquals(expectedMessage, result.feedbackToUser);
-        //            assertEquals(expectedModel, actualModel);
-        //            assertEquals(expectedCommandHistory, actualCommandHistory);
-        //        } catch (CommandException ce) {
-        //            throw new AssertionError("Execution of command should not fail.", ce);
-        //        }
+        try {
+            CommandResult result = command.execute(actualModel, actualCommandHistory);
+            assertEquals(expectedMessage, result.feedbackToUser);
+            assertEquals(expectedModel, actualModel);
+            assertEquals(expectedCommandHistory, actualCommandHistory);
+        } catch (CommandException ce) {
+            throw new AssertionError("Execution of command should not fail.", ce);
+        }
     }
 
     /**
@@ -97,15 +98,15 @@ public class CommandTestUtil {
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
 
-        //        try {
-        //            command.execute(actualModel, actualCommandHistory);
-        //            throw new AssertionError("The expected CommandException was not thrown.");
-        //        } catch (CommandException e) {
-        //            assertEquals(expectedMessage, e.getMessage());
-        //            assertEquals(expectedSaveIt, actualModel.getSaveIt());
-        //            assertEquals(expectedFilteredList, actualModel.getFilteredAndSortedIssueList());
-        //            assertEquals(expectedCommandHistory, actualCommandHistory);
-        //        }
+        try {
+            command.execute(actualModel, actualCommandHistory);
+            throw new AssertionError("The expected CommandException was not thrown.");
+        } catch (CommandException e) {
+            assertEquals(expectedMessage, e.getMessage());
+            assertEquals(expectedSaveIt, actualModel.getSaveIt());
+            assertEquals(expectedFilteredList, actualModel.getFilteredAndSortedIssueList());
+            assertEquals(expectedCommandHistory, actualCommandHistory);
+        }
     }
 
     /**

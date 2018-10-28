@@ -34,15 +34,13 @@ public class ListCommandTest {
     @Test
     @Ignore
     public void execute_listIsNotFiltered_showsSameList() throws ParseException {
-        assertCommandSuccess(new ListCommand(
-                new IssueSort("")), model, commandHistory, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCommand(), model, commandHistory, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     @Ignore
     public void execute_listIsFiltered_showsEverything() throws ParseException {
         showIssueAtIndex(model, INDEX_FIRST_ISSUE);
-        assertCommandSuccess(new ListCommand(
-                new IssueSort("freq")), model, commandHistory, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCommand(), model, commandHistory, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

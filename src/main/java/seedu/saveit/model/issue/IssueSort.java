@@ -19,7 +19,7 @@ public class IssueSort {
     private static final String DEFAULT = "adding order";
     private final Comparator<Issue> comparator;
     private final String sortType;
-    
+
     public IssueSort(String sortType) {
         switch (sortType) {
         case FREQUENCY_SORT:
@@ -46,13 +46,6 @@ public class IssueSort {
 
     public String getSortType() {
         return this.sortType;
-    }
-
-    /**
-     * Returns true if a given string is a valid IssueSort sort_tyep.
-     */
-    public static boolean isValidTagName(String test) {
-        return test.matches(ISSUE_SORT_VALIDATION_REGEX);
     }
 
     @Override

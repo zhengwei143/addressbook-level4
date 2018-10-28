@@ -3,7 +3,7 @@ package seedu.saveit.model.issue;
 import java.util.Comparator;
 
 import seedu.saveit.commons.core.Messages;
-import seedu.saveit.logic.commands.ListCommand;
+import seedu.saveit.logic.commands.SortCommand;
 import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.model.Issue;
 
@@ -19,16 +19,16 @@ public class IssueSort {
     public IssueSort(String sortType) throws ParseException {
         switch (sortType) {
         case FREQUENCY_SORT:
-            this.comparator = new IssueFreqSort();
+            this.comparator = new IssueFreqComparator();
             break;
         case CHRONOLOGICAL_SORT:
-            this.comparator = new IssueChroSort();
+            this.comparator = new IssueChroComparator();
             break;
         case TAG_SORT:
-            this.comparator = new IssueTagSort();
+            this.comparator = new IssueTagComparator();
             break;
         default:
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
     }
 

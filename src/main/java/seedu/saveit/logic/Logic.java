@@ -21,7 +21,7 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /** Returns an unmodifiable view of the filtered list of issues */
-    ObservableList<Issue> getFilteredIssueList();
+    ObservableList<Issue> getFilteredAndSortedIssueList();
 
     /**Returns an unmodifiable view of the filtered list of solutions of the selected issue */
     ObservableList<Solution> getFilteredSolutionList();

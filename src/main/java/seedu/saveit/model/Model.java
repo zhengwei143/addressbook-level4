@@ -71,6 +71,9 @@ public interface Model {
      */
     void sortIssues(IssueSort sortType);
 
+    /** Returns an unmodifiable view of the filtered or sorted issue list */
+    ObservableList<Issue> getFilteredAndSortedIssueList();
+
     /**
      * Updates the filter of the filtered issue list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

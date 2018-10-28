@@ -26,7 +26,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedSaveIt versionedSaveIt;
     private FilteredList<Issue> filteredIssues;
-    private SortedList<Issue> sortedList;
+    private SortedList<Issue> sortedIssues;
 
     /**
      * Initializes a ModelManager with the given saveIt and userPrefs.
@@ -39,7 +39,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedSaveIt = new VersionedSaveIt(saveIt);
         filteredIssues = new FilteredList<>(versionedSaveIt.getIssueList());
-        sortedList = new SortedList<>(versionedSaveIt.getIssueList());
+        sortedIssues = new SortedList<>(versionedSaveIt.getIssueList());
     }
 
     public ModelManager() {
@@ -147,7 +147,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredIssues.setPredicate(predicate);
     }
 
-    //=========== Filtered Issue List Accessors =============================================================
+    //=========== Sorted Issue List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Issue} backed by the internal list of
@@ -155,13 +155,27 @@ public class ModelManager extends ComponentManager implements Model {
      */
     @Override
     public ObservableList<Issue> getSortedIssueList() {
-        return FXCollections.unmodifiableObservableList(sortedList);
+        return FXCollections.unmodifiableObservableList(sortedIssues);
     }
 
     @Override
-    public void updateSortedIssueList(Comparator<Issue> sortType) {
-        requireNonNull(sortType);
-        sortedList.setComparator(sortType);
+
+    public void updateSortedIssueList(Comparator<Issue> comparator) {
+        sortedIssues.setComparator(comparator);
+    }
+
+    //=========== Sorted Issue List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Issue} backed by the internal list of
+     * {@code versionedSaveIt}
+     */
+    @Override
+    public ObservableList<Issue> getFilteredAndSortedIssueList() {
+        Comparator<? super Issue> comparator = sortedIssues.getComparator();
+        sortedIssues = new SortedList<>(getFilteredIssueList());
+        updateSortedIssueList((Comparator<Issue>) comparator);
+        return getSortedIssueList();
     }
 
     //=========== Undo/Redo =================================================================================

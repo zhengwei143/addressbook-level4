@@ -49,7 +49,7 @@ public class LogicManagerTest {
     @Test
     public void getFilteredIssueList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        logic.getFilteredIssueList().remove(0);
+        logic.getFilteredAndSortedIssueList().remove(0);
     }
 
     /**

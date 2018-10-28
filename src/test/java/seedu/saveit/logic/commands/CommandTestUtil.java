@@ -103,7 +103,7 @@ public class CommandTestUtil {
         //        } catch (CommandException e) {
         //            assertEquals(expectedMessage, e.getMessage());
         //            assertEquals(expectedSaveIt, actualModel.getSaveIt());
-        //            assertEquals(expectedFilteredList, actualModel.getFilteredIssueList());
+        //            assertEquals(expectedFilteredList, actualModel.getFilteredAndSortedIssueList());
         //            assertEquals(expectedCommandHistory, actualCommandHistory);
         //        }
     }

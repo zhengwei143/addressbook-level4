@@ -164,8 +164,8 @@ public class AutoSuggestedManager extends InlineCssTextArea {
      */
     private void fillTagKeyWords() {
         this.tagKeyWords.clear();
-        logic.getFilteredIssueList().forEach(issue -> issue.getTags().
-                forEach(tag -> this.tagKeyWords.add(tag.tagName)));
+        logic.getFilteredIssueList().forEach(issue -> issue.getTags()
+                .forEach(tag -> this.tagKeyWords.add(tag.tagName)));
     }
 
     /**

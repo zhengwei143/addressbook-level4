@@ -14,14 +14,12 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String COMMAND_ALIAS = "sr";
 
-    public static final String DEFAULT_SORT_TYPE = "chro";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort all issues with index numbers based on "
             + "the provided sort_type: freq (search frequency), chro (chronological), tag (tag names) .\n"
             + "Parameters: KEYWORD\n"
             + "Example: " + COMMAND_WORD + " freq";
 
-    public static final String MESSAGE_SUCCESS = "Sorted issues";
+    public static final String MESSAGE_SUCCESS = "Sorted issues by %s";
 
     private final IssueSort sort_type;
 
@@ -34,6 +32,6 @@ public class SortCommand extends Command {
         requireNonNull(model);
         model.sortIssues(sort_type);
         return new CommandResult(
-                String.format(MESSAGE_SUCCESS, model.getSortedIssueList().size()));
+                String.format(MESSAGE_SUCCESS, sort_type.getSortType()));
     }
 }

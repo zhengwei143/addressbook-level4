@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.model.Model;
-import seedu.saveit.model.issue.IssueSort;
 
 /**
  * Lists all issues in the saveIt to the user.

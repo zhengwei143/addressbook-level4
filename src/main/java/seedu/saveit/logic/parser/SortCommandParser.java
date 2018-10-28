@@ -25,10 +25,6 @@ public class SortCommandParser implements Parser<SortCommand> {
             );
         }
 
-        if (trimmedArgs.isEmpty()) {
-            return new SortCommand(new IssueSort(SortCommand.DEFAULT_SORT_TYPE));
-        }
-
         return new SortCommand(new IssueSort(trimmedArgs));
     }
 }

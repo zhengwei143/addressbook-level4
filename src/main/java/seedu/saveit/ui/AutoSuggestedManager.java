@@ -57,7 +57,7 @@ public class AutoSuggestedManager extends InlineCssTextArea {
         this.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
-                    String newValue) {
+                String newValue) {
                 if (getText().length() == 0 || !getText().contains(WORD_FIND)) {
                     popUpWindow.hide();
                 } else {
@@ -146,7 +146,7 @@ public class AutoSuggestedManager extends InlineCssTextArea {
      */
     private void addAllTagKeyWord() {
         tagSet.clear();
-        for (String str: tagKeyWords) {
+        for (String str : tagKeyWords) {
             tagSet.add(str);
         }
     }
@@ -164,8 +164,8 @@ public class AutoSuggestedManager extends InlineCssTextArea {
      */
     private void fillTagKeyWords() {
         this.tagKeyWords.clear();
-        logic.getFilteredIssueList().forEach(issue -> issue.getTags().
-                forEach(tag -> this.tagKeyWords.add(tag.tagName)));
+        logic.getFilteredIssueList().forEach(issue -> issue.getTags()
+            .forEach(tag -> this.tagKeyWords.add(tag.tagName)));
     }
 
     /**
@@ -173,7 +173,7 @@ public class AutoSuggestedManager extends InlineCssTextArea {
      */
     private void getFocused() {
         popUpWindow.show(AutoSuggestedManager.this, Side.BOTTOM, (double) AutoSuggestedManager
-                .this.getCaretPosition() * 8, 0);
+            .this.getCaretPosition() * 8, 0);
         popUpWindow.hide();
     }
 }

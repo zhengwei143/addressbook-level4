@@ -21,7 +21,7 @@ public class AddTagCommand extends Command {
     public static final String COMMAND_WORD = "addTag";
     public static final String COMMAND_ALIAS = "at";
 
-    public static final String MESSAGE_Add_TAG_SUCCESS = "Add tags success";
+    public static final String MESSAGE_ADD_TAG_SUCCESS = "Add tags success";
 
     public static final String MESSAGE_USAGE =
         COMMAND_WORD + ": To add tags for an issue.\n"
@@ -57,7 +57,7 @@ public class AddTagCommand extends Command {
         model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
         model.commitSaveIt();
 
-        return new CommandResult(MESSAGE_Add_TAG_SUCCESS);
+        return new CommandResult(MESSAGE_ADD_TAG_SUCCESS);
     }
 
     @Override

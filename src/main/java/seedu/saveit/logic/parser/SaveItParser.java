@@ -120,8 +120,7 @@ public class SaveItParser {
         case AddTagCommand.COMMAND_ALIAS:
             return new AddTagCommandParser().parse(arguments);
 
-
-            default:
+        default:
             throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND);
         }
     }

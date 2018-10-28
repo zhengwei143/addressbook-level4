@@ -38,8 +38,8 @@ public class AutoSuggestionManager extends InlineCssTextArea {
     private static ContextMenu popUpWindow;
     private String[] wordSet = {WORD_ADD, WORD_EDIT, WORD_FIND, WORD_TAG};
 
-    private static IssueNameAutoSuggestion issueSuggestion;
-    private static TagNameAutoSuggestion tagSuggestion;
+    private IssueNameAutoSuggestion issueSuggestion;
+    private TagNameAutoSuggestion tagSuggestion;
 
 
     public AutoSuggestionManager() {
@@ -60,8 +60,8 @@ public class AutoSuggestionManager extends InlineCssTextArea {
                 if (getText().length() == 0 || !Arrays.stream(wordSet).parallel().anyMatch(getText()::contains)) {
                     popUpWindow.hide();
                 } else {
-                if (getText().length() > WORD_FIND.length() && getText()
-                        .substring(0,WORD_FIND.length()).contains(WORD_FIND)) { //find or findtag
+                    if (getText().length() > WORD_FIND.length() && getText()
+                        .substring(0, WORD_FIND.length()).contains(WORD_FIND)) { //find or findtag
                         showResult(AutoSuggestionManager.this, WHITESPACE_IDENTIFIER);
                     } else { //add or edit
                         showResult(AutoSuggestionManager.this, TAG_PREFIX_IDENTIFIER);

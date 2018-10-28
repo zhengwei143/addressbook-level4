@@ -16,9 +16,9 @@ public class IssueSort {
     private static final String TAG_SORT = "tag";
     private static final String EMPTY_SORT = "";
     private static final String FREQUENCY = "search frequency";
-    private static final String CHRONOLOGICAL = "chronological";
+    private static final String CHRONOLOGICAL = "chronological order";
     private static final String TAG = "first tag";
-    private static final String DEFAULT = CHRONOLOGICAL;
+    private static final String DEFAULT = "adding order";
     private final Comparator<Issue> comparator;
     private final String sort_type;
 

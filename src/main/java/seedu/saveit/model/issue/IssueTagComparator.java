@@ -16,11 +16,17 @@ public class IssueTagComparator implements Comparator<Issue> {
         Tag tag_a = a.getTags().stream().findFirst().orElse(null);
 
         if (tag_a == null) {
-            return -1;
-        } else if (tag_b == null) {
             return 1;
+        } else if (tag_b == null) {
+            return -1;
         }
 
-        return tag_a.compare(tag_b);
+        int result = tag_a.compare(tag_b);
+
+        if (result == 0) {
+            return a.getTags().size() - b.getTags().size();
+        } else {
+            return result;
+        }
     }
 }

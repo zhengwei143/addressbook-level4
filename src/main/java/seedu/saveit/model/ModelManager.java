@@ -139,10 +139,10 @@ public class ModelManager extends ComponentManager implements Model {
     public ObservableList<Solution> getFilteredSolutionList() {
         int directory = getCurrentDirectory();
         if (directory == 0) {
-            return FXCollections.unmodifiableObservableList(FXCollections.emptyObservableList());
+            return FXCollections.unmodifiableObservableList(filteredIssues.get(0).getObservableSolutions());
         } else {
             return FXCollections.unmodifiableObservableList
-                    (filteredIssues.get(getCurrentDirectory()).getObservableSolutions());
+                    (filteredIssues.get(getCurrentDirectory() - 1).getObservableSolutions());
         }
     }
 

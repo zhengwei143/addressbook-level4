@@ -56,10 +56,8 @@ public class SolutionListPanel extends UiPart<Region> {
         });
     }
 
-    @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        scrollTo(event.targetIndex);
+    public void setSolutionList(ObservableList<Solution> solutionList) {
+        solutionListView.setItems(solutionList);
     }
 
     /**

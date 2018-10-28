@@ -17,8 +17,6 @@ public class IssueTagComparator implements Comparator<Issue> {
 
         if (tag_a == null) {
             return 1;
-        } else if (tag_b == null) {
-            return -1;
         }
 
         int result = tag_a.compare(tag_b);

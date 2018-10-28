@@ -37,6 +37,9 @@ public class Tag {
      * Compare two Tag regarding to their tagName.
      */
     public int compare(Tag other) {
+        if (other == null) {
+            return -1;
+        }
         return tagName.compareTo(other.tagName);
     }
 

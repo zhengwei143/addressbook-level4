@@ -11,19 +11,19 @@ import seedu.saveit.model.Issue;
  * Create respective Comparator based on the command inputted.
  */
 public class IssueSort {
-    private static final String FREQUENCY_SORT = "freq";
-    private static final String CHRONOLOGICAL_SORT = "chro";
-    private static final String TAG_SORT = "tag";
-    private static final String EMPTY_SORT = "";
+    public static final String FREQUENCY_SORT = "freq";
+    public static final String CHRONOLOGICAL_SORT = "chro";
+    public static final String TAG_SORT = "tag";
+    public static final String EMPTY_SORT = "";
     private static final String FREQUENCY = "search frequency";
     private static final String CHRONOLOGICAL = "chronological order";
     private static final String TAG = "first tag";
     private static final String DEFAULT = "adding order";
     private final Comparator<Issue> comparator;
     private final String sort_type;
-
-    public IssueSort(String sortType) throws ParseException {
-        switch (sortType) {
+    
+    public IssueSort(String sort_type) {
+        switch (sort_type) {
         case FREQUENCY_SORT:
             this.comparator = new IssueFreqComparator();
             this.sort_type = FREQUENCY;
@@ -36,12 +36,9 @@ public class IssueSort {
             this.comparator = new IssueTagComparator();
             this.sort_type = TAG;
             break;
-        case EMPTY_SORT:
+        case EMPTY_SORT:default:
             this.comparator = null;
             this.sort_type = DEFAULT;
-            break;
-        default:
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
     }
 

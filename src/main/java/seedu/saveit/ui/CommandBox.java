@@ -31,7 +31,7 @@ public class CommandBox extends UiPart<Region> {
 
 
     @FXML
-    private AutoSuggestedManager commandTextField;
+    private AutoSuggestionManager commandTextField;
 
     public CommandBox(Logic logic) {
         super(FXML);
@@ -116,7 +116,7 @@ public class CommandBox extends UiPart<Region> {
     private void handleCommandEntered() {
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText().trim().replaceAll("\\r|\\n", ""));
-            if (!commandTextField.getText().contains(AutoSuggestedManager.WORD_FIND)) {
+            if (!commandTextField.getText().contains(AutoSuggestionManager.WORD_FIND)) {
                 commandTextField.update(logic);
             }
             initHistory();

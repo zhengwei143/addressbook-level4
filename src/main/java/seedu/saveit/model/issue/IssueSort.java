@@ -50,4 +50,10 @@ public class IssueSort {
         return this.sort_type;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof IssueSort // instanceof handles nulls
+                && sort_type.equals(((IssueSort) other).sort_type));
+    }
 }

@@ -2,8 +2,6 @@ package seedu.saveit.ui;
 
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,7 +9,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.saveit.commons.core.LogsCenter;
-import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.model.issue.Solution;
 
 /**

@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import seedu.saveit.commons.core.Messages;
 import seedu.saveit.logic.commands.AddCommand;
+import seedu.saveit.logic.commands.AddTagCommand;
 import seedu.saveit.logic.commands.ClearCommand;
 import seedu.saveit.logic.commands.Command;
 import seedu.saveit.logic.commands.DeleteCommand;
@@ -115,7 +116,12 @@ public class SaveItParser {
         case RefactorTagCommand.COMMAND_ALIAS:
             return new RefactorTagCommandParser().parse(arguments);
 
-        default:
+        case AddTagCommand.COMMAND_WORD:
+        case AddTagCommand.COMMAND_ALIAS:
+            return new AddTagCommandParser().parse(arguments);
+
+
+            default:
             throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND);
         }
     }

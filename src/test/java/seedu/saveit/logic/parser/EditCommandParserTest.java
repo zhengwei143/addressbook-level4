@@ -14,6 +14,8 @@ import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_SYNTAX;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -35,6 +37,9 @@ import seedu.saveit.testutil.EditIssueDescriptorBuilder;
 public class EditCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
+    private static final String DESCRIPTION_EMPTY = " " + PREFIX_DESCRIPTION;
+    private static final String STATEMENT_EMPTY = " " + PREFIX_STATEMENT;
+
 
     private static final String MESSAGE_INVALID_FORMAT =
         String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -42,13 +47,12 @@ public class EditCommandParserTest {
     private EditCommandParser parser = new EditCommandParser();
 
     @Test
-    @Ignore
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_STATEMENT_JAVA, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, STATEMENT_EMPTY + VALID_STATEMENT_JAVA, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);

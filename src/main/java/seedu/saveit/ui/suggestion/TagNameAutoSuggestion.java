@@ -7,10 +7,13 @@ import java.util.TreeSet;
 
 import seedu.saveit.logic.Logic;
 
+/**
+ * The suggestion component which stores and provides tag name key words
+ */
 public class TagNameAutoSuggestion {
 
     private Logic logic;
-    private static TreeSet<String> tagSet;
+    private TreeSet<String> tagSet;
     private Set<String> tagKeyWords;
 
     public TagNameAutoSuggestion(Logic logic) {
@@ -21,12 +24,18 @@ public class TagNameAutoSuggestion {
         addAllTagKeyWord();
     }
 
+    /**
+     * Compares and match the keywords.
+     */
     public LinkedList<String> giveSuggestion(String text) {
         LinkedList<String> searchResult = new LinkedList<>();
         searchResult.addAll(tagSet.subSet(text, text + Character.MAX_VALUE));
         return searchResult;
     }
 
+    /**
+     * Updates the keywords stored in the class.
+     */
     public void update(Logic logic) {
         this.logic = logic;
         fillTagKeyWords();

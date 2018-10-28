@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.saveit.commons.core.Messages;
+import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.util.CollectionUtil;
 import seedu.saveit.logic.CommandHistory;
@@ -70,9 +71,9 @@ public class EditCommand extends Command {
         Issue issueToEdit;
         requireNonNull(model);
         List<Issue> lastShownList = model.getFilteredIssueList();
-        int currentDirectory = model.getCurrentDirectory();
+        Directory currentDirectory = model.getCurrentDirectory();
 
-        if (currentDirectory == 0 && (editIssueDescriptor.getStatement().isPresent() || editIssueDescriptor
+        if (currentDirectory.isRootLevel() && (editIssueDescriptor.getStatement().isPresent() || editIssueDescriptor
             .getDescription().isPresent() || editIssueDescriptor.getTags().isPresent())) {
             if (index.getZeroBased() <= lastShownList.size()) {
                 issueToEdit = lastShownList.get(index.getZeroBased());
@@ -80,10 +81,10 @@ public class EditCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
             }
             // if it edits solution or remark, then throw Exception
-        } else if (currentDirectory != 0 && editIssueDescriptor.getSolution().isPresent()) {
-            int solutionListSize = lastShownList.get(model.getCurrentDirectory() - 1).getSolutions().size();
+        } else if (currentDirectory.isIssueLevel() && editIssueDescriptor.getSolution().isPresent()) {
+            int solutionListSize = lastShownList.get(currentDirectory.getIssue() - 1).getSolutions().size();
             if (index.getZeroBased() <= solutionListSize) {
-                issueToEdit = lastShownList.get(model.getCurrentDirectory() - 1);
+                issueToEdit = lastShownList.get(currentDirectory.getIssue() - 1);
             } else {
                 throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
             }

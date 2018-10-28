@@ -16,7 +16,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
-import seedu.saveit.commons.core.index.Index;
+import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.model.Issue;
@@ -109,12 +109,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void resetDirectory(Index targetIndex, boolean rootDirectory) {
+        public void resetDirectory(Directory currentDirectory) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public int getCurrentDirectory() {
+        public Directory getCurrentDirectory() {
             throw new AssertionError("This method should not be called.");
         }
 

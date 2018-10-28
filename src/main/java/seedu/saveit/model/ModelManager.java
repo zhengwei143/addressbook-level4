@@ -12,7 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.saveit.commons.core.ComponentManager;
 import seedu.saveit.commons.core.LogsCenter;
-import seedu.saveit.commons.core.index.Index;
+import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.events.model.SaveItChangedEvent;
 import seedu.saveit.commons.util.CollectionUtil;
 import seedu.saveit.model.issue.IssueSort;
@@ -24,7 +24,6 @@ import seedu.saveit.model.issue.Solution;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private static final Index ROOT_DIRECTORY = Index.fromZeroBased(0);
     private final VersionedSaveIt versionedSaveIt;
     private FilteredList<Issue> filteredIssues;
     private SortedList<Issue> sortedList;
@@ -54,17 +53,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetDirectory(Index targetIndex, boolean rootDirectory) {
-        if (rootDirectory) {
-            versionedSaveIt.setCurrentDirectory(targetIndex.getZeroBased());
-        } else {
-            versionedSaveIt.setCurrentDirectory(targetIndex.getOneBased());
-        }
+    public void resetDirectory(Directory currentDirectory) {
+        versionedSaveIt.setCurrentDirectory(currentDirectory);
         indicateSaveItChanged();
     }
 
     @Override
-    public int getCurrentDirectory() {
+    public Directory getCurrentDirectory() {
         return versionedSaveIt.getCurrentDirectory();
     }
 
@@ -137,12 +132,12 @@ public class ModelManager extends ComponentManager implements Model {
      */
     @Override
     public ObservableList<Solution> getFilteredSolutionList() {
-        int directory = getCurrentDirectory();
-        if (directory == 0) {
+        Directory directory = getCurrentDirectory();
+        if (directory.isRootLevel()) {
             return FXCollections.unmodifiableObservableList(filteredIssues.get(0).getObservableSolutions());
         } else {
             return FXCollections.unmodifiableObservableList
-                    (filteredIssues.get(getCurrentDirectory() - 1).getObservableSolutions());
+                    (filteredIssues.get(directory.getIssue() - 1).getObservableSolutions());
         }
     }
 

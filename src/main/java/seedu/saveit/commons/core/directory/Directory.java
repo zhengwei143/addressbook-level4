@@ -10,14 +10,19 @@ public class Directory {
     private int solution;
 
     /**
-     * Directory can only be created by calling {@link Directory#formDirectory(int,int)}.
+     * newIssue and newSolution should be non-negative values.
      */
-    private Directory(int newIssue, int newSolution) {
+    public Directory(int newIssue, int newSolution) {
+        assert newIssue >= 0 && newSolution >= 0;
         issue = newIssue;
         solution = newSolution;
     }
 
+    /**
+     * newIssue and newSolution should be non-negative values.
+     */
     public static Directory formDirectory(int newIssue, int newSolution) {
+        assert newIssue >= 0 && newSolution >= 0;
         return new Directory(newIssue, newSolution);
     }
 
@@ -32,14 +37,22 @@ public class Directory {
      * Judge whether the directory is at Issue level.
      */
     public boolean isIssueLevel() {
-        return issue != 0 && solution == 0;
+        return issue > 0 && solution == 0;
     }
 
     /**
      * Judge whether the directory is at Solution level.
      */
-    public boolean isSolutionlevel() {
-        return issue != 0 && solution != 0;
+    public boolean isSolutionLevel() {
+        return issue > 0 && solution > 0;
+    }
+
+    public int getIssue() {
+        return issue;
+    }
+
+    public int getSolution() {
+        return solution;
     }
 
     @Override

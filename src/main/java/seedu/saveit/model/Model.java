@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.saveit.commons.core.index.Index;
+import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.model.issue.IssueSort;
 import seedu.saveit.model.issue.Solution;
 
@@ -19,10 +19,10 @@ public interface Model {
     void resetData(ReadOnlySaveIt newData);
 
     /** Reset the current directory. */
-    void resetDirectory(Index targetIndex, boolean rootDirectory);
+    void resetDirectory(Directory currentDirectory);
 
     /** Return the current directory. */
-    int getCurrentDirectory();
+    Directory getCurrentDirectory();
 
     /** Returns the SaveIt */
     ReadOnlySaveIt getSaveIt();

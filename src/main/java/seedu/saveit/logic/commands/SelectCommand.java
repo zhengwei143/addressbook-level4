@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.saveit.commons.core.EventsCenter;
 import seedu.saveit.commons.core.Messages;
+import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.logic.CommandHistory;
@@ -44,7 +45,7 @@ public class SelectCommand extends Command {
         if (targetIndex.getZeroBased() >= filteredIssueList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
         }
-        model.resetDirectory(targetIndex, false);
+        model.resetDirectory(new Directory(targetIndex.getOneBased(), 0));
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
         return new CommandResult(String.format(MESSAGE_SELECT_ISSUE_SUCCESS, targetIndex.getOneBased()));
 

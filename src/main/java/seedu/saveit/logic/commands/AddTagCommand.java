@@ -18,7 +18,7 @@ import seedu.saveit.model.issue.Tag;
  */
 public class AddTagCommand extends Command {
 
-    public static final String COMMAND_WORD = "addTag";
+    public static final String COMMAND_WORD = "addtag";
     public static final String COMMAND_ALIAS = "at";
 
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Add tags success";

@@ -12,7 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import seedu.saveit.commons.core.LogsCenter;
-import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
+import seedu.saveit.commons.events.ui.ChangeDirectoryRequestEvent;
 import seedu.saveit.commons.events.ui.NewResultAvailableEvent;
 
 /**
@@ -46,10 +46,11 @@ public class ResultDisplay extends UiPart<Region> {
         Platform.runLater(() -> displayed.setValue(event.message));
     }
 
+
     @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
+    private void handleChangeDirectoryRequestEvent(ChangeDirectoryRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        Platform.runLater(() -> currentDirectory.setValue(ROOT_DIRECTORY + "/issue " + (event.targetIndex + 1)));
+        Platform.runLater(() -> currentDirectory.setValue(event.directory.toString()));
     }
 
 }

@@ -8,6 +8,7 @@ import seedu.saveit.commons.core.EventsCenter;
 import seedu.saveit.commons.core.Messages;
 import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
+import seedu.saveit.commons.events.ui.ChangeDirectoryRequestEvent;
 import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
@@ -47,6 +48,8 @@ public class SelectCommand extends Command {
         }
         model.resetDirectory(new Directory(targetIndex.getOneBased(), 0));
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
+        EventsCenter.getInstance().post(
+                new ChangeDirectoryRequestEvent(new Directory(targetIndex.getOneBased(), 0)));
         return new CommandResult(String.format(MESSAGE_SELECT_ISSUE_SUCCESS, targetIndex.getOneBased()));
 
     }

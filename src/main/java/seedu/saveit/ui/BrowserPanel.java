@@ -44,7 +44,7 @@ public class BrowserPanel extends UiPart<Region> {
 
     private void loadIssuePage(Issue issue) {
         //loadPage(issue.getStatement().issue);
-        loadPage("http://www.google.com");
+        loadPage("https://docs.oracle.com/javase/7/docs/api/");
     }
 
     public void loadPage(String url) {

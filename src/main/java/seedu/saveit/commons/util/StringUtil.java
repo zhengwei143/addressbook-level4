@@ -71,7 +71,7 @@ public class StringUtil {
      * ArgumentMultimap}.
      */
     public static boolean arePrefixesPresent(String args, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> args.contains(prefix.getPrefix()));
+        return Stream.of(prefixes).anyMatch(prefix -> args.contains(prefix.getPrefix()));
     }
 
     /**

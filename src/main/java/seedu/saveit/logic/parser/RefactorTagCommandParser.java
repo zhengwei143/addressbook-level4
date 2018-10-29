@@ -1,7 +1,12 @@
 package seedu.saveit.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.saveit.commons.util.StringUtil.arePrefixesPresent;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_NEW_TAG;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.saveit.logic.parser.ParserUtil.parseTag;
 
@@ -31,6 +36,11 @@ public class RefactorTagCommandParser implements Parser<RefactorTagCommand> {
         Tag newTag;
         Tag oldTag;
 
+        if (arePrefixesPresent(args, PREFIX_DESCRIPTION, PREFIX_STATEMENT, PREFIX_SOLUTION_LINK, PREFIX_REMARK)) {
+            throw new ParseException(
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, RefactorTagCommand.MESSAGE_USAGE));
+        }
+
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
             oldTag = parseTag(argMultimap.getValue(PREFIX_TAG).get());
         } else {
@@ -45,7 +55,6 @@ public class RefactorTagCommandParser implements Parser<RefactorTagCommand> {
 
         return new RefactorTagCommand(oldTag, newTag);
     }
-
 
 
 }

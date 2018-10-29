@@ -47,23 +47,23 @@ public class RefactorTagCommandParserTest {
     public void parse_invalidArgs_throwsParseException() {
         // correct tag prefix, but wrong new tag prefix
         assertParseFailure(parser, TAG_DESC_UI + DESCRIPTION_DESC_C,
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RefactorTagCommand.MESSAGE_USAGE));
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
 
         // wrong tag prefix, also wrong new tag prefix
         assertParseFailure(parser, DESCRIPTION_DESC_C + DESCRIPTION_DESC_C,
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RefactorTagCommand.MESSAGE_USAGE));
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
 
         // different order and includes tag prefix, but it has not allowed prefix
         assertParseFailure(parser, DESCRIPTION_DESC_C + TAG_DESC_UI,
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RefactorTagCommand.MESSAGE_USAGE));
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
 
         // only has new tag, but not original tag
         assertParseFailure(parser, TAG_NEW_TAG + TAG_NEW_TAG,
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RefactorTagCommand.MESSAGE_USAGE));
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
 
         // only has new tag, but not original tag
         assertParseFailure(parser, TAG_NEW_TAG + TAG_NEW_TAG,
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RefactorTagCommand.MESSAGE_USAGE));
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
 
     }
 

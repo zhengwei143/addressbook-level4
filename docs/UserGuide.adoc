@@ -504,6 +504,7 @@ e.g. `Search BST`
 * *History* : `history`
 * *Exit* : `exit`
 * *List* : `list`
+* *Sort* : `sort` TYPE
 * *Refactor Tag* : `refactor [OLDTAG] [NEWTAG]` +
 e.g. `refactorTag java C++`
 * *Highlight* : `highlight`

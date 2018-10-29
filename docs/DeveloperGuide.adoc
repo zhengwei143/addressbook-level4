@@ -1236,13 +1236,13 @@ These instructions only provide a starting point for testers to work on; testers
 . Adding an issue in root directory
 
 .. Prerequisites: User is in root directory
-.. Test case: `add i/problem d/description t/UI`
+.. Test case: `add i/problem d/description t/UI` +
    Expected: A new issue with statement and description is added, tagged with UI.
-.. Test case: `add t/UI d/description d/newdescription i/problem`
+.. Test case: `add t/UI d/description d/newdescription i/problem` +
    Expected: A new issue with statement and newdescription is added, tagged with UI.
-.. Test case: `add i/proπblem d/description`
+.. Test case: `add i/proπblem d/description` +
    Expected: No issue is added. Error details shown in the status message. Status bar remains the same.
-.. Test case: `add s/www.example.com r/remark`
+.. Test case: `add s/www.example.com r/remark` +
    Expected: No issue is added. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect add commands to try: `add i/problem`, `add i/problem s/link` _{give more}_ +
    Expected: Similar to previous.
@@ -1254,13 +1254,13 @@ _{ more test cases ... }_
 . Editing an issue in root directory
 
 .. Prerequisites: User is in root directory
-.. Test case: `edit 1 i/problem`
+.. Test case: `edit 1 i/problem` +
    Expected: First issue is edited. Its new issue statement is problem.
-.. Test case: `edit 1 d/description d/newdescription`
+.. Test case: `edit 1 d/description d/newdescription` +
    Expected: First issue is edited. Its new description is newdescription.
-.. Test case: `edit 1 i/proπblem`
+.. Test case: `edit 1 i/proπblem` +
    Expected: No issue is edited. Error details shown in the status message. Status bar remains the same.
-.. Test case: `edit 1 s/www.example.com r/remark`
+.. Test case: `edit 1 s/www.example.com r/remark` +
    Expected: No issue is edited. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect add commands to try: `edit i/problem s/link`, `edit x i/problem` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
@@ -1282,6 +1282,20 @@ _{ more test cases ... }_
    Expected: Similar to previous.
 
 _{ more test cases ... }_
+
+=== Sorting an issue list
+
+. Sorting the issue list in root directory
+
+.. Prerequisites: User is in root directory
+.. Test case: `sort` +
+   Expected: Issues are sorted by adding order.
+.. Test case: `sort freq` +
+   Expected: Issues are sorted by search frequency.
+.. Test case: `sort random` +
+   Expected: The invalid command error it shown in the status message. The issue list remains the same.
+.. Test case: `sort tag random` +
+   Expected: The invalid command error it shown in the status message. The issue list remains the same.
 
 === Saving data
 

@@ -17,11 +17,11 @@ public class SortCommand extends Command {
     public static final String COMMAND_ALIAS = "sr";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort all issues with index numbers based on "
-            + "the provided sortType: freq (search frequency), chro (chronological), tag (tag names) .\n"
+            + "the provided sortType: freq (search frequency), chro (chronological), tag (tag names).\n"
             + "Parameters: KEYWORD\n"
             + "Example: " + COMMAND_WORD + " " + IssueSort.TAG_SORT;
 
-    public static final String MESSAGE_SUCCESS = "Sorted issues by %s";
+    public static final String MESSAGE_SUCCESS = "Sorted issues by %s.";
 
     private final IssueSort sortType;
 

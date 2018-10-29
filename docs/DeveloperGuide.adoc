@@ -283,7 +283,9 @@ image::SortCommandSequenceDiagram.png[width="800"]
 .Reference Frame Initialize Comparator
 image::InitializeComparator.png[width="800"]
 
+
 This two diagrams show that after the input is parsed, a IssueSort object is initialized before the SortCommand object.
+
 As shown in the diagram, an IssueSort object contains a Comparator object as its attribute, and the type of that object depends on the input String passed from SortCommand.
 We consider switch statement as a proper way to provide alternative paths to initialize Comparator here for current implementation.
 

@@ -356,36 +356,38 @@ Examples:
 ****
 
 
-=== Listing all issues : `(l)list` [coming in v1.3]
+=== Listing all issues : `(l)list`
 
-Shows a list of all issues in the statement bookmark according to either chronological order or frequency order. Users can also choose to list part of issues.
+Shows a list of all issues.
 
-Format: `list chr`
+=== Sorting the list of issues
+
+Format: `sort chro`
 
 [TIP]
 ====
-* List all the issues by chronological order.
+* Sort the issue list by their last modified time chronologically.
 ====
 
 
-Format: `list freq`
+Format: `sort freq`
 [TIP]
 ====
-* List issues based on search frequency.
+* Sort the issue list based on search frequency.
 ====
 
-Format: `list tag`
+Format: `sort tag`
 [TIP]
 ====
-* List all the issues in alphabetical order.
-* List the issues without tags at the end of the display issue list.
+* Sort the issue list by their first tag in alphabetical order.
+* Sort the issues without tags at the end of the display issue list.
 ====
 
 Examples:
 ****
-* list
-* list freq
-* list tag
+* sort
+* sort freq
+* sort tag
 ****
 
 

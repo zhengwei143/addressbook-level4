@@ -264,13 +264,13 @@ Classes used by multiple components are in the `seedu.saveit.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented. Note that this section does not fully encompass all the features, but the more core features of the application.
 
-// tag::list[]
-=== List feature
+// tag::sort[]
+=== Sort feature
 ==== Current Implementation
 
 The current list mechanism inherits the same implementation from AddressBook.
 
-* `ModelManager#updateFilteredIssueList()` -- Predicate is set to be unused. Indicate no change is required.
+* `ModelManager#updateFilteredIssueList()` -- Predicate is set to be unused.
 * `FXCollections.unmodifiableObservableList()` -- Return a ObservableList of all issues.
 
 ==== Design Considerations

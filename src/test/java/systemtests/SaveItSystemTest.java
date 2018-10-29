@@ -42,7 +42,6 @@ import seedu.saveit.logic.commands.SelectCommand;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.SaveIt;
 import seedu.saveit.testutil.TypicalIssues;
-import seedu.saveit.ui.BrowserPanel;
 import seedu.saveit.ui.CommandBox;
 
 /**

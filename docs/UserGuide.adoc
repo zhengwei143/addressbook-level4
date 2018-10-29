@@ -360,20 +360,25 @@ Examples:
 
 Shows a list of all issues.
 
-=== Sorting the list of issues
+=== Sorting the list of issues: `sort`
 
-Format: `sort chro`
 
+Format: `sort`
 [TIP]
 ====
-* Sort the issue list by their last modified time chronologically.
+* Sort the issue list based on the time when they are added. The first issue added has the highest priority.
 ====
 
+Format: `sort chro`
+[TIP]
+====
+* Sort the issue list by their last modified time chronologically. The last modified one has the highest priority.
+====
 
 Format: `sort freq`
 [TIP]
 ====
-* Sort the issue list based on search frequency.
+* Sort the issue list based on search frequency. The one which matches the search keywords most frequently has the highest priority.
 ====
 
 Format: `sort tag`

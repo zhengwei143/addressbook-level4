@@ -266,42 +266,58 @@ This section describes some noteworthy details on how certain features are imple
 
 // tag::sort[]
 === Sort feature
-==== Current Implementation
 
-The current list mechanism inherits the same implementation from AddressBook.
+The sort command can sort an issue list shown in the GUI.
 
-* `ModelManager#updateFilteredIssueList()` -- Predicate is set to be unused.
-* `FXCollections.unmodifiableObservableList()` -- Return a ObservableList of all issues.
+==== Current implementation
 
-==== Design Considerations
+We use JavaFX `SortedList` and the Comparator provided by `IssueSort` to sort the list, `ModelManager#getSortedList()` to retrieve the sorted list.
 
-===== List by a specific order
-
-This mechanism relies most on the logic component. ListCommandParser.java need to be implemented to identify if there is a sorting requirement.
-
-Since list should not modify the sorting inside storage, IndicateSaveItChanged should not be raised and this command should not change Model.
-
-There will only be 3 kinds of order that the list can be shown in, as proposed in the following paragraph.
-
-* List by chronological order **(default)** +
-  **Command:** `list chr` +
-  This order follows how the data is stored in Model, reflecting the user's learning journey. +
-  There is no need to implement new Comparator for that.
-
-* List by Tag +
-  **Command:** `list tag` +
-  Tag is mainly used as a way to distinguish different kind of problems, such as Java problems and C problems. This order can help users to identify the issues quickly. +
-  This order requires the tag attribute of every issue to be tracked. A simple idea is to get the TagList and sort all issues according to the tags. +
-  Those issues without a tag should be put at the end of the lists.
-
-* List by search frequency +
-  **Command** `list freq` +
-  Search frequency can reflect the importance of different issues. This order can help users to review important issues more easily.
-  Search frequency tracker is needed for this list order. It can be considered as an attribute just like tags, thus a Comparator which is similar to that used in List by Tag can be used here. +
+In order to allow sort work with filtered list, we implement the new method `getFilteredAndSortedList()`, which calls `getSortedList()` and apply it to the filtered list.
 
 The following sequence diagram illustrates how the mechanism works:
 
-image::ListByOrderCommandSequenceDiagram.png[width="800"]
+.Sort Command Sequence Diagram
+image::SortCommandSequenceDiagram.png[width="800"]
+
+.Reference Frame Initialize Comparator
+image::InitializeComparator.png[width="800"]
+
+This two diagrams show that after the input is parsed, a IssueSort object is initialized before the SortCommand object.
+As shown in the diagram, an IssueSort object contains a Comparator object as its attribute, and the type of that object depends on the input String passed from SortCommand.
+We consider switch statement as a proper way to provide alternative paths to initialize Comparator here for current implementation.
+
+==== Design Considerations
+
+===== Aspect: How sort executes
+
+* Alternative 1 (current choice): Combine SortedList and FilteredList, sort at GUI side
+
+** Pros: Consistent sorting. Doesn't affect the memory of issue lists.
+
+** Cons: Need effort to make sure the correct list is retrieved.
+
+* Alternative 2: Reconstruct UniqueIssueList directly, sort at Storage
+
+** Pros: Easy to understand and implement
+
+** Cons: Time consuming.
+
+===== Aspect: Comparator to support the sort command
+
+* Sort by added time: `sort` +
+  This sorting follows how the data is stored in Storage, reflecting the user's learning journey. +
+  There is no need to implement new Comparator for that.
+
+* Sort by chronological order: `sort chro` +
+  This sorting require the Comparator to compare the last modified time of the issue. Therefore, a Timestamp needs to be stored and updated every time an issue is added or edited.
+
+* Sort by first Tag: `sort tag` +
+  This sorting requires the tag attribute of every issue to be tracked. We retrieve tag lists and get the first tags. A String Comparator is enough for sorting tagName of them.
+  Those issues without a tag should be put at the end of the lists.
+
+* Sort by search frequency: `sort freq` +
+  This sorting requires the search frequency tracker. We retrieve the IssueSearchFrequency and sort them by the compare method provided in that class.
 
 // tag::undoredo[]
 === Undo/Redo feature

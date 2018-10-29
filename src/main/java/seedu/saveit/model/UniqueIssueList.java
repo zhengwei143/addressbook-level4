@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.model.issue.exceptions.DuplicateIssueException;
 import seedu.saveit.model.issue.exceptions.IssueNotFoundException;
 
@@ -135,5 +136,12 @@ public class UniqueIssueList implements Iterable<Issue> {
             }
         }
         return true;
+    }
+
+    /**
+     * return the number of solutions of the indexed issue.
+     */
+    public int getSolutionNumber(Index index) {
+        return internalList.get(index.getZeroBased()).getSolutions().size();
     }
 }

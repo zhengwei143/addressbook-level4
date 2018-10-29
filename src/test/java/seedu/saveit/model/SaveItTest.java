@@ -19,6 +19,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.model.issue.exceptions.DuplicateIssueException;
 import seedu.saveit.testutil.IssueBuilder;
 
@@ -107,8 +108,8 @@ public class SaveItTest {
         }
 
         @Override
-        public int getCurrentDirectory() {
-            return 0;
+        public Directory getCurrentDirectory() {
+            return new Directory(0, 0);
         }
     }
 

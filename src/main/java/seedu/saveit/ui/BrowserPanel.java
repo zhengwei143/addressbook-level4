@@ -21,8 +21,8 @@ import seedu.saveit.model.Issue;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
-    public static final String SEARCH_PAGE_URL =
-            "https://se-edu.github.io/saveit-level4/DummySearchPage.html?name=";
+    public static final String JAVADOC_PAGE =
+            "https://docs.oracle.com/javase/7/docs/api/";
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -44,7 +44,7 @@ public class BrowserPanel extends UiPart<Region> {
 
     private void loadIssuePage(Issue issue) {
         //loadPage(issue.getStatement().issue);
-        loadPage("https://docs.oracle.com/javase/7/docs/api/");
+        loadPage(JAVADOC_PAGE);
     }
 
     public void loadPage(String url) {

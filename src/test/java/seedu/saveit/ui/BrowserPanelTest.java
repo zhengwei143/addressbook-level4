@@ -5,12 +5,12 @@ import static org.junit.Assert.assertEquals;
 import static seedu.saveit.testutil.EventsUtil.postNow;
 import static seedu.saveit.testutil.TypicalIssues.ALICE;
 import static seedu.saveit.ui.BrowserPanel.DEFAULT_PAGE;
+import static seedu.saveit.ui.BrowserPanel.JAVADOC_PAGE;
 import static seedu.saveit.ui.UiPart.FXML_FILE_FOLDER;
 
 import java.net.URL;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import guitests.guihandles.BrowserPanelHandle;
@@ -34,7 +34,6 @@ public class BrowserPanelTest extends GuiUnitTest {
     }
 
     @Test
-    @Ignore
     public void display() throws Exception {
         // default web page
         URL expectedDefaultPageUrl = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
@@ -42,8 +41,7 @@ public class BrowserPanelTest extends GuiUnitTest {
 
         // associated web page of an issue
         postNow(selectionChangedEventStub);
-        URL expectedIssueUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + ALICE.getStatement().issue
-                .replaceAll(" ", "%20"));
+        URL expectedIssueUrl = new URL(JAVADOC_PAGE);
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedIssueUrl, browserPanelHandle.getLoadedUrl());

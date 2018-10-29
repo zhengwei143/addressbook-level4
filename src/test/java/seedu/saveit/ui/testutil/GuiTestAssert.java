@@ -8,7 +8,9 @@ import java.util.stream.Collectors;
 import guitests.guihandles.IssueCardHandle;
 import guitests.guihandles.IssueListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.SolutionCardHandle;
 import seedu.saveit.model.Issue;
+import seedu.saveit.model.issue.Solution;
 
 /**
  * A set of assertion methods useful for writing GUI tests.
@@ -33,6 +35,14 @@ public class GuiTestAssert {
         assertEquals(expectedIssue.getDescription().value, actualCard.getDescription());
         assertEquals(expectedIssue.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
                 actualCard.getTags());
+    }
+
+    /**
+     * Asserts that {@code actualCard} displays the details of {@code expectedSolution}.
+     */
+    public static void assertCardDisplaysSolution(Solution expectedSolution, SolutionCardHandle actualCard) {
+        assertEquals(expectedSolution.getLink().getValue(), actualCard.getLink());
+        assertEquals(expectedSolution.getRemark().toString(), actualCard.getRemark());
     }
 
     /**

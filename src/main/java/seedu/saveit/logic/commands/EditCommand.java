@@ -124,7 +124,8 @@ public class EditCommand extends Command {
         IssueStatement updatedName = editIssueDescriptor.getStatement().orElse(issueToEdit.getStatement());
         Description updatedDescription = editIssueDescriptor.getDescription().orElse(issueToEdit.getDescription());
         Set<Tag> updatedTags = editIssueDescriptor.getTags().orElse(issueToEdit.getTags());
-        IssueSearchFrequency issueSearchFrequency = editIssueDescriptor.getFrequency().orElse(issueToEdit.getFrequency());
+        IssueSearchFrequency issueSearchFrequency = editIssueDescriptor.getFrequency()
+            .orElse(issueToEdit.getFrequency());
 
         return new Issue(updatedName, updatedDescription, updatedSolutions, updatedTags, issueSearchFrequency);
     }

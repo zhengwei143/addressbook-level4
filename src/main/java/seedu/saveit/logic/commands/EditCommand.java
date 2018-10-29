@@ -22,6 +22,7 @@ import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.issue.Description;
+import seedu.saveit.model.issue.IssueSearchFrequency;
 import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;
@@ -123,8 +124,9 @@ public class EditCommand extends Command {
         IssueStatement updatedName = editIssueDescriptor.getStatement().orElse(issueToEdit.getStatement());
         Description updatedDescription = editIssueDescriptor.getDescription().orElse(issueToEdit.getDescription());
         Set<Tag> updatedTags = editIssueDescriptor.getTags().orElse(issueToEdit.getTags());
+        IssueSearchFrequency issueSearchFrequency = editIssueDescriptor.getFrequency().orElse(issueToEdit.getFrequency());
 
-        return new Issue(updatedName, updatedDescription, updatedSolutions, updatedTags);
+        return new Issue(updatedName, updatedDescription, updatedSolutions, updatedTags, issueSearchFrequency);
     }
 
     /**
@@ -177,6 +179,7 @@ public class EditCommand extends Command {
      */
     public static class EditIssueDescriptor {
 
+        private IssueSearchFrequency frequency;
         private IssueStatement statement;
         private List<Solution> solutions;
         private Description description;
@@ -201,6 +204,7 @@ public class EditCommand extends Command {
             setSolutions(toCopy.solutions);
             setDescription(toCopy.description);
             setTags(toCopy.tags);
+            setFrequency(toCopy.frequency);
         }
 
         public int getIndex() {
@@ -211,7 +215,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(statement, description, solutions, tags);
+            return CollectionUtil.isAnyNonNull(statement, description, solutions, tags, frequency);
         }
 
         public void setStatement(IssueStatement statement) {
@@ -257,6 +261,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setFrequency(IssueSearchFrequency frequency) {
+            this.frequency = frequency;
+        }
+
+        public Optional<IssueSearchFrequency> getFrequency() {
+            return Optional.ofNullable(frequency);
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -275,7 +287,8 @@ public class EditCommand extends Command {
             return getStatement().equals(e.getStatement())
                 && getDescription().equals(e.getDescription())
                 && getSolutions().equals(e.getSolutions())
-                && getTags().equals(e.getTags());
+                && getTags().equals(e.getTags())
+                && getFrequency().equals(e.getFrequency());
         }
     }
 }

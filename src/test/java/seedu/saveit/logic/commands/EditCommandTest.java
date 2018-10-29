@@ -13,8 +13,6 @@ import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.saveit.logic.commands.CommandTestUtil.showIssueAtIndex;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
-import static seedu.saveit.testutil.TypicalIssues.COMMON_ISSUE_FREQUENCY;
-import static seedu.saveit.testutil.TypicalIssues.INITIALIZED_ISSUE_FREQUENCY;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
 
 import org.junit.Test;

@@ -50,13 +50,11 @@ public class SelectCommand extends Command {
 
     }
 
-
     /**
      * execute command for selecting an {@code Issue}
      */
     private CommandResult selectIssue(Model model, CommandHistory history) throws CommandException {
-        List<Issue> filteredIssueList = model.getFilteredIssueList();
-
+        List<Issue> filteredIssueList = model.getFilteredAndSortedIssueList();
         if (targetIndex.getZeroBased() >= filteredIssueList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
         }

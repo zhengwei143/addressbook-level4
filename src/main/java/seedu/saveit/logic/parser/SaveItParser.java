@@ -21,6 +21,7 @@ import seedu.saveit.logic.commands.RedoCommand;
 import seedu.saveit.logic.commands.RefactorTagCommand;
 import seedu.saveit.logic.commands.RetrieveCommand;
 import seedu.saveit.logic.commands.SelectCommand;
+import seedu.saveit.logic.commands.SortCommand;
 import seedu.saveit.logic.commands.UndoCommand;
 import seedu.saveit.logic.parser.exceptions.ParseException;
 
@@ -81,7 +82,11 @@ public class SaveItParser {
 
         case ListCommand.COMMAND_WORD:
         case ListCommand.COMMAND_ALIAS:
-            return new ListCommandParser().parse(arguments);
+            return new ListCommand();
+
+        case SortCommand.COMMAND_WORD:
+        case SortCommand.COMMAND_ALIAS:
+            return new SortCommandParser().parse(arguments);
 
 
         case HomeCommand.COMMAND_WORD:

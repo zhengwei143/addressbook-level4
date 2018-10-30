@@ -2,7 +2,6 @@ package seedu.saveit.logic.commands;
 
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
-import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.model.Model;
 
 /**
@@ -21,6 +20,6 @@ public abstract class Command {
      * @return feedback message of the operation result for display
      * @throws CommandException If an error occurs during command execution.
      */
-    public abstract CommandResult execute(Model model, CommandHistory history) throws CommandException, ParseException;
+    public abstract CommandResult execute(Model model, CommandHistory history) throws CommandException;
 
 }

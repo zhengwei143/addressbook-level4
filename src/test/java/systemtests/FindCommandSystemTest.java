@@ -158,7 +158,7 @@ public class FindCommandSystemTest extends SaveItSystemTest {
      */
     private void assertCommandSuccess(String command, Model expectedModel) {
         String expectedResultMessage = String.format(
-            MESSAGE_ISSUES_LISTED_OVERVIEW, expectedModel.getFilteredIssueList().size());
+            MESSAGE_ISSUES_LISTED_OVERVIEW, expectedModel.getFilteredAndSortedIssueList().size());
 
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);

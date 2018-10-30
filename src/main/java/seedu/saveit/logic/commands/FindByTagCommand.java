@@ -30,7 +30,7 @@ public class FindByTagCommand extends Command {
         requireNonNull(model);
         model.filterIssues(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_ISSUES_LISTED_OVERVIEW, model.getFilteredIssueList().size()));
+                String.format(Messages.MESSAGE_ISSUES_LISTED_OVERVIEW, model.getFilteredAndSortedIssueList().size()));
     }
 
     @Override

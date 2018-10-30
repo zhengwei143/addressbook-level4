@@ -51,7 +51,7 @@ public class RefactorTagCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Issue> lastShownList = model.getFilteredIssueList();
+        List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
 
         for (Issue issue : lastShownList) {
             Set<Tag> updatedTags = new HashSet<Tag>(issue.getTags());

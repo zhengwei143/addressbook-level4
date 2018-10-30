@@ -12,7 +12,7 @@ public class Description {
 
 
     public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
-        "Issue description can take any values, but it should not be blank";
+        "Issue description can take any values, but it should not be blank.";
     public static final String DESCRIPTION_VALIDATION_REGEX = "[^\\s].*";
     public final String value;
 

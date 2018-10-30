@@ -128,7 +128,7 @@ public class MainWindow extends UiPart<Stage> {
         browserPanel = new BrowserPanel();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-        issueListPanel = new IssueListPanel(logic.getFilteredIssueList());
+        issueListPanel = new IssueListPanel(logic.getFilteredAndSortedIssueList());
         issueListPanelPlaceholder.getChildren().add(issueListPanel.getRoot());
 
         solutionListPanel = new SolutionListPanel(logic.getFilteredSolutionList());

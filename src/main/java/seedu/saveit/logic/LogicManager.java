@@ -10,6 +10,7 @@ import seedu.saveit.commons.core.ComponentManager;
 import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.logic.commands.Command;
 import seedu.saveit.logic.commands.CommandResult;
+import seedu.saveit.logic.commands.DangerCommand;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.logic.parser.SaveItParser;
 import seedu.saveit.logic.parser.exceptions.ParseException;
@@ -28,18 +29,16 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
-    private final List<String> dangerCommands;
     private final Model model;
     private final CommandHistory history;
     private final SaveItParser saveItParser;
-    private Command bufferedCommand;
+    private DangerCommand bufferedCommand;
 
     public LogicManager(Model model) {
         this.model = model;
         history = new CommandHistory();
         saveItParser = new SaveItParser();
         bufferedCommand = null;
-        dangerCommands = initializeDangerCommands();
     }
 
     @Override
@@ -53,7 +52,7 @@ public class LogicManager extends ComponentManager implements Logic {
 
             Command command = saveItParser.parseCommand(commandText);
             if (requireConfirmationBeforeExecution(command)) {
-                return setBufferedCommand(command);
+                return setBufferedCommand((DangerCommand) command);
             } else {
                 return command.execute(model, history);
             }
@@ -79,14 +78,6 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     /**
-     * Explicitly write down all commands that need confirmation before they are executed.
-     */
-    private List<String> initializeDangerCommands() {
-        String[] commandArr = {"ClearCommand"};
-        return new ArrayList<>(Arrays.asList(commandArr));
-    }
-
-    /**
      * Check if a buffered command can be executed based on {@code commandText}.
      * Update {@code bufferedCommand} to null.
      */
@@ -104,11 +95,7 @@ public class LogicManager extends ComponentManager implements Logic {
      * Check if a command requires confirmation before being executed.
      */
     private boolean requireConfirmationBeforeExecution(Command command) {
-        if (command == null) {
-            return false;
-        }
-
-        return dangerCommands.contains(command.getClass().getSimpleName());
+        return command instanceof DangerCommand;
     }
 
     private CommandResult executeBufferedCommand() throws CommandException, ParseException {
@@ -117,7 +104,7 @@ public class LogicManager extends ComponentManager implements Logic {
         return commandResult;
     }
 
-    private CommandResult setBufferedCommand(Command command) {
+    private CommandResult setBufferedCommand(DangerCommand command) {
         bufferedCommand = command;
         return new CommandResult(String.format(ASK_FOR_CONFIRMATION, getBufferedCommandType()));
     }
@@ -127,8 +114,6 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     private String getBufferedCommandType() {
-        String className = bufferedCommand.getClass().getSimpleName();
-        String command = "Command";
-        return className.substring(0, className.length() - command.length()).toLowerCase();
+        return bufferedCommand.getCommandWord();
     }
 }

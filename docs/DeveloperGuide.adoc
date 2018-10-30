@@ -409,6 +409,53 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+=== Confirmation Check
+
+Some commands that can affect the users' experience significantly need to be paid attention to and confirmation should be provided before they are executed.
+For the current version, `clear` is the only command that needs confirmation.
+
+==== Current Implementation
+
+Instead of letting LogicManager execute the command directly after parsing it, we now check if we need confirmation before the command is executed.
+
+In order to connect the confirmation with the command: +
+
+Step 1. We buffer the command that waits for confirmation. +
+
+Step 2. Generate the CommandResult according to the confirmation message entered. +
+
+Step 3. Clear the buffer.
+
+==== Design Consideration
+
+===== Aspect: How to distinguish commands that need confirmation
+
+* **Alternative 1 (current choice):** Use abstract class DangerCommand
+
+** Pros: Protect the specific Command type from being accessed by LogicManager. Sustainable.
+
+** Cons: N.A.
+
+* **Alternative 2:** Check class name and provide a danger class name list
+
+** Pros: Easy to implement.
+
+** Cons: Command information leaked. Inaccurate, e.g. two classes from different package can have the same class name.
+
+===== Aspect: How to connect the confirmation message with the command requiring it
+
+* **Alternative 1 (current choice):** Buffer the command
+
+** Pros: Protect CommandBox from Command Class.
+
+** Cons: Another variable introduced. Need effort to deal with the buffered command properly.
+
+* **Alternative 2:** Let Command check the confirmation message
+
+** Pros: Follow the normal logic. Easy to understand.
+
+** Cons: CommandBox is exposed to Command Class.
+
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.

@@ -9,7 +9,7 @@ import seedu.saveit.model.SaveIt;
 /**
  * Clears the saveIt
  */
-public class ClearCommand extends Command {
+public class ClearCommand extends DangerCommand {
 
     public static final String COMMAND_WORD = "clear";
     public static final String COMMAND_ALIAS = "c";
@@ -23,5 +23,10 @@ public class ClearCommand extends Command {
         model.resetData(new SaveIt());
         model.commitSaveIt();
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
     }
 }

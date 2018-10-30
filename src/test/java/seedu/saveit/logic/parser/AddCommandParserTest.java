@@ -33,7 +33,6 @@ import seedu.saveit.logic.commands.CommandTestUtil;
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueStatement;
-import seedu.saveit.model.issue.Tag;
 import seedu.saveit.testutil.IssueBuilder;
 
 public class AddCommandParserTest {

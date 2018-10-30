@@ -77,7 +77,7 @@ public class LogicManager extends ComponentManager implements Logic {
      * Check if a buffered command can be executed based on {@code commandText}.
      * Update {@code bufferedCommand} to null.
      */
-    private CommandResult handleBufferedCommand(String commandText) throws CommandException, ParseException {
+    private CommandResult handleBufferedCommand(String commandText) throws CommandException {
         DangerCommand command = bufferedCommand;
         resetBufferedCommand();
 

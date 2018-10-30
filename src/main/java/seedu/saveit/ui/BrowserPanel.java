@@ -12,8 +12,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.saveit.MainApp;
 import seedu.saveit.commons.core.LogsCenter;
-import seedu.saveit.commons.events.ui.IssuePanelSelectionChangedEvent;
-import seedu.saveit.model.Issue;
+import seedu.saveit.commons.events.ui.SolutionPanelSelectionChangedEvent;
+import seedu.saveit.model.issue.Solution;
 
 /**
  * The Browser Panel of the App.
@@ -42,9 +42,9 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
 
-    private void loadIssuePage(Issue issue) {
-        //loadPage(issue.getStatement().issue);
-        loadPage(JAVADOC_PAGE);
+    private void loadSolutionPage(Solution solution) {
+        loadPage(solution.solutionLink.getValue());
+        //loadPage(JAVADOC_PAGE);
     }
 
     public void loadPage(String url) {
@@ -67,8 +67,8 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handleIssuePanelSelectionChangedEvent(IssuePanelSelectionChangedEvent event) {
+    private void handleSolutionPanelSelectionChangedEvent(SolutionPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadIssuePage(event.getNewSelection());
+        loadSolutionPage(event.getNewSelection());
     }
 }

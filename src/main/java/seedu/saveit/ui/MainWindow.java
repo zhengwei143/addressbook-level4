@@ -16,6 +16,7 @@ import seedu.saveit.commons.core.Config;
 import seedu.saveit.commons.core.GuiSettings;
 import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.events.ui.ExitAppRequestEvent;
+import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.commons.events.ui.ShowHelpRequestEvent;
 import seedu.saveit.logic.Logic;
 import seedu.saveit.model.UserPrefs;
@@ -36,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private IssueListPanel issueListPanel;
+    private SolutionListPanel solutionListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
@@ -51,6 +53,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane issueListPanelPlaceholder;
+
+    @FXML
+    private StackPane solutionListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -125,6 +130,9 @@ public class MainWindow extends UiPart<Stage> {
         issueListPanel = new IssueListPanel(logic.getFilteredIssueList());
         issueListPanelPlaceholder.getChildren().add(issueListPanel.getRoot());
 
+        solutionListPanel = new SolutionListPanel(logic.getFilteredSolutionList());
+        solutionListPanelPlaceholder.getChildren().add(solutionListPanel.getRoot());
+
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -134,6 +142,7 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
+
 
     void hide() {
         primaryStage.hide();
@@ -179,6 +188,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.show();
     }
 
+
+
     /**
      * Closes the application.
      */
@@ -199,5 +210,11 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+    @Subscribe
+    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        solutionListPanel.setSolutionList(logic.getFilteredSolutionList());
     }
 }

@@ -74,6 +74,7 @@ public class CommandBoxTest extends GuiUnitTest {
     }
 
     @Test
+    @Ignore
     public void handleKeyPress_startingWithUp() {
         // empty history
         assertInputHistory(KeyCode.UP, "");

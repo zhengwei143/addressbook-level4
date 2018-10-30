@@ -1,6 +1,7 @@
 package seedu.saveit.model;
 
 import javafx.collections.ObservableList;
+import seedu.saveit.commons.core.directory.Directory;
 
 /**
  * Unmodifiable view of an saveIt
@@ -13,5 +14,5 @@ public interface ReadOnlySaveIt {
      */
     ObservableList<Issue> getIssueList();
 
-    int getCurrentDirectory();
+    Directory getCurrentDirectory();
 }

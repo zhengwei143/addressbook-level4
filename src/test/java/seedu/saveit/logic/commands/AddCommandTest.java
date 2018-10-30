@@ -16,7 +16,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
-import seedu.saveit.commons.core.index.Index;
+import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.model.Issue;
@@ -24,6 +24,7 @@ import seedu.saveit.model.Model;
 import seedu.saveit.model.ReadOnlySaveIt;
 import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.issue.IssueSort;
+import seedu.saveit.model.issue.Solution;
 import seedu.saveit.testutil.IssueBuilder;
 
 public class AddCommandTest {
@@ -108,12 +109,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void resetDirectory(Index targetIndex, boolean rootDirectory) {
+        public void resetDirectory(Directory currentDirectory) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public int getCurrentDirectory() {
+        public Directory getCurrentDirectory() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -139,6 +140,11 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Issue> getFilteredIssueList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Solution> getFilteredSolutionList() {
             throw new AssertionError("This method should not be called.");
         }
 

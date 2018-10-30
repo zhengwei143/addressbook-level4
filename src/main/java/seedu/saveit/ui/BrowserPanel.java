@@ -41,8 +41,10 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+
     private void loadIssuePage(Issue issue) {
-        loadPage(SEARCH_PAGE_URL + issue.getStatement().issue);
+        //loadPage(issue.getStatement().issue);
+        loadPage("http://www.google.com");
     }
 
     public void loadPage(String url) {

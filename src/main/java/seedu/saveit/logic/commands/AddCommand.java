@@ -77,7 +77,7 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        int issueIndex = model.getCurrentDirectory();
+        int issueIndex = model.getCurrentDirectory().getIssue();
         if (addSolution) {
             try {
                 if (issueIndex > 0) {

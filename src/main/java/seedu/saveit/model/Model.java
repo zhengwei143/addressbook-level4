@@ -4,8 +4,9 @@ import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.saveit.commons.core.index.Index;
+import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.model.issue.IssueSort;
+import seedu.saveit.model.issue.Solution;
 
 /**
  * The API of the Model component.
@@ -18,10 +19,10 @@ public interface Model {
     void resetData(ReadOnlySaveIt newData);
 
     /** Reset the current directory. */
-    void resetDirectory(Index targetIndex, boolean rootDirectory);
+    void resetDirectory(Directory currentDirectory);
 
     /** Return the current directory. */
-    int getCurrentDirectory();
+    Directory getCurrentDirectory();
 
     /** Returns the SaveIt */
     ReadOnlySaveIt getSaveIt();
@@ -52,6 +53,9 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered issue list */
     ObservableList<Issue> getFilteredIssueList();
+
+    /**Returns an unmodified view of the filtered soluiton list of the selected issue */
+    ObservableList<Solution> getFilteredSolutionList();
 
     /**
      * Filters the issues given the predicate and sorts them based on the search frequency

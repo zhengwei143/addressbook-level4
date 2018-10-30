@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.saveit.commons.core.directory.Directory;
+import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.exceptions.IllegalValueException;
 
 /**
@@ -14,7 +16,7 @@ import seedu.saveit.commons.exceptions.IllegalValueException;
 public class SaveIt implements ReadOnlySaveIt {
 
     private final UniqueIssueList issues;
-    private int currentDirectory;
+    private Directory currentDirectory;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -25,7 +27,7 @@ public class SaveIt implements ReadOnlySaveIt {
      */
     {
         issues = new UniqueIssueList();
-        currentDirectory = 0;
+        currentDirectory = new Directory(0, 0);
     }
 
     public SaveIt() {}
@@ -51,10 +53,14 @@ public class SaveIt implements ReadOnlySaveIt {
     /**
      * Update the current directory.
      * {@code CurrentDirectory} must not exceeds the length of {@code issues}.
+     * @param directory
      */
-    public void setCurrentDirectory(int directory) {
+    public void setCurrentDirectory(Directory directory) {
         try {
-            if (currentDirectory > issues.size()) {
+            if (currentDirectory.isIssueLevel() && currentDirectory.getIssue() > issues.size()) {
+                throw new IllegalValueException("Refer to non-existent directory.");
+            } else if (currentDirectory.isSolutionLevel() && currentDirectory.getSolution()
+                    > issues.getSolutionNumber(Index.fromOneBased(currentDirectory.getSolution()))) {
                 throw new IllegalValueException("Refer to non-existent directory.");
             }
             currentDirectory = directory;
@@ -124,7 +130,7 @@ public class SaveIt implements ReadOnlySaveIt {
     }
 
     @Override
-    public int getCurrentDirectory() {
+    public Directory getCurrentDirectory() {
         return currentDirectory;
     }
 

@@ -1,6 +1,8 @@
 package seedu.saveit.logic.commands;
 
-import seedu.saveit.commons.core.index.Index;
+import seedu.saveit.commons.core.EventsCenter;
+import seedu.saveit.commons.core.directory.Directory;
+import seedu.saveit.commons.events.ui.ChangeDirectoryRequestEvent;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.model.Model;
 
@@ -19,7 +21,8 @@ public class HomeCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
-        model.resetDirectory(Index.fromZeroBased(ROOT_DIRECTORY), true);
+        model.resetDirectory(new Directory(0, 0));
+        EventsCenter.getInstance().post(new ChangeDirectoryRequestEvent(new Directory(0, 0)));
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

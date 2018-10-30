@@ -47,7 +47,7 @@ public class RetrieveCommand extends Command {
             throws CommandException {
         requireNonNull(model);
 
-        int issueIndex = model.getCurrentDirectory();
+        int issueIndex = model.getCurrentDirectory().getIssue();
         List<Issue> lastShownList = model.getFilteredIssueList();
         Issue selectedIssue;
 

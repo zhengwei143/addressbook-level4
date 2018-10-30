@@ -286,8 +286,16 @@ image::InitializeComparator.png[width="800"]
 
 This two diagrams show that after the input is parsed, a IssueSort object is initialized before the SortCommand object.
 
-As shown in the diagram, an IssueSort object contains a Comparator object as its attribute, and the type of that object depends on the input String passed from SortCommand.
-We consider switch statement as a proper way to provide alternative paths to initialize Comparator here for current implementation.
+As shown in the diagram, an IssueSort object can provide the required comparator with the input String passed from SortCommand.
+We use the retrieved Comparator the sort the list when executing the sort command.
+
+The following is a class diagram for IssueSort.
+
+.IssueSort Class Diagram
+image::IssueSort.png[width="800"]
+
+It shows that Comparator is an attribute of IssueSort class. We create three different classes that implement the Comparator Interface.
+They can serve the three sort type we provide in SaveIt. When more sort type is needed, we can simple create another class implementing Comparator, and add anther case in switch statement.
 
 ==== Design Considerations
 

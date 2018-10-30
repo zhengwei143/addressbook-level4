@@ -11,18 +11,20 @@ import static seedu.saveit.testutil.TypicalIssues.FIONA;
 import static seedu.saveit.testutil.TypicalIssues.GEORGE;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import seedu.saveit.logic.CommandHistory;
+import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.UserPrefs;
-import seedu.saveit.model.issue.IssueContainsKeywordsPredicate;
-import seedu.saveit.model.issue.IssueSort;
+import seedu.saveit.model.issue.*;
 
 public class SortCommandTest {
     private Model model;
@@ -57,6 +59,21 @@ public class SortCommandTest {
         SortCommand command = new SortCommand(issueSort);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(DANIEL, BENSON, ALICE, ELLE), model.getFilteredAndSortedIssueList());
+    }
+
+    @Test
+    public void execute_sortAfterUpdate_success() {
+        IssueSort issueSort = prepareIssueSort(IssueSort.TAG_SORT);
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, issueSort.getSortType());
+        Issue issue = new Issue(new IssueStatement("new C++ problem"), new Description("only for test"), new ArrayList<>(), new HashSet<>());
+
+        expectedModel.updateSortedIssueList(issueSort.getComparator());
+        expectedModel.addIssue(issue);
+        model.addIssue(issue);
+        SortCommand command = new SortCommand(issueSort);
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(DANIEL, BENSON, ALICE, issue, GEORGE, FIONA, ELLE, CARL),
+                model.getFilteredAndSortedIssueList());
     }
 
     /**

@@ -31,7 +31,7 @@ public class AddCommandTest {
     private static final int ROOT_LEVEL_INDEX = 0;
     private static final int EMPTY_SOLUTION_LIST_INDEX = 0;
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
-    private static final Directory HOME_DIRECTORY = new Directory(ROOT_LEVEL_INDEX ,EMPTY_SOLUTION_LIST_INDEX);
+    private static final Directory HOME_DIRECTORY = new Directory(ROOT_LEVEL_INDEX, EMPTY_SOLUTION_LIST_INDEX);
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

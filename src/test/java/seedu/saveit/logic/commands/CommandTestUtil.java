@@ -92,7 +92,7 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         SaveIt expectedSaveIt = new SaveIt(actualModel.getSaveIt());
-        List<Issue> expectedFilteredList = new ArrayList<>(actualModel.getFilteredIssueList());
+        List<Issue> expectedFilteredList = new ArrayList<>(actualModel.getFilteredAndSortedIssueList());
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
 
@@ -112,20 +112,20 @@ public class CommandTestUtil {
      * model}'s saveit book.
      */
     public static void showIssueAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredIssueList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredAndSortedIssueList().size());
 
-        Issue issue = model.getFilteredIssueList().get(targetIndex.getZeroBased());
+        Issue issue = model.getFilteredAndSortedIssueList().get(targetIndex.getZeroBased());
         final String[] splitName = issue.getStatement().issue.split("\\s+");
         model.updateFilteredIssueList(new IssueContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredIssueList().size());
+        assertEquals(1, model.getFilteredAndSortedIssueList().size());
     }
 
     /**
      * Deletes the first issue in {@code model}'s filtered list from {@code model}'s saveit book.
      */
     public static void deleteFirstIssue(Model model) {
-        Issue firstIssue = model.getFilteredIssueList().get(0);
+        Issue firstIssue = model.getFilteredAndSortedIssueList().get(0);
         model.deleteIssue(firstIssue);
         model.commitSaveIt();
     }

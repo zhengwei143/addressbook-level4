@@ -41,7 +41,7 @@ public class SelectCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        List<Issue> filteredIssueList = model.getFilteredIssueList();
+        List<Issue> filteredIssueList = model.getFilteredAndSortedIssueList();
 
         if (targetIndex.getZeroBased() >= filteredIssueList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);

@@ -63,7 +63,7 @@ public class AddCommand extends Command {
      * Add a solution to a existing issue in the issue list
      */
     private void addSolutionToIssue(Model model, int index) {
-        List<Issue> lastShownList = model.getFilteredIssueList();
+        List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
         Issue originalIssue = lastShownList.get(index - 1);
         List<Solution> newSolutionList = new ArrayList<>(originalIssue.getSolutions());
         newSolutionList.add(solutionToBeAdded);

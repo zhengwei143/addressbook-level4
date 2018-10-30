@@ -143,7 +143,7 @@ public abstract class SaveItSystemTest {
      */
     protected void showAllIssues() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getSaveIt().getIssueList().size(), getModel().getFilteredIssueList().size());
+        assertEquals(getModel().getSaveIt().getIssueList().size(), getModel().getFilteredAndSortedIssueList().size());
     }
 
     /**
@@ -151,7 +151,7 @@ public abstract class SaveItSystemTest {
      */
     protected void showIssuesWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredIssueList().size() < getModel().getSaveIt().getIssueList().size());
+        assertTrue(getModel().getFilteredAndSortedIssueList().size() < getModel().getSaveIt().getIssueList().size());
     }
 
     /**
@@ -180,7 +180,7 @@ public abstract class SaveItSystemTest {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new SaveIt(expectedModel.getSaveIt()), testApp.readStorageSaveIt());
-        assertListMatching(getIssueListPanel(), expectedModel.getFilteredIssueList());
+        assertListMatching(getIssueListPanel(), expectedModel.getFilteredAndSortedIssueList());
     }
 
     /**
@@ -276,7 +276,7 @@ public abstract class SaveItSystemTest {
     private void assertApplicationStartingStateIsCorrect() {
         assertEquals("", getCommandBox().getInput());
         assertEquals("", getResultDisplay().getText());
-        assertListMatching(getIssueListPanel(), getModel().getFilteredIssueList());
+        assertListMatching(getIssueListPanel(), getModel().getFilteredAndSortedIssueList());
         assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE), getBrowserPanel().getLoadedUrl());
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());

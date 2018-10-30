@@ -70,7 +70,7 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         Issue issueToEdit;
         requireNonNull(model);
-        List<Issue> lastShownList = model.getFilteredIssueList();
+        List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
         Directory currentDirectory = model.getCurrentDirectory();
 
         if (currentDirectory.isRootLevel() && (editIssueDescriptor.getStatement().isPresent() || editIssueDescriptor

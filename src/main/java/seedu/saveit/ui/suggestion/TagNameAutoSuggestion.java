@@ -10,7 +10,7 @@ import seedu.saveit.logic.Logic;
 /**
  * The suggestion component which stores and provides tag name key words
  */
-public class TagNameAutoSuggestion {
+public class TagNameAutoSuggestion implements AutoSuggestion {
 
     private Logic logic;
     private TreeSet<String> tagSet;
@@ -27,6 +27,7 @@ public class TagNameAutoSuggestion {
     /**
      * Compares and match the keywords.
      */
+    @Override
     public LinkedList<String> giveSuggestion(String text) {
         LinkedList<String> searchResult = new LinkedList<>();
         searchResult.addAll(tagSet.subSet(text, text + Character.MAX_VALUE));
@@ -36,6 +37,7 @@ public class TagNameAutoSuggestion {
     /**
      * Updates the keywords stored in the class.
      */
+    @Override
     public void update(Logic logic) {
         this.logic = logic;
         fillTagKeyWords();

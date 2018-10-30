@@ -10,7 +10,7 @@ import seedu.saveit.logic.Logic;
 /**
  * The suggestion component which stores and provides issue statement key words
  */
-public class IssueNameAutoSuggestion {
+public class IssueNameAutoSuggestion implements AutoSuggestion {
 
     private Logic logic;
     private TreeSet<String> issueStatementSet;
@@ -27,6 +27,7 @@ public class IssueNameAutoSuggestion {
     /**
      * Compares and match the keywords.
      */
+    @Override
     public LinkedList<String> giveSuggestion(String text) {
         LinkedList<String> searchResult = new LinkedList<>();
         searchResult.addAll(issueStatementSet.subSet(text, text + Character.MAX_VALUE));
@@ -36,6 +37,7 @@ public class IssueNameAutoSuggestion {
     /**
      * Updates the keywords stored in the class.
      */
+    @Override
     public void update(Logic logic) {
         this.logic = logic;
         fillIssueKeyWords();

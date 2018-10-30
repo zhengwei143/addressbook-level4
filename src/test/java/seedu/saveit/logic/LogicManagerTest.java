@@ -8,7 +8,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.saveit.logic.commands.*;
+import seedu.saveit.logic.commands.ClearCommand;
+import seedu.saveit.logic.commands.CommandResult;
+import seedu.saveit.logic.commands.DangerCommand;
+import seedu.saveit.logic.commands.HistoryCommand;
+import seedu.saveit.logic.commands.ListCommand;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.model.Model;

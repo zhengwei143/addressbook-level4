@@ -75,15 +75,15 @@ public class EditCommand extends Command {
 
         if (currentDirectory.isRootLevel() && (editIssueDescriptor.getStatement().isPresent() || editIssueDescriptor
             .getDescription().isPresent() || editIssueDescriptor.getTags().isPresent())) {
-            if (index.getZeroBased() <= lastShownList.size()) {
+            if (index.getZeroBased() < lastShownList.size()) {
                 issueToEdit = lastShownList.get(index.getZeroBased());
             } else {
-                throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
+                throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
             }
             // if it edits solution or remark, then throw Exception
         } else if (currentDirectory.isIssueLevel() && editIssueDescriptor.getSolution().isPresent()) {
             int solutionListSize = lastShownList.get(currentDirectory.getIssue() - 1).getSolutions().size();
-            if (index.getZeroBased() <= solutionListSize) {
+            if (index.getZeroBased() < solutionListSize) {
                 issueToEdit = lastShownList.get(currentDirectory.getIssue() - 1);
             } else {
                 throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);

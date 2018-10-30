@@ -6,6 +6,9 @@ import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_STACKOV
 
 import seedu.saveit.model.issue.Solution;
 
+/**
+ * A utility class containing a list of {@code Solution} objects to be used in tests.
+ */
 public class TypicalSolutions {
     public static final Solution REPO = new Solution("https://github.com/CS2103-AY1819S1-T12-4/main repoPage");
     public static final Solution ZHIHU = new Solution("http://www.ZhiHu.com newSol");

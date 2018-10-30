@@ -17,20 +17,24 @@ import seedu.saveit.model.issue.Tag;
  */
 public class RefactorTagCommand extends Command {
 
-    public static final String COMMAND_WORD = "refactorTag";
+    public static final String COMMAND_WORD = "refactortag";
     public static final String COMMAND_ALIAS = "rt";
 
     public static final String MESSAGE_REFACTOR_TAG_SUCCESS = "Refactoring tag success";
+    public static final String MESSAGE_REFACTOR_TAG_FAILURE = "Refactoring tag is unsuccessful due to no such tag";
 
     public static final String MESSAGE_USAGE =
         COMMAND_WORD + ": To rename or remove a specific tag for all entries with that tag.\n"
             + "Parameters: t/OLD_TAG [nt/NEW_TAG] \n"
-            + "Example: " + COMMAND_WORD + " t/python nt/java";
+            + "Example: " + COMMAND_WORD + " t/python n/java";
 
     public static final String DUMMY_TAG = "dummyTag";
 
     private final Tag oldTag;
     private final Tag newTag;
+
+    private Issue editedIssue;
+    private boolean isEidt;
 
     /**
      * @param oldTag the tag will be replaced
@@ -40,6 +44,8 @@ public class RefactorTagCommand extends Command {
         requireNonNull(oldTag);
         this.oldTag = oldTag;
         this.newTag = newTag;
+        editedIssue = null;
+        this.isEidt = false;
     }
 
     @Override
@@ -54,21 +60,26 @@ public class RefactorTagCommand extends Command {
                 if (!newTag.tagName.equals(DUMMY_TAG)) {
                     updatedTags.add(newTag);
                 }
+                isEidt = true;
             }
 
-            Issue editedIssue = new Issue(issue.getStatement(), issue.getDescription(),
+            editedIssue = new Issue(issue.getStatement(), issue.getDescription(),
                 issue.getSolutions(), updatedTags);
             model.updateIssue(issue, editedIssue);
             model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
             model.commitSaveIt();
         }
-        return new CommandResult(MESSAGE_REFACTOR_TAG_SUCCESS);
+        if (isEidt) {
+            return new CommandResult(MESSAGE_REFACTOR_TAG_SUCCESS);
+        }
+        return new CommandResult(MESSAGE_REFACTOR_TAG_FAILURE);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof RefactorTagCommand); // instanceof handles nulls
+            || (other instanceof RefactorTagCommand) // instanceof handles nulls
+            || (editedIssue.equals(((RefactorTagCommand) other).editedIssue)); //state check
     }
 }
 

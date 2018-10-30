@@ -5,12 +5,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.junit.Ignore;
-
 import seedu.saveit.logic.commands.EditCommand;
 import seedu.saveit.logic.commands.EditCommand.EditIssueDescriptor;
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.issue.Description;
+import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;
 
@@ -44,16 +43,14 @@ public class EditIssueDescriptorBuilder {
     /**
      * Sets the {@code IssueStatement} of the {@code EditIssueDescriptor} that we are building.
      */
-    @Ignore
-    public EditIssueDescriptorBuilder withStatement(String name) {
-        //        descriptor.setName(new IssueStatement(name));
+    public EditIssueDescriptorBuilder withStatement(String statement) {
+        descriptor.setStatement(new IssueStatement(statement));
         return this;
     }
 
     /**
      * Sets the {@code Description} of the {@code EditIssueDescriptor} that we are building.
      */
-    @Ignore
     public EditIssueDescriptorBuilder withDescription(String descriptions) {
         descriptor.setDescription(new Description(descriptions));
         return this;

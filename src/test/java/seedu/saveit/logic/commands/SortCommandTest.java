@@ -44,7 +44,7 @@ public class SortCommandTest {
     public void execute_sortIsNotFiltered_success() {
         IssueSort issueSort = prepareIssueSort(IssueSort.TAG_SORT);
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, issueSort.getSortType());
-        expectedModel.updateSortedIssueList(issueSort.getComparator());
+        expectedModel.updateFilteredAndSortedIssueList(issueSort.getComparator());
         SortCommand command = new SortCommand(issueSort);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(DANIEL, BENSON, ALICE, GEORGE, FIONA, ELLE, CARL),
@@ -58,7 +58,7 @@ public class SortCommandTest {
 
         IssueSort issueSort = prepareIssueSort(IssueSort.TAG_SORT);
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, issueSort.getSortType());
-        expectedModel.updateSortedIssueList(issueSort.getComparator());
+        expectedModel.updateFilteredAndSortedIssueList(issueSort.getComparator());
         SortCommand command = new SortCommand(issueSort);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(DANIEL, BENSON, ALICE, ELLE), model.getFilteredAndSortedIssueList());
@@ -71,7 +71,7 @@ public class SortCommandTest {
         Issue issue = new Issue(new IssueStatement("new C++ problem"),
                 new Description("only for test"), new ArrayList<>(), new HashSet<>());
 
-        expectedModel.updateSortedIssueList(issueSort.getComparator());
+        expectedModel.updateFilteredAndSortedIssueList(issueSort.getComparator());
         expectedModel.addIssue(issue);
         model.addIssue(issue);
         SortCommand command = new SortCommand(issueSort);

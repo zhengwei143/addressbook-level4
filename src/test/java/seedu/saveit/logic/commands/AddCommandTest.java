@@ -149,11 +149,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Issue> getSortedIssueList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Issue> getFilteredAndSortedIssueList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -174,7 +169,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateSortedIssueList(Comparator<Issue> sortType) {
+        public void updateFilteredAndSortedIssueList(Comparator<Issue> sortType) {
             throw new AssertionError("This method should not be called.");
         }
 

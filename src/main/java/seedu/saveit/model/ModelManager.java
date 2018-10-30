@@ -26,7 +26,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedSaveIt versionedSaveIt;
     private FilteredList<Issue> filteredIssues;
-    private SortedList<Issue> sortedIssues;
+    private SortedList<Issue> filteredAndSortedIssues;
 
     /**
      * Initializes a ModelManager with the given saveIt and userPrefs.
@@ -39,7 +39,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedSaveIt = new VersionedSaveIt(saveIt);
         filteredIssues = new FilteredList<>(versionedSaveIt.getIssueList());
-        sortedIssues = new SortedList<>(versionedSaveIt.getIssueList());
+        filteredAndSortedIssues = new SortedList<>(getFilteredIssueList());
     }
 
     public ModelManager() {
@@ -112,7 +112,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void sortIssues(IssueSort sortType) {
-        updateSortedIssueList(sortType.getComparator());
+        updateFilteredAndSortedIssueList(sortType.getComparator());
     }
 
     //=========== Filtered Issue List Accessors =============================================================
@@ -148,20 +148,10 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //=========== Sorted Issue List Accessors =============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Issue} backed by the internal list of
-     * {@code versionedSaveIt}
-     */
-    @Override
-    public ObservableList<Issue> getSortedIssueList() {
-        return FXCollections.unmodifiableObservableList(sortedIssues);
-    }
-
     @Override
 
-    public void updateSortedIssueList(Comparator<Issue> comparator) {
-        sortedIssues.setComparator(comparator);
+    public void updateFilteredAndSortedIssueList(Comparator<Issue> comparator) {
+        filteredAndSortedIssues.setComparator(comparator);
     }
 
     //=========== Sorted Issue List Accessors =============================================================
@@ -172,10 +162,7 @@ public class ModelManager extends ComponentManager implements Model {
      */
     @Override
     public ObservableList<Issue> getFilteredAndSortedIssueList() {
-        Comparator<? super Issue> comparator = sortedIssues.getComparator();
-        sortedIssues = new SortedList<>(getFilteredIssueList());
-        updateSortedIssueList((Comparator<Issue>) comparator);
-        return getSortedIssueList();
+        return FXCollections.unmodifiableObservableList(filteredAndSortedIssues);
     }
 
     //=========== Undo/Redo =================================================================================

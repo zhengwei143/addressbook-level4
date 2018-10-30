@@ -47,7 +47,7 @@ public class IssueNameAutoSuggestion {
      */
     private void fillIssueKeyWords() {
         this.issueKeyWords.clear();
-        logic.getFilteredIssueList().forEach(issue -> this.issueKeyWords.add(issue.getStatement().issue));
+        logic.getFilteredAndSortedIssueList().forEach(issue -> this.issueKeyWords.add(issue.getStatement().issue));
     }
 
     /**

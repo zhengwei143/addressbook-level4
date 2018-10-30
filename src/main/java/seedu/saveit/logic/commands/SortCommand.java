@@ -3,6 +3,7 @@ package seedu.saveit.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.saveit.commons.core.Messages;
+import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.model.Model;
@@ -31,8 +32,8 @@ public class SortCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        int currentDirectory = model.getCurrentDirectory();
-        if (currentDirectory != 0) {
+        Directory currentDirectory = model.getCurrentDirectory();
+        if (!currentDirectory.isRootLevel()) {
             throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
         }
 

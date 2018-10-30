@@ -329,6 +329,7 @@ Example:
 
 [NOTE]
 ====
+* User need confirm to execute this operation.
 * User can undo this operation to restore the issue lists.
 ====
 

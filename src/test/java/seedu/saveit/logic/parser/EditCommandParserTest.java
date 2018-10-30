@@ -5,7 +5,6 @@ import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_STATEMENT_DESC;
-import static seedu.saveit.logic.commands.CommandTestUtil.SOLUTION_DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.STATEMENT_DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_UI;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
@@ -92,7 +91,7 @@ public class EditCommandParserTest {
             Tag.MESSAGE_TAG_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_STATEMENT_DESC + INVALID_DESCRIPTION_DESC + SOLUTION_DESC_JAVA,
+        assertParseFailure(parser, "1" + INVALID_STATEMENT_DESC + INVALID_DESCRIPTION_DESC + TAG_DESC_UI,
             IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS);
     }
 

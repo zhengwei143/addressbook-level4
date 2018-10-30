@@ -17,23 +17,23 @@ public class ListCommand extends Command {
     public static final String DEFAULT_SORT_TYPE = "chro";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all issues with index numbers based on "
-            + "the provided sort_type: freq (search frequency), chro (chronological), tag (tag names) .\n"
+            + "the provided sortType: freq (search frequency), chro (chronological), tag (tag names) .\n"
             + "Parameters: KEYWORD\n"
             + "Example: " + COMMAND_WORD + " freq";
 
     public static final String MESSAGE_SUCCESS = "Listed all issues";
 
-    private final IssueSort sort_type;
+    private final IssueSort sortType;
 
-    public ListCommand(IssueSort sort_type) {
-        this.sort_type = sort_type;
+    public ListCommand(IssueSort sortType) {
+        this.sortType = sortType;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
-        model.sortIssues(sort_type);
+        model.sortIssues(sortType);
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, model.getSortedIssueList().size()));
     }

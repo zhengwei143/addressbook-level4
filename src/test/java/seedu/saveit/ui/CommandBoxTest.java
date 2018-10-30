@@ -107,7 +107,7 @@ public class CommandBoxTest extends GuiUnitTest {
     }
 
     @Test
-    @Ignore
+    @Ignore //TODO: find out why local can pass but fails on travis
     public void handleKeyPress_startingWithDown() {
         // empty history
         assertInputHistory(KeyCode.DOWN, "");

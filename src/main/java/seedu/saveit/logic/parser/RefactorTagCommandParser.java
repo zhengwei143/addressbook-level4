@@ -30,7 +30,6 @@ public class RefactorTagCommandParser implements Parser<RefactorTagCommand> {
 
         Tag newTag;
         Tag oldTag;
-        System.out.println(argMultimap.getValue(PREFIX_TAG).isPresent());
 
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
             oldTag = parseTag(argMultimap.getValue(PREFIX_TAG).get());
@@ -46,6 +45,7 @@ public class RefactorTagCommandParser implements Parser<RefactorTagCommand> {
 
         return new RefactorTagCommand(oldTag, newTag);
     }
+
 
 
 }

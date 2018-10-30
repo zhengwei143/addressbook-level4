@@ -35,7 +35,8 @@ public class AddCommand extends Command {
     private static final String dummyStatement = "dummyStatement";
     private static final String dummyDescription = "dummyDescription";
     private static final String MESSAGE_FAILED_ISSUE =
-            "Issue has to be selected first before adding " + "solution";
+            "Issue has to be selected first before adding solution";
+    private static final String MESSAGE_WRONG_DIRECTORY = "Wrong directory, please check!";
     private static final String MESSAGE_SOLUTION_SUCCESS = "New solution added: %1$s";
     private boolean addSolution;
     private final Solution solutionToBeAdded;
@@ -80,7 +81,7 @@ public class AddCommand extends Command {
         int issueIndex = model.getCurrentDirectory().getIssue();
         if (addSolution) {
             try {
-                if (issueIndex > 0) {
+                if (!model.getCurrentDirectory().isRootLevel()) {
                     addSolutionToIssue(model, issueIndex);
                     return new CommandResult(String.format(MESSAGE_SOLUTION_SUCCESS, solutionToBeAdded));
                 } else {
@@ -89,6 +90,10 @@ public class AddCommand extends Command {
             } catch (NoSuchElementException e) {
                 throw new CommandException(MESSAGE_FAILED_ISSUE);
             }
+        }
+
+        if (!model.getCurrentDirectory().isRootLevel()) {
+            throw new CommandException(MESSAGE_WRONG_DIRECTORY);
         }
 
         if (model.hasIssue(toAdd)) {

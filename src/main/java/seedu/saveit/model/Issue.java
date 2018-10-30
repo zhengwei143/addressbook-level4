@@ -1,7 +1,9 @@
 package seedu.saveit.model;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -29,6 +31,7 @@ public class Issue {
     private final List<Solution> solutions = new ArrayList<>();
     private final Description description;
     private final IssueSearchFrequency frequency;
+    private final Timestamp time;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -41,6 +44,7 @@ public class Issue {
         this.solutions.addAll(solutions);
         this.tags.addAll(tags);
         this.frequency = new IssueSearchFrequency(0);
+        this.time = new Timestamp(new Date().getTime());
     }
 
     /**
@@ -54,6 +58,7 @@ public class Issue {
         this.solutions.addAll(solutions);
         this.tags.addAll(tags);
         this.frequency = frequency;
+        this.time = new Timestamp(new Date().getTime());
     }
 
     public IssueStatement getStatement() {
@@ -92,6 +97,13 @@ public class Issue {
      */
     public IssueSearchFrequency getFrequency() {
         return frequency;
+    }
+
+    /**
+     * Returns the Timestamp of the Issue
+     */
+    public Timestamp getLastModifiedTime() {
+        return time;
     }
 
     /**

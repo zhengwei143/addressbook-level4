@@ -65,7 +65,7 @@ public class SelectCommandSystemTest extends SaveItSystemTest {
 
         /* Case: filtered issue list, select index within bounds of saveit book and issue list -> selected */
         Index validIndex = Index.fromOneBased(1);
-        assertTrue(validIndex.getZeroBased() < getModel().getFilteredIssueList().size());
+        assertTrue(validIndex.getZeroBased() < getModel().getFilteredAndSortedIssueList().size());
         command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased();
         assertCommandSuccess(command, validIndex);
 
@@ -80,7 +80,7 @@ public class SelectCommandSystemTest extends SaveItSystemTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
 
         /* Case: invalid index (size + 1) -> rejected */
-        invalidIndex = getModel().getFilteredIssueList().size() + 1;
+        invalidIndex = getModel().getFilteredAndSortedIssueList().size() + 1;
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */

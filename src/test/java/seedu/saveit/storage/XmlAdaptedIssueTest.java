@@ -16,9 +16,9 @@ import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.testutil.Assert;
 
 public class XmlAdaptedIssueTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = " ";
     private static final String INVALID_DESCRIPTION = " ";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = " ";
     private static final String INVALID_SOLUTION = "&StackπOverflow *remark";
 
     private static final String VALID_NAME = BENSON.getStatement().toString();

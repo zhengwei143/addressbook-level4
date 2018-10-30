@@ -62,14 +62,14 @@ public interface Model {
      */
     void filterIssues(Predicate<Issue> predicate);
 
-    /** Returns an unmodifiable view of the sorted issue list */
-    ObservableList<Issue> getSortedIssueList();
-
     /**
      * Sorts the issues given the order.
      * @param sortType
      */
     void sortIssues(IssueSort sortType);
+
+    /** Returns an unmodifiable view of the filtered or sorted issue list */
+    ObservableList<Issue> getFilteredAndSortedIssueList();
 
     /**
      * Updates the filter of the filtered issue list to filter by the given {@code predicate}.
@@ -80,7 +80,7 @@ public interface Model {
     /**
      * Updates the sorting of the sorted issue list to sort by the give {@code sortType}.
      */
-    void updateSortedIssueList(Comparator<Issue> sortType);
+    void updateFilteredAndSortedIssueList(Comparator<Issue> sortType);
 
     /**
      * Returns true if the model has previous saveIt states to restore.

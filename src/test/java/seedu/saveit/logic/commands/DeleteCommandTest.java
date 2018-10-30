@@ -33,7 +33,7 @@ public class DeleteCommandTest {
     @Test
     @Ignore
     public void execute_validIndexUnfilteredList_success() {
-        Issue issueToDelete = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
+        Issue issueToDelete = model.getFilteredAndSortedIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ISSUE);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ISSUE_SUCCESS, issueToDelete);
@@ -47,7 +47,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredIssueList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAndSortedIssueList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
@@ -58,7 +58,7 @@ public class DeleteCommandTest {
     public void execute_validIndexFilteredList_success() {
         showIssueAtIndex(model, INDEX_FIRST_ISSUE);
 
-        Issue issueToDelete = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
+        Issue issueToDelete = model.getFilteredAndSortedIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ISSUE);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ISSUE_SUCCESS, issueToDelete);
@@ -86,7 +86,7 @@ public class DeleteCommandTest {
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
-        Issue issueToDelete = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
+        Issue issueToDelete = model.getFilteredAndSortedIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ISSUE);
         Model expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());
         expectedModel.deleteIssue(issueToDelete);
@@ -106,7 +106,7 @@ public class DeleteCommandTest {
 
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredIssueList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAndSortedIssueList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         // execution failed -> saveit book state not added into model
@@ -131,7 +131,7 @@ public class DeleteCommandTest {
         Model expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());
 
         showIssueAtIndex(model, INDEX_SECOND_ISSUE);
-        Issue issueToDelete = model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
+        Issue issueToDelete = model.getFilteredAndSortedIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
         expectedModel.deleteIssue(issueToDelete);
         expectedModel.commitSaveIt();
 
@@ -142,7 +142,7 @@ public class DeleteCommandTest {
         expectedModel.undoSaveIt();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        assertNotEquals(issueToDelete, model.getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased()));
+        assertNotEquals(issueToDelete, model.getFilteredAndSortedIssueList().get(INDEX_FIRST_ISSUE.getZeroBased()));
         // redo -> deletes same second issue in unfiltered issue list
         expectedModel.redoSaveIt();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
@@ -176,6 +176,6 @@ public class DeleteCommandTest {
     private void showNoIssue(Model model) {
         model.updateFilteredIssueList(p -> false);
 
-        assertTrue(model.getFilteredIssueList().isEmpty());
+        assertTrue(model.getFilteredAndSortedIssueList().isEmpty());
     }
 }

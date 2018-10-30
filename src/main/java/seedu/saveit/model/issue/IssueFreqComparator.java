@@ -7,8 +7,8 @@ import seedu.saveit.model.Issue;
 /**
  * Comparator used to sort the Issues in search frequency order
  */
-public class IssueFreqSort implements Comparator<Issue> {
+public class IssueFreqComparator implements Comparator<Issue> {
     public int compare(Issue a, Issue b) {
-        return b.getFrequency().compare(a.getFrequency());
+        return a.getFrequency().compare(b.getFrequency());
     }
 }

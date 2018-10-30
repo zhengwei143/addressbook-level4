@@ -356,36 +356,43 @@ Examples:
 ****
 
 
-=== Listing all issues : `(l)list` [coming in v1.3]
+=== Listing all issues : `(l)list`
 
-Shows a list of all issues in the statement bookmark according to either chronological order or frequency order. Users can also choose to list part of issues.
+Shows a list of all issues.
 
-Format: `list chr`
+=== Sorting the list of issues: `(s)sort`
 
+
+Format: `sort`
 [TIP]
 ====
-* List all the issues by chronological order.
+* Sort the issue list based on the time when they are added. The first issue added has the highest priority.
 ====
 
-
-Format: `list freq`
+Format: `sort chro`
 [TIP]
 ====
-* List issues based on search frequency.
+* Sort the issue list by their last modified time chronologically. The last modified one has the highest priority.
 ====
 
-Format: `list tag`
+Format: `sort freq`
 [TIP]
 ====
-* List all the issues in alphabetical order.
-* List the issues without tags at the end of the display issue list.
+* Sort the issue list based on search frequency. The one which matches the search keywords most frequently has the highest priority.
+====
+
+Format: `sort tag`
+[TIP]
+====
+* Sort the issue list by their first tag in alphabetical order.
+* Sort the issues without tags at the end of the display issue list.
 ====
 
 Examples:
 ****
-* list
-* list freq
-* list tag
+* sort
+* sort freq
+* sort tag
 ****
 
 
@@ -497,6 +504,7 @@ e.g. `Search BST`
 * *History* : `history`
 * *Exit* : `exit`
 * *List* : `list`
+* *Sort* : `sort` TYPE
 * *Refactor Tag* : `refactor [OLDTAG] [NEWTAG]` +
 e.g. `refactorTag java C++`
 * *Highlight* : `highlight`

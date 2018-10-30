@@ -63,7 +63,7 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
         /* Case: filtered issue list, delete index within bounds of saveit book and issue list -> deleted */
         showIssuesWithName(KEYWORD_MATCHING_MEIER);
         Index index = INDEX_FIRST_ISSUE;
-        assertTrue(index.getZeroBased() < getModel().getFilteredIssueList().size());
+        assertTrue(index.getZeroBased() < getModel().getFilteredAndSortedIssueList().size());
         assertCommandSuccess(index);
 
         /* Case: filtered issue list, delete index within bounds of saveit book but out of bounds of issue list

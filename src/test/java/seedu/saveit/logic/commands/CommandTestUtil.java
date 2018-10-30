@@ -44,10 +44,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_SYNTAX = " " + PREFIX_TAG + VALID_TAG_SYNTAX;
     public static final String TAG_DESC_UI = " " + PREFIX_TAG + VALID_TAG_UI;
 
-    public static final String INVALID_STATEMENT_DESC = " " + PREFIX_STATEMENT + "James&"; // '&' not allowed in names
-    public static final String INVALID_DESCRIPTION_DESC =
-        " " + PREFIX_DESCRIPTION + " "; // 'a' not allowed in descriptionss
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_STATEMENT_DESC = " " + PREFIX_STATEMENT + " ";
+    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + " ";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

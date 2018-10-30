@@ -7,7 +7,6 @@ import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_STATEMENT_DESC;
-import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.saveit.logic.commands.CommandTestUtil.SOLUTION_DESC_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.SOLUTION_DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.STATEMENT_DESC_C;
@@ -180,11 +179,6 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         assertCommandFailure(
             EditCommand.COMMAND_WORD + " " + INDEX_FIRST_ISSUE.getOneBased() + INVALID_DESCRIPTION_DESC,
             Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
-
-        /* Case: invalid tag -> rejected */
-        assertCommandFailure(
-            EditCommand.COMMAND_WORD + " " + INDEX_FIRST_ISSUE.getOneBased() + INVALID_TAG_DESC,
-            Tag.MESSAGE_TAG_CONSTRAINTS);
 
         /* Case: edit a issue with new values same as another issue's values -> rejected */
         executeCommand(IssueUtil.getAddCommand(BOB));

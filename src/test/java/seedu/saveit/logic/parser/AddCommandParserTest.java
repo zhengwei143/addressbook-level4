@@ -5,7 +5,6 @@ import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_STATEMENT_DESC;
-import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.saveit.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.saveit.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.saveit.logic.commands.CommandTestUtil.SOLUTION_DESC_C;
@@ -106,10 +105,6 @@ public class AddCommandParserTest {
         // invalid descriptions
         assertParseFailure(parser, STATEMENT_DESC_C + INVALID_DESCRIPTION_DESC
                 + TAG_DESC_UI + CommandTestUtil.TAG_DESC_UI, Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
-
-        // invalid tag
-        assertParseFailure(parser, STATEMENT_DESC_C + DESCRIPTION_DESC_C
-                + INVALID_TAG_DESC + VALID_TAG_SYNTAX, Tag.MESSAGE_TAG_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + STATEMENT_DESC_C + DESCRIPTION_DESC_C

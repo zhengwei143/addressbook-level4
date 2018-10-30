@@ -8,13 +8,12 @@ import org.fxmisc.richtext.InlineCssTextArea;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Side;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Label;
 import seedu.saveit.logic.Logic;
+import seedu.saveit.ui.suggestion.AutoSuggestion;
 import seedu.saveit.ui.suggestion.IssueNameAutoSuggestion;
 import seedu.saveit.ui.suggestion.TagNameAutoSuggestion;
 
@@ -35,7 +34,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
     //To get substring after tag prefix, substring starting index has to be increased by 2
     private static final int STRING_INDEX_ADJUSTMENT_TAG_PREFIX = 2;
     private static final int MAX_NUMBER = 5;
-    private static ContextMenu popUpWindow;
+    public ContextMenu popUpWindow;
     private String[] wordSet = {WORD_ADD, WORD_EDIT, WORD_FIND, WORD_TAG};
 
     private IssueNameAutoSuggestion issueSuggestion;
@@ -85,6 +84,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
     public void showResult(String identifier) {
         String mainText = getText();
         String text;
+        AutoSuggestion suggestion;
 
         int startingIndex;
 
@@ -103,8 +103,10 @@ public class AutoSuggestionManager extends InlineCssTextArea {
         LinkedList<String> searchResult;
         if (identifier.equals(WHITESPACE_IDENTIFIER) && !getText().contains(WORD_TAG)) {
             searchResult = issueSuggestion.giveSuggestion(text);
+            suggestion = issueSuggestion;
         } else {
             searchResult = tagSuggestion.giveSuggestion(text);
+            suggestion = tagSuggestion;
         }
 
         if (searchResult.size() > 0 && text.length() > 0) {
@@ -112,7 +114,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
             if (searchResult.size() == 1 && searchResult.get(0).equals(text)) {
                 popUpWindow.hide();
             } else {
-                showSuggestionWindow(searchResult, startingIndex);
+                showSuggestionWindow(searchResult, startingIndex, suggestion);
             }
         } else {
             popUpWindow.hide();
@@ -123,7 +125,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
      * Fills in suggestion content and shows the pop up window
      */
     private void showSuggestionWindow(LinkedList<String> searchResult,
-            int startingIndex) {
+            int startingIndex, AutoSuggestion suggestion) {
         int count = Math.min(searchResult.size(), MAX_NUMBER);
         List<CustomMenuItem> menuItems = new LinkedList<>();
         for (int i = 0; i < count; i++) {
@@ -132,15 +134,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
             Label entryLabel = new Label(result);
             requestFocus();
             CustomMenuItem item = new CustomMenuItem(entryLabel, true);
-            int initIndex = startingIndex;
-            item.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    replaceText(previousText.substring(0, initIndex) + result);
-                    moveTo(getLength());
-                    popUpWindow.hide();
-                }
-            });
+            item.setOnAction(suggestion.getItemHandler(this, previousText, startingIndex, result));
             menuItems.add(item);
         }
         popUpWindow.getItems().clear();

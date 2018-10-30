@@ -5,7 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeSet;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import seedu.saveit.logic.Logic;
+import seedu.saveit.ui.AutoSuggestionManager;
 
 /**
  * The suggestion component which stores and provides issue statement key words
@@ -42,6 +45,16 @@ public class IssueNameAutoSuggestion implements AutoSuggestion {
         this.logic = logic;
         fillIssueKeyWords();
         addAllIssueKeyWord();
+    }
+
+    @Override
+    public EventHandler<ActionEvent>
+        getItemHandler(AutoSuggestionManager manager, String previousText, int initIndex, String result) {
+        return actionEvent -> {
+            manager.replaceText(previousText.substring(0, initIndex) + result);
+            manager.moveTo(manager.getLength());
+            manager.popUpWindow.hide();
+        };
     }
 
     /**

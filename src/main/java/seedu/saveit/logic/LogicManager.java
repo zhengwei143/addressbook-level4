@@ -1,8 +1,5 @@
 package seedu.saveit.logic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -22,8 +19,6 @@ import seedu.saveit.model.issue.Solution;
  * The main LogicManager of the app.
  */
 public class LogicManager extends ComponentManager implements Logic {
-    public static final String ASK_FOR_CONFIRMATION = "Are you sure to %s ? Please enter Yes(Y) to confirm.";
-    public static final String CONFIRMATION_FAILED = "Didn't %s.";
     public static final String CONFIRM_WORD = "Yes";
     public static final String CONFIRM_ALIAS = "Y";
 
@@ -52,7 +47,8 @@ public class LogicManager extends ComponentManager implements Logic {
 
             Command command = saveItParser.parseCommand(commandText);
             if (requireConfirmationBeforeExecution(command)) {
-                return setBufferedCommand((DangerCommand) command);
+                setBufferedCommand((DangerCommand) command);
+                return bufferedCommand.askForConfirmation();
             } else {
                 return command.execute(model, history);
             }
@@ -82,12 +78,13 @@ public class LogicManager extends ComponentManager implements Logic {
      * Update {@code bufferedCommand} to null.
      */
     private CommandResult handleBufferedCommand(String commandText) throws CommandException, ParseException {
+        DangerCommand command = bufferedCommand;
+        resetBufferedCommand();
+
         if (commandText.equals(CONFIRM_WORD) || commandText.equals(CONFIRM_ALIAS)) {
-            return executeBufferedCommand();
+            return command.execute(model, history);
         } else {
-            String bufferedCommandType = getBufferedCommandType();
-            resetBufferedCommand();
-            return new CommandResult(String.format(CONFIRMATION_FAILED, bufferedCommandType));
+            return command.failedConfirmation();
         }
     }
 
@@ -98,22 +95,11 @@ public class LogicManager extends ComponentManager implements Logic {
         return command instanceof DangerCommand;
     }
 
-    private CommandResult executeBufferedCommand() throws CommandException, ParseException {
-        CommandResult commandResult = bufferedCommand.execute(model, history);
-        resetBufferedCommand();
-        return commandResult;
-    }
-
-    private CommandResult setBufferedCommand(DangerCommand command) {
+    private void setBufferedCommand(DangerCommand command) {
         bufferedCommand = command;
-        return new CommandResult(String.format(ASK_FOR_CONFIRMATION, getBufferedCommandType()));
     }
 
     private void resetBufferedCommand() {
         bufferedCommand = null;
-    }
-
-    private String getBufferedCommandType() {
-        return bufferedCommand.getCommandWord();
     }
 }

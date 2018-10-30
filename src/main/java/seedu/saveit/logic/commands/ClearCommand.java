@@ -26,7 +26,12 @@ public class ClearCommand extends DangerCommand {
     }
 
     @Override
-    public String getCommandWord() {
-        return COMMAND_WORD;
+    public CommandResult askForConfirmation() {
+        return new CommandResult(String.format(ASK_FOR_CONFIRMATION, COMMAND_WORD));
+    }
+
+    @Override
+    public CommandResult failedConfirmation() {
+        return new CommandResult(String.format(CONFIRMATION_FAILED, COMMAND_WORD));
     }
 }

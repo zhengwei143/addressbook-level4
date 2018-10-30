@@ -17,7 +17,7 @@ import seedu.saveit.model.issue.Tag;
  */
 public class RefactorTagCommand extends Command {
 
-    public static final String COMMAND_WORD = "refactorTag";
+    public static final String COMMAND_WORD = "refactortag";
     public static final String COMMAND_ALIAS = "rt";
 
     public static final String MESSAGE_REFACTOR_TAG_SUCCESS = "Refactoring tag success";

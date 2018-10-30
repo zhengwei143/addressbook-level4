@@ -2,12 +2,15 @@ package seedu.saveit.ui;
 
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.saveit.commons.core.LogsCenter;
+import seedu.saveit.commons.events.ui.BrowserPanelFocusChangeEvent;
 import seedu.saveit.commons.events.ui.NewResultAvailableEvent;
 import seedu.saveit.logic.ListElementPointer;
 import seedu.saveit.logic.Logic;
@@ -42,6 +45,7 @@ public class CommandBox extends UiPart<Region> {
 
         commandTextField.initialise(logic);
         historySnapshot = logic.getHistorySnapshot();
+        registerAsAnEventHandler(this);
     }
 
     /**
@@ -165,5 +169,11 @@ public class CommandBox extends UiPart<Region> {
             return;
         }
         commandTextField.setStyle(0, commandTextField.getText().length(), ERROR_STYLE_CLASS);
+    }
+
+    @Subscribe
+    private void handleBrowserPanelFocusChangeEvent(BrowserPanelFocusChangeEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        commandTextField.requestFocus();
     }
 }

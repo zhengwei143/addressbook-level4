@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import seedu.saveit.model.issue.Solution;
 
 /**
- * An UI component that displays information of a {@code Issue}.
+ * An UI component that displays information of a {@code Solution}.
  */
 public class SolutionCard extends UiPart<Region> {
 

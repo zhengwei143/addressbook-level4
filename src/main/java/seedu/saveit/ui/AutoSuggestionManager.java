@@ -62,9 +62,9 @@ public class AutoSuggestionManager extends InlineCssTextArea {
                 } else {
                     if (getText().length() > WORD_FIND.length() && getText()
                         .substring(0, WORD_FIND.length()).contains(WORD_FIND)) { //find or findtag
-                        showResult(AutoSuggestionManager.this, WHITESPACE_IDENTIFIER);
+                        showResult(WHITESPACE_IDENTIFIER);
                     } else { //add or edit
-                        showResult(AutoSuggestionManager.this, TAG_PREFIX_IDENTIFIER);
+                        showResult(TAG_PREFIX_IDENTIFIER);
                     }
                 }
             }
@@ -82,8 +82,8 @@ public class AutoSuggestionManager extends InlineCssTextArea {
     /**
      * Analyses the input string and suggests the key words
      */
-    public void showResult(InlineCssTextArea textField, String identifier) {
-        String mainText = textField.getText();
+    public void showResult(String identifier) {
+        String mainText = getText();
         String text;
 
         int startingIndex;
@@ -95,7 +95,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
         }
 
         if (startingIndex != -1) {
-            text = mainText.substring(startingIndex, mainText.length()).trim();
+            text = mainText.substring(startingIndex).trim();
         } else {
             text = mainText.trim();
         }
@@ -112,7 +112,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
             if (searchResult.size() == 1 && searchResult.get(0).equals(text)) {
                 popUpWindow.hide();
             } else {
-                showSuggestionWindow(textField, searchResult, startingIndex);
+                showSuggestionWindow(searchResult, startingIndex);
             }
         } else {
             popUpWindow.hide();
@@ -122,22 +122,22 @@ public class AutoSuggestionManager extends InlineCssTextArea {
     /**
      * Fills in suggestion content and shows the pop up window
      */
-    private void showSuggestionWindow(InlineCssTextArea textField, LinkedList<String> searchResult,
+    private void showSuggestionWindow(LinkedList<String> searchResult,
             int startingIndex) {
         int count = Math.min(searchResult.size(), MAX_NUMBER);
         List<CustomMenuItem> menuItems = new LinkedList<>();
         for (int i = 0; i < count; i++) {
             final String result = searchResult.get(i);
-            final String previousText = textField.getText();
+            final String previousText = getText();
             Label entryLabel = new Label(result);
-            textField.requestFocus();
+            requestFocus();
             CustomMenuItem item = new CustomMenuItem(entryLabel, true);
             int initIndex = startingIndex;
             item.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    textField.replaceText(previousText.substring(0, initIndex) + result);
-                    textField.moveTo(textField.getLength());
+                    replaceText(previousText.substring(0, initIndex) + result);
+                    moveTo(getLength());
                     popUpWindow.hide();
                 }
             });
@@ -146,15 +146,14 @@ public class AutoSuggestionManager extends InlineCssTextArea {
         popUpWindow.getItems().clear();
         popUpWindow.getItems().addAll(menuItems);
         getFocused();
-        popUpWindow.show(textField, Side.BOTTOM, (double) textField.getCaretPosition() * 8, 0);
+        popUpWindow.show(this, Side.BOTTOM, (double) getCaretPosition() * 8, 0);
     }
 
     /**
      * Makes the popup window get ready to get focused before next showing
      */
     private void getFocused() {
-        popUpWindow.show(AutoSuggestionManager.this, Side.BOTTOM, (double) AutoSuggestionManager
-            .this.getCaretPosition() * 8, 0);
+        popUpWindow.show(AutoSuggestionManager.this, Side.BOTTOM, (double) getCaretPosition() * 8, 0);
         popUpWindow.hide();
     }
 }

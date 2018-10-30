@@ -1,7 +1,18 @@
 package seedu.saveit.logic.parser;
 
 import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.saveit.logic.commands.CommandTestUtil.*;
+import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
+import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
+import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_STATEMENT_DESC;
+import static seedu.saveit.logic.commands.CommandTestUtil.SOLUTION_DESC_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.STATEMENT_DESC_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_UI;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_SYNTAX;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -81,7 +92,7 @@ public class EditCommandParserTest {
             Tag.MESSAGE_TAG_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_STATEMENT_DESC  + INVALID_DESCRIPTION_DESC,
+        assertParseFailure(parser, "1" + INVALID_STATEMENT_DESC + INVALID_DESCRIPTION_DESC + SOLUTION_DESC_JAVA,
             IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS);
     }
 

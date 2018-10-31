@@ -189,6 +189,9 @@ public class AutoSuggestionManager extends InlineCssTextArea {
 
     /**
      * Fills in suggestion content and shows the pop up window
+     * @param searchResult List of strings used to create the items
+     * @param startingIndex position where the argument starts
+     * @param suggestion the AutoSuggestion object being used
      */
     private void showSuggestionWindow(LinkedList<String> searchResult,
             int startingIndex, AutoSuggestion suggestion) {
@@ -207,7 +210,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
         popUpWindow.getItems().clear();
         popUpWindow.getItems().addAll(menuItems);
         getFocused();
-        popUpWindow.show(this, Side.BOTTOM, (double) getCaretPosition() * 8, 0);
+        popUpWindow.show(this, Side.BOTTOM, (double) startingIndex * 8, 0);
     }
 
     /**

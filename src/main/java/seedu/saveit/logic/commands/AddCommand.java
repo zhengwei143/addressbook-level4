@@ -7,7 +7,6 @@ import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
@@ -80,14 +79,10 @@ public class AddCommand extends Command {
         requireNonNull(model);
         int issueIndex = model.getCurrentDirectory().getIssue();
         if (addSolution) {
-            try {
-                if (!model.getCurrentDirectory().isRootLevel()) {
-                    addSolutionToIssue(model, issueIndex);
-                    return new CommandResult(String.format(MESSAGE_SOLUTION_SUCCESS, solutionToBeAdded));
-                } else {
-                    throw new CommandException(MESSAGE_FAILED_ISSUE);
-                }
-            } catch (NoSuchElementException e) {
+            if (!model.getCurrentDirectory().isRootLevel()) {
+                addSolutionToIssue(model, issueIndex);
+                return new CommandResult(String.format(MESSAGE_SOLUTION_SUCCESS, solutionToBeAdded));
+            } else {
                 throw new CommandException(MESSAGE_FAILED_ISSUE);
             }
         }

@@ -4,11 +4,12 @@ import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
-import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
-import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
-import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
-import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
+import static seedu.saveit.ui.BrowserPanel.DEFAULT_PAGE;
+import static seedu.saveit.ui.BrowserPanel.JAVADOC_PAGE;
+import static seedu.saveit.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
+import static seedu.saveit.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
+import static seedu.saveit.ui.UiPart.FXML_FILE_FOLDER;
+import static seedu.saveit.ui.testutil.GuiTestAssert.assertListMatching;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -25,24 +26,23 @@ import org.junit.ClassRule;
 
 import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
+import guitests.guihandles.IssueListPanelHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
-import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
-import seedu.address.MainApp;
-import seedu.address.TestApp;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SelectCommand;
-import seedu.address.model.Model;
-import seedu.address.model.SaveIt;
-import seedu.address.testutil.TypicalPersons;
-import seedu.address.ui.BrowserPanel;
-import seedu.address.ui.CommandBox;
+import seedu.saveit.MainApp;
+import seedu.saveit.TestApp;
+import seedu.saveit.commons.core.EventsCenter;
+import seedu.saveit.commons.core.index.Index;
+import seedu.saveit.logic.commands.ClearCommand;
+import seedu.saveit.logic.commands.FindCommand;
+import seedu.saveit.logic.commands.ListCommand;
+import seedu.saveit.logic.commands.SelectCommand;
+import seedu.saveit.model.Model;
+import seedu.saveit.model.SaveIt;
+import seedu.saveit.testutil.TypicalIssues;
+import seedu.saveit.ui.CommandBox;
 
 /**
  * A system test class for SaveIt, which provides access to handles of GUI components and helper methods
@@ -85,7 +85,7 @@ public abstract class SaveItSystemTest {
      * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
      */
     protected SaveIt getInitialData() {
-        return TypicalPersons.getTypicalSaveIt();
+        return TypicalIssues.getTypicalSaveIt();
     }
 
     /**
@@ -103,8 +103,8 @@ public abstract class SaveItSystemTest {
         return mainWindowHandle.getCommandBox();
     }
 
-    public PersonListPanelHandle getPersonListPanel() {
-        return mainWindowHandle.getPersonListPanel();
+    public IssueListPanelHandle getIssueListPanel() {
+        return mainWindowHandle.getIssueListPanel();
     }
 
     public MainMenuHandle getMainMenu() {
@@ -139,33 +139,33 @@ public abstract class SaveItSystemTest {
     }
 
     /**
-     * Displays all persons in the address book.
+     * Displays all issues in the saveit book.
      */
-    protected void showAllPersons() {
+    protected void showAllIssues() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getSaveIt().getIssueList().size(), getModel().getFilteredIssueList().size());
+        assertEquals(getModel().getSaveIt().getIssueList().size(), getModel().getFilteredAndSortedIssueList().size());
     }
 
     /**
-     * Displays all persons with any parts of their names matching {@code keyword} (case-insensitive).
+     * Displays all issues with any parts of their names matching {@code keyword} (case-insensitive).
      */
-    protected void showPersonsWithName(String keyword) {
+    protected void showIssuesWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredIssueList().size() < getModel().getSaveIt().getIssueList().size());
+        assertTrue(getModel().getFilteredAndSortedIssueList().size() < getModel().getSaveIt().getIssueList().size());
     }
 
     /**
      * Selects the issue at {@code index} of the displayed list.
      */
-    protected void selectPerson(Index index) {
+    protected void selectIssue(Index index) {
         executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
-        assertEquals(index.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
+        assertEquals(index.getZeroBased(), getIssueListPanel().getSelectedCardIndex());
     }
 
     /**
-     * Deletes all persons in the address book.
+     * Deletes all issues in the saveit book.
      */
-    protected void deleteAllPersons() {
+    protected void deleteAllIssues() {
         executeCommand(ClearCommand.COMMAND_WORD);
         assertEquals(0, getModel().getSaveIt().getIssueList().size());
     }
@@ -173,18 +173,18 @@ public abstract class SaveItSystemTest {
     /**
      * Asserts that the {@code CommandBox} displays {@code expectedCommandInput}, the {@code ResultDisplay} displays
      * {@code expectedResultMessage}, the storage contains the same issue objects as {@code expectedModel}
-     * and the issue list panel displays the persons in the model correctly.
+     * and the issue list panel displays the issues in the model correctly.
      */
     protected void assertApplicationDisplaysExpected(String expectedCommandInput, String expectedResultMessage,
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new SaveIt(expectedModel.getSaveIt()), testApp.readStorageSaveIt());
-        assertListMatching(getPersonListPanel(), expectedModel.getFilteredIssueList());
+        assertListMatching(getIssueListPanel(), expectedModel.getFilteredAndSortedIssueList());
     }
 
     /**
-     * Calls {@code BrowserPanelHandle}, {@code PersonListPanelHandle} and {@code StatusBarFooterHandle} to remember
+     * Calls {@code BrowserPanelHandle}, {@code IssueListPanelHandle} and {@code StatusBarFooterHandle} to remember
      * their current state.
      */
     private void rememberStates() {
@@ -192,7 +192,7 @@ public abstract class SaveItSystemTest {
         getBrowserPanel().rememberUrl();
         statusBarFooterHandle.rememberSaveLocation();
         statusBarFooterHandle.rememberSyncStatus();
-        getPersonListPanel().rememberSelectedPersonCard();
+        getIssueListPanel().rememberSelectedIssueCard();
     }
 
     /**
@@ -202,37 +202,37 @@ public abstract class SaveItSystemTest {
      */
     protected void assertSelectedCardDeselected() {
         assertFalse(getBrowserPanel().isUrlChanged());
-        assertFalse(getPersonListPanel().isAnyCardSelected());
+        assertFalse(getIssueListPanel().isAnyCardSelected());
     }
 
     /**
      * Asserts that the browser's url is changed to display the details of the issue in the issue list panel at
      * {@code expectedSelectedCardIndex}, and only the card at {@code expectedSelectedCardIndex} is selected.
      * @see BrowserPanelHandle#isUrlChanged()
-     * @see PersonListPanelHandle#isSelectedPersonCardChanged()
+     * @see IssueListPanelHandle#isSelectedIssueCardChanged()
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
-        getPersonListPanel().navigateToCard(getPersonListPanel().getSelectedCardIndex());
-        String selectedCardName = getPersonListPanel().getHandleToSelectedCard().getStatement();
+        getIssueListPanel().navigateToCard(getIssueListPanel().getSelectedCardIndex());
+        String selectedCardName = getIssueListPanel().getHandleToSelectedCard().getStatement();
         URL expectedUrl;
         try {
-            expectedUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + selectedCardName.replaceAll(" ", "%20"));
+            expectedUrl = new URL(JAVADOC_PAGE);
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.", mue);
         }
         assertEquals(expectedUrl, getBrowserPanel().getLoadedUrl());
 
-        assertEquals(expectedSelectedCardIndex.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
+        assertEquals(expectedSelectedCardIndex.getZeroBased(), getIssueListPanel().getSelectedCardIndex());
     }
 
     /**
      * Asserts that the browser's url and the selected card in the issue list panel remain unchanged.
      * @see BrowserPanelHandle#isUrlChanged()
-     * @see PersonListPanelHandle#isSelectedPersonCardChanged()
+     * @see IssueListPanelHandle#isSelectedIssueCardChanged()
      */
     protected void assertSelectedCardUnchanged() {
         assertFalse(getBrowserPanel().isUrlChanged());
-        assertFalse(getPersonListPanel().isSelectedPersonCardChanged());
+        assertFalse(getIssueListPanel().isSelectedIssueCardChanged());
     }
 
     /**
@@ -276,7 +276,7 @@ public abstract class SaveItSystemTest {
     private void assertApplicationStartingStateIsCorrect() {
         assertEquals("", getCommandBox().getInput());
         assertEquals("", getResultDisplay().getText());
-        assertListMatching(getPersonListPanel(), getModel().getFilteredIssueList());
+        assertListMatching(getIssueListPanel(), getModel().getFilteredAndSortedIssueList());
         assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE), getBrowserPanel().getLoadedUrl());
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());

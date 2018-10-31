@@ -64,7 +64,7 @@ This will generate all resources required by the application and tests.
 
 === Verifying the setup
 
-. Run the `seedu.address.MainApp` and try a few commands
+. Run the `seedu.saveit.MainApp` and try a few commands
 . <<Testing,Run the tests>> to ensure they all pass.
 
 === Configurations to do before writing code
@@ -258,50 +258,120 @@ image::StorageClassDiagram.png[width="800"]
 [[Design-Commons]]
 === Common classes
 
-Classes used by multiple components are in the `seedu.address.commons` package.
+Classes used by multiple components are in the `seedu.saveit.commons` package.
 
 == Implementation
 
 This section describes some noteworthy details on how certain features are implemented. Note that this section does not fully encompass all the features, but the more core features of the application.
 
-// tag::list[]
-=== List feature
-==== Current Implementation
+=== Add issue feature
+The add command can add an new issue to the issue list
 
-The current list mechanism inherits the same implementation from AddressBook.
+==== Current implementation
+We use `SaveItParser` to call `AddCommandParser` so as to pass the entered issue, then `AddCommand` is invoked which will ask model to add the issue to the `Model` component.
+In order to store the new issue inside the SaveIt, `VersionedSaveIt` will be invoked and it will add issue to the `UniqueIssueList`.
 
-* `ModelManager#updateFilteredIssueList()` -- Predicate is set to be unused. Indicate no change is required.
-* `FXCollections.unmodifiableObservableList()` -- Return a ObservableList of all issues.
+The following sequence diagram illustrates how the add new issue feature functions:
+
+.Add Issue Command Sequence Diagram
+image::AddNewIssue.png[width="800"]
+
+This diagram gives a clear procedure that how the user input is passed step by step and calling different methods and objects at different sequences.
+
+=== Add solution feature
+The add command can add a new solution link as well as solution remark to an existing issue
+
+==== Current implementation
+We use `SaveItParser` to call `AddCommandParser` just like how add issue features functions as above mentioned. However, this time, the solution link and solution remark is provided to `AddCommand` instead. During execution, `updateIssue` and `updateFilteredIssueList` will be called respectively in `ModelManager` as a way to replace the original issue with the new edition of issue which has the new solution entered.
+
+The following sequence diagram illustrates how the add solution feature functions
+
+.Add Solution Command Sequence Diagram
+image::AddNewSolution.png[width="800"]
+
+This diagram shows the sequence that how add solution command is executed. It could be also noticed that it is basically similar to that of add new issue feature besides it invokes updateIssue method in Model component rather than addIssue method.
 
 ==== Design Considerations
+===== Aspect: How add solutions executes
+* Alternative 1 (current choice): Combine AddIssue and AddSolution combined together and distinguishes them at the stage of `AddCommandParser`
+** Pros: Consistent syntax between the two features, so the command is more user-friendly.
+** Cons: Need to put more effort on distinguishing the difference between these two requests, `AddCommandParser` is relatively complex compared to the other parser component.
+* Alternative 2: Build a new command especially for adding solution
+** Pros: Easy to implement.
+** Cons: The command set becomes too complex for the user.
 
-===== List by a specific order
+===== Aspect: How add command distinguishes between adding solution and adding issue
+* Alternative 1 (current choice): Passing a new created issue with dummy issue statement or dummy solution link
+** Pros: Consistent coding style and less change on logic structure
+** Cons: Quite complex implementation compared to other command
+* Alternative 2: Overloading Issue constructor so that different issues will be passing to `AddCommand` accordingly.
+* Pros: Relatively easier to implement
+* Cons: Lots of changes on structure.
 
-This mechanism relies most on the logic component. ListCommandParser.java need to be implemented to identify if there is a sorting requirement.
+=== Sort feature
 
-Since list should not modify the sorting inside storage, IndicateSaveItChanged should not be raised and this command should not change Model.
+The sort command can sort an issue list shown in the GUI.
 
-There will only be 3 kinds of order that the list can be shown in, as proposed in the following paragraph.
+==== Current implementation
 
-* List by chronological order **(default)** +
-  **Command:** `list chr` +
-  This order follows how the data is stored in Model, reflecting the user's learning journey. +
-  There is no need to implement new Comparator for that.
+We use JavaFX `SortedList` and the Comparator provided by `IssueSort` to sort the list, `ModelManager#getSortedList()` to retrieve the sorted list.
 
-* List by Tag +
-  **Command:** `list tag` +
-  Tag is mainly used as a way to distinguish different kind of problems, such as Java problems and C problems. This order can help users to identify the issues quickly. +
-  This order requires the tag attribute of every issue to be tracked. A simple idea is to get the TagList and sort all issues according to the tags. +
-  Those issues without a tag should be put at the end of the lists.
-
-* List by search frequency +
-  **Command** `list freq` +
-  Search frequency can reflect the importance of different issues. This order can help users to review important issues more easily.
-  Search frequency tracker is needed for this list order. It can be considered as an attribute just like tags, thus a Comparator which is similar to that used in List by Tag can be used here. +
+In order to allow sort work with filtered list, we implement the new method `getFilteredAndSortedList()`, which calls `getSortedList()` and apply it to the filtered list.
 
 The following sequence diagram illustrates how the mechanism works:
 
-image::ListByOrderCommandSequenceDiagram.png[width="800"]
+.Sort Command Sequence Diagram
+image::SortCommandSequenceDiagram.png[width="800"]
+
+.Reference Frame Initialize Comparator
+image::InitializeComparator.png[width="800"]
+
+
+This two diagrams show that after the input is parsed, a IssueSort object is initialized before the SortCommand object.
+
+As shown in the diagram, an IssueSort object can provide the required comparator with the input String passed from SortCommand.
+We use the retrieved Comparator the sort the list when executing the sort command.
+
+The following is a class diagram for IssueSort.
+
+.IssueSort Class Diagram
+image::IssueSort.png[width="800"]
+
+It shows that Comparator is an attribute of IssueSort class. We create three different classes that implement the Comparator Interface.
+They can serve the three sort type we provide in SaveIt. When more sort type is needed, we can simple create another class implementing Comparator, and add anther case in switch statement.
+
+==== Design Considerations
+
+===== Aspect: How sort executes
+
+* **Alternative 1 (current choice):** Combine SortedList and FilteredList, sort at GUI side
+
+** Pros: Consistent sorting. Doesn't affect the memory of issue lists.
+
+** Cons: Need effort to make sure the correct list is retrieved.
+
+* **Alternative 2:** Reconstruct UniqueIssueList directly, sort at Storage
+
+** Pros: Easy to understand and implement
+
+** Cons: Time consuming.
+
+===== Aspect: Comparator to support the sort command
+
+* Sort by added time: `sort` +
+  This sorting follows how the data is stored in Storage, reflecting the user's learning journey. +
+  There is no need to implement new Comparator for that.
+
+* Sort by chronological order: `sort chro` +
+  This sorting require the Comparator to compare the last modified time of the issue. Therefore, a Timestamp needs to be stored and updated every time an issue is added or edited.
+
+* Sort by first Tag: `sort tag` +
+  This sorting requires the tag attribute of every issue to be tracked. We retrieve tag lists and get the first tags. A String Comparator is enough for sorting tagName of them.
+  Those issues without a tag should be put at the end of the lists.
+
+* Sort by search frequency: `sort freq` +
+  This sorting requires the search frequency tracker. We retrieve the IssueSearchFrequency and sort them by the compare method provided in that class.
+// end::sort[]
 
 // tag::undoredo[]
 === Undo/Redo feature
@@ -383,6 +453,55 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+// tag::confirmation[]
+=== Confirmation Check
+
+Some commands that can affect the users' experience significantly need to be paid attention to and confirmation should be provided before they are executed.
+For the current version, `clear` is the only command that needs confirmation.
+
+==== Current Implementation
+
+Instead of letting LogicManager execute the command directly after parsing it, we now check if we need confirmation before the command is executed.
+
+In order to connect the confirmation with the command: +
+
+Step 1. We buffer the command that waits for confirmation. +
+
+Step 2. Generate the CommandResult according to the confirmation message entered. +
+
+Step 3. Clear the buffer.
+
+==== Design Consideration
+
+===== Aspect: How to distinguish commands that need confirmation
+
+* **Alternative 1 (current choice):** Use abstract class DangerCommand
+
+** Pros: Protect the specific Command type from being accessed by LogicManager. Sustainable.
+
+** Cons: N.A.
+
+* **Alternative 2:** Check class name and provide a danger class name list
+
+** Pros: Easy to implement.
+
+** Cons: Command information leaked. Inaccurate, e.g. two classes from different package can have the same class name.
+
+===== Aspect: How to connect the confirmation message with the command requiring it
+
+* **Alternative 1 (current choice):** Buffer the command
+
+** Pros: Protect CommandBox from Command Class.
+
+** Cons: Another variable introduced. Need effort to deal with the buffered command properly.
+
+* **Alternative 2:** Let Command check the confirmation message
+
+** Pros: Follow the normal logic. Easy to understand.
+
+** Cons: CommandBox is exposed to Command Class.
+// end::confirmation[]
+
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
@@ -430,6 +549,74 @@ image::UI_Design1.png[width="800"]
 image::UI_Design2.png[width="800"]
 
 
+=== Edit Feature
+The edit feature allows users to edit any field of the issue and solution.
+
+==== Current Implementation
+The edit mechanism is facilitated by `editCommandParser` and `editCommand`. Users are allowed to edit any field in the issue list. includes: +
+
+* Issue level
+** Issue statement
+** Issue description
+** Issue tags
+* Solution level
+** Solution link
+** Solution remark
+
+The `editCommandParser` extends `Parser` and implements the following operations:
+
+* `editCommandParser#parser(String args)`
+** Checks the arguments for empty strings and throws a `ParseException` if empty string is found.
+** Analyses the argument to check if it is a valid command format. If it is a valid format, it will set the corresponding fileds usign `EditDescriptor`. There are two types format.
+*** edit issue: edit Index i/statement d/description t/tag1 t/tag2 ...
+*** edit solution: `edit Index s/https://www.dummysolutionlink.com r/remark`.
+
+If it fails to parse the command, it will throw `ParseException` and display edit command usage message.
+
+* `editCommand#execute(Model model, CommandHisotry history)`
+** Analyses the user in the root directory or issue directory. If the user in the root directory but provide solution level edit command or in solution directory but provide issue level edit command +
+throw `CommandException` and show wrong directory information.
+
+** Checks if the user index in editDescriptor is larger than the size of the issue list or solution list. +
+Throw `CommandException` and show invalid index warning. Otherwise, call the function `model.updateIssue(issueToEdit, editedIssue)` to update issue list.
+
+Please refer to the Sequence Diagram below for the edit operation.
+
+.Edit Command Sequence Diagram
+image::EditCommandSequenceDiagram.jpg[width="800"]
+
+==== Design Consideration
+* Alternative 1 (current choice): Update the whole issue fields when every single field needs to edit.
+
+** Pros: It is easy to implement in current implementation.
+
+** Cons: It may have performance issues regarding memory usage.
+
+* Alternative 2: Update the specific data field instead of updating the whole issue.
+
+** Pros: It will use less memory.
+
+** Cons: It has lower security if it the issue is the mutable object.
+
+
+=== Refactor tag Feature
+The refactor tag feature allows users to rename or remove a specific tag for all entries with that tag.
+
+==== Current Impelementation
+The refactor tag mechanism is facilitated by `refactorTagCommandParser` and `refactorCommand`.
+
+The `refactorTagCommandParser` extends `Parser` and implements the following operations:
+
+* `refactorTagCommandParser#parser(String args)`
+** Checks the arguments for empty strings and throws a `ParseException` if an empty string is found.
+** Analyses the argument to check if it is a valid command format. Users are only allowed to use two prefixes in refactor tag command.
+*** `t/` the tag that user wants to refactor, which must be input by the user, otherwise throws `ParserException` and shows refactor tag command usage message.
+*** `n/` the new tag that user wants to replace the original one, which is optional. (if the user does not provide, then remove the original one)
+
+If it fails to parse the command, it will throw `ParseException` and display refactor tag command usage message.
+
+* `refactorTagCommand#execute(Model model, CommandHisotry history)`
+** update the issue list and return success message if it has edited an issue, otherwise show unsuccessful message.
 
 == Documentation
 
@@ -571,14 +758,14 @@ We have two types of tests:
 
 .  *GUI Tests* - These are tests involving the GUI. They include,
 .. _System Tests_ that test the entire App by simulating user actions on the GUI. These are in the `systemtests` package.
-.. _Unit tests_ that test the individual components. These are in `seedu.address.ui` package.
+.. _Unit tests_ that test the individual components. These are in `seedu.saveit.ui` package.
 .  *Non-GUI Tests* - These are tests not involving the GUI. They include,
 ..  _Unit tests_ targeting the lowest level methods/classes. +
-e.g. `seedu.address.commons.StringUtilTest`
+e.g. `seedu.saveit.commons.StringUtilTest`
 ..  _Integration tests_ that are checking the integration of multiple code units (those code units are assumed to be working). +
-e.g. `seedu.address.storage.StorageManagerTest`
+e.g. `seedu.saveit.storage.StorageManagerTest`
 ..  Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together. +
-e.g. `seedu.address.logic.LogicManagerTest`
+e.g. `seedu.saveit.logic.LogicManagerTest`
 
 
 === Troubleshooting Testing
@@ -1218,13 +1405,13 @@ These instructions only provide a starting point for testers to work on; testers
 . Adding an issue in root directory
 
 .. Prerequisites: User is in root directory
-.. Test case: `add i/problem d/description t/UI`
+.. Test case: `add i/problem d/description t/UI` +
    Expected: A new issue with statement and description is added, tagged with UI.
-.. Test case: `add t/UI d/description d/newdescription i/problem`
+.. Test case: `add t/UI d/description d/newdescription i/problem` +
    Expected: A new issue with statement and newdescription is added, tagged with UI.
-.. Test case: `add i/proπblem d/description`
+.. Test case: `add i/proπblem d/description` +
    Expected: No issue is added. Error details shown in the status message. Status bar remains the same.
-.. Test case: `add s/www.example.com r/remark`
+.. Test case: `add s/www.example.com r/remark` +
    Expected: No issue is added. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect add commands to try: `add i/problem`, `add i/problem s/link` _{give more}_ +
    Expected: Similar to previous.
@@ -1236,13 +1423,13 @@ _{ more test cases ... }_
 . Editing an issue in root directory
 
 .. Prerequisites: User is in root directory
-.. Test case: `edit 1 i/problem`
+.. Test case: `edit 1 i/problem` +
    Expected: First issue is edited. Its new issue statement is problem.
-.. Test case: `edit 1 d/description d/newdescription`
+.. Test case: `edit 1 d/description d/newdescription` +
    Expected: First issue is edited. Its new description is newdescription.
-.. Test case: `edit 1 i/proπblem`
+.. Test case: `edit 1 i/proπblem` +
    Expected: No issue is edited. Error details shown in the status message. Status bar remains the same.
-.. Test case: `edit 1 s/www.example.com r/remark`
+.. Test case: `edit 1 s/www.example.com r/remark` +
    Expected: No issue is edited. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect add commands to try: `edit i/problem s/link`, `edit x i/problem` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
@@ -1264,6 +1451,20 @@ _{ more test cases ... }_
    Expected: Similar to previous.
 
 _{ more test cases ... }_
+
+=== Sorting an issue list
+
+. Sorting the issue list in root directory
+
+.. Prerequisites: User is in root directory
+.. Test case: `sort` +
+   Expected: Issues are sorted by adding order.
+.. Test case: `sort freq` +
+   Expected: Issues are sorted by search frequency.
+.. Test case: `sort random` +
+   Expected: The invalid command error it shown in the status message. The issue list remains the same.
+.. Test case: `sort tag random` +
+   Expected: The invalid command error it shown in the status message. The issue list remains the same.
 
 === Saving data
 

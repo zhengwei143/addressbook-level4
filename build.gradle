@@ -28,7 +28,7 @@ if (JavaVersion.current() == JavaVersion.VERSION_1_10
 }
 
 // Specifies the entry point of the application
-mainClassName = 'seedu.address.MainApp'
+mainClassName = 'seedu.saveit.MainApp'
 
 sourceCompatibility = JavaVersion.VERSION_1_9
 targetCompatibility = JavaVersion.VERSION_1_9
@@ -79,10 +79,12 @@ dependencies {
     testRuntimeOnly group: 'org.testfx', name: 'openjfx-monocle', version: 'jdk-9+181'
     testRuntimeOnly group:'org.junit.vintage', name:'junit-vintage-engine', version: jUnitVersion
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+
+    compile group: 'org.fxmisc.richtext', name: 'richtextfx', version: '0.9.1'
 }
 
 shadowJar {
-    archiveName = 'address.jar'
+    archiveName = 'saveit.jar'
 
     destinationDir = file("${buildDir}/jar/")
 }
@@ -157,16 +159,16 @@ test {
         }
 
         if (runNonGuiTests) {
-            test.include 'seedu/address/**'
+            test.include 'seedu/saveit/**'
         }
 
         if (runGuiTests) {
             test.include 'systemtests/**'
-            test.include 'seedu/address/ui/**'
+            test.include 'seedu/saveit/ui/**'
         }
 
         if (!runGuiTests) {
-            test.exclude 'seedu/address/ui/**'
+            test.exclude 'seedu/saveit/ui/**'
         }
     }
 }
@@ -207,8 +209,8 @@ asciidoctor {
         idprefix: '',  // for compatibility with GitHub preview
         idseparator: '-',
         'site-root': "${sourceDir}",  // must be the same as sourceDir, do not modify
-        'site-name': 'address-Level4',
-        'site-githuburl': 'https://github.com/se-edu/address-level4',
+        'site-name': 'saveit-Level4',
+        'site-githuburl': 'https://github.com/se-edu/saveit-level4',
         'site-seedu': true,  // delete this line if your project is not a fork (not a SE-EDU project)
     ]
 

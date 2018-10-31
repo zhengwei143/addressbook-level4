@@ -3,44 +3,42 @@ package systemtests;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
-import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_STATEMENT_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.SOLUTION_DESC_C;
-import static seedu.address.logic.commands.CommandTestUtil.SOLUTION_DESC_JAVA;
-import static seedu.address.logic.commands.CommandTestUtil.STATEMENT_DESC_C;
-import static seedu.address.logic.commands.CommandTestUtil.STATEMENT_DESC_JAVA;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_UI;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STATEMENT_JAVA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UI;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ISSUES;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
+import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
+import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_STATEMENT_DESC;
+import static seedu.saveit.logic.commands.CommandTestUtil.SOLUTION_DESC_C;
+import static seedu.saveit.logic.commands.CommandTestUtil.SOLUTION_DESC_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.STATEMENT_DESC_C;
+import static seedu.saveit.logic.commands.CommandTestUtil.STATEMENT_DESC_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_UI;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.saveit.model.Model.PREDICATE_SHOW_ALL_ISSUES;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
+import static seedu.saveit.testutil.TypicalIssues.AMY;
+import static seedu.saveit.testutil.TypicalIssues.BOB;
+import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.CommandTestUtil;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Issue;
-import seedu.address.model.Model;
-import seedu.address.model.issue.Description;
-import seedu.address.model.issue.IssueStatement;
-import seedu.address.model.issue.Tag;
-import seedu.address.testutil.IssueBuilder;
-import seedu.address.testutil.IssueUtil;
+import seedu.saveit.commons.core.Messages;
+import seedu.saveit.commons.core.index.Index;
+import seedu.saveit.logic.commands.CommandTestUtil;
+import seedu.saveit.logic.commands.EditCommand;
+import seedu.saveit.logic.commands.RedoCommand;
+import seedu.saveit.logic.commands.UndoCommand;
+import seedu.saveit.model.Issue;
+import seedu.saveit.model.Model;
+import seedu.saveit.model.issue.Description;
+import seedu.saveit.model.issue.IssueStatement;
+import seedu.saveit.testutil.IssueBuilder;
+import seedu.saveit.testutil.IssueUtil;
 
 public class EditCommandSystemTest extends SaveItSystemTest {
 
@@ -72,7 +70,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         model.updateIssue(
-            getModel().getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased()), editedIssue);
+            getModel().getFilteredAndSortedIssueList().get(INDEX_FIRST_ISSUE.getZeroBased()), editedIssue);
         assertCommandSuccess(command, model, expectedResultMessage);
 
 
@@ -84,9 +82,9 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         /* Case: edit an issue with new values same as another issue's values but with different name ->
         edited */
         assertTrue(getModel().getSaveIt().getIssueList().contains(BOB));
-        index = INDEX_SECOND_PERSON;
+        index = INDEX_SECOND_ISSUE;
 
-        assertNotEquals(getModel().getFilteredIssueList().get(index.getZeroBased()), BOB);
+        assertNotEquals(getModel().getFilteredAndSortedIssueList().get(index.getZeroBased()), BOB);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + STATEMENT_DESC_JAVA + DESCRIPTION_DESC_C
             + SOLUTION_DESC_C + CommandTestUtil.TAG_DESC_UI + TAG_DESC_UI;
         editedIssue = new IssueBuilder(BOB).withStatement(VALID_STATEMENT_JAVA).build();
@@ -95,7 +93,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         /* Case: edit an issue with new values same as another issue's values but with different description
          * -> edited
          */
-        index = INDEX_SECOND_PERSON;
+        index = INDEX_SECOND_ISSUE;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + STATEMENT_DESC_C + DESCRIPTION_DESC_JAVA
                 + SOLUTION_DESC_C + CommandTestUtil.TAG_DESC_UI + TAG_DESC_UI;
         editedIssue = new IssueBuilder(BOB).withDescription(VALID_DESCRIPTION_JAVA).build();
@@ -104,27 +102,27 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         /* Case: clear tags -> cleared */
         index = INDEX_FIRST_ISSUE;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
-        Issue issueToEdit = getModel().getFilteredIssueList().get(index.getZeroBased());
+        Issue issueToEdit = getModel().getFilteredAndSortedIssueList().get(index.getZeroBased());
         editedIssue = new IssueBuilder(issueToEdit).withTags().build();
         assertCommandSuccess(command, index, editedIssue);
 
         /* ------------------ Performing edit operation while a filtered list is being shown
         ------------------------ */
 
-        /* Case: filtered issue list, edit index within bounds of address book and issue list -> edited */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        /* Case: filtered issue list, edit index within bounds of saveit book and issue list -> edited */
+        showIssuesWithName(KEYWORD_MATCHING_MEIER);
         index = INDEX_FIRST_ISSUE;
 
-        assertTrue(index.getZeroBased() < getModel().getFilteredIssueList().size());
+        assertTrue(index.getZeroBased() < getModel().getFilteredAndSortedIssueList().size());
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + STATEMENT_DESC_C;
-        issueToEdit = getModel().getFilteredIssueList().get(index.getZeroBased());
+        issueToEdit = getModel().getFilteredAndSortedIssueList().get(index.getZeroBased());
         editedIssue = new IssueBuilder(issueToEdit).withStatement(VALID_STATEMENT_C).build();
         assertCommandSuccess(command, index, editedIssue);
 
-        /* Case: filtered issue list, edit index within bounds of address book but out of bounds of issue list
+        /* Case: filtered issue list, edit index within bounds of saveit book but out of bounds of issue list
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showIssuesWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getSaveIt().getIssueList().size();
 
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + STATEMENT_DESC_C,
@@ -137,9 +135,9 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         unchanged but
          * browser url changes
          */
-        showAllPersons();
+        showAllIssues();
         index = INDEX_FIRST_ISSUE;
-        selectPerson(index);
+        selectIssue(index);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + STATEMENT_DESC_JAVA + DESCRIPTION_DESC_JAVA
             + SOLUTION_DESC_JAVA + CommandTestUtil.TAG_DESC_UI;
         // this can be misleading: card selection actually remains unchanged but the
@@ -158,7 +156,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 
         /* Case: invalid index (size + 1) -> rejected */
-        invalidIndex = getModel().getFilteredIssueList().size() + 1;
+        invalidIndex = getModel().getFilteredAndSortedIssueList().size() + 1;
 
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + STATEMENT_DESC_C,
             Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
@@ -181,16 +179,11 @@ public class EditCommandSystemTest extends SaveItSystemTest {
             EditCommand.COMMAND_WORD + " " + INDEX_FIRST_ISSUE.getOneBased() + INVALID_DESCRIPTION_DESC,
             Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
 
-        /* Case: invalid tag -> rejected */
-        assertCommandFailure(
-            EditCommand.COMMAND_WORD + " " + INDEX_FIRST_ISSUE.getOneBased() + INVALID_TAG_DESC,
-            Tag.MESSAGE_TAG_CONSTRAINTS);
-
         /* Case: edit a issue with new values same as another issue's values -> rejected */
         executeCommand(IssueUtil.getAddCommand(BOB));
         assertTrue(getModel().getSaveIt().getIssueList().contains(BOB));
         index = INDEX_FIRST_ISSUE;
-        assertFalse(getModel().getFilteredIssueList().get(index.getZeroBased()).equals(BOB));
+        assertFalse(getModel().getFilteredAndSortedIssueList().get(index.getZeroBased()).equals(BOB));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + STATEMENT_DESC_C + DESCRIPTION_DESC_C
             + SOLUTION_DESC_C + CommandTestUtil.TAG_DESC_UI + TAG_DESC_UI;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_ISSUE);
@@ -200,7 +193,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
             + SOLUTION_DESC_C + TAG_DESC_UI;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_ISSUE);
 
-        /* Case: edit a issue with new values same as another issue's values but with different address -> rejected */
+        /* Case: edit a issue with new values same as another issue's values but with different saveit -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + STATEMENT_DESC_C + DESCRIPTION_DESC_C
             + SOLUTION_DESC_JAVA + CommandTestUtil.TAG_DESC_UI + TAG_DESC_UI;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_ISSUE);
@@ -235,7 +228,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
     private void assertCommandSuccess(String command, Index toEdit, Issue editedIssue,
         Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
-        expectedModel.updateIssue(expectedModel.getFilteredIssueList().get(toEdit.getZeroBased()),
+        expectedModel.updateIssue(expectedModel.getFilteredAndSortedIssueList().get(toEdit.getZeroBased()),
             editedIssue);
         expectedModel.updateFilteredIssueList(PREDICATE_SHOW_ALL_ISSUES);
 

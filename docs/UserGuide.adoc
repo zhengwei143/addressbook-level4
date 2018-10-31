@@ -32,7 +32,7 @@ To get started with SaveIt, please follow the  instructions below:
 .  Copy the file to a folder as the home folder for your SaveIt.
 .  Double-click the file to start the app. The GUI should appear in a few seconds, as shown below.
 +
-.Applacation Interface
+.Application Interface
 image::UI_Design.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
@@ -52,13 +52,13 @@ The following is a list of commands that you can use in the application.
 *Command Format*
 
 ====
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add i/ISSUE_STATEMENT d/DESCRIPTION`, `ISSUE_STATEMENT` and `DESCRIPTION` are parameters which can be used as `add i/Segment_Fault d/java`.
+* Words in `UPPER_CASE` are the parameters to be provided by the user e.g. in `add i/ISSUE_STATEMENT d/DESCRIPTION`, `ISSUE_STATEMENT` and `DESCRIPTION` are parameters which can be used as `add i/Segment_Fault d/java`.
 * Items in square brackets are optional e.g `i/ISSUE_STATEMENT d/DESCRIPTION [t/TAG]` can be used as `i/map_function d/how to use map in python t/python` or as `i/map_function d/how to use in python`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/python`, `t/python t/java` etc.
 * Parameters can be in any order e.g. if the command specifies `t/TAG, d/DESCRIPTION i/ISSUE_STATEMENT` is also acceptable.
 ====
 
-=== Viewing help : `help`
+=== Viewing help : `(h)help`
 
 Types `help` to view the handy help page!
 
@@ -70,16 +70,11 @@ Examples:
 ****
 
 
-=== Selecting an statement : `select`
+=== Selecting a statement : `(s)select`
 
 Selects an issue identified by the index number used in the displayed issue list and change the current editing directory to the issue selected.
 
 Format: `select INDEX`
-
-[TIP]
-====
-* Selects the issue [INDEX] and loads the lists of the solutions.
-====
 
 Examples:
 ****
@@ -94,23 +89,13 @@ Examples:
 * All properties of this solutions will be displayed at the left side of the interface.
 ====
 
-=== Adding an issue: `add`
+=== Adding an issue: `(a)add`
 
 Adds an issue to the SaveIt App.
 
 Format: `add i/ISSUE_STATEMENT d/DESCRIPTION [t/TAG]...`
 
-[TIP]
-====
-* Add an issue (issue statement and description, tags are opitonal).
-====
-
 Format: `add s/SOLUTION_LINK2 r/REMARK`
-
-[TIP]
-====
-* Add a solution (solution link and remark) to a specific issue
-====
 
 Examples: +
 
@@ -130,37 +115,28 @@ Examples: +
 * User needs to select the issue index to add a solution to that issue
 * The display panel will display the first solution link of the issue at the specified `INDEX`.
 * An issue contains one solution link and one remark
-* User can continue to add an solution to the issue
+* User can continue to add a solution to the issue
 ====
 
 
-=== Editing an issue : `edit`
+=== Editing an issue : `(e)edit`
 
-Edits an existing issue or solutions in the SaveIt App.
+Edits an existing issue or solution in the SaveIt App.
 
 Format: `edit INDEX [i/NEW_ISSUE] [d/NEW_DESCRIPTION] [t/TAG]...`
 
-[TIP]
-====
-* Edit an issue statement, description or tag
-* Allow editing any field of the issue(at least one field provided)
-====
-
-Format: * `edit INDEX s/NEW_SOLUTION_LINK s/NEW_SOLUTION_REMARK`
-
+Format: `edit INDEX s/NEW_SOLUTION_LINK s/NEW_SOLUTION_REMARK`
 
 [TIP]
 ====
-* Select the solution before editing
-* Edit the solution or solution remark
-* Allow editing any field of the solution(at least one field provided)
+* Select an issue before editing solution
 ====
 
 Examples: +
 ****
-* `edit 1 i/filter_function d/how to use filter function in python t/python`
-* `select 1`
-* `edit 3 s/www.example2a.com r/refer the link explanation`
+* `edit 1 i/filter_function d/how to use filter function in python t/python` (the issue statement, description and tag will be updated)
+* `select 1` (select the first issue)
+* `edit 3 s/www.example2a.com r/refer the link explanation` (the third solution link and remark will be updated)
 ****
 
 [NOTE]
@@ -169,20 +145,30 @@ Examples: +
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the statement will be removed i.e. adding of solutions is not cumulative.
-* You can remove all the statement solutions by typing `s/` without specifying any tags after it.
+* You can remove all the tags by typing `t/` without specifying any tags after it.
+====
+
+=== Editing an issue : `(at)addtag`
+
+Adds tags on existing issue in the SaveIt App.
+
+Format: `addTag INDEX t/TAG_1 [t/TAG_2] [t/TAG_3]...`
+
+Examples: +
+****
+* `addtag 2 t/python t/java t/algorithm`
+****
+
+[NOTE]
+====
+* If the tag already exits in the current issue tags, it will be ignored.
 ====
 
 
-=== Deleting an statement : `delete`
+=== Deleting a statement : `(d)delete`
 Deletes the specified issue from SaveIt App.
 
 Format: `delete INDEX`
-
-
-[TIP]
-====
-* The issue [1] will be deleted
-====
 
 Examples: +
 ****
@@ -191,22 +177,22 @@ Examples: +
 
 [NOTE]
 ====
-* The index refers to the index number shown in the displayed issue list.
+* The index refers to the index number on the issue list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * The index cannot be bigger than the number of issues.
 ====
 
 
-=== Locating issues by statement: `find`
+=== Locating issues by statement or description: `(f)find`
 
-Find issues whose statement and description contains any of the given search queries.
+Finds issues whose statement and description contain any of the given search queries.
 
 Format: `find [KEYWORDS...]`
 
 [TIP]
 ====
-* The issue statement and description contain the KEYWORD will be shown in the displayed issue list
-* The Keywords can be more than 1
+* The issues matching the keywords (based on their statements or descriptions) will be displayed on the issue list.
+* There can be more than 1 keywords
 ====
 
 Examples:
@@ -225,7 +211,32 @@ Examples:
 * Searching the keyword will increment the search frequency of the issue (so that it can be ordered accordingly later on).
 ====
 
-=== Returning to home directory  : `home`
+=== Locating issues by tags: `(ft)findtag`
+
+Finds issues that contain the tags entered in the search queries.
+
+[TIP]
+====
+* The issues with matching tags (given the keywords) will be displayed on the issue list.
+* There can be more than 1 keywords representing multiple tags
+====
+
+Examples:
+****
+* `findtag java`
+* `findtag cplusplus segmentationFault`
+****
+
+[NOTE]
+====
+* The search is case-sensitive
+* The keywords must match exactly to the tag names of the issue's tags
+* If multiple tags are searched, only issues containing *all* the searched tags will be displayed
+* A matched issue can have other tags (aside from the ones searched).
+e.g `issue[cplusplus][segmentation]` will match with a single searched tag `[cplusplus]`
+====
+
+=== Returning to home directory  : `(h)home`
 
 Changes the current editing directory to the root directory. Besides, Shows a list of all issues in the issue list by index.
 
@@ -246,7 +257,7 @@ Examples:
 * All issues are listed in chronological order by default in home directory.
 ====
 
-=== Undoing previous command : `undo`
+=== Undoing previous command : `(u)undo`
 
 Restores the SaveIt App to the state before the previous undoable command was executed.
 
@@ -279,7 +290,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 * Users can use `redo` (refer to next command) to restore their changes if they regret `undo` a command.
 ====
 
-=== Redoing the previously undone command: `redo`
+=== Redoing the previously undone command: `(r)redo`
 
 Reverses the most recent `undo` command.
 
@@ -305,7 +316,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 ****
 
 
-=== Clearing all entries : `clear`
+=== Clearing all entries : `(c)clear`
 
 Clears all issues from the saveIt App.
 
@@ -318,10 +329,11 @@ Example:
 
 [NOTE]
 ====
+* User need confirm to execute this operation.
 * User can undo this operation to restore the issue lists.
 ====
 
-=== Listing entered commands : `history`
+=== Listing entered commands : `(h)history`
 
 Lists all the commands that you have entered in reverse chronological order.
 
@@ -332,7 +344,7 @@ Format: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
-=== Exiting the program : `exit`
+=== Exiting the program : `(x)exit`
 
 Exits the SaveIt App.
 
@@ -345,44 +357,51 @@ Examples:
 ****
 
 
-=== Listing all issues : `list` [coming in v1.3]
+=== Listing all issues : `(l)list`
 
-Shows a list of all issues in the statement bookmark according to either chronological order or frequency order. Users can also choose to list part of issues.
+Shows a list of all issues.
 
-Format: `list chr`
+=== Sorting the list of issues: `(s)sort`
 
+
+Format: `sort`
 [TIP]
 ====
-* List all the issues by chronological order.
+* Sort the issue list based on the time when they are added. The first issue added has the highest priority.
 ====
 
-
-Format: `list freq`
+Format: `sort chro`
 [TIP]
 ====
-* List issues based on search frequency.
+* Sort the issue list by their last modified time chronologically. The last modified one has the highest priority.
 ====
 
-Format: `list tag`
+Format: `sort freq`
 [TIP]
 ====
-* List all the issues in alphabetical order.
-* List the issues without tags at the end of the display issue list.
+* Sort the issue list based on search frequency. The one which matches the search keywords most frequently has the highest priority.
+====
+
+Format: `sort tag`
+[TIP]
+====
+* Sort the issue list by their first tag in alphabetical order.
+* Sort the issues without tags at the end of the display issue list.
 ====
 
 Examples:
 ****
-* list
-* list freq
-* list tag
+* sort
+* sort freq
+* sort tag
 ****
 
 
-=== Refactoring tag: `refactorTag` [coming in v1.3]
+=== Refactoring tag: `(rt)refactortag`
 
-To rename or remove a spcific tag for all entries with that tag.
+To rename or remove a specific tag for all entries with that tag.
 
-Format: `refactorTag t/OLD_TAG [t/NEW_TAG]`
+Format: `refactortag t/OLD_TAG [n/NEW_TAG]`
 
 [TIP]
 ====
@@ -392,36 +411,60 @@ Format: `refactorTag t/OLD_TAG [t/NEW_TAG]`
 
 Examples:
 ****
-* refactorTag t/python t/java (Changes all entries tagged [python] to be tagged [java])
-* refactorTag t/python (Removes the tag [java] from all the entries)
+* refactorTag t/python nt/java (Changes all entries tagged [python] to be tagged [java])
+* refactorTag t/python (Removes the tag [python] from all the entries)
 ****
 
-=== Autosuggesting existing tags [coming in v1.3]
+[NOTE]
+====
+* If the new tag exits in the issue already, it is the same as removing the old tag.
+====
+
+=== Add tag: `(at)addtag` [coming in v1.3]
+
+To add tags for a specific issue.
+
+Format: `addtag INDEX t/TAG1 [t/TAG2]...`
+
+Examples:
+****
+* addtag t/python t/java)
+****
+
+[NOTE]
+====
+* If the tag exits in the issue already, it will not take any actions.
+====
+
+=== Autosuggesting existing tags
+
 To prevent the user from creating many similar tags / duplicates, whenever the user creates a record with a tag, or modifies a record’s tag, the application searches for similar tags in the system and prompts the user with a list of similar tags.
 
 Example:
-****
-*   add i/NEW_ISSUE t/java
-====
-*   Similar tags have been found that have matched with [java], do you mean?
-**   Javascript
-**   Java9
-**   No, i would like to create a new tag [java]
-====
-*   tag 1 : chooses to replace [java] with [javascript]
-*   tag 3 : chooses to create a new tag [java]
-****
 
-=== Highlighting command parameters [coming in v1.3]
+.Autosuggesting of existing tags
+image::autosuggest-tag.png[width="790"]
+
+
+=== Suggest to copy existing values
+When editing fields in an issue (e.g. Editing an issue statement), if only slight modifications are required, the user will have to copy paste the existing issue statement and modify it, or type it out again.
+To make things more convenient, after the application prompts the user if they want to copy the existing value onto the command line.
+
+Example:
+
+.Copying existing fields
+image::copy-existing.png[width="790"]
+
+=== Highlighting command parameters
 
 To distinguish user command for different parameters, commands get highlighted with different color as you type.
 
 Examples:
 ****
-*** [red]#add# [aqua]#i/[ISSUE_STATEMENT]# [fuchsia]#d/[DESCRIPTION]#
-*** [red]#edit# [blue]#12# [green]#s/[SOLUTION_LINK]# [maroon]#r/[REMARK]#
-*** [red]#select# [blue]#4#
-*** [red]#list# [yellow]#freq#
+*** [yellow]#add# [aqua]#i/#[ISSUE_STATEMENT] [aqua]#d/#[DESCRIPTION]
+*** [yellow]#edit# [green]#12# [green]#s/#[SOLUTION_LINK] [aqua]#r/#[REMARK]
+*** [yellow]#select# [green]#4#
+*** [yellow]#list# [blue]#freq#
 ****
 
 
@@ -482,6 +525,7 @@ e.g. `Search BST`
 * *History* : `history`
 * *Exit* : `exit`
 * *List* : `list`
+* *Sort* : `sort` TYPE
 * *Refactor Tag* : `refactor [OLDTAG] [NEWTAG]` +
 e.g. `refactorTag java C++`
 * *Highlight* : `highlight`

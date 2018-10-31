@@ -31,7 +31,6 @@ public class DeleteCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    @Ignore
     public void execute_validIndexUnfilteredList_success() {
         Issue issueToDelete = model.getFilteredAndSortedIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ISSUE);
@@ -54,7 +53,6 @@ public class DeleteCommandTest {
     }
 
     @Test
-    @Ignore
     public void execute_validIndexFilteredList_success() {
         showIssueAtIndex(model, INDEX_FIRST_ISSUE);
 

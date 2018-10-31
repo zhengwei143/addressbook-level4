@@ -26,7 +26,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
     private static final String dummyStatement = "dummyStatement";
     private static final String dummyDescription = "dummyDescription";
-    private static final String dummySolutionLink = "dummySolutionLink";
+    private static final String dummySolutionLink = "https://www.dummySolutionLink.com";
     private static final String dummySolutionRemark = "dummySolutionRemark";
 
     /**
@@ -60,7 +60,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             if (argMultimap.getValue(PREFIX_SOLUTION_LINK).isPresent()
                     || argMultimap.getValue(PREFIX_REMARK).isPresent()) {
                 throw new ParseException(
-                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_ADD_SOLUTION_USAGE));
             }
         }
 

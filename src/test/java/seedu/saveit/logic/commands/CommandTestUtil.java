@@ -29,7 +29,7 @@ public class CommandTestUtil {
     public static final String VALID_STATEMENT_C = "C Issue";
     public static final String VALID_DESCRIPTION_JAVA = "syntax error";
     public static final String VALID_DESCRIPTION_C = "94351253";
-    public static final String VALID_SOLUTION_JAVA = "http://www.oracle.com RemarkJava";
+    public static final String VALID_SOLUTION_JAVA = "https://www.oracle.com RemarkJava";
     public static final String VALID_SOLUTION_C = "https://stackoverflow.com/ RemarkC";
     public static final String VALID_SOLUTION_STACKOVERFLOW = "https://stackoverflow.com/ newSol";
     public static final String VALID_TAG_UI = "ui";

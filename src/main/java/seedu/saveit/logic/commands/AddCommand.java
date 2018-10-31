@@ -7,7 +7,6 @@ import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
@@ -29,13 +28,15 @@ public class AddCommand extends Command {
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_TAG + "algorithm "
             + PREFIX_TAG + "java";
+    public static final String MESSAGE_ADD_SOLUTION_USAGE = "Issue has to be added first before adding solutions";
     public static final String MESSAGE_ISSUE_SUCCESS = "New issue added: %1$s";
     public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt";
 
     private static final String dummyStatement = "dummyStatement";
     private static final String dummyDescription = "dummyDescription";
     private static final String MESSAGE_FAILED_ISSUE =
-            "Issue has to be selected first before adding " + "solution";
+            "Issue has to be selected first before adding solution";
+    private static final String MESSAGE_WRONG_DIRECTORY = "Wrong directory, please check!";
     private static final String MESSAGE_SOLUTION_SUCCESS = "New solution added: %1$s";
     private boolean addSolution;
     private final Solution solutionToBeAdded;
@@ -79,16 +80,16 @@ public class AddCommand extends Command {
         requireNonNull(model);
         int issueIndex = model.getCurrentDirectory().getIssue();
         if (addSolution) {
-            try {
-                if (issueIndex > 0) {
-                    addSolutionToIssue(model, issueIndex);
-                    return new CommandResult(String.format(MESSAGE_SOLUTION_SUCCESS, solutionToBeAdded));
-                } else {
-                    throw new CommandException(MESSAGE_FAILED_ISSUE);
-                }
-            } catch (NoSuchElementException e) {
+            if (!model.getCurrentDirectory().isRootLevel()) {
+                addSolutionToIssue(model, issueIndex);
+                return new CommandResult(String.format(MESSAGE_SOLUTION_SUCCESS, solutionToBeAdded));
+            } else {
                 throw new CommandException(MESSAGE_FAILED_ISSUE);
             }
+        }
+
+        if (!model.getCurrentDirectory().isRootLevel()) {
+            throw new CommandException(MESSAGE_WRONG_DIRECTORY);
         }
 
         if (model.hasIssue(toAdd)) {

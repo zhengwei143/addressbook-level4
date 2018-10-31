@@ -34,7 +34,7 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
     public static final String COMMAND_ALIAS = "e";
-    public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt."; //TODO: necessary?
+    public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt.";
     public static final String MESSAGE_EDIT_ISSUE_SUCCESS = "Edited Issue: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " command format: \n"
@@ -50,7 +50,7 @@ public class EditCommand extends Command {
 
 
     public static final String DUMMY_SOLUTION_REMARK = "dummySolutionRemark";
-    public static final String DUMMY_SOLUTION_LINK = "dummySolutionLink";
+    public static final String DUMMY_SOLUTION_LINK = "https://www.dummySolutionLink.com";
 
     private final Index index;
     private final EditIssueDescriptor editIssueDescriptor;
@@ -73,21 +73,11 @@ public class EditCommand extends Command {
         List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
         Directory currentDirectory = model.getCurrentDirectory();
 
-        if (currentDirectory.isRootLevel() && (editIssueDescriptor.getStatement().isPresent() || editIssueDescriptor
-            .getDescription().isPresent() || editIssueDescriptor.getTags().isPresent())) {
-            if (index.getZeroBased() <= lastShownList.size()) {
-                issueToEdit = lastShownList.get(index.getZeroBased());
-            } else {
-                throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
-            }
-            // if it edits solution or remark, then throw Exception
-        } else if (currentDirectory.isIssueLevel() && editIssueDescriptor.getSolution().isPresent()) {
+        if (currentDirectory.isRootLevel() && editIssueDescriptor.isAnyIssueFieldEdited()) {
+            issueToEdit = getIssueToEdit(lastShownList, lastShownList.size(), index.getZeroBased());
+        } else if (currentDirectory.isIssueLevel() && editIssueDescriptor.isAnySolutionFieldEdited()) {
             int solutionListSize = lastShownList.get(currentDirectory.getIssue() - 1).getSolutions().size();
-            if (index.getZeroBased() <= solutionListSize) {
-                issueToEdit = lastShownList.get(currentDirectory.getIssue() - 1);
-            } else {
-                throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
-            }
+            issueToEdit = getIssueToEdit(lastShownList, solutionListSize, currentDirectory.getIssue() - 1);
         } else {
             throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
         }
@@ -101,6 +91,17 @@ public class EditCommand extends Command {
         model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
         model.commitSaveIt();
         return new CommandResult(String.format(MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue));
+    }
+
+    private Issue getIssueToEdit(List<Issue> lastShownList, int solutionListSize, int issueIndex)
+        throws CommandException {
+        Issue issueToEdit;
+        if (issueIndex < solutionListSize) {
+            issueToEdit = lastShownList.get(issueIndex);
+        } else {
+            throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
+        }
+        return issueToEdit;
     }
 
     /**
@@ -209,11 +210,19 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns true if at least one field is edited.
+         * Returns true if at least one field of issue level is edited.
          */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(statement, description, solutions, tags);
+        public boolean isAnyIssueFieldEdited() {
+            return CollectionUtil.isAnyNonNull(statement, description, tags);
         }
+
+        /**
+         * Returns true if solution field is edited.
+         */
+        public boolean isAnySolutionFieldEdited() {
+            return CollectionUtil.isAnyNonNull(solution);
+        }
+
 
         public void setStatement(IssueStatement statement) {
             this.statement = statement;

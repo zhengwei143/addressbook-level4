@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -29,7 +28,10 @@ import seedu.saveit.testutil.IssueBuilder;
 
 public class AddCommandTest {
 
+    private static final int ROOT_LEVEL_INDEX = 0;
+    private static final int EMPTY_SOLUTION_LIST_INDEX = 0;
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
+    private static final Directory HOME_DIRECTORY = new Directory(ROOT_LEVEL_INDEX, EMPTY_SOLUTION_LIST_INDEX);
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -43,8 +45,6 @@ public class AddCommandTest {
     }
 
     @Test
-    @Ignore
-    //TODO: fix the override method below getCurrentDirectory
     public void execute_issueAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingIssueAdded modelStub = new ModelStubAcceptingIssueAdded();
         Issue validIssue = new IssueBuilder().build();
@@ -57,8 +57,6 @@ public class AddCommandTest {
     }
 
     @Test
-    @Ignore
-    //TODO: fix the override method below getCurrentDirectory
     public void execute_duplicateIssue_throwsCommandException() throws Exception {
         Issue validIssue = new IssueBuilder().build();
         AddCommand addCommand = new AddCommand(validIssue);
@@ -94,9 +92,8 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all of the methods failing except method getCurrentDirectory();
      */
-    @Ignore
     private class ModelStub implements Model {
         @Override
         public void addIssue(Issue issue) {
@@ -115,7 +112,7 @@ public class AddCommandTest {
 
         @Override
         public Directory getCurrentDirectory() {
-            throw new AssertionError("This method should not be called.");
+            return HOME_DIRECTORY;
         }
 
         @Override

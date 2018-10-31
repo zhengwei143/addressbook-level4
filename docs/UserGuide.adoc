@@ -420,7 +420,7 @@ Examples:
 * If the new tag exits in the issue already, it is the same as removing the old tag.
 ====
 
-=== Add tag: `(at)addtag`
+=== Adding tag: `(at)addtag`
 
 To add tags for a specific issue.
 
@@ -446,7 +446,7 @@ Example:
 image::autosuggest-tag.png[width="790"]
 
 
-=== Suggest to copy existing values
+=== Suggesting to copy existing values
 When editing fields in an issue (e.g. Editing an issue statement), if only slight modifications are required, the user will have to copy paste the existing issue statement and modify it, or type it out again.
 To make things more convenient, after the application prompts the user if they want to copy the existing value onto the command line.
 
@@ -482,7 +482,7 @@ Developers usually work in teams, and since they are working on the same code ba
 
 * Switching projects: switch 1 OR switch cs2103project
 
-=== Highlight the page : `highlight` [coming in v2.0]
+=== Highlighting the page : `highlight` [coming in v2.0]
 Highlight the certain part of the page that shows on the window, use an annotation box.
 Format: `highlight`
 

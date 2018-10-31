@@ -4,7 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_STACKOVERLOW;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_STACKOVERFLOW;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
 import static seedu.saveit.testutil.TypicalIssues.ALICE;
@@ -44,7 +44,7 @@ public class IssueTest {
         assertFalse(ALICE.isSameIssue(editedAlice));
 
         // same name, same description, different attributes -> returns true
-        editedAlice = new IssueBuilder(ALICE).withSolutions(VALID_SOLUTION_STACKOVERLOW)
+        editedAlice = new IssueBuilder(ALICE).withSolutions(VALID_SOLUTION_STACKOVERFLOW)
                 .withTags(VALID_TAG_UI).build();
         assertTrue(ALICE.isSameIssue(editedAlice));
     }

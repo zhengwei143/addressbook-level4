@@ -53,8 +53,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetDirectory(Directory currentDirectory) {
-        versionedSaveIt.setCurrentDirectory(currentDirectory);
+    public void resetDirectory(Directory newDirectory) {
+        versionedSaveIt.setCurrentDirectory(newDirectory);
         indicateSaveItChanged();
     }
 

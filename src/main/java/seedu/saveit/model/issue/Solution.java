@@ -10,8 +10,6 @@ import seedu.saveit.model.issue.solution.SolutionLink;
  */
 public class Solution {
 
-    public static final String SOLUTION_VALIDATION_REGEX = "[^\\s].*+";
-
     public final String solutionName;
 
     public final SolutionLink solutionLink;
@@ -56,13 +54,6 @@ public class Solution {
 
     public Remark getRemark() {
         return remark;
-    }
-
-    /**
-     * Returns true if a given string is a valid solution name.
-     */
-    public static boolean isValidSolution(String solutionLink, String solutionRemark) {
-        return false;
     }
 
     @Override

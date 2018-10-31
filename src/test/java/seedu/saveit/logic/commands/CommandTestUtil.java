@@ -14,7 +14,6 @@ import java.util.List;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
-import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.SaveIt;

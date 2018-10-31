@@ -456,6 +456,70 @@ image::UI_Design1.png[width="800"]
 image::UI_Design2.png[width="800"]
 
 
+=== Edit Feature
+The edit feature allows users to edit any field of the issue and solution.
+
+==== Overview
+The edit mechanism is facilitated by `editCommandParser` and `editCommand`. Users are allowed to edit any field in the issue list. includes: +
+
+* Issue level
+** Issue statement
+** Issue description
+** Issue tags
+* Solution level
+** Solution link
+** Solution remark
+
+The `editCommandParser` extends `Parser` and implements the following operations:
+
+* `editCommandParser#parser(String args)`
+** Checks the arguments for empty strings and throws a `ParseException` if empty string is found.
+** Analyses the argument to check if it is a valid command format. If it is a valid format, it will se tthe corresponding fileds usign `EditDescriptor`. There are two types format.
+*** edit issue: edit Index i/statement d/description t/tag1 t/tag2 ...
+*** edit solution: `edit Index s/https://www.dummysolutionlink.com r/remark`.
+
+If it fails to parse the command, it will throw `ParseException` and display edit command usage message.
+
+* `editCommand#execute(Model model, CommandHisotry history)`
+** Analyses the user in the root directory or issue directory. If the user in the root directory but provide solution level edit command or in solution directory but provide issue level edit command +
+throw `CommandException` and show wrong directory information.
+
+** Checks if the user index in editDescriptor is larger than the size of the issue list or solution list. +
+Throw `CommandException` and show invalid index warning. Otherwise, call the function `model.updateIssue(issueToEdit, editedIssue)` to update issue list.
+
+Please refer to the Sequence Diagram below for the edit operation.
+
+.Edit Command Sequence Diagram
+image::EditCommandSequenceDiagram.jpg[width="800"]
+
+==== Design Consideration
+* Alternative 1 (current choice): Update the whole issue fields when every single field needs to edit.
+
+** Pros: It is easy to implement in current implementation.
+
+** Cons: It may have performance issues regarding memory usage.
+
+* Alternative 2: Update the specific data field instead of updating the whole issue.
+
+** Pros: It will use less memory.
+
+** Cons: It has lower security if it the issue is the mutable object.
+
+
+
+
+==== Design Consideration
+* Alternative 1 (current choice): Update the whole issue fields when every single field needs to edit.
+
+** Pros: It is easy to implement in current implementation.
+
+** Cons: It may have performance issues regarding memory usage.
+
+* Alternative 2: Update the specific data field instead of updating the whole issue.
+
+** Pros: It will use less memory.
+
+** Cons: It has lower security if it the issue is the mutable object.
 
 == Documentation
 

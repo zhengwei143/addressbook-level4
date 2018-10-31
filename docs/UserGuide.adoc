@@ -32,7 +32,7 @@ To get started with SaveIt, please follow the  instructions below:
 .  Copy the file to a folder as the home folder for your SaveIt.
 .  Double-click the file to start the app. The GUI should appear in a few seconds, as shown below.
 +
-.Applacation Interface
+.Application Interface
 image::UI_Design.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
@@ -436,24 +436,26 @@ Examples:
 * If the tag exits in the issue already, it will not take any actions.
 ====
 
+=== Autosuggesting existing tags
 
-=== Autosuggesting existing tags [coming in v1.3]
 To prevent the user from creating many similar tags / duplicates, whenever the user creates a record with a tag, or modifies a record’s tag, the application searches for similar tags in the system and prompts the user with a list of similar tags.
 
 Example:
-****
-*   add i/NEW_ISSUE t/java
-====
-*   Similar tags have been found that have matched with [java], do you mean?
-**   Javascript
-**   Java9
-**   No, i would like to create a new tag [java]
-====
-*   tag 1 : chooses to replace [java] with [javascript]
-*   tag 3 : chooses to create a new tag [java]
-****
 
-=== Highlighting command parameters [coming in v1.3]
+.Autosuggesting of existing tags
+image::autosuggest-tag.png[width="790"]
+
+
+=== Suggest to copy existing values
+When editing fields in an issue (e.g. Editing an issue statement), if only slight modifications are required, the user will have to copy paste the existing issue statement and modify it, or type it out again.
+To make things more convenient, after the application prompts the user if they want to copy the existing value onto the command line.
+
+Example:
+
+.Copying existing fields
+image::copy-existing.png[width="790"]
+
+=== Highlighting command parameters
 
 To distinguish user command for different parameters, commands get highlighted with different color as you type.
 

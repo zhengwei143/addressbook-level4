@@ -67,11 +67,11 @@ public class StringUtil {
     }
 
     /**
-     * Returns true if all the CliSyntax prefix contains in the  given {@code
+     * Returns true if all the CliSyntax prefix contains in the given {@code
      * ArgumentMultimap}.
      */
     public static boolean arePrefixesPresent(String args, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> args.contains(prefix.getPrefix()));
+        return Stream.of(prefixes).anyMatch(prefix -> args.contains(prefix.getPrefix()));
     }
 
     /**

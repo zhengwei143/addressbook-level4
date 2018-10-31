@@ -50,43 +50,47 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         // check if the command is correct
-        if ((arePrefixesPresent(args, PREFIX_STATEMENT) || arePrefixesPresent(args, PREFIX_DESCRIPTION)
-            || arePrefixesPresent(args, PREFIX_TAG)) && arePrefixesNotPresent(args,
+        if ((arePrefixesPresent(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_TAG)) && arePrefixesNotPresent(args,
             PREFIX_SOLUTION_LINK, PREFIX_REMARK)) {
-            EditIssueDescriptor editIssueDescriptor = new EditIssueDescriptor();
-            if (argMultimap.getValue(PREFIX_STATEMENT).isPresent()) {
-                IssueStatement statement = ParserUtil.parseStatement(argMultimap.getValue(PREFIX_STATEMENT).get());
-                editIssueDescriptor
-                    .setStatement(statement);
-            }
 
-            if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-                Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
-                editIssueDescriptor.setDescription(description);
-            }
-
-            parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editIssueDescriptor::setTags);
-            return new EditCommand(index, editIssueDescriptor);
-
+            return getIssueLevelEditCommand(argMultimap, index);
         } else if (arePrefixesNotPresent(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_TAG) && (
-            arePrefixesPresent(args,
-                PREFIX_SOLUTION_LINK) || arePrefixesPresent(args, PREFIX_REMARK))) {
+            arePrefixesPresent(args, PREFIX_SOLUTION_LINK, PREFIX_REMARK))) {
 
-            String solutionLink =
-                argMultimap.getValue(PREFIX_SOLUTION_LINK).isPresent() ? argMultimap.getValue(PREFIX_SOLUTION_LINK)
-                    .get() : EditCommand.DUMMY_SOLUTION_LINK;
-            String solutionRemark =
-                argMultimap.getValue(PREFIX_REMARK).isPresent() ? argMultimap.getValue(PREFIX_REMARK).get()
-                    : EditCommand.DUMMY_SOLUTION_REMARK;
-
-            Solution solution = parseSolutionForEdit(solutionLink, solutionRemark);
-            EditIssueDescriptor editIssueDescriptorForSolution = new EditIssueDescriptor(index, solution);
-
-            return new EditCommand(index, editIssueDescriptorForSolution);
+            return getSolutionLevelEditCommand(argMultimap, index);
         } else {
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
+    }
+
+    private EditCommand getIssueLevelEditCommand(ArgumentMultimap argMultimap, Index index) throws ParseException {
+        EditIssueDescriptor editIssueDescriptor = new EditIssueDescriptor();
+        if (argMultimap.getValue(PREFIX_STATEMENT).isPresent()) {
+            IssueStatement statement = ParserUtil.parseStatement(argMultimap.getValue(PREFIX_STATEMENT).get());
+            editIssueDescriptor.setStatement(statement);
+        }
+
+        if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
+            Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+            editIssueDescriptor.setDescription(description);
+        }
+
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editIssueDescriptor::setTags);
+        return new EditCommand(index, editIssueDescriptor);
+    }
+
+    private EditCommand getSolutionLevelEditCommand(ArgumentMultimap argMultimap, Index index) throws ParseException {
+        String solutionLink = argMultimap.getValue(PREFIX_SOLUTION_LINK).isPresent()
+            ? argMultimap.getValue(PREFIX_SOLUTION_LINK).get() : EditCommand.DUMMY_SOLUTION_LINK;
+
+        String solutionRemark = argMultimap.getValue(PREFIX_REMARK).isPresent()
+            ? argMultimap.getValue(PREFIX_REMARK).get() : EditCommand.DUMMY_SOLUTION_REMARK;
+
+        Solution solution = parseSolutionForEdit(solutionLink, solutionRemark);
+        EditIssueDescriptor editIssueDescriptorForSolution = new EditIssueDescriptor(index, solution);
+
+        return new EditCommand(index, editIssueDescriptorForSolution);
     }
 
     /**

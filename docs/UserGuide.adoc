@@ -420,7 +420,7 @@ Examples:
 * If the new tag exits in the issue already, it is the same as removing the old tag.
 ====
 
-=== Add tag: `(at)addtag` [coming in v1.3]
+=== Add tag: `(at)addtag`
 
 To add tags for a specific issue.
 

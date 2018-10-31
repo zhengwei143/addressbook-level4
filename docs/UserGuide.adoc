@@ -56,6 +56,7 @@ The following is a list of commands that you can use in the application.
 * Items in square brackets are optional e.g `i/ISSUE_STATEMENT d/DESCRIPTION [t/TAG]` can be used as `i/map_function d/how to use map in python t/python` or as `i/map_function d/how to use in python`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/python`, `t/python t/java` etc.
 * Parameters can be in any order e.g. if the command specifies `t/TAG, d/DESCRIPTION i/ISSUE_STATEMENT` is also acceptable.
+* Command alias can be used instead of lengthy command words.
 ====
 
 === Viewing help : `(h)help`
@@ -125,7 +126,7 @@ Edits an existing issue or solution in the SaveIt App.
 
 Format: `edit INDEX [i/NEW_ISSUE] [d/NEW_DESCRIPTION] [t/TAG]...`
 
-Format: `edit INDEX s/NEW_SOLUTION_LINK s/NEW_SOLUTION_REMARK`
+Format: `edit INDEX s/NEW_SOLUTION_LINK r/NEW_SOLUTION_REMARK`
 
 [TIP]
 ====

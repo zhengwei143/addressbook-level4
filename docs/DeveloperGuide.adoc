@@ -264,7 +264,50 @@ Classes used by multiple components are in the `seedu.saveit.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented. Note that this section does not fully encompass all the features, but the more core features of the application.
 
-// tag::sort[]
+=== Add issue feature
+The add command can add an new issue to the issue list
+
+==== Current implementation
+We use `SaveItParser` to call `AddCommandParser` so as to pass the entered issue, then `AddCommand` is invoked which will ask model to add the issue to the `Model` component.
+In order to store the new issue inside the SaveIt, `VersionedSaveIt` will be invoked and it will add issue to the `UniqueIssueList`.
+
+The following sequence diagram illustrates how the add new issue feature functions:
+
+.Add Issue Command Sequence Diagram
+image::AddNewIssue.png[width="800"]
+
+This diagram gives a clear procedure that how the user input is passed step by step and calling different methods and objects at different sequences.
+
+=== Add solution feature
+The add command can add a new solution link as well as solution remark to an existing issue
+
+==== Current implementation
+We use `SaveItParser` to call `AddCommandParser` just like how add issue features functions as above mentioned. However, this time, the solution link and solution remark is provided to `AddCommand` instead. During execution, `updateIssue` and `updateFilteredIssueList` will be called respectively in `ModelManager` as a way to replace the original issue with the new edition of issue which has the new solution entered.
+
+The following sequence diagram illustrates how the add solution feature functions
+
+.Add Solution Command Sequence Diagram
+image::AddNewSolution.png[width="800"]
+
+This diagram shows the sequence that how add solution command is executed. It could be also noticed that it is basically similar to that of add new issue feature besides it invokes updateIssue method in Model component rather than addIssue method.
+
+==== Design Considerations
+===== Aspect: How add solutions executes
+* Alternative 1 (current choice): Combine AddIssue and AddSolution combined together and distinguishes them at the stage of `AddCommandParser`
+** Pros: Consistent syntax between the two features, so the command is more user-friendly.
+** Cons: Need to put more effort on distinguishing the difference between these two requests, `AddCommandParser` is relatively complex compared to the other parser component.
+* Alternative 2: Build a new command especially for adding solution
+** Pros: Easy to implement.
+** Cons: The command set becomes too complex for the user.
+
+===== Aspect: How add command distinguishes between adding solution and adding issue
+* Alternative 1 (current choice): Passing a new created issue with dummy issue statement or dummy solution link
+** Pros: Consistent coding style and less change on logic structure
+** Cons: Quite complex implementation compared to other command
+* Alternative 2: Overloading Issue constructor so that different issues will be passing to `AddCommand` accordingly.
+* Pros: Relatively easier to implement
+* Cons: Lots of changes on structure.
+
 === Sort feature
 
 The sort command can sort an issue list shown in the GUI.

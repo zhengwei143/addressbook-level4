@@ -53,7 +53,7 @@ public class IssueNameAutoSuggestion implements AutoSuggestion {
         return actionEvent -> {
             manager.replaceText(previousText.substring(0, initIndex) + result);
             manager.moveTo(manager.getLength());
-            manager.popUpWindow.hide();
+            manager.getWindow().hide();
         };
     }
 

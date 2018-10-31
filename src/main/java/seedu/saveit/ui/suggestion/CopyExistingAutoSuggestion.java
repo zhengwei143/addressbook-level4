@@ -45,7 +45,7 @@ public class CopyExistingAutoSuggestion implements AutoSuggestion {
 
     @Override
     public void update(Logic logic) {
-
+        this.logic = logic;
     }
 
     @Override

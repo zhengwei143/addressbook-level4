@@ -25,9 +25,7 @@ public class Prefix {
         this.position = position;
     }
 
-    public String getPrefix() {
-        return prefix;
-    }
+    public String getPrefix() { return prefix; }
 
     public int getPosition() { return position; }
 

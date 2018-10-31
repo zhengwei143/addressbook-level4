@@ -26,7 +26,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
     private static final String dummyStatement = "dummyStatement";
     private static final String dummyDescription = "dummyDescription";
-    private static final String dummySolutionLink = "dummySolutionLink";
+    private static final String dummySolutionLink = "https://www.dummySolutionLink.com";
     private static final String dummySolutionRemark = "dummySolutionRemark";
 
     /**

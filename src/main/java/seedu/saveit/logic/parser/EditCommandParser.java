@@ -81,11 +81,11 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     private EditCommand getSolutionLevelEditCommand(ArgumentMultimap argMultimap, Index index) throws ParseException {
-        String solutionLink = argMultimap.getValue(PREFIX_SOLUTION_LINK).isPresent() ?
-            argMultimap.getValue(PREFIX_SOLUTION_LINK).get() : EditCommand.DUMMY_SOLUTION_LINK;
+        String solutionLink = argMultimap.getValue(PREFIX_SOLUTION_LINK).isPresent()
+            ? argMultimap.getValue(PREFIX_SOLUTION_LINK).get() : EditCommand.DUMMY_SOLUTION_LINK;
 
-        String solutionRemark = argMultimap.getValue(PREFIX_REMARK).isPresent() ?
-            argMultimap.getValue(PREFIX_REMARK).get() : EditCommand.DUMMY_SOLUTION_REMARK;
+        String solutionRemark = argMultimap.getValue(PREFIX_REMARK).isPresent()
+            ? argMultimap.getValue(PREFIX_REMARK).get() : EditCommand.DUMMY_SOLUTION_REMARK;
 
         Solution solution = parseSolutionForEdit(solutionLink, solutionRemark);
         EditIssueDescriptor editIssueDescriptorForSolution = new EditIssueDescriptor(index, solution);

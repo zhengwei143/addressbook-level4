@@ -50,7 +50,7 @@ public class EditCommand extends Command {
 
 
     public static final String DUMMY_SOLUTION_REMARK = "dummySolutionRemark";
-    public static final String DUMMY_SOLUTION_LINK = "dummySolutionLink";
+    public static final String DUMMY_SOLUTION_LINK = "https://www.dummySolutionLink.com";
 
     private final Index index;
     private final EditIssueDescriptor editIssueDescriptor;
@@ -73,15 +73,16 @@ public class EditCommand extends Command {
         List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
         Directory currentDirectory = model.getCurrentDirectory();
 
-        if (currentDirectory.isRootLevel() && (editIssueDescriptor.getStatement().isPresent() || editIssueDescriptor
-            .getDescription().isPresent() || editIssueDescriptor.getTags().isPresent())) {
+        if (currentDirectory.isRootLevel() && editIssueDescriptor.isAnyIssueFieldEdited()) {
+            System.out.println("issue eidt ");
             if (index.getZeroBased() < lastShownList.size()) {
                 issueToEdit = lastShownList.get(index.getZeroBased());
             } else {
                 throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
             }
             // if it edits solution or remark, then throw Exception
-        } else if (currentDirectory.isIssueLevel() && editIssueDescriptor.getSolution().isPresent()) {
+        } else if (currentDirectory.isIssueLevel() && editIssueDescriptor.isAnySolutionFieldEdited()) {
+            System.out.println("result edit");
             int solutionListSize = lastShownList.get(currentDirectory.getIssue() - 1).getSolutions().size();
             if (index.getZeroBased() < solutionListSize) {
                 issueToEdit = lastShownList.get(currentDirectory.getIssue() - 1);
@@ -89,6 +90,7 @@ public class EditCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
             }
         } else {
+            System.out.println("no");
             throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
         }
         Issue editedIssue = createEditedIssue(issueToEdit, editIssueDescriptor);
@@ -101,6 +103,11 @@ public class EditCommand extends Command {
         model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
         model.commitSaveIt();
         return new CommandResult(String.format(MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue));
+    }
+
+    private boolean isAnyIssueElementToEdit() {
+        return editIssueDescriptor.getStatement().isPresent() || editIssueDescriptor
+            .getDescription().isPresent() || editIssueDescriptor.getTags().isPresent();
     }
 
     /**
@@ -209,11 +216,19 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns true if at least one field is edited.
+         * Returns true if at least one field of issue level is edited.
          */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(statement, description, solutions, tags);
+        public boolean isAnyIssueFieldEdited() {
+            return CollectionUtil.isAnyNonNull(statement, description, tags);
         }
+
+        /**
+         * Returns true if solution field is edited.
+         */
+        public boolean isAnySolutionFieldEdited() {
+            return CollectionUtil.isAnyNonNull(solution);
+        }
+
 
         public void setStatement(IssueStatement statement) {
             this.statement = statement;

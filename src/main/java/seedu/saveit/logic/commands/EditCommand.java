@@ -34,7 +34,7 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
     public static final String COMMAND_ALIAS = "e";
-    public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt."; //TODO: necessary?
+    public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt.";
     public static final String MESSAGE_EDIT_ISSUE_SUCCESS = "Edited Issue: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " command format: \n"
@@ -74,19 +74,10 @@ public class EditCommand extends Command {
         Directory currentDirectory = model.getCurrentDirectory();
 
         if (currentDirectory.isRootLevel() && editIssueDescriptor.isAnyIssueFieldEdited()) {
-            if (index.getZeroBased() < lastShownList.size()) {
-                issueToEdit = lastShownList.get(index.getZeroBased());
-            } else {
-                throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
-            }
-            // if it edits solution or remark, then throw Exception
+            issueToEdit = getIssueToEdit(lastShownList, lastShownList.size(), index.getZeroBased());
         } else if (currentDirectory.isIssueLevel() && editIssueDescriptor.isAnySolutionFieldEdited()) {
             int solutionListSize = lastShownList.get(currentDirectory.getIssue() - 1).getSolutions().size();
-            if (index.getZeroBased() < solutionListSize) {
-                issueToEdit = lastShownList.get(currentDirectory.getIssue() - 1);
-            } else {
-                throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
-            }
+            issueToEdit = getIssueToEdit(lastShownList, solutionListSize, currentDirectory.getIssue() - 1);
         } else {
             throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
         }
@@ -100,6 +91,16 @@ public class EditCommand extends Command {
         model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
         model.commitSaveIt();
         return new CommandResult(String.format(MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue));
+    }
+
+    private Issue getIssueToEdit(List<Issue> lastShownList, int solutionListSize, int i) throws CommandException {
+        Issue issueToEdit;
+        if (index.getZeroBased() < solutionListSize) {
+            issueToEdit = lastShownList.get(i);
+        } else {
+            throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
+        }
+        return issueToEdit;
     }
 
     /**

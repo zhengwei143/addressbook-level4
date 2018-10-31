@@ -135,9 +135,16 @@ Format: `edit INDEX s/NEW_SOLUTION_LINK r/NEW_SOLUTION_REMARK`
 
 Examples: +
 ****
-* `edit 1 i/filter_function d/how to use filter function in python t/python` (the issue statement, description and tag will be updated)
+* `edit 1 i/map function d/how to use map`
+
+.Command Edit solution link to a solution
+
+image::edit-issue.png[width="790"]
 * `select 1` (select the first issue)
-* `edit 3 s/www.example2a.com r/refer the link explanation` (the third solution link and remark will be updated)
+* `edit 3 s/www.youtube.com` (the third solution link and remark will be updated)
+
+.Command Edit solution link to a solution
+image::edit-solution.png[width="790"]
 ****
 
 [NOTE]
@@ -158,11 +165,14 @@ Format: `addTag INDEX t/TAG_1 [t/TAG_2] [t/TAG_3]...`
 Examples: +
 ****
 * `addtag 2 t/python t/java t/algorithm`
+
+.Command Add tag(s) to an issue
+image::add-tag.png[width="790"]
 ****
 
 [NOTE]
 ====
-* If the tag already exits in the current issue tags, it will be ignored.
+* If the tag already exits in the current issue, it will be ignored.
 ====
 
 

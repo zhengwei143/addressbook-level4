@@ -13,6 +13,7 @@ import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.util.StringUtil;
 import seedu.saveit.logic.commands.EditCommand;
 import seedu.saveit.logic.parser.exceptions.ParseException;
+import seedu.saveit.model.ReadOnlySaveIt;
 import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.model.issue.Solution;
@@ -113,6 +114,24 @@ public class ParserUtil {
         }
         Solution solution = new Solution(trimmedSolutionLink, trimmedRemark);
         return solution;
+    }
+
+    public static SolutionLink parseSolutionLink(String solutionLink) throws ParseException {
+        requireNonNull(solutionLink);
+        String trimmedSolutionLink = solutionLink.trim();
+        if (!SolutionLink.isValidLink(trimmedSolutionLink)) {
+            throw new ParseException(SolutionLink.MESSAGE_SOLUTION_LINK_CONSTRAINTS);
+        }
+        return new SolutionLink(solutionLink);
+    }
+
+    public static Remark parseSolutionRemark(String solutionRemark) throws ParseException {
+        requireNonNull(solutionRemark);
+        String trimmedRemark = solutionRemark.trim();
+        if (!Remark.isValidRemark(trimmedRemark)) {
+            throw new ParseException(Remark.MESSAGE_REMARK_CONSTRAINTS);
+        }
+        return new Remark(solutionRemark);
     }
 
     /**

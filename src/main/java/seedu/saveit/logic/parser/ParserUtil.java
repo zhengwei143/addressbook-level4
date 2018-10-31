@@ -27,7 +27,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
-    private static final String dummySolutionLink = "dummySolutionLink";
+    private static final String dummySolutionLink = "https://www.dummySolutionLink.com";
     private static final String dummySolutionRemark = "dummySolutionRemark";
 
     /**

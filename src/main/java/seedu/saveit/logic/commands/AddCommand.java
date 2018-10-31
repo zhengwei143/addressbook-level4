@@ -28,6 +28,7 @@ public class AddCommand extends Command {
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_TAG + "algorithm "
             + PREFIX_TAG + "java";
+    public static final String MESSAGE_ADD_SOLUTION_USAGE = "Issue has to be added first before adding solutions";
     public static final String MESSAGE_ISSUE_SUCCESS = "New issue added: %1$s";
     public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt";
 

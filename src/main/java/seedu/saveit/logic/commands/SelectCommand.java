@@ -77,7 +77,7 @@ public class SelectCommand extends Command {
                 new ChangeDirectoryRequestEvent(model.getCurrentDirectory()));
         EventsCenter.getInstance().post(new JumpToSolutionListRequestEvent(targetIndex));
         return new CommandResult(
-                String.format(MESSAGE_SELECT_SOLUTION_SUCCESS, model.getCurrentDirectory().getIssue())
+                String.format(MESSAGE_SELECT_ISSUE_SUCCESS, model.getCurrentDirectory().getIssue())
                         + String.format(MESSAGE_SELECT_SOLUTION_SUCCESS, targetIndex.getOneBased()));
     }
 

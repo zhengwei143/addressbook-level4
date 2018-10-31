@@ -397,11 +397,11 @@ Examples:
 ****
 
 
-=== Refactoring tag: `(rt)refactorTag` [coming in v1.3]
+=== Refactoring tag: `(rt)refactortag`
 
 To rename or remove a specific tag for all entries with that tag.
 
-Format: `refactorTag t/OLD_TAG [n/NEW_TAG]`
+Format: `refactortag t/OLD_TAG [n/NEW_TAG]`
 
 [TIP]
 ====
@@ -419,6 +419,24 @@ Examples:
 ====
 * If the new tag exits in the issue already, it is the same as removing the old tag.
 ====
+
+=== Add tag: `(at)addtag` [coming in v1.3]
+
+To add tags for a specific issue.
+
+Format: `addtag INDEX t/TAG1 [t/TAG2]...`
+
+Examples:
+****
+* addtag t/python t/java)
+****
+
+[NOTE]
+====
+* If the tag exits in the issue already, it will not take any actions.
+====
+
+
 === Autosuggesting existing tags [coming in v1.3]
 To prevent the user from creating many similar tags / duplicates, whenever the user creates a record with a tag, or modifies a record’s tag, the application searches for similar tags in the system and prompts the user with a list of similar tags.
 
@@ -441,10 +459,10 @@ To distinguish user command for different parameters, commands get highlighted w
 
 Examples:
 ****
-*** [red]#add# [aqua]#i/[ISSUE_STATEMENT]# [fuchsia]#d/[DESCRIPTION]#
-*** [red]#edit# [blue]#12# [green]#s/[SOLUTION_LINK]# [maroon]#r/[REMARK]#
-*** [red]#select# [blue]#4#
-*** [red]#list# [yellow]#freq#
+*** [yellow]#add# [aqua]#i/#[ISSUE_STATEMENT] [aqua]#d/#[DESCRIPTION]
+*** [yellow]#edit# [green]#12# [green]#s/#[SOLUTION_LINK] [aqua]#r/#[REMARK]
+*** [yellow]#select# [green]#4#
+*** [yellow]#list# [blue]#freq#
 ****
 
 

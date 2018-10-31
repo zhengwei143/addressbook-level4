@@ -93,10 +93,12 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue));
     }
 
-    private Issue getIssueToEdit(List<Issue> lastShownList, int solutionListSize, int issueIndex)
+    private Issue getIssueToEdit(List<Issue> lastShownList, int listSize, int issueIndex)
         throws CommandException {
         Issue issueToEdit;
-        if (issueIndex < solutionListSize) {
+        System.out.println("issueIndex" + issueIndex);
+        System.out.println("list size " + listSize);
+        if (index.getZeroBased() < listSize) {
             issueToEdit = lastShownList.get(issueIndex);
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);

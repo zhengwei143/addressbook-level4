@@ -11,13 +11,13 @@ import seedu.saveit.commons.util.AppUtil;
 public class IssueStatement {
 
     public static final String MESSAGE_ISSUE_STATEMENT_CONSTRAINTS =
-            "Issue statement should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Issue statement can take any values, but it should not be blank.";
 
     /*
      * The first character of the saveit must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String ISSUE_STATEMENT_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String ISSUE_STATEMENT_VALIDATION_REGEX = "[^\\s].*";
 
     public final String issue;
 

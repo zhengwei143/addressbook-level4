@@ -5,7 +5,6 @@ import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_STATEMENT_DESC;
-import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.saveit.logic.commands.CommandTestUtil.SOLUTION_DESC_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.SOLUTION_DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.STATEMENT_DESC_C;
@@ -36,7 +35,6 @@ import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueStatement;
-import seedu.saveit.model.issue.Tag;
 import seedu.saveit.testutil.IssueBuilder;
 import seedu.saveit.testutil.IssueUtil;
 
@@ -152,11 +150,6 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         /* Case: invalid descriptions -> rejected */
         command = AddCommand.COMMAND_WORD + STATEMENT_DESC_JAVA + INVALID_DESCRIPTION_DESC + SOLUTION_DESC_JAVA;
         assertCommandFailure(command, Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
-
-        /* Case: invalid tag -> rejected */
-        command = AddCommand.COMMAND_WORD + STATEMENT_DESC_JAVA + DESCRIPTION_DESC_JAVA + SOLUTION_DESC_JAVA
-            + INVALID_TAG_DESC;
-        assertCommandFailure(command, Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
     /**

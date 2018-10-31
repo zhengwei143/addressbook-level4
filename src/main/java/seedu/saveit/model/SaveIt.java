@@ -57,10 +57,10 @@ public class SaveIt implements ReadOnlySaveIt {
      */
     public void setCurrentDirectory(Directory directory) {
         try {
-            if (currentDirectory.isIssueLevel() && currentDirectory.getIssue() > issues.size()) {
+            if (directory.isIssueLevel() && directory.getIssue() > issues.size()) {
                 throw new IllegalValueException("Refer to non-existent directory.");
-            } else if (currentDirectory.isSolutionLevel() && currentDirectory.getSolution()
-                    > issues.getSolutionNumber(Index.fromOneBased(currentDirectory.getSolution()))) {
+            } else if (directory.isSolutionLevel() && directory.getSolution()
+                    > issues.getSolutionNumber(Index.fromOneBased(directory.getSolution()))) {
                 throw new IllegalValueException("Refer to non-existent directory.");
             }
             currentDirectory = directory;

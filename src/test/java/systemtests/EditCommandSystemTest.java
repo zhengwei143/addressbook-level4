@@ -7,7 +7,6 @@ import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_STATEMENT_DESC;
-import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.saveit.logic.commands.CommandTestUtil.SOLUTION_DESC_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.SOLUTION_DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.STATEMENT_DESC_C;
@@ -38,7 +37,6 @@ import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueStatement;
-import seedu.saveit.model.issue.Tag;
 import seedu.saveit.testutil.IssueBuilder;
 import seedu.saveit.testutil.IssueUtil;
 
@@ -72,7 +70,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         model.updateIssue(
-            getModel().getFilteredIssueList().get(INDEX_FIRST_ISSUE.getZeroBased()), editedIssue);
+            getModel().getFilteredAndSortedIssueList().get(INDEX_FIRST_ISSUE.getZeroBased()), editedIssue);
         assertCommandSuccess(command, model, expectedResultMessage);
 
 
@@ -86,7 +84,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         assertTrue(getModel().getSaveIt().getIssueList().contains(BOB));
         index = INDEX_SECOND_ISSUE;
 
-        assertNotEquals(getModel().getFilteredIssueList().get(index.getZeroBased()), BOB);
+        assertNotEquals(getModel().getFilteredAndSortedIssueList().get(index.getZeroBased()), BOB);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + STATEMENT_DESC_JAVA + DESCRIPTION_DESC_C
             + SOLUTION_DESC_C + CommandTestUtil.TAG_DESC_UI + TAG_DESC_UI;
         editedIssue = new IssueBuilder(BOB).withStatement(VALID_STATEMENT_JAVA).build();
@@ -104,7 +102,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         /* Case: clear tags -> cleared */
         index = INDEX_FIRST_ISSUE;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
-        Issue issueToEdit = getModel().getFilteredIssueList().get(index.getZeroBased());
+        Issue issueToEdit = getModel().getFilteredAndSortedIssueList().get(index.getZeroBased());
         editedIssue = new IssueBuilder(issueToEdit).withTags().build();
         assertCommandSuccess(command, index, editedIssue);
 
@@ -115,9 +113,9 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         showIssuesWithName(KEYWORD_MATCHING_MEIER);
         index = INDEX_FIRST_ISSUE;
 
-        assertTrue(index.getZeroBased() < getModel().getFilteredIssueList().size());
+        assertTrue(index.getZeroBased() < getModel().getFilteredAndSortedIssueList().size());
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + STATEMENT_DESC_C;
-        issueToEdit = getModel().getFilteredIssueList().get(index.getZeroBased());
+        issueToEdit = getModel().getFilteredAndSortedIssueList().get(index.getZeroBased());
         editedIssue = new IssueBuilder(issueToEdit).withStatement(VALID_STATEMENT_C).build();
         assertCommandSuccess(command, index, editedIssue);
 
@@ -158,7 +156,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 
         /* Case: invalid index (size + 1) -> rejected */
-        invalidIndex = getModel().getFilteredIssueList().size() + 1;
+        invalidIndex = getModel().getFilteredAndSortedIssueList().size() + 1;
 
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + STATEMENT_DESC_C,
             Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
@@ -181,16 +179,11 @@ public class EditCommandSystemTest extends SaveItSystemTest {
             EditCommand.COMMAND_WORD + " " + INDEX_FIRST_ISSUE.getOneBased() + INVALID_DESCRIPTION_DESC,
             Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
 
-        /* Case: invalid tag -> rejected */
-        assertCommandFailure(
-            EditCommand.COMMAND_WORD + " " + INDEX_FIRST_ISSUE.getOneBased() + INVALID_TAG_DESC,
-            Tag.MESSAGE_TAG_CONSTRAINTS);
-
         /* Case: edit a issue with new values same as another issue's values -> rejected */
         executeCommand(IssueUtil.getAddCommand(BOB));
         assertTrue(getModel().getSaveIt().getIssueList().contains(BOB));
         index = INDEX_FIRST_ISSUE;
-        assertFalse(getModel().getFilteredIssueList().get(index.getZeroBased()).equals(BOB));
+        assertFalse(getModel().getFilteredAndSortedIssueList().get(index.getZeroBased()).equals(BOB));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + STATEMENT_DESC_C + DESCRIPTION_DESC_C
             + SOLUTION_DESC_C + CommandTestUtil.TAG_DESC_UI + TAG_DESC_UI;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_ISSUE);
@@ -235,7 +228,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
     private void assertCommandSuccess(String command, Index toEdit, Issue editedIssue,
         Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
-        expectedModel.updateIssue(expectedModel.getFilteredIssueList().get(toEdit.getZeroBased()),
+        expectedModel.updateIssue(expectedModel.getFilteredAndSortedIssueList().get(toEdit.getZeroBased()),
             editedIssue);
         expectedModel.updateFilteredIssueList(PREDICATE_SHOW_ALL_ISSUES);
 

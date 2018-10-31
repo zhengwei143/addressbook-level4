@@ -45,7 +45,7 @@ public class AddTagCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Issue> lastShownList = model.getFilteredIssueList();
+        List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
 
         Issue issue = lastShownList.get(index.getZeroBased());
         Set<Tag> toUpdateTagList = new HashSet<Tag>(issue.getTags());

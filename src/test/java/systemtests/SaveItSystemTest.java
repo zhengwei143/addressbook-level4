@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.saveit.ui.BrowserPanel.DEFAULT_PAGE;
+import static seedu.saveit.ui.BrowserPanel.JAVADOC_PAGE;
 import static seedu.saveit.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.saveit.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
 import static seedu.saveit.ui.UiPart.FXML_FILE_FOLDER;
@@ -41,7 +42,6 @@ import seedu.saveit.logic.commands.SelectCommand;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.SaveIt;
 import seedu.saveit.testutil.TypicalIssues;
-import seedu.saveit.ui.BrowserPanel;
 import seedu.saveit.ui.CommandBox;
 
 /**
@@ -143,7 +143,7 @@ public abstract class SaveItSystemTest {
      */
     protected void showAllIssues() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getSaveIt().getIssueList().size(), getModel().getFilteredIssueList().size());
+        assertEquals(getModel().getSaveIt().getIssueList().size(), getModel().getFilteredAndSortedIssueList().size());
     }
 
     /**
@@ -151,7 +151,7 @@ public abstract class SaveItSystemTest {
      */
     protected void showIssuesWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredIssueList().size() < getModel().getSaveIt().getIssueList().size());
+        assertTrue(getModel().getFilteredAndSortedIssueList().size() < getModel().getSaveIt().getIssueList().size());
     }
 
     /**
@@ -180,7 +180,7 @@ public abstract class SaveItSystemTest {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new SaveIt(expectedModel.getSaveIt()), testApp.readStorageSaveIt());
-        assertListMatching(getIssueListPanel(), expectedModel.getFilteredIssueList());
+        assertListMatching(getIssueListPanel(), expectedModel.getFilteredAndSortedIssueList());
     }
 
     /**
@@ -216,7 +216,7 @@ public abstract class SaveItSystemTest {
         String selectedCardName = getIssueListPanel().getHandleToSelectedCard().getStatement();
         URL expectedUrl;
         try {
-            expectedUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + selectedCardName.replaceAll(" ", "%20"));
+            expectedUrl = new URL(JAVADOC_PAGE);
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.", mue);
         }
@@ -276,7 +276,7 @@ public abstract class SaveItSystemTest {
     private void assertApplicationStartingStateIsCorrect() {
         assertEquals("", getCommandBox().getInput());
         assertEquals("", getResultDisplay().getText());
-        assertListMatching(getIssueListPanel(), getModel().getFilteredIssueList());
+        assertListMatching(getIssueListPanel(), getModel().getFilteredAndSortedIssueList());
         assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE), getBrowserPanel().getLoadedUrl());
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());

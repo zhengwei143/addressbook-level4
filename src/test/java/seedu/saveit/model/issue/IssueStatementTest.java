@@ -28,8 +28,6 @@ public class IssueStatementTest {
         // invalid name
         assertFalse(IssueStatement.isValidIssueStatement("")); // empty string
         assertFalse(IssueStatement.isValidIssueStatement(" ")); // spaces only
-        assertFalse(IssueStatement.isValidIssueStatement("^")); // only non-alphanumeric characters
-        assertFalse(IssueStatement.isValidIssueStatement("peter*")); // contains non-alphanumeric characters
 
         // valid name
         assertTrue(IssueStatement.isValidIssueStatement("peter jack")); // alphabets only

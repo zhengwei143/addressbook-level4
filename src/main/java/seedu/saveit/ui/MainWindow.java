@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import seedu.saveit.commons.core.Config;
 import seedu.saveit.commons.core.GuiSettings;
 import seedu.saveit.commons.core.LogsCenter;
+import seedu.saveit.commons.events.model.SaveItChangedEvent;
 import seedu.saveit.commons.events.ui.ExitAppRequestEvent;
 import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.commons.events.ui.ShowHelpRequestEvent;
@@ -127,7 +128,7 @@ public class MainWindow extends UiPart<Stage> {
         browserPanel = new BrowserPanel();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-        issueListPanel = new IssueListPanel(logic.getFilteredIssueList());
+        issueListPanel = new IssueListPanel(logic.getFilteredAndSortedIssueList());
         issueListPanelPlaceholder.getChildren().add(issueListPanel.getRoot());
 
         solutionListPanel = new SolutionListPanel(logic.getFilteredSolutionList());
@@ -214,6 +215,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        solutionListPanel.setSolutionList(logic.getFilteredSolutionList());
+    }
+
+    @Subscribe
+    private void handleSaveItChangedEvent(SaveItChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         solutionListPanel.setSolutionList(logic.getFilteredSolutionList());
     }

@@ -2,6 +2,8 @@ package seedu.saveit.ui;
 
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,6 +11,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.saveit.commons.core.LogsCenter;
+import seedu.saveit.commons.events.ui.JumpToSolutionListRequestEvent;
+import seedu.saveit.commons.events.ui.SolutionPanelSelectionChangedEvent;
 import seedu.saveit.model.issue.Solution;
 
 /**
@@ -37,11 +41,12 @@ public class SolutionListPanel extends UiPart<Region> {
         solutionListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
-                        logger.fine("Selection in issue list panel changed to : '" + newValue + "'");
-                        //raise(new IssuePanelSelectionChangedEvent(newValue));
+                        logger.fine("Selection in solution list panel changed to : '" + newValue + "'");
+                        raise(new SolutionPanelSelectionChangedEvent(newValue));
                     }
                 });
     }
+
 
     /**
      * Scrolls to the {@code PersonCard} at the {@code index} and selects it.
@@ -55,6 +60,12 @@ public class SolutionListPanel extends UiPart<Region> {
 
     public void setSolutionList(ObservableList<Solution> solutionList) {
         solutionListView.setItems(solutionList);
+    }
+
+    @Subscribe
+    private void handleJumpToSolutionListRequestEvent(JumpToSolutionListRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        scrollTo(event.targetIndex);
     }
 
     /**

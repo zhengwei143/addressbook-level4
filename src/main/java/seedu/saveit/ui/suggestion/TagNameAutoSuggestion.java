@@ -57,7 +57,7 @@ public class TagNameAutoSuggestion {
      */
     private void fillTagKeyWords() {
         this.tagKeyWords.clear();
-        logic.getFilteredIssueList().forEach(issue -> issue.getTags()
+        logic.getFilteredAndSortedIssueList().forEach(issue -> issue.getTags()
                 .forEach(tag -> this.tagKeyWords.add(tag.tagName)));
     }
 }

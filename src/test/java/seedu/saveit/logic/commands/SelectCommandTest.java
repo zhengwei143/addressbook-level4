@@ -38,7 +38,7 @@ public class SelectCommandTest {
     @Test
     @Ignore
     public void execute_validIndexUnfilteredList_success() {
-        Index lastIssueIndex = Index.fromOneBased(model.getFilteredIssueList().size());
+        Index lastIssueIndex = Index.fromOneBased(model.getFilteredAndSortedIssueList().size());
 
         assertExecutionSuccess(INDEX_FIRST_ISSUE);
         assertExecutionSuccess(INDEX_THIRD_ISSUE);
@@ -47,7 +47,7 @@ public class SelectCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_failure() {
-        Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredIssueList().size() + 1);
+        Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredAndSortedIssueList().size() + 1);
 
         assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
     }

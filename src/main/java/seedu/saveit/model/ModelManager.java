@@ -26,7 +26,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedSaveIt versionedSaveIt;
     private FilteredList<Issue> filteredIssues;
-    private SortedList<Issue> sortedList;
+    private SortedList<Issue> filteredAndSortedIssues;
 
     /**
      * Initializes a ModelManager with the given saveIt and userPrefs.
@@ -39,7 +39,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedSaveIt = new VersionedSaveIt(saveIt);
         filteredIssues = new FilteredList<>(versionedSaveIt.getIssueList());
-        sortedList = new SortedList<>(versionedSaveIt.getIssueList());
+        filteredAndSortedIssues = new SortedList<>(getFilteredIssueList());
     }
 
     public ModelManager() {
@@ -53,8 +53,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetDirectory(Directory currentDirectory) {
-        versionedSaveIt.setCurrentDirectory(currentDirectory);
+    public void resetDirectory(Directory newDirectory) {
+        versionedSaveIt.setCurrentDirectory(newDirectory);
         indicateSaveItChanged();
     }
 
@@ -112,7 +112,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void sortIssues(IssueSort sortType) {
-        updateSortedIssueList(sortType.getComparator());
+        updateFilteredAndSortedIssueList(sortType.getComparator());
     }
 
     //=========== Filtered Issue List Accessors =============================================================
@@ -134,7 +134,7 @@ public class ModelManager extends ComponentManager implements Model {
     public ObservableList<Solution> getFilteredSolutionList() {
         Directory directory = getCurrentDirectory();
         if (directory.isRootLevel()) {
-            return FXCollections.unmodifiableObservableList(filteredIssues.get(0).getObservableSolutions());
+            return null;
         } else {
             return FXCollections.unmodifiableObservableList
                     (filteredIssues.get(directory.getIssue() - 1).getObservableSolutions());
@@ -147,21 +147,22 @@ public class ModelManager extends ComponentManager implements Model {
         filteredIssues.setPredicate(predicate);
     }
 
-    //=========== Filtered Issue List Accessors =============================================================
+    //=========== Sorted Issue List Accessors =============================================================
+    @Override
+
+    public void updateFilteredAndSortedIssueList(Comparator<Issue> comparator) {
+        filteredAndSortedIssues.setComparator(comparator);
+    }
+
+    //=========== Sorted Issue List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Issue} backed by the internal list of
      * {@code versionedSaveIt}
      */
     @Override
-    public ObservableList<Issue> getSortedIssueList() {
-        return FXCollections.unmodifiableObservableList(sortedList);
-    }
-
-    @Override
-    public void updateSortedIssueList(Comparator<Issue> sortType) {
-        requireNonNull(sortType);
-        sortedList.setComparator(sortType);
+    public ObservableList<Issue> getFilteredAndSortedIssueList() {
+        return FXCollections.unmodifiableObservableList(filteredAndSortedIssues);
     }
 
     //=========== Undo/Redo =================================================================================

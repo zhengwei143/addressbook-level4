@@ -25,7 +25,7 @@ public class RefactorTagCommand extends Command {
 
     public static final String MESSAGE_USAGE =
         COMMAND_WORD + ": To rename or remove a specific tag for all entries with that tag.\n"
-            + "Parameters: t/OLD_TAG [nt/NEW_TAG] \n"
+            + "Parameters: t/OLD_TAG [n/NEW_TAG] \n"
             + "Example: " + COMMAND_WORD + " t/python n/java";
 
     public static final String DUMMY_TAG = "dummyTag";

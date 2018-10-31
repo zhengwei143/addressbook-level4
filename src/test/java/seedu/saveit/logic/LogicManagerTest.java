@@ -8,7 +8,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.saveit.logic.commands.ClearCommand;
 import seedu.saveit.logic.commands.CommandResult;
+import seedu.saveit.logic.commands.DangerCommand;
 import seedu.saveit.logic.commands.HistoryCommand;
 import seedu.saveit.logic.commands.ListCommand;
 import seedu.saveit.logic.commands.exceptions.CommandException;
@@ -44,6 +46,26 @@ public class LogicManagerTest {
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
         assertHistoryCorrect(listCommand);
+    }
+
+
+    @Test
+    public void execute_confirmedDangerCommand_success() {
+        String clearCommand = ClearCommand.COMMAND_WORD;
+        assertCommandSuccess(clearCommand,
+                String.format(DangerCommand.ASK_FOR_CONFIRMATION, ClearCommand.COMMAND_WORD), model);
+        assertCommandSuccess(LogicManager.CONFIRM_ALIAS, ClearCommand.MESSAGE_SUCCESS, model);
+        assertHistoryCorrect(LogicManager.CONFIRM_ALIAS, clearCommand);
+    }
+
+    @Test
+    public void execute_unconfirmedDangerCommand_success() {
+        String clearCommand = ClearCommand.COMMAND_WORD;
+        String input = "any other word";
+        assertCommandSuccess(clearCommand,
+                String.format(DangerCommand.ASK_FOR_CONFIRMATION, ClearCommand.COMMAND_WORD), model);
+        assertCommandSuccess(input, String.format(DangerCommand.CONFIRMATION_FAILED, ClearCommand.COMMAND_WORD), model);
+        assertHistoryCorrect(input, clearCommand);
     }
 
     @Test

@@ -1,20 +1,35 @@
 package seedu.saveit.ui;
 
-import java.util.Arrays;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.saveit.logic.parser.SaveItParser.BASIC_COMMAND_FORMAT;
+
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
+import java.util.regex.Matcher;
 
 import org.fxmisc.richtext.InlineCssTextArea;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Side;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Label;
+import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.Logic;
+import seedu.saveit.logic.commands.AddCommand;
+import seedu.saveit.logic.commands.EditCommand;
+import seedu.saveit.logic.commands.FindCommand;
+import seedu.saveit.logic.parser.ArgumentMultimap;
+import seedu.saveit.logic.parser.ArgumentTokenizer;
+import seedu.saveit.logic.parser.ParserUtil;
+import seedu.saveit.logic.parser.Prefix;
+import seedu.saveit.logic.parser.exceptions.ParseException;
+import seedu.saveit.ui.suggestion.AutoSuggestion;
+import seedu.saveit.ui.suggestion.CopyExistingAutoSuggestion;
 import seedu.saveit.ui.suggestion.IssueNameAutoSuggestion;
 import seedu.saveit.ui.suggestion.TagNameAutoSuggestion;
 
@@ -25,22 +40,20 @@ public class AutoSuggestionManager extends InlineCssTextArea {
 
     public static final String WORD_FIND = "find";
     private static final String WORD_TAG = "tag";
-    private static final String WORD_ADD = "add";
-    private static final String WORD_EDIT = "edit";
 
     private static final String WHITESPACE_IDENTIFIER = " ";
     private static final String TAG_PREFIX_IDENTIFIER = "t/";
-    //To get substring after whitespace, substring starting index has to be increased by 1
+    // To get substring after whitespace, substring starting index has to be increased by 1
     private static final int STRING_INDEX_ADJUSTMENT_WHITESPACE = 1;
-    //To get substring after tag prefix, substring starting index has to be increased by 2
+    // To get substring after tag prefix, substring starting index has to be increased by 2
     private static final int STRING_INDEX_ADJUSTMENT_TAG_PREFIX = 2;
     private static final int MAX_NUMBER = 5;
-    private static ContextMenu popUpWindow;
-    private String[] wordSet = {WORD_ADD, WORD_EDIT, WORD_FIND, WORD_TAG};
+    private ContextMenu popUpWindow;
 
     private IssueNameAutoSuggestion issueSuggestion;
     private TagNameAutoSuggestion tagSuggestion;
 
+    private Logic logic;
 
     public AutoSuggestionManager() {
         super();
@@ -50,31 +63,119 @@ public class AutoSuggestionManager extends InlineCssTextArea {
      * Adds new listener to the text field to handle the key suggestion
      */
     public void initialise(Logic logic) {
+        this.logic = logic;
         issueSuggestion = new IssueNameAutoSuggestion(logic);
         tagSuggestion = new TagNameAutoSuggestion(logic);
         popUpWindow = new ContextMenu();
-        this.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                String newValue) {
-                if (getText().length() == 0 || !Arrays.stream(wordSet).parallel().anyMatch(getText()::contains)) {
-                    popUpWindow.hide();
-                } else {
-                    if (getText().length() > WORD_FIND.length() && getText()
-                        .substring(0, WORD_FIND.length()).contains(WORD_FIND)) { //find or findtag
-                        showResult(AutoSuggestionManager.this, WHITESPACE_IDENTIFIER);
-                    } else { //add or edit
-                        showResult(AutoSuggestionManager.this, TAG_PREFIX_IDENTIFIER);
-                    }
-                }
+
+        this.textProperty().addListener((observable, oldValue, newValue) -> {
+            Matcher matcher = BASIC_COMMAND_FORMAT.matcher(newValue);
+
+            if (!matcher.matches()) {
+                popUpWindow.hide();
+                return;
+            }
+
+            String commandWord = matcher.group("commandWord");
+            String arguments = matcher.group("arguments");
+
+            switch (commandWord) {
+
+            case AddCommand.COMMAND_WORD:
+            case AddCommand.COMMAND_ALIAS:
+                addCommandListener(commandWord, arguments);
+                return;
+
+            case EditCommand.COMMAND_WORD:
+            case EditCommand.COMMAND_ALIAS:
+                editCommandListener(commandWord, arguments);
+                return;
+
+            case FindCommand.COMMAND_WORD:
+            case FindCommand.COMMAND_ALIAS:
+                findCommandListener(commandWord, arguments);
+                return;
+
+            default:
+                popUpWindow.hide();
             }
         });
+    }
+
+    /**
+     * Handles the method call to display the suggestion box
+     */
+    private void handleCopyExisting(Index index, Prefix prefix) {
+        AutoSuggestion suggestion = new CopyExistingAutoSuggestion(logic, index);
+        // TODO: Temporarily feed in empty string, need refactoring
+        LinkedList<String> values = suggestion.giveSuggestion(prefix.getPrefix());
+        showSuggestionWindow(values, getCaretPosition(), suggestion);
+    }
+
+    /**
+     * Listener for the {@code AddCommand}
+     */
+    public void addCommandListener(String commandWord, String arguments) {
+        if (arguments.length() != 0) {
+            showResult(TAG_PREFIX_IDENTIFIER);
+        }
+    }
+
+    /**
+     * Listener for the {@code EditCommand}
+     */
+    public void editCommandListener(String commandWord, String arguments) {
+        ArgumentMultimap argMultiMap =
+                ArgumentTokenizer.tokenize(arguments, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_SOLUTION_LINK,
+                        PREFIX_REMARK, PREFIX_TAG);
+
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(argMultiMap.getPreamble());
+        } catch (ParseException pe) {
+            // TODO: Throw some exception?
+            return;
+        }
+
+        String i = argMultiMap.getPreamble();
+        int position = getCaretPosition() - commandWord.length();
+
+        Prefix prefix = argMultiMap.findNearestPrefixKey(position);
+
+        if (prefix == null) {
+            return;
+        }
+
+        // Differentiate suggestion based on prefix
+        if (prefix.equals(PREFIX_STATEMENT) || prefix.equals(PREFIX_DESCRIPTION)) {
+            Optional<String> posArgs = argMultiMap.getValue(prefix);
+            // Only show AutoSuggestion box if the string is empty
+            if (posArgs.isPresent() && posArgs.get().length() == 0) {
+                handleCopyExisting(index, prefix);
+            } else {
+                popUpWindow.hide();
+            }
+        } else if (prefix.equals(PREFIX_TAG)) {
+            showResult(TAG_PREFIX_IDENTIFIER);
+        }
+
+
+    }
+
+    /**
+     * Listener for the {@code FindCommand}
+     */
+    public void findCommandListener(String commandWord, String arguments) {
+        if (arguments.length() != 0) {
+            showResult(WHITESPACE_IDENTIFIER);
+        }
     }
 
     /**
      * Updates the keywords stored in the class whenever there is a change on issue list in the storage.
      */
     public void update(Logic logic) {
+        this.logic = logic;
         issueSuggestion.update(logic);
         tagSuggestion.update(logic);
     }
@@ -82,9 +183,10 @@ public class AutoSuggestionManager extends InlineCssTextArea {
     /**
      * Analyses the input string and suggests the key words
      */
-    public void showResult(InlineCssTextArea textField, String identifier) {
-        String mainText = textField.getText();
+    public void showResult(String identifier) {
+        String mainText = getText();
         String text;
+        AutoSuggestion suggestion;
 
         int startingIndex;
 
@@ -95,7 +197,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
         }
 
         if (startingIndex != -1) {
-            text = mainText.substring(startingIndex, mainText.length()).trim();
+            text = mainText.substring(startingIndex).trim();
         } else {
             text = mainText.trim();
         }
@@ -103,8 +205,10 @@ public class AutoSuggestionManager extends InlineCssTextArea {
         LinkedList<String> searchResult;
         if (identifier.equals(WHITESPACE_IDENTIFIER) && !getText().contains(WORD_TAG)) {
             searchResult = issueSuggestion.giveSuggestion(text);
+            suggestion = issueSuggestion;
         } else {
             searchResult = tagSuggestion.giveSuggestion(text);
+            suggestion = tagSuggestion;
         }
 
         if (searchResult.size() > 0 && text.length() > 0) {
@@ -112,7 +216,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
             if (searchResult.size() == 1 && searchResult.get(0).equals(text)) {
                 popUpWindow.hide();
             } else {
-                showSuggestionWindow(textField, searchResult, startingIndex);
+                showSuggestionWindow(searchResult, startingIndex, suggestion);
             }
         } else {
             popUpWindow.hide();
@@ -121,40 +225,42 @@ public class AutoSuggestionManager extends InlineCssTextArea {
 
     /**
      * Fills in suggestion content and shows the pop up window
+     * @param searchResult List of strings used to create the items
+     * @param startingIndex position where the argument starts
+     * @param suggestion the AutoSuggestion object being used
      */
-    private void showSuggestionWindow(InlineCssTextArea textField, LinkedList<String> searchResult,
-            int startingIndex) {
+    private void showSuggestionWindow(LinkedList<String> searchResult,
+            int startingIndex, AutoSuggestion suggestion) {
         int count = Math.min(searchResult.size(), MAX_NUMBER);
+        // Builds the dropdown
         List<CustomMenuItem> menuItems = new LinkedList<>();
         for (int i = 0; i < count; i++) {
             final String result = searchResult.get(i);
-            final String previousText = textField.getText();
+            final String previousText = getText();
             Label entryLabel = new Label(result);
-            textField.requestFocus();
+            requestFocus();
             CustomMenuItem item = new CustomMenuItem(entryLabel, true);
-            int initIndex = startingIndex;
-            item.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    textField.replaceText(previousText.substring(0, initIndex) + result);
-                    textField.moveTo(textField.getLength());
-                    popUpWindow.hide();
-                }
-            });
+            item.setOnAction(suggestion.getItemHandler(this, previousText, startingIndex, i));
             menuItems.add(item);
         }
         popUpWindow.getItems().clear();
         popUpWindow.getItems().addAll(menuItems);
         getFocused();
-        popUpWindow.show(textField, Side.BOTTOM, (double) textField.getCaretPosition() * 8, 0);
+        popUpWindow.show(this, Side.BOTTOM, (double) startingIndex * 8, 0);
     }
 
     /**
      * Makes the popup window get ready to get focused before next showing
      */
     private void getFocused() {
-        popUpWindow.show(AutoSuggestionManager.this, Side.BOTTOM, (double) AutoSuggestionManager
-            .this.getCaretPosition() * 8, 0);
+        popUpWindow.show(AutoSuggestionManager.this, Side.BOTTOM, (double) getCaretPosition() * 8, 0);
         popUpWindow.hide();
+    }
+
+    /**
+     * Gets the contextMenu
+     */
+    public ContextMenu getWindow() {
+        return popUpWindow;
     }
 }

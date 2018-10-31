@@ -6,13 +6,31 @@ package seedu.saveit.logic.parser;
  */
 public class Prefix {
     private final String prefix;
+    private final int position;
 
     public Prefix(String prefix) {
         this.prefix = prefix;
+        // In this case, the position is just assigned to 0
+        // equality is not affected by the value of the position
+        this.position = 0;
+    }
+
+    /**
+     * Additional parameter used to (optionally) store the position of the
+     *  {@code prefix} in the argument string
+     *  to dynamically control the position of the autosuggestion box
+     */
+    public Prefix(String prefix, int position) {
+        this.prefix = prefix;
+        this.position = position;
     }
 
     public String getPrefix() {
         return prefix;
+    }
+
+    public int getPosition() {
+        return position;
     }
 
     public String toString() {

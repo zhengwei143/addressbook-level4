@@ -300,6 +300,14 @@ This diagram shows the sequence that how add solution command is executed. It co
 ** Pros: Easy to implement.
 ** Cons: The command set becomes too complex for the user.
 
+===== Aspect: How add command distinguishes between adding solution and adding issue
+* Alternative 1 (current choice): Passing a new created issue with dummy issue statement or dummy solution link
+** Pros: Consistent coding style and less change on logic structure
+** Cons: Quite complex implementation compared to other command
+* Alternative 2: Overloading Issue constructor so that different issues will be passing to `AddCommand` accordingly.
+* Pros: Relatively easier to implement
+* Cons: Lots of changes on structure.
+
 === Sort feature
 
 The sort command can sort an issue list shown in the GUI.

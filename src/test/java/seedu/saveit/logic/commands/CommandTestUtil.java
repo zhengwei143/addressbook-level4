@@ -14,6 +14,7 @@ import java.util.List;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
+import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.SaveIt;
@@ -29,7 +30,7 @@ public class CommandTestUtil {
     public static final String VALID_STATEMENT_C = "C Issue";
     public static final String VALID_DESCRIPTION_JAVA = "syntax error";
     public static final String VALID_DESCRIPTION_C = "94351253";
-    public static final String VALID_SOLUTION_JAVA = "https://www.oracle.com RemarkJava";
+    public static final String VALID_SOLUTION_JAVA = "http://www.oracle.com RemarkJava";
     public static final String VALID_SOLUTION_C = "https://stackoverflow.com/ RemarkC";
     public static final String VALID_SOLUTION_STACKOVERFLOW = "https://stackoverflow.com/ newSol";
     public static final String VALID_TAG_UI = "ui";
@@ -44,8 +45,10 @@ public class CommandTestUtil {
     public static final String TAG_DESC_SYNTAX = " " + PREFIX_TAG + VALID_TAG_SYNTAX;
     public static final String TAG_DESC_UI = " " + PREFIX_TAG + VALID_TAG_UI;
 
-    public static final String INVALID_STATEMENT_DESC = " " + PREFIX_STATEMENT + " ";
-    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + " ";
+    public static final String INVALID_STATEMENT_DESC = " " + PREFIX_STATEMENT + " "; // 'empty' not allowed in names
+    public static final String INVALID_DESCRIPTION_DESC =
+        " " + PREFIX_DESCRIPTION + " "; // 'empty' not allowed in descriptions
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + " "; // 'empty' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -92,17 +95,16 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         SaveIt expectedSaveIt = new SaveIt(actualModel.getSaveIt());
-        List<Issue> expectedFilteredList = new ArrayList<>(actualModel.getFilteredAndSortedIssueList());
+        List<Issue> expectedFilteredList = new ArrayList<>(actualModel.getFilteredIssueList());
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
-
         try {
             command.execute(actualModel, actualCommandHistory);
             throw new AssertionError("The expected CommandException was not thrown.");
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
             assertEquals(expectedSaveIt, actualModel.getSaveIt());
-            assertEquals(expectedFilteredList, actualModel.getFilteredAndSortedIssueList());
+            assertEquals(expectedFilteredList, actualModel.getFilteredIssueList());
             assertEquals(expectedCommandHistory, actualCommandHistory);
         }
     }

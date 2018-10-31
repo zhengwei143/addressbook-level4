@@ -45,7 +45,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_REMARK, PREFIX_TAG);
 
         if (arePrefixesPresent(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_TAG) && argMultimap
-                .getPreamble().isEmpty() && arePrefixesNotPresent(args, PREFIX_SOLUTION_LINK, PREFIX_REMARK)) {
+                .getPreamble().isEmpty() && arePrefixesNotPresent(args, PREFIX_SOLUTION_LINK,
+                PREFIX_REMARK)) {
             return handleAddIssueParser(argMultimap);
         } else if (arePrefixesPresent(args, PREFIX_SOLUTION_LINK, PREFIX_REMARK)
                 && arePrefixesNotPresent(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_TAG)) {
@@ -56,7 +57,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
     }
 
-    private AddCommand handleAddIssueParser(ArgumentMultimap argMultimap) throws ParseException{
+    /**
+     * Handles parsing the add command which intends to add a new issue.
+     */
+    private AddCommand handleAddIssueParser(ArgumentMultimap argMultimap) throws ParseException {
         IssueStatement statement;
 
         if (argMultimap.getValue(PREFIX_STATEMENT).isPresent()) {
@@ -81,7 +85,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         return new AddCommand(issue);
     }
 
-    private AddCommand handleAddSolutionParser(ArgumentMultimap argMultimap) throws ParseException{
+    /**
+     * Handles parsing the add command which intends to add solution.
+     */
+    private AddCommand handleAddSolutionParser(ArgumentMultimap argMultimap) throws ParseException {
 
         String solutionLink;
 
@@ -94,7 +101,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         String solutionRemark;
 
         if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
-            solutionRemark =ParserUtil.parseSolutionRemark(argMultimap.getValue(PREFIX_REMARK).get()).value;
+            solutionRemark = ParserUtil.parseSolutionRemark(argMultimap.getValue(PREFIX_REMARK).get()).value;
         } else {
             throw new ParseException(NO_REMARK_EXCEPTION);
         }
@@ -104,8 +111,9 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Set<Tag> dummyTagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Issue issue = new Issue(new IssueStatement(AddCommand.DUMMY_STATEMENT), new Description(AddCommand.DUMMY_DESCRIPTION),
-                    solutionList, dummyTagList);
+        Issue issue = new Issue(new IssueStatement(AddCommand.DUMMY_STATEMENT),
+                new Description(AddCommand.DUMMY_DESCRIPTION),
+                solutionList, dummyTagList);
 
         return new AddCommand(issue);
     }

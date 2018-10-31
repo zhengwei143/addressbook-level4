@@ -13,7 +13,6 @@ import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.util.StringUtil;
 import seedu.saveit.logic.commands.EditCommand;
 import seedu.saveit.logic.parser.exceptions.ParseException;
-import seedu.saveit.model.ReadOnlySaveIt;
 import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.model.issue.Solution;
@@ -116,6 +115,9 @@ public class ParserUtil {
         return solution;
     }
 
+    /**
+     * Parses {@code String solutionLink into a {@code SolutionLink}}
+     */
     public static SolutionLink parseSolutionLink(String solutionLink) throws ParseException {
         requireNonNull(solutionLink);
         String trimmedSolutionLink = solutionLink.trim();
@@ -125,6 +127,9 @@ public class ParserUtil {
         return new SolutionLink(solutionLink);
     }
 
+    /**
+     * Parses {@code String solutionRemark into a {@code Remark}}
+     */
     public static Remark parseSolutionRemark(String solutionRemark) throws ParseException {
         requireNonNull(solutionRemark);
         String trimmedRemark = solutionRemark.trim();

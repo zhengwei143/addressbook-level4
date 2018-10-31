@@ -1,11 +1,15 @@
 package seedu.saveit.ui;
 
-import static seedu.saveit.logic.parser.CliSyntax.*;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.saveit.logic.parser.SaveItParser.BASIC_COMMAND_FORMAT;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Matcher;
 
 import org.fxmisc.richtext.InlineCssTextArea;
@@ -19,11 +23,10 @@ import seedu.saveit.logic.Logic;
 import seedu.saveit.logic.commands.AddCommand;
 import seedu.saveit.logic.commands.EditCommand;
 import seedu.saveit.logic.commands.FindCommand;
-import seedu.saveit.logic.parser.ArgumentMultimap;
-import seedu.saveit.logic.parser.ArgumentTokenizer;
-import seedu.saveit.logic.parser.ParserUtil;
+import seedu.saveit.logic.parser.*;
 import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.ui.suggestion.AutoSuggestion;
+import seedu.saveit.ui.suggestion.CopyExistingAutoSuggestion;
 import seedu.saveit.ui.suggestion.IssueNameAutoSuggestion;
 import seedu.saveit.ui.suggestion.TagNameAutoSuggestion;
 
@@ -47,6 +50,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
     private IssueNameAutoSuggestion issueSuggestion;
     private TagNameAutoSuggestion tagSuggestion;
 
+    private Logic logic;
 
     public AutoSuggestionManager() {
         super();
@@ -56,7 +60,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
      * Adds new listener to the text field to handle the key suggestion
      */
     public void initialise(Logic logic) {
-
+        this.logic = logic;
         issueSuggestion = new IssueNameAutoSuggestion(logic);
         tagSuggestion = new TagNameAutoSuggestion(logic);
         popUpWindow = new ContextMenu();
@@ -96,6 +100,16 @@ public class AutoSuggestionManager extends InlineCssTextArea {
     }
 
     /**
+     * Handles the method call to display the suggestion box
+     */
+    private void handleCopyExisting(Index index, Prefix prefix) {
+        AutoSuggestion suggestion = new CopyExistingAutoSuggestion(logic, index);
+        // TODO: Temporarily feed in empty string, need refactoring
+        LinkedList<String> values = suggestion.giveSuggestion(prefix.getPrefix());
+        showSuggestionWindow(values, getCaretPosition(), suggestion);
+    }
+
+    /**
      * Listener for the {@code AddCommand}
      */
     public void addCommandListener(String commandWord, String arguments) {
@@ -117,14 +131,32 @@ public class AutoSuggestionManager extends InlineCssTextArea {
             index = ParserUtil.parseIndex(argMultiMap.getPreamble());
         } catch (ParseException pe) {
             // TODO: Throw some exception?
+            return;
         }
 
         String i = argMultiMap.getPreamble();
-        int position = getCaretPosition();
+        int position = getCaretPosition() - commandWord.length();
 
-        if (arguments.length() != 0) {
+        Prefix prefix = argMultiMap.findNearestPrefixKey(position);
+
+        if (prefix == null) {
+            return;
+        }
+
+        // Differentiate suggestion based on prefix
+        if (prefix.equals(PREFIX_STATEMENT) || prefix.equals(PREFIX_DESCRIPTION)) {
+            Optional<String> posArgs = argMultiMap.getValue(prefix);
+            // Only show AutoSuggestion box if the string is empty
+            if (posArgs.isPresent() && posArgs.get().length() == 0) {
+                handleCopyExisting(index, prefix);
+            } else {
+                popUpWindow.hide();
+            }
+        } else if (prefix.equals(PREFIX_TAG)) {
             showResult(TAG_PREFIX_IDENTIFIER);
         }
+
+
     }
 
     /**
@@ -140,6 +172,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
      * Updates the keywords stored in the class whenever there is a change on issue list in the storage.
      */
     public void update(Logic logic) {
+        this.logic = logic;
         issueSuggestion.update(logic);
         tagSuggestion.update(logic);
     }
@@ -204,7 +237,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
             Label entryLabel = new Label(result);
             requestFocus();
             CustomMenuItem item = new CustomMenuItem(entryLabel, true);
-            item.setOnAction(suggestion.getItemHandler(this, previousText, startingIndex, result));
+            item.setOnAction(suggestion.getItemHandler(this, previousText, startingIndex, i));
             menuItems.add(item);
         }
         popUpWindow.getItems().clear();

@@ -1,10 +1,7 @@
 package seedu.saveit.logic.parser;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Stores mapping of prefixes to their respective arguments.
@@ -49,6 +46,24 @@ public class ArgumentMultimap {
             return new ArrayList<>();
         }
         return new ArrayList<>(argMultimap.get(prefix));
+    }
+
+    /**
+     * Attempts to find the {@code Prefix} used as the key with the same position as the caret
+     * @param caretPosition
+     * @return Prefix if found and null if not
+     */
+    public Prefix findNearestPrefixKey(int caretPosition) {
+        Set<Prefix> keySet = argMultimap.keySet();
+        List<Prefix> filtered = keySet.stream()
+                .filter(prefix -> prefix.getPosition() <= (caretPosition - prefix.getPrefix().length()))
+                .collect(Collectors.toList());
+
+        if (filtered.size() == 0) {
+            return null;
+        }
+        // Should get the last matched Prefix (as it is the closest to the caret)
+        return filtered.get(filtered.size() - 1);
     }
 
     /**

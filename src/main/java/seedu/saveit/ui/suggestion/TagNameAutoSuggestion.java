@@ -18,11 +18,13 @@ public class TagNameAutoSuggestion implements AutoSuggestion {
     private Logic logic;
     private TreeSet<String> tagSet;
     private Set<String> tagKeyWords;
+    private LinkedList<String> searchResult;
 
     public TagNameAutoSuggestion(Logic logic) {
         this.logic = logic;
         this.tagSet = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
         this.tagKeyWords = new HashSet<>();
+        this.searchResult = new LinkedList<>();
         fillTagKeyWords();
         addAllTagKeyWord();
     }
@@ -32,7 +34,7 @@ public class TagNameAutoSuggestion implements AutoSuggestion {
      */
     @Override
     public LinkedList<String> giveSuggestion(String text) {
-        LinkedList<String> searchResult = new LinkedList<>();
+        searchResult.clear();
         searchResult.addAll(tagSet.subSet(text, text + Character.MAX_VALUE));
         return searchResult;
     }
@@ -49,7 +51,8 @@ public class TagNameAutoSuggestion implements AutoSuggestion {
 
     @Override
     public EventHandler<ActionEvent>
-        getItemHandler(AutoSuggestionManager manager, String previousText, int initIndex, String result) {
+        getItemHandler(AutoSuggestionManager manager, String previousText, int initIndex, int selection) {
+        String result = searchResult.get(selection);
         return actionEvent -> {
             manager.replaceText(previousText.substring(0, initIndex) + result);
             manager.moveTo(manager.getLength());

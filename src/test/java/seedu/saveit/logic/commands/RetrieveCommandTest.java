@@ -26,10 +26,10 @@ import seedu.saveit.model.issue.solution.SolutionLink;
 
 public class RetrieveCommandTest {
 
+    private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
     private Model model;
     private Model expectedModel;
     private CommandHistory commandHistory = new CommandHistory();
-    private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
     @Before
     public void setUp() {
@@ -53,7 +53,7 @@ public class RetrieveCommandTest {
                     .getSolutions().get(0).getLink();
             assertEquals(expectedSolutionLink, link);
             assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new AssertionError("There should not be an error retrieving the solution link", e);
         }
     }

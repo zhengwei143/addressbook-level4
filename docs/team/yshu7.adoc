@@ -52,8 +52,9 @@ https://github.com/CS2103-AY1819S1-T12-4/main/pull/123[#123]
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=sort]
-include::../UserGuide.adoc[tag=clear]
+include::../UserGuide.adoc#sorting-the-list-of-issues-code-s-sort-code[tag=sort]
+
+include::../UserGuide.adoc#clearing-all-entries-code-c-clear-code[tag=clear]
 
 == Contributions to the Developer Guide
 
@@ -61,8 +62,9 @@ include::../UserGuide.adoc[tag=clear]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=sort]
-include::../DeveloperGuide.adoc[tag=confirmation]
+include::../DeveloperGuide.adoc#sort-feature[tag=sort]
+
+include::../DeveloperGuide.adoc#confirmation-check[tag=confirmation]
 
 == PROJECT: PowerPointLabs
 

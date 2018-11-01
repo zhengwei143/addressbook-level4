@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -16,6 +17,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
 import seedu.saveit.commons.core.directory.Directory;
+import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.model.Issue;
@@ -24,6 +26,7 @@ import seedu.saveit.model.ReadOnlySaveIt;
 import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.issue.IssueSort;
 import seedu.saveit.model.issue.Solution;
+import seedu.saveit.model.issue.Tag;
 import seedu.saveit.testutil.IssueBuilder;
 
 public class AddCommandTest {
@@ -171,6 +174,8 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addTag(Index index, Set<Tag> tagList)  { throw new AssertionError("This method should not be called."); }
+        @Override
         public boolean canUndoSaveIt() {
             throw new AssertionError("This method should not be called.");
         }
@@ -194,6 +199,9 @@ public class AddCommandTest {
         public void commitSaveIt() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean refactorTag(Tag oldTag, Tag newTag) { return false; }
     }
 
     /**

@@ -572,6 +572,10 @@ e.g. `retrieve 3`
 e.g. `delete 3`
 * *Search* : `search KEYWORD [MORE_KEYWORDS]` +
 e.g. `Search BST`
+* *Add Tag* : `addtag INDEX t/TAG1 [t/TAG2]...` +
+e.g. `addtag 2 t/python t/java t/TIL`
+* *Refactor Tag* : `refactor t/OLDTAG [n/NEWTAG]` +
+e.g. `refactorTag t/java n/C++`
 * *Home* : `home`
 * *Clear* : `clear`
 * *Undo* : `undo`
@@ -580,6 +584,5 @@ e.g. `Search BST`
 * *Exit* : `exit`
 * *List* : `list`
 * *Sort* : `sort` TYPE
-* *Refactor Tag* : `refactor [OLDTAG] [NEWTAG]` +
-e.g. `refactorTag java C++`
+
 * *Highlight* : `highlight`

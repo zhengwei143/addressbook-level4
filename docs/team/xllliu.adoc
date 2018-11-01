@@ -5,14 +5,12 @@
 
 == PROJECT: SaveIt
 
----
-
-== Overview
+== 1. Overview
 
 SaveIt​ is geared at keeping track of the issues that the user finds and to link it with the url of the web-page found on the Internet.
 More importantly, SaveIt is ​optimized for those who prefer to work with a Command Line Interface​ (CLI) while still having the benefits of a Graphical User Interface (GUI) created with JavaFX. It is written in Java, and has about 10 kLoC.
 
-== Summary of contributions
+== 2. Summary of contributions
 * *Major enhancement*: Redesign the solution list panel in GUI
 ** What it does: allow the users to view solutions in the list panel when they select a sepecific issue.
 ** Justification: This feature improves the product significantly because a user may want to view the different solutions of an issue and load the web-page of the solution seperately. This enhancement is important as morphing changes the original UI structure of Addressbook level 4, the new GUI is more user-friendly.
@@ -37,7 +35,7 @@ More importantly, SaveIt is ​optimized for those who prefer to work with a Com
 *** Report bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
 
 
-== Contributions to the User Guide
+== 3. Contributions to the User Guide
 
 
 |===
@@ -63,13 +61,86 @@ Examples:
 * All properties of this solutions will be displayed at the left side of the interface.
 ====
 
-== Contributions to the Developer Guide
+=== Returning to home directory  : `(h)home`
+
+Changes the current editing directory to the root directory. Besides, Shows a list of all issues in the issue list by index.
+
+Format: `home`
+
+[TIP]
+====
+* Return to the home directory
+====
+
+Examples:
+****
+* `home`
+****
+
+[NOTE]
+====
+* All issues are listed in chronological order by default in home directory.
+====
+
+=== Command Summary
+Here is a summary of all command formats for your reference. Please note that some commands may implement more than one format.
+
+* *Help* : `help`
+* *Select* : `select INDEX` +
+e.g.`select 2`
+* *Add*  +
+For issues: `add i/[ISSUE_STATEMENT] d/[DESCRIPTION] t/[Tag]` +
+e.g. `add i/Bug d/exception thrown not handled t/java` +
+For solutions: `add s/[SOLUTION_LINK] r/[REMARK]` +
+e.g. `add s/www.github.com r/A git website`
+* *Edit* +
+For issues: `edit INDEX i/[ISSUE_STATEMENT] d/[DESCRIPTION]` +
+e.g. `edit 2 i/exception thrown not handled d/statement solved` +
+For solutions: `edit INDEX s/[SOLUTION_LINK] r/[REMARK]` +
+e.g. `edit 3 s/www.google.com r/add a catch block`
+* *Delete* : `delete INDEX` +
+e.g. `delete 3`
+* *Search* : `search KEYWORD [MORE_KEYWORDS]` +
+e.g. `Search BST`
+* *Home* : `home`
+* *Clear* : `clear`
+* *Undo* : `undo`
+* *Redo* : `redo`
+* *History* : `history`
+* *Exit* : `exit`
+* *List* : `list`
+* *Sort* : `sort` TYPE
+* *Refactor Tag* : `refactor [OLDTAG] [NEWTAG]` +
+e.g. `refactorTag java C++`
+* *Highlight* : `highlight`
+
+
+== 4.Contributions to the Developer Guide
 
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
+=== UI component
 
-== PROJECT: SaveIt
+.Structure of the UI Component
+image::UiClassDiagram.png[width="800"]
+
+The figure above shows the breakdown of the smaller components involved in the `UI` Component. The `UI` Component is the interface (abstraction barrier) between the user and the underlying components - `Model` and `Logic`.
+
+*API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
+
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
+
+The `UI` component,
+
+* Executes user commands using the `Logic` component.
+* Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
+* Responds to events raised from various parts of the App and updates the UI accordingly.
+
+
+== 5.PROJECT: SaveIt
 
 ---
 

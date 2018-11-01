@@ -6,7 +6,7 @@ package seedu.saveit.logic.parser;
  */
 public class Prefix {
     private final String prefix;
-    private final int position;
+    private int position;
 
     public Prefix(String prefix) {
         this.prefix = prefix;
@@ -35,6 +35,10 @@ public class Prefix {
 
     public String toString() {
         return getPrefix();
+    }
+
+    public void offset(int value) {
+        this.position += value;
     }
 
     @Override

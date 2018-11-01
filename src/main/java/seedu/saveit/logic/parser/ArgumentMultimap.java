@@ -1,11 +1,6 @@
 package seedu.saveit.logic.parser;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -58,17 +53,48 @@ public class ArgumentMultimap {
      * @param caretPosition
      * @return Prefix if found and null if not
      */
-    public Prefix findNearestPrefixKey(int caretPosition) {
+    public Prefix findPrecedingPrefixKey(int caretPosition) {
         Set<Prefix> keySet = argMultimap.keySet();
         List<Prefix> filtered = keySet.stream()
-                .filter(prefix -> prefix.getPosition() <= (caretPosition - prefix.getPrefix().length()))
+                .filter(prefix -> prefix.getPrefix() != ArgumentTokenizer.END_MARKER)
+                .filter(prefix -> (prefix.getPosition() + prefix.getPrefix().length()) <= caretPosition)
                 .collect(Collectors.toList());
+
+        filtered.sort(Comparator.comparing(prefix -> prefix.getPosition()));
 
         if (filtered.size() == 0) {
             return null;
         }
         // Should get the last matched Prefix (as it is the closest to the caret)
         return filtered.get(filtered.size() - 1);
+    }
+
+    /**
+     * Attempts to find the {@code Prefix} that is positioned after
+     * @param currentPrefix
+     */
+    public Prefix findSucceedingPrefixKey(Prefix currentPrefix) {
+        Set<Prefix> keySet = argMultimap.keySet();
+        // TODO: Might need to filter by <= as the end marker might have the same position
+        List<Prefix> filtered = keySet.stream()
+                .filter(prefix -> currentPrefix.getPosition() <= prefix.getPosition())
+                .collect(Collectors.toList());
+
+        filtered.sort(Comparator.comparing(prefix -> prefix.getPosition()));
+
+        if (filtered.size() <= 1) {
+            return currentPrefix;
+        }
+        // Return the second matched Prefix (which would be the succeeding Prefix after currentPrefix)
+        // The first matched should be the currentPrefix
+        return filtered.get(1);
+    }
+
+    /**
+     * Offsets all the {@code Prefix.positions} by {@code offset}
+     */
+    public void offsetPositions(int offset) {
+        argMultimap.keySet().stream().forEach(prefix -> prefix.offset(offset));
     }
 
     /**

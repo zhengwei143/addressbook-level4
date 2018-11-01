@@ -89,4 +89,12 @@ public class StringUtil {
     public static boolean arePrefixesValuePresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
+
+    /**
+     * Replaces the substring of {@code stringToModify} from {@code startIndex} to {@code endIndex}
+     * with the {@code stringToInsert}
+     */
+    public static String replaceAt(String stringToModify, String stringToInsert, int startIndex, int endIndex) {
+        return stringToModify.substring(0, startIndex) + stringToInsert + stringToModify.substring(endIndex);
+    }
 }

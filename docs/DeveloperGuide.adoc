@@ -264,10 +264,21 @@ Classes used by multiple components are in the `seedu.saveit.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented. Note that this section does not fully encompass all the features, but the more core features of the application.
 
-=== Add issue feature
-The add command can add an new issue to the issue list
+=== Add feature
+The add command can add both issue and solution to SaveIt. It includes two levels:
 
-==== Current implementation
+* Issue level
+** Issue statement
+** Issue description
+** Issue tags
+* Solution level
+** Solution link
+** Solution remark
+
+==== Add issue
+Add issue happens on the issue level
+
+===== Current implementation
 We use `SaveItParser` to call `AddCommandParser` so as to pass the entered issue, then `AddCommand` is invoked which will ask model to add the issue to the `Model` component.
 In order to store the new issue inside the SaveIt, `VersionedSaveIt` will be invoked and it will add issue to the `UniqueIssueList`.
 
@@ -278,10 +289,10 @@ image::AddNewIssue.png[width="800"]
 
 This diagram gives a clear procedure that how the user input is passed step by step and calling different methods and objects at different sequences.
 
-=== Add solution feature
-The add command can add a new solution link as well as solution remark to an existing issue
+==== Add solution to existing issue
+Add solution happens on the solution level
 
-==== Current implementation
+===== Current implementation
 We use `SaveItParser` to call `AddCommandParser` just like how add issue features functions as above mentioned. However, this time, the solution link and solution remark is provided to `AddCommand` instead. During execution, `updateIssue` and `updateFilteredIssueList` will be called respectively in `ModelManager` as a way to replace the original issue with the new edition of issue which has the new solution entered.
 
 The following sequence diagram illustrates how the add solution feature functions

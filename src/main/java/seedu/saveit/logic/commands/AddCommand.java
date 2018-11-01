@@ -2,6 +2,8 @@ package seedu.saveit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_REMARK_STRING;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK_STRING;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -27,13 +29,18 @@ public class AddCommand extends Command {
             + PREFIX_STATEMENT + "ISSUE_STATEMENT "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_TAG + "algorithm "
-            + PREFIX_TAG + "java";
-    public static final String MESSAGE_ADD_SOLUTION_USAGE = "Issue has to be added first before adding solutions";
+            + PREFIX_TAG + "java\n"
+            + "_____________________________\n"
+            + COMMAND_WORD
+            + ": Adds a solution to a existing issue. "
+            + "Parameters: "
+            + PREFIX_SOLUTION_LINK_STRING + "SOLUTION_LINK"
+            + PREFIX_REMARK_STRING + "SOLUTION_REMARK";
     public static final String MESSAGE_ISSUE_SUCCESS = "New issue added: %1$s";
     public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt";
+    public static final String DUMMY_STATEMENT = "dummyStatement";
+    public static final String DUMMY_DESCRIPTION = "dummyDescription";
 
-    private static final String dummyStatement = "dummyStatement";
-    private static final String dummyDescription = "dummyDescription";
     private static final String MESSAGE_FAILED_ISSUE =
             "Issue has to be selected first before adding solution";
     private static final String MESSAGE_WRONG_DIRECTORY = "Wrong directory, please check!";
@@ -46,8 +53,8 @@ public class AddCommand extends Command {
      * Creates an AddCommand to add the specified {@code Issue}
      */
     public AddCommand(Issue issue) {
-        if (issue.getStatement().issue.equals(dummyStatement) && issue.getDescription().value
-                .equals(dummyDescription)) {
+        if (issue.getStatement().issue.equals(DUMMY_STATEMENT) && issue.getDescription().value
+                .equals(DUMMY_DESCRIPTION)) {
             addSolution = true;
             assert (issue.getSolutions().size() == 1);
             solutionToBeAdded = issue.getSolutions().get(0);

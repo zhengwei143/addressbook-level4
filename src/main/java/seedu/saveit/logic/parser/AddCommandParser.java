@@ -1,14 +1,16 @@
 package seedu.saveit.logic.parser;
 
+import static seedu.saveit.commons.util.StringUtil.arePrefixesNotPresent;
+import static seedu.saveit.commons.util.StringUtil.arePrefixesPresent;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import seedu.saveit.commons.core.Messages;
 import seedu.saveit.logic.commands.AddCommand;
@@ -24,10 +26,12 @@ import seedu.saveit.model.issue.Tag;
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
-    private static final String dummyStatement = "dummyStatement";
-    private static final String dummyDescription = "dummyDescription";
-    private static final String dummySolutionLink = "https://www.dummySolutionLink.com";
-    private static final String dummySolutionRemark = "dummySolutionRemark";
+    private static final String DUMMY_SOLUTION_LINK = "https://www.dummySolutionLink.com";
+    private static final String DUMMY_SOLUTION_REMARK = "dummySolutionRemark";
+    private static final String NO_LINK_EXCEPTION = "Please enter solution link";
+    private static final String NO_REMARK_EXCEPTION = "Please enter solution remark";
+    private static final String NO_STATEMENT_EXCEPTION = "Please enter statement";
+    private static final String NO_DESCRIPTION_EXCEPTION = "Please enter description";
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand and returns an AddCommand
@@ -40,33 +44,40 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_SOLUTION_LINK,
                         PREFIX_REMARK, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_STATEMENT, PREFIX_DESCRIPTION) || !argMultimap
-                .getPreamble().isEmpty()) {
-            if (arePrefixesPresent(argMultimap, PREFIX_SOLUTION_LINK, PREFIX_REMARK)
-                    && !argMultimap.getValue(PREFIX_TAG).isPresent()) {
-                List<Solution> solutionList = ParserUtil.parseSolutions(argMultimap.getValue(PREFIX_SOLUTION_LINK)
-                        .get(), argMultimap.getValue(PREFIX_REMARK).get());
-                Set<Tag> dummyTagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-                Issue issue = new Issue(new IssueStatement(dummyStatement), new Description(dummyDescription),
-                        solutionList, dummyTagList);
-
-                return new AddCommand(issue);
-            } else {
-                throw new ParseException(
-                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-            }
+        if (arePrefixesPresent(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_TAG) && argMultimap
+                .getPreamble().isEmpty() && arePrefixesNotPresent(args, PREFIX_SOLUTION_LINK,
+                PREFIX_REMARK)) {
+            return handleAddIssueParser(argMultimap);
+        } else if (arePrefixesPresent(args, PREFIX_SOLUTION_LINK, PREFIX_REMARK)
+                && arePrefixesNotPresent(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_TAG)) {
+            return handleAddSolutionParser(argMultimap);
         } else {
-            if (argMultimap.getValue(PREFIX_SOLUTION_LINK).isPresent()
-                    || argMultimap.getValue(PREFIX_REMARK).isPresent()) {
-                throw new ParseException(
-                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_ADD_SOLUTION_USAGE));
-            }
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddCommand.MESSAGE_USAGE));
+        }
+    }
+
+    /**
+     * Handles parsing the add command which intends to add a new issue.
+     */
+    private AddCommand handleAddIssueParser(ArgumentMultimap argMultimap) throws ParseException {
+        IssueStatement statement;
+
+        if (argMultimap.getValue(PREFIX_STATEMENT).isPresent()) {
+            statement = ParserUtil.parseStatement(argMultimap.getValue(PREFIX_STATEMENT).get());
+        } else {
+            throw new ParseException(NO_STATEMENT_EXCEPTION);
         }
 
-        IssueStatement statement = ParserUtil.parseStatement(argMultimap.getValue(PREFIX_STATEMENT).get());
-        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
-        List<Solution> solutionList = ParserUtil.parseSolutions(dummySolutionLink, dummySolutionRemark);
+        Description description;
+
+        if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
+            description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+        } else {
+            throw new ParseException(NO_DESCRIPTION_EXCEPTION);
+        }
+
+        List<Solution> solutionList = ParserUtil.parseSolutions(DUMMY_SOLUTION_LINK, DUMMY_SOLUTION_REMARK);
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Issue issue = new Issue(statement, description, solutionList, tagList);
@@ -75,11 +86,35 @@ public class AddCommandParser implements Parser<AddCommand> {
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given {@code
-     * ArgumentMultimap}.
+     * Handles parsing the add command which intends to add solution.
      */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
+    private AddCommand handleAddSolutionParser(ArgumentMultimap argMultimap) throws ParseException {
 
+        String solutionLink;
+
+        if (argMultimap.getValue(PREFIX_SOLUTION_LINK).isPresent()) {
+            solutionLink = ParserUtil.parseSolutionLink(argMultimap.getValue(PREFIX_SOLUTION_LINK).get()).value;
+        } else {
+            throw new ParseException(NO_LINK_EXCEPTION);
+        }
+
+        String solutionRemark;
+
+        if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
+            solutionRemark = ParserUtil.parseSolutionRemark(argMultimap.getValue(PREFIX_REMARK).get()).value;
+        } else {
+            throw new ParseException(NO_REMARK_EXCEPTION);
+        }
+
+        List<Solution> solutionList = new ArrayList<>();
+        solutionList.add(new Solution(solutionLink, solutionRemark));
+
+        Set<Tag> dummyTagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+        Issue issue = new Issue(new IssueStatement(AddCommand.DUMMY_STATEMENT),
+                new Description(AddCommand.DUMMY_DESCRIPTION),
+                solutionList, dummyTagList);
+
+        return new AddCommand(issue);
+    }
 }

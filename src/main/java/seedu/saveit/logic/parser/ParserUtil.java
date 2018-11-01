@@ -116,6 +116,30 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code String solutionLink into a {@code SolutionLink}}
+     */
+    public static SolutionLink parseSolutionLink(String solutionLink) throws ParseException {
+        requireNonNull(solutionLink);
+        String trimmedSolutionLink = solutionLink.trim();
+        if (!SolutionLink.isValidLink(trimmedSolutionLink)) {
+            throw new ParseException(SolutionLink.MESSAGE_SOLUTION_LINK_CONSTRAINTS);
+        }
+        return new SolutionLink(solutionLink);
+    }
+
+    /**
+     * Parses {@code String solutionRemark into a {@code Remark}}
+     */
+    public static Remark parseSolutionRemark(String solutionRemark) throws ParseException {
+        requireNonNull(solutionRemark);
+        String trimmedRemark = solutionRemark.trim();
+        if (!Remark.isValidRemark(trimmedRemark)) {
+            throw new ParseException(Remark.MESSAGE_REMARK_CONSTRAINTS);
+        }
+        return new Remark(solutionRemark);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}. Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code tag} is invalid.

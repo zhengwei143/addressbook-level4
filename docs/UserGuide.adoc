@@ -32,7 +32,7 @@ To get started with SaveIt, please follow the  instructions below:
 .  Copy the file to a folder as the home folder for your SaveIt.
 .  Double-click the file to start the app. The GUI should appear in a few seconds, as shown below.
 +
-.Applacation Interface
+.Application Interface
 image::UI_Design.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
@@ -56,6 +56,7 @@ The following is a list of commands that you can use in the application.
 * Items in square brackets are optional e.g `i/ISSUE_STATEMENT d/DESCRIPTION [t/TAG]` can be used as `i/map_function d/how to use map in python t/python` or as `i/map_function d/how to use in python`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/python`, `t/python t/java` etc.
 * Parameters can be in any order e.g. if the command specifies `t/TAG, d/DESCRIPTION i/ISSUE_STATEMENT` is also acceptable.
+* Command alias can be used instead of lengthy command words.
 ====
 
 === Viewing help : `(h)help`
@@ -125,7 +126,7 @@ Edits an existing issue or solution in the SaveIt App.
 
 Format: `edit INDEX [i/NEW_ISSUE] [d/NEW_DESCRIPTION] [t/TAG]...`
 
-Format: `edit INDEX s/NEW_SOLUTION_LINK s/NEW_SOLUTION_REMARK`
+Format: `edit INDEX s/NEW_SOLUTION_LINK r/NEW_SOLUTION_REMARK`
 
 [TIP]
 ====
@@ -134,9 +135,16 @@ Format: `edit INDEX s/NEW_SOLUTION_LINK s/NEW_SOLUTION_REMARK`
 
 Examples: +
 ****
-* `edit 1 i/filter_function d/how to use filter function in python t/python` (the issue statement, description and tag will be updated)
+* `edit 1 i/map function d/how to use map`
+
+.Command Edit solution link to a solution
+
+image::edit-issue.png[width="790"]
 * `select 1` (select the first issue)
-* `edit 3 s/www.example2a.com r/refer the link explanation` (the third solution link and remark will be updated)
+* `edit 3 s/www.youtube.com` (the third solution link and remark will be updated)
+
+.Command Edit solution link to a solution
+image::edit-solution.png[width="790"]
 ****
 
 [NOTE]
@@ -157,11 +165,14 @@ Format: `addTag INDEX t/TAG_1 [t/TAG_2] [t/TAG_3]...`
 Examples: +
 ****
 * `addtag 2 t/python t/java t/algorithm`
+
+.Command Add tag(s) to an issue
+image::add-tag.png[width="790"]
 ****
 
 [NOTE]
 ====
-* If the tag already exits in the current issue tags, it will be ignored.
+* If the tag already exits in the current issue, it will be ignored.
 ====
 
 
@@ -329,6 +340,7 @@ Example:
 
 [NOTE]
 ====
+* User need confirm to execute this operation.
 * User can undo this operation to restore the issue lists.
 ====
 
@@ -396,11 +408,11 @@ Examples:
 ****
 
 
-=== Refactoring tag: `(rt)refactorTag` [coming in v1.3]
+=== Refactoring tag: `(rt)refactortag`
 
 To rename or remove a specific tag for all entries with that tag.
 
-Format: `refactorTag t/OLD_TAG [n/NEW_TAG]`
+Format: `refactortag t/OLD_TAG [n/NEW_TAG]`
 
 [TIP]
 ====
@@ -410,40 +422,61 @@ Format: `refactorTag t/OLD_TAG [n/NEW_TAG]`
 
 Examples:
 ****
-* refactorTag t/python nt/java (Changes all entries tagged [python] to be tagged [java])
-* refactorTag t/python (Removes the tag [python] from all the entries)
+* refactorTag t/solved n/TIL (Changes all entries tagged [solved] to be tagged [TIL])
+* refactorTag t/solved (Removes the tag [solved] from all the entries)
+
+.Refactor tag
+image::refactor-tag.png[width="790"]
+****
+
+
+
+=== Adding tag: `(at)addtag`
+
+To add tags for a specific issue.
+
+Format: `addtag INDEX t/TAG1 [t/TAG2]...`
+
+Examples:
+****
+* addtag t/python t/java)
 ****
 
 [NOTE]
 ====
-* If the new tag exits in the issue already, it is the same as removing the old tag.
+* If the tag exits in the issue already, it will not take any actions.
 ====
-=== Autosuggesting existing tags [coming in v1.3]
+
+=== Autosuggesting existing tags
+
 To prevent the user from creating many similar tags / duplicates, whenever the user creates a record with a tag, or modifies a record’s tag, the application searches for similar tags in the system and prompts the user with a list of similar tags.
 
 Example:
-****
-*   add i/NEW_ISSUE t/java
-====
-*   Similar tags have been found that have matched with [java], do you mean?
-**   Javascript
-**   Java9
-**   No, i would like to create a new tag [java]
-====
-*   tag 1 : chooses to replace [java] with [javascript]
-*   tag 3 : chooses to create a new tag [java]
-****
 
-=== Highlighting command parameters [coming in v1.3]
+.Autosuggesting of existing tags
+image::autosuggest-tag.png[width="790"]
 
-To distinguish user command for different parameters, commands get highlighted with different color as you type.
+
+=== Suggesting to copy existing values
+When editing fields in an issue (e.g. Editing an issue statement), if only slight modifications are required, the user will have to copy paste the existing issue statement and modify it, or type it out again.
+To make things more convenient, after the application prompts the user if they want to copy the existing value onto the command line.
+
+Example:
+
+.Copying existing fields
+image::copy-existing.png[width="790"]
+
+=== Highlighting command parameters
+
+When the user types the command in the command line, it is difficult for users to distinguish their inputs and parameters. Hence command gets highlighted is essential to differentiate the parameter and values that user input.
 
 Examples:
 ****
-*** [red]#add# [aqua]#i/[ISSUE_STATEMENT]# [fuchsia]#d/[DESCRIPTION]#
-*** [red]#edit# [blue]#12# [green]#s/[SOLUTION_LINK]# [maroon]#r/[REMARK]#
-*** [red]#select# [blue]#4#
-*** [red]#list# [yellow]#freq#
+.Command highlight 1
+image::command-highlight1.png[width="790"]
+
+.Command highlight 2
+image::command-highlight2.png[width="790"]
 ****
 
 
@@ -461,7 +494,7 @@ Developers usually work in teams, and since they are working on the same code ba
 
 * Switching projects: switch 1 OR switch cs2103project
 
-=== Highlight the page : `highlight` [coming in v2.0]
+=== Highlighting the page : `highlight` [coming in v2.0]
 Highlight the certain part of the page that shows on the window, use an annotation box.
 Format: `highlight`
 

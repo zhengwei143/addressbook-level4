@@ -75,7 +75,8 @@ public class EditCommand extends Command {
 
         if (currentDirectory.isRootLevel() && editIssueDescriptor.isAnyIssueFieldEdited()) {
             issueToEdit = getIssueToEdit(lastShownList, lastShownList.size(), index.getZeroBased());
-        } else if (currentDirectory.isIssueLevel() && editIssueDescriptor.isAnySolutionFieldEdited()) {
+        } else if ((currentDirectory.isIssueLevel() || currentDirectory.isSolutionLevel()) && editIssueDescriptor
+            .isAnySolutionFieldEdited()) {
             int solutionListSize = lastShownList.get(currentDirectory.getIssue() - 1).getSolutions().size();
             issueToEdit = getIssueToEdit(lastShownList, solutionListSize, currentDirectory.getIssue() - 1);
         } else {
@@ -93,10 +94,10 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue));
     }
 
-    private Issue getIssueToEdit(List<Issue> lastShownList, int solutionListSize, int issueIndex)
+    private Issue getIssueToEdit(List<Issue> lastShownList, int listSize, int issueIndex)
         throws CommandException {
         Issue issueToEdit;
-        if (issueIndex < solutionListSize) {
+        if (index.getZeroBased() < listSize) {
             issueToEdit = lastShownList.get(issueIndex);
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);

@@ -42,6 +42,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
     public static final String WORD_FIND = "find";
     private static final String WORD_TAG = "tag";
 
+    private static final String DUMMY_STRING = "";
     private static final String WHITESPACE_IDENTIFIER = " ";
     private static final String TAG_PREFIX_IDENTIFIER = "t/";
     // To get substring after whitespace, substring starting index has to be increased by 1
@@ -115,7 +116,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
         AutoSuggestion suggestion = new CopyExistingAutoSuggestion(logic, index);
         // TODO: Temporarily feed in empty string, need refactoring
         LinkedList<String> values = suggestion.giveSuggestion(prefix.getPrefix());
-        showSuggestionWindow(values, getCaretPosition(), suggestion);
+        showSuggestionWindow(values, getCaretPosition(), suggestion, DUMMY_STRING);
     }
 
     /**
@@ -123,7 +124,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
      */
     public void addCommandListener(String commandWord, String arguments) {
         if (arguments.length() != 0) {
-            showResult(TAG_PREFIX_IDENTIFIER);
+            showResult(TAG_PREFIX_IDENTIFIER, commandWord, arguments);
         }
     }
 
@@ -132,7 +133,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
      */
     public void findTagCommandListener(String commandWord, String arguments) {
         if (arguments.length() != 0) {
-            showResult(WHITESPACE_IDENTIFIER);
+            showResult(WHITESPACE_IDENTIFIER, commandWord, arguments);
         }
     }
 
@@ -171,7 +172,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
                 popUpWindow.hide();
             }
         } else if (prefix.equals(PREFIX_TAG)) {
-            showResult(TAG_PREFIX_IDENTIFIER);
+            showResult(TAG_PREFIX_IDENTIFIER, commandWord, arguments);
         }
 
 
@@ -182,7 +183,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
      */
     public void findCommandListener(String commandWord, String arguments) {
         if (arguments.length() != 0) {
-            showResult(WHITESPACE_IDENTIFIER);
+            showResult(WHITESPACE_IDENTIFIER, commandWord, arguments);
         }
     }
 
@@ -198,40 +199,63 @@ public class AutoSuggestionManager extends InlineCssTextArea {
     /**
      * Analyses the input string and suggests the key words
      */
-    public void showResult(String identifier) {
-        String mainText = getText();
-        String text;
-        AutoSuggestion suggestion;
-
-        int startingIndex;
-
+    public void showResult(String identifier, String commandWord, String argument) {
         if (identifier.equals(WHITESPACE_IDENTIFIER)) {
-            startingIndex = mainText.indexOf(identifier) + STRING_INDEX_ADJUSTMENT_WHITESPACE;
+            handleSuggestionForFinding();
         } else {
-            startingIndex = mainText.lastIndexOf(identifier) + STRING_INDEX_ADJUSTMENT_TAG_PREFIX;
+            handleSuggestionForAddingEditing();
         }
 
-        if (startingIndex != -1) {
-            text = mainText.substring(startingIndex).trim();
-        } else {
-            text = mainText.trim();
-        }
+    }
 
-        LinkedList<String> searchResult;
-        if (identifier.equals(WHITESPACE_IDENTIFIER) && !getText().contains(WORD_TAG)) {
-            searchResult = issueSuggestion.giveSuggestion(text);
-            suggestion = issueSuggestion;
-        } else {
-            searchResult = tagSuggestion.giveSuggestion(text);
-            suggestion = tagSuggestion;
-        }
+    /**
+     * Analyses the input String and give suggestion for find and findtag command
+     */
+    private void handleSuggestionForFinding() {
+        String mainText = getText();
+        int startingIndex = mainText.indexOf(WHITESPACE_IDENTIFIER) + STRING_INDEX_ADJUSTMENT_WHITESPACE;
+        String text = startingIndex == -1? mainText.trim() : mainText.substring(startingIndex).trim();
+        LinkedList<String> searchResult = mainText.contains(WORD_TAG)? tagSuggestion.giveSuggestion(text)
+                : issueSuggestion.giveSuggestion(text);
+        AutoSuggestion suggestion = mainText.contains(WORD_TAG)? tagSuggestion : issueSuggestion;
+        showWindow(searchResult, text, startingIndex, suggestion, DUMMY_STRING);
+    }
 
+    /**
+     * Analyses the input String and give suggestion for tags in add and edit command
+     */
+    private void handleSuggestionForAddingEditing() {
+        String cursorString = getText().substring(0, getCaretPosition());
+        if (cursorString.lastIndexOf(TAG_PREFIX_IDENTIFIER) == -1 ) {
+            return;
+        }
+        int startingIndex = cursorString.lastIndexOf(TAG_PREFIX_IDENTIFIER);
+        String afterText = getText().substring(getCaretPosition(), getText().length());
+        String substring = cursorString.substring(startingIndex, getCaretPosition());
+        startingIndex += STRING_INDEX_ADJUSTMENT_TAG_PREFIX;
+        String text = substring.contains(WHITESPACE_IDENTIFIER)? DUMMY_STRING :
+                substring.replaceFirst(TAG_PREFIX_IDENTIFIER, DUMMY_STRING);
+        LinkedList<String> searchResult = tagSuggestion.giveSuggestion(text);
+        showWindow(searchResult, text, startingIndex, tagSuggestion, afterText);
+    }
+
+    /**
+     * Handles the pop up window
+     * @param searchResult List of strings used to create the items
+     * @param text The context which user enters
+     * @param startingIndex position where the argument starts
+     * @param suggestion The AutoSuggestion object being used
+     * @param afterText The command line string will be truncated into three parts when dealing with tag,
+     * it represents the last truncated part which is after the cursor position.
+     */
+    private void showWindow(LinkedList<String> searchResult, String text, int startingIndex,
+            AutoSuggestion suggestion, String afterText) {
         if (searchResult.size() > 0 && text.length() > 0) {
             //hide the suggestion window if the issue statement is already entered completely
             if (searchResult.size() == 1 && searchResult.get(0).equals(text)) {
                 popUpWindow.hide();
             } else {
-                showSuggestionWindow(searchResult, startingIndex, suggestion);
+                showSuggestionWindow(searchResult, startingIndex, suggestion, afterText);
             }
         } else {
             popUpWindow.hide();
@@ -245,7 +269,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
      * @param suggestion the AutoSuggestion object being used
      */
     private void showSuggestionWindow(LinkedList<String> searchResult,
-            int startingIndex, AutoSuggestion suggestion) {
+            int startingIndex, AutoSuggestion suggestion, String afterText) {
         int count = Math.min(searchResult.size(), MAX_NUMBER);
         // Builds the dropdown
         List<CustomMenuItem> menuItems = new LinkedList<>();
@@ -255,7 +279,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
             Label entryLabel = new Label(result);
             requestFocus();
             CustomMenuItem item = new CustomMenuItem(entryLabel, true);
-            item.setOnAction(suggestion.getItemHandler(this, previousText, startingIndex, i));
+            item.setOnAction(suggestion.getItemHandler(this, previousText, afterText, startingIndex, i));
             menuItems.add(item);
         }
         popUpWindow.getItems().clear();

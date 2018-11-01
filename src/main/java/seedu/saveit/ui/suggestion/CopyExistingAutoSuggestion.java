@@ -50,7 +50,8 @@ public class CopyExistingAutoSuggestion implements AutoSuggestion {
 
     @Override
     public EventHandler<ActionEvent>
-        getItemHandler(AutoSuggestionManager manager, String previousText, int initIndex, int selection) {
+        getItemHandler(AutoSuggestionManager manager, String previousText,
+            String afterText, int initIndex, int selection) {
         String result = getValueFromIdentifier(identifier);
         return actionEvent -> {
             manager.replaceText(previousText.substring(0, initIndex) + result);

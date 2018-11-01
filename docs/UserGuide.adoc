@@ -565,6 +565,9 @@ For issues: `edit INDEX i/[ISSUE_STATEMENT] d/[DESCRIPTION]` +
 e.g. `edit 2 i/exception thrown not handled d/statement solved` +
 For solutions: `edit INDEX s/[SOLUTION_LINK] r/[REMARK]` +
 e.g. `edit 3 s/www.google.com r/add a catch block`
+* *Retrieve* : `retrieve INDEX` +
+For solutions: `retrieve SOLUTION_INDEX` +
+e.g. `retrieve 3`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
 * *Search* : `search KEYWORD [MORE_KEYWORDS]` +

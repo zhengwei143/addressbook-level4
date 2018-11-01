@@ -106,13 +106,13 @@ Examples: +
 
 ****
 * `add i/ArrayIndexOutOfBound d/issue description t/unsolved`
-. Add new issue to the issue list
 
+.Add new issue to the issue list
 image::AddingNewIssue.png[width="800"]
 * `select 3`
 * `add s/www.example1a.com r/use functional programming`
-. Add new solution to the third issue in the issue list
 
+.Add new solution to the third issue in the issue list
 image::AddingNewSolution.png[width="800"]
 ****
 

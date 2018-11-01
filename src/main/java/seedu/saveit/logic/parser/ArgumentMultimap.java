@@ -91,13 +91,6 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Offsets all the {@code Prefix.positions} by {@code offset}
-     */
-    public void offsetPositions(int offset) {
-        argMultimap.keySet().stream().forEach(prefix -> prefix.offset(offset));
-    }
-
-    /**
      * Returns the preamble (text before the first valid prefix). Trims any leading/trailing spaces.
      */
     public String getPreamble() {

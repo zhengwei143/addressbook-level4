@@ -20,6 +20,8 @@ public class SaveIt implements ReadOnlySaveIt {
 
     private final UniqueIssueList issues;
     private Directory currentDirectory;
+    public static final String DUMMY_TAG = "dummyTag";
+
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -123,6 +125,29 @@ public class SaveIt implements ReadOnlySaveIt {
         Issue updateIssue = new Issue(issueToEdit.getStatement(), issueToEdit.getDescription(),
             issueToEdit.getSolutions(), tagsToUpdate, issueToEdit.getFrequency());
         updateIssue(issueToEdit, updateIssue);
+    }
+
+    /**
+     * Adds tag(s) to the existing data of this {@code SaveIt} issue with {@code tagList} for {@code index} issue.
+     */
+    public boolean refactorTag(Tag oldTag, Tag newTag) {
+        boolean isEdit = false;
+        requireNonNull(oldTag);
+        for (Issue issueToUpdate : issues) {
+            Set<Tag> tagsToUpdate = new HashSet<>(issueToUpdate.getTags());
+            if (tagsToUpdate.contains(oldTag)) {
+                tagsToUpdate.remove(oldTag);
+                if (!newTag.tagName.equals(DUMMY_TAG)) {
+                    tagsToUpdate.add(newTag);
+                }
+                isEdit = true;
+                Issue updateIssue = new Issue(issueToUpdate.getStatement(), issueToUpdate.getDescription(),
+                    issueToUpdate.getSolutions(), tagsToUpdate, issueToUpdate.getFrequency());
+                updateIssue(issueToUpdate, updateIssue);
+            }
+
+        }
+        return isEdit;
     }
 
     /**

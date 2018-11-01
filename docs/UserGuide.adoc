@@ -425,7 +425,7 @@ Examples:
 * refactorTag t/solved n/TIL (Changes all entries tagged [solved] to be tagged [TIL])
 * refactorTag t/solved (Removes the tag [solved] from all the entries)
 
-.Command highlight 2
+.Refactor tag
 image::refactor-tag.png[width="790"]
 ****
 

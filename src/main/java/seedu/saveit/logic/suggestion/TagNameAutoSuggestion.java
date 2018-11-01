@@ -56,7 +56,7 @@ public class TagNameAutoSuggestion implements AutoSuggestion {
         String result = searchResult.get(selection);
         return actionEvent -> {
             manager.replaceText(previousText.substring(0, initIndex) + result + afterText);
-            manager.moveTo(afterText.equals("")? manager.getLength() : initIndex + result.length());
+            manager.moveTo(afterText.equals("") ? manager.getLength() : initIndex + result.length());
             manager.getWindow().hide();
         };
     }

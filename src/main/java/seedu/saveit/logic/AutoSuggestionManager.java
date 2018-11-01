@@ -213,10 +213,10 @@ public class AutoSuggestionManager extends InlineCssTextArea {
     private void handleSuggestionForFinding() {
         String mainText = getText();
         int startingIndex = mainText.indexOf(WHITESPACE_IDENTIFIER) + STRING_INDEX_ADJUSTMENT_WHITESPACE;
-        String text = startingIndex == -1? mainText.trim() : mainText.substring(startingIndex).trim();
-        LinkedList<String> searchResult = mainText.contains(WORD_TAG)? tagSuggestion.giveSuggestion(text)
+        String text = startingIndex == -1 ? mainText.trim() : mainText.substring(startingIndex).trim();
+        LinkedList<String> searchResult = mainText.contains(WORD_TAG) ? tagSuggestion.giveSuggestion(text)
                 : issueSuggestion.giveSuggestion(text);
-        AutoSuggestion suggestion = mainText.contains(WORD_TAG)? tagSuggestion : issueSuggestion;
+        AutoSuggestion suggestion = mainText.contains(WORD_TAG) ? tagSuggestion : issueSuggestion;
         showWindow(searchResult, text, startingIndex, suggestion, DUMMY_STRING);
     }
 
@@ -225,15 +225,15 @@ public class AutoSuggestionManager extends InlineCssTextArea {
      */
     private void handleSuggestionForAddingEditing() {
         String cursorString = getText().substring(0, getCaretPosition());
-        if (cursorString.lastIndexOf(TAG_PREFIX_IDENTIFIER) == -1 ) {
+        if (cursorString.lastIndexOf(TAG_PREFIX_IDENTIFIER) == -1) {
             return;
         }
         int startingIndex = cursorString.lastIndexOf(TAG_PREFIX_IDENTIFIER);
         String afterText = getText().substring(getCaretPosition(), getText().length());
         String substring = cursorString.substring(startingIndex, getCaretPosition());
         startingIndex += STRING_INDEX_ADJUSTMENT_TAG_PREFIX;
-        String text = substring.contains(WHITESPACE_IDENTIFIER)? DUMMY_STRING :
-                substring.replaceFirst(TAG_PREFIX_IDENTIFIER, DUMMY_STRING);
+        String text = substring.contains(WHITESPACE_IDENTIFIER) ? DUMMY_STRING
+                : substring.replaceFirst(TAG_PREFIX_IDENTIFIER, DUMMY_STRING);
         LinkedList<String> searchResult = tagSuggestion.giveSuggestion(text);
         showWindow(searchResult, text, startingIndex, tagSuggestion, afterText);
     }

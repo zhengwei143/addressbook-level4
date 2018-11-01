@@ -24,6 +24,7 @@ public interface AutoSuggestion {
     void update(Logic logic);
 
     EventHandler<ActionEvent>
-        getItemHandler(AutoSuggestionManager manager, String previousText, String afterText, int initIndex, int selection);
+        getItemHandler(AutoSuggestionManager manager, String previousText, String afterText,
+            int initIndex, int selection);
 
 }

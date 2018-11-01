@@ -22,6 +22,7 @@ import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.Logic;
 import seedu.saveit.logic.commands.AddCommand;
 import seedu.saveit.logic.commands.EditCommand;
+import seedu.saveit.logic.commands.FindByTagCommand;
 import seedu.saveit.logic.commands.FindCommand;
 import seedu.saveit.logic.parser.ArgumentMultimap;
 import seedu.saveit.logic.parser.ArgumentTokenizer;
@@ -96,6 +97,11 @@ public class AutoSuggestionManager extends InlineCssTextArea {
                 findCommandListener(commandWord, arguments);
                 return;
 
+            case FindByTagCommand.COMMAND_WORD:
+            case FindByTagCommand.COMMAND_ALIAS:
+                findTagCommandListener(commandWord, arguments);
+                return;
+
             default:
                 popUpWindow.hide();
             }
@@ -118,6 +124,15 @@ public class AutoSuggestionManager extends InlineCssTextArea {
     public void addCommandListener(String commandWord, String arguments) {
         if (arguments.length() != 0) {
             showResult(TAG_PREFIX_IDENTIFIER);
+        }
+    }
+
+    /**
+     * Listener for the {@code AddCommand}
+     */
+    public void findTagCommandListener(String commandWord, String arguments) {
+        if (arguments.length() != 0) {
+            showResult(WHITESPACE_IDENTIFIER);
         }
     }
 

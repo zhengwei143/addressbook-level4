@@ -1,4 +1,4 @@
-package seedu.saveit.ui.suggestion;
+package seedu.saveit.logic.suggestion;
 
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_DESCRIPTION_STRING;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT_STRING;
@@ -11,7 +11,7 @@ import javafx.event.EventHandler;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.Logic;
 import seedu.saveit.model.Issue;
-import seedu.saveit.ui.AutoSuggestionManager;
+import seedu.saveit.logic.AutoSuggestionManager;
 
 /**
  * Prompts the user with a suggestion to copy and paste the existing text value

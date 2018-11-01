@@ -1,4 +1,4 @@
-package seedu.saveit.ui.suggestion;
+package seedu.saveit.logic.suggestion;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -8,7 +8,7 @@ import java.util.TreeSet;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import seedu.saveit.logic.Logic;
-import seedu.saveit.ui.AutoSuggestionManager;
+import seedu.saveit.logic.AutoSuggestionManager;
 
 /**
  * The suggestion component which stores and provides issue statement key words

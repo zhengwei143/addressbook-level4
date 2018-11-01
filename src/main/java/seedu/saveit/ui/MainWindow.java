@@ -20,6 +20,7 @@ import seedu.saveit.commons.events.ui.ExitAppRequestEvent;
 import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.commons.events.ui.ShowHelpRequestEvent;
 import seedu.saveit.logic.Logic;
+import seedu.saveit.logic.SuggestionLogic;
 import seedu.saveit.model.UserPrefs;
 
 /**
@@ -34,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private SuggestionLogic suggestionLogic;
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
@@ -64,12 +66,13 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
-    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
+    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, SuggestionLogic suggestionLogic) {
         super(FXML, primaryStage);
 
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.suggestionLogic = suggestionLogic;
         this.config = config;
         this.prefs = prefs;
 
@@ -140,7 +143,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getSaveItFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(logic);
+        CommandBox commandBox = new CommandBox(logic, suggestionLogic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 

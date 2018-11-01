@@ -14,6 +14,7 @@ import javafx.stage.WindowEvent;
 import seedu.saveit.commons.core.Config;
 import seedu.saveit.commons.events.ui.ExitAppRequestEvent;
 import seedu.saveit.logic.LogicManager;
+import seedu.saveit.logic.SuggestionLogicManager;
 import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.UserPrefs;
 import seedu.saveit.ui.testutil.EventsCollectorRule;
@@ -33,7 +34,8 @@ public class MainWindowCloseTest extends GuiUnitTest {
     public void setUp() throws Exception {
         FxToolkit.setupStage(stage -> {
             this.stage = stage;
-            mainWindow = new MainWindow(stage, new Config(), new UserPrefs(), new LogicManager(new ModelManager()));
+            mainWindow = new MainWindow(stage, new Config(), new UserPrefs(), new LogicManager(new ModelManager()),
+                    new SuggestionLogicManager(new ModelManager()));
             mainWindowHandle = new EmptyMainWindowHandle(stage);
 
             stage.setScene(mainWindow.getRoot().getScene());

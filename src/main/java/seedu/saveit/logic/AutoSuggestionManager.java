@@ -1,4 +1,4 @@
-package seedu.saveit.ui;
+package seedu.saveit.logic;
 
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_REMARK;
@@ -19,7 +19,6 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Label;
 import seedu.saveit.commons.core.index.Index;
-import seedu.saveit.logic.Logic;
 import seedu.saveit.logic.commands.AddCommand;
 import seedu.saveit.logic.commands.EditCommand;
 import seedu.saveit.logic.commands.FindByTagCommand;
@@ -29,10 +28,10 @@ import seedu.saveit.logic.parser.ArgumentTokenizer;
 import seedu.saveit.logic.parser.ParserUtil;
 import seedu.saveit.logic.parser.Prefix;
 import seedu.saveit.logic.parser.exceptions.ParseException;
-import seedu.saveit.ui.suggestion.AutoSuggestion;
-import seedu.saveit.ui.suggestion.CopyExistingAutoSuggestion;
-import seedu.saveit.ui.suggestion.IssueNameAutoSuggestion;
-import seedu.saveit.ui.suggestion.TagNameAutoSuggestion;
+import seedu.saveit.logic.suggestion.AutoSuggestion;
+import seedu.saveit.logic.suggestion.CopyExistingAutoSuggestion;
+import seedu.saveit.logic.suggestion.IssueNameAutoSuggestion;
+import seedu.saveit.logic.suggestion.TagNameAutoSuggestion;
 
 /**
  * The TextField component which supports auto key word suggestion
@@ -129,7 +128,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
     }
 
     /**
-     * Listener for the {@code AddCommand}
+     * Listener for the {@code FindByTagCommand}
      */
     public void findTagCommandListener(String commandWord, String arguments) {
         if (arguments.length() != 0) {

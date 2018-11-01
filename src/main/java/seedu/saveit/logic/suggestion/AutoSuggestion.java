@@ -1,11 +1,11 @@
-package seedu.saveit.ui.suggestion;
+package seedu.saveit.logic.suggestion;
 
 import java.util.LinkedList;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import seedu.saveit.logic.Logic;
-import seedu.saveit.ui.AutoSuggestionManager;
+import seedu.saveit.logic.AutoSuggestionManager;
 
 /**
  *

@@ -98,6 +98,7 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing except method getCurrentDirectory();
      */
     private class ModelStub implements Model {
+
         @Override
         public void addIssue(Issue issue) {
             throw new AssertionError("This method should not be called.");
@@ -174,7 +175,10 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addTag(Index index, Set<Tag> tagList)  { throw new AssertionError("This method should not be called."); }
+        public void addTag(Index index, Set<Tag> tagList) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public boolean canUndoSaveIt() {
             throw new AssertionError("This method should not be called.");
@@ -201,13 +205,16 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean refactorTag(Tag oldTag, Tag newTag) { return false; }
+        public boolean refactorTag(Tag oldTag, Tag newTag) {
+            return false;
+        }
     }
 
     /**
      * A Model stub that contains a single issue.
      */
     private class ModelStubWithIssue extends ModelStub {
+
         private final Issue issue;
 
         ModelStubWithIssue(Issue issue) {
@@ -226,6 +233,7 @@ public class AddCommandTest {
      * A Model stub that always accept the issue being added.
      */
     private class ModelStubAcceptingIssueAdded extends ModelStub {
+
         final ArrayList<Issue> issuesAdded = new ArrayList<>();
 
         @Override

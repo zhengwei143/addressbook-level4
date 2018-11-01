@@ -2,6 +2,8 @@ package seedu.saveit.logic.parser;
 
 import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
+import static seedu.saveit.logic.commands.CommandTestUtil.NEWTAG_DESC_SYNTAX;
+import static seedu.saveit.logic.commands.CommandTestUtil.NEWTAG_DESC_UI;
 import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_SYNTAX;
 import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_UI;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_SYNTAX;
@@ -58,11 +60,11 @@ public class RefactorTagCommandParserTest {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
 
         // only has new tag, but not original tag
-        assertParseFailure(parser, TAG_DESC_SYNTAX + TAG_DESC_UI,
+        assertParseFailure(parser, NEWTAG_DESC_SYNTAX + NEWTAG_DESC_UI,
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
 
         // only has new tag, but not original tag
-        assertParseFailure(parser, TAG_DESC_UI + TAG_DESC_UI,
+        assertParseFailure(parser, NEWTAG_DESC_UI,
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
 
     }

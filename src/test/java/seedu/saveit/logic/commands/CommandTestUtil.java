@@ -3,6 +3,7 @@ package seedu.saveit.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_NEW_TAG;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
@@ -43,6 +44,8 @@ public class CommandTestUtil {
     public static final String SOLUTION_DESC_C = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_C;
     public static final String TAG_DESC_SYNTAX = " " + PREFIX_TAG + VALID_TAG_SYNTAX;
     public static final String TAG_DESC_UI = " " + PREFIX_TAG + VALID_TAG_UI;
+    public static final String NEWTAG_DESC_SYNTAX = " " + PREFIX_NEW_TAG + VALID_TAG_SYNTAX;
+    public static final String NEWTAG_DESC_UI = " " + PREFIX_NEW_TAG + VALID_TAG_UI;
 
     public static final String INVALID_STATEMENT_DESC = " " + PREFIX_STATEMENT + " "; // 'empty' not allowed in names
     public static final String INVALID_DESCRIPTION_DESC =

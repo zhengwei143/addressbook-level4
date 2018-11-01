@@ -9,9 +9,9 @@ import java.util.LinkedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import seedu.saveit.commons.core.index.Index;
+import seedu.saveit.logic.AutoSuggestionManager;
 import seedu.saveit.logic.Logic;
 import seedu.saveit.model.Issue;
-import seedu.saveit.logic.AutoSuggestionManager;
 
 /**
  * Prompts the user with a suggestion to copy and paste the existing text value

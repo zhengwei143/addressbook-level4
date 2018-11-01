@@ -4,8 +4,8 @@ import java.util.LinkedList;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import seedu.saveit.logic.Logic;
 import seedu.saveit.logic.AutoSuggestionManager;
+import seedu.saveit.logic.Logic;
 
 /**
  *

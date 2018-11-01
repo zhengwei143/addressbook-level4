@@ -7,8 +7,8 @@ import java.util.TreeSet;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import seedu.saveit.logic.Logic;
 import seedu.saveit.logic.AutoSuggestionManager;
+import seedu.saveit.logic.Logic;
 
 /**
  * The suggestion component which stores and provides tag name key words

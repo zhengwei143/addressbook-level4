@@ -2,12 +2,15 @@ package seedu.saveit.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.exceptions.IllegalValueException;
+import seedu.saveit.model.issue.Tag;
 
 /**
  * Wraps all data at the saveit-book level
@@ -106,6 +109,20 @@ public class SaveIt implements ReadOnlySaveIt {
         requireNonNull(editedIssue);
 
         issues.setIssue(target, editedIssue);
+    }
+
+    /**
+     * Adds tag(s) to the existing data of this {@code SaveIt} issue with {@code tagList} for {@code index} issue.
+     */
+    public void addTag(Index index, Set<Tag> tagList) {
+        requireNonNull(tagList);
+        Issue issueToEdit = issues.getIssue(index);
+        Set<Tag> tagsToUpdate = new HashSet<>(issueToEdit.getTags());
+        tagsToUpdate.addAll(tagList);
+
+        Issue updateIssue = new Issue(issueToEdit.getStatement(), issueToEdit.getDescription(),
+            issueToEdit.getSolutions(), tagsToUpdate, issueToEdit.getFrequency());
+        updateIssue(issueToEdit, updateIssue);
     }
 
     /**

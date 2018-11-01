@@ -112,7 +112,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
-    //=========== Add Tag ==========================================
+    //=========== Add Tag ===================================================================================
     @Override
     public void addTag(Index index, Set<Tag> tagList) {
         CollectionUtil.requireAllNonNull(index, tagList);
@@ -121,9 +121,9 @@ public class ModelManager extends ComponentManager implements Model {
         indicateSaveItChanged();
     }
 
-    //=========== Refactor Tag ==========================================
+    //=========== Refactor Tag ==============================================================================
     @Override
-    public boolean refactorTag(Tag oldTag, Tag newTag){
+    public boolean refactorTag(Tag oldTag, Tag newTag) {
         CollectionUtil.requireAllNonNull(oldTag, newTag);
         boolean isEdit = versionedSaveIt.refactorTag(oldTag, newTag);
 

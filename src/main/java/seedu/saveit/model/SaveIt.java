@@ -20,7 +20,7 @@ public class SaveIt implements ReadOnlySaveIt {
 
     private final UniqueIssueList issues;
     private Directory currentDirectory;
-    public static final String DUMMY_TAG = "dummyTag";
+    private static final String DUMMY_TAG = "dummyTag";
 
 
     /*

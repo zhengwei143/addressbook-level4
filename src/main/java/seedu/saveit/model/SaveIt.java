@@ -18,8 +18,8 @@ import seedu.saveit.model.issue.Tag;
  */
 public class SaveIt implements ReadOnlySaveIt {
 
+    private static final String DUMMY_TAG = "dummyTag";
     private final UniqueIssueList issues;
-    private final String DUMMY_TAG = "dummyTag";
     private Directory currentDirectory;
 
 

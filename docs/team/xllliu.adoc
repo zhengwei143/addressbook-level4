@@ -44,6 +44,25 @@ More importantly, SaveIt is ​optimized for those who prefer to work with a Com
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
+=== Selecting a statement : `(s)select`
+
+Selects an issue identified by the index number used in the displayed issue list and change the current editing directory to the issue selected.
+
+Format: `select INDEX`
+
+Examples:
+****
+* `select 5`
+****
+
+[NOTE]
+====
+* The index refers to the index number shown in the list.
+* The index *must be a positive integer* and `1, 2, 3, ...`
+* The index cannot be bigger than the number of issues.
+* All properties of this solutions will be displayed at the left side of the interface.
+====
+
 == Contributions to the Developer Guide
 
 |===

@@ -123,7 +123,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
      */
     public void addCommandListener(String commandWord, String arguments) {
         if (arguments.length() != 0) {
-            showResult(TAG_PREFIX_IDENTIFIER, commandWord, arguments);
+            handleSuggestionForAddingEditing();
         }
     }
 
@@ -132,7 +132,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
      */
     public void findTagCommandListener(String commandWord, String arguments) {
         if (arguments.length() != 0) {
-            showResult(WHITESPACE_IDENTIFIER, commandWord, arguments);
+            handleSuggestionForFinding();
         }
     }
 
@@ -171,7 +171,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
                 popUpWindow.hide();
             }
         } else if (prefix.equals(PREFIX_TAG)) {
-            showResult(TAG_PREFIX_IDENTIFIER, commandWord, arguments);
+            handleSuggestionForAddingEditing();
         }
 
 
@@ -182,7 +182,7 @@ public class AutoSuggestionManager extends InlineCssTextArea {
      */
     public void findCommandListener(String commandWord, String arguments) {
         if (arguments.length() != 0) {
-            showResult(WHITESPACE_IDENTIFIER, commandWord, arguments);
+            handleSuggestionForFinding();
         }
     }
 
@@ -193,18 +193,6 @@ public class AutoSuggestionManager extends InlineCssTextArea {
         this.logic = logic;
         issueSuggestion.update(logic);
         tagSuggestion.update(logic);
-    }
-
-    /**
-     * Analyses the input string and suggests the key words
-     */
-    public void showResult(String identifier, String commandWord, String argument) {
-        if (identifier.equals(WHITESPACE_IDENTIFIER)) {
-            handleSuggestionForFinding();
-        } else {
-            handleSuggestionForAddingEditing();
-        }
-
     }
 
     /**

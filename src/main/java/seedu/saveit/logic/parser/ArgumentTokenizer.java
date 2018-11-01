@@ -15,7 +15,8 @@ import java.util.stream.Collectors;
  */
 public class ArgumentTokenizer {
 
-    public static String END_MARKER = "END";
+    public static final String START_MARKER = "";
+    public static final String END_MARKER = "END";
 
     /**
      * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps prefixes to their
@@ -101,11 +102,11 @@ public class ArgumentTokenizer {
         prefixPositions.sort((prefix1, prefix2) -> prefix1.getPosition() - prefix2.getPosition());
 
         // Insert a PrefixPosition to represent the preamble
-        Prefix preambleMarker = new Prefix("", offset);
+        Prefix preambleMarker = new Prefix(START_MARKER, offset);
         prefixPositions.add(0, preambleMarker);
 
         // Add a dummy PrefixPosition to represent the end of the string
-        Prefix startPositionMarker = new Prefix("", argsString.length() + offset);
+        Prefix startPositionMarker = new Prefix(START_MARKER, argsString.length() + offset);
         prefixPositions.add(startPositionMarker);
 
         // Map prefixes to their argument values (if any)

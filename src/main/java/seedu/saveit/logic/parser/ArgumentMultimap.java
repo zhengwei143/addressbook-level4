@@ -75,7 +75,6 @@ public class ArgumentMultimap {
      */
     public Prefix findSucceedingPrefixKey(Prefix currentPrefix) {
         Set<Prefix> keySet = argMultimap.keySet();
-        // TODO: Might need to filter by <= as the end marker might have the same position
         List<Prefix> filtered = keySet.stream()
                 .filter(prefix -> currentPrefix.getPosition() <= prefix.getPosition())
                 .collect(Collectors.toList());
@@ -94,6 +93,6 @@ public class ArgumentMultimap {
      * Returns the preamble (text before the first valid prefix). Trims any leading/trailing spaces.
      */
     public String getPreamble() {
-        return getValue(new Prefix("")).orElse("");
+        return getValue(new Prefix(ArgumentTokenizer.START_MARKER)).orElse("");
     }
 }

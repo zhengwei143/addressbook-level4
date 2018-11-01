@@ -12,6 +12,8 @@ import guitests.guihandles.CommandBoxHandle;
 import javafx.scene.input.KeyCode;
 import seedu.saveit.logic.Logic;
 import seedu.saveit.logic.LogicManager;
+import seedu.saveit.logic.SuggestionLogic;
+import seedu.saveit.logic.SuggestionLogicManager;
 import seedu.saveit.logic.commands.ListCommand;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
@@ -30,8 +32,9 @@ public class CommandBoxTest extends GuiUnitTest {
     public void setUp() {
         Model model = new ModelManager();
         Logic logic = new LogicManager(model);
+        SuggestionLogic suggestionLogic = new SuggestionLogicManager(model);
 
-        CommandBox commandBox = new CommandBox(logic);
+        CommandBox commandBox = new CommandBox(logic, suggestionLogic);
         commandBoxHandle = new CommandBoxHandle(getChildNode(commandBox.getRoot(),
                 CommandBoxHandle.COMMAND_INPUT_FIELD_ID));
         uiPartRule.setUiPart(commandBox);

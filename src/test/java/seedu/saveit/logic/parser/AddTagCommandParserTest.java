@@ -31,7 +31,7 @@ public class AddTagCommandParserTest {
 
     @Test
     @Ignore
-    public void parse_validArgs_with_one_tag_returnAddTagCommand() {
+    public void parse_validOneTag_returnAddTagCommand() {
         Set<Tag> tagSet = new HashSet<>();
         tagSet.add(new Tag(VALID_TAG_UI));
 
@@ -44,7 +44,7 @@ public class AddTagCommandParserTest {
 
     @Test
     @Ignore
-    public void parse_validArgs_with_more_tags_returnAddTagCommand() {
+    public void parse_validMoreTags_returnAddTagCommand() {
         Set<Tag> tagSet = new HashSet<>();
         tagSet.add(new Tag(VALID_TAG_UI));
         tagSet.add(new Tag(VALID_TAG_SYNTAX));

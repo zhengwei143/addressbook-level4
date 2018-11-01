@@ -36,7 +36,7 @@ public class RefactorTagCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_without_newTag_returnRefactorTagCommand() {
+    public void parse_validWithoutNewTag_returnRefactorTagCommand() {
         RefactorTagCommand expectedRefactorTagCommand =
             new RefactorTagCommand(new Tag(VALID_TAG_UI), new Tag(RefactorTagCommand.DUMMY_TAG));
 

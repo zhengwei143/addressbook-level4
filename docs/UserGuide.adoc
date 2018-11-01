@@ -56,6 +56,7 @@ The following is a list of commands that you can use in the application.
 * Items in square brackets are optional e.g `i/ISSUE_STATEMENT d/DESCRIPTION [t/TAG]` can be used as `i/map_function d/how to use map in python t/python` or as `i/map_function d/how to use in python`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/python`, `t/python t/java` etc.
 * Parameters can be in any order e.g. if the command specifies `t/TAG, d/DESCRIPTION i/ISSUE_STATEMENT` is also acceptable.
+* Command alias can be used instead of lengthy command words.
 ====
 
 === Viewing help : `(h)help`
@@ -125,7 +126,7 @@ Edits an existing issue or solution in the SaveIt App.
 
 Format: `edit INDEX [i/NEW_ISSUE] [d/NEW_DESCRIPTION] [t/TAG]...`
 
-Format: `edit INDEX s/NEW_SOLUTION_LINK s/NEW_SOLUTION_REMARK`
+Format: `edit INDEX s/NEW_SOLUTION_LINK r/NEW_SOLUTION_REMARK`
 
 [TIP]
 ====
@@ -134,9 +135,16 @@ Format: `edit INDEX s/NEW_SOLUTION_LINK s/NEW_SOLUTION_REMARK`
 
 Examples: +
 ****
-* `edit 1 i/filter_function d/how to use filter function in python t/python` (the issue statement, description and tag will be updated)
+* `edit 1 i/map function d/how to use map`
+
+.Command Edit solution link to a solution
+
+image::edit-issue.png[width="790"]
 * `select 1` (select the first issue)
-* `edit 3 s/www.example2a.com r/refer the link explanation` (the third solution link and remark will be updated)
+* `edit 3 s/www.youtube.com` (the third solution link and remark will be updated)
+
+.Command Edit solution link to a solution
+image::edit-solution.png[width="790"]
 ****
 
 [NOTE]
@@ -157,11 +165,14 @@ Format: `addTag INDEX t/TAG_1 [t/TAG_2] [t/TAG_3]...`
 Examples: +
 ****
 * `addtag 2 t/python t/java t/algorithm`
+
+.Command Add tag(s) to an issue
+image::add-tag.png[width="790"]
 ****
 
 [NOTE]
 ====
-* If the tag already exits in the current issue tags, it will be ignored.
+* If the tag already exits in the current issue, it will be ignored.
 ====
 
 
@@ -411,14 +422,14 @@ Format: `refactortag t/OLD_TAG [n/NEW_TAG]`
 
 Examples:
 ****
-* refactorTag t/python nt/java (Changes all entries tagged [python] to be tagged [java])
-* refactorTag t/python (Removes the tag [python] from all the entries)
+* refactorTag t/solved n/TIL (Changes all entries tagged [solved] to be tagged [TIL])
+* refactorTag t/solved (Removes the tag [solved] from all the entries)
+
+.Command highlight 2
+image::refactor-tag.png[width="790"]
 ****
 
-[NOTE]
-====
-* If the new tag exits in the issue already, it is the same as removing the old tag.
-====
+
 
 === Adding tag: `(at)addtag`
 
@@ -457,14 +468,15 @@ image::copy-existing.png[width="790"]
 
 === Highlighting command parameters
 
-To distinguish user command for different parameters, commands get highlighted with different color as you type.
+When the user types the command in the command line, it is difficult for users to distinguish their inputs and parameters. Hence command gets highlighted is essential to differentiate the parameter and values that user input.
 
 Examples:
 ****
-*** [yellow]#add# [aqua]#i/#[ISSUE_STATEMENT] [aqua]#d/#[DESCRIPTION]
-*** [yellow]#edit# [green]#12# [green]#s/#[SOLUTION_LINK] [aqua]#r/#[REMARK]
-*** [yellow]#select# [green]#4#
-*** [yellow]#list# [blue]#freq#
+.Command highlight 1
+image::command-highlight1.png[width="790"]
+
+.Command highlight 2
+image::command-highlight2.png[width="790"]
 ****
 
 

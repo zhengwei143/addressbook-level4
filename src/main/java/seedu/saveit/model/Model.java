@@ -114,4 +114,10 @@ public interface Model {
      * Saves the current saveIt state for undo/redo.
      */
     void commitSaveIt();
+
+    /**
+     * To rename or remove a specified {@code oldTag} to {@code newTag} for all entries.
+     * @return true if any tag has been replaced, otherwise false.
+     */
+    boolean refactorTag(Tag oldTag, Tag newTag);
 }

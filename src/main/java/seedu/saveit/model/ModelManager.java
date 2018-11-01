@@ -121,6 +121,16 @@ public class ModelManager extends ComponentManager implements Model {
         indicateSaveItChanged();
     }
 
+    //=========== Refactor Tag ==========================================
+    @Override
+    public boolean refactorTag(Tag oldTag, Tag newTag){
+        CollectionUtil.requireAllNonNull(oldTag, newTag);
+        boolean isEdit = versionedSaveIt.refactorTag(oldTag, newTag);
+
+        indicateSaveItChanged();
+        return isEdit;
+    }
+
 
     @Override
     public void sortIssues(IssueSort sortType) {

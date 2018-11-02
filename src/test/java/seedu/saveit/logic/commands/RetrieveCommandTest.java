@@ -39,7 +39,6 @@ public class RetrieveCommandTest {
     }
 
     @Test
-    @Ignore //TODO: fix HeadlessException (travis doesn't have a keyboard)
     public void execute_retrieveValidIndex_success() {
         try {
             Index issueIndex = ParserUtil.parseIndex("3");

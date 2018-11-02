@@ -58,10 +58,11 @@ public class ArgumentMultimap {
      * Modifying the returned list will not affect the underlying data structure of the ArgumentMultimap.
      */
     public List<String> getAllValues(Prefix prefix) {
-        if (filterIdenticalPrefix(prefix).size() == 0) {
+        List<String> result = retrieveIdenticalPrefixValue(prefix);
+        if (result.size() == 0) {
             return new ArrayList<>();
         }
-        return new ArrayList<>(filterIdenticalPrefix(prefix));
+        return new ArrayList<>(result);
     }
 
     /**
@@ -69,7 +70,7 @@ public class ArgumentMultimap {
      * If the prefix does not exist or has no values, this will return an empty list.
      * Modifying the returned list will not affect the underlying data structure of the ArgumentMultimap.
      */
-    public List<String> getAllValuesOrdered (Prefix prefix) {
+    public List<String> getAllValuesOrdered(Prefix prefix) {
         if (!argMultimap.containsKey(prefix)) {
             return new ArrayList<>();
         }
@@ -81,7 +82,7 @@ public class ArgumentMultimap {
      * @param prefix
      * @return
      */
-    private List<String> filterIdenticalPrefix (Prefix prefix) {
+    private List<String> retrieveIdenticalPrefixValue(Prefix prefix) {
         List<String> list = new ArrayList<>();
         //return a order map view of identical keys according to the position order of prefix
         Map<Prefix, List<String>> orderPrefixes = new TreeMap<>(argMultimap.entrySet()

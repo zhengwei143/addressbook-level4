@@ -12,6 +12,7 @@ import javafx.scene.layout.Region;
 import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.events.ui.BrowserPanelFocusChangeEvent;
 import seedu.saveit.commons.events.ui.NewResultAvailableEvent;
+import seedu.saveit.logic.AutoSuggestionManager;
 import seedu.saveit.logic.ListElementPointer;
 import seedu.saveit.logic.Logic;
 import seedu.saveit.logic.commands.CommandResult;

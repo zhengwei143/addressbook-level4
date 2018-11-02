@@ -1,11 +1,11 @@
-package seedu.saveit.ui.suggestion;
+package seedu.saveit.logic.suggestion;
 
 import java.util.LinkedList;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import seedu.saveit.logic.AutoSuggestionManager;
 import seedu.saveit.logic.Logic;
-import seedu.saveit.ui.AutoSuggestionManager;
 
 /**
  *
@@ -24,6 +24,7 @@ public interface AutoSuggestion {
     void update(Logic logic);
 
     EventHandler<ActionEvent>
-        getItemHandler(AutoSuggestionManager manager, String previousText, int initIndex, int selection);
+        getItemHandler(AutoSuggestionManager manager, String previousText, String afterText,
+            int initIndex, int selection);
 
 }

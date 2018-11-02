@@ -1,4 +1,4 @@
-package seedu.saveit.ui.suggestion;
+package seedu.saveit.logic.suggestion;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -7,8 +7,8 @@ import java.util.TreeSet;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import seedu.saveit.logic.AutoSuggestionManager;
 import seedu.saveit.logic.Logic;
-import seedu.saveit.ui.AutoSuggestionManager;
 
 /**
  * The suggestion component which stores and provides tag name key words
@@ -51,11 +51,12 @@ public class TagNameAutoSuggestion implements AutoSuggestion {
 
     @Override
     public EventHandler<ActionEvent>
-        getItemHandler(AutoSuggestionManager manager, String previousText, int initIndex, int selection) {
+        getItemHandler(AutoSuggestionManager manager, String previousText,
+            String afterText, int initIndex, int selection) {
         String result = searchResult.get(selection);
         return actionEvent -> {
-            manager.replaceText(previousText.substring(0, initIndex) + result);
-            manager.moveTo(manager.getLength());
+            manager.replaceText(previousText.substring(0, initIndex) + result + afterText);
+            manager.moveTo(afterText.equals("") ? manager.getLength() : initIndex + result.length());
             manager.getWindow().hide();
         };
     }

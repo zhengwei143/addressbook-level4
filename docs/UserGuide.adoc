@@ -97,13 +97,23 @@ Adds an issue to the SaveIt App.
 Format: `add i/ISSUE_STATEMENT d/DESCRIPTION [t/TAG]...`
 
 Format: `add s/SOLUTION_LINK2 r/REMARK`
+[TIP]
+====
+* Select an issue before adding solution
+====
 
 Examples: +
 
 ****
-* `add i/map_function d/how to use map function in python t/python`
+* `add i/ArrayIndexOutOfBound d/issue description t/unsolved`
+
+.Add new issue to the issue list
+image::AddingNewIssue.png[width="800"]
 * `select 3`
 * `add s/www.example1a.com r/use functional programming`
+
+.Add new solution to the third issue in the issue list
+image::AddingNewSolution.png[width="800"]
 ****
 
 [NOTE]
@@ -115,8 +125,8 @@ Examples: +
 * The index cannot be bigger than the number of issues.
 * User needs to select the issue index to add a solution to that issue
 * The display panel will display the first solution link of the issue at the specified `INDEX`.
-* An issue contains one solution link and one remark
-* User can continue to add a solution to the issue
+* A solution contains one solution link and one remark
+* User can add solutions to the same issue continuously
 ====
 
 
@@ -156,7 +166,7 @@ image::edit-solution.png[width="790"]
 * You can remove all the tags by typing `t/` without specifying any tags after it.
 ====
 
-=== Editing an issue : `(at)addtag`
+=== Adding a tag : `(at)addtag`
 
 Adds tags on existing issue in the SaveIt App.
 
@@ -175,6 +185,27 @@ image::add-tag.png[width="790"]
 * If the tag already exits in the current issue, it will be ignored.
 ====
 
+=== Retrieving a solution link: `(rv)retrieve`
+Retrieves the solution link to the system clipboard
+
+Format: `retrieve INDEX`
+
+[TIP]
+====
+* Select an issue before retrieving solution link
+====
+
+Examples: +
+****
+* `retrieve 1`
+****
+
+[NOTE]
+====
+* The index refers to the index number on the solution list of a certain issue.
+* The index *must be a positive integer* 1, 2, 3, ...
+* The index cannot be bigger than the number of solutions of a certain issue.
+====
 
 === Deleting a statement : `(d)delete`
 Deletes the specified issue from SaveIt App.
@@ -447,6 +478,14 @@ Examples:
 * If the tag exits in the issue already, it will not take any actions.
 ====
 
+=== Autosuggesting existing issue in find command
+To prevent the issue list is so large that user can hardly remember all the issues, whenever user types in any keyword in find command, SaveIt will auto suggest any related issue name according to the keyword entered.
+
+Example:
+
+.Autosuggesting of exsiting issues statements
+image::FindIssueAutoSuggestion.png[width="800"]
+
 === Autosuggesting existing tags
 
 To prevent the user from creating many similar tags / duplicates, whenever the user creates a record with a tag, or modifies a record’s tag, the application searches for similar tags in the system and prompts the user with a list of similar tags.
@@ -526,10 +565,17 @@ For issues: `edit INDEX i/[ISSUE_STATEMENT] d/[DESCRIPTION]` +
 e.g. `edit 2 i/exception thrown not handled d/statement solved` +
 For solutions: `edit INDEX s/[SOLUTION_LINK] r/[REMARK]` +
 e.g. `edit 3 s/www.google.com r/add a catch block`
+* *Retrieve* : `retrieve INDEX` +
+For solutions: `retrieve SOLUTION_INDEX` +
+e.g. `retrieve 3`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
 * *Search* : `search KEYWORD [MORE_KEYWORDS]` +
 e.g. `Search BST`
+* *Add Tag* : `addtag INDEX t/TAG1 [t/TAG2]...` +
+e.g. `addtag 2 t/python t/java t/TIL`
+* *Refactor Tag* : `refactor t/OLDTAG [n/NEWTAG]` +
+e.g. `refactorTag t/java n/C++`
 * *Home* : `home`
 * *Clear* : `clear`
 * *Undo* : `undo`
@@ -538,6 +584,5 @@ e.g. `Search BST`
 * *Exit* : `exit`
 * *List* : `list`
 * *Sort* : `sort` TYPE
-* *Refactor Tag* : `refactor [OLDTAG] [NEWTAG]` +
-e.g. `refactorTag java C++`
+
 * *Highlight* : `highlight`

@@ -1,12 +1,15 @@
 package seedu.saveit.model;
 
 import java.util.Comparator;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.saveit.commons.core.directory.Directory;
+import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.model.issue.IssueSort;
 import seedu.saveit.model.issue.Solution;
+import seedu.saveit.model.issue.Tag;
 
 /**
  * The API of the Model component.
@@ -83,6 +86,11 @@ public interface Model {
     void updateFilteredAndSortedIssueList(Comparator<Issue> sortType);
 
     /**
+     * Adds tag(s) to the existing data of this {@code SaveIt} for {@code index} issue with {@code tagList}.
+     */
+    void addTag(Index index, Set<Tag> tagList);
+
+    /**
      * Returns true if the model has previous saveIt states to restore.
      */
     boolean canUndoSaveIt();
@@ -106,4 +114,10 @@ public interface Model {
      * Saves the current saveIt state for undo/redo.
      */
     void commitSaveIt();
+
+    /**
+     * To rename or remove a specified {@code oldTag} to {@code newTag} for all entries.
+     * @return true if any tag has been replaced, otherwise false.
+     */
+    boolean refactorTag(Tag oldTag, Tag newTag);
 }

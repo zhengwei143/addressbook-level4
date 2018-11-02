@@ -370,7 +370,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command)
 ****
 
-
+// tag::clear[]
 === Clearing all entries : `(c)clear`
 
 Clears all issues from the saveIt App.
@@ -387,6 +387,7 @@ Example:
 * User need confirm to execute this operation.
 * User can undo this operation to restore the issue lists.
 ====
+// end::clear[]
 
 === Listing entered commands : `(h)history`
 
@@ -416,6 +417,7 @@ Examples:
 
 Shows a list of all issues.
 
+// tag::sort[]
 === Sorting the list of issues: `(s)sort`
 
 
@@ -450,7 +452,7 @@ Examples:
 * sort freq
 * sort tag
 ****
-
+// end::sort[]
 
 === Refactoring tag: `(rt)refactortag`
 
@@ -596,6 +598,7 @@ e.g. `refactorTag t/java n/C++`
 * *History* : `history`
 * *Exit* : `exit`
 * *List* : `list`
-* *Sort* : `sort` TYPE
-
+* *Sort* : `sort TYPE`
+* *Refactor Tag* : `refactor [OLDTAG] [NEWTAG]` +
+e.g. `refactorTag java C++`
 * *Highlight* : `highlight`

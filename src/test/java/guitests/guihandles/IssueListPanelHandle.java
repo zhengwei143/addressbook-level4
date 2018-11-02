@@ -6,7 +6,7 @@ import java.util.Set;
 
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
-import seedu.address.model.Issue;
+import seedu.saveit.model.Issue;
 
 /**
  * Provides a handle for {@code IssueListPanel} containing the list of {@code IssueCard}.

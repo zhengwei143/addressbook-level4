@@ -4,11 +4,13 @@
         <statement>Alice Pauline</statement>
         <description>94351253</description>
         <tagged>friends</tagged>
+        <frequency>1</frequency>
     </issues>
 
     <!-- Issue with same identity as Alice Pauline -->
     <issues>
         <statement>Alice Pauline</statement>
         <description>94351253</description>
+        <frequency>1</frequency>
     </issues>
 </saveit>

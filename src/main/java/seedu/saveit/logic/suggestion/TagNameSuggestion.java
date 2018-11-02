@@ -2,7 +2,8 @@ package seedu.saveit.logic.suggestion;
 
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import seedu.saveit.commons.util.StringUtil;
@@ -21,7 +22,7 @@ public class TagNameSuggestion implements Suggestion {
     private Model model;
     private String argument;
     private Prefix startPrefix;
-    private Prefix endPrefix;;
+    private Prefix endPrefix;
 
     public TagNameSuggestion(Model model, String argument, Prefix startPrefix, Prefix endPrefix) {
         this.model = model;

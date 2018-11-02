@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.fxmisc.richtext.InlineCssTextArea;
+
 import com.google.common.eventbus.Subscribe;
 
 import javafx.beans.value.ObservableValue;
@@ -15,14 +17,13 @@ import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
-import org.fxmisc.richtext.InlineCssTextArea;
 import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.events.ui.BrowserPanelFocusChangeEvent;
 import seedu.saveit.commons.events.ui.NewResultAvailableEvent;
 import seedu.saveit.commons.util.StringUtil;
+import seedu.saveit.logic.ListElementPointer;
 import seedu.saveit.logic.Logic;
 import seedu.saveit.logic.SuggestionLogic;
-import seedu.saveit.logic.ListElementPointer;
 import seedu.saveit.logic.commands.CommandResult;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.logic.parser.exceptions.ParseException;
@@ -105,7 +106,8 @@ public class CommandBox extends UiPart<Region> {
         for (int i = 0; i < count; i++) {
             final SuggestionValue value = suggestionResult.values.get(i);
             String oldText = commandTextArea.getText();
-            String newText = StringUtil.replaceAt(oldText, value.result, suggestionResult.startPosition, suggestionResult.endPosition);
+            String newText = StringUtil.replaceAt(oldText, value.result, suggestionResult.startPosition,
+                    suggestionResult.endPosition);
             Label entryLabel = new Label(value.label);
             commandTextArea.requestFocus();
             CustomMenuItem item = new CustomMenuItem(entryLabel, true);

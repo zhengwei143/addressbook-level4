@@ -14,7 +14,8 @@ public class SuggestionResult {
     public final int endPosition;
     public final String feedbackToUser;
 
-    public SuggestionResult(LinkedList<SuggestionValue> values, String feedbackToUser, int startPosition, int endPosition) {
+    public SuggestionResult(LinkedList<SuggestionValue> values, String feedbackToUser,
+            int startPosition, int endPosition) {
         this.values = values;
         this.feedbackToUser = feedbackToUser;
         this.startPosition = startPosition;

@@ -20,13 +20,6 @@ public class CommandHighlightManager {
     public static final String STYLE_NORMAL_VALUE = "-fx-fill: #42c3f4;";
     private static CommandHighlightManager instance;
 
-//    public static CommandHighlightManager getInstance() {
-//        if (instance == null) {
-//            instance = new CommandHighlightManager();
-//        }
-//        return instance;
-//    }
-
     /**
      * highlight user input.
      */

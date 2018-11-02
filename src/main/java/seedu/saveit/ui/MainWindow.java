@@ -66,7 +66,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
-    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, SuggestionLogic suggestionLogic) {
+    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic,
+            SuggestionLogic suggestionLogic) {
         super(FXML, primaryStage);
 
         // Set dependencies

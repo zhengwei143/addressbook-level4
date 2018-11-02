@@ -177,6 +177,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public TreeSet<String> getCurrentIssueStatementSet() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean canUndoSaveIt() {
             throw new AssertionError("This method should not be called.");
         }

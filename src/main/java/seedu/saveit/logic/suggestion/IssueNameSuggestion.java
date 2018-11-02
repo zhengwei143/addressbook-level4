@@ -15,6 +15,7 @@ import seedu.saveit.model.Model;
 public class IssueNameSuggestion implements Suggestion {
 
     private static final String STATEMENT_SUCCESS = "Existing Statement selected";
+    private static final int WHITE_SPACE_OFFSET = 1;
 
     private Model model;
     private String argument;
@@ -44,7 +45,7 @@ public class IssueNameSuggestion implements Suggestion {
             values.add(new SuggestionValue(statement, statement));
         }
 
-        int startPosition = startPrefix.getPosition() + startPrefix.getPrefix().length();
+        int startPosition = startPrefix.getPosition() + startPrefix.getPrefix().length() + WHITE_SPACE_OFFSET;
         int endPosition = endPrefix.getPrefix() == ArgumentTokenizer.END_MARKER
                 ? endPrefix.getPosition() : endPrefix.getPosition() - 1;
 

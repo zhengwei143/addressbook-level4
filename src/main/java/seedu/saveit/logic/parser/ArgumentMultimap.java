@@ -1,7 +1,10 @@
 package seedu.saveit.logic.parser;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
+
+import javax.swing.text.html.Option;
 
 /**
  * Stores mapping of prefixes to their respective arguments.
@@ -42,11 +45,46 @@ public class ArgumentMultimap {
      * Modifying the returned list will not affect the underlying data structure of the ArgumentMultimap.
      */
     public List<String> getAllValues(Prefix prefix) {
-        if (!argMultimap.containsKey(prefix)) {
+        if (filterIdenticalPrefix(prefix).size() == 0) {
             return new ArrayList<>();
         }
-        return new ArrayList<>(argMultimap.get(prefix));
+        return new ArrayList<>(filterIdenticalPrefix(prefix));
     }
+
+    /**
+     * Returns a list String which belongs to the requested prefix
+     * @param prefix
+     * @return
+     */
+    private List<String> filterIdenticalPrefix (Prefix prefix) {
+        //return a map view of identical keys
+        Map<Prefix, List<String>> test = new TreeMap<>(argMultimap.entrySet().stream()
+                .filter(item -> item.getKey().equals(prefix))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
+        //fill the list with each string
+        List<String> list = new ArrayList<>();
+        test.entrySet().forEach(item -> list.add(item.getValue().get(item.getValue().size() - 1)));
+        return list;
+    }
+
+
+//TODO: maybe use comparator instead
+//    /**
+//     * Returns a list String which belongs to the requested prefix
+//     * @param prefix
+//     * @return
+//     */
+//    private List<String> filterIdenticalPrefix (Prefix prefix) {
+//        //return a map view of identical keys
+//        List<String> list = new ArrayList<>();
+//        Map<Prefix, List<String>> orderedPrefix = new TreeMap<>((Prefix o1, Prefix o2)->o1.getPosition()-o2.getPosition());
+//        orderedPrefix.putAll(argMultimap.entrySet().stream()
+//                .filter(item -> item.getKey().equals(prefix))
+//                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
+//        //fill the list with each string
+//        orderedPrefix.entrySet().forEach(item -> list.add(item.getValue().get(item.getValue().size() - 1)));
+//        return list;
+//    }
 
     /**
      * Attempts to find the {@code Prefix} used as the key with the same position as the caret

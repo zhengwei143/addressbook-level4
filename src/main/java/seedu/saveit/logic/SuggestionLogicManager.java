@@ -51,6 +51,7 @@ public class SuggestionLogicManager implements SuggestionLogic {
     /**
      * Generates a {@code SuggestionResult} based on the {@code userInput}
      */
+    @Override
     public SuggestionResult evaluate(String userInput) {
         Suggestion suggestion = parseUserInput(userInput);
         if (suggestion == null) {

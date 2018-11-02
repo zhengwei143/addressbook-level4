@@ -18,7 +18,7 @@ public class TagNameSuggestion implements Suggestion {
     private Model model;
     private String argument;
     private Prefix startPrefix;
-    private Prefix endPrefix;
+    private Prefix endPrefix;;
 
     public TagNameSuggestion(Model model, String argument, Prefix startPrefix, Prefix endPrefix) {
         this.model = model;

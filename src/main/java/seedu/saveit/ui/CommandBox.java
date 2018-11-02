@@ -111,7 +111,7 @@ public class CommandBox extends UiPart<Region> {
             CustomMenuItem item = new CustomMenuItem(entryLabel, true);
             item.setOnAction(actionEvent -> {
                 commandTextArea.replaceText(newText);
-//                commandTextArea.moveTo(oldText.length() + value.result.length());
+                commandTextArea.moveTo(suggestionResult.startPosition + value.result.length());
                 popUpWindow.hide();
             });
             menuItems.add(item);

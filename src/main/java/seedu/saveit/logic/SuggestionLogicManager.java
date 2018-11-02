@@ -125,7 +125,7 @@ public class SuggestionLogicManager implements SuggestionLogic {
      */
     public Suggestion parseAddCommandSuggestion(
             ArgumentMultimap argMultiMap, Prefix startPrefix, Prefix endPrefix) {
-        Optional<String> posArgs = argMultiMap.getValue(startPrefix);
+        Optional<String> posArgs = argMultiMap.getValueOrdered(startPrefix);
 
         switch (startPrefix.getPrefix()) {
 
@@ -152,7 +152,7 @@ public class SuggestionLogicManager implements SuggestionLogic {
             return null;
         }
 
-        Optional<String> posArgs = argMultiMap.getValue(startPrefix);
+        Optional<String> posArgs = argMultiMap.getValueOrdered(startPrefix);
 
         switch (startPrefix.getPrefix()) {
 
@@ -175,7 +175,7 @@ public class SuggestionLogicManager implements SuggestionLogic {
     public Suggestion parseFindCommandSuggestion(
             ArgumentMultimap argMultiMap, Prefix startPrefix, Prefix endPrefix) {
 
-        Optional<String> posArgs = argMultiMap.getValue(startPrefix);
+        Optional<String> posArgs = argMultiMap.getValueOrdered(startPrefix);
 
         switch (startPrefix.getPrefix()) {
 
@@ -194,7 +194,7 @@ public class SuggestionLogicManager implements SuggestionLogic {
     public Suggestion parseFindByTagCommandSuggestion(
             ArgumentMultimap argMultiMap, Prefix startPrefix, Prefix endPrefix) {
 
-        Optional<String> posArgs = argMultiMap.getValue(startPrefix);
+        Optional<String> posArgs = argMultiMap.getValueOrdered(startPrefix);
 
         switch (startPrefix.getPrefix()) {
 

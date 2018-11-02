@@ -3,6 +3,7 @@ package seedu.saveit.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,10 +14,12 @@ import javafx.collections.transformation.SortedList;
 import seedu.saveit.commons.core.ComponentManager;
 import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.core.directory.Directory;
+import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.events.model.SaveItChangedEvent;
 import seedu.saveit.commons.util.CollectionUtil;
 import seedu.saveit.model.issue.IssueSort;
 import seedu.saveit.model.issue.Solution;
+import seedu.saveit.model.issue.Tag;
 
 /**
  * Represents the in-memory model of the saveIt data.
@@ -107,6 +110,25 @@ public class ModelManager extends ComponentManager implements Model {
         for (Issue issue : filteredIssues) {
             issue.updateFrequency();
         }
+    }
+
+    //=========== Add Tag ===================================================================================
+    @Override
+    public void addTag(Index index, Set<Tag> tagList) {
+        CollectionUtil.requireAllNonNull(index, tagList);
+        versionedSaveIt.addTag(index, tagList);
+
+        indicateSaveItChanged();
+    }
+
+    //=========== Refactor Tag ==============================================================================
+    @Override
+    public boolean refactorTag(Tag oldTag, Tag newTag) {
+        CollectionUtil.requireAllNonNull(oldTag, newTag);
+        boolean isEdit = versionedSaveIt.refactorTag(oldTag, newTag);
+
+        indicateSaveItChanged();
+        return isEdit;
     }
 
 

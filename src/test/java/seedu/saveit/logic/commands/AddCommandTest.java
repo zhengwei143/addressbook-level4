@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -16,6 +17,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
 import seedu.saveit.commons.core.directory.Directory;
+import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.model.Issue;
@@ -24,6 +26,7 @@ import seedu.saveit.model.ReadOnlySaveIt;
 import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.issue.IssueSort;
 import seedu.saveit.model.issue.Solution;
+import seedu.saveit.model.issue.Tag;
 import seedu.saveit.testutil.IssueBuilder;
 
 public class AddCommandTest {
@@ -95,6 +98,7 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing except method getCurrentDirectory();
      */
     private class ModelStub implements Model {
+
         @Override
         public void addIssue(Issue issue) {
             throw new AssertionError("This method should not be called.");
@@ -171,6 +175,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addTag(Index index, Set<Tag> tagList) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean canUndoSaveIt() {
             throw new AssertionError("This method should not be called.");
         }
@@ -194,12 +203,18 @@ public class AddCommandTest {
         public void commitSaveIt() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean refactorTag(Tag oldTag, Tag newTag) {
+            return false;
+        }
     }
 
     /**
      * A Model stub that contains a single issue.
      */
     private class ModelStubWithIssue extends ModelStub {
+
         private final Issue issue;
 
         ModelStubWithIssue(Issue issue) {
@@ -218,6 +233,7 @@ public class AddCommandTest {
      * A Model stub that always accept the issue being added.
      */
     private class ModelStubAcceptingIssueAdded extends ModelStub {
+
         final ArrayList<Issue> issuesAdded = new ArrayList<>();
 
         @Override

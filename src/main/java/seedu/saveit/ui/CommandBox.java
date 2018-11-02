@@ -59,7 +59,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextArea.textProperty().addListener((observable, oldValue, newValue) -> {
             highlight(observable, oldValue, newValue);
             suggestionLogic.updateCaretPosition(commandTextArea.getCaretPosition());
-            handleSuggestions(newValue);
+            handleSuggestion(newValue);
         });
 
         historySnapshot = logic.getHistorySnapshot();
@@ -83,9 +83,8 @@ public class CommandBox extends UiPart<Region> {
      * and handles the {@code SuggestionResult}
      * @param userInput
      */
-    private void handleSuggestions(String userInput) {
+    private void handleSuggestion(String userInput) {
         SuggestionResult suggestionResult = suggestionLogic.evaluate(userInput);
-//        logger.info(suggestionResult.feedbackToUser);
         displaySuggestion(suggestionResult);
     }
 

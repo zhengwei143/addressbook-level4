@@ -1,30 +1,31 @@
 package seedu.saveit.logic.suggestion;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.TreeSet;
+import java.util.stream.Collectors;
 
-import seedu.saveit.logic.Logic;
+import seedu.saveit.commons.util.StringUtil;
+import seedu.saveit.logic.parser.ArgumentTokenizer;
+import seedu.saveit.logic.parser.Prefix;
+import seedu.saveit.model.Model;
 
 /**
  * The suggestion component which stores and provides issue statement key words
  */
 public class IssueNameSuggestion implements Suggestion {
 
-    private Logic logic;
-    private TreeSet<String> issueStatementSet;
-    private List<String> issueKeyWords;
-    private LinkedList<String> searchResult;
+    private static final String STATEMENT_SUCCESS = "Existing Statement selected";
 
-    public IssueNameSuggestion(Logic logic) {
-        this.logic = logic;
-        this.issueStatementSet = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
-        this.issueKeyWords = new ArrayList<>();
-        this.searchResult = new LinkedList<>();
+    private Model model;
+    private String argument;
+    private Prefix startPrefix;
+    private Prefix endPrefix;
 
-        fillIssueKeyWords();
-        addAllIssueKeyWord();
+    public IssueNameSuggestion(Model model, String argument, Prefix startPrefix, Prefix endPrefix) {
+        this.model = model;
+        this.argument = argument;
+        this.startPrefix = startPrefix;
+        this.endPrefix = endPrefix;
     }
 
     /**
@@ -32,27 +33,21 @@ public class IssueNameSuggestion implements Suggestion {
      */
     @Override
     public SuggestionResult evaluate() {
-        // TODO: FIX
-        searchResult.clear();
-//        searchResult.addAll(issueStatementSet.subSet(text, text + Character.MAX_VALUE));
-        return null;
-    }
+        List<String> statements = model.getCurrentIssueStatementSet()
+                .stream()
+                .filter(statement -> StringUtil.partialMatchFromStart(statement, argument))
+                .collect(Collectors.toList());
+        statements.sort(String.CASE_INSENSITIVE_ORDER);
 
-    /**
-     * Stores all the issue statements to the key word list
-     */
-    private void fillIssueKeyWords() {
-        this.issueKeyWords.clear();
-        logic.getFilteredAndSortedIssueList().forEach(issue -> this.issueKeyWords.add(issue.getStatement().issue));
-    }
-
-    /**
-     * Adds all the stored key words to the treeSet
-     */
-    private void addAllIssueKeyWord() {
-        issueStatementSet.clear();
-        for (String str : issueKeyWords) {
-            issueStatementSet.add(str);
+        LinkedList<SuggestionValue> values = new LinkedList<>();
+        for (String statement : statements) {
+            values.add(new SuggestionValue(statement, statement));
         }
+
+        int startPosition = startPrefix.getPosition() + startPrefix.getPrefix().length();
+        int endPosition = endPrefix.getPrefix() == ArgumentTokenizer.END_MARKER
+                ? endPrefix.getPosition() : endPrefix.getPosition() - 1;
+
+        return new SuggestionResult(values, STATEMENT_SUCCESS, startPosition, endPosition);
     }
 }

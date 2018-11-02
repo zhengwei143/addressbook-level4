@@ -21,13 +21,13 @@ public class StringUtil {
      * Returns true if the {@code sentence} is partially matched with the {@code word}
      *   Ignores cases and full word is not required.
      *   Examples:
-     *      partialMatchIgnoreCase("hello there", "ello") == true
-     *      partialMatchIgnoreCase("hello there", "heLLO") == true
+     *      partialMatch("hello there", "ello") == true
+     *      partialMatch("hello there", "heLLO") == true
      * @param sentence cannot be null
      * @param word cannot be null or empty, must be a single word
      * @return
      */
-    public static boolean partialMatchIgnoreCase(String sentence, String word) {
+    public static boolean partialMatch(String sentence, String word) {
         requireNonNull(sentence);
         requireNonNull(word);
 
@@ -36,6 +36,19 @@ public class StringUtil {
         checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
 
         return sentence.toLowerCase().matches(PARTIAL_MATCH_REGEX + preppedWord.toLowerCase() + PARTIAL_MATCH_REGEX);
+    }
+
+    /**
+     * Returns true if the {@code word} matches the start of the {@code sentence} (case-insensitive)
+     */
+    public static boolean partialMatchFromStart(String sentence, String word) {
+        requireNonNull(sentence);
+        requireNonNull(word);
+
+        String preppedWord = word.trim();
+        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
+
+        return sentence.toLowerCase().matches(preppedWord.toLowerCase() + PARTIAL_MATCH_REGEX);
     }
 
     /**

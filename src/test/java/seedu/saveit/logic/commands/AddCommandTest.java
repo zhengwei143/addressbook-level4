@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.TreeSet;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -167,6 +168,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredAndSortedIssueList(Comparator<Issue> sortType) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public TreeSet<String> getCurrentTagSet() {
             throw new AssertionError("This method should not be called.");
         }
 

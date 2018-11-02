@@ -3,6 +3,7 @@ package seedu.saveit.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
+import java.util.TreeSet;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -149,7 +150,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Sorted Issue List Accessors =============================================================
     @Override
-
     public void updateFilteredAndSortedIssueList(Comparator<Issue> comparator) {
         filteredAndSortedIssues.setComparator(comparator);
     }
@@ -164,6 +164,24 @@ public class ModelManager extends ComponentManager implements Model {
     public ObservableList<Issue> getFilteredAndSortedIssueList() {
         return FXCollections.unmodifiableObservableList(filteredAndSortedIssues);
     }
+
+    //=========== Tag Set Accessors ======================================================================
+    @Override
+    public TreeSet<String> getCurrentTagSet() {
+        TreeSet<String> tagSet = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        versionedSaveIt.getIssueList().forEach(issue -> issue.getTags()
+                .forEach(tag -> tagSet.add(tag.tagName)));
+        return tagSet;
+    }
+
+    //=========== Tag Set Accessors ======================================================================
+    @Override
+    public TreeSet<String> getCurrentIssueStatementSet() {
+        TreeSet<String> statementSet = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        versionedSaveIt.getIssueList().forEach(issue -> statementSet.add(issue.getStatement().issue));
+        return statementSet;
+    }
+
 
     //=========== Undo/Redo =================================================================================
 

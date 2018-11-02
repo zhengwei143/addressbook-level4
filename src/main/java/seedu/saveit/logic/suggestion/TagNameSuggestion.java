@@ -1,5 +1,7 @@
 package seedu.saveit.logic.suggestion;
 
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -14,6 +16,7 @@ import seedu.saveit.model.Model;
 public class TagNameSuggestion implements Suggestion {
 
     private static final String TAG_SUCCESS = "Existing Tag selected";
+    private static final int WHITE_SPACE_OFFSET = 1;
 
     private Model model;
     private String argument;
@@ -44,6 +47,7 @@ public class TagNameSuggestion implements Suggestion {
         }
 
         int startPosition = startPrefix.getPosition() + startPrefix.getPrefix().length();
+        startPosition += startPrefix.equals(PREFIX_TAG) ? 0 : WHITE_SPACE_OFFSET;
         int endPosition = endPrefix.getPrefix() == ArgumentTokenizer.END_MARKER
                 ? endPrefix.getPosition() : endPrefix.getPosition() - 1;
 

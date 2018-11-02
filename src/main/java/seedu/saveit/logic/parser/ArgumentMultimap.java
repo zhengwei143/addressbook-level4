@@ -82,13 +82,13 @@ public class ArgumentMultimap {
      * @return
      */
     private List<String> filterIdenticalPrefix (Prefix prefix) {
-        //return a map view of identical keys
-        Map<Prefix, List<String>> test = new TreeMap<>(argMultimap.entrySet().stream()
-                .filter(item -> item.getKey().equals(prefix))
+        List<String> list = new ArrayList<>();
+        //return a order map view of identical keys according to the position order of prefix
+        Map<Prefix, List<String>> orderPrefixes = new TreeMap<>(argMultimap.entrySet()
+                .stream().filter(item -> item.getKey().equals(prefix))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
         //fill the list with each string
-        List<String> list = new ArrayList<>();
-        test.entrySet().forEach(item -> list.add(item.getValue().get(item.getValue().size() - 1)));
+        orderPrefixes.entrySet().forEach(item -> list.add(item.getValue().get(item.getValue().size() - 1)));
         return list;
     }
 

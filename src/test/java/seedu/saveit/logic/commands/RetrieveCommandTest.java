@@ -12,7 +12,6 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.DataFlavor;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.saveit.commons.core.directory.Directory;

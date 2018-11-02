@@ -1,4 +1,4 @@
-package seedu.saveit.ui.suggestion;
+package seedu.saveit.logic.suggestion;
 
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_DESCRIPTION_STRING;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT_STRING;
@@ -9,9 +9,9 @@ import java.util.LinkedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import seedu.saveit.commons.core.index.Index;
+import seedu.saveit.logic.AutoSuggestionManager;
 import seedu.saveit.logic.Logic;
 import seedu.saveit.model.Issue;
-import seedu.saveit.ui.AutoSuggestionManager;
 
 /**
  * Prompts the user with a suggestion to copy and paste the existing text value
@@ -50,7 +50,8 @@ public class CopyExistingAutoSuggestion implements AutoSuggestion {
 
     @Override
     public EventHandler<ActionEvent>
-        getItemHandler(AutoSuggestionManager manager, String previousText, int initIndex, int selection) {
+        getItemHandler(AutoSuggestionManager manager, String previousText,
+            String afterText, int initIndex, int selection) {
         String result = getValueFromIdentifier(identifier);
         return actionEvent -> {
             manager.replaceText(previousText.substring(0, initIndex) + result);

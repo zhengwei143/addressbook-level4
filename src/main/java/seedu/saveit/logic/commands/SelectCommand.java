@@ -56,7 +56,7 @@ public class SelectCommand extends Command {
     private CommandResult selectIssue(Model model, CommandHistory history) throws CommandException {
         List<Issue> filteredIssueList = model.getFilteredAndSortedIssueList();
         if (targetIndex.getZeroBased() >= filteredIssueList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX + "\n" + MESSAGE_USAGE);
         }
         model.resetDirectory(new Directory(targetIndex.getOneBased(), 0));
         EventsCenter.getInstance().post(
@@ -70,7 +70,7 @@ public class SelectCommand extends Command {
      */
     private CommandResult selectSolution(Model model, CommandHistory history) throws CommandException {
         if (targetIndex.getZeroBased() >= model.getFilteredSolutionList().size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_SOLUTION_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_SOLUTION_DISPLAYED_INDEX + "\n" + MESSAGE_USAGE);
         }
         model.resetDirectory(new Directory(model.getCurrentDirectory().getIssue(), targetIndex.getOneBased()));
         EventsCenter.getInstance().post(

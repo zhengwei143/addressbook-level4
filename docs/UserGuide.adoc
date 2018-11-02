@@ -71,13 +71,26 @@ Examples:
 ****
 
 
-=== Selecting a statement : `(s)select`
+=== Selecting an issue/solution  : `(s)select`
 
-Selects an issue identified by the index number used in the displayed issue list and change the current editing directory to the issue selected.
+If the user is at the root directory, the command selects
+ an issue identified by the index number used in the issue panel.
+  The command also displays the solutions
+  of the selected issue in the solution panel. Now the edit directory
+is changed to issue level.
+
+[TIP]
+====
+* When an issue is selected, the directory is changed to `SaveIt/Issue */`. Then
+the user is not allowed to add, edit, or select issue.
+====
+
+If the user is at the issue directory, the command load the web link
+ of the indexed solution in the built-in browser.
 
 Format: `select INDEX`
 
-Examples:
+Example:
 ****
 * `select 5`
 ****

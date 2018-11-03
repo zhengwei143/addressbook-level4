@@ -16,6 +16,8 @@ public class Solution {
 
     public final Remark remark;
 
+    private boolean isPrimary;
+
     /**
      * Construct a new Solution.
      */
@@ -33,6 +35,7 @@ public class Solution {
                 this.remark = new Remark(solutionName);
             }
         }
+        this.isPrimary = true;
         this.solutionName = solutionName;
     }
 
@@ -54,6 +57,10 @@ public class Solution {
 
     public Remark getRemark() {
         return remark;
+    }
+
+    public boolean isPrimary() {
+        return true;
     }
 
     @Override

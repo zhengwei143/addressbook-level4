@@ -116,6 +116,10 @@
     -fx-border-width: 1;
 }
 
+.list_primary_cell {
+    -fx-background-color: rgba(0, 100, 100, 0.5);
+}
+
 .list-cell .label {
     -fx-text-fill: white;
 }
@@ -123,13 +127,13 @@
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: #3e86a0;
 }
 
 .cell_small_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: #3e86a0;
 }
 
 .cell_small_label_italic {

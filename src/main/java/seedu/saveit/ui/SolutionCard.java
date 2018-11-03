@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.saveit.model.issue.Solution;
 
 /**
@@ -26,6 +27,8 @@ public class SolutionCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private VBox solutionPane;
+    @FXML
     private Label link;
     @FXML
     private Label id;
@@ -40,6 +43,13 @@ public class SolutionCard extends UiPart<Region> {
         link.setWrapText(true);
         remark.setText(solution.getRemark().toString());
         remark.setWrapText(true);
+        solutionPane = (VBox) link.getParent();
+
+        if (solution.isPrimary()) {
+            solutionPane.getStyleClass().add("list_primary_cell");
+        } else {
+            solutionPane.getStyleClass().remove("list_primary_cell");
+        }
     }
 
 

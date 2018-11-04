@@ -120,7 +120,6 @@ public class SaveIt implements ReadOnlySaveIt {
     public void addSolution(Index index, Solution solution) {
         Issue issueToEdit = issues.getIssue(index);
         List<Solution> solutionsToUpdate = new ArrayList<>(issueToEdit.getSolutions());
-        solutionsToUpdate.addAll(issueToEdit.getSolutions());
         solutionsToUpdate.add(solution);
 
         Issue updateIssue = new Issue(issueToEdit.getStatement(), issueToEdit.getDescription(),

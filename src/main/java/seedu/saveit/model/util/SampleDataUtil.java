@@ -54,7 +54,8 @@ public class SampleDataUtil {
                     getSolutionList(
                             new Solution(new SolutionLink("https://www.reddit.com/"),
                                     new Remark("Not sure about this one.")),
-                            new Solution(new SolutionLink("https://docs.oracle.com/javase/7/docs/api/overview-summary.html"),
+                            new Solution(new SolutionLink(
+                                    "https://docs.oracle.com/javase/7/docs/api/overview-summary.html"),
                                     new Remark("Ask prof tmr."))),
                     getTagSet("solved")),
             new Issue(new IssueStatement("UnknownBug"), new Description("Unknown"),

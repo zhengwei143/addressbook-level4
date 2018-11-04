@@ -9,7 +9,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.sun.xml.bind.v2.runtime.output.StAXExStreamWriterOutput;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.util.StringUtil;
 import seedu.saveit.logic.commands.EditCommand;

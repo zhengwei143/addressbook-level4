@@ -18,10 +18,8 @@ import org.junit.rules.ExpectedException;
 import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueStatement;
-import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;
 import seedu.saveit.model.issue.solution.Remark;
-import seedu.saveit.model.issue.solution.SolutionLink;
 import seedu.saveit.testutil.Assert;
 
 @Ignore

@@ -70,33 +70,31 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         switch (toAdd.getStatement().getValue()) {
-            case DUMMY_STATEMENT: //adding solution to existing issue
 
-                assert (toAdd.getDescription().getValue().equals(DUMMY_DESCRIPTION));
-                assert (toAdd.getSolutions().size() == 1);
+        case DUMMY_STATEMENT: //adding solution to existing issue
+            assert (toAdd.getDescription().getValue().equals(DUMMY_DESCRIPTION));
+            assert (toAdd.getSolutions().size() == 1);
+            if (model.getCurrentDirectory().isIssueLevel()) {
+                Index issueIndex = Index.fromOneBased(model.getCurrentDirectory().getIssue());
+                Solution solutionToBeAdded = toAdd.getSolutions().get(0);
+                addSolutionToIssue(model, solutionToBeAdded, issueIndex);
+                return new CommandResult(String.format(MESSAGE_SOLUTION_SUCCESS, solutionToBeAdded));
+            } else {
+                throw new CommandException(MESSAGE_FAILED_ISSUE);
+            }
 
-                if (model.getCurrentDirectory().isIssueLevel()) {
-                    Index issueIndex = Index.fromOneBased(model.getCurrentDirectory().getIssue());
-                    Solution solutionToBeAdded = toAdd.getSolutions().get(0);
-                    addSolutionToIssue(model, solutionToBeAdded, issueIndex);
-                    return new CommandResult(String.format(MESSAGE_SOLUTION_SUCCESS, solutionToBeAdded));
-                } else {
-                    throw new CommandException(MESSAGE_FAILED_ISSUE);
-                }
-            default: //adding new issue
+        default: //adding new issue
+            assert (toAdd.getSolutions().size() == 0);
+            if (model.getCurrentDirectory().isIssueLevel()) {
+                throw new CommandException(MESSAGE_WRONG_DIRECTORY);
+            }
 
-                assert (toAdd.getSolutions().size() == 0);
-
-                if (model.getCurrentDirectory().isIssueLevel()) {
-                    throw new CommandException(MESSAGE_WRONG_DIRECTORY);
-                }
-
-                if (model.hasIssue(toAdd)) {
-                    throw new CommandException(MESSAGE_DUPLICATE_ISSUE);
-                }
-                model.addIssue(toAdd);
-                model.commitSaveIt();
-                return new CommandResult(String.format(MESSAGE_ISSUE_SUCCESS, toAdd));
+            if (model.hasIssue(toAdd)) {
+                throw new CommandException(MESSAGE_DUPLICATE_ISSUE);
+            }
+            model.addIssue(toAdd);
+            model.commitSaveIt();
+            return new CommandResult(String.format(MESSAGE_ISSUE_SUCCESS, toAdd));
         }
     }
 

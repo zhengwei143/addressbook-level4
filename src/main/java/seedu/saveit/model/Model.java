@@ -2,6 +2,7 @@ package seedu.saveit.model;
 
 import java.util.Comparator;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -100,6 +101,16 @@ public interface Model {
      * Adds tag(s) to the existing data of this {@code SaveIt} for {@code index} issue with {@code tagList}.
      */
     void addTag(Index index, Set<Tag> tagList);
+
+    /**
+     * Returns a Set of strings representing all the Tag(s) contained in the issues
+     */
+    TreeSet<String> getCurrentTagSet();
+
+    /**
+     * Returns a Set of strings representing all the IssueStatement(s) contained in the issues
+     */
+    TreeSet<String> getCurrentIssueStatementSet();
 
     /**
      * Returns true if the model has previous saveIt states to restore.

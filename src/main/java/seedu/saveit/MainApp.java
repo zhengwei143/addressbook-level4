@@ -20,6 +20,8 @@ import seedu.saveit.commons.util.ConfigUtil;
 import seedu.saveit.commons.util.StringUtil;
 import seedu.saveit.logic.Logic;
 import seedu.saveit.logic.LogicManager;
+import seedu.saveit.logic.SuggestionLogic;
+import seedu.saveit.logic.SuggestionLogicManager;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.ReadOnlySaveIt;
@@ -46,6 +48,7 @@ public class MainApp extends Application {
 
     protected Ui ui;
     protected Logic logic;
+    protected SuggestionLogic suggestionLogic;
     protected Storage storage;
     protected Model model;
     protected Config config;
@@ -71,7 +74,9 @@ public class MainApp extends Application {
 
         logic = new LogicManager(model);
 
-        ui = new UiManager(logic, config, userPrefs);
+        suggestionLogic = new SuggestionLogicManager(model);
+
+        ui = new UiManager(logic, suggestionLogic, config, userPrefs);
 
         initEventsCenter();
     }

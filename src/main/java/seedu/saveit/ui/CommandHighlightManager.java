@@ -20,17 +20,10 @@ public class CommandHighlightManager {
     public static final String STYLE_NORMAL_VALUE = "-fx-fill: #42c3f4;";
     private static CommandHighlightManager instance;
 
-    public static CommandHighlightManager getInstance() {
-        if (instance == null) {
-            instance = new CommandHighlightManager();
-        }
-        return instance;
-    }
-
     /**
      * highlight user input.
      */
-    public void highlight(InlineCssTextArea commandTextField) {
+    public static void highlight(InlineCssTextArea commandTextField) {
         String userInput = commandTextField.getText();
         int position = 0;
 
@@ -60,15 +53,15 @@ public class CommandHighlightManager {
         }
     }
 
-    private boolean isSpace(String userInput, int position) {
+    private static boolean isSpace(String userInput, int position) {
         return userInput.charAt(position) != ' ';
     }
 
-    private boolean isShorterThanInput(String userInput, int position) {
+    private static boolean isShorterThanInput(String userInput, int position) {
         return position < userInput.length();
     }
 
-    private boolean isIndex(String userInput, int position) {
+    private static boolean isIndex(String userInput, int position) {
         return isShorterThanInput(userInput, position) && Character.isDigit(userInput.charAt(position));
     }
 
@@ -77,7 +70,7 @@ public class CommandHighlightManager {
      *
      * @return true if parameter, otherwise false
      */
-    private boolean isParameter(String userInput, int position) {
+    private static boolean isParameter(String userInput, int position) {
         StringBuilder input = new StringBuilder();
         input.append(userInput.charAt(position - 1));
         input.append(userInput.charAt(position));
@@ -93,7 +86,7 @@ public class CommandHighlightManager {
      * @param inputCheck every two consecutive characters.
      * @return true if parameter, otherwise false
      */
-    private boolean isParamter(String inputCheck) {
+    private static boolean isParamter(String inputCheck) {
         return inputCheck.equals(PREFIX_STATEMENT.toString()) || inputCheck.equals(PREFIX_SOLUTION_LINK.toString())
             || inputCheck.equals(PREFIX_REMARK.toString()) || inputCheck.equals(PREFIX_DESCRIPTION.toString())
             || inputCheck.equals(PREFIX_TAG.toString()) || inputCheck.equals(PREFIX_NEW_TAG.toString());

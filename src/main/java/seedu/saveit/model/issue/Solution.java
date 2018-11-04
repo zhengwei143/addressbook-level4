@@ -18,11 +18,6 @@ public class Solution {
      * @param solutionLink url link to solution website.
      * @param remark user's notes about this solution.
      */
-    public Solution(String solutionLink, String remark) {
-        this.solutionLink = new SolutionLink(solutionLink);
-        this.remark = new Remark(remark);
-    }
-
     public Solution(SolutionLink solutionLink, Remark remark) {
         this.solutionLink = solutionLink;
         this.remark = remark;

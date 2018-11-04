@@ -48,7 +48,7 @@ public class SolutionBuilder {
 
 
     public Solution build() {
-        return new Solution(solutionLink.getValue() , remark.toString());
+        return new Solution(solutionLink , remark);
     }
 
 }

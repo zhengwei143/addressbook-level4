@@ -171,8 +171,9 @@ public class ModelManager extends ComponentManager implements Model {
         if (directory.isRootLevel()) {
             return null;
         } else {
-            return FXCollections.unmodifiableObservableList
-                    (filteredIssues.get(directory.getIssue() - 1).getObservableSolutions());
+            ObservableList<Solution> solutions = filteredIssues.get(directory.getIssue() - 1).getObservableSolutions();
+            solutions.sort(new solutionComparator());
+            return FXCollections.unmodifiableObservableList(solutions);
         }
     }
 
@@ -264,4 +265,16 @@ public class ModelManager extends ComponentManager implements Model {
                 && filteredIssues.equals(other.filteredIssues);
     }
 
+    private class solutionComparator implements Comparator<Solution> {
+        @Override
+        public int compare(Solution solutionOne, Solution solutionTwo) {
+            if (solutionOne.isPrimarySolution()) {
+                return -1;
+            } else if (solutionTwo.isPrimarySolution()){
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+    }
 }

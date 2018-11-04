@@ -51,7 +51,6 @@ public class StarCommand extends Command {
         Issue updatedIssue = issueSelected.updatePrimarySolution(solutionList, zeroBasedIndex);
 
         model.updateIssue(issueSelected, updatedIssue);
-        model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
         model.commitSaveIt();
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, index.getOneBased()));

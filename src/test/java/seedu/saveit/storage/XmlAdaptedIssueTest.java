@@ -19,7 +19,8 @@ public class XmlAdaptedIssueTest {
     private static final String INVALID_NAME = " ";
     private static final String INVALID_DESCRIPTION = " ";
     private static final String INVALID_TAG = " ";
-    private static final String INVALID_SOLUTION = "&StackOverflow *remark";
+    private static final String INVALID_SOLUTION_LINK = "&StackπOverflow";
+    private static final String INVALID_REMARK = "*remark";
 
     private static final String VALID_NAME = BENSON.getStatement().toString();
     private static final String VALID_DESCRIPTION = BENSON.getDescription().toString();
@@ -69,7 +70,7 @@ public class XmlAdaptedIssueTest {
     @Test
     public void toModelType_invalidSolutions_throwsIllegalValueException() {
         List<XmlAdaptedSolution> invalidSolutions = new ArrayList<>(VALID_SOLUTIONS);
-        invalidSolutions.add(new XmlAdaptedSolution(INVALID_SOLUTION));
+        invalidSolutions.add(new XmlAdaptedSolution(INVALID_SOLUTION_LINK, INVALID_REMARK));
         XmlAdaptedIssue issue =
             new XmlAdaptedIssue(VALID_NAME, VALID_DESCRIPTION, invalidSolutions, VALID_TAGS);
         Assert.assertThrows(IllegalValueException.class, issue::toModelType);

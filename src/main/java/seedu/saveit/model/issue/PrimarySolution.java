@@ -12,6 +12,10 @@ public class PrimarySolution extends Solution {
         super(solutionLink, remark);
     }
 
+    public PrimarySolution(SolutionLink solutionLink, Remark remark) {
+        super(solutionLink, remark);
+    }
+
     public PrimarySolution(Solution solution) {
         super(solution.getLink().getValue(), solution.getRemark().value);
     }

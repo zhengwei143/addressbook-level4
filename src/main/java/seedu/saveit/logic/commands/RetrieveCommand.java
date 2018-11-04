@@ -9,7 +9,6 @@ import java.awt.datatransfer.StringSelection;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
-import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 
 /**
@@ -46,13 +45,8 @@ public class RetrieveCommand extends Command {
         requireNonNull(model);
 
         if (model.getCurrentDirectory().isIssueLevel()) {
-            int issueIndex = model.getCurrentDirectory().getIssue();
-
-            assert(issueIndex > 0);
-
-            Issue selectedIssue = model.getFilteredAndSortedIssueList().get(issueIndex - 1);
             try {
-                String selectedLink = selectedIssue.getSolutions().get(targetedIndex.getZeroBased())
+                String selectedLink = model.getFilteredSolutionList().get(targetedIndex.getZeroBased())
                         .getLink().getValue();
                 copyToClipBoard(selectedLink);
                 return new CommandResult(

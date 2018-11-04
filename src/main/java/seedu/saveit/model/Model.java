@@ -68,7 +68,7 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered issue list */
     ObservableList<Issue> getFilteredIssueList();
 
-    /**Returns an unmodified view of the filtered soluiton list of the selected issue */
+    /**Returns an unmodified view of the filtered solution list of the selected issue */
     ObservableList<Solution> getFilteredSolutionList();
 
     /**

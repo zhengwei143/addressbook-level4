@@ -13,7 +13,7 @@ public class SolutionLink {
         "SolutionLinks can only take a validate url.";
 
     public static final String SOLUTION_LINK_VALIDATION_REGEX =
-        "[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)";
+        "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)";
 
     public final String value;
 

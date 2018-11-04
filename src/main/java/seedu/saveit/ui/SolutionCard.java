@@ -45,7 +45,7 @@ public class SolutionCard extends UiPart<Region> {
         remark.setWrapText(true);
         solutionPane = (VBox) link.getParent();
 
-        if (solution.isPrimary()) {
+        if (solution.isPrimarySolution()) {
             solutionPane.getStyleClass().add("list_primary_cell");
         } else {
             solutionPane.getStyleClass().remove("list_primary_cell");

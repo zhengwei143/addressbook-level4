@@ -15,6 +15,7 @@ import seedu.saveit.commons.util.CollectionUtil;
 import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueSearchFrequency;
 import seedu.saveit.model.issue.IssueStatement;
+import seedu.saveit.model.issue.PrimarySolution;
 import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;
 
@@ -125,6 +126,25 @@ public class Issue {
      */
     public void updateFrequency() {
         frequency.increment();
+    }
+
+    /**
+     * Updates the primary solution.
+     */
+    public Issue updatePrimarySolution(List<Solution> solutions, int index) {
+        PrimarySolution newPrimarySolution = new PrimarySolution(solutions.get(index));
+        List<Solution> newSolutions = new ArrayList<>(solutions);
+
+        for (int i = 0; i < newSolutions.size(); i++) {
+            Solution s = newSolutions.get(i);
+            if (s.isPrimarySolution()) {
+                newSolutions.set(i, new Solution(s));
+            }
+        }
+
+        newSolutions.set(index, newPrimarySolution);
+
+        return new Issue(this.statement, this.description, newSolutions, this.tags, this.frequency);
     }
 
     /**

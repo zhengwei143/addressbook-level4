@@ -22,6 +22,7 @@ import seedu.saveit.logic.commands.RefactorTagCommand;
 import seedu.saveit.logic.commands.RetrieveCommand;
 import seedu.saveit.logic.commands.SelectCommand;
 import seedu.saveit.logic.commands.SortCommand;
+import seedu.saveit.logic.commands.StarCommand;
 import seedu.saveit.logic.commands.UndoCommand;
 import seedu.saveit.logic.parser.exceptions.ParseException;
 
@@ -88,7 +89,6 @@ public class SaveItParser {
         case SortCommand.COMMAND_ALIAS:
             return new SortCommandParser().parse(arguments);
 
-
         case HomeCommand.COMMAND_WORD:
         case HomeCommand.COMMAND_ALIAS:
             return new HomeCommand();
@@ -124,6 +124,10 @@ public class SaveItParser {
         case AddTagCommand.COMMAND_WORD:
         case AddTagCommand.COMMAND_ALIAS:
             return new AddTagCommandParser().parse(arguments);
+
+        case StarCommand.COMMAND_WORD:
+        case StarCommand.COMMAND_ALIAS:
+            return new StarCommandParser().parse(arguments);
 
         default:
             throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND);

@@ -16,8 +16,6 @@ public class Solution {
 
     public final Remark remark;
 
-    private boolean isPrimary;
-
     /**
      * Construct a new Solution.
      */
@@ -35,7 +33,6 @@ public class Solution {
                 this.remark = new Remark(solutionName);
             }
         }
-        this.isPrimary = true;
         this.solutionName = solutionName;
     }
 
@@ -51,6 +48,12 @@ public class Solution {
         this.solutionName = solutionLink + " " + remark;
     }
 
+    public Solution(Solution solution) {
+        this.solutionLink = solution.getLink();
+        this.remark = solution.remark;
+        this.solutionName = solutionLink + " " + remark;
+    }
+
     public SolutionLink getLink() {
         return solutionLink;
     }
@@ -59,8 +62,8 @@ public class Solution {
         return remark;
     }
 
-    public boolean isPrimary() {
-        return true;
+    public boolean isPrimarySolution() {
+        return false;
     }
 
     @Override

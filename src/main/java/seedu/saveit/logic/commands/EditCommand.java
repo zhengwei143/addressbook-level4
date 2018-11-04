@@ -23,6 +23,7 @@ import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.issue.Description;
+import seedu.saveit.model.issue.PrimarySolution;
 import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;
@@ -150,8 +151,11 @@ public class EditCommand extends Command {
                 newSolution.getRemark().getValue().equals(DUMMY_SOLUTION_REMARK) ? oldSolution.getRemark().getValue()
                     : newSolution.getRemark().getValue();
 
-            updatedSolution = new Solution(updatedSolutionLink, updatedSolutionRemark);
-
+            if (oldSolution.isPrimarySolution()) {
+                updatedSolution = new PrimarySolution(updatedSolutionLink, updatedSolutionRemark);
+            } else {
+                updatedSolution = new Solution(updatedSolutionLink, updatedSolutionRemark);
+            }
             return updatedSolution;
         }
     }

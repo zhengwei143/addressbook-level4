@@ -17,33 +17,51 @@
     <issues>
         <statement>Carl Kurz</statement>
         <description>95352563</description>
-        <solutions>https://github.com/CS2103-AY1819S1-T12-4/main repoPage</solutions>
+        <solutions>
+            <solutionLink>https://github.com/CS2103-AY1819S1-T12-4/main</solutionLink>
+            <remark>repoPage</remark>
+        </solutions>
         <frequency>1</frequency>
     </issues>
     <issues>
         <statement>Daniel Meier</statement>
         <description>87652533</description>
-        <solutions>https://stackoverflow.com/ newSolution</solutions>
-        <solutions>http://www.ZhiHu.com newSol</solutions>
+        <solutions>
+            <solutionLink>https://stackoverflow.com/</solutionLink>
+            <remark>newSolution</remark>>
+        </solutions>
+        <solutions>
+            <solutionLink>http://www.ZhiHu.com</solutionLink>
+            <remark>newSol</remark>>
+        </solutions>
         <tagged>friends</tagged>
         <frequency>1</frequency>
     </issues>
     <issues>
         <statement>Elle Meyer</statement>
         <description>9482224</description>
-        <solutions>http://www.google.com ave</solutions>
+        <solutions>
+            <solutionLink>http://www.google.com</solutionLink>
+            <remark>ave</remark>>
+        </solutions>
         <frequency>1</frequency>
     </issues>
     <issues>
         <statement>Fiona Kunz</statement>
         <description>9482427</description>
-        <solutions>http://www.reddit.com tokyo</solutions>
+        <solutions>
+            <solutionLink>http://www.reddit.com</solutionLink>
+            <remark>tokyo</remark>>
+        </solutions>
         <frequency>1</frequency>
     </issues>
     <issues>
         <statement>George Best</statement>
         <description>9482442</description>
-        <solutions>http://www.yahoo.com street</solutions>
+        <solutions>
+            <solutionLink>http://www.yahoo.com</solutionLink>
+            <remark>street</remark>>
+        </solutions>
         <frequency>1</frequency>
     </issues>
 </saveit>

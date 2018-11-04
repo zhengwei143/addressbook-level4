@@ -40,7 +40,7 @@ public class XmlUtilTest {
     private static final String VALID_STATEMENT = "Hans Muster";
     private static final String VALID_DESCRIPTION = "9482424";
     private static final List<XmlAdaptedSolution> VALID_SOLUTIONS = Collections
-            .singletonList(new XmlAdaptedSolution("webSite remark"));
+            .singletonList(new XmlAdaptedSolution("webSite", "remark"));
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections
             .singletonList(new XmlAdaptedTag("friends"));
 

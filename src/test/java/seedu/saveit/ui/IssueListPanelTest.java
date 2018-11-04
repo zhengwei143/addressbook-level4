@@ -102,7 +102,10 @@ public class IssueListPanelTest extends GuiUnitTest {
             builder.append("<issues>\n");
             builder.append("<statement>").append(i).append("a</statement>\n");
             builder.append("<description>000</description>\n");
-            builder.append("<solutions>www.example.com remark</solutions>\n");
+            builder.append("<solutions>\n");
+            builder.append("<solutionLink>www.example.com></solutionLink>\n");
+            builder.append("<remark>remark</remark>\n");
+            builder.append("</solutions>\n");
             builder.append("</issues>\n");
         }
         builder.append("</saveit>\n");

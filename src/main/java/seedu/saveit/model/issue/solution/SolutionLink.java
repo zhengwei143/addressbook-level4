@@ -10,7 +10,7 @@ import seedu.saveit.commons.util.AppUtil;
 public class SolutionLink {
 
     public static final String MESSAGE_SOLUTION_LINK_CONSTRAINTS =
-            "SolutionLinks can only take a validate url.";
+        "SolutionLinks can only take a validate url.";
 
     public static final String SOLUTION_LINK_VALIDATION_REGEX =
             "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)";
@@ -20,8 +20,6 @@ public class SolutionLink {
 
     /**
      * Construct a new solution link.
-     * Since the the link value will always be checked before creating new solution link, MalformedURLException
-     * is redundant.
      * @param value url to the solution website.
      */
     public SolutionLink(String value) {
@@ -33,7 +31,6 @@ public class SolutionLink {
 
     /**
      * Returns if a given string is a valid URL.
-     * Not sure if this method is needed. Depends on later implementation.
      */
     public static boolean isValidLink(String test) {
         test = appendURLPrefix(test);
@@ -56,8 +53,8 @@ public class SolutionLink {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof SolutionLink // instanceof handles nulls
-                && value.equals(((SolutionLink) other).getValue())); // state check
+            || (other instanceof SolutionLink // instanceof handles nulls
+            && value.equals(((SolutionLink) other).getValue())); // state check
     }
 
     @Override

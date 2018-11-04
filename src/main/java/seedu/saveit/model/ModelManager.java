@@ -3,9 +3,7 @@ package seedu.saveit.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.saveit.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -19,7 +17,6 @@ import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.events.model.SaveItChangedEvent;
-import seedu.saveit.commons.util.CollectionUtil;
 import seedu.saveit.model.issue.IssueSort;
 import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;

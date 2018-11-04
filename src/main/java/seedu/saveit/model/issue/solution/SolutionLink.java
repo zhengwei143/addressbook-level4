@@ -42,7 +42,7 @@ public class SolutionLink {
     }
 
     private static String appendURLPrefix(String value) {
-        return value.startsWith("http")? value: linkPrefix + value;
+        return value.startsWith("http") ? value : linkPrefix + value;
     }
 
     @Override

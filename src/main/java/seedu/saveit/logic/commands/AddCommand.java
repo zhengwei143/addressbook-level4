@@ -7,9 +7,6 @@ import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK_STRING;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
@@ -72,7 +69,7 @@ public class AddCommand extends Command {
     /**
      * Add a solution to a existing issue in the issue list
      */
-    private void addSolutionToIssue(Model model, Index index) throws CommandException{
+    private void addSolutionToIssue(Model model, Index index) throws CommandException {
         if (model.hasSolution(index, solutionToBeAdded)) {
             throw new CommandException(MESSAGE_DUPLICATE_SOLUTION);
         }

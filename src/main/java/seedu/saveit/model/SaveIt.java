@@ -100,7 +100,7 @@ public class SaveIt implements ReadOnlySaveIt {
     /**
      * Returns true if the targeted issue has the same solution exists in the saveIt.
      */
-    public boolean hasSolution(Index index, Solution solution){
+    public boolean hasSolution(Index index, Solution solution) {
         requireAllNonNull(index, solution);
         return issues.getIssue(index).getSolutions().contains(solution);
     }

@@ -24,7 +24,7 @@ public class SolutionLink {
      */
     public SolutionLink(String value) {
         requireNonNull(value);
-        value = appendURLPrefix(value);
+        value = appendUrlPrefix(value);
         AppUtil.checkArgument(isValidLink(value), MESSAGE_SOLUTION_LINK_CONSTRAINTS);
         this.value = value;
     }
@@ -33,7 +33,7 @@ public class SolutionLink {
      * Returns if a given string is a valid URL.
      */
     public static boolean isValidLink(String test) {
-        test = appendURLPrefix(test);
+        test = appendUrlPrefix(test);
         return test.matches(SOLUTION_LINK_VALIDATION_REGEX);
     }
 
@@ -41,7 +41,7 @@ public class SolutionLink {
         return this.value;
     }
 
-    private static String appendURLPrefix(String value) {
+    private static String appendUrlPrefix(String value) {
         return value.startsWith("http") ? value : linkPrefix + value;
     }
 

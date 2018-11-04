@@ -172,7 +172,7 @@ public class ModelManager extends ComponentManager implements Model {
             return null;
         } else {
             ObservableList<Solution> solutions = filteredIssues.get(directory.getIssue() - 1).getObservableSolutions();
-            solutions.sort(new solutionComparator());
+            solutions.sort(new SolutionComparator());
             return FXCollections.unmodifiableObservableList(solutions);
         }
     }
@@ -265,12 +265,15 @@ public class ModelManager extends ComponentManager implements Model {
                 && filteredIssues.equals(other.filteredIssues);
     }
 
-    private class solutionComparator implements Comparator<Solution> {
+    /**
+     * A comparator for puting primary solution on top of the solution list.
+     */
+    private class SolutionComparator implements Comparator<Solution> {
         @Override
         public int compare(Solution solutionOne, Solution solutionTwo) {
             if (solutionOne.isPrimarySolution()) {
                 return -1;
-            } else if (solutionTwo.isPrimarySolution()){
+            } else if (solutionTwo.isPrimarySolution()) {
                 return 1;
             } else {
                 return 0;

@@ -51,7 +51,7 @@ public class Solution {
     public Solution(SolutionLink solutionLink, Remark remark) {
         this.solutionLink = solutionLink;
         this.remark = remark;
-        this.solutionName =  solutionLink + " " + remark;
+        this.solutionName = solutionLink + " " + remark;
     }
 
     public Solution(Solution solution) {

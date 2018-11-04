@@ -5,6 +5,9 @@ import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.commands.StarCommand;
 import seedu.saveit.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new StarCommand object
+ */
 public class StarCommandParser implements Parser<StarCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the SelectCommand

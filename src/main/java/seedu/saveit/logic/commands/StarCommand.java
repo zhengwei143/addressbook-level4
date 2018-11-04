@@ -2,6 +2,8 @@ package seedu.saveit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 import seedu.saveit.commons.core.Messages;
 import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
@@ -11,8 +13,9 @@ import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.issue.Solution;
 
-import java.util.List;
-
+/**
+ * Star one existing solution for an issue.
+ */
 public class StarCommand extends Command {
     public static final String COMMAND_WORD = "star";
     public static final String COMMAND_ALIAS = "*";
@@ -31,7 +34,7 @@ public class StarCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException{
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         Directory currentDirectory = model.getCurrentDirectory();
         List<Issue> lastShownIssueList = model.getFilteredAndSortedIssueList();

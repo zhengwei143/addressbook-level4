@@ -1,7 +1,8 @@
 package seedu.saveit.model.issue.solution;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import static java.util.Objects.requireNonNull;
+
+import seedu.saveit.commons.util.AppUtil;
 
 /**
  * Represents a Issue's solution link in saveit.
@@ -11,9 +12,11 @@ public class SolutionLink {
     public static final String MESSAGE_SOLUTION_LINK_CONSTRAINTS =
             "SolutionLinks can only take a validate url.";
 
-    public final String value;
+    public static final String SOLUTION_LINK_VALIDATION_REGEX =
+            "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)";
 
-    private URL url = null;
+    private static final String linkPrefix = "https://";
+    private final String value;
 
     /**
      * Construct a new solution link.
@@ -22,12 +25,10 @@ public class SolutionLink {
      * @param value url to the solution website.
      */
     public SolutionLink(String value) {
+        requireNonNull(value);
+        value = appendURLPrefix(value);
+        AppUtil.checkArgument(isValidLink(value), MESSAGE_SOLUTION_LINK_CONSTRAINTS);
         this.value = value;
-        try {
-            this.url = new URL(value);
-        } catch (MalformedURLException e) {
-            // redundant
-        }
     }
 
     /**
@@ -35,16 +36,16 @@ public class SolutionLink {
      * Not sure if this method is needed. Depends on later implementation.
      */
     public static boolean isValidLink(String test) {
-        try {
-            URL url = new URL(test);
-        } catch (MalformedURLException e) {
-            return false;
-        }
-        return true;
+        test = appendURLPrefix(test);
+        return test.matches(SOLUTION_LINK_VALIDATION_REGEX);
     }
 
     public String getValue() {
         return this.value;
+    }
+
+    private static String appendURLPrefix(String value) {
+        return value.startsWith("http")? value: linkPrefix + value;
     }
 
     @Override

@@ -36,10 +36,21 @@ public interface Model {
     boolean hasIssue(Issue issue);
 
     /**
+     * Returns true if the indexed issue has same solution as {@code solution} exists in the saveIt.
+     */
+    boolean hasSolution(Index index, Solution solution);
+
+    /**
      * Deletes the given issue.
      * The issue must exist in the saveIt.
      */
     void deleteIssue(Issue target);
+
+    /**
+     * Adds the given solution to the indexed issue.
+     * {@code solution} must not already exist in the given issue.
+     */
+    void addSolution(Index index, Solution solution);
 
     /**
      * Adds the given issue.

@@ -62,8 +62,8 @@ public class IssueCardHandle extends NodeHandle<Node> {
      * Returns true if this handle contains {@code issue}.
      */
     public boolean equals(Issue issue) {
-        return getStatement().equals(issue.getStatement().issue)
-                && getDescription().equals(issue.getDescription().value)
+        return getStatement().equals(issue.getStatement().getValue())
+                && getDescription().equals(issue.getDescription().getValue())
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(issue.getTags().stream()
                         .map(tag -> tag.tagName)
                         .collect(Collectors.toList())));

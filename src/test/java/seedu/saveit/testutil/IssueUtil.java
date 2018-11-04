@@ -32,8 +32,8 @@ public class IssueUtil {
      */
     public static String getIssueDetails(Issue issue) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_STATEMENT + issue.getStatement().issue + " ");
-        sb.append(PREFIX_DESCRIPTION + issue.getDescription().value + " ");
+        sb.append(PREFIX_STATEMENT + issue.getStatement().getValue() + " ");
+        sb.append(PREFIX_DESCRIPTION + issue.getDescription().getValue() + " ");
         issue.getSolutions().stream().forEach(
             s -> sb.append(PREFIX_SOLUTION_LINK + s.getLink().getValue() + " " + PREFIX_REMARK
                     + s.getRemark().getValue() + " ")
@@ -49,9 +49,9 @@ public class IssueUtil {
      */
     public static String getEditIssueDescriptorDetails(EditCommand.EditIssueDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getStatement().ifPresent(name -> sb.append(PREFIX_STATEMENT).append(name.issue).append(" "));
+        descriptor.getStatement().ifPresent(name -> sb.append(PREFIX_STATEMENT).append(name.getValue()).append(" "));
         descriptor.getDescription()
-            .ifPresent(description -> sb.append(PREFIX_DESCRIPTION).append(description.value).append(" "));
+            .ifPresent(description -> sb.append(PREFIX_DESCRIPTION).append(description.getValue()).append(" "));
         if (descriptor.getSolutions().isPresent()) {
             List<Solution> solutions = descriptor.getSolutions().get();
             if (solutions.isEmpty()) {

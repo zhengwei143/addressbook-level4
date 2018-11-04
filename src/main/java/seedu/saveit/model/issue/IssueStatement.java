@@ -19,7 +19,7 @@ public class IssueStatement {
      */
     public static final String ISSUE_STATEMENT_VALIDATION_REGEX = "[^\\s].*";
 
-    public final String issue;
+    private final String issue;
 
     /**
      * Constructs a {@code IssueStatement}.
@@ -30,6 +30,13 @@ public class IssueStatement {
         requireNonNull(issue);
         AppUtil.checkArgument(isValidIssueStatement(issue), MESSAGE_ISSUE_STATEMENT_CONSTRAINTS);
         this.issue = issue;
+    }
+
+    /**
+     * Returns issue statement.
+     */
+    public String getValue() {
+        return issue;
     }
 
     /**

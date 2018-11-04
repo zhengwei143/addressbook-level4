@@ -67,7 +67,7 @@ public class IssueNameAutoSuggestion implements AutoSuggestion {
      */
     private void fillIssueKeyWords() {
         this.issueKeyWords.clear();
-        logic.getFilteredAndSortedIssueList().forEach(issue -> this.issueKeyWords.add(issue.getStatement().issue));
+        logic.getFilteredAndSortedIssueList().forEach(issue -> this.issueKeyWords.add(issue.getStatement().getValue()));
     }
 
     /**

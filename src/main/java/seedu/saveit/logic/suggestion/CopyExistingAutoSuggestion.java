@@ -67,10 +67,10 @@ public class CopyExistingAutoSuggestion implements AutoSuggestion {
         switch (identifier) {
 
         case PREFIX_DESCRIPTION_STRING:
-            return issue.getDescription().value;
+            return issue.getDescription().getValue();
 
         case PREFIX_STATEMENT_STRING:
-            return issue.getStatement().issue;
+            return issue.getStatement().getValue();
 
         default:
             return "";

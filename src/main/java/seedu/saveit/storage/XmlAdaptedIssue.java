@@ -81,8 +81,8 @@ public class XmlAdaptedIssue {
      * @param source future changes to this will not affect the created XmlAdaptedIssue
      */
     public XmlAdaptedIssue(Issue source) {
-        statement = source.getStatement().issue;
-        description = source.getDescription().value;
+        statement = source.getStatement().getValue();
+        description = source.getDescription().getValue();
         solutions = source.getSolutions().stream()
                 .map(XmlAdaptedSolution::new)
                 .collect(Collectors.toList());

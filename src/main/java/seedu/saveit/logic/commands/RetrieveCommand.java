@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import java.util.List;
 
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.CommandHistory;
@@ -43,16 +42,15 @@ public class RetrieveCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history)
-            throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        int issueIndex = model.getCurrentDirectory().getIssue();
-        List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
-        Issue selectedIssue;
+        if (model.getCurrentDirectory().isIssueLevel()) {
+            int issueIndex = model.getCurrentDirectory().getIssue();
 
-        if (issueIndex > 0) {
-            selectedIssue = lastShownList.get(issueIndex - 1);
+            assert(issueIndex > 0);
+
+            Issue selectedIssue = model.getFilteredAndSortedIssueList().get(issueIndex - 1);
             try {
                 String selectedLink = selectedIssue.getSolutions().get(targetedIndex.getZeroBased())
                         .getLink().getValue();
@@ -72,8 +70,7 @@ public class RetrieveCommand extends Command {
      */
     private void copyToClipBoard(String solution) {
         Clipboard clipBoard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        StringSelection selection = new StringSelection(solution);
-        clipBoard.setContents(selection, null);
+        clipBoard.setContents(new StringSelection(solution), null);
     }
 
     @Override

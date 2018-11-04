@@ -41,7 +41,7 @@ public class CommandTestUtil {
     public static final String VALID_SOLUTION_LINK_STACKOVERFLOW = "https://stackoverflow.com/";
     public static final String VALID_REMARK_STACKOVERFLOW = "newSol";
     public static final String[] VALID_SOLUTION_STACKOVERFLOW =
-            {VALID_SOLUTION_LINK_STACKOVERFLOW, VALID_REMARK_STACKOVERFLOW};
+        {VALID_SOLUTION_LINK_STACKOVERFLOW, VALID_REMARK_STACKOVERFLOW};
     public static final String VALID_TAG_UI = "ui";
     public static final String VALID_TAG_SYNTAX = "syntax";
     public static final String VALID_TAG_PYTHON = "python";

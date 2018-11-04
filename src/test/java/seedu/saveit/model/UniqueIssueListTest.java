@@ -96,7 +96,7 @@ public class UniqueIssueListTest {
     @Test
     public void setIssue_editedIssueHasSameIdentity_success() {
         uniqueIssueList.add(ALICE);
-        Issue editedAlice = new IssueBuilder(ALICE).withDescription(VALID_SOLUTION_C).withTags(VALID_TAG_UI)
+        Issue editedAlice = new IssueBuilder(ALICE).withDescription(VALID_DESCRIPTION_C).withTags(VALID_TAG_UI)
                 .build();
         uniqueIssueList.setIssue(ALICE, editedAlice);
         UniqueIssueList expectedUniqueIssueList = new UniqueIssueList();

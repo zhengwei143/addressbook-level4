@@ -74,8 +74,8 @@ public class IssueBuilder {
     /**
      * Parses the {@code solutions} into a {@code Set<Solution>} and set it to the {@code Issue} that we are building.
      */
-    public IssueBuilder withSolutions (String ... solutions) {
-        this.solutions = SampleDataUtil.getSolutionSet(solutions);
+    public IssueBuilder withSolutions (Solution... solutions) {
+        this.solutions = SampleDataUtil.getSolutionList(solutions);
         return this;
     }
 

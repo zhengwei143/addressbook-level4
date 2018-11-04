@@ -5,13 +5,14 @@ import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_STATEMENT_DESC;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_REMARK_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.SOLUTION_DESC_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.SOLUTION_DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.STATEMENT_DESC_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.STATEMENT_DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_UI;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_LINK_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.saveit.testutil.TypicalIssues.ALICE;
@@ -37,6 +38,7 @@ import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.testutil.IssueBuilder;
 import seedu.saveit.testutil.IssueUtil;
+import seedu.saveit.testutil.SolutionBuilder;
 
 public class AddCommandSystemTest extends SaveItSystemTest {
 
@@ -121,7 +123,8 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         assertCommandSuccess(toAdd);
 
         /* Case: add a duplicate issue except with different solution -> rejected */
-        toAdd = new IssueBuilder(HOON).withSolutions(VALID_SOLUTION_C).build();
+        toAdd = new IssueBuilder(HOON).withSolutions(new SolutionBuilder().withLink(VALID_SOLUTION_LINK_C)
+                .withRemark(VALID_REMARK_C).build()).build();
         command = IssueUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_ISSUE);
 

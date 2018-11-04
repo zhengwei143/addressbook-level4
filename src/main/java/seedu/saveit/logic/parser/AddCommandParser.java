@@ -20,6 +20,8 @@ import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;
+import seedu.saveit.model.issue.solution.Remark;
+import seedu.saveit.model.issue.solution.SolutionLink;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -82,13 +84,13 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     private AddCommand handleAddSolutionParser(ArgumentMultimap argMultimap) throws ParseException {
 
-        String solutionLink;
-        String solutionRemark;
+        SolutionLink solutionLink;
+        Remark solutionRemark;
 
         if (argMultimap.getValue(PREFIX_SOLUTION_LINK).isPresent() && argMultimap.getValue(PREFIX_REMARK)
                 .isPresent()) {
-            solutionLink = ParserUtil.parseSolutionLink(argMultimap.getValue(PREFIX_SOLUTION_LINK).get()).getValue();
-            solutionRemark = ParserUtil.parseSolutionRemark(argMultimap.getValue(PREFIX_REMARK).get()).getValue();
+            solutionLink = ParserUtil.parseSolutionLink(argMultimap.getValue(PREFIX_SOLUTION_LINK).get());
+            solutionRemark = ParserUtil.parseSolutionRemark(argMultimap.getValue(PREFIX_REMARK).get());
         } else {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     AddCommand.MESSAGE_USAGE));

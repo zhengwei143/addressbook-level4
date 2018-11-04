@@ -3,7 +3,8 @@ package seedu.saveit.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_STACKOVERFLOW;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_REMARK_STACKOVERFLOW;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_LINK_STACKOVERFLOW;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
 import static seedu.saveit.testutil.TypicalIssues.ALICE;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
@@ -22,6 +23,7 @@ import javafx.collections.ObservableList;
 import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.model.issue.exceptions.DuplicateIssueException;
 import seedu.saveit.testutil.IssueBuilder;
+import seedu.saveit.testutil.SolutionBuilder;
 
 public class SaveItTest {
 
@@ -51,7 +53,9 @@ public class SaveItTest {
     @Test
     public void resetData_withDuplicateIssues_throwsDuplicateIssueException() {
         // Two issues with the same identity fields
-        Issue editedAlice = new IssueBuilder(ALICE).withSolutions(VALID_SOLUTION_STACKOVERFLOW)
+        Issue editedAlice = new IssueBuilder(ALICE)
+                .withSolutions(new SolutionBuilder().withLink(VALID_SOLUTION_LINK_STACKOVERFLOW)
+                        .withRemark(VALID_REMARK_STACKOVERFLOW).build())
                 .withTags(VALID_TAG_UI).build();
         List<Issue> newIssues = Arrays.asList(ALICE, editedAlice);
         SaveItStub newData = new SaveItStub(newIssues);
@@ -80,7 +84,9 @@ public class SaveItTest {
     @Test
     public void hasIssue_issueWithSameIdentityFieldsInSaveIt_returnsTrue() {
         saveIt.addIssue(ALICE);
-        Issue editedAlice = new IssueBuilder(ALICE).withSolutions(VALID_SOLUTION_STACKOVERFLOW)
+        Issue editedAlice = new IssueBuilder(ALICE)
+                .withSolutions(new SolutionBuilder().withLink(VALID_SOLUTION_LINK_STACKOVERFLOW)
+                        .withRemark(VALID_REMARK_STACKOVERFLOW).build())
                 .withTags(VALID_TAG_UI).build();
         assertTrue(saveIt.hasIssue(editedAlice));
     }

@@ -2,8 +2,10 @@ package seedu.saveit.testutil;
 
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_REMARK_C;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_REMARK_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_LINK_C;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_LINK_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
@@ -14,6 +16,7 @@ import java.util.List;
 
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.SaveIt;
+import seedu.saveit.model.issue.Solution;
 
 /**
  * A utility class containing a list of {@code Issue} objects to be used in tests.
@@ -36,49 +39,52 @@ public class TypicalIssues {
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .withLastModifiedTime(COMMON_ISSUE_TIME + 20).build();
     public static final Issue CARL = new IssueBuilder().withStatement("Carl Kurz").withDescription("95352563")
-            .withSolutions("https://github.com/CS2103-AY1819S1-T12-4/main repoPage")
+            .withSolutions(new SolutionBuilder().withLink("https://github.com/CS2103-AY1819S1-T12-4/main")
+                            .withRemark("repoPage").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .withLastModifiedTime(COMMON_ISSUE_TIME + 30).build();
     public static final Issue DANIEL = new IssueBuilder().withStatement("Daniel Meier")
             .withDescription("87652533")
             .withTags("friends")
-            .withSolutions("https://stackoverflow.com/ newSolution",
-                    "http://www.ZhiHu.com newSol")
+            .withSolutions(new SolutionBuilder().withLink("https://stackoverflow.com/").withRemark("newSolution").build(),
+                    new SolutionBuilder().withLink("http://www.ZhiHu.com").withRemark("newSol").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .withLastModifiedTime(COMMON_ISSUE_TIME + 40).build();
     public static final Issue ELLE = new IssueBuilder().withStatement("Elle Meyer").withDescription("9482224")
-            .withSolutions("http://www.google.com ave")
+            .withSolutions(new SolutionBuilder().withLink("http://www.google.com").withRemark("ave").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .withLastModifiedTime(COMMON_ISSUE_TIME + 50).build();
     public static final Issue FIONA = new IssueBuilder().withStatement("Fiona Kunz").withDescription("9482427")
-            .withSolutions("http://www.reddit.com tokyo")
+            .withSolutions(new SolutionBuilder().withLink("http://www.reddit.com").withRemark("tokyo").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .withLastModifiedTime(COMMON_ISSUE_TIME + 60).build();
 
     public static final Issue GEORGE = new IssueBuilder().withStatement("George Best").withDescription("9482442")
-            .withSolutions("http://www.yahoo.com street")
+            .withSolutions(new SolutionBuilder().withLink("http://www.yahoo.com").withRemark("street").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .withLastModifiedTime(COMMON_ISSUE_TIME + 70).build();
 
     // Manually added
     public static final Issue HOON = new IssueBuilder().withStatement("Hoon Meier").withDescription("8482424")
-            .withSolutions("https://stackoverflow.com/ india")
+            .withSolutions(new SolutionBuilder().withLink("https://stackoverflow.com/").withRemark("india").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .withLastModifiedTime().build();
     public static final Issue IDA = new IssueBuilder().withStatement("Ida Mueller").withDescription("8482131")
-            .withSolutions("http://www.baidu.com ave")
+            .withSolutions(new SolutionBuilder().withLink("http://www.baidu.com").withRemark("ave").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .withLastModifiedTime().build();
 
     // Manually added - Issue's details found in {@code CommandTestUtil}
     public static final Issue AMY = new IssueBuilder().withStatement(VALID_STATEMENT_JAVA)
             .withDescription(VALID_DESCRIPTION_JAVA)
-            .withSolutions(VALID_SOLUTION_JAVA).withTags(VALID_TAG_UI)
+            .withSolutions(new SolutionBuilder().withLink(VALID_SOLUTION_LINK_JAVA).withRemark(VALID_REMARK_JAVA).build())
+            .withTags(VALID_TAG_UI)
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .withLastModifiedTime().build();
     public static final Issue BOB = new IssueBuilder().withStatement(VALID_STATEMENT_C)
             .withDescription(VALID_DESCRIPTION_C)
-            .withSolutions(VALID_SOLUTION_C).withTags(VALID_TAG_UI)
+            .withSolutions(new SolutionBuilder().withLink(VALID_SOLUTION_LINK_C).withRemark(VALID_REMARK_C).build())
+            .withTags(VALID_TAG_UI)
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .withLastModifiedTime().build();
 

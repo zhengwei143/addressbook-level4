@@ -40,7 +40,8 @@ public class CommandTestUtil {
     public static final String[] VALID_SOLUTION_C = {VALID_SOLUTION_LINK_C, VALID_REMARK_C};
     public static final String VALID_SOLUTION_LINK_STACKOVERFLOW = "https://stackoverflow.com/";
     public static final String VALID_REMARK_STACKOVERFLOW = "newSol";
-    public static final String[] VALID_SOLUTION_STACKOVERFLOW = {VALID_SOLUTION_LINK_STACKOVERFLOW, VALID_REMARK_STACKOVERFLOW};
+    public static final String[] VALID_SOLUTION_STACKOVERFLOW =
+            {VALID_SOLUTION_LINK_STACKOVERFLOW, VALID_REMARK_STACKOVERFLOW};
     public static final String VALID_TAG_UI = "ui";
     public static final String VALID_TAG_SYNTAX = "syntax";
     public static final String VALID_TAG_PYTHON = "python";
@@ -49,10 +50,10 @@ public class CommandTestUtil {
     public static final String STATEMENT_DESC_C = " " + PREFIX_STATEMENT + VALID_STATEMENT_C;
     public static final String DESCRIPTION_DESC_JAVA = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_JAVA;
     public static final String DESCRIPTION_DESC_C = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_C;
-    public static final String SOLUTION_DESC_JAVA = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_LINK_JAVA +
-            " " + PREFIX_REMARK + VALID_REMARK_JAVA;
-    public static final String SOLUTION_DESC_C = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_LINK_C +
-            " " + PREFIX_REMARK + VALID_REMARK_C;
+    public static final String SOLUTION_DESC_JAVA = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_LINK_JAVA
+            + " " + PREFIX_REMARK + VALID_REMARK_JAVA;
+    public static final String SOLUTION_DESC_C = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_LINK_C
+            + " " + PREFIX_REMARK + VALID_REMARK_C;
     public static final String TAG_DESC_SYNTAX = " " + PREFIX_TAG + VALID_TAG_SYNTAX;
     public static final String TAG_DESC_UI = " " + PREFIX_TAG + VALID_TAG_UI;
     public static final String TAG_DESC_PYTHON = " " + PREFIX_TAG + VALID_TAG_PYTHON;

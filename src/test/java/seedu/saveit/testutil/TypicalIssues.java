@@ -16,7 +16,6 @@ import java.util.List;
 
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.SaveIt;
-import seedu.saveit.model.issue.Solution;
 
 /**
  * A utility class containing a list of {@code Issue} objects to be used in tests.
@@ -46,7 +45,8 @@ public class TypicalIssues {
     public static final Issue DANIEL = new IssueBuilder().withStatement("Daniel Meier")
             .withDescription("87652533")
             .withTags("friends")
-            .withSolutions(new SolutionBuilder().withLink("https://stackoverflow.com/").withRemark("newSolution").build(),
+            .withSolutions(
+                    new SolutionBuilder().withLink("https://stackoverflow.com/").withRemark("newSolution").build(),
                     new SolutionBuilder().withLink("http://www.ZhiHu.com").withRemark("newSol").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .withLastModifiedTime(COMMON_ISSUE_TIME + 40).build();
@@ -77,7 +77,8 @@ public class TypicalIssues {
     // Manually added - Issue's details found in {@code CommandTestUtil}
     public static final Issue AMY = new IssueBuilder().withStatement(VALID_STATEMENT_JAVA)
             .withDescription(VALID_DESCRIPTION_JAVA)
-            .withSolutions(new SolutionBuilder().withLink(VALID_SOLUTION_LINK_JAVA).withRemark(VALID_REMARK_JAVA).build())
+            .withSolutions(
+                    new SolutionBuilder().withLink(VALID_SOLUTION_LINK_JAVA).withRemark(VALID_REMARK_JAVA).build())
             .withTags(VALID_TAG_UI)
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .withLastModifiedTime().build();

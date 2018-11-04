@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_SYNTAX;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
 import static seedu.saveit.testutil.TypicalIssues.ALICE;

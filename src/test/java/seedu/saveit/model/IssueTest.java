@@ -16,7 +16,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.saveit.model.issue.Solution;
 import seedu.saveit.testutil.IssueBuilder;
 import seedu.saveit.testutil.SolutionBuilder;
 

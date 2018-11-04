@@ -63,8 +63,8 @@ public class EditIssueDescriptorBuilder {
      * are building.
      */
     public EditIssueDescriptorBuilder withSolutions(String[]... solutions) {
-        List<Solution> solutionSet = Stream.of(solutions).
-                map(s -> new Solution(new SolutionLink(s[0]), new Remark(s[1]))).collect(Collectors.toList());
+        List<Solution> solutionSet = Stream.of(solutions)
+                .map(s -> new Solution(new SolutionLink(s[0]), new Remark(s[1]))).collect(Collectors.toList());
         descriptor.setSolutions(solutionSet);
         return this;
     }

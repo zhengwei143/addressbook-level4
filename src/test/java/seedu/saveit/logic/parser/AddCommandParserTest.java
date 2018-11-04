@@ -62,7 +62,8 @@ public class AddCommandParserTest {
         Issue expectedIssueMultipleSolutions = new IssueBuilder(BOB)
                 .withSolutions(
                         new SolutionBuilder().withLink(VALID_SOLUTION_LINK_JAVA).withRemark(VALID_REMARK_JAVA).build(),
-                        new SolutionBuilder().withLink(VALID_SOLUTION_LINK_C).withRemark(VALID_REMARK_C).build()).build();
+                        new SolutionBuilder().withLink(VALID_SOLUTION_LINK_C).withRemark(VALID_REMARK_C).build())
+                .build();
         assertParseSuccess(parser, STATEMENT_DESC_C + DESCRIPTION_DESC_C + SOLUTION_DESC_JAVA
                 + SOLUTION_DESC_C + CommandTestUtil.TAG_DESC_UI, new AddCommand(expectedIssueMultipleSolutions));
 

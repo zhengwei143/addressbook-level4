@@ -35,8 +35,8 @@ public class IssueUtil {
         sb.append(PREFIX_STATEMENT + issue.getStatement().issue + " ");
         sb.append(PREFIX_DESCRIPTION + issue.getDescription().value + " ");
         issue.getSolutions().stream().forEach(
-            s -> sb.append(PREFIX_SOLUTION_LINK + s.getLink().getValue() + " " + PREFIX_REMARK +
-                    s.getRemark().getValue() + " ")
+            s -> sb.append(PREFIX_SOLUTION_LINK + s.getLink().getValue() + " " + PREFIX_REMARK
+                    + s.getRemark().getValue() + " ")
         );
         issue.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")

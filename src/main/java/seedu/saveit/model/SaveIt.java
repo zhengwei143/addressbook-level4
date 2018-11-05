@@ -1,7 +1,6 @@
 package seedu.saveit.model;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.saveit.commons.core.index.Index.fromZeroBased;
 import static seedu.saveit.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -24,7 +23,6 @@ import seedu.saveit.model.issue.exceptions.IssueNotFoundException;
  */
 public class SaveIt implements ReadOnlySaveIt {
 
-    private static final String DUMMY_TAG = "dummyTag";
     private final UniqueIssueList issues;
     private Directory currentDirectory;
 
@@ -180,9 +178,27 @@ public class SaveIt implements ReadOnlySaveIt {
             Set<Tag> tagsToUpdate = new HashSet<>(issueToUpdate.getTags());
             if (tagsToUpdate.contains(oldTag)) {
                 tagsToUpdate.remove(oldTag);
-                if (!newTag.tagName.equals(DUMMY_TAG)) {
-                    tagsToUpdate.add(newTag);
-                }
+                tagsToUpdate.add(newTag);
+                isEdit = true;
+                Issue updateIssue = new Issue(issueToUpdate.getStatement(), issueToUpdate.getDescription(),
+                    issueToUpdate.getSolutions(), tagsToUpdate, issueToUpdate.getFrequency());
+                updateIssue(issueToUpdate, updateIssue);
+            }
+
+        }
+        return isEdit;
+    }
+
+    /**
+     * remove the {@code oldTag} of {@code SaveIt} for all issue entries.
+     */
+    public boolean refactorTag(Tag tag) {
+        boolean isEdit = false;
+        requireNonNull(tag);
+        for (Issue issueToUpdate : issues) {
+            Set<Tag> tagsToUpdate = new HashSet<>(issueToUpdate.getTags());
+            if (tagsToUpdate.contains(tag)) {
+                tagsToUpdate.remove(tag);
                 isEdit = true;
                 Issue updateIssue = new Issue(issueToUpdate.getStatement(), issueToUpdate.getDescription(),
                     issueToUpdate.getSolutions(), tagsToUpdate, issueToUpdate.getFrequency());

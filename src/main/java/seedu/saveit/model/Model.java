@@ -142,4 +142,10 @@ public interface Model {
      * @return true if any tag has been replaced, otherwise false.
      */
     boolean refactorTag(Tag oldTag, Tag newTag);
+
+    /**
+     * To remove a specified {@code tag} for all entries.
+     * @return true if any tag has been removed, otherwise false.
+     */
+    boolean refactorTag(Tag tag);
 }

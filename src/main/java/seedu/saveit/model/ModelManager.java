@@ -144,6 +144,15 @@ public class ModelManager extends ComponentManager implements Model {
         return isEdit;
     }
 
+    @Override
+    public boolean refactorTag(Tag tag) {
+        requireAllNonNull(tag);
+        boolean isEdit = versionedSaveIt.refactorTag(tag);
+
+        indicateSaveItChanged();
+        return isEdit;
+    }
+
 
     @Override
     public void sortIssues(IssueSort sortType) {

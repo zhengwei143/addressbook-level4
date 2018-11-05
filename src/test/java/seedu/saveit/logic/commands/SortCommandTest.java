@@ -1,7 +1,9 @@
 package seedu.saveit.logic.commands;
 
 import static junit.framework.TestCase.assertEquals;
+import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.ALICE;
 import static seedu.saveit.testutil.TypicalIssues.BENSON;
 import static seedu.saveit.testutil.TypicalIssues.CARL;
@@ -19,6 +21,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import seedu.saveit.commons.core.Messages;
+import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
@@ -82,7 +86,10 @@ public class SortCommandTest {
 
     @Test
     public void execute_notUnderRootLevel_failure() {
-
+        model.resetDirectory(Directory.formDirectory(INDEX_FIRST_ISSUE.getOneBased(), 0));
+        IssueSort issueSort = prepareIssueSort(IssueSort.TAG_SORT);
+        SortCommand command = new SortCommand(issueSort);
+        assertCommandFailure(command, model, commandHistory, Messages.MESSAGE_WRONG_DIRECTORY);
     }
 
     /**

@@ -40,10 +40,10 @@ public class AddCommand extends Command {
     public static final String DUMMY_STATEMENT = "dummyStatement";
     public static final String DUMMY_DESCRIPTION = "dummyDescription";
 
-    private static final String MESSAGE_FAILED_ISSUE =
+    public static final String MESSAGE_FAILED_ISSUE =
             "Issue has to be selected first before adding solution";
-    private static final String MESSAGE_WRONG_DIRECTORY = "Wrong directory, please check!";
-    private static final String MESSAGE_SOLUTION_SUCCESS = "New solution added: %1$s";
+    public static final String MESSAGE_WRONG_DIRECTORY = "Wrong directory, please check!";
+    public static final String MESSAGE_SOLUTION_SUCCESS = "New solution added: %1$s";
     private final Issue toAdd;
 
     /**
@@ -74,7 +74,7 @@ public class AddCommand extends Command {
         case DUMMY_STATEMENT: //adding solution to existing issue
             assert (toAdd.getDescription().getValue().equals(DUMMY_DESCRIPTION));
             assert (toAdd.getSolutions().size() == 1);
-            if (model.getCurrentDirectory().isIssueLevel()) {
+            if (!model.getCurrentDirectory().isRootLevel()) {
                 Index issueIndex = Index.fromOneBased(model.getCurrentDirectory().getIssue());
                 Solution solutionToBeAdded = toAdd.getSolutions().get(0);
                 addSolutionToIssue(model, solutionToBeAdded, issueIndex);
@@ -85,7 +85,7 @@ public class AddCommand extends Command {
 
         default: //adding new issue
             assert (toAdd.getSolutions().size() == 0);
-            if (model.getCurrentDirectory().isIssueLevel()) {
+            if (!model.getCurrentDirectory().isRootLevel()) {
                 throw new CommandException(MESSAGE_WRONG_DIRECTORY);
             }
 

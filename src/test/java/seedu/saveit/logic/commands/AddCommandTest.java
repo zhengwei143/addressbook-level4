@@ -131,7 +131,7 @@ public class AddCommandTest {
                 new IssueBuilder().withSolutions(VALID_SOLUTION_JAVA, VALID_SOLUTION_C)
                         .build(), INDEX_FIRST_ISSUE, INDEX_SECOND_SOLUTION);
 
-               Issue validIssue = new IssueBuilder().withDummyStatement().withDummyDescription()
+        Issue validIssue = new IssueBuilder().withDummyStatement().withDummyDescription()
                 .withSolutions(VALID_SOLUTION_STACKOVERFLOW).build();
         Issue expectedIssue = new IssueBuilder()
                 .withSolutions(VALID_SOLUTION_JAVA, VALID_SOLUTION_C, VALID_SOLUTION_STACKOVERFLOW).build();
@@ -146,8 +146,7 @@ public class AddCommandTest {
     @Test
     public void execute_duplicateSolution_throwsCommandException() throws Exception {
         ModelStubAcceptingSolutionAdded modelStub = initialise_acceptingSolutionAdded_issueLevel(
-                new IssueBuilder()
-                        .withSolutions(VALID_SOLUTION_JAVA, VALID_SOLUTION_C).build(), INDEX_FIRST_ISSUE);
+                new IssueBuilder().withSolutions(VALID_SOLUTION_JAVA, VALID_SOLUTION_C).build(), INDEX_FIRST_ISSUE);
 
         Issue validIssue = new IssueBuilder().withDummyStatement().withDummyDescription()
                 .withSolutions(VALID_SOLUTION_JAVA).build();
@@ -160,8 +159,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_rootLevelAddSolution_throwsCommandException() throws Exception {
-        ModelStubAcceptingSolutionAdded modelStub = new ModelStubAcceptingSolutionAdded(
-                new IssueBuilder().build());
+        ModelStubAcceptingSolutionAdded modelStub = new ModelStubAcceptingSolutionAdded(new IssueBuilder().build());
 
         Issue validIssue = new IssueBuilder().withDummyStatement().withDummyDescription()
                 .withSolutions(VALID_SOLUTION_JAVA).build();

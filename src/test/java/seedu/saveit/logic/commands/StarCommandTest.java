@@ -1,27 +1,33 @@
 package seedu.saveit.logic.commands;
 
-import org.junit.Before;
-import org.junit.Test;
-import seedu.saveit.commons.core.Messages;
-import seedu.saveit.commons.core.directory.Directory;
-import seedu.saveit.commons.core.index.Index;
-import seedu.saveit.logic.CommandHistory;
-import seedu.saveit.model.*;
-import seedu.saveit.model.issue.Solution;
-
-import java.util.List;
 
 import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_SOLUTION;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
 
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import seedu.saveit.commons.core.Messages;
+import seedu.saveit.commons.core.directory.Directory;
+import seedu.saveit.commons.core.index.Index;
+import seedu.saveit.logic.CommandHistory;
+import seedu.saveit.model.Issue;
+import seedu.saveit.model.Model;
+import seedu.saveit.model.ModelManager;
+import seedu.saveit.model.SaveIt;
+import seedu.saveit.model.UserPrefs;
+import seedu.saveit.model.issue.Solution;
+
 public class StarCommandTest {
     private Model model;
     private Model expectedModel;
     private CommandHistory commandHistory;
-    Issue issueSelected;
-    List<Solution> solutionList;
+    private Issue issueSelected;
+    private List<Solution> solutionList;
 
     @Before
     public void setUp() {
@@ -48,7 +54,8 @@ public class StarCommandTest {
     public void execute_invalidIndexIssueLevel_failure() {
         setUpIssueLevel();
         int lastSolutionIndex = solutionList.size();
-        assertExecutionFailure(Index.fromZeroBased(lastSolutionIndex), Messages.MESSAGE_INVALID_SOLUTION_DISPLAYED_INDEX);
+        assertExecutionFailure(Index.fromZeroBased(lastSolutionIndex),
+                Messages.MESSAGE_INVALID_SOLUTION_DISPLAYED_INDEX);
     }
 
     /**
@@ -78,7 +85,8 @@ public class StarCommandTest {
     private void assertExecutionSuccess(Index index) {
         StarCommand starCommand = new StarCommand(index);
         Solution staredSolution = solutionList.get(index.getZeroBased());
-        expectedModel.updateIssue(issueSelected, issueSelected.updatePrimarySolution(solutionList, index.getZeroBased()));
+        expectedModel.updateIssue(issueSelected,
+                issueSelected.updatePrimarySolution(solutionList, index.getZeroBased()));
         expectedModel.commitSaveIt();
         String expectedMessage = String.format(StarCommand.MESSAGE_SUCCESS, staredSolution);
 

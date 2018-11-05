@@ -17,7 +17,7 @@ public class PrimarySolution extends Solution {
     }
 
     public PrimarySolution(Solution solution) {
-        super(solution.getLink().getValue(), solution.getRemark().value);
+        super(solution.getLink().getValue(), solution.getRemark().getValue());
     }
 
     public boolean isPrimarySolution() {

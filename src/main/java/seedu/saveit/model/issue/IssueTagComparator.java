@@ -17,6 +17,14 @@ public class IssueTagComparator implements Comparator<Issue> {
         Set<Tag> tagSetB = b.getTags();
         Set<Tag> tagSetA = a.getTags();
 
+        if (tagSetA.size() == 0 && tagSetB.size() != 0) {
+            return 1;
+        }
+
+        if (tagSetB.size() == 0 && tagSetA.size() != 0) {
+            return -1;
+        }
+
         Iterator<Tag> tagIteratorA = tagSetA.iterator();
         Iterator<Tag> tagIteratorB = tagSetB.iterator();
         while (tagIteratorA.hasNext() && tagIteratorB.hasNext()) {

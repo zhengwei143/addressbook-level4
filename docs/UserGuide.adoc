@@ -454,7 +454,9 @@ Format: `sort freq`
 Format: `sort tag`
 [TIP]
 ====
-* Sort the issue list by their first tag in alphabetical order.
+* Sort the issue list by their tag in alphabetical order.
+If their first tags start with the same character, the following tags are compared until there is a difference or one tag set comes to the end.
+In the second case, the issue with fewer tags is give higher priority.
 * Sort the issues without tags at the end of the display issue list.
 ====
 
@@ -463,6 +465,9 @@ Examples:
 * sort
 * sort freq
 * sort tag
+
+.Sort Command
+image::sort-command.png[width="790"]
 ****
 // end::sort[]
 

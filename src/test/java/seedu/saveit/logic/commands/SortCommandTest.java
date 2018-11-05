@@ -51,7 +51,7 @@ public class SortCommandTest {
         expectedModel.updateFilteredAndSortedIssueList(issueSort.getComparator());
         SortCommand command = new SortCommand(issueSort);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA, GEORGE, DANIEL, BENSON, ALICE),
+        assertEquals(Arrays.asList(DANIEL, BENSON, ALICE, CARL, ELLE, FIONA, GEORGE),
                 model.getFilteredAndSortedIssueList());
     }
 
@@ -65,7 +65,7 @@ public class SortCommandTest {
         expectedModel.updateFilteredAndSortedIssueList(issueSort.getComparator());
         SortCommand command = new SortCommand(issueSort);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ELLE, DANIEL, BENSON, ALICE), model.getFilteredAndSortedIssueList());
+        assertEquals(Arrays.asList(DANIEL, BENSON, ALICE, ELLE), model.getFilteredAndSortedIssueList());
     }
 
     @Test
@@ -80,7 +80,7 @@ public class SortCommandTest {
         model.addIssue(issue);
         SortCommand command = new SortCommand(issueSort);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA, GEORGE, issue, DANIEL, BENSON, ALICE),
+        assertEquals(Arrays.asList(DANIEL, BENSON, ALICE, CARL, ELLE, FIONA, GEORGE, issue),
                 model.getFilteredAndSortedIssueList());
     }
 

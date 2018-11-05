@@ -21,8 +21,8 @@ public class StarCommand extends Command {
     public static final String COMMAND_ALIAS = "*";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Star solution by the index number used in the displayed solution list\n"
-            + "Parameters: INDEX\n"
+            + ": Highlight one solution in the displayed solution list\n"
+            + "Parameters: INDEX (must be the index shown in the list)\n"
             + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_SUCCESS = "Stared solution: %1$s";
 
@@ -51,11 +51,20 @@ public class StarCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_SOLUTION_DISPLAYED_INDEX);
         }
 
+        Solution primarySolution = solutionList.get(zeroBasedIndex);
         Issue updatedIssue = issueSelected.updatePrimarySolution(solutionList, zeroBasedIndex);
 
         model.updateIssue(issueSelected, updatedIssue);
         model.commitSaveIt();
         return new CommandResult(
-                String.format(MESSAGE_SUCCESS, index.getOneBased()));
+                String.format(MESSAGE_SUCCESS, primarySolution));
+    }
+
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof StarCommand // instanceof handles nulls
+                && index.equals(((StarCommand) other).index)); // state check
     }
 }

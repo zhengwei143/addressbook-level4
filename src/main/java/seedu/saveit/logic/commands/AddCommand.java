@@ -85,7 +85,7 @@ public class AddCommand extends Command {
     /**
      * Add an issue to saveIt
      */
-    private void addIssueToSaveIt(Model model, Issue toAdd) throws CommandException{
+    private void addIssueToSaveIt(Model model, Issue toAdd) throws CommandException {
         if (model.hasIssue(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_ISSUE);
         }

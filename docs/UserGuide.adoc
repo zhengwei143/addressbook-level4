@@ -466,7 +466,7 @@ Examples:
 * sort freq
 * sort tag
 
-.Sort Command
+.Sort Tag Command
 image::sort-command.png[width="790"]
 ****
 // end::sort[]

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.saveit.commons.core.Messages.MESSAGE_WRONG_DIRECTORY;
 import static seedu.saveit.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
@@ -15,7 +16,6 @@ import static seedu.saveit.testutil.TypicalDirectories.getCustomizedIssueLevel;
 import static seedu.saveit.testutil.TypicalDirectories.getCustomizedSolutionLevel;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_SOLUTION;
-import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_SOLUTION;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,6 +44,7 @@ import seedu.saveit.model.issue.Tag;
 import seedu.saveit.testutil.IssueBuilder;
 
 public class AddCommandTest {
+
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
     @Rule
@@ -66,7 +67,8 @@ public class AddCommandTest {
 
         CommandResult commandResult = new AddCommand(validIssue).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(AddCommand.MESSAGE_ISSUE_SUCCESS, validIssue), commandResult.feedbackToUser);
+        assertEquals(String.format(AddCommand.MESSAGE_ISSUE_SUCCESS, validIssue),
+                commandResult.feedbackToUser);
         assertEquals(Arrays.asList(validIssue), modelStub.issuesAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
@@ -86,12 +88,10 @@ public class AddCommandTest {
     public void execute_issueLevelAddIssue_throwsCommandException() throws Exception {
         Issue validIssue = new IssueBuilder().build();
         AddCommand addCommand = new AddCommand(validIssue);
-        ModelStub modelStub = new ModelStubAcceptingIssueAdded();
-        Directory issueLevel = getCustomizedIssueLevel(INDEX_FIRST_ISSUE);
-        modelStub.resetDirectory(issueLevel);
+        ModelStub modelStub = initialise_acceptingIssueAdded_issueLevel(INDEX_FIRST_ISSUE);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_WRONG_DIRECTORY);
+        thrown.expectMessage(MESSAGE_WRONG_DIRECTORY);
         addCommand.execute(modelStub, commandHistory);
     }
 
@@ -99,12 +99,11 @@ public class AddCommandTest {
     public void execute_solutionLevelAddIssue_throwsCommandException() throws Exception {
         Issue validIssue = new IssueBuilder().build();
         AddCommand addCommand = new AddCommand(validIssue);
-        ModelStub modelStub = new ModelStubAcceptingIssueAdded();
-        Directory solutionLevel = getCustomizedSolutionLevel(INDEX_FIRST_ISSUE, INDEX_THIRD_SOLUTION);
-        modelStub.resetDirectory(solutionLevel);
+        ModelStub modelStub = initialise_acceptingIssueAdded_solutionLevel(INDEX_FIRST_ISSUE,
+                INDEX_SECOND_SOLUTION);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_WRONG_DIRECTORY);
+        thrown.expectMessage(MESSAGE_WRONG_DIRECTORY);
         addCommand.execute(modelStub, commandHistory);
     }
 
@@ -112,9 +111,8 @@ public class AddCommandTest {
 
     @Test
     public void execute_issueAcceptedByModel_issueLevelAddSuccessful() throws Exception {
-        ModelStubAcceptingSolutionAdded modelStub = new ModelStubAcceptingSolutionAdded(new IssueBuilder().build());
-        Directory issueLevel = getCustomizedIssueLevel(INDEX_FIRST_ISSUE);
-        modelStub.resetDirectory(issueLevel);
+        ModelStubAcceptingSolutionAdded modelStub =
+                initialise_acceptingSolutionAdded_issueLevel(new IssueBuilder().build(), INDEX_FIRST_ISSUE);
 
         Issue validIssue = new IssueBuilder().withDummyStatement().withDummyDescription()
                 .withSolutions(VALID_SOLUTION_STACKOVERFLOW).build();
@@ -129,12 +127,11 @@ public class AddCommandTest {
 
     @Test
     public void execute_issueAcceptedByModel_solutionLevelAddSuccessful() throws Exception {
-        ModelStubAcceptingSolutionAdded modelStub = new ModelStubAcceptingSolutionAdded(new IssueBuilder()
-                .withSolutions(VALID_SOLUTION_JAVA, VALID_SOLUTION_C).build());
-        Directory issueLevel = getCustomizedSolutionLevel(INDEX_FIRST_ISSUE, INDEX_SECOND_SOLUTION);
-        modelStub.resetDirectory(issueLevel);
+        ModelStubAcceptingSolutionAdded modelStub = initialise_acceptingSolutionAdded_solutionLevel(
+                new IssueBuilder().withSolutions(VALID_SOLUTION_JAVA, VALID_SOLUTION_C)
+                        .build(), INDEX_FIRST_ISSUE, INDEX_SECOND_SOLUTION);
 
-        Issue validIssue = new IssueBuilder().withDummyStatement().withDummyDescription()
+               Issue validIssue = new IssueBuilder().withDummyStatement().withDummyDescription()
                 .withSolutions(VALID_SOLUTION_STACKOVERFLOW).build();
         Issue expectedIssue = new IssueBuilder()
                 .withSolutions(VALID_SOLUTION_JAVA, VALID_SOLUTION_C, VALID_SOLUTION_STACKOVERFLOW).build();
@@ -148,10 +145,9 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicateSolution_throwsCommandException() throws Exception {
-        ModelStubAcceptingSolutionAdded modelStub = new ModelStubAcceptingSolutionAdded(new IssueBuilder()
-                .withSolutions(VALID_SOLUTION_JAVA, VALID_SOLUTION_C).build());
-        Directory issueLevel = getCustomizedIssueLevel(INDEX_FIRST_ISSUE);
-        modelStub.resetDirectory(issueLevel);
+        ModelStubAcceptingSolutionAdded modelStub = initialise_acceptingSolutionAdded_issueLevel(
+                new IssueBuilder()
+                        .withSolutions(VALID_SOLUTION_JAVA, VALID_SOLUTION_C).build(), INDEX_FIRST_ISSUE);
 
         Issue validIssue = new IssueBuilder().withDummyStatement().withDummyDescription()
                 .withSolutions(VALID_SOLUTION_JAVA).build();
@@ -164,8 +160,8 @@ public class AddCommandTest {
 
     @Test
     public void execute_rootLevelAddSolution_throwsCommandException() throws Exception {
-        ModelStubAcceptingSolutionAdded modelStub = new ModelStubAcceptingSolutionAdded(new IssueBuilder().build());
-        modelStub.resetDirectory(ROOT_LEVEL);
+        ModelStubAcceptingSolutionAdded modelStub = new ModelStubAcceptingSolutionAdded(
+                new IssueBuilder().build());
 
         Issue validIssue = new IssueBuilder().withDummyStatement().withDummyDescription()
                 .withSolutions(VALID_SOLUTION_JAVA).build();
@@ -185,11 +181,11 @@ public class AddCommandTest {
                 .withDescription(VALID_DESCRIPTION_C).build();
 
         CommandResult commandResult = new AddCommand(validIssue).execute(modelStub, commandHistory);
-        assertEquals(String.format(AddCommand.MESSAGE_ISSUE_SUCCESS, validIssue), commandResult.feedbackToUser);
+        assertEquals(String.format(AddCommand.MESSAGE_ISSUE_SUCCESS, validIssue),
+                commandResult.feedbackToUser);
         assertEquals(Arrays.asList(validIssue), modelStub.issuesAdded);
 
-        Directory issueLevel = getCustomizedIssueLevel(INDEX_FIRST_ISSUE);
-        modelStub.resetDirectory(issueLevel);
+        modelStub.resetDirectory(getCustomizedIssueLevel(INDEX_FIRST_ISSUE));
         validIssue = new IssueBuilder().withDummyStatement().withDummyDescription()
                 .withSolutions(VALID_SOLUTION_STACKOVERFLOW).build();
         Issue expectedIssue = new IssueBuilder().withStatement(VALID_STATEMENT_C)
@@ -226,6 +222,33 @@ public class AddCommandTest {
 
         // different issue -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
+    }
+
+    private ModelStubAcceptingIssueAdded initialise_acceptingIssueAdded_issueLevel(Index issueLevelIndex) {
+        ModelStubAcceptingIssueAdded model = new ModelStubAcceptingIssueAdded();
+        model.resetDirectory(getCustomizedIssueLevel(issueLevelIndex));
+        return model;
+    }
+
+    private ModelStubAcceptingIssueAdded initialise_acceptingIssueAdded_solutionLevel(Index issueLevelIndex,
+            Index solutionLevelIndex) {
+        ModelStubAcceptingIssueAdded model = new ModelStubAcceptingIssueAdded();
+        model.resetDirectory(getCustomizedSolutionLevel(issueLevelIndex, solutionLevelIndex));
+        return model;
+    }
+
+    private ModelStubAcceptingSolutionAdded initialise_acceptingSolutionAdded_issueLevel(Issue issue,
+            Index issueLevelIndex) {
+        ModelStubAcceptingSolutionAdded model = new ModelStubAcceptingSolutionAdded(issue);
+        model.resetDirectory(getCustomizedIssueLevel(issueLevelIndex));
+        return model;
+    }
+
+    private ModelStubAcceptingSolutionAdded initialise_acceptingSolutionAdded_solutionLevel(Issue issue,
+            Index issueLevelIndex, Index solutionLevelIndex) {
+        ModelStubAcceptingSolutionAdded model = new ModelStubAcceptingSolutionAdded(issue);
+        model.resetDirectory(getCustomizedSolutionLevel(issueLevelIndex, solutionLevelIndex));
+        return model;
     }
 
     /**
@@ -322,6 +345,7 @@ public class AddCommandTest {
         public void addTag(Index index, Set<Tag> tagList) {
             throw new AssertionError("This method should not be called.");
         }
+
         public TreeSet<String> getCurrentTagSet() {
             throw new AssertionError("This method should not be called.");
         }
@@ -440,7 +464,8 @@ public class AddCommandTest {
             issuesAdded.add(issue);
         }
 
-        public ModelStubAcceptingSolutionAdded() { }
+        public ModelStubAcceptingSolutionAdded() {
+        }
 
         @Override
         public boolean hasIssue(Issue issue) {

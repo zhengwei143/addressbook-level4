@@ -1,6 +1,7 @@
 package seedu.saveit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.saveit.commons.core.Messages.MESSAGE_WRONG_DIRECTORY;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_REMARK_STRING;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK_STRING;
@@ -42,7 +43,6 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_FAILED_ISSUE =
             "Issue has to be selected first before adding solution";
-    public static final String MESSAGE_WRONG_DIRECTORY = "Wrong directory, please check!";
     public static final String MESSAGE_SOLUTION_SUCCESS = "New solution added: %1$s";
     private final Issue toAdd;
 
@@ -74,7 +74,7 @@ public class AddCommand extends Command {
         case DUMMY_STATEMENT: //adding solution to existing issue
             assert (toAdd.getDescription().getValue().equals(DUMMY_DESCRIPTION));
             assert (toAdd.getSolutions().size() == 1);
-            if (!model.getCurrentDirectory().isRootLevel()) {
+            if (model.getCurrentDirectory().isIssueLevel() || model.getCurrentDirectory().isSolutionLevel()) {
                 Index issueIndex = Index.fromOneBased(model.getCurrentDirectory().getIssue());
                 Solution solutionToBeAdded = toAdd.getSolutions().get(0);
                 addSolutionToIssue(model, solutionToBeAdded, issueIndex);

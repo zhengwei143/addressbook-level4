@@ -4,9 +4,9 @@ package seedu.saveit.logic.parser;
  * A prefix that marks the beginning of an argument in an arguments string.
  * E.g. 't/' in 'add James t/ friend'.
  */
-public class Prefix {
+public class Prefix implements Comparable<Prefix> {
     private final String prefix;
-    private final int position;
+    private int position;
 
     public Prefix(String prefix) {
         this.prefix = prefix;
@@ -37,9 +37,13 @@ public class Prefix {
         return getPrefix();
     }
 
+    public void offset(int value) {
+        this.position += value;
+    }
+
     @Override
     public int hashCode() {
-        return prefix == null ? 0 : prefix.hashCode();
+        return prefix == null ? 0 : (prefix + position).hashCode();
     }
 
     @Override
@@ -53,5 +57,10 @@ public class Prefix {
 
         Prefix otherPrefix = (Prefix) obj;
         return otherPrefix.getPrefix().equals(getPrefix());
+    }
+
+    @Override
+    public int compareTo(Prefix other) {
+        return this.getPosition() - other.getPosition();
     }
 }

@@ -30,8 +30,8 @@ public class GuiTestAssert {
      * Asserts that {@code actualCard} displays the details of {@code expectedIssue}.
      */
     public static void assertCardDisplaysIssue(Issue expectedIssue, IssueCardHandle actualCard) {
-        assertEquals(expectedIssue.getStatement().issue, actualCard.getStatement());
-        assertEquals(expectedIssue.getDescription().value, actualCard.getDescription());
+        assertEquals(expectedIssue.getStatement().getValue(), actualCard.getStatement());
+        assertEquals(expectedIssue.getDescription().getValue(), actualCard.getDescription());
         assertEquals(expectedIssue.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
                 actualCard.getTags());
     }

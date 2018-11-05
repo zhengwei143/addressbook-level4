@@ -5,12 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import java.util.List;
 
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
-import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 
 /**
@@ -43,19 +41,13 @@ public class RetrieveCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history)
-            throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        int issueIndex = model.getCurrentDirectory().getIssue();
-        List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
-        Issue selectedIssue;
-
-        if (issueIndex > 0) {
-            selectedIssue = lastShownList.get(issueIndex - 1);
+        if (model.getCurrentDirectory().isIssueLevel()) {
             try {
-                String selectedLink = selectedIssue.getSolutions().get(targetedIndex.getZeroBased())
-                        .getLink().value;
+                String selectedLink = model.getFilteredSolutionList().get(targetedIndex.getZeroBased())
+                        .getLink().getValue();
                 copyToClipBoard(selectedLink);
                 return new CommandResult(
                         String.format(MESSAGE_RETRIEVE_LINK_SUCCESS, targetedIndex.getOneBased()));
@@ -72,8 +64,7 @@ public class RetrieveCommand extends Command {
      */
     private void copyToClipBoard(String solution) {
         Clipboard clipBoard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        StringSelection selection = new StringSelection(solution);
-        clipBoard.setContents(selection, null);
+        clipBoard.setContents(new StringSelection(solution), null);
     }
 
     @Override

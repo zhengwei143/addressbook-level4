@@ -114,7 +114,7 @@ public class FindCommandSystemTest extends SaveItSystemTest {
         assertSelectedCardUnchanged();
 
         /* Case: find description number of issue in saveit book -> 0 issues found */
-        command = FindCommand.COMMAND_WORD + " " + DANIEL.getDescription().value;
+        command = FindCommand.COMMAND_WORD + " " + DANIEL.getDescription().getValue();
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -127,7 +127,8 @@ public class FindCommandSystemTest extends SaveItSystemTest {
         /* Case: find while an issue is selected -> selected card deselected */
         showAllIssues();
         selectIssue(Index.fromOneBased(1));
-        assertFalse(getIssueListPanel().getHandleToSelectedCard().getStatement().equals(DANIEL.getStatement().issue));
+        assertFalse(getIssueListPanel().getHandleToSelectedCard().getStatement()
+                .equals(DANIEL.getStatement().getValue()));
         command = FindCommand.COMMAND_WORD + " Daniel";
         ModelHelper.setFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);

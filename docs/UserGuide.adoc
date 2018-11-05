@@ -70,6 +70,18 @@ Examples:
 * `help`
 ****
 
+=== Highlighting command parameters
+
+When the user types the command in the command line, it is difficult for users to distinguish their inputs and parameters. Hence command gets highlighted is essential to differentiate the parameter and values that user input.
+
+Examples:
+****
+.Command highlight 1
+image::command-highlight1.png[width="790"]
+
+.Command highlight 2
+image::command-highlight2.png[width="790"]
+****
 
 === Selecting an issue/solution  : `(s)select`
 
@@ -370,7 +382,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command)
 ****
 
-
+// tag::clear[]
 === Clearing all entries : `(c)clear`
 
 Clears all issues from the saveIt App.
@@ -387,8 +399,9 @@ Example:
 * User need confirm to execute this operation.
 * User can undo this operation to restore the issue lists.
 ====
+// end::clear[]
 
-=== Listing entered commands : `(h)history`
+=== Listing entered commands : `(his)history`
 
 Lists all the commands that you have entered in reverse chronological order.
 
@@ -416,7 +429,8 @@ Examples:
 
 Shows a list of all issues.
 
-=== Sorting the list of issues: `(s)sort`
+// tag::sort[]
+=== Sorting the list of issues: `(sr)sort`
 
 
 Format: `sort`
@@ -450,7 +464,7 @@ Examples:
 * sort freq
 * sort tag
 ****
-
+// end::sort[]
 
 === Refactoring tag: `(rt)refactortag`
 
@@ -468,6 +482,7 @@ Examples:
 ****
 * refactorTag t/solved n/TIL (Changes all entries tagged [solved] to be tagged [TIL])
 * refactorTag t/solved (Removes the tag [solved] from all the entries)
+
 
 .Refactor tag
 image::refactor-tag.png[width="790"]
@@ -518,18 +533,7 @@ Example:
 .Copying existing fields
 image::copy-existing.png[width="790"]
 
-=== Highlighting command parameters
 
-When the user types the command in the command line, it is difficult for users to distinguish their inputs and parameters. Hence command gets highlighted is essential to differentiate the parameter and values that user input.
-
-Examples:
-****
-.Command highlight 1
-image::command-highlight1.png[width="790"]
-
-.Command highlight 2
-image::command-highlight2.png[width="790"]
-****
 
 
 === Team based - Creating / Switching projects [coming in v2.0]
@@ -596,6 +600,6 @@ e.g. `refactorTag t/java n/C++`
 * *History* : `history`
 * *Exit* : `exit`
 * *List* : `list`
-* *Sort* : `sort` TYPE
-
-* *Highlight* : `highlight`
+* *Sort* : `sort TYPE`
+* *Refactor Tag* : `refactor [OLDTAG] [NEWTAG]` +
+e.g. `refactorTag java C++`

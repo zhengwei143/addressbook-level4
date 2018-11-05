@@ -12,7 +12,6 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.DataFlavor;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.saveit.commons.core.directory.Directory;
@@ -39,7 +38,6 @@ public class RetrieveCommandTest {
     }
 
     @Test
-    @Ignore //TODO: fix HeadlessException (travis doesn't have a keyboard)
     public void execute_retrieveValidIndex_success() {
         try {
             Index issueIndex = ParserUtil.parseIndex("3");

@@ -90,7 +90,7 @@ public class ParserUtil {
         if (!Remark.isValidRemark(trimmedRemark)) {
             throw new ParseException(Remark.MESSAGE_REMARK_CONSTRAINTS);
         }
-        solutionList.add(new Solution(solutionLink, solutionRemark));
+        solutionList.add(new Solution(trimmedSolutionLink, trimmedRemark));
         return solutionList;
     }
 
@@ -124,7 +124,7 @@ public class ParserUtil {
         if (!SolutionLink.isValidLink(trimmedSolutionLink)) {
             throw new ParseException(SolutionLink.MESSAGE_SOLUTION_LINK_CONSTRAINTS);
         }
-        return new SolutionLink(solutionLink);
+        return new SolutionLink(trimmedSolutionLink);
     }
 
     /**
@@ -136,7 +136,7 @@ public class ParserUtil {
         if (!Remark.isValidRemark(trimmedRemark)) {
             throw new ParseException(Remark.MESSAGE_REMARK_CONSTRAINTS);
         }
-        return new Remark(solutionRemark);
+        return new Remark(trimmedRemark);
     }
 
     /**

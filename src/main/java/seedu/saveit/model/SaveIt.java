@@ -1,7 +1,9 @@
 package seedu.saveit.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.saveit.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,6 +12,7 @@ import javafx.collections.ObservableList;
 import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.exceptions.IllegalValueException;
+import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;
 
 /**
@@ -95,12 +98,35 @@ public class SaveIt implements ReadOnlySaveIt {
     }
 
     /**
+     * Returns true if the targeted issue has the same solution exists in the saveIt.
+     */
+    public boolean hasSolution(Index index, Solution solution) {
+        requireAllNonNull(index, solution);
+        return issues.getIssue(index).getSolutions().contains(solution);
+    }
+
+    /**
      * Adds an issue to the saveIt.
      * The issue must not already exist in the saveIt.
      */
     public void addIssue(Issue p) {
         issues.add(p);
     }
+
+    /**
+     * Adds an issue to the saveIt.
+     * The issue must not already exist in the saveIt.
+     */
+    public void addSolution(Index index, Solution solution) {
+        Issue issueToEdit = issues.getIssue(index);
+        List<Solution> solutionsToUpdate = new ArrayList<>(issueToEdit.getSolutions());
+        solutionsToUpdate.add(solution);
+
+        Issue updateIssue = new Issue(issueToEdit.getStatement(), issueToEdit.getDescription(),
+                solutionsToUpdate, issueToEdit.getTags(), issueToEdit.getFrequency());
+        updateIssue(issueToEdit, updateIssue);
+    }
+
 
     /**
      * Replaces the given issue {@code target} in the list with {@code editedIssue}.

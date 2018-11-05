@@ -7,9 +7,7 @@ import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK_STRING;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.model.Issue;
@@ -38,6 +36,7 @@ public class AddCommand extends Command {
             + PREFIX_REMARK_STRING + "SOLUTION_REMARK";
     public static final String MESSAGE_ISSUE_SUCCESS = "New issue added: %1$s";
     public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt";
+    public static final String MESSAGE_DUPLICATE_SOLUTION = "This solution already exists in the given issue";
     public static final String DUMMY_STATEMENT = "dummyStatement";
     public static final String DUMMY_DESCRIPTION = "dummyDescription";
 
@@ -45,68 +44,58 @@ public class AddCommand extends Command {
             "Issue has to be selected first before adding solution";
     private static final String MESSAGE_WRONG_DIRECTORY = "Wrong directory, please check!";
     private static final String MESSAGE_SOLUTION_SUCCESS = "New solution added: %1$s";
-    private boolean addSolution;
-    private final Solution solutionToBeAdded;
     private final Issue toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Issue}
      */
     public AddCommand(Issue issue) {
-        if (issue.getStatement().issue.equals(DUMMY_STATEMENT) && issue.getDescription().value
-                .equals(DUMMY_DESCRIPTION)) {
-            addSolution = true;
-            assert (issue.getSolutions().size() == 1);
-            solutionToBeAdded = issue.getSolutions().get(0);
-            toAdd = null;
-        } else {
-            addSolution = false;
-            requireNonNull(issue);
-            toAdd = issue;
-            solutionToBeAdded = null;
-        }
+        requireNonNull(issue);
+        toAdd = issue;
     }
 
     /**
      * Add a solution to a existing issue in the issue list
      */
-    private void addSolutionToIssue(Model model, int index) {
-        List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
-        Issue originalIssue = lastShownList.get(index - 1);
-        List<Solution> newSolutionList = new ArrayList<>(originalIssue.getSolutions());
-        newSolutionList.add(solutionToBeAdded);
-        Issue newIssue = new Issue(originalIssue.getStatement(), originalIssue.getDescription(),
-                newSolutionList, originalIssue.getTags(), originalIssue.getFrequency());
-        model.updateIssue(originalIssue, newIssue);
-        model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
+    private void addSolutionToIssue(Model model, Solution solutionToBeAdded, Index index) throws CommandException {
+        if (model.hasSolution(index, solutionToBeAdded)) {
+            throw new CommandException(MESSAGE_DUPLICATE_SOLUTION);
+        }
+        model.addSolution(index, solutionToBeAdded);
         model.commitSaveIt();
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        int issueIndex = model.getCurrentDirectory().getIssue();
-        if (addSolution) {
-            if (!model.getCurrentDirectory().isRootLevel()) {
-                addSolutionToIssue(model, issueIndex);
+
+        switch (toAdd.getStatement().getValue()) {
+
+        case DUMMY_STATEMENT: //adding solution to existing issue
+            assert (toAdd.getDescription().getValue().equals(DUMMY_DESCRIPTION));
+            assert (toAdd.getSolutions().size() == 1);
+            if (model.getCurrentDirectory().isIssueLevel()) {
+                Index issueIndex = Index.fromOneBased(model.getCurrentDirectory().getIssue());
+                Solution solutionToBeAdded = toAdd.getSolutions().get(0);
+                addSolutionToIssue(model, solutionToBeAdded, issueIndex);
                 return new CommandResult(String.format(MESSAGE_SOLUTION_SUCCESS, solutionToBeAdded));
             } else {
                 throw new CommandException(MESSAGE_FAILED_ISSUE);
             }
-        }
 
-        if (!model.getCurrentDirectory().isRootLevel()) {
-            throw new CommandException(MESSAGE_WRONG_DIRECTORY);
-        }
+        default: //adding new issue
+            assert (toAdd.getSolutions().size() == 0);
+            if (model.getCurrentDirectory().isIssueLevel()) {
+                throw new CommandException(MESSAGE_WRONG_DIRECTORY);
+            }
 
-        if (model.hasIssue(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_ISSUE);
+            if (model.hasIssue(toAdd)) {
+                throw new CommandException(MESSAGE_DUPLICATE_ISSUE);
+            }
+            model.addIssue(toAdd);
+            model.commitSaveIt();
+            return new CommandResult(String.format(MESSAGE_ISSUE_SUCCESS, toAdd));
         }
-
-        model.addIssue(toAdd);
-        model.commitSaveIt();
-        addSolution = false;
-        return new CommandResult(String.format(MESSAGE_ISSUE_SUCCESS, toAdd));
     }
 
     @Override

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -130,7 +131,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasSolution(Index index, Solution solution) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteIssue(Issue target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addSolution(Index index, Solution solution) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -176,6 +187,14 @@ public class AddCommandTest {
 
         @Override
         public void addTag(Index index, Set<Tag> tagList) {
+            throw new AssertionError("This method should not be called.");
+        }
+        public TreeSet<String> getCurrentTagSet() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public TreeSet<String> getCurrentIssueStatementSet() {
             throw new AssertionError("This method should not be called.");
         }
 

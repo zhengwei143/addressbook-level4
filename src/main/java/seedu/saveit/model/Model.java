@@ -2,6 +2,7 @@ package seedu.saveit.model;
 
 import java.util.Comparator;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -36,10 +37,21 @@ public interface Model {
     boolean hasIssue(Issue issue);
 
     /**
+     * Returns true if the indexed issue has same solution as {@code solution} exists in the saveIt.
+     */
+    boolean hasSolution(Index index, Solution solution);
+
+    /**
      * Deletes the given issue.
      * The issue must exist in the saveIt.
      */
     void deleteIssue(Issue target);
+
+    /**
+     * Adds the given solution to the indexed issue.
+     * {@code solution} must not already exist in the given issue.
+     */
+    void addSolution(Index index, Solution solution);
 
     /**
      * Adds the given issue.
@@ -57,7 +69,7 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered issue list */
     ObservableList<Issue> getFilteredIssueList();
 
-    /**Returns an unmodified view of the filtered soluiton list of the selected issue */
+    /**Returns an unmodified view of the filtered solution list of the selected issue */
     ObservableList<Solution> getFilteredSolutionList();
 
     /**
@@ -89,6 +101,16 @@ public interface Model {
      * Adds tag(s) to the existing data of this {@code SaveIt} for {@code index} issue with {@code tagList}.
      */
     void addTag(Index index, Set<Tag> tagList);
+
+    /**
+     * Returns a Set of strings representing all the Tag(s) contained in the issues
+     */
+    TreeSet<String> getCurrentTagSet();
+
+    /**
+     * Returns a Set of strings representing all the IssueStatement(s) contained in the issues
+     */
+    TreeSet<String> getCurrentIssueStatementSet();
 
     /**
      * Returns true if the model has previous saveIt states to restore.

@@ -119,7 +119,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredAndSortedIssueList().size());
 
         Issue issue = model.getFilteredAndSortedIssueList().get(targetIndex.getZeroBased());
-        final String[] splitName = issue.getStatement().issue.split("\\s+");
+        final String[] splitName = issue.getStatement().getValue().split("\\s+");
         model.updateFilteredIssueList(new IssueContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredAndSortedIssueList().size());

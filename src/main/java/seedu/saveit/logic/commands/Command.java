@@ -5,7 +5,7 @@ import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.model.Model;
 
 /**
- * Represents a command with hidden internal logic and the ability to be executed.
+ * Represents a command with hidden internal Logic and the ability to be executed.
  */
 public abstract class Command {
 

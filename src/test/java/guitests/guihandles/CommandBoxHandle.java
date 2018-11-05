@@ -10,7 +10,7 @@ import javafx.scene.input.KeyCode;
  */
 public class CommandBoxHandle extends NodeHandle<InlineCssTextArea> {
 
-    public static final String COMMAND_INPUT_FIELD_ID = "#commandTextField";
+    public static final String COMMAND_INPUT_FIELD_ID = "#commandTextArea";
 
     public CommandBoxHandle(InlineCssTextArea commandBoxNode) {
         super(commandBoxNode);

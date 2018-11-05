@@ -1,9 +1,11 @@
 package seedu.saveit.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.saveit.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Comparator;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -16,7 +18,6 @@ import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.events.model.SaveItChangedEvent;
-import seedu.saveit.commons.util.CollectionUtil;
 import seedu.saveit.model.issue.IssueSort;
 import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;
@@ -36,7 +37,7 @@ public class ModelManager extends ComponentManager implements Model {
      */
     public ModelManager(ReadOnlySaveIt saveIt, UserPrefs userPrefs) {
         super();
-        CollectionUtil.requireAllNonNull(saveIt, userPrefs);
+        requireAllNonNull(saveIt, userPrefs);
 
         logger.fine("Initializing with SaveIt: " + saveIt + " and user prefs " + userPrefs);
 
@@ -83,8 +84,20 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean hasSolution(Index index, Solution solution) {
+        requireAllNonNull(index, solution);
+        return versionedSaveIt.hasSolution(index, solution);
+    }
+
+    @Override
     public void deleteIssue(Issue target) {
         versionedSaveIt.removeIssue(target);
+        indicateSaveItChanged();
+    }
+
+    @Override
+    public void addSolution(Index index, Solution solution) {
+        versionedSaveIt.addSolution(index, solution);
         indicateSaveItChanged();
     }
 
@@ -97,7 +110,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateIssue(Issue target, Issue editedIssue) {
-        CollectionUtil.requireAllNonNull(target, editedIssue);
+        requireAllNonNull(target, editedIssue);
 
         versionedSaveIt.updateIssue(target, editedIssue);
         indicateSaveItChanged();
@@ -115,7 +128,7 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Add Tag ===================================================================================
     @Override
     public void addTag(Index index, Set<Tag> tagList) {
-        CollectionUtil.requireAllNonNull(index, tagList);
+        requireAllNonNull(index, tagList);
         versionedSaveIt.addTag(index, tagList);
 
         indicateSaveItChanged();
@@ -124,7 +137,7 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Refactor Tag ==============================================================================
     @Override
     public boolean refactorTag(Tag oldTag, Tag newTag) {
-        CollectionUtil.requireAllNonNull(oldTag, newTag);
+        requireAllNonNull(oldTag, newTag);
         boolean isEdit = versionedSaveIt.refactorTag(oldTag, newTag);
 
         indicateSaveItChanged();
@@ -171,7 +184,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Sorted Issue List Accessors =============================================================
     @Override
-
     public void updateFilteredAndSortedIssueList(Comparator<Issue> comparator) {
         filteredAndSortedIssues.setComparator(comparator);
     }
@@ -186,6 +198,24 @@ public class ModelManager extends ComponentManager implements Model {
     public ObservableList<Issue> getFilteredAndSortedIssueList() {
         return FXCollections.unmodifiableObservableList(filteredAndSortedIssues);
     }
+
+    //=========== Tag Set Accessors ======================================================================
+    @Override
+    public TreeSet<String> getCurrentTagSet() {
+        TreeSet<String> tagSet = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        versionedSaveIt.getIssueList().forEach(issue -> issue.getTags()
+                .forEach(tag -> tagSet.add(tag.tagName)));
+        return tagSet;
+    }
+
+    //=========== Tag Set Accessors ======================================================================
+    @Override
+    public TreeSet<String> getCurrentIssueStatementSet() {
+        TreeSet<String> statementSet = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        versionedSaveIt.getIssueList().forEach(issue -> statementSet.add(issue.getStatement().getValue()));
+        return statementSet;
+    }
+
 
     //=========== Undo/Redo =================================================================================
 

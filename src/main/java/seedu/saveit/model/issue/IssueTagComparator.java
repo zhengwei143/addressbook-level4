@@ -14,18 +14,18 @@ public class IssueTagComparator implements Comparator<Issue> {
      * Compare Issue a and b with their first tag in the tag set. Tag is compared based on String tagName.
      */
     public int compare(Issue a, Issue b) {
-        Set<Tag> tagsB = b.getTags();
-        Set<Tag> tagsA = a.getTags();
+        Set<Tag> tagSetB = b.getTags();
+        Set<Tag> tagSetA = a.getTags();
 
-        Iterator<Tag> tagAIterator = tagsA.iterator();
-        Iterator<Tag> tagBIterator = tagsB.iterator();
-        while (tagAIterator.hasNext() && tagBIterator.hasNext()) {
-            Tag tagA = tagAIterator.next();
-            Tag tagB = tagBIterator.next();
+        Iterator<Tag> tagIteratorA = tagSetA.iterator();
+        Iterator<Tag> tagIteratorB = tagSetB.iterator();
+        while (tagIteratorA.hasNext() && tagIteratorB.hasNext()) {
+            Tag tagA = tagIteratorA.next();
+            Tag tagB = tagIteratorB.next();
             if (tagA.compare(tagB) != 0) {
                 return tagA.compare(tagB);
             }
         }
-        return tagsA.size() - tagsB.size();
+        return tagSetA.size() - tagSetB.size();
     }
 }

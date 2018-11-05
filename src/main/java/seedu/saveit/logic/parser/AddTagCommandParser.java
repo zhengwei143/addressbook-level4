@@ -68,22 +68,28 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
 
     /**
      * add discrete values to the index set
+     *
      * @param index index set
      * @param indexToCheck the issue index user want to add tags
-     * @throws ParseException
      */
     private void addDiscreteIndex(Set<Index> index, String indexToCheck) throws ParseException {
         String[] indexNumber = indexToCheck.split(" ");
-        for (int i = 0; i < indexNumber.length; i++) {
-            addIndex(index, Integer.parseInt(indexNumber[i]));
+        try {
+            for (int i = 0; i < indexNumber.length; i++) {
+                addIndex(index, Integer.parseInt(indexNumber[i]));
+            }
+        } catch (NumberFormatException nfe) {
+            throw new ParseException(
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
         }
+
     }
 
     /**
      * add range values to the index set
+     *
      * @param index index set
      * @param indexToCheck the issue index user want to add tags
-     * @throws ParseException
      */
     private void addRangeIndex(Set<Index> index, String indexToCheck) throws ParseException {
         String[] indexRange = indexToCheck.split("-");
@@ -104,9 +110,9 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
 
     /**
      * add the issue index to the index set.
+     *
      * @param index index set for the issue that users want to add tags.
      * @param indexToAdd the index that user want to add tags.
-     * @throws ParseException
      */
     private void addIndex(Set<Index> index, int indexToAdd) throws ParseException {
         checkLowerBound(indexToAdd);
@@ -123,7 +129,7 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
 
     /**
      * check if the index is smaller than indexLowerLimit.
-     * @param indexToAdd
+     *
      * @throws ParseException throw exception if index is smaller than indexLowerLimit.
      */
     private void checkLowerBound(int indexToAdd) throws ParseException {

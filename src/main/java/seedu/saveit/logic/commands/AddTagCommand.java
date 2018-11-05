@@ -30,7 +30,8 @@ public class AddTagCommand extends Command {
 
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Add tags success";
     public static final String MESSAGE_ADD_TAG_LOWER_BOUND_FAILURE = "Your index should be > 0";
-    public static final String MESSAGE_ADD_TAG_HIGHER_BOUND_FAILURE = "Your index should not be more than the number of your issues";
+    public static final String MESSAGE_ADD_TAG_HIGHER_BOUND_FAILURE =
+        "Your index should not be more than the number of your issues";
 
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -64,7 +65,6 @@ public class AddTagCommand extends Command {
             throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
         }
 
-
         int numOfIssues = model.getFilteredAndSortedIssueList().size();
         checkHigherBound(numOfIssues, index);
         Set<Issue> issueToEdit = new HashSet<>();
@@ -78,7 +78,7 @@ public class AddTagCommand extends Command {
             System.out.println(issueToEdit.size() == index.size());
             model.addTag(issueToEdit, tagList);
             model.commitSaveIt();
-        } catch (DuplicateIssueException die){
+        } catch (DuplicateIssueException die) {
             throw new CommandException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
         } catch (IssueNotFoundException infe) {
@@ -91,17 +91,15 @@ public class AddTagCommand extends Command {
 
     /**
      * check if the index set exceeds the higher bound of the issues
-     * @param higherBound
-     * @param index
-     * @throws ParseException
      */
     public void checkHigherBound(int higherBound, Set<Index> index) throws ParseException {
         Iterator<Index> it = index.iterator();
 
-        while(it.hasNext()){
+        while (it.hasNext()) {
             int next = it.next().getZeroBased();
-            if( next >= higherBound){
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_ADD_TAG_HIGHER_BOUND_FAILURE + " " + String.valueOf(higherBound)));
+            if (next >= higherBound) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddTagCommand.MESSAGE_ADD_TAG_HIGHER_BOUND_FAILURE + " " + String.valueOf(higherBound)));
             }
         }
     }

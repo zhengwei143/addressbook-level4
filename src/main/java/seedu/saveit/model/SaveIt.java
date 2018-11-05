@@ -148,14 +148,14 @@ public class SaveIt implements ReadOnlySaveIt {
         Iterator<Issue> issueIterator = issues.iterator();
         boolean added = false;
 
-        while(issueIterator.hasNext()){
+        while (issueIterator.hasNext()) {
             Issue issueToEdit = issueIterator.next();
             Set<Tag> currentTags = new HashSet<>(issueToEdit.getTags());
             Set<Tag> updateTags = new HashSet<>();
             updateTags.addAll(tagList);
             updateTags.addAll(currentTags);
 
-            if(currentTags.size() != updateTags.size()){
+            if (currentTags.size() != updateTags.size()) {
                 added = true;
                 Issue updateIssue = new Issue(issueToEdit.getStatement(), issueToEdit.getDescription(),
                     issueToEdit.getSolutions(), updateTags, issueToEdit.getFrequency());
@@ -163,7 +163,7 @@ public class SaveIt implements ReadOnlySaveIt {
             }
         }
 
-        if(!added){
+        if (!added) {
             throw new IssueNotFoundException();
         }
     }

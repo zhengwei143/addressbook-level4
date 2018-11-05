@@ -143,19 +143,21 @@ public class SaveIt implements ReadOnlySaveIt {
     /**
      * Adds tag(s) to the existing data of this {@code SaveIt} with {@code tagList} for a range of {@code index} issue.
      */
-    public void addTag(Set<Index> index, Set<Tag> tagList) {
+    public void addTag(Set<Issue> issues, Set<Tag> tagList) {
         requireNonNull(tagList);
-        Iterator<Index> indexIterator = index.iterator();
+        Iterator<Issue> issueIterator = issues.iterator();
         boolean added = false;
 
-        while(indexIterator.hasNext()){
-            Issue issueToEdit = issues.getIssue(indexIterator.next());
+        while(issueIterator.hasNext()){
+            Issue issueToEdit = issueIterator.next();
             Set<Tag> currentTags = new HashSet<>(issueToEdit.getTags());
             Set<Tag> updateTags = new HashSet<>();
+            System.out.println("tagList" + tagList.size());
             updateTags.addAll(tagList);
             updateTags.addAll(currentTags);
 
             if(!(currentTags.size() == updateTags.size())){
+                System.out.println("update");
                 added = true;
                 Issue updateIssue = new Issue(issueToEdit.getStatement(), issueToEdit.getDescription(),
                     issueToEdit.getSolutions(), updateTags, issueToEdit.getFrequency());

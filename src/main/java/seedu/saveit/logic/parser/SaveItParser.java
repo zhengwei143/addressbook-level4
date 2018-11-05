@@ -88,7 +88,6 @@ public class SaveItParser {
         case SortCommand.COMMAND_ALIAS:
             return new SortCommandParser().parse(arguments);
 
-
         case HomeCommand.COMMAND_WORD:
         case HomeCommand.COMMAND_ALIAS:
             return new HomeCommand();

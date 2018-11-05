@@ -2,6 +2,8 @@ package seedu.saveit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.saveit.commons.core.Messages;
+import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.model.Issue;
@@ -56,8 +58,13 @@ public class RefactorTagCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        Directory currentDirectory = model.getCurrentDirectory();
+        if (!currentDirectory.isRootLevel()) {
+            throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
+        }
+
         isEdit = newTag != null ? model.refactorTag(oldTag, newTag) : model.refactorTag(oldTag);
-        model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
+//        model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
         model.commitSaveIt();
         if (isEdit) {
             return new CommandResult(MESSAGE_REFACTOR_TAG_SUCCESS);

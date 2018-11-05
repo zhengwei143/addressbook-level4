@@ -11,4 +11,5 @@ public class Messages {
     public static final String MESSAGE_INVALID_SOLUTION_DISPLAYED_INDEX = "The solution index provided is invalid";
     public static final String MESSAGE_ISSUES_LISTED_OVERVIEW = "%1$d issues listed!";
     public static final String MESSAGE_WRONG_DIRECTORY = "Wrong directory, please check!";
+    public static final String MESSAGE_INVALID_DISPLAYED_INDEX = "The index is invalid";
 }

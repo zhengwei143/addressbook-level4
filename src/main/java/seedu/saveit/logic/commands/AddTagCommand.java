@@ -3,13 +3,18 @@ package seedu.saveit.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
+import seedu.saveit.commons.core.Messages;
+import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.logic.parser.exceptions.ParseException;
+import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.issue.Tag;
 import seedu.saveit.model.issue.exceptions.DuplicateIssueException;
@@ -54,17 +59,31 @@ public class AddTagCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws ParseException, CommandException {
         requireNonNull(model);
-        // check higher bound
-        // got the issue length
-        int numOfIssues = model.getFilteredIssueList().size();
+        Directory currentDirectory = model.getCurrentDirectory();
+        if (!currentDirectory.isRootLevel()) {
+            throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
+        }
+
+
+        int numOfIssues = model.getFilteredAndSortedIssueList().size();
         checkHigherBound(numOfIssues, index);
+        Set<Issue> issueToEdit = new HashSet<>();
         try {
-            model.addTag(index, tagList);
-            model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
+            List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
+            index.forEach(issueIndex -> {
+                System.out.println("issue is " + issueIndex.getZeroBased());
+                issueToEdit.add(lastShownList.get(issueIndex.getZeroBased()));
+            });
+
+            System.out.println(issueToEdit.size() == index.size());
+            model.addTag(issueToEdit, tagList);
             model.commitSaveIt();
         } catch (DuplicateIssueException die){
             throw new CommandException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
+        } catch (IssueNotFoundException infe) {
+            throw new CommandException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, "No updated tags due to already have"));
         }
 
         return new CommandResult(MESSAGE_ADD_TAG_SUCCESS);

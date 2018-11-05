@@ -98,9 +98,9 @@ public interface Model {
     void updateFilteredAndSortedIssueList(Comparator<Issue> sortType);
 
     /**
-     * Adds tag(s) to the existing data of this {@code SaveIt} with {@code tagList} for a range of {@code index} issue.
+     * Adds tag(s) to the existing data of this {@code SaveIt} with {@code tagList} for a range of {@code issues}.
      */
-    void addTag(Set<Index> index, Set<Tag> tagList);
+    void addTag(Set<Issue> issues, Set<Tag> tagList);
 
     /**
      * Returns a Set of strings representing all the Tag(s) contained in the issues

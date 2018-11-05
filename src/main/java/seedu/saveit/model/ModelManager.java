@@ -127,7 +127,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Add Tag ===================================================================================
     @Override
-    public void addTag(Index index, Set<Tag> tagList) {
+    public void addTag(Set<Index> index, Set<Tag> tagList) {
         requireAllNonNull(index, tagList);
         versionedSaveIt.addTag(index, tagList);
 

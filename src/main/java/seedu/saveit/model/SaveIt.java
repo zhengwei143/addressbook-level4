@@ -1,10 +1,12 @@
 package seedu.saveit.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.saveit.commons.core.index.Index.fromZeroBased;
 import static seedu.saveit.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -14,6 +16,7 @@ import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.exceptions.IllegalValueException;
 import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;
+import seedu.saveit.model.issue.exceptions.IssueNotFoundException;
 
 /**
  * Wraps all data at the saveit-book level
@@ -140,17 +143,31 @@ public class SaveIt implements ReadOnlySaveIt {
     }
 
     /**
-     * Adds tag(s) to the existing data of this {@code SaveIt} issue with {@code tagList} for {@code index} issue.
+     * Adds tag(s) to the existing data of this {@code SaveIt} with {@code tagList} for a range of {@code index} issue.
      */
-    public void addTag(Index index, Set<Tag> tagList) {
+    public void addTag(Set<Index> index, Set<Tag> tagList) {
         requireNonNull(tagList);
-        Issue issueToEdit = issues.getIssue(index);
-        Set<Tag> tagsToUpdate = new HashSet<>(issueToEdit.getTags());
-        tagsToUpdate.addAll(tagList);
+        Iterator<Index> indexIterator = index.iterator();
+        boolean added = false;
 
-        Issue updateIssue = new Issue(issueToEdit.getStatement(), issueToEdit.getDescription(),
-            issueToEdit.getSolutions(), tagsToUpdate, issueToEdit.getFrequency());
-        updateIssue(issueToEdit, updateIssue);
+        while(indexIterator.hasNext()){
+            Issue issueToEdit = issues.getIssue(indexIterator.next());
+            Set<Tag> currentTags = new HashSet<>(issueToEdit.getTags());
+            Set<Tag> updateTags = new HashSet<>();
+            updateTags.addAll(tagList);
+            updateTags.addAll(currentTags);
+
+            if(!(currentTags.size() == updateTags.size())){
+                added = true;
+                Issue updateIssue = new Issue(issueToEdit.getStatement(), issueToEdit.getDescription(),
+                    issueToEdit.getSolutions(), updateTags, issueToEdit.getFrequency());
+                updateIssue(issueToEdit, updateIssue);
+            }
+        }
+
+        if(!added){
+            throw new IssueNotFoundException();
+        }
     }
 
     /**
@@ -171,7 +188,6 @@ public class SaveIt implements ReadOnlySaveIt {
                     issueToUpdate.getSolutions(), tagsToUpdate, issueToUpdate.getFrequency());
                 updateIssue(issueToUpdate, updateIssue);
             }
-
         }
         return isEdit;
     }

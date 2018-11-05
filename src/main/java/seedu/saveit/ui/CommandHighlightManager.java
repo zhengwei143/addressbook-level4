@@ -18,23 +18,23 @@ public class CommandHighlightManager {
     public static final String STYLE_PARAMETER_KEY = "-fx-fill: #ffff00;";
     public static final String STYLE_INDEX = "-fx-fill: #55ae47;";
     public static final String STYLE_NORMAL_VALUE = "-fx-fill: #42c3f4;";
-    private static CommandHighlightManager instance;
 
     /**
-     * highlight user input.
+     * highlight user input in different colors.
      */
     public static void highlight(InlineCssTextArea commandTextField) {
         String userInput = commandTextField.getText();
         int position = 0;
+        boolean indexHighlighted = false;
 
-        while (isShorterThanInput(userInput, position) && isSpace(userInput, position)) {
+        while (isShorterThanInput(userInput, position) && isNotSpace(userInput, position)) {
             commandTextField.setStyle(position, position + 1, STYLE_COMMAND_WORD);
             position++;
         }
 
         // highlight the following parameters, which are key-value pairs
         while (isShorterThanInput(userInput, position)) {
-            while (isIndex(userInput, position)) {
+            while (isIndex(userInput, position) && isNotSpace(userInput, position) && !indexHighlighted ) {
                 commandTextField.setStyle(position, position + 1, STYLE_INDEX);
                 position++;
             }
@@ -42,6 +42,7 @@ public class CommandHighlightManager {
             if (isShorterThanInput(userInput, position) && isParameter(userInput, position)) {
                 commandTextField.setStyle(position - 1, position + 1, STYLE_PARAMETER_KEY);
                 position++;
+                indexHighlighted = true;
             }
 
             if (!isShorterThanInput(userInput, position)) {
@@ -53,7 +54,7 @@ public class CommandHighlightManager {
         }
     }
 
-    private static boolean isSpace(String userInput, int position) {
+    private static boolean isNotSpace(String userInput, int position) {
         return userInput.charAt(position) != ' ';
     }
 
@@ -66,7 +67,7 @@ public class CommandHighlightManager {
     }
 
     /**
-     * check if user input parameters
+     * check if the character is parameter
      *
      * @return true if parameter, otherwise false
      */
@@ -75,7 +76,7 @@ public class CommandHighlightManager {
         input.append(userInput.charAt(position - 1));
         input.append(userInput.charAt(position));
         String inputCheck = input.toString();
-        if (isParamter(inputCheck)) {
+        if (isParameter(inputCheck)) {
             return true;
         }
         return false;
@@ -86,7 +87,7 @@ public class CommandHighlightManager {
      * @param inputCheck every two consecutive characters.
      * @return true if parameter, otherwise false
      */
-    private static boolean isParamter(String inputCheck) {
+    private static boolean isParameter(String inputCheck) {
         return inputCheck.equals(PREFIX_STATEMENT.toString()) || inputCheck.equals(PREFIX_SOLUTION_LINK.toString())
             || inputCheck.equals(PREFIX_REMARK.toString()) || inputCheck.equals(PREFIX_DESCRIPTION.toString())
             || inputCheck.equals(PREFIX_TAG.toString()) || inputCheck.equals(PREFIX_NEW_TAG.toString());

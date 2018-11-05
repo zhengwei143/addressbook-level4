@@ -54,17 +54,6 @@ public class AddCommand extends Command {
         toAdd = issue;
     }
 
-    /**
-     * Add a solution to a existing issue in the issue list
-     */
-    private void addSolutionToIssue(Model model, Solution solutionToBeAdded, Index index) throws CommandException {
-        if (model.hasSolution(index, solutionToBeAdded)) {
-            throw new CommandException(MESSAGE_DUPLICATE_SOLUTION);
-        }
-        model.addSolution(index, solutionToBeAdded);
-        model.commitSaveIt();
-    }
-
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
@@ -88,14 +77,31 @@ public class AddCommand extends Command {
             if (!model.getCurrentDirectory().isRootLevel()) {
                 throw new CommandException(MESSAGE_WRONG_DIRECTORY);
             }
-
-            if (model.hasIssue(toAdd)) {
-                throw new CommandException(MESSAGE_DUPLICATE_ISSUE);
-            }
-            model.addIssue(toAdd);
-            model.commitSaveIt();
+            addIssueToSaveIt(model, toAdd);
             return new CommandResult(String.format(MESSAGE_ISSUE_SUCCESS, toAdd));
         }
+    }
+
+    /**
+     * Add an issue to saveIt
+     */
+    private void addIssueToSaveIt(Model model, Issue toAdd) throws CommandException{
+        if (model.hasIssue(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_ISSUE);
+        }
+        model.addIssue(toAdd);
+        model.commitSaveIt();
+    }
+
+    /**
+     * Add a solution to a existing issue in the issue list
+     */
+    private void addSolutionToIssue(Model model, Solution solutionToBeAdded, Index index) throws CommandException {
+        if (model.hasSolution(index, solutionToBeAdded)) {
+            throw new CommandException(MESSAGE_DUPLICATE_SOLUTION);
+        }
+        model.addSolution(index, solutionToBeAdded);
+        model.commitSaveIt();
     }
 
     @Override

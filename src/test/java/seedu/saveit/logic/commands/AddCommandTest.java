@@ -83,7 +83,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_IssueLevelAddIssue_throwsCommandException() throws Exception {
+    public void execute_issueLevelAddIssue_throwsCommandException() throws Exception {
         Issue validIssue = new IssueBuilder().build();
         AddCommand addCommand = new AddCommand(validIssue);
         ModelStub modelStub = new ModelStubAcceptingIssueAdded();
@@ -96,7 +96,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_SolutionLevelAddIssue_throwsCommandException() throws Exception {
+    public void execute_solutionLevelAddIssue_throwsCommandException() throws Exception {
         Issue validIssue = new IssueBuilder().build();
         AddCommand addCommand = new AddCommand(validIssue);
         ModelStub modelStub = new ModelStubAcceptingIssueAdded();
@@ -111,7 +111,7 @@ public class AddCommandTest {
     //=========== Add Solution test ===================================================================================
 
     @Test
-    public void execute_issueAcceptedByModel_issueLevel_addSuccessful() throws Exception {
+    public void execute_issueAcceptedByModel_issueLevelAddSuccessful() throws Exception {
         ModelStubAcceptingSolutionAdded modelStub = new ModelStubAcceptingSolutionAdded(new IssueBuilder().build());
         Directory issueLevel = getCustomizedIssueLevel(INDEX_FIRST_ISSUE);
         modelStub.resetDirectory(issueLevel);
@@ -128,7 +128,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_issueAcceptedByModel_solutionLevel_addSuccessful() throws Exception {
+    public void execute_issueAcceptedByModel_solutionLevelAddSuccessful() throws Exception {
         ModelStubAcceptingSolutionAdded modelStub = new ModelStubAcceptingSolutionAdded(new IssueBuilder()
                 .withSolutions(VALID_SOLUTION_JAVA, VALID_SOLUTION_C).build());
         Directory issueLevel = getCustomizedSolutionLevel(INDEX_FIRST_ISSUE, INDEX_SECOND_SOLUTION);
@@ -153,9 +153,9 @@ public class AddCommandTest {
         Directory issueLevel = getCustomizedIssueLevel(INDEX_FIRST_ISSUE);
         modelStub.resetDirectory(issueLevel);
 
-        Issue ValidIssue = new IssueBuilder().withDummyStatement().withDummyDescription()
+        Issue validIssue = new IssueBuilder().withDummyStatement().withDummyDescription()
                 .withSolutions(VALID_SOLUTION_JAVA).build();
-        AddCommand addCommand = new AddCommand(ValidIssue);
+        AddCommand addCommand = new AddCommand(validIssue);
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_SOLUTION);
@@ -167,9 +167,9 @@ public class AddCommandTest {
         ModelStubAcceptingSolutionAdded modelStub = new ModelStubAcceptingSolutionAdded(new IssueBuilder().build());
         modelStub.resetDirectory(ROOT_LEVEL);
 
-        Issue ValidIssue = new IssueBuilder().withDummyStatement().withDummyDescription()
+        Issue validIssue = new IssueBuilder().withDummyStatement().withDummyDescription()
                 .withSolutions(VALID_SOLUTION_JAVA).build();
-        AddCommand addCommand = new AddCommand(ValidIssue);
+        AddCommand addCommand = new AddCommand(validIssue);
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddCommand.MESSAGE_FAILED_ISSUE);
@@ -179,7 +179,7 @@ public class AddCommandTest {
     //=========== Add Issue then Solution test ========================================================================
 
     @Test
-    public void execute_issueAndSolutionAcceptedByModel_issueLevel_addSuccessful() throws Exception {
+    public void execute_issueAndSolutionAcceptedByModel_issueLevelAddSuccessful() throws Exception {
         ModelStubAcceptingIssueAndSolutionAdded modelStub = new ModelStubAcceptingIssueAndSolutionAdded();
         Issue validIssue = new IssueBuilder().withStatement(VALID_STATEMENT_C)
                 .withDescription(VALID_DESCRIPTION_C).build();
@@ -392,8 +392,8 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingIssueAdded extends ModelStub {
 
-        private Directory directory = ROOT_LEVEL;
         final ArrayList<Issue> issuesAdded = new ArrayList<>();
+        Directory directory = ROOT_LEVEL;
 
         @Override
         public boolean hasIssue(Issue issue) {
@@ -433,8 +433,8 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingSolutionAdded extends ModelStub {
 
-        private Directory directory = ROOT_LEVEL;
         final ArrayList<Issue> issuesAdded = new ArrayList<>();
+        Directory directory = ROOT_LEVEL;
 
         public ModelStubAcceptingSolutionAdded(Issue issue) {
             issuesAdded.add(issue);

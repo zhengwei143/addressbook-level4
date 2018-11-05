@@ -57,6 +57,10 @@ public class IssueBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code IssueStatement} of the {@code Issue} that we are building
+     * to dummy statement.
+     */
     public IssueBuilder withDummyStatement() {
         this.statement = new IssueStatement(DUMMY_STATEMENT);
         return this;
@@ -86,6 +90,10 @@ public class IssueBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Description} of the {@code Issue} that we are
+     * building to dummy description.
+     */
     public IssueBuilder withDummyDescription() {
         this.description = new Description(DUMMY_DESCRIPTION);
         return this;

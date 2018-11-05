@@ -393,7 +393,7 @@ public class AddCommandTest {
     private class ModelStubAcceptingIssueAdded extends ModelStub {
 
         final ArrayList<Issue> issuesAdded = new ArrayList<>();
-        Directory directory = ROOT_LEVEL;
+        private Directory directory = ROOT_LEVEL;
 
         @Override
         public boolean hasIssue(Issue issue) {
@@ -434,7 +434,7 @@ public class AddCommandTest {
     private class ModelStubAcceptingSolutionAdded extends ModelStub {
 
         final ArrayList<Issue> issuesAdded = new ArrayList<>();
-        Directory directory = ROOT_LEVEL;
+        private Directory directory = ROOT_LEVEL;
 
         public ModelStubAcceptingSolutionAdded(Issue issue) {
             issuesAdded.add(issue);

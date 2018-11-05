@@ -29,6 +29,8 @@ public class AddTagCommand extends Command {
     public static final String COMMAND_ALIAS = "at";
 
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Add tags success";
+    public static final String MESSAGE_DUPLICATE_TAG = "No updated tags due to duplicate tags";
+
     public static final String MESSAGE_ADD_TAG_LOWER_BOUND_FAILURE = "Your index should be > 0";
     public static final String MESSAGE_ADD_TAG_HIGHER_BOUND_FAILURE =
         "Your index should not be more than the number of your issues";
@@ -83,7 +85,7 @@ public class AddTagCommand extends Command {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
         } catch (IssueNotFoundException infe) {
             throw new CommandException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, "No updated tags due to already have"));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_DUPLICATE_TAG));
         }
 
         return new CommandResult(MESSAGE_ADD_TAG_SUCCESS);

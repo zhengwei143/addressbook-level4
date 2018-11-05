@@ -93,9 +93,15 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
      */
     private void addRangeIndex(Set<Index> index, String indexToCheck) throws ParseException {
         String[] indexRange = indexToCheck.split("-");
-
-        int rangeStart = Integer.parseInt(indexRange[0]);
-        int rangeEnd = Integer.parseInt(indexRange[1]);
+        int rangeStart;
+        int rangeEnd;
+        try {
+            rangeStart = Integer.parseInt(indexRange[0]);
+            rangeEnd = Integer.parseInt(indexRange[1]);
+        } catch (NumberFormatException nfe){
+            throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
+        }
         checkLowerBound(rangeStart);
 
         if (rangeEnd < rangeStart) {

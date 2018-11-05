@@ -47,7 +47,7 @@ public class SortCommandTest {
         expectedModel.updateFilteredAndSortedIssueList(issueSort.getComparator());
         SortCommand command = new SortCommand(issueSort);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(DANIEL, BENSON, ALICE, GEORGE, FIONA, ELLE, CARL),
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA, GEORGE, DANIEL, BENSON, ALICE),
                 model.getFilteredAndSortedIssueList());
     }
 
@@ -61,7 +61,7 @@ public class SortCommandTest {
         expectedModel.updateFilteredAndSortedIssueList(issueSort.getComparator());
         SortCommand command = new SortCommand(issueSort);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(DANIEL, BENSON, ALICE, ELLE), model.getFilteredAndSortedIssueList());
+        assertEquals(Arrays.asList(ELLE, DANIEL, BENSON, ALICE), model.getFilteredAndSortedIssueList());
     }
 
     @Test
@@ -76,8 +76,13 @@ public class SortCommandTest {
         model.addIssue(issue);
         SortCommand command = new SortCommand(issueSort);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(DANIEL, BENSON, ALICE, issue, GEORGE, FIONA, ELLE, CARL),
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA, GEORGE, issue, DANIEL, BENSON, ALICE),
                 model.getFilteredAndSortedIssueList());
+    }
+
+    @Test
+    public void execute_notUnderRootLevel_failure() {
+
     }
 
     /**

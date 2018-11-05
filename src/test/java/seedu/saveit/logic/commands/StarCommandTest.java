@@ -1,6 +1,5 @@
 package seedu.saveit.logic.commands;
 
-
 import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_SOLUTION;

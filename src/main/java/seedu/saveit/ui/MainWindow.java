@@ -53,6 +53,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane commandBoxPlaceholder;
 
     @FXML
+    private MenuItem exitMenuItem;
+
+    @FXML
     private MenuItem helpMenuItem;
 
     @FXML

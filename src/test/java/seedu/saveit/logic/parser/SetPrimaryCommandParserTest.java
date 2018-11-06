@@ -10,7 +10,7 @@ import org.junit.Test;
 import seedu.saveit.logic.commands.SetPrimaryCommand;
 
 public class SetPrimaryCommandParserTest {
-    private StarCommandParser parser = new StarCommandParser();
+    private SetPrimaryCommandParser parser = new SetPrimaryCommandParser();
 
     @Test
     public void parse_validArgs_returnsStarCommand() {

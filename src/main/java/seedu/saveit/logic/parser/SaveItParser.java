@@ -4,8 +4,26 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.saveit.commons.core.Messages;
-import seedu.saveit.logic.commands.*;
+import seedu.saveit.logic.commands.AddCommand;
+import seedu.saveit.logic.commands.AddTagCommand;
+import seedu.saveit.logic.commands.ClearCommand;
+import seedu.saveit.logic.commands.Command;
+import seedu.saveit.logic.commands.DeleteCommand;
+import seedu.saveit.logic.commands.EditCommand;
+import seedu.saveit.logic.commands.ExitCommand;
+import seedu.saveit.logic.commands.FindByTagCommand;
+import seedu.saveit.logic.commands.FindCommand;
+import seedu.saveit.logic.commands.HelpCommand;
+import seedu.saveit.logic.commands.HistoryCommand;
+import seedu.saveit.logic.commands.HomeCommand;
+import seedu.saveit.logic.commands.ListCommand;
+import seedu.saveit.logic.commands.RedoCommand;
+import seedu.saveit.logic.commands.RefactorTagCommand;
+import seedu.saveit.logic.commands.RetrieveCommand;
+import seedu.saveit.logic.commands.SelectCommand;
 import seedu.saveit.logic.commands.SetPrimaryCommand;
+import seedu.saveit.logic.commands.SortCommand;
+import seedu.saveit.logic.commands.UndoCommand;
 import seedu.saveit.logic.parser.exceptions.ParseException;
 
 /**
@@ -109,7 +127,7 @@ public class SaveItParser {
 
         case SetPrimaryCommand.COMMAND_WORD:
         case SetPrimaryCommand.COMMAND_ALIAS:
-            return new StarCommandParser().parse(arguments);
+            return new SetPrimaryCommandParser().parse(arguments);
 
         default:
             throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND);

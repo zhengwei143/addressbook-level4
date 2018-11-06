@@ -8,7 +8,7 @@ import seedu.saveit.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new SetPrimaryCommand object
  */
-public class StarCommandParser implements Parser<SetPrimaryCommand> {
+public class SetPrimaryCommandParser implements Parser<SetPrimaryCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the SelectCommand
      * and returns an SelectCommand object for execution.

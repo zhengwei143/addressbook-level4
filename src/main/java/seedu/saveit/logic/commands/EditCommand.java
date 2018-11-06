@@ -68,19 +68,19 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        requireNonNull(model);
         Issue issueToEdit;
+        requireNonNull(model);
         List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
         Directory currentDirectory = model.getCurrentDirectory();
 
-        if (isEditIssueDoable(currentDirectory)) {
+        if (currentDirectory.isRootLevel()) {
             issueToEdit = getIssueToEdit(lastShownList, lastShownList.size(), index.getZeroBased());
-        } else if (isEditSolutionDoable(currentDirectory)) {
-            int solutionListSize = lastShownList.get(currentDirectory.getIssue() - 1).getSolutions().size();
-            issueToEdit = getIssueToEdit(lastShownList, solutionListSize, currentDirectory.getIssue() - 1);
         } else {
-            throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
+            int issueIndex = currentDirectory.getIssue() - 1;
+            int solutionListSize = lastShownList.get(issueIndex).getSolutions().size();
+            issueToEdit = getIssueToEdit(lastShownList, solutionListSize, issueIndex);
         }
+
 
         Issue editedIssue = createEditedIssue(issueToEdit, editIssueDescriptor);
         if (!issueToEdit.isSameIssue(editedIssue) && model.hasIssue(editedIssue)) {
@@ -88,22 +88,9 @@ public class EditCommand extends Command {
         }
 
         model.updateIssue(issueToEdit, editedIssue);
-//        model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
+        model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
         model.commitSaveIt();
         return new CommandResult(String.format(MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue));
-    }
-
-    private boolean isEditIssueDoable(Directory currentDirectory) {
-        return isEditIssueDoable(currentDirectory.isRootLevel(), editIssueDescriptor.isAnyIssueFieldEdited());
-    }
-
-    private boolean isEditIssueDoable(boolean rootLevel, boolean anyIssueFieldEdited) {
-        return rootLevel && anyIssueFieldEdited;
-    }
-
-    private boolean isEditSolutionDoable(Directory currentDirectory) {
-        return (currentDirectory.isIssueLevel() || currentDirectory.isSolutionLevel()) && editIssueDescriptor
-            .isAnySolutionFieldEdited();
     }
 
     private Issue getIssueToEdit(List<Issue> lastShownList, int listSize, int issueIndex) throws CommandException {
@@ -151,20 +138,21 @@ public class EditCommand extends Command {
         // if in the home directory, should not process this
         if (index >= issueToEdit.getSolutions().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
-        } else {
-            Solution oldSolution = issueToEdit.getSolutions().get(index);
-            Solution updatedSolution;
+        }
+        
+        Solution oldSolution = issueToEdit.getSolutions().get(index);
+        Solution updatedSolution;
 
-            String updatedSolutionLink =
-                newSolution.getLink().getValue().equals(DUMMY_SOLUTION_LINK) ? oldSolution.getLink().getValue()
-                    : newSolution.getLink().getValue();
-            String updatedSolutionRemark =
-                newSolution.getRemark().getValue().equals(DUMMY_SOLUTION_REMARK) ? oldSolution.getRemark().getValue()
-                    : newSolution.getRemark().getValue();
+        String updatedSolutionLink =
+            newSolution.getLink().getValue().equals(DUMMY_SOLUTION_LINK) ? oldSolution.getLink().getValue()
+                : newSolution.getLink().getValue();
+        String updatedSolutionRemark =
+            newSolution.getRemark().getValue().equals(DUMMY_SOLUTION_REMARK) ? oldSolution.getRemark().getValue()
+                : newSolution.getRemark().getValue();
 
-            updatedSolution = new Solution(updatedSolutionLink, updatedSolutionRemark);
+        updatedSolution = new Solution(updatedSolutionLink, updatedSolutionRemark);
 
-            return updatedSolution;
+        return updatedSolution;
         }
     }
 
@@ -221,21 +209,6 @@ public class EditCommand extends Command {
         public int getIndex() {
             return index;
         }
-
-        /**
-         * Returns true if at least one field of issue level is edited.
-         */
-        public boolean isAnyIssueFieldEdited() {
-            return CollectionUtil.isAnyNonNull(statement, description, tags);
-        }
-
-        /**
-         * Returns true if solution field is edited.
-         */
-        public boolean isAnySolutionFieldEdited() {
-            return CollectionUtil.isAnyNonNull(solution);
-        }
-
 
         public void setStatement(IssueStatement statement) {
             this.statement = statement;

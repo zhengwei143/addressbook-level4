@@ -646,7 +646,7 @@ image::refactor-tag.jpeg[width="800"]
 ** Cons: It is inconvenient if the user wants to replace the tags once.
 * Alternative 2: Allows to rename or remove multiple old tags with multiple new tags.
 ** Pros: It is convenient for users to replace or remove the tags once.
-** Cons: It is not clear for users to see the changes since tags are displayed disordered. 
+** Cons: It is not clear for users to see the changes since tags are displayed disordered.
 // end::refactorTag[]
 
 

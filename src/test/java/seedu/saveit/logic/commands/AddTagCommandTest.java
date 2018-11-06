@@ -139,8 +139,7 @@ public class AddTagCommandTest {
         AddTagCommand addTagCommand = new AddTagCommand(indexSet, tagSet);
         String expectedMessage = String.format(AddTagCommand.MESSAGE_ADD_TAG_SUCCESS);
         ModelManager expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());
-        Set<Issue> issueToEdit = new HashSet<>();
-        issueToEdit = getIssueToEdit(indexSet, expectedModel);
+        Set<Issue> issueToEdit = getIssueToEdit(indexSet, expectedModel);
         expectedModel.addTag(issueToEdit, tagSet);
         expectedModel.commitSaveIt();
 

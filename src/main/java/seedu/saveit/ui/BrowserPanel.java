@@ -13,7 +13,7 @@ import javafx.scene.web.WebView;
 import seedu.saveit.MainApp;
 import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.events.ui.BrowserPanelFocusChangeEvent;
-import seedu.saveit.commons.events.ui.ChangeDirectoryRequestEvent;
+import seedu.saveit.commons.events.model.DirectoryChangedEvent;
 import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.commons.events.ui.SolutionPanelSelectionChangedEvent;
 import seedu.saveit.model.issue.Solution;
@@ -91,7 +91,7 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handleChangeDirectoryRequestEvent(ChangeDirectoryRequestEvent event) {
+    private void handleChangeDirectoryRequestEvent(DirectoryChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         if (event.directory.isRootLevel()) {
             loadDefaultPage();

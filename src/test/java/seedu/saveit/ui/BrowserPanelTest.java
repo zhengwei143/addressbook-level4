@@ -16,14 +16,14 @@ import guitests.guihandles.BrowserPanelHandle;
 import seedu.saveit.MainApp;
 import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
-import seedu.saveit.commons.events.ui.ChangeDirectoryRequestEvent;
+import seedu.saveit.commons.events.model.DirectoryChangedEvent;
 import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.commons.events.ui.SolutionPanelSelectionChangedEvent;
 
 public class BrowserPanelTest extends GuiUnitTest {
     private SolutionPanelSelectionChangedEvent selectionChangedEventStub;
     private JumpToListRequestEvent jumpToListRequestEventStub;
-    private ChangeDirectoryRequestEvent changeDirectoryRequestEventStub;
+    private DirectoryChangedEvent directoryChangedEventStub;
 
     private BrowserPanel browserPanel;
     private BrowserPanelHandle browserPanelHandle;
@@ -32,7 +32,7 @@ public class BrowserPanelTest extends GuiUnitTest {
     public void setUp() {
         selectionChangedEventStub = new SolutionPanelSelectionChangedEvent(REPO);
         jumpToListRequestEventStub = new JumpToListRequestEvent(Index.fromOneBased(1));
-        changeDirectoryRequestEventStub = new ChangeDirectoryRequestEvent(new Directory(0, 0));
+        directoryChangedEventStub = new DirectoryChangedEvent(new Directory(0, 0));
 
         guiRobot.interact(() -> browserPanel = new BrowserPanel());
         uiPartRule.setUiPart(browserPanel);
@@ -53,7 +53,7 @@ public class BrowserPanelTest extends GuiUnitTest {
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedSolutionUrl, browserPanelHandle.getLoadedUrl());
 
-        postNow(changeDirectoryRequestEventStub);
+        postNow(directoryChangedEventStub);
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedDefaultPageUrl, browserPanelHandle.getLoadedUrl());
 

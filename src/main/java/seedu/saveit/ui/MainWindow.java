@@ -15,8 +15,8 @@ import javafx.stage.Stage;
 import seedu.saveit.commons.core.Config;
 import seedu.saveit.commons.core.GuiSettings;
 import seedu.saveit.commons.core.LogsCenter;
+import seedu.saveit.commons.events.model.DirectoryChangedEvent;
 import seedu.saveit.commons.events.model.SaveItChangedEvent;
-import seedu.saveit.commons.events.ui.ChangeDirectoryRequestEvent;
 import seedu.saveit.commons.events.ui.ExitAppRequestEvent;
 import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.commons.events.ui.ShowHelpRequestEvent;
@@ -231,7 +231,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     @Subscribe
-    private void handleChangeDirectoryRequestEvent(ChangeDirectoryRequestEvent event) {
+    private void handleChangeDirectoryRequestEvent(DirectoryChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         if (event.directory.isRootLevel()) {
             issueListPanelPlaceholder.getChildren().remove(solutionListPanel.getRoot());

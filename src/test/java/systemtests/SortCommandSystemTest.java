@@ -77,7 +77,8 @@ public class SortCommandSystemTest extends SaveItSystemTest {
          * -> failure
          */
         command = SortCommand.COMMAND_WORD + " random";
-        assertCommandFailure(command, String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        assertCommandFailure(command,
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
     }
 
     /**
@@ -118,6 +119,9 @@ public class SortCommandSystemTest extends SaveItSystemTest {
         assertStatusBarUnchanged();
     }
 
+    /**
+     * Find the {@code} issues passed in one by one, to increase their search frequency.
+     */
     private void updateFrequency(Issue... issues) {
         String command;
         for (Issue issue : issues) {
@@ -130,6 +134,9 @@ public class SortCommandSystemTest extends SaveItSystemTest {
         }
     }
 
+    /**
+     * Find all the {@code} issues passed in, to filter the issue list.
+     */
     private void filterList(Issue... issues) {
         String keyword = "";
         for (Issue issue : issues) {

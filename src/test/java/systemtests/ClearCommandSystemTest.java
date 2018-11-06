@@ -3,7 +3,6 @@ package systemtests;
 import static seedu.saveit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MEIER;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.saveit.commons.core.index.Index;

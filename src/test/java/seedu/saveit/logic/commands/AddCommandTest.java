@@ -12,8 +12,6 @@ import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_STACKOVERFLOW;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.saveit.testutil.TypicalDirectories.ROOT_LEVEL;
-import static seedu.saveit.testutil.TypicalDirectories.getCustomizedIssueLevel;
-import static seedu.saveit.testutil.TypicalDirectories.getCustomizedSolutionLevel;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_SOLUTION;
 
@@ -41,6 +39,7 @@ import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.issue.IssueSort;
 import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;
+import seedu.saveit.testutil.DirectoryBuilder;
 import seedu.saveit.testutil.IssueBuilder;
 
 public class AddCommandTest {
@@ -183,7 +182,7 @@ public class AddCommandTest {
                 commandResult.feedbackToUser);
         assertEquals(Arrays.asList(validIssue), modelStub.issuesAdded);
 
-        modelStub.resetDirectory(getCustomizedIssueLevel(INDEX_FIRST_ISSUE));
+        modelStub.resetDirectory(new DirectoryBuilder().withIssueIndex(INDEX_FIRST_ISSUE).build());
         validIssue = new IssueBuilder().withDummyStatement().withDummyDescription()
                 .withSolutions(VALID_SOLUTION_STACKOVERFLOW).build();
         Issue expectedIssue = new IssueBuilder().withStatement(VALID_STATEMENT_C)
@@ -224,28 +223,30 @@ public class AddCommandTest {
 
     private ModelStubAcceptingIssueAdded initialise_acceptingIssueAdded_issueLevel(Index issueLevelIndex) {
         ModelStubAcceptingIssueAdded model = new ModelStubAcceptingIssueAdded();
-        model.resetDirectory(getCustomizedIssueLevel(issueLevelIndex));
+        model.resetDirectory(new DirectoryBuilder().withIssueIndex(issueLevelIndex).build());
         return model;
     }
 
     private ModelStubAcceptingIssueAdded initialise_acceptingIssueAdded_solutionLevel(Index issueLevelIndex,
             Index solutionLevelIndex) {
         ModelStubAcceptingIssueAdded model = new ModelStubAcceptingIssueAdded();
-        model.resetDirectory(getCustomizedSolutionLevel(issueLevelIndex, solutionLevelIndex));
+        model.resetDirectory(new DirectoryBuilder().withIssueIndex(issueLevelIndex)
+                .withSolutionIndex(solutionLevelIndex).build());
         return model;
     }
 
     private ModelStubAcceptingSolutionAdded initialise_acceptingSolutionAdded_issueLevel(Issue issue,
             Index issueLevelIndex) {
         ModelStubAcceptingSolutionAdded model = new ModelStubAcceptingSolutionAdded(issue);
-        model.resetDirectory(getCustomizedIssueLevel(issueLevelIndex));
+        model.resetDirectory(new DirectoryBuilder().withIssueIndex(issueLevelIndex).build());
         return model;
     }
 
     private ModelStubAcceptingSolutionAdded initialise_acceptingSolutionAdded_solutionLevel(Issue issue,
             Index issueLevelIndex, Index solutionLevelIndex) {
         ModelStubAcceptingSolutionAdded model = new ModelStubAcceptingSolutionAdded(issue);
-        model.resetDirectory(getCustomizedSolutionLevel(issueLevelIndex, solutionLevelIndex));
+        model.resetDirectory(new DirectoryBuilder().withIssueIndex(issueLevelIndex)
+                .withSolutionIndex(solutionLevelIndex).build());
         return model;
     }
 

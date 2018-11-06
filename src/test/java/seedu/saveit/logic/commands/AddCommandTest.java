@@ -221,12 +221,19 @@ public class AddCommandTest {
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
+    /**
+     * A util which builds a model for adding issue and set issue directory.
+     */
     private ModelStubAcceptingIssueAdded initialise_acceptingIssueAdded_issueLevel(Index issueLevelIndex) {
         ModelStubAcceptingIssueAdded model = new ModelStubAcceptingIssueAdded();
         model.resetDirectory(new DirectoryBuilder().withIssueIndex(issueLevelIndex).build());
         return model;
     }
 
+
+    /**
+     * A util which builds a model for adding issue and set solution directory.
+     */
     private ModelStubAcceptingIssueAdded initialise_acceptingIssueAdded_solutionLevel(Index issueLevelIndex,
             Index solutionLevelIndex) {
         ModelStubAcceptingIssueAdded model = new ModelStubAcceptingIssueAdded();
@@ -235,6 +242,10 @@ public class AddCommandTest {
         return model;
     }
 
+
+    /**
+     * A util which builds a model for adding solution and set issue directory.
+     */
     private ModelStubAcceptingSolutionAdded initialise_acceptingSolutionAdded_issueLevel(Issue issue,
             Index issueLevelIndex) {
         ModelStubAcceptingSolutionAdded model = new ModelStubAcceptingSolutionAdded(issue);
@@ -242,6 +253,9 @@ public class AddCommandTest {
         return model;
     }
 
+    /**
+     * A util which builds a model for adding solution and set solution directory.
+     */
     private ModelStubAcceptingSolutionAdded initialise_acceptingSolutionAdded_solutionLevel(Issue issue,
             Index issueLevelIndex, Index solutionLevelIndex) {
         ModelStubAcceptingSolutionAdded model = new ModelStubAcceptingSolutionAdded(issue);

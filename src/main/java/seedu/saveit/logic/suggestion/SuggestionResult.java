@@ -13,10 +13,12 @@ public class SuggestionResult {
     private final int startPosition;
     private final int endPosition;
     private final String feedbackToUser;
+    private final String oldValue;
 
-    public SuggestionResult(LinkedList<SuggestionValue> values, String feedbackToUser,
+    public SuggestionResult(LinkedList<SuggestionValue> values, String feedbackToUser, String oldValue,
             int startPosition, int endPosition) {
         this.values = values;
+        this.oldValue = oldValue;
         this.feedbackToUser = feedbackToUser;
         this.startPosition = startPosition;
         this.endPosition = endPosition;
@@ -36,6 +38,10 @@ public class SuggestionResult {
 
     public LinkedList<SuggestionValue> getSuggestionValue() {
         return values;
+    }
+
+    public String getOldValue() {
+        return oldValue;
     }
 
     /**

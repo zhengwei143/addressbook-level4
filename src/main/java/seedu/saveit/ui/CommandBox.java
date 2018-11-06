@@ -112,7 +112,9 @@ public class CommandBox extends UiPart<Region> {
             menuItems.add(item);
         }
 
-        if (checkInputValue(suggestionResult)) { //hide the dropdown when the correct value is entered by user
+        if (checkInputValue(suggestionResult)) {
+            //hide the dropdown when the suggested value has already been entered by user
+            popUpWindow.getItems().clear();
             popUpWindow.hide();
         } else {
             popUpWindow.getItems().clear();
@@ -215,7 +217,8 @@ public class CommandBox extends UiPart<Region> {
      * Makes the popup window get ready to get focused before next showing
      */
     private void getFocused() {
-        popUpWindow.show(commandTextArea, Side.BOTTOM, (double) commandTextArea.getCaretPosition() * 8, 0);
+        popUpWindow.show(commandTextArea, Side.BOTTOM,
+                (double) commandTextArea.getCaretPosition() * DEFAULT_CARET_OFFSET, 0);
         popUpWindow.hide();
     }
 
@@ -240,14 +243,25 @@ public class CommandBox extends UiPart<Region> {
         commandTextArea.setStyle(0, commandTextArea.getText().length(), ERROR_STYLE_CLASS);
     }
 
-    // ======================= Suggestion displaying util ========================================================
+    @Subscribe
+    private void handleBrowserPanelFocusChangeEvent(BrowserPanelFocusChangeEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        commandTextArea.requestFocus();
+    }
 
+    // ======================= Suggestion display util ==========================================================
+
+    /**
+     * Checks if the input value is the same as the suggested keyword.
+     */
     private boolean checkInputValue(SuggestionResult suggestionResult) {
-        String oldValue = commandTextArea.getText().substring(suggestionResult.getStartPosition(),
-                suggestionResult.getEndPosition());
+        String oldValue = suggestionResult.getOldValue();
         return oldValue.equals(suggestionResult.getSuggestionValue().get(0).getResult());
     }
 
+    /**
+     * Sets on action for item in {@code CustomMenuItem}.
+     */
     private void handleSelectOnItem(CustomMenuItem item, SuggestionValue value, SuggestionResult suggestionResult) {
         item.setOnAction(actionEvent -> {
             String oldText = commandTextArea.getText();
@@ -257,11 +271,5 @@ public class CommandBox extends UiPart<Region> {
             commandTextArea.moveTo(suggestionResult.getStartPosition() + value.getResult().length());
             popUpWindow.hide();
         });
-    }
-
-    @Subscribe
-    private void handleBrowserPanelFocusChangeEvent(BrowserPanelFocusChangeEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        commandTextArea.requestFocus();
     }
 }

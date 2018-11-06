@@ -2,6 +2,7 @@ package seedu.saveit.model.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -23,20 +24,20 @@ public class SampleDataUtil {
     public static Issue[] getSampleIssues() {
         return new Issue[]{
             new Issue(new IssueStatement("Java NullPointer"), new Description("cannot find object"),
-                    getSolutionSet("https://stackoverflow.com/ remark"), getTagSet("solved")),
+                getSolutionSet("https://stackoverflow.com/ remark"), getTagSet("solved")),
             new Issue(new IssueStatement("StackOverflow"), new Description("Cannot run"),
-                    getSolutionSet("https://ivle.nus.edu.sg/v1/workspace.aspx newRemark",
-                            "https://www.wikipedia.org/ remark"), getTagSet("newBug", "notSolved")),
+                getSolutionSet("https://ivle.nus.edu.sg/v1/workspace.aspx newRemark",
+                    "https://www.wikipedia.org/ remark"), getTagSet("newBug", "notSolved")),
             new Issue(new IssueStatement("ArrayIndexOutOfBounds"), new Description("invalid input"),
-                    getSolutionSet("https://www.zhihu.com/ solutionIsHere"), getTagSet("notSolved")),
+                getSolutionSet("https://www.zhihu.com/ solutionIsHere"), getTagSet("notSolved")),
             new Issue(new IssueStatement("ClassNotFoundException"), new Description("WrongPackage"),
-                    getSolutionSet("https://stackoverflow.com/ solution"), getTagSet("urgent")),
+                getSolutionSet("https://stackoverflow.com/ solution"), getTagSet("urgent")),
             new Issue(new IssueStatement("ExceptionNotHandled"), new Description("Mistake"),
-                    getSolutionSet("https://www.reddit.com/ yes",
-                            "https://docs.oracle.com/javase/7/docs/api/overview-summary.html remark"),
-                    getTagSet("solved")),
+                getSolutionSet("https://www.reddit.com/ yes",
+                    "https://docs.oracle.com/javase/7/docs/api/overview-summary.html remark"),
+                getTagSet("solved")),
             new Issue(new IssueStatement("UnknownBug"), new Description("Unknown"),
-                    getSolutionSet("https://www.google.com.sg/ newRemark"), getTagSet("Dead"))
+                getSolutionSet("https://www.google.com.sg/ newRemark"), getTagSet("Dead"))
         };
     }
 
@@ -77,8 +78,15 @@ public class SampleDataUtil {
      */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
+            .map(Tag::new)
+            .collect(Collectors.toSet());
     }
 
+    public static boolean isCommandWordNotNeedIndex(String strings) {
+        String[] commandWordNotNeedIndex = {
+            "add", "clear", "exit", "findtag", "find", "help", "history", "home",
+            "redo", "undo", "sort", "refactortag", "list", "a", "c", "x",
+            "ft", "f", "h", "his", "hm", "r", "u", "sr", "rt"};
+        return Arrays.stream(commandWordNotNeedIndex).parallel().anyMatch(strings::contains);
+    }
 }

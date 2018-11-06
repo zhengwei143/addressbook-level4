@@ -6,6 +6,7 @@ import static seedu.saveit.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.saveit.model.util.SampleDataUtil.isCommandWordNotNeedIndex;
 
 import org.fxmisc.richtext.InlineCssTextArea;
 
@@ -26,10 +27,12 @@ public class CommandHighlightManager {
         String userInput = commandTextField.getText();
         int position = 0;
         boolean indexHighlighted = false;
-        boolean commandWordHighlighted = false;
+
+        // check for some command word that does not require index
+        indexHighlighted = checkCommandWord(userInput);
 
         // if there are space chars before command word, pos++
-        while(isSpace(userInput, position) && !commandWordHighlighted){
+        while (isShorterThanInput(userInput, position) && isSpace(userInput, position)) {
             position++;
         }
 
@@ -41,7 +44,7 @@ public class CommandHighlightManager {
 
         // highlight the following parameters, which are key-value pairs
         while (isShorterThanInput(userInput, position)) {
-            while (isIndex(userInput, position) && !isSpace(userInput, position) && !indexHighlighted ) {
+            while (isIndex(userInput, position) && !isSpace(userInput, position) && !indexHighlighted) {
                 commandTextField.setStyle(position, position + 1, STYLE_INDEX);
                 position++;
             }
@@ -61,10 +64,23 @@ public class CommandHighlightManager {
         }
     }
 
+    /**
+     * check if the commandword requires index, return true if yes, otherwise false
+     */
+    private static boolean checkCommandWord(String userInput) {
+        return isCommandWordNotNeedIndex(userInput);
+    }
+
+    /**
+     * check if the this position character is space, return true if yes, otherwise false
+     */
     private static boolean isSpace(String userInput, int position) {
         return userInput.charAt(position) == ' ';
     }
 
+    /**
+     * check if the position is within the userInput length, return true if yes, otherwise false
+     */
     private static boolean isShorterThanInput(String userInput, int position) {
         return position < userInput.length();
     }
@@ -78,8 +94,8 @@ public class CommandHighlightManager {
      * @return true if parameter, otherwise false
      */
     private static boolean isParameter(String userInput, int position) {
-        StringBuilder input = new StringBuilder();
-        if(userInput.charAt(position) == '/') {
+        if (userInput.charAt(position) == '/') {
+            StringBuilder input = new StringBuilder();
             input.append(userInput.charAt(position - 1));
             input.append(userInput.charAt(position));
             String inputCheck = input.toString();

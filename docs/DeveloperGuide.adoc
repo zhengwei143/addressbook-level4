@@ -537,7 +537,7 @@ Certain properties of the application can be controlled (e.g App name, logging l
 
 A new command--`home` is implemented to allow users to return to the root directory after editing a certain issue.
 
-=== GUI Enhancement[Coming in v1.3]
+=== GUI Enhancement
 The  figure below shows the expected GUI for SaveIt v1.3.
 
 .GUI Draft 1

@@ -432,6 +432,9 @@ Shows a list of all issues.
 // tag::sort[]
 === Sorting the list of issues: `(sr)sort`
 
+Sorts the list of issue according to a specified sort type.
+
+The list always follow this sort type until another sort command is executed.
 
 Format: `sort`
 [TIP]

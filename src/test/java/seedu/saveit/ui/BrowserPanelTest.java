@@ -32,7 +32,7 @@ public class BrowserPanelTest extends GuiUnitTest {
     public void setUp() {
         selectionChangedEventStub = new SolutionPanelSelectionChangedEvent(REPO);
         jumpToListRequestEventStub = new JumpToListRequestEvent(Index.fromOneBased(1));
-        changeDirectoryRequestEventStub = new ChangeDirectoryRequestEvent(new Directory(0,0));
+        changeDirectoryRequestEventStub = new ChangeDirectoryRequestEvent(new Directory(0, 0));
 
         guiRobot.interact(() -> browserPanel = new BrowserPanel());
         uiPartRule.setUiPart(browserPanel);

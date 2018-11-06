@@ -1,46 +1,17 @@
 package seedu.saveit.logic.commands;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-import static seedu.saveit.commons.core.Messages.MESSAGE_ISSUES_LISTED_OVERVIEW;
-import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_UI;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_PYTHON;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_SYNTAX;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
-import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.saveit.logic.commands.CommandTestUtil.showIssueAtIndex;
-import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
-import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
-import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.junit.Ignore;
 import org.junit.Test;
 
-import javafx.beans.Observable;
-import javafx.collections.ObservableList;
-import seedu.saveit.commons.core.Messages;
-import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.CommandHistory;
-import seedu.saveit.logic.commands.EditCommand.EditIssueDescriptor;
-import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
-import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.UserPrefs;
-import seedu.saveit.model.issue.IssueContainsKeywordsPredicate;
-import seedu.saveit.model.issue.IssueSort;
 import seedu.saveit.model.issue.Tag;
-import seedu.saveit.testutil.EditIssueDescriptorBuilder;
-import seedu.saveit.testutil.IssueBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for

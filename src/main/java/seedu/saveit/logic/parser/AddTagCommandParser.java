@@ -98,7 +98,7 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
         try {
             rangeStart = Integer.parseInt(indexRange[0]);
             rangeEnd = Integer.parseInt(indexRange[1]);
-        } catch (NumberFormatException nfe){
+        } catch (NumberFormatException nfe) {
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
         }

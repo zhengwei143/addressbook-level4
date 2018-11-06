@@ -157,9 +157,7 @@ public class SaveIt implements ReadOnlySaveIt {
 
             if (currentTags.size() != updateTags.size()) {
                 added = true;
-                Issue updateIssue = new Issue(issueToEdit.getStatement(), issueToEdit.getDescription(),
-                    issueToEdit.getSolutions(), updateTags, issueToEdit.getFrequency());
-                updateIssue(issueToEdit, updateIssue);
+                updateTags(issueToEdit, updateTags);
             }
         }
 
@@ -180,9 +178,7 @@ public class SaveIt implements ReadOnlySaveIt {
                 tagsToUpdate.remove(oldTag);
                 tagsToUpdate.add(newTag);
                 isEdit = true;
-                Issue updateIssue = new Issue(issueToUpdate.getStatement(), issueToUpdate.getDescription(),
-                    issueToUpdate.getSolutions(), tagsToUpdate, issueToUpdate.getFrequency());
-                updateIssue(issueToUpdate, updateIssue);
+                updateTags(issueToUpdate, tagsToUpdate);
             }
 
         }
@@ -200,12 +196,16 @@ public class SaveIt implements ReadOnlySaveIt {
             if (tagsToUpdate.contains(tag)) {
                 tagsToUpdate.remove(tag);
                 isEdit = true;
-                Issue updateIssue = new Issue(issueToUpdate.getStatement(), issueToUpdate.getDescription(),
-                    issueToUpdate.getSolutions(), tagsToUpdate, issueToUpdate.getFrequency());
-                updateIssue(issueToUpdate, updateIssue);
+                updateTags(issueToUpdate, tagsToUpdate);
             }
         }
         return isEdit;
+    }
+
+    private void updateTags(Issue issueToUpdate, Set<Tag> tagsToUpdate) {
+        Issue updateIssue = new Issue(issueToUpdate.getStatement(), issueToUpdate.getDescription(),
+            issueToUpdate.getSolutions(), tagsToUpdate, issueToUpdate.getFrequency());
+        updateIssue(issueToUpdate, updateIssue);
     }
 
     /**

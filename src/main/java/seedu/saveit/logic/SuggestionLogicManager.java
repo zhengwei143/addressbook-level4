@@ -74,7 +74,7 @@ public class SuggestionLogicManager implements SuggestionLogic {
         Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput);
 
         if (!matcher.matches()) {
-            // TODO: Handle invalid userInput(s)
+            //let SaveItParser handle the invalid command format
             return null;
         }
 

@@ -7,12 +7,12 @@ import java.util.LinkedList;
  */
 public class SuggestionResult {
 
-    public final LinkedList<SuggestionValue> values;
+    private final LinkedList<SuggestionValue> values;
 
     // start & end positions between which to replace the String with a selected option
-    public final int startPosition;
-    public final int endPosition;
-    public final String feedbackToUser;
+    private final int startPosition;
+    private final int endPosition;
+    private final String feedbackToUser;
 
     public SuggestionResult(LinkedList<SuggestionValue> values, String feedbackToUser,
             int startPosition, int endPosition) {
@@ -20,6 +20,22 @@ public class SuggestionResult {
         this.feedbackToUser = feedbackToUser;
         this.startPosition = startPosition;
         this.endPosition = endPosition;
+    }
+
+    public int getStartPosition() {
+        return startPosition;
+    }
+
+    public int getEndPosition() {
+        return endPosition;
+    }
+
+    public String getFeedbackToUser() {
+        return feedbackToUser;
+    }
+
+    public LinkedList<SuggestionValue> getSuggestionValue() {
+        return values;
     }
 
     /**

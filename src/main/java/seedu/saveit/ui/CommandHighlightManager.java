@@ -26,15 +26,22 @@ public class CommandHighlightManager {
         String userInput = commandTextField.getText();
         int position = 0;
         boolean indexHighlighted = false;
+        boolean commandWordHighlighted = false;
 
-        while (isShorterThanInput(userInput, position) && isNotSpace(userInput, position)) {
+        // if there are space chars before command word, pos++
+        while(isSpace(userInput, position) && !commandWordHighlighted){
+            position++;
+        }
+
+        // highlight command word
+        while (isShorterThanInput(userInput, position) && !isSpace(userInput, position)) {
             commandTextField.setStyle(position, position + 1, STYLE_COMMAND_WORD);
             position++;
         }
 
         // highlight the following parameters, which are key-value pairs
         while (isShorterThanInput(userInput, position)) {
-            while (isIndex(userInput, position) && isNotSpace(userInput, position) && !indexHighlighted ) {
+            while (isIndex(userInput, position) && !isSpace(userInput, position) && !indexHighlighted ) {
                 commandTextField.setStyle(position, position + 1, STYLE_INDEX);
                 position++;
             }
@@ -54,8 +61,8 @@ public class CommandHighlightManager {
         }
     }
 
-    private static boolean isNotSpace(String userInput, int position) {
-        return userInput.charAt(position) != ' ';
+    private static boolean isSpace(String userInput, int position) {
+        return userInput.charAt(position) == ' ';
     }
 
     private static boolean isShorterThanInput(String userInput, int position) {
@@ -68,16 +75,17 @@ public class CommandHighlightManager {
 
     /**
      * check if the character is parameter
-     *
      * @return true if parameter, otherwise false
      */
     private static boolean isParameter(String userInput, int position) {
         StringBuilder input = new StringBuilder();
-        input.append(userInput.charAt(position - 1));
-        input.append(userInput.charAt(position));
-        String inputCheck = input.toString();
-        if (isParameter(inputCheck)) {
-            return true;
+        if(userInput.charAt(position) == '/') {
+            input.append(userInput.charAt(position - 1));
+            input.append(userInput.charAt(position));
+            String inputCheck = input.toString();
+            if (isParameter(inputCheck)) {
+                return true;
+            }
         }
         return false;
     }

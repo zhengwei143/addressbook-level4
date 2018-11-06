@@ -560,6 +560,7 @@ image::UI_Design1.png[width="800"]
 image::UI_Design2.png[width="800"]
 
 
+// end::edit[]
 === Edit Feature
 The edit feature allows users to edit any field of the issue and solution.
 
@@ -608,15 +609,17 @@ image::edit-command-sequence-diagram.jpg[width="800"]
 ** Pros: It will use less memory.
 
 ** Cons: It has lower security if it the issue is the mutable object.
+// end::edit[]
 
 
+// tag::refactorTag[]
 === Refactor tag Feature
 The refactor tag feature allows users to rename or remove a specified tag for all entries with that tag.
 
 ==== Current Implementation
-The refactor tag mechanism is facilitated by `refactorTagCommandParser` and `refactorCommand`.
+The refactor tag mechanism is facilitated by `RefactorTagCommandParser` and `RefactorCommand`.
 
-The `refactorTagCommandParser` extends `Parser` and implements the following operations:
+The `RefactorTagCommandParser` extends `Parser` and implements the following operations:
 
 * `refactorTagCommandParser#parser(String args)`
 ** Checks the arguments for empty strings and throws a `ParseException` if an empty string is found.
@@ -635,16 +638,27 @@ Please refer to the Sequence Diagram below for the refactor tag operation.
 .Refactor Tag Command Activity Diagram
 image::refactor-tag.jpeg[width="800"]
 
+==== Design Consideration
+
+===== Aspect: Implementation of RefactorTag command parser.
+* Alternative 1 (current choice): Allows only to rename or remove the old tags that user input lastly.
+** Pros: It is easy to implement.
+** Cons: It is inconvenient if the user wants to replace the tags once.
+* Alternative 2: Allows to rename or remove multiple old tags with multiple new tags.
+** Pros: It is convenient for users to replace or remove the tags once.
+** Cons: It is not clear for users to see the changes since tags are displayed disordered. 
+// end::refactorTag[]
 
 
 
+// tag::addTag[]
 === Add tag Feature
-The add tag feature allows the user to add a tag or more tags to a specified issue.
+The add tag feature allows users to add `Tag(s)` to specified `Indexed` issues.
 
 ==== Current Implementation
-The add tag mechanism is facilitated by `addTagCommandParser` and `addTagCommand`.
+The add tag mechanism is facilitated by `AddTagCommandParser` and `AddTagCommand`.
 
-Please refer to the Sequence Diagram below for the refactor tag operation.
+Please refer to the Sequence Diagram below for the add tag operation.
 
 .Add Tag Command Sequence Diagram
 image::add-tag-sequence-diagram.jpeg[width="800"]
@@ -652,17 +666,22 @@ image::add-tag-sequence-diagram.jpeg[width="800"]
 ==== Design Consideration
 
 ===== Aspect: Implementation of AddTag command parser.
-* Alternative 1 (current choice): Adds tag(s) for one issue in command execution.
-** Pros: It allows multiple additions of `Tags` in one command execution.
-** Cons: It has a lower efficiency to add tags for multiple issues.
-* Alternative 2: Creates a separate class for ranges of index
-** Pros: It is convenient for users to add tags for multiple issues once.
+* Alternative 1 (current choice): Allows range of `Index` to be accepted as index parameter.
+** Pros: It is efficient to add multiple `Tags` to multiple issues instead of doing it singly.
+** Cons: It has to consider various conditions of the user input.
+* Alternative 2: Creates a IndexRange class for index.
+** Pros: It is easy to understand and maintain.
 ** Cons: It will increase coupling between IndexRange class and Index class
+// end::addTag[]
 
 
-
+// tag::commandHighlight[]
 === Command Highlight
+The command highlight feature is to differentiate command word, index, prefix and values that user input in Command Line.
 
+==== Current Implementation
+The Command Highlight mechanism uses `InlineCssTextArea` class. It uses listener to detect the change in the `commandTextField` and check if it is command word, parameter, index or values and assign different colors correspondingly.
+// end::commandHighlight[]
 
 
 == Documentation

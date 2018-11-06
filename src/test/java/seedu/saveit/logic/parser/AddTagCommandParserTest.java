@@ -2,7 +2,6 @@ package seedu.saveit.logic.parser;
 
 import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.saveit.logic.commands.AddTagCommand.MESSAGE_USAGE;
-import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_PYTHON;
 import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_SYNTAX;
 import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_UI;
@@ -18,7 +17,6 @@ import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_ISSUE;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.saveit.commons.core.index.Index;
@@ -260,6 +258,12 @@ public class AddTagCommandParserTest {
     @Test
     public void parse_invalidMultipleRanges_throwsParseException() {
         assertParseFailure(parser, " 2-4 4-a t/python",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidIndexsRanges_throwsParseException() {
+        assertParseFailure(parser, " -4-3 t/python",
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
     }
 }

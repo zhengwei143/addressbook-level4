@@ -15,6 +15,7 @@ import java.util.List;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
+import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.SaveIt;
@@ -35,6 +36,7 @@ public class CommandTestUtil {
     public static final String VALID_SOLUTION_STACKOVERFLOW = "https://stackoverflow.com/ newSol";
     public static final String VALID_TAG_UI = "ui";
     public static final String VALID_TAG_SYNTAX = "syntax";
+    public static final String VALID_TAG_PYTHON = "python";
 
     public static final String STATEMENT_DESC_JAVA = " " + PREFIX_STATEMENT + VALID_STATEMENT_JAVA;
     public static final String STATEMENT_DESC_C = " " + PREFIX_STATEMENT + VALID_STATEMENT_C;
@@ -44,6 +46,8 @@ public class CommandTestUtil {
     public static final String SOLUTION_DESC_C = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_C;
     public static final String TAG_DESC_SYNTAX = " " + PREFIX_TAG + VALID_TAG_SYNTAX;
     public static final String TAG_DESC_UI = " " + PREFIX_TAG + VALID_TAG_UI;
+    public static final String TAG_DESC_PYTHON = " " + PREFIX_TAG + VALID_TAG_PYTHON;
+
     public static final String NEWTAG_DESC_SYNTAX = " " + PREFIX_NEW_TAG + VALID_TAG_SYNTAX;
     public static final String NEWTAG_DESC_UI = " " + PREFIX_NEW_TAG + VALID_TAG_UI;
 
@@ -80,10 +84,16 @@ public class CommandTestUtil {
         try {
             CommandResult result = command.execute(actualModel, actualCommandHistory);
             assertEquals(expectedMessage, result.feedbackToUser);
+
+
+
+
             assertEquals(expectedModel, actualModel);
             assertEquals(expectedCommandHistory, actualCommandHistory);
         } catch (CommandException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 
@@ -108,6 +118,8 @@ public class CommandTestUtil {
             assertEquals(expectedSaveIt, actualModel.getSaveIt());
             assertEquals(expectedFilteredList, actualModel.getFilteredIssueList());
             assertEquals(expectedCommandHistory, actualCommandHistory);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 

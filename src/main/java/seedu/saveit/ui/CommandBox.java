@@ -111,11 +111,16 @@ public class CommandBox extends UiPart<Region> {
             handleSelectOnItem(item, value, suggestionResult);
             menuItems.add(item);
         }
-        popUpWindow.getItems().clear();
-        popUpWindow.getItems().addAll(menuItems);
-        getFocused();
-        popUpWindow.show(commandTextArea, Side.BOTTOM,
-                (double) suggestionResult.getStartPosition() * DEFAULT_CARET_OFFSET, 0);
+
+        if (checkInputValue(suggestionResult)) { //hide the dropdown when the correct value is entered by user
+            popUpWindow.hide();
+        } else {
+            popUpWindow.getItems().clear();
+            popUpWindow.getItems().addAll(menuItems);
+            getFocused();
+            popUpWindow.show(commandTextArea, Side.BOTTOM,
+                    (double) suggestionResult.getStartPosition() * DEFAULT_CARET_OFFSET, 0);
+        }
     }
 
     /**
@@ -233,6 +238,14 @@ public class CommandBox extends UiPart<Region> {
             return;
         }
         commandTextArea.setStyle(0, commandTextArea.getText().length(), ERROR_STYLE_CLASS);
+    }
+
+    // ======================= Suggestion displaying util ========================================================
+
+    private boolean checkInputValue(SuggestionResult suggestionResult) {
+        String oldValue = commandTextArea.getText().substring(suggestionResult.getStartPosition(),
+                suggestionResult.getEndPosition());
+        return oldValue.equals(suggestionResult.getSuggestionValue().get(0).getResult());
     }
 
     private void handleSelectOnItem(CustomMenuItem item, SuggestionValue value, SuggestionResult suggestionResult) {

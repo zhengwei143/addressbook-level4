@@ -37,7 +37,9 @@ public class SolutionCard extends UiPart<Region> {
         this.solution = solution;
         id.setText("Solution " + String.valueOf(displayedIndex));
         link.setText(solution.getLink().getValue());
+        link.setWrapText(true);
         remark.setText(solution.getRemark().toString());
+        remark.setWrapText(true);
     }
 
 

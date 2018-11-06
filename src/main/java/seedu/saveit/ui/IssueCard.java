@@ -41,6 +41,7 @@ public class IssueCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         statement.setText(issue.getStatement().getValue());
         description.setText(issue.getDescription().getValue());
+        description.setWrapText(true);
         int index = 1;
         issue.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }

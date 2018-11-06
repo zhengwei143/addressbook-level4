@@ -82,11 +82,13 @@ public class SampleDataUtil {
             .collect(Collectors.toSet());
     }
 
-    public static boolean isCommandWordNotNeedIndex(String strings) {
+    /**
+     * Returns true if the commandWord should follow with index otherwise false.
+     */
+    public static boolean isCommandWordNeedIndex(String commandWord) {
         String[] commandWordNotNeedIndex = {
-            "add", "clear", "exit", "findtag", "find", "help", "history", "home",
-            "redo", "undo", "sort", "refactortag", "list", "a", "c", "x",
-            "ft", "f", "h", "his", "hm", "r", "u", "sr", "rt"};
-        return Arrays.stream(commandWordNotNeedIndex).parallel().anyMatch(strings::contains);
+            "addtag", "delete", "edit", "retrieve", "select", "at", "d", "e", "rv", "s"};
+
+        return Arrays.stream(commandWordNotNeedIndex).parallel().anyMatch(commandWord::equals);
     }
 }

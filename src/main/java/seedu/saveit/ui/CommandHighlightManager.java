@@ -6,7 +6,7 @@ import static seedu.saveit.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.saveit.model.util.SampleDataUtil.isCommandWordNotNeedIndex;
+import static seedu.saveit.model.util.SampleDataUtil.isCommandWordNeedIndex;
 
 import org.fxmisc.richtext.InlineCssTextArea;
 
@@ -25,11 +25,10 @@ public class CommandHighlightManager {
      */
     public static void highlight(InlineCssTextArea commandTextField) {
         String userInput = commandTextField.getText();
+        StringBuilder commandWord = new StringBuilder();
         int position = 0;
         boolean indexHighlighted = false;
-
-        // check for some command word that does not require index
-        indexHighlighted = checkCommandWord(userInput);
+        boolean indexNeedHighlight = false;
 
         // if there are space chars before command word, pos++
         while (isShorterThanInput(userInput, position) && isSpace(userInput, position)) {
@@ -38,13 +37,18 @@ public class CommandHighlightManager {
 
         // highlight command word
         while (isShorterThanInput(userInput, position) && !isSpace(userInput, position)) {
+            commandWord.append(userInput.charAt(position));
             commandTextField.setStyle(position, position + 1, STYLE_COMMAND_WORD);
             position++;
         }
 
+        // check for some command word that does not require index
+        indexNeedHighlight = checkCommandWord(commandWord);
+
         // highlight the following parameters, which are key-value pairs
         while (isShorterThanInput(userInput, position)) {
-            while (isIndex(userInput, position) && !isSpace(userInput, position) && !indexHighlighted) {
+            while (indexNeedHighlight && !indexHighlighted && isIndex(userInput, position) && !isSpace(userInput,
+                position)) {
                 commandTextField.setStyle(position, position + 1, STYLE_INDEX);
                 position++;
             }
@@ -65,10 +69,10 @@ public class CommandHighlightManager {
     }
 
     /**
-     * check if the commandword requires index, return true if yes, otherwise false
+     * check if the commandWord requires index, return true if yes, otherwise false
      */
-    private static boolean checkCommandWord(String userInput) {
-        return isCommandWordNotNeedIndex(userInput);
+    private static boolean checkCommandWord(StringBuilder userInput) {
+        return isCommandWordNeedIndex(userInput.toString());
     }
 
     /**
@@ -91,6 +95,7 @@ public class CommandHighlightManager {
 
     /**
      * check if the character is parameter
+     *
      * @return true if parameter, otherwise false
      */
     private static boolean isParameter(String userInput, int position) {
@@ -108,6 +113,7 @@ public class CommandHighlightManager {
 
     /**
      * check if find the parameter
+     *
      * @param inputCheck every two consecutive characters.
      * @return true if parameter, otherwise false
      */

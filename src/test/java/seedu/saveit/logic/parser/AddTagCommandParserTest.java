@@ -209,30 +209,29 @@ public class AddTagCommandParserTest {
     @Test
     public void parse_validIndexInvalidTag_throwsParseException() {
         assertParseFailure(parser, "2", String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "2 java", String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "2 java",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1 python 3", String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
     }
 
 
     @Test
     public void parse_invalidIndexInvalidTag_throwsParseException() {
-        assertParseFailure(parser, "0 java", String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "0 java",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidIndexValidTag_throwsParseException() {
-        assertParseFailure(parser, "0 t/java", String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
-    }
-
-
-    @Test
-    public void parse_invalidOrder_parse_invalidIndexInvalidTag_throwsParseException() {
-        assertParseFailure(parser, "1 python 3", String.format(
-            MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "0 t/java",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyIndexValidTag_throwsParseException() {
-        assertParseFailure(parser, "t/python", String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "t/python",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
     }
 
 
@@ -245,13 +244,13 @@ public class AddTagCommandParserTest {
     @Test
     public void parse_invalidRange2_throwsParseException() {
         assertParseFailure(parser, "4-a t/python",
-             String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidIndexedAndRange_throwsParseException() {
         assertParseFailure(parser, "1 4-2 t/python",
-             String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
     }
 
     @Test

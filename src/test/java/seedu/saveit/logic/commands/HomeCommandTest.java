@@ -7,7 +7,7 @@ import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
 
 import org.junit.Test;
 
-import seedu.saveit.commons.events.ui.ChangeDirectoryRequestEvent;
+import seedu.saveit.commons.events.model.DirectoryChangedEvent;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
@@ -24,10 +24,10 @@ public class HomeCommandTest {
     @Test
     public void execute_home_success() {
         assertCommandSuccess(new HomeCommand(), model, commandHistory, MESSAGE_SUCCESS, expectedModel);
-        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ChangeDirectoryRequestEvent);
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DirectoryChangedEvent);
         assertTrue(eventsCollectorRule.eventsCollector.getSize() == 2);
-        ChangeDirectoryRequestEvent lastEvent =
-                (ChangeDirectoryRequestEvent) eventsCollectorRule.eventsCollector.getMostRecent();
+        DirectoryChangedEvent lastEvent =
+                (DirectoryChangedEvent) eventsCollectorRule.eventsCollector.getMostRecent();
         assertTrue(lastEvent.directory.isRootLevel());
     }
 }

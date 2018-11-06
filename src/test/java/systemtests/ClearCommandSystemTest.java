@@ -16,7 +16,6 @@ import seedu.saveit.model.ModelManager;
 public class ClearCommandSystemTest extends SaveItSystemTest {
 
     @Test
-    @Ignore
     public void clear() {
         final Model defaultModel = getModel();
 

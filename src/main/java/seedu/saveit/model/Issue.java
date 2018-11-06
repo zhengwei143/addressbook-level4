@@ -31,7 +31,7 @@ public class Issue {
     private final List<Solution> solutions = new ArrayList<>();
     private final Description description;
     private final IssueSearchFrequency frequency;
-    private final Timestamp time;
+    private final Timestamp lastModifiedTime;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -44,11 +44,11 @@ public class Issue {
         this.solutions.addAll(solutions);
         this.tags.addAll(tags);
         this.frequency = new IssueSearchFrequency(0);
-        this.time = new Timestamp(new Date().getTime());
+        this.lastModifiedTime = new Timestamp(new Date().getTime());
     }
 
     /**
-            * Overloaded constructor with additional {@code frequency} field
+     * Overloaded constructor with additional {@code frequency} field
      */
     public Issue(IssueStatement statement, Description description, List<Solution> solutions,
             Set<Tag> tags, IssueSearchFrequency frequency) {
@@ -58,7 +58,21 @@ public class Issue {
         this.solutions.addAll(solutions);
         this.tags.addAll(tags);
         this.frequency = frequency;
-        this.time = new Timestamp(new Date().getTime());
+        this.lastModifiedTime = new Timestamp(new Date().getTime());
+    }
+
+    /**
+     * Overloaded constructor with additional {@code frequency} field
+     */
+    public Issue(IssueStatement statement, Description description, List<Solution> solutions,
+                 Set<Tag> tags, IssueSearchFrequency frequency, Timestamp lastModifiedTime) {
+        CollectionUtil.requireAllNonNull(statement, description, solutions, tags);
+        this.statement = statement;
+        this.description = description;
+        this.solutions.addAll(solutions);
+        this.tags.addAll(tags);
+        this.frequency = frequency;
+        this.lastModifiedTime = lastModifiedTime;
     }
 
     /**
@@ -71,7 +85,7 @@ public class Issue {
         this.solutions.addAll(issue.getSolutions());
         this.tags.addAll(issue.getTags());
         this.frequency = issue.getFrequency();
-        this.time = new Timestamp(new Date().getTime());
+        this.lastModifiedTime = new Timestamp(new Date().getTime());
     }
 
 
@@ -117,7 +131,7 @@ public class Issue {
      * Returns the Timestamp of the Issue
      */
     public Timestamp getLastModifiedTime() {
-        return time;
+        return lastModifiedTime;
     }
 
     /**
@@ -157,7 +171,7 @@ public class Issue {
 
         Issue otherIssue = (Issue) other;
         return otherIssue.getStatement().equals(getStatement())
-                && otherIssue.getFrequency().equals(getFrequency());
+                && otherIssue.getDescription().equals(getDescription());
     }
 
     @Override

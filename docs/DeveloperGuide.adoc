@@ -609,6 +609,8 @@ image::edit-command-sequence-diagram.jpg[width="800"]
 
 ** Cons: It has lower security if it the issue is the mutable object.
 
+=== Star feature
+The star feature allows users to choose one solution as primary solution.
 
 === Refactor tag Feature
 The refactor tag feature allows users to rename or remove a specified tag for all entries with that tag.

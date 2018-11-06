@@ -16,9 +16,9 @@ import seedu.saveit.model.issue.Solution;
 /**
  * Star one existing solution for an issue.
  */
-public class StarCommand extends Command {
-    public static final String COMMAND_WORD = "star";
-    public static final String COMMAND_ALIAS = "*";
+public class SetPrimaryCommand extends Command {
+    public static final String COMMAND_WORD = "setprimary";
+    public static final String COMMAND_ALIAS = "sp";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Highlight one solution in the displayed solution list\n"
@@ -28,7 +28,7 @@ public class StarCommand extends Command {
 
     private final Index index;
 
-    public StarCommand(Index index) {
+    public SetPrimaryCommand(Index index) {
         requireNonNull(index);
         this.index = index;
     }
@@ -64,7 +64,7 @@ public class StarCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof StarCommand // instanceof handles nulls
-                && index.equals(((StarCommand) other).index)); // state check
+                || (other instanceof SetPrimaryCommand // instanceof handles nulls
+                && index.equals(((SetPrimaryCommand) other).index)); // state check
     }
 }

@@ -466,6 +466,23 @@ Examples:
 ****
 // end::sort[]
 
+// tag::star[]
+=== Choosing one primary solution: `(sp)setprimary`
+
+Chooses one solution of the issue and make it the primary solution.
+
+The primary solution is shown on the top of the solution list and is highlighted.
+
+Format: `setprimary INDEX`
+
+[NOTE]
+====
+* The index refers to the index number on the solution list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* The index cannot be bigger than the number of issues.
+====
+// end::star[]
+
 === Refactoring tag: `(rt)refactortag`
 
 To rename or remove a specific tag for all entries with that tag.

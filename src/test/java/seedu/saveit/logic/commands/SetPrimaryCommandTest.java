@@ -21,7 +21,7 @@ import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.UserPrefs;
 import seedu.saveit.model.issue.Solution;
 
-public class StarCommandTest {
+public class SetPrimaryCommandTest {
     private Model model;
     private Model expectedModel;
     private CommandHistory commandHistory;
@@ -79,25 +79,25 @@ public class StarCommandTest {
     }
 
     /**
-     * Executes a {@code StarCommand} with the given {@code index}.
+     * Executes a {@code SetPrimaryCommand} with the given {@code index}.
      */
     private void assertExecutionSuccess(Index index) {
-        StarCommand starCommand = new StarCommand(index);
+        SetPrimaryCommand setPrimaryCommand = new SetPrimaryCommand(index);
         Solution staredSolution = solutionList.get(index.getZeroBased());
         expectedModel.updateIssue(issueSelected,
                 issueSelected.updatePrimarySolution(solutionList, index.getZeroBased()));
         expectedModel.commitSaveIt();
-        String expectedMessage = String.format(StarCommand.MESSAGE_SUCCESS, staredSolution);
+        String expectedMessage = String.format(SetPrimaryCommand.MESSAGE_SUCCESS, staredSolution);
 
-        assertCommandSuccess(starCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(setPrimaryCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     /**
-     * Executes a {@code StarCommand} with the given {@code index}, and checks that a {@code CommandException}
+     * Executes a {@code SetPrimaryCommand} with the given {@code index}, and checks that a {@code CommandException}
      * is thrown with the {@code expectedMessage}.
      */
     private void assertExecutionFailure(Index index, String expectedMessage) {
-        StarCommand starCommand = new StarCommand(index);
-        assertCommandFailure(starCommand, model, commandHistory, expectedMessage);
+        SetPrimaryCommand setPrimaryCommand = new SetPrimaryCommand(index);
+        assertCommandFailure(setPrimaryCommand, model, commandHistory, expectedMessage);
     }
 }

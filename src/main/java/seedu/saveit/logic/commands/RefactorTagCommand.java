@@ -65,7 +65,7 @@ public class RefactorTagCommand extends Command {
         }
 
         isEdit = newTag != null ? model.refactorTag(oldTag, newTag) : model.refactorTag(oldTag);
-//        model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
+        model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
         model.commitSaveIt();
         if (isEdit) {
             return new CommandResult(MESSAGE_REFACTOR_TAG_SUCCESS);

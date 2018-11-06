@@ -73,12 +73,11 @@ public class AddTagCommand extends Command {
         try {
             List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
             index.forEach(issueIndex -> {
-                System.out.println("issue is " + issueIndex.getZeroBased());
                 issueToEdit.add(lastShownList.get(issueIndex.getZeroBased()));
             });
 
-            System.out.println(issueToEdit.size() == index.size());
             model.addTag(issueToEdit, tagList);
+            model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
             model.commitSaveIt();
         } catch (DuplicateIssueException die) {
             throw new CommandException(

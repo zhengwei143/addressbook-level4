@@ -209,7 +209,6 @@ public class AddTagCommandParserTest {
     @Test
     public void parse_validIndexInvalidTag_throwsParseException() {
         assertParseFailure(parser, "2", String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "2 t/?", Tag.MESSAGE_TAG_CONSTRAINTS);
         assertParseFailure(parser, "2 java", String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
     }
 

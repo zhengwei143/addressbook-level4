@@ -70,7 +70,6 @@ public class AddTagCommandTest {
 
         Set<Issue> issueToEdit = getIssueToEdit(indexSet, expectedModel);
 
-        System.out.println(issueToEdit.size());
         expectedModel.addTag(issueToEdit, tagSet);
         expectedModel.commitSaveIt();
 

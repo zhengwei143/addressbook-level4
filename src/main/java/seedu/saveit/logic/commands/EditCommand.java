@@ -18,7 +18,6 @@ import java.util.Set;
 import seedu.saveit.commons.core.Messages;
 import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
-import seedu.saveit.commons.util.CollectionUtil;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.model.Issue;
@@ -39,15 +38,16 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt.";
     public static final String MESSAGE_EDIT_ISSUE_SUCCESS = "Edited Issue: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_USAGE = "Edit issue or solution by the index number (positive integer) used in the displayed list: \n"
-        + "******  " + COMMAND_WORD + " INDEX "
-        + "[" + PREFIX_STATEMENT + "ISSUE_STATEMENT] "
-        + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
-        + "[" + PREFIX_TAG + "TAG]...\n"
-        + "Edit solution by the index number used in the displayed solution list: \n"
-        + "******  " + COMMAND_WORD + " INDEX "
-        + "[" + PREFIX_SOLUTION_LINK + "NEW_SOLUTION_LINK] "
-        + "[" + PREFIX_REMARK + "NEW_SOLUTION_REMARK] \n";
+    public static final String MESSAGE_USAGE =
+        "Edit issue or solution by the index number (positive integer) used in the displayed list: \n"
+            + "******  " + COMMAND_WORD + " INDEX "
+            + "[" + PREFIX_STATEMENT + "ISSUE_STATEMENT] "
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Edit solution by the index number used in the displayed solution list: \n"
+            + "******  " + COMMAND_WORD + " INDEX "
+            + "[" + PREFIX_SOLUTION_LINK + "NEW_SOLUTION_LINK] "
+            + "[" + PREFIX_REMARK + "NEW_SOLUTION_REMARK] \n";
 
 
     public static final String DUMMY_SOLUTION_REMARK = "dummySolutionRemark";
@@ -80,7 +80,6 @@ public class EditCommand extends Command {
             int solutionListSize = lastShownList.get(issueIndex).getSolutions().size();
             issueToEdit = getIssueToEdit(lastShownList, solutionListSize, issueIndex);
         }
-
 
         Issue editedIssue = createEditedIssue(issueToEdit, editIssueDescriptor);
         if (!issueToEdit.isSameIssue(editedIssue) && model.hasIssue(editedIssue)) {
@@ -139,7 +138,7 @@ public class EditCommand extends Command {
         if (index >= issueToEdit.getSolutions().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
         }
-        
+
         Solution oldSolution = issueToEdit.getSolutions().get(index);
         Solution updatedSolution;
 
@@ -153,8 +152,8 @@ public class EditCommand extends Command {
         updatedSolution = new Solution(updatedSolutionLink, updatedSolutionRemark);
 
         return updatedSolution;
-        }
     }
+
 
     @Override
     public boolean equals(Object other) {

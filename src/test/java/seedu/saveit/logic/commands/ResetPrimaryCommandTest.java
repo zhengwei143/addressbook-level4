@@ -1,7 +1,15 @@
 package seedu.saveit.logic.commands;
 
+import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_SOLUTION;
+import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
+
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
+
 import seedu.saveit.commons.core.Messages;
 import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
@@ -13,13 +21,6 @@ import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.UserPrefs;
 import seedu.saveit.model.issue.Solution;
 import seedu.saveit.testutil.DirectoryBuilder;
-
-import java.util.List;
-
-import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_SOLUTION;
-import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
 
 public class ResetPrimaryCommandTest {
     private Model model;

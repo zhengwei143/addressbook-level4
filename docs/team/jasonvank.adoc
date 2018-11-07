@@ -32,7 +32,7 @@ More importantly, SaveIt is ​optimized for those who prefer to work with a Com
 ** Implemented `command highlight` feature: Allows users to differentiate their inputs by highlight command word,  parameters and values in different colors.
 ** Implemented `command alias` feature: Allows users to type command words less but achieving the same functionality.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=jasonvank[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
 * *Other contributions*:
 

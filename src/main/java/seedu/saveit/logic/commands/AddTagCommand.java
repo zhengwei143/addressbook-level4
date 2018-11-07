@@ -10,7 +10,7 @@ import seedu.saveit.model.Model;
 import seedu.saveit.model.issue.Tag;
 
 /**
- * To rename or remove a spcific tag for all entries with that tag.
+ * To rename or remove a specific tag for all entries with that tag.
  */
 public class AddTagCommand extends Command {
 

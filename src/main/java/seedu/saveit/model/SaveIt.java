@@ -5,6 +5,7 @@ import static seedu.saveit.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -14,6 +15,7 @@ import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.exceptions.IllegalValueException;
 import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;
+import seedu.saveit.model.issue.exceptions.IssueNotFoundException;
 
 /**
  * Wraps all data at the saveit-book level
@@ -21,7 +23,6 @@ import seedu.saveit.model.issue.Tag;
  */
 public class SaveIt implements ReadOnlySaveIt {
 
-    private static final String DUMMY_TAG = "dummyTag";
     private final UniqueIssueList issues;
     private Directory currentDirectory;
 
@@ -139,17 +140,29 @@ public class SaveIt implements ReadOnlySaveIt {
     }
 
     /**
-     * Adds tag(s) to the existing data of this {@code SaveIt} issue with {@code tagList} for {@code index} issue.
+     * Adds tag(s) to the existing data of this {@code SaveIt} with {@code tagList} for a range of {@code index} issue.
      */
-    public void addTag(Index index, Set<Tag> tagList) {
+    public void addTag(Set<Issue> issues, Set<Tag> tagList) {
         requireNonNull(tagList);
-        Issue issueToEdit = issues.getIssue(index);
-        Set<Tag> tagsToUpdate = new HashSet<>(issueToEdit.getTags());
-        tagsToUpdate.addAll(tagList);
+        Iterator<Issue> issueIterator = issues.iterator();
+        boolean added = false;
 
-        Issue updateIssue = new Issue(issueToEdit.getStatement(), issueToEdit.getDescription(),
-            issueToEdit.getSolutions(), tagsToUpdate, issueToEdit.getFrequency());
-        updateIssue(issueToEdit, updateIssue);
+        while (issueIterator.hasNext()) {
+            Issue issueToEdit = issueIterator.next();
+            Set<Tag> currentTags = new HashSet<>(issueToEdit.getTags());
+            Set<Tag> updateTags = new HashSet<>();
+            updateTags.addAll(tagList);
+            updateTags.addAll(currentTags);
+
+            if (currentTags.size() != updateTags.size()) {
+                added = true;
+                updateTags(issueToEdit, updateTags);
+            }
+        }
+
+        if (!added) {
+            throw new IssueNotFoundException();
+        }
     }
 
     /**
@@ -162,17 +175,36 @@ public class SaveIt implements ReadOnlySaveIt {
             Set<Tag> tagsToUpdate = new HashSet<>(issueToUpdate.getTags());
             if (tagsToUpdate.contains(oldTag)) {
                 tagsToUpdate.remove(oldTag);
-                if (!newTag.tagName.equals(DUMMY_TAG)) {
-                    tagsToUpdate.add(newTag);
-                }
+                tagsToUpdate.add(newTag);
                 isEdit = true;
-                Issue updateIssue = new Issue(issueToUpdate.getStatement(), issueToUpdate.getDescription(),
-                    issueToUpdate.getSolutions(), tagsToUpdate, issueToUpdate.getFrequency());
-                updateIssue(issueToUpdate, updateIssue);
+                updateTags(issueToUpdate, tagsToUpdate);
             }
 
         }
         return isEdit;
+    }
+
+    /**
+     * remove the {@code oldTag} of {@code SaveIt} for all issue entries.
+     */
+    public boolean refactorTag(Tag tag) {
+        boolean isEdit = false;
+        requireNonNull(tag);
+        for (Issue issueToUpdate : issues) {
+            Set<Tag> tagsToUpdate = new HashSet<>(issueToUpdate.getTags());
+            if (tagsToUpdate.contains(tag)) {
+                tagsToUpdate.remove(tag);
+                isEdit = true;
+                updateTags(issueToUpdate, tagsToUpdate);
+            }
+        }
+        return isEdit;
+    }
+
+    private void updateTags(Issue issueToUpdate, Set<Tag> tagsToUpdate) {
+        Issue updateIssue = new Issue(issueToUpdate.getStatement(), issueToUpdate.getDescription(),
+            issueToUpdate.getSolutions(), tagsToUpdate, issueToUpdate.getFrequency());
+        updateIssue(issueToUpdate, updateIssue);
     }
 
     /**

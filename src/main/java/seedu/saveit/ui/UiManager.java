@@ -12,10 +12,15 @@ import javafx.stage.Stage;
 import seedu.saveit.MainApp;
 import seedu.saveit.commons.core.ComponentManager;
 import seedu.saveit.commons.core.Config;
+import seedu.saveit.commons.core.EventsCenter;
 import seedu.saveit.commons.core.LogsCenter;
+import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.events.storage.DataSavingExceptionEvent;
+import seedu.saveit.commons.events.ui.ChangeDirectoryRequestEvent;
+import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.commons.util.StringUtil;
 import seedu.saveit.logic.Logic;
+import seedu.saveit.logic.SuggestionLogic;
 import seedu.saveit.model.UserPrefs;
 
 /**
@@ -33,13 +38,15 @@ public class UiManager extends ComponentManager implements Ui {
     private static final String ICON_APPLICATION = "/images/saveIt_logo.png";
 
     private Logic logic;
+    private SuggestionLogic suggestionLogic;
     private Config config;
     private UserPrefs prefs;
     private MainWindow mainWindow;
 
-    public UiManager(Logic logic, Config config, UserPrefs prefs) {
+    public UiManager(Logic logic, SuggestionLogic suggestionLogic, Config config, UserPrefs prefs) {
         super();
         this.logic = logic;
+        this.suggestionLogic = suggestionLogic;
         this.config = config;
         this.prefs = prefs;
     }
@@ -52,7 +59,7 @@ public class UiManager extends ComponentManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, config, prefs, logic);
+            mainWindow = new MainWindow(primaryStage, config, prefs, logic, suggestionLogic);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
@@ -116,5 +123,12 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         showFileOperationAlertAndWait(FILE_OPS_ERROR_DIALOG_HEADER_MESSAGE, FILE_OPS_ERROR_DIALOG_CONTENT_MESSAGE,
                 event.exception);
+    }
+
+    @Subscribe
+    private void handleChangeDirectoryRequestEvent(ChangeDirectoryRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        logic.resetDirectory(event.directory);
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(Index.fromOneBased(event.directory.getIssue())));
     }
 }

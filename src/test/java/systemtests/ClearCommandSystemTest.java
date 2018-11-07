@@ -23,6 +23,8 @@ public class ClearCommandSystemTest extends SaveItSystemTest {
         /* Case: clear non-empty saveit book, command with leading spaces and trailing alphanumeric characters and
          * spaces -> cleared
          */
+        executeCommand("   " + ClearCommand.COMMAND_WORD + " ab12   ");
+        executeCommand("Yes");
         assertCommandSuccess("   " + ClearCommand.COMMAND_WORD + " ab12   ");
         assertSelectedCardUnchanged();
 
@@ -76,7 +78,6 @@ public class ClearCommandSystemTest extends SaveItSystemTest {
      * @see ClearCommandSystemTest#assertCommandSuccess(String)
      */
     private void assertCommandSuccess(String command, String expectedResultMessage, Model expectedModel) {
-        executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
         assertStatusBarUnchangedExceptSyncStatus();

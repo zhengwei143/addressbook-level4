@@ -1,7 +1,8 @@
-= Fan Wenkai - Project Portfolio
+= Yang Shuqi - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
+:sectnums:
 
 == PROJECT: SaveIt
 
@@ -9,40 +10,34 @@
 
 == Overview
 
-SaveIt​ is geared at keeping track of the issues that the user finds and to link it with the email found on google.
-More importantly, SaveIt is ​optimized for those who prefer to work with a Command Line Interface​ (CLI) while still having the benefits of a Graphical User Interface (GUI).
-If you can type fast, SaveIt can help you search the same statement that save previously faster than traditional GUI apps.
+This document is written for summarizing my contributions in the project SaveIt.
+
 == Summary of contributions
+SaveIt is a platform for you to keep track of issues that you encounter and the corresponding solutions that you found on through your search engine.
+More importantly, SaveIt is ​optimized for those who prefer to work with a Command Line Interface​ (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancements*:
+** Improved *Edit* Command feature
+*** What it does: It allows a user to edit any fields in the issue and solution.
+*** Justification: The current data structure is an issue is bound to multiple solutions. Since a solution includes a solution link and a solution remark, users should be able to edit any field in a solution instead of replacing the whole solution.
+*** Highlights: It requires a depth analysis for different conditions whether the command is valid. Also, we need to tell the user if he is in the wrong directory. It improves the efficiency to edit their issues and solutions.
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+** Implemented *Add Tags*
+*** What it does: It allows the user to add tags to specified issues.
+*** Justification: This feature allows users to add tags to an issue if they forgot to add tags when they create an issue. It is troublesome to replace all the issues when using `edit` command.
+*** Highlights: It requires a depth analysis to decide whether the command should be accepted. It is flexible to users as they can provide a range of indexes or some discrete indexes to add tags in one execution.
+
+* *Minor enhancements*:
+** Implemented `refactortag` command: Allows users to rename or remove a specific tag for all entries with that tag.
+** Implemented `command highlight` feature: Allows users to differentiate their inputs by highlight command word,  parameters and values in different colors.
+** Implemented `command alias` feature: Allows users to type command words less but achieving the same functionality.
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
-** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
 
 == Contributions to the User Guide
 
@@ -51,14 +46,10 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
+
 == Contributions to the Developer Guide
 
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_

@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.saveit.commons.core.ComponentManager;
 import seedu.saveit.commons.core.LogsCenter;
+import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.logic.commands.Command;
 import seedu.saveit.logic.commands.CommandResult;
 import seedu.saveit.logic.commands.DangerCommand;
@@ -69,6 +70,11 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
+    public void resetDirectory(Directory directory) {
+        model.resetDirectory(directory);
+    }
+
+    @Override
     public ListElementPointer getHistorySnapshot() {
         return new ListElementPointer(history.getHistory());
     }
@@ -77,7 +83,7 @@ public class LogicManager extends ComponentManager implements Logic {
      * Check if a buffered command can be executed based on {@code commandText}.
      * Update {@code bufferedCommand} to null.
      */
-    private CommandResult handleBufferedCommand(String commandText) throws CommandException {
+    private CommandResult handleBufferedCommand(String commandText) throws CommandException, ParseException {
         DangerCommand command = bufferedCommand;
         resetBufferedCommand();
 

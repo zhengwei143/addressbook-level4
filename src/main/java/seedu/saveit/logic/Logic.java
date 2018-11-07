@@ -1,6 +1,7 @@
 package seedu.saveit.logic;
 
 import javafx.collections.ObservableList;
+import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.logic.commands.CommandResult;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.logic.parser.exceptions.ParseException;
@@ -9,6 +10,7 @@ import seedu.saveit.model.issue.Solution;
 
 /**
  * API of the Logic component
+ * used to handle the logic regarding the execution of commands
  */
 public interface Logic {
     /**
@@ -20,12 +22,15 @@ public interface Logic {
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
+    /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
+    ListElementPointer getHistorySnapshot();
+
     /** Returns an unmodifiable view of the filtered list of issues */
     ObservableList<Issue> getFilteredAndSortedIssueList();
 
-    /**Returns an unmodifiable view of the filtered list of solutions of the selected issue */
+    /** Returns an unmodifiable view of the filtered list of solutions of the selected issue */
     ObservableList<Solution> getFilteredSolutionList();
 
-    /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
-    ListElementPointer getHistorySnapshot();
+    /** Reset the directory of current model */
+    void resetDirectory(Directory directory);
 }

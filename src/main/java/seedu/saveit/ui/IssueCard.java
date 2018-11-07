@@ -39,8 +39,9 @@ public class IssueCard extends UiPart<Region> {
         super(FXML);
         this.issue = issue;
         id.setText(displayedIndex + ". ");
-        statement.setText(issue.getStatement().issue);
-        description.setText(issue.getDescription().value);
+        statement.setText(issue.getStatement().getValue());
+        description.setText(issue.getDescription().getValue());
+        description.setWrapText(true);
         int index = 1;
         issue.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }

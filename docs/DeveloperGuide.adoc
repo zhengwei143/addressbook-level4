@@ -304,18 +304,18 @@ This diagram shows the sequence that how add solution command is executed. It co
 
 ==== Design Considerations
 ===== Aspect: How add solutions executes
-* Alternative 1 (current choice): Combine AddIssue and AddSolution combined together and distinguishes them at the stage of `AddCommandParser`
+* **Alternative 1 (current choice):** Combine AddIssue and AddSolution combined together and distinguishes them at the stage of `AddCommandParser`
 ** Pros: Consistent syntax between the two features, so the command is more user-friendly.
 ** Cons: Need to put more effort on distinguishing the difference between these two requests, `AddCommandParser` is relatively complex compared to the other parser component.
-* Alternative 2: Build a new command especially for adding solution
+* **Alternative 2:** Build a new command especially for adding solution
 ** Pros: Easy to implement.
 ** Cons: The command set becomes too complex for the user.
 
 ===== Aspect: How add command distinguishes between adding solution and adding issue
-* Alternative 1 (current choice): Passing a new created issue with dummy issue statement or dummy solution link
+* **Alternative 1 (current choice):** Passing a new created issue with dummy issue statement or dummy solution link
 ** Pros: Consistent coding style and less change on logic structure
 ** Cons: Quite complex implementation compared to other command
-* Alternative 2: Overloading Issue constructor so that different issues will be passing to `AddCommand` accordingly.
+* **Alternative 2:** Overloading Issue constructor so that different issues will be passing to `AddCommand` accordingly.
 * Pros: Relatively easier to implement
 * Cons: Lots of changes on structure.
 
@@ -366,22 +366,6 @@ They can serve the three sort type we provide in SaveIt. When more sort type is 
 ** Pros: Easy to understand and implement
 
 ** Cons: Time consuming.
-
-===== Aspect: Comparator to support the sort command
-
-* Sort by added time: `sort` +
-  This sorting follows how the data is stored in Storage, reflecting the user's learning journey. +
-  There is no need to implement new Comparator for that.
-
-* Sort by chronological order: `sort chro` +
-  This sorting require the Comparator to compare the last modified time of the issue. Therefore, a Timestamp needs to be stored and updated every time an issue is added or edited.
-
-* Sort by first Tag: `sort tag` +
-  This sorting requires the tag attribute of every issue to be tracked. We retrieve tag lists and get the first tags. A String Comparator is enough for sorting tagName of them.
-  Those issues without a tag should be put at the end of the lists.
-
-* Sort by search frequency: `sort freq` +
-  This sorting requires the search frequency tracker. We retrieve the IssueSearchFrequency and sort them by the compare method provided in that class.
 // end::sort[]
 
 // tag::undoredo[]
@@ -537,7 +521,7 @@ Certain properties of the application can be controlled (e.g App name, logging l
 
 A new command--`home` is implemented to allow users to return to the root directory after editing a certain issue.
 
-=== GUI Enhancement[Coming in v1.3]
+=== GUI Enhancement
 The  figure below shows the expected GUI for SaveIt v1.3.
 
 .GUI Draft 1
@@ -560,6 +544,7 @@ image::UI_Design1.png[width="800"]
 image::UI_Design2.png[width="800"]
 
 
+// end::edit[]
 === Edit Feature
 The edit feature allows users to edit any field of the issue and solution.
 
@@ -597,26 +582,53 @@ Please refer to the Sequence Diagram below for the edit operation.
 image::edit-command-sequence-diagram.jpg[width="800"]
 
 ==== Design Consideration
-* Alternative 1 (current choice): Update the whole issue fields when every single field needs to edit.
+* **Alternative 1 (current choice):** Update the whole issue fields when every single field needs to edit.
 
 ** Pros: It is easy to implement in current implementation.
 
 ** Cons: It may have performance issues regarding memory usage.
 
-* Alternative 2: Update the specific data field instead of updating the whole issue.
+* **Alternative 2:** Update the specific data field instead of updating the whole issue.
 
 ** Pros: It will use less memory.
 
 ** Cons: It has lower security if it the issue is the mutable object.
 
+=== Retrieve Feature
+The retrieve feature allows user to choose a solution link to copy to the system clipboard.
+
+==== Current Implementation
+
+The retrieve feature basically takes the user entered index and call `getFilteredAndSortedList` method in `Model` to get the selected solution. Then Java `Toolkit` package is used to copy the url link of solution to the system clipboard.
+
+=== Set Primary feature
+The set primary feature allows users to choose one solution as primary solution.
+
+==== Current Implementation
+
+The set primary mechanism is facilitated by the method `isPrimarySolution()` override by `PrimarySolution` inheriting from `Solution`.
+
+==== Design Consideration
+===== Aspect: How to distinguish between PrimarySolution and Solution
+* **Alternative 1 (current choice):** Use PrimarySolution as a subclass of Solution
+
+** Pros: No flag attribute is introduced. Solution structure remains the same.
+
+** Cons: New object is created. May affect performance.
+
+* **Alternative 2:** Add a flag attribute to Solution
+
+** Pros: Easy to understand.
+
+** Cons: Solution constructor is affected. The flag attribute is redundant for non-primary solutions.
 
 === Refactor tag Feature
 The refactor tag feature allows users to rename or remove a specified tag for all entries with that tag.
 
 ==== Current Implementation
-The refactor tag mechanism is facilitated by `refactorTagCommandParser` and `refactorCommand`.
+The refactor tag mechanism is facilitated by `RefactorTagCommandParser` and `RefactorCommand`.
 
-The `refactorTagCommandParser` extends `Parser` and implements the following operations:
+The `RefactorTagCommandParser` extends `Parser` and implements the following operations:
 
 * `refactorTagCommandParser#parser(String args)`
 ** Checks the arguments for empty strings and throws a `ParseException` if an empty string is found.
@@ -635,16 +647,27 @@ Please refer to the Sequence Diagram below for the refactor tag operation.
 .Refactor Tag Command Activity Diagram
 image::refactor-tag.jpeg[width="800"]
 
+==== Design Consideration
+
+===== Aspect: Implementation of RefactorTag command parser.
+* Alternative 1 (current choice): Allows only to rename or remove the old tags that user input lastly.
+** Pros: It is easy to implement.
+** Cons: It is inconvenient if the user wants to replace the tags once.
+* Alternative 2: Allows to rename or remove multiple old tags with multiple new tags.
+** Pros: It is convenient for users to replace or remove the tags once.
+** Cons: It is not clear for users to see the changes since tags are displayed disordered.
+// end::refactorTag[]
 
 
 
+// tag::addTag[]
 === Add tag Feature
-The add tag feature allows the user to add a tag or more tags to a specified issue.
+The add tag feature allows users to add `Tag(s)` to specified `Indexed` issues.
 
 ==== Current Implementation
-The add tag mechanism is facilitated by `addTagCommandParser` and `addTagCommand`.
+The add tag mechanism is facilitated by `AddTagCommandParser` and `AddTagCommand`.
 
-Please refer to the Sequence Diagram below for the refactor tag operation.
+Please refer to the Sequence Diagram below for the add tag operation.
 
 .Add Tag Command Sequence Diagram
 image::add-tag-sequence-diagram.jpeg[width="800"]
@@ -652,17 +675,22 @@ image::add-tag-sequence-diagram.jpeg[width="800"]
 ==== Design Consideration
 
 ===== Aspect: Implementation of AddTag command parser.
-* Alternative 1 (current choice): Adds tag(s) for one issue in command execution.
-** Pros: It allows multiple additions of `Tags` in one command execution.
-** Cons: It has a lower efficiency to add tags for multiple issues.
-* Alternative 2: Creates a separate class for ranges of index
-** Pros: It is convenient for users to add tags for multiple issues once.
+* Alternative 1 (current choice):** Allows range of `Index` to be accepted as index parameter.
+** Pros: It is efficient to add multiple `Tags` to multiple issues instead of doing it singly.
+** Cons: It has to consider various conditions of the user input.
+* Alternative 2: Creates a IndexRange class for index.
+** Pros: It is easy to understand and maintain.
 ** Cons: It will increase coupling between IndexRange class and Index class
+// end::addTag[]
 
 
-
+// tag::commandHighlight[]
 === Command Highlight
+The command highlight feature is to differentiate command word, index, prefix and values that user input in Command Line.
 
+==== Current Implementation
+The Command Highlight mechanism uses `InlineCssTextArea` class. It uses listener to detect the change in the `commandTextField` and check if it is command word, parameter, index or values and assign different colors correspondingly.
+// end::commandHighlight[]
 
 
 == Documentation

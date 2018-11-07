@@ -8,7 +8,7 @@ import seedu.saveit.commons.core.EventsCenter;
 import seedu.saveit.commons.core.Messages;
 import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
-import seedu.saveit.commons.events.ui.ChangeDirectoryRequestEvent;
+import seedu.saveit.commons.events.model.DirectoryChangedEvent;
 import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.commons.events.ui.JumpToSolutionListRequestEvent;
 import seedu.saveit.logic.CommandHistory;
@@ -56,11 +56,11 @@ public class SelectCommand extends Command {
     private CommandResult selectIssue(Model model, CommandHistory history) throws CommandException {
         List<Issue> filteredIssueList = model.getFilteredAndSortedIssueList();
         if (targetIndex.getZeroBased() >= filteredIssueList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX + "\n" + MESSAGE_USAGE);
         }
         model.resetDirectory(new Directory(targetIndex.getOneBased(), 0));
         EventsCenter.getInstance().post(
-                new ChangeDirectoryRequestEvent(model.getCurrentDirectory()));
+                new DirectoryChangedEvent(model.getCurrentDirectory()));
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
         return new CommandResult(String.format(MESSAGE_SELECT_ISSUE_SUCCESS, targetIndex.getOneBased()));
     }
@@ -70,11 +70,11 @@ public class SelectCommand extends Command {
      */
     private CommandResult selectSolution(Model model, CommandHistory history) throws CommandException {
         if (targetIndex.getZeroBased() >= model.getFilteredSolutionList().size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_SOLUTION_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_SOLUTION_DISPLAYED_INDEX + "\n" + MESSAGE_USAGE);
         }
         model.resetDirectory(new Directory(model.getCurrentDirectory().getIssue(), targetIndex.getOneBased()));
         EventsCenter.getInstance().post(
-                new ChangeDirectoryRequestEvent(model.getCurrentDirectory()));
+                new DirectoryChangedEvent(model.getCurrentDirectory()));
         EventsCenter.getInstance().post(new JumpToSolutionListRequestEvent(targetIndex));
         return new CommandResult(
                 String.format(MESSAGE_SELECT_ISSUE_SUCCESS, model.getCurrentDirectory().getIssue())

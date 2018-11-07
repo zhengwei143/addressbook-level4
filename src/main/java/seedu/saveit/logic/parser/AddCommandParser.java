@@ -28,10 +28,6 @@ public class AddCommandParser implements Parser<AddCommand> {
 
     private static final String DUMMY_SOLUTION_LINK = "https://www.dummySolutionLink.com";
     private static final String DUMMY_SOLUTION_REMARK = "dummySolutionRemark";
-    private static final String NO_LINK_EXCEPTION = "Please enter solution link";
-    private static final String NO_REMARK_EXCEPTION = "Please enter solution remark";
-    private static final String NO_STATEMENT_EXCEPTION = "Please enter statement";
-    private static final String NO_DESCRIPTION_EXCEPTION = "Please enter description";
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand and returns an AddCommand
@@ -62,19 +58,15 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     private AddCommand handleAddIssueParser(ArgumentMultimap argMultimap) throws ParseException {
         IssueStatement statement;
-
-        if (argMultimap.getValue(PREFIX_STATEMENT).isPresent()) {
-            statement = ParserUtil.parseStatement(argMultimap.getValue(PREFIX_STATEMENT).get());
-        } else {
-            throw new ParseException(NO_STATEMENT_EXCEPTION);
-        }
-
         Description description;
 
-        if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
+        if (argMultimap.getValue(PREFIX_STATEMENT).isPresent() && argMultimap.getValue(PREFIX_DESCRIPTION)
+                .isPresent()) {
+            statement = ParserUtil.parseStatement(argMultimap.getValue(PREFIX_STATEMENT).get());
             description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         } else {
-            throw new ParseException(NO_DESCRIPTION_EXCEPTION);
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddCommand.MESSAGE_USAGE));
         }
 
         List<Solution> solutionList = ParserUtil.parseSolutions(DUMMY_SOLUTION_LINK, DUMMY_SOLUTION_REMARK);
@@ -91,19 +83,15 @@ public class AddCommandParser implements Parser<AddCommand> {
     private AddCommand handleAddSolutionParser(ArgumentMultimap argMultimap) throws ParseException {
 
         String solutionLink;
-
-        if (argMultimap.getValue(PREFIX_SOLUTION_LINK).isPresent()) {
-            solutionLink = ParserUtil.parseSolutionLink(argMultimap.getValue(PREFIX_SOLUTION_LINK).get()).getValue();
-        } else {
-            throw new ParseException(NO_LINK_EXCEPTION);
-        }
-
         String solutionRemark;
 
-        if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
+        if (argMultimap.getValue(PREFIX_SOLUTION_LINK).isPresent() && argMultimap.getValue(PREFIX_REMARK)
+                .isPresent()) {
+            solutionLink = ParserUtil.parseSolutionLink(argMultimap.getValue(PREFIX_SOLUTION_LINK).get()).getValue();
             solutionRemark = ParserUtil.parseSolutionRemark(argMultimap.getValue(PREFIX_REMARK).get()).getValue();
         } else {
-            throw new ParseException(NO_REMARK_EXCEPTION);
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddCommand.MESSAGE_USAGE));
         }
 
         List<Solution> solutionList = new ArrayList<>();

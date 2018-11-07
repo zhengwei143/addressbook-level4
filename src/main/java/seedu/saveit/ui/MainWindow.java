@@ -15,11 +15,13 @@ import javafx.stage.Stage;
 import seedu.saveit.commons.core.Config;
 import seedu.saveit.commons.core.GuiSettings;
 import seedu.saveit.commons.core.LogsCenter;
+import seedu.saveit.commons.events.model.DirectoryChangedEvent;
 import seedu.saveit.commons.events.model.SaveItChangedEvent;
 import seedu.saveit.commons.events.ui.ExitAppRequestEvent;
 import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.commons.events.ui.ShowHelpRequestEvent;
 import seedu.saveit.logic.Logic;
+import seedu.saveit.logic.SuggestionLogic;
 import seedu.saveit.model.UserPrefs;
 
 /**
@@ -34,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private SuggestionLogic suggestionLogic;
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
@@ -50,13 +53,13 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane commandBoxPlaceholder;
 
     @FXML
+    private MenuItem exitMenuItem;
+
+    @FXML
     private MenuItem helpMenuItem;
 
     @FXML
     private StackPane issueListPanelPlaceholder;
-
-    @FXML
-    private StackPane solutionListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -64,12 +67,14 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
-    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
+    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic,
+            SuggestionLogic suggestionLogic) {
         super(FXML, primaryStage);
 
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.suggestionLogic = suggestionLogic;
         this.config = config;
         this.prefs = prefs;
 
@@ -132,7 +137,6 @@ public class MainWindow extends UiPart<Stage> {
         issueListPanelPlaceholder.getChildren().add(issueListPanel.getRoot());
 
         solutionListPanel = new SolutionListPanel(logic.getFilteredSolutionList());
-        solutionListPanelPlaceholder.getChildren().add(solutionListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -140,7 +144,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getSaveItFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(logic);
+        CommandBox commandBox = new CommandBox(logic, suggestionLogic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -216,12 +220,23 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        solutionListPanel.setSolutionList(logic.getFilteredSolutionList());
+        issueListPanelPlaceholder.getChildren().remove(issueListPanel.getRoot());
+        issueListPanelPlaceholder.getChildren().add(solutionListPanel.getRoot());
     }
 
     @Subscribe
     private void handleSaveItChangedEvent(SaveItChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         solutionListPanel.setSolutionList(logic.getFilteredSolutionList());
+    }
+
+    @Subscribe
+    private void handleChangeDirectoryRequestEvent(DirectoryChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        if (event.directory.isRootLevel()) {
+            issueListPanelPlaceholder.getChildren().remove(solutionListPanel.getRoot());
+            issueListPanelPlaceholder.getChildren().add(issueListPanel.getRoot());
+            System.out.println("success");
+        }
     }
 }

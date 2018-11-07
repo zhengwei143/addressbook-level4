@@ -12,7 +12,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.saveit.MainApp;
 import seedu.saveit.commons.core.LogsCenter;
+import seedu.saveit.commons.events.model.DirectoryChangedEvent;
 import seedu.saveit.commons.events.ui.BrowserPanelFocusChangeEvent;
+import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.commons.events.ui.SolutionPanelSelectionChangedEvent;
 import seedu.saveit.model.issue.Solution;
 
@@ -53,7 +55,7 @@ public class BrowserPanel extends UiPart<Region> {
 
 
     private void loadSolutionPage(Solution solution) {
-        loadPage(solution.solutionLink.getValue());
+        loadPage(solution.getLink().getValue());
     }
 
     public void loadPage(String url) {
@@ -80,5 +82,19 @@ public class BrowserPanel extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadSolutionPage(event.getNewSelection());
         isNewPageLoaded = true;
+    }
+
+    @Subscribe
+    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        loadDefaultPage();
+    }
+
+    @Subscribe
+    private void handleChangeDirectoryRequestEvent(DirectoryChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        if (event.directory.isRootLevel()) {
+            loadDefaultPage();
+        }
     }
 }

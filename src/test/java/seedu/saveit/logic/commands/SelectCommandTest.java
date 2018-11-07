@@ -11,11 +11,11 @@ import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
 import seedu.saveit.commons.core.Messages;
+import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.logic.CommandHistory;
@@ -36,12 +36,13 @@ public class SelectCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    @Ignore
     public void execute_validIndexUnfilteredList_success() {
         Index lastIssueIndex = Index.fromOneBased(model.getFilteredAndSortedIssueList().size());
 
         assertExecutionSuccess(INDEX_FIRST_ISSUE);
+        model.resetDirectory(new Directory(0, 0));
         assertExecutionSuccess(INDEX_THIRD_ISSUE);
+        model.resetDirectory(new Directory(0, 0));
         assertExecutionSuccess(lastIssueIndex);
     }
 
@@ -49,11 +50,11 @@ public class SelectCommandTest {
     public void execute_invalidIndexUnfilteredList_failure() {
         Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredAndSortedIssueList().size() + 1);
 
-        assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
+        assertExecutionFailure(outOfBoundsIndex,
+                Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX + "\n" + SelectCommand.MESSAGE_USAGE);
     }
 
     @Test
-    @Ignore
     public void execute_validIndexFilteredList_success() {
         showIssueAtIndex(model, INDEX_FIRST_ISSUE);
         showIssueAtIndex(expectedModel, INDEX_FIRST_ISSUE);
@@ -70,7 +71,8 @@ public class SelectCommandTest {
         // ensures that outOfBoundIndex is still in bounds of saveit book list
         assertTrue(outOfBoundsIndex.getZeroBased() < model.getSaveIt().getIssueList().size());
 
-        assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
+        assertExecutionFailure(outOfBoundsIndex,
+                Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX + "\n" + SelectCommand.MESSAGE_USAGE);
     }
 
     @Test

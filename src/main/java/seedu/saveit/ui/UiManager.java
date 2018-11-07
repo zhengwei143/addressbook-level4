@@ -12,8 +12,12 @@ import javafx.stage.Stage;
 import seedu.saveit.MainApp;
 import seedu.saveit.commons.core.ComponentManager;
 import seedu.saveit.commons.core.Config;
+import seedu.saveit.commons.core.EventsCenter;
 import seedu.saveit.commons.core.LogsCenter;
+import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.events.storage.DataSavingExceptionEvent;
+import seedu.saveit.commons.events.ui.ChangeDirectoryRequestEvent;
+import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.commons.util.StringUtil;
 import seedu.saveit.logic.Logic;
 import seedu.saveit.logic.SuggestionLogic;
@@ -119,5 +123,12 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         showFileOperationAlertAndWait(FILE_OPS_ERROR_DIALOG_HEADER_MESSAGE, FILE_OPS_ERROR_DIALOG_CONTENT_MESSAGE,
                 event.exception);
+    }
+
+    @Subscribe
+    private void handleChangeDirectoryRequestEvent(ChangeDirectoryRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        logic.resetDirectory(event.directory);
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(Index.fromOneBased(event.directory.getIssue())));
     }
 }

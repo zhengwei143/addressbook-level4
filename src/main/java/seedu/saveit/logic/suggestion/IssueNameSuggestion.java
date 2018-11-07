@@ -49,6 +49,6 @@ public class IssueNameSuggestion implements Suggestion {
         int endPosition = endPrefix.getPrefix() == ArgumentTokenizer.END_MARKER
                 ? endPrefix.getPosition() : endPrefix.getPosition() - 1;
 
-        return new SuggestionResult(values, STATEMENT_SUCCESS, startPosition, endPosition);
+        return new SuggestionResult(values, STATEMENT_SUCCESS, argument, startPosition, endPosition);
     }
 }

@@ -18,12 +18,14 @@ import java.util.Set;
 import seedu.saveit.commons.core.Messages;
 import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
+import seedu.saveit.commons.util.CollectionUtil;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueStatement;
+import seedu.saveit.model.issue.PrimarySolution;
 import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;
 
@@ -73,12 +75,19 @@ public class EditCommand extends Command {
         List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
         Directory currentDirectory = model.getCurrentDirectory();
 
-        if (currentDirectory.isRootLevel()) {
+        if (currentDirectory.isRootLevel() && editIssueDescriptor.isAnyIssueFieldEdited()) {
             issueToEdit = getIssueToEdit(lastShownList, lastShownList.size(), index.getZeroBased());
-        } else {
+        } else if (currentDirectory.isSolutionLevel() && editIssueDescriptor
+            .isAnySolutionFieldEdited()) {
             int issueIndex = currentDirectory.getIssue() - 1;
             int solutionListSize = lastShownList.get(issueIndex).getSolutions().size();
             issueToEdit = getIssueToEdit(lastShownList, solutionListSize, issueIndex);
+        } else if ((currentDirectory.isRootLevel() && editIssueDescriptor.isAnySolutionFieldEdited())
+            || (currentDirectory.isIssueLevel() && editIssueDescriptor.isAnyIssueFieldEdited())) {
+            // Mismatch of directory level and fields modified
+            throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
+        } else {
+            throw new CommandException(MESSAGE_USAGE);
         }
 
         Issue editedIssue = createEditedIssue(issueToEdit, editIssueDescriptor);
@@ -149,8 +158,11 @@ public class EditCommand extends Command {
             newSolution.getRemark().getValue().equals(DUMMY_SOLUTION_REMARK) ? oldSolution.getRemark().getValue()
                 : newSolution.getRemark().getValue();
 
-        updatedSolution = new Solution(updatedSolutionLink, updatedSolutionRemark);
-
+        if (oldSolution.isPrimarySolution()) {
+            updatedSolution = new PrimarySolution(updatedSolutionLink, updatedSolutionRemark);
+        } else {
+            updatedSolution = new Solution(updatedSolutionLink, updatedSolutionRemark);
+        }
         return updatedSolution;
     }
 
@@ -207,6 +219,20 @@ public class EditCommand extends Command {
 
         public int getIndex() {
             return index;
+        }
+
+        /**
+         * Returns true if at least one field of issue level is edited.
+         */
+        public boolean isAnyIssueFieldEdited() {
+            return CollectionUtil.isAnyNonNull(statement, description, tags);
+        }
+
+        /**
+         * Returns true if solution field is edited.
+         */
+        public boolean isAnySolutionFieldEdited() {
+            return CollectionUtil.isAnyNonNull(solution);
         }
 
         public void setStatement(IssueStatement statement) {

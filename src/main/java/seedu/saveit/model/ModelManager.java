@@ -180,8 +180,9 @@ public class ModelManager extends ComponentManager implements Model {
         if (directory.isRootLevel()) {
             return null;
         } else {
-            return FXCollections.unmodifiableObservableList
-                    (filteredIssues.get(directory.getIssue() - 1).getObservableSolutions());
+            ObservableList<Solution> solutions = filteredIssues.get(directory.getIssue() - 1).getObservableSolutions();
+            solutions.sort(new SolutionComparator());
+            return FXCollections.unmodifiableObservableList(solutions);
         }
     }
 
@@ -270,7 +271,25 @@ public class ModelManager extends ComponentManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return versionedSaveIt.equals(other.versionedSaveIt)
-                && filteredIssues.equals(other.filteredIssues);
+                && filteredIssues.equals(other.filteredIssues)
+                && filteredAndSortedIssues.equals(other.filteredAndSortedIssues);
     }
 
+    /**
+     * A comparator for putting primary solution on top of the solution list.
+     */
+    private class SolutionComparator implements Comparator<Solution> {
+        @Override
+        public int compare(Solution solutionOne, Solution solutionTwo) {
+            if (solutionOne.isPrimarySolution() && !solutionTwo.isPrimarySolution()) {
+                return -1;
+            }
+
+            if (solutionTwo.isPrimarySolution() && !solutionOne.isPrimarySolution()) {
+                return 1;
+            }
+
+            return 0;
+        }
+    }
 }

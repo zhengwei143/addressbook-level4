@@ -304,18 +304,18 @@ This diagram shows the sequence that how add solution command is executed. It co
 
 ==== Design Considerations
 ===== Aspect: How add solutions executes
-* Alternative 1 (current choice): Combine AddIssue and AddSolution combined together and distinguishes them at the stage of `AddCommandParser`
+* **Alternative 1 (current choice):** Combine AddIssue and AddSolution combined together and distinguishes them at the stage of `AddCommandParser`
 ** Pros: Consistent syntax between the two features, so the command is more user-friendly.
 ** Cons: Need to put more effort on distinguishing the difference between these two requests, `AddCommandParser` is relatively complex compared to the other parser component.
-* Alternative 2: Build a new command especially for adding solution
+* **Alternative 2:** Build a new command especially for adding solution
 ** Pros: Easy to implement.
 ** Cons: The command set becomes too complex for the user.
 
 ===== Aspect: How add command distinguishes between adding solution and adding issue
-* Alternative 1 (current choice): Passing a new created issue with dummy issue statement or dummy solution link
+* **Alternative 1 (current choice):** Passing a new created issue with dummy issue statement or dummy solution link
 ** Pros: Consistent coding style and less change on logic structure
 ** Cons: Quite complex implementation compared to other command
-* Alternative 2: Overloading Issue constructor so that different issues will be passing to `AddCommand` accordingly.
+* **Alternative 2:** Overloading Issue constructor so that different issues will be passing to `AddCommand` accordingly.
 * Pros: Relatively easier to implement
 * Cons: Lots of changes on structure.
 
@@ -366,22 +366,6 @@ They can serve the three sort type we provide in SaveIt. When more sort type is 
 ** Pros: Easy to understand and implement
 
 ** Cons: Time consuming.
-
-===== Aspect: Comparator to support the sort command
-
-* Sort by added time: `sort` +
-  This sorting follows how the data is stored in Storage, reflecting the user's learning journey. +
-  There is no need to implement new Comparator for that.
-
-* Sort by chronological order: `sort chro` +
-  This sorting require the Comparator to compare the last modified time of the issue. Therefore, a Timestamp needs to be stored and updated every time an issue is added or edited.
-
-* Sort by first Tag: `sort tag` +
-  This sorting requires the tag attribute of every issue to be tracked. We retrieve tag lists and get the first tags. A String Comparator is enough for sorting tagName of them.
-  Those issues without a tag should be put at the end of the lists.
-
-* Sort by search frequency: `sort freq` +
-  This sorting requires the search frequency tracker. We retrieve the IssueSearchFrequency and sort them by the compare method provided in that class.
 // end::sort[]
 
 // tag::undoredo[]
@@ -537,7 +521,7 @@ Certain properties of the application can be controlled (e.g App name, logging l
 
 A new command--`home` is implemented to allow users to return to the root directory after editing a certain issue.
 
-=== GUI Enhancement[Coming in v1.3]
+=== GUI Enhancement
 The  figure below shows the expected GUI for SaveIt v1.3.
 
 .GUI Draft 1
@@ -598,21 +582,39 @@ Please refer to the Sequence Diagram below for the edit operation.
 image::edit-command-sequence-diagram.jpg[width="800"]
 
 ==== Design Consideration
-* Alternative 1 (current choice): Update the whole issue fields when every single field needs to edit.
+* **Alternative 1 (current choice):** Update the whole issue fields when every single field needs to edit.
 
 ** Pros: It is easy to implement in current implementation.
 
 ** Cons: It may have performance issues regarding memory usage.
 
-* Alternative 2: Update the specific data field instead of updating the whole issue.
+* **Alternative 2:** Update the specific data field instead of updating the whole issue.
 
 ** Pros: It will use less memory.
 
 ** Cons: It has lower security if it the issue is the mutable object.
-// end::edit[]
 
+=== Set Primary feature
+The set primary feature allows users to choose one solution as primary solution.
 
-// tag::refactorTag[]
+==== Current Implementation
+
+The set primary mechanism is facilitated by the method `isPrimarySolution()` override by `PrimarySolution` inheriting from `Solution`.
+
+==== Design Consideration
+===== Aspect: How to distinguish between PrimarySolution and Solution
+* **Alternative 1 (current choice):** Use PrimarySolution as a subclass of Solution
+
+** Pros: No flag attribute is introduced. Solution structure remains the same.
+
+** Cons: New object is created. May affect performance.
+
+* **Alternative 2:** Add a flag attribute to Solution
+
+** Pros: Easy to understand.
+
+** Cons: Solution constructor is affected. The flag attribute is redundant for non-primary solutions.
+
 === Refactor tag Feature
 The refactor tag feature allows users to rename or remove a specified tag for all entries with that tag.
 
@@ -666,7 +668,7 @@ image::add-tag-sequence-diagram.jpeg[width="800"]
 ==== Design Consideration
 
 ===== Aspect: Implementation of AddTag command parser.
-* Alternative 1 (current choice): Allows range of `Index` to be accepted as index parameter.
+* Alternative 1 (current choice):** Allows range of `Index` to be accepted as index parameter.
 ** Pros: It is efficient to add multiple `Tags` to multiple issues instead of doing it singly.
 ** Cons: It has to consider various conditions of the user input.
 * Alternative 2: Creates a IndexRange class for index.

@@ -19,8 +19,10 @@ import seedu.saveit.logic.commands.HomeCommand;
 import seedu.saveit.logic.commands.ListCommand;
 import seedu.saveit.logic.commands.RedoCommand;
 import seedu.saveit.logic.commands.RefactorTagCommand;
+import seedu.saveit.logic.commands.ResetPrimaryCommand;
 import seedu.saveit.logic.commands.RetrieveCommand;
 import seedu.saveit.logic.commands.SelectCommand;
+import seedu.saveit.logic.commands.SetPrimaryCommand;
 import seedu.saveit.logic.commands.SortCommand;
 import seedu.saveit.logic.commands.UndoCommand;
 import seedu.saveit.logic.parser.exceptions.ParseException;
@@ -123,6 +125,14 @@ public class SaveItParser {
         case AddTagCommand.COMMAND_WORD:
         case AddTagCommand.COMMAND_ALIAS:
             return new AddTagCommandParser().parse(arguments);
+
+        case SetPrimaryCommand.COMMAND_WORD:
+        case SetPrimaryCommand.COMMAND_ALIAS:
+            return new SetPrimaryCommandParser().parse(arguments);
+
+        case ResetPrimaryCommand.COMMAND_WORD:
+        case ResetPrimaryCommand.COMMAND_ALIAS:
+            return new ResetPrimaryCommand();
 
         default:
             throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND);

@@ -83,7 +83,6 @@ public class SaveIt implements ReadOnlySaveIt {
      */
     public void resetData(ReadOnlySaveIt newData) {
         requireNonNull(newData);
-
         setIssues(newData.getIssueList());
         setCurrentDirectory(newData.getCurrentDirectory());
     }

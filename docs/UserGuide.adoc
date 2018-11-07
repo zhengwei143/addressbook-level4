@@ -484,6 +484,9 @@ Shows a list of all issues.
 // tag::sort[]
 === Sorting the list of issues: `(sr)sort`
 
+Sorts the list of issue according to a specified sort type.
+
+The list always follow this sort type until another sort command is executed.
 
 Format: `sort`
 [TIP]
@@ -506,7 +509,9 @@ Format: `sort freq`
 Format: `sort tag`
 [TIP]
 ====
-* Sort the issue list by their first tag in alphabetical order.
+* Sort the issue list by their tag in alphabetical order.
+If their first tags start with the same character, the following tags are compared until there is a difference or one tag set comes to the end.
+In the second case, the issue with fewer tags is give higher priority.
 * Sort the issues without tags at the end of the display issue list.
 ====
 
@@ -515,11 +520,44 @@ Examples:
 * sort
 * sort freq
 * sort tag
+
+.Sort Tag Command
+image::sort-command.png[width="790"]
 ****
 // end::sort[]
 
+// tag::setprimary[]
+=== Choosing one primary solution: `(sp)setprimary`
 
+Chooses one solution of the issue and make it the primary solution.
 
+If there is an existing primary solution, `setprimary` will reset the primary solution to the latest one.
+
+The primary solution is shown on the top of the solution list and is highlighted.
+
+Format: `setprimary INDEX`
+
+[NOTE]
+====
+* The index refers to the index number on the solution list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* The index cannot be bigger than the number of issues.
+* This command can only be executed *after you select an issue or a solution*.
+====
+// end::setprimary[]
+
+=== Resetting the primary solution: `(rp)resetprimary`
+
+Resets the primary solution and make all solutions normal and not highlighted.
+
+Even if there is no primary solution, this command can still be executed.
+
+Format: `resetprimary`
+
+[NOTE]
+====
+* This command can only be executed *after you select an issue or a solution*.
+====
 
 === Autosuggesting existing issue in find command
 To prevent the issue list is so large that user can hardly remember all the issues, whenever user types in any keyword in find command, SaveIt will auto suggest any related issue name according to the keyword entered.
@@ -616,5 +654,7 @@ e.g. `refactorTag t/java n/C++`
 * *Exit* : `exit`
 * *List* : `list`
 * *Sort* : `sort TYPE`
+* *Set Primary* : `setprimary [INDEX]`
+* *Reset Primary* : `resetprimary`
 * *Refactor Tag* : `refactor [OLDTAG] [NEWTAG]` +
 e.g. `refactorTag java C++`

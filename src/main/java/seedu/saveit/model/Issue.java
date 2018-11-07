@@ -15,6 +15,7 @@ import seedu.saveit.commons.util.CollectionUtil;
 import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueSearchFrequency;
 import seedu.saveit.model.issue.IssueStatement;
+import seedu.saveit.model.issue.PrimarySolution;
 import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;
 
@@ -24,6 +25,8 @@ import seedu.saveit.model.issue.Tag;
  */
 public class Issue {
 
+    private static final int RESET_PRIMARY_SOLUTION = -1;
+
     // Identity fields
     private final IssueStatement statement;
 
@@ -31,7 +34,7 @@ public class Issue {
     private final List<Solution> solutions = new ArrayList<>();
     private final Description description;
     private final IssueSearchFrequency frequency;
-    private final Timestamp time;
+    private final Timestamp lastModifiedTime;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -44,11 +47,11 @@ public class Issue {
         this.solutions.addAll(solutions);
         this.tags.addAll(tags);
         this.frequency = new IssueSearchFrequency(0);
-        this.time = new Timestamp(new Date().getTime());
+        this.lastModifiedTime = new Timestamp(new Date().getTime());
     }
 
     /**
-            * Overloaded constructor with additional {@code frequency} field
+     * Overloaded constructor with additional {@code frequency} field
      */
     public Issue(IssueStatement statement, Description description, List<Solution> solutions,
             Set<Tag> tags, IssueSearchFrequency frequency) {
@@ -58,7 +61,21 @@ public class Issue {
         this.solutions.addAll(solutions);
         this.tags.addAll(tags);
         this.frequency = frequency;
-        this.time = new Timestamp(new Date().getTime());
+        this.lastModifiedTime = new Timestamp(new Date().getTime());
+    }
+
+    /**
+     * Overloaded constructor with additional {@code frequency} field
+     */
+    public Issue(IssueStatement statement, Description description, List<Solution> solutions,
+                 Set<Tag> tags, IssueSearchFrequency frequency, Timestamp lastModifiedTime) {
+        CollectionUtil.requireAllNonNull(statement, description, solutions, tags);
+        this.statement = statement;
+        this.description = description;
+        this.solutions.addAll(solutions);
+        this.tags.addAll(tags);
+        this.frequency = frequency;
+        this.lastModifiedTime = lastModifiedTime;
     }
 
     /**
@@ -71,7 +88,7 @@ public class Issue {
         this.solutions.addAll(issue.getSolutions());
         this.tags.addAll(issue.getTags());
         this.frequency = issue.getFrequency();
-        this.time = new Timestamp(new Date().getTime());
+        this.lastModifiedTime = new Timestamp(new Date().getTime());
     }
 
 
@@ -117,7 +134,7 @@ public class Issue {
      * Returns the Timestamp of the Issue
      */
     public Timestamp getLastModifiedTime() {
-        return time;
+        return lastModifiedTime;
     }
 
     /**
@@ -125,6 +142,40 @@ public class Issue {
      */
     public void updateFrequency() {
         frequency.increment();
+    }
+
+    /**
+     * Set the primary solution.
+     */
+    public Issue setPrimarySolution(int index) {
+        return updatePrimarySolution(index);
+    }
+
+    /**
+     * Reset the primary solution.
+     */
+    public Issue resetPrimarySolution() {
+        return updatePrimarySolution(RESET_PRIMARY_SOLUTION);
+    }
+
+    /**
+     * Updates the primary solution.
+     */
+    public Issue updatePrimarySolution(int index) {
+        List<Solution> newSolutions = new ArrayList<>(this.solutions);
+
+        for (int i = 0; i < newSolutions.size(); i++) {
+            Solution s = newSolutions.get(i);
+            if (s.isPrimarySolution()) {
+                newSolutions.set(i, new Solution(s));
+            }
+        }
+
+        if (index != RESET_PRIMARY_SOLUTION) {
+            PrimarySolution newPrimarySolution = new PrimarySolution(this.solutions.get(index));
+            newSolutions.set(index, newPrimarySolution);
+        }
+        return new Issue(this.statement, this.description, newSolutions, this.tags, this.frequency);
     }
 
     /**
@@ -157,7 +208,7 @@ public class Issue {
 
         Issue otherIssue = (Issue) other;
         return otherIssue.getStatement().equals(getStatement())
-                && otherIssue.getFrequency().equals(getFrequency());
+                && otherIssue.getDescription().equals(getDescription());
     }
 
     @Override

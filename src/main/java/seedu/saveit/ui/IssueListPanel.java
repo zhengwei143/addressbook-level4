@@ -11,6 +11,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.saveit.commons.core.LogsCenter;
+import seedu.saveit.commons.core.directory.Directory;
+import seedu.saveit.commons.events.ui.ChangeDirectoryRequestEvent;
 import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.model.Issue;
 
@@ -33,7 +35,7 @@ public class IssueListPanel extends UiPart<Region> {
     private void setConnections(ObservableList<Issue> issueList) {
         issueListView.setItems(issueList);
         issueListView.setCellFactory(listView -> new IssueListViewCell());
-        //setEventHandlerForSelectionChangeEvent();
+        setEventHandlerForSelectionChangeEvent();
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
@@ -41,7 +43,9 @@ public class IssueListPanel extends UiPart<Region> {
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in issue list panel changed to : '" + newValue + "'");
-                        //raise(new SolutionPanelSelectionChangedEvent(newValue));
+                        int selectedIndex = issueListView.getSelectionModel().getSelectedIndex() + 1;
+                        raise(new ChangeDirectoryRequestEvent(
+                                new Directory(selectedIndex, 0)));
                     }
                 });
     }

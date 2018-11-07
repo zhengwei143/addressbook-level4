@@ -53,7 +53,6 @@ public class MainWindowCloseTest extends GuiUnitTest {
     }
 
     @Test
-    @Ignore
     public void close_externalRequest_exitAppRequestEventPosted() {
         mainWindowHandle.closeMainWindowExternally();
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ExitAppRequestEvent);

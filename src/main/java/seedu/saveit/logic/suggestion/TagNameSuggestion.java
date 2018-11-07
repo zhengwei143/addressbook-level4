@@ -52,6 +52,6 @@ public class TagNameSuggestion implements Suggestion {
         int endPosition = endPrefix.getPrefix() == ArgumentTokenizer.END_MARKER
                 ? endPrefix.getPosition() : endPrefix.getPosition() - 1;
 
-        return new SuggestionResult(values, TAG_SUCCESS, startPosition, endPosition);
+        return new SuggestionResult(values, TAG_SUCCESS, argument, startPosition, endPosition);
     }
 }

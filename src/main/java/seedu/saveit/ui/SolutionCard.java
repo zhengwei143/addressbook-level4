@@ -38,7 +38,7 @@ public class SolutionCard extends UiPart<Region> {
     public SolutionCard(Solution solution, int displayedIndex) {
         super(FXML);
         this.solution = solution;
-        id.setText("Solution " + String.valueOf(displayedIndex));
+        id.setText(String.valueOf(displayedIndex) + ". Solution");
         link.setText(solution.getLink().getValue());
         link.setWrapText(true);
         remark.setText(solution.getRemark().toString());
@@ -46,6 +46,7 @@ public class SolutionCard extends UiPart<Region> {
         solutionPane = (VBox) link.getParent();
 
         if (solution.isPrimarySolution()) {
+            id.setText(String.valueOf(displayedIndex) + ". Primary Solution");
             solutionPane.getStyleClass().add("list_primary_cell");
         } else {
             solutionPane.getStyleClass().remove("list_primary_cell");

@@ -471,6 +471,8 @@ Examples:
 
 Chooses one solution of the issue and make it the primary solution.
 
+If there is an existing primary solution, `setprimary` will reset the primary solution to the latest one.
+
 The primary solution is shown on the top of the solution list and is highlighted.
 
 Format: `setprimary INDEX`
@@ -480,8 +482,22 @@ Format: `setprimary INDEX`
 * The index refers to the index number on the solution list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * The index cannot be bigger than the number of issues.
+* This command can only be executed *after you select an issue or a solution*.
 ====
 // end::setprimary[]
+
+=== Resetting the primary solution: `(rp)resetprimary`
+
+Resets the primary solution and make all solutions normal and not highlighted.
+
+Even if there is no primary solution, this command can still be executed.
+
+Format: `resetprimary`
+
+[NOTE]
+====
+* This command can only be executed *after you select an issue or a solution*.
+====
 
 === Refactoring tag: `(rt)refactortag`
 
@@ -618,5 +634,7 @@ e.g. `refactorTag t/java n/C++`
 * *Exit* : `exit`
 * *List* : `list`
 * *Sort* : `sort TYPE`
+* *Set Primary* : `setprimary [INDEX]`
+* *Reset Primary* : `resetprimary`
 * *Refactor Tag* : `refactor [OLDTAG] [NEWTAG]` +
 e.g. `refactorTag java C++`

@@ -20,6 +20,7 @@ import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.UserPrefs;
 import seedu.saveit.model.issue.Solution;
+import seedu.saveit.testutil.DirectoryBuilder;
 
 public class SetPrimaryCommandTest {
     private Model model;
@@ -62,8 +63,9 @@ public class SetPrimaryCommandTest {
      */
     private void setUpIssueLevel() {
         Index selectedIssueOneBasedIndex = Index.fromOneBased(4);
-        model.resetDirectory(Directory.formDirectory(selectedIssueOneBasedIndex.getOneBased(), 0));
-        expectedModel.resetDirectory(Directory.formDirectory(selectedIssueOneBasedIndex.getOneBased(), 0));
+        Directory newDirectory = new DirectoryBuilder().withIssueIndex(selectedIssueOneBasedIndex).build();
+        model.resetDirectory(newDirectory);
+        expectedModel.resetDirectory(newDirectory);
         issueSelected = expectedModel.getFilteredAndSortedIssueList().get(selectedIssueOneBasedIndex.getZeroBased());
         solutionList = expectedModel.getFilteredSolutionList();
     }
@@ -72,8 +74,9 @@ public class SetPrimaryCommandTest {
      * Reset the directory of model and expected to Root Level.
      */
     private void setUpRootLevel() {
-        model.resetDirectory(Directory.formDirectory(0, 0));
-        expectedModel.resetDirectory(Directory.formDirectory(0, 0));
+        Directory rootDirectory = new DirectoryBuilder().build();
+        model.resetDirectory(rootDirectory);
+        expectedModel.resetDirectory(rootDirectory);
         issueSelected = null;
         solutionList = null;
     }
@@ -85,7 +88,7 @@ public class SetPrimaryCommandTest {
         SetPrimaryCommand setPrimaryCommand = new SetPrimaryCommand(index);
         Solution staredSolution = solutionList.get(index.getZeroBased());
         expectedModel.updateIssue(issueSelected,
-                issueSelected.updatePrimarySolution(solutionList, index.getZeroBased()));
+                issueSelected.setPrimarySolution(index.getZeroBased()));
         expectedModel.commitSaveIt();
         String expectedMessage = String.format(SetPrimaryCommand.MESSAGE_SUCCESS, staredSolution);
 

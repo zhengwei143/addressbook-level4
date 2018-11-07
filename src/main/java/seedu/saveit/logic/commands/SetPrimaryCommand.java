@@ -24,7 +24,7 @@ public class SetPrimaryCommand extends Command {
             + ": Highlight one solution in the displayed solution list\n"
             + "Parameters: INDEX (must be the index shown in the list)\n"
             + "Example: " + COMMAND_WORD + " 1";
-    public static final String MESSAGE_SUCCESS = "Stared solution: %1$s";
+    public static final String MESSAGE_SUCCESS = "Set primary solution: %1$s";
 
     private final Index index;
 
@@ -39,7 +39,7 @@ public class SetPrimaryCommand extends Command {
         Directory currentDirectory = model.getCurrentDirectory();
         List<Issue> lastShownIssueList = model.getFilteredAndSortedIssueList();
 
-        if (!currentDirectory.isIssueLevel()) {
+        if (!currentDirectory.isIssueLevel() && !currentDirectory.isSolutionLevel()) {
             throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
         }
 
@@ -52,7 +52,7 @@ public class SetPrimaryCommand extends Command {
         }
 
         Solution primarySolution = solutionList.get(zeroBasedIndex);
-        Issue updatedIssue = issueSelected.updatePrimarySolution(solutionList, zeroBasedIndex);
+        Issue updatedIssue = issueSelected.setPrimarySolution(zeroBasedIndex);
 
         model.updateIssue(issueSelected, updatedIssue);
         model.commitSaveIt();

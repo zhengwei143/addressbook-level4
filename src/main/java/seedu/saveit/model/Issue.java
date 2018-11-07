@@ -25,6 +25,8 @@ import seedu.saveit.model.issue.Tag;
  */
 public class Issue {
 
+    private final int RESET_PRIMARY_SOLUTION = -1;
+
     // Identity fields
     private final IssueStatement statement;
 
@@ -129,11 +131,24 @@ public class Issue {
     }
 
     /**
+     * Set the primary solution.
+     */
+    public Issue setPrimarySolution(int index) {
+        return updatePrimarySolution(index);
+    }
+
+    /**
+     * Reset the primary solution.
+     */
+    public Issue resetPrimarySolution() {
+        return updatePrimarySolution(RESET_PRIMARY_SOLUTION);
+    }
+
+    /**
      * Updates the primary solution.
      */
-    public Issue updatePrimarySolution(List<Solution> solutions, int index) {
-        PrimarySolution newPrimarySolution = new PrimarySolution(solutions.get(index));
-        List<Solution> newSolutions = new ArrayList<>(solutions);
+    public Issue updatePrimarySolution(int index) {
+        List<Solution> newSolutions = new ArrayList<>(this.solutions);
 
         for (int i = 0; i < newSolutions.size(); i++) {
             Solution s = newSolutions.get(i);
@@ -142,8 +157,10 @@ public class Issue {
             }
         }
 
-        newSolutions.set(index, newPrimarySolution);
-
+        if (index != RESET_PRIMARY_SOLUTION) {
+            PrimarySolution newPrimarySolution = new PrimarySolution(this.solutions.get(index));
+            newSolutions.set(index, newPrimarySolution);
+        }
         return new Issue(this.statement, this.description, newSolutions, this.tags, this.frequency);
     }
 

@@ -264,4 +264,10 @@ public class AddTagCommandParserTest {
         assertParseFailure(parser, " -4-3 t/python",
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_invalidIndexValidTags_throwsParseException() {
+        assertParseFailure(parser, " 4-* t/python",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
+    }
 }

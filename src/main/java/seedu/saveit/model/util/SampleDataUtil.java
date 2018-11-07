@@ -1,5 +1,12 @@
 package seedu.saveit.model.util;
 
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_NEW_TAG;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -87,7 +94,17 @@ public class SampleDataUtil {
     public static boolean isCommandWordNeedIndex(String commandWord) {
         String[] commandWordNotNeedIndex = {
             "addtag", "delete", "edit", "retrieve", "select", "at", "d", "e", "rv", "s"};
-
         return Arrays.stream(commandWordNotNeedIndex).parallel().anyMatch(commandWord::equals);
+    }
+
+    /**
+     * check if find the parameter
+     * @param inputCheck every two consecutive characters.
+     * @return true if parameter, otherwise false
+     */
+    public static boolean isPrefixParameter(String inputCheck) {
+        return inputCheck.equals(PREFIX_STATEMENT.toString()) || inputCheck.equals(PREFIX_SOLUTION_LINK.toString())
+            || inputCheck.equals(PREFIX_REMARK.toString()) || inputCheck.equals(PREFIX_DESCRIPTION.toString())
+            || inputCheck.equals(PREFIX_TAG.toString()) || inputCheck.equals(PREFIX_NEW_TAG.toString());
     }
 }

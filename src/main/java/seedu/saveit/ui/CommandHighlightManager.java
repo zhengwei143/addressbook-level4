@@ -1,12 +1,7 @@
 package seedu.saveit.ui;
 
-import static seedu.saveit.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.saveit.logic.parser.CliSyntax.PREFIX_NEW_TAG;
-import static seedu.saveit.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
-import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
-import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.saveit.model.util.SampleDataUtil.isCommandWordNeedIndex;
+import static seedu.saveit.model.util.SampleDataUtil.isPrefixParameter;
 
 import org.fxmisc.richtext.InlineCssTextArea;
 
@@ -28,7 +23,7 @@ public class CommandHighlightManager {
         StringBuilder commandWord = new StringBuilder();
         int position = 0;
         boolean indexHighlighted = false;
-        boolean indexNeedHighlight = false;
+        boolean indexNeedHighlight;
 
         // if there are space chars before command word, pos++
         while (isShorterThanInput(userInput, position) && isSpace(userInput, position)) {
@@ -95,7 +90,6 @@ public class CommandHighlightManager {
 
     /**
      * check if the character is parameter
-     *
      * @return true if parameter, otherwise false
      */
     private static boolean isParameter(String userInput, int position) {
@@ -104,22 +98,10 @@ public class CommandHighlightManager {
             input.append(userInput.charAt(position - 1));
             input.append(userInput.charAt(position));
             String inputCheck = input.toString();
-            if (isParameter(inputCheck)) {
+            if (isPrefixParameter(inputCheck)) {
                 return true;
             }
         }
         return false;
-    }
-
-    /**
-     * check if find the parameter
-     *
-     * @param inputCheck every two consecutive characters.
-     * @return true if parameter, otherwise false
-     */
-    private static boolean isParameter(String inputCheck) {
-        return inputCheck.equals(PREFIX_STATEMENT.toString()) || inputCheck.equals(PREFIX_SOLUTION_LINK.toString())
-            || inputCheck.equals(PREFIX_REMARK.toString()) || inputCheck.equals(PREFIX_DESCRIPTION.toString())
-            || inputCheck.equals(PREFIX_TAG.toString()) || inputCheck.equals(PREFIX_NEW_TAG.toString());
     }
 }

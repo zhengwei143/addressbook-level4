@@ -9,7 +9,6 @@ import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.saveit.logic.commands.EditCommand.EditIssueDescriptor;

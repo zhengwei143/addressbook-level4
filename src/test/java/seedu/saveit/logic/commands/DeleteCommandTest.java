@@ -10,7 +10,6 @@ import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.saveit.commons.core.Messages;

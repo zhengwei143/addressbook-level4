@@ -4,7 +4,6 @@ import static org.junit.Assert.assertTrue;
 import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.saveit.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 

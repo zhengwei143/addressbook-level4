@@ -11,7 +11,6 @@ import static seedu.saveit.testutil.TypicalIssues.ELLE;
 import static seedu.saveit.testutil.TypicalIssues.FIONA;
 import static seedu.saveit.testutil.TypicalIssues.GEORGE;
 
-import org.assertj.core.internal.bytebuddy.TypeCache;
 import org.junit.Ignore;
 import org.junit.Test;
 

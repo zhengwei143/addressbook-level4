@@ -24,7 +24,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.saveit.commons.core.Messages;
-import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
@@ -94,7 +93,8 @@ public class SortCommandTest {
         SortCommand command = new SortCommand(issueSort);
         assertCommandFailure(command, model, commandHistory, Messages.MESSAGE_WRONG_DIRECTORY);
 
-        model.resetDirectory(new DirectoryBuilder().withIssueIndex(INDEX_THIRD_ISSUE).withSolutionIndex(INDEX_FIRST_SOLUTION).build());
+        model.resetDirectory(new DirectoryBuilder().withIssueIndex(INDEX_THIRD_ISSUE)
+                .withSolutionIndex(INDEX_FIRST_SOLUTION).build());
         assertCommandFailure(command, model, commandHistory, Messages.MESSAGE_WRONG_DIRECTORY);
     }
 

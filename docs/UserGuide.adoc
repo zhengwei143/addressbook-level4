@@ -555,7 +555,7 @@ Example:
 .Autosuggesting of exsiting issues statements
 image::FindIssueAutoSuggestion.png[width="800"]
 
-=== Autosuggesting existing tags
+=== Autosuggesting existing tags in findByTag command
 
 To prevent the user from creating many similar tags / duplicates, whenever the user creates a record with a tag, or modifies a record’s tag, the application searches for similar tags in the system and prompts the user with a list of similar tags.
 

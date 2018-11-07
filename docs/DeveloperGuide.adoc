@@ -593,6 +593,13 @@ image::edit-command-sequence-diagram.jpg[width="800"]
 
 ** Cons: It has lower security if it the issue is the mutable object.
 
+=== Retrieve Feature
+The retrieve feature allows user to choose a solution link to copy to the system clipboard.
+
+==== Current Implementation
+
+The retrieve feature basically takes the user entered index and call `getFilteredAndSortedList` method in `Model` to get the selected solution. Then Java `Toolkit` package is used to copy the url link of solution to the system clipboard.
+
 === Set Primary feature
 The set primary feature allows users to choose one solution as primary solution.
 

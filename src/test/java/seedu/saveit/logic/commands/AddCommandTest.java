@@ -355,7 +355,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addTag(Index index, Set<Tag> tagList) {
+        public void addTag(Set<Issue> issues, Set<Tag> tagList) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -395,6 +395,11 @@ public class AddCommandTest {
 
         @Override
         public boolean refactorTag(Tag oldTag, Tag newTag) {
+            return false;
+        }
+
+        @Override
+        public boolean refactorTag(Tag tag) {
             return false;
         }
     }

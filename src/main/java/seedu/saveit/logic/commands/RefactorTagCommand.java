@@ -2,9 +2,10 @@ package seedu.saveit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.saveit.commons.core.Messages;
+import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
-import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.issue.Tag;
 
@@ -22,14 +23,14 @@ public class RefactorTagCommand extends Command {
     public static final String MESSAGE_USAGE =
         COMMAND_WORD + ": To rename or remove a specific tag for all entries with that tag.\n"
             + "Parameters: t/OLD_TAG [n/NEW_TAG] \n"
-            + "Example: " + COMMAND_WORD + " t/python n/java";
+            + "Example: " + COMMAND_WORD + " t/python n/java\n"
+            + "We will consider the last tag if you input multiple tags";
 
     public static final String DUMMY_TAG = "dummyTag";
 
     private final Tag oldTag;
     private final Tag newTag;
 
-    private Issue editedIssue;
     private boolean isEdit;
 
     /**
@@ -40,15 +41,29 @@ public class RefactorTagCommand extends Command {
         requireNonNull(oldTag);
         this.oldTag = oldTag;
         this.newTag = newTag;
-        editedIssue = null;
         this.isEdit = false;
+    }
+
+    /**
+     * @param oldTag the tag will be replaced
+     */
+    public RefactorTagCommand(Tag oldTag) {
+        requireNonNull(oldTag);
+        this.oldTag = oldTag;
+        this.isEdit = false;
+        this.newTag = null;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        isEdit = model.refactorTag(oldTag, newTag);
+        Directory currentDirectory = model.getCurrentDirectory();
+        if (!currentDirectory.isRootLevel()) {
+            throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
+        }
+
+        isEdit = newTag != null ? model.refactorTag(oldTag, newTag) : model.refactorTag(oldTag);
         model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
         model.commitSaveIt();
         if (isEdit) {
@@ -61,7 +76,8 @@ public class RefactorTagCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
             || (other instanceof RefactorTagCommand) // instanceof handles nulls
-            || (editedIssue.equals(((RefactorTagCommand) other).editedIssue)); //state check
+            || (oldTag.equals(((RefactorTagCommand) other).oldTag)) //state check
+            || (newTag.equals(((RefactorTagCommand) other).newTag));
     }
 }
 

@@ -16,6 +16,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import seedu.saveit.commons.core.Messages;
+import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.logic.CommandHistory;
@@ -40,7 +41,9 @@ public class SelectCommandTest {
         Index lastIssueIndex = Index.fromOneBased(model.getFilteredAndSortedIssueList().size());
 
         assertExecutionSuccess(INDEX_FIRST_ISSUE);
+        model.resetDirectory(new Directory(0, 0));
         assertExecutionSuccess(INDEX_THIRD_ISSUE);
+        model.resetDirectory(new Directory(0, 0));
         assertExecutionSuccess(lastIssueIndex);
     }
 

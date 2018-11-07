@@ -62,6 +62,8 @@ include::../UserGuide.adoc[tag=sort]
 
 include::../UserGuide.adoc[tag=clear]
 
+include::../UserGuide.adoc[tag=setprimary]
+
 == Contributions to the Developer Guide
 
 |===
@@ -71,6 +73,8 @@ include::../UserGuide.adoc[tag=clear]
 include::../DeveloperGuide.adoc[tag=sort]
 
 include::../DeveloperGuide.adoc[tag=confirmation]
+
+include::../DeveloperGuide.adoc[tag=setprimary]
 
 == PROJECT: PowerPointLabs
 

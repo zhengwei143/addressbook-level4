@@ -123,7 +123,6 @@ public class DeleteCommandTest {
      * 4. Redo the deletion. This ensures {@code RedoCommand} deletes the issue object regardless of indexing.
      */
     @Test
-    @Ignore
     public void executeUndoRedo_validIndexFilteredList_sameIssueDeleted() throws Exception {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ISSUE);
         Model expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());

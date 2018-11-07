@@ -18,7 +18,6 @@ import seedu.saveit.testutil.EditIssueDescriptorBuilder;
 public class EditIssueDescriptorTest {
 
     @Test
-    @Ignore
     public void equals() {
         // same values -> returns true
         EditIssueDescriptor descriptorWithSameValues = new EditCommand.EditIssueDescriptor(DESC_AMY);

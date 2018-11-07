@@ -36,7 +36,6 @@ public class SelectCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    @Ignore
     public void execute_validIndexUnfilteredList_success() {
         Index lastIssueIndex = Index.fromOneBased(model.getFilteredAndSortedIssueList().size());
 

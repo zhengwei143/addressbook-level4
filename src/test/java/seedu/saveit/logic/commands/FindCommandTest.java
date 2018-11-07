@@ -58,7 +58,6 @@ public class FindCommandTest {
     }
 
     @Test
-    @Ignore
     public void execute_zeroKeywords_noIssueFound() {
         String expectedMessage = String.format(MESSAGE_ISSUES_LISTED_OVERVIEW, 0);
         IssueContainsKeywordsPredicate predicate = preparePredicate(" ");
@@ -69,7 +68,6 @@ public class FindCommandTest {
     }
 
     @Test
-    @Ignore
     public void execute_multipleKeywords_multipleIssuesFound() {
         String expectedMessage = String.format(MESSAGE_ISSUES_LISTED_OVERVIEW, 3);
         IssueContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");

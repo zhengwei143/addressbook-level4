@@ -23,7 +23,6 @@ public class HelpCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    @Ignore
     public void execute_help_success() {
         assertCommandSuccess(new HelpCommand(), model, commandHistory, SHOWING_HELP_MESSAGE, expectedModel);
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ShowHelpRequestEvent);

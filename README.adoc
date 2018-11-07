@@ -1,5 +1,7 @@
 = SaveIt
 
+image:https://api.codacy.com/project/badge/Grade/772cab8ccdee4fb397b9c08777c020dc[link="https://app.codacy.com/app/CS2103-AY1819S1-T12-4/main?utm_source=github.com&utm_medium=referral&utm_content=jasonvank/main&utm_campaign=Badge_Grade_Dashboard"]
+
 image:https://api.codacy.com/project/badge/Grade/a9983648158d400fa91dd930fea587a5[link="https://app.codacy.com/app/jasonvank/main?utm_source=github.com&utm_medium=referral&utm_content=jasonvank/main&utm_campaign=Badge_Grade_Dashboard"]
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 

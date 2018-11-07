@@ -1,5 +1,6 @@
 package seedu.saveit.testutil;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -12,8 +13,6 @@ import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;
-import seedu.saveit.model.issue.solution.Remark;
-import seedu.saveit.model.issue.solution.SolutionLink;
 
 /**
  * A utility class to help with building EditIssueDescriptor objects.
@@ -62,9 +61,8 @@ public class EditIssueDescriptorBuilder {
      * Parses the {@code solutions} into a {@code Set<Solution>} and set it to the {@code EditIssueDescriptor} that we
      * are building.
      */
-    public EditIssueDescriptorBuilder withSolutions(String[]... solutions) {
-        List<Solution> solutionSet = Stream.of(solutions)
-                .map(s -> new Solution(new SolutionLink(s[0]), new Remark(s[1]))).collect(Collectors.toList());
+    public EditIssueDescriptorBuilder withSolutions(Solution... solutions) {
+        List<Solution> solutionSet = Arrays.asList(solutions);
         descriptor.setSolutions(solutionSet);
         return this;
     }

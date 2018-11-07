@@ -189,8 +189,8 @@ public class AddCommandTest {
                 .withDescription(VALID_DESCRIPTION_C).withSolutions(VALID_SOLUTION_STACKOVERFLOW).build();
         commandResult = new AddCommand(validIssue).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SOLUTION_SUCCESS,
-                new Solution(VALID_SOLUTION_STACKOVERFLOW)), commandResult.feedbackToUser);
+        assertEquals(String.format(AddCommand.MESSAGE_SOLUTION_SUCCESS, VALID_SOLUTION_STACKOVERFLOW),
+                commandResult.feedbackToUser);
         assertEquals(Arrays.asList(expectedIssue), modelStub.issuesAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }

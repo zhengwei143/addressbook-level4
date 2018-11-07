@@ -3,10 +3,8 @@ package seedu.saveit.model;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_REMARK_C;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_REMARK_STACKOVERFLOW;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_LINK_C;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_LINK_STACKOVERFLOW;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_STACKOVERFLOW;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
 import static seedu.saveit.testutil.TypicalIssues.ALICE;
@@ -17,7 +15,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.saveit.testutil.IssueBuilder;
-import seedu.saveit.testutil.SolutionBuilder;
 
 public class IssueTest {
     @Rule
@@ -48,8 +45,7 @@ public class IssueTest {
 
         // same name, same description, different attributes -> returns true
         editedAlice = new IssueBuilder(ALICE)
-                .withSolutions(new SolutionBuilder().withLink(VALID_SOLUTION_LINK_STACKOVERFLOW)
-                        .withRemark(VALID_REMARK_STACKOVERFLOW).build())
+                .withSolutions(VALID_SOLUTION_STACKOVERFLOW)
                 .withTags(VALID_TAG_UI).build();
         assertTrue(ALICE.isSameIssue(editedAlice));
     }
@@ -68,8 +64,7 @@ public class IssueTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different solutions, same issue statement -> returns true
-        editedAlice = new IssueBuilder(ALICE).withSolutions(new SolutionBuilder()
-                .withLink(VALID_SOLUTION_LINK_C).withRemark(VALID_REMARK_C).build()).build();
+        editedAlice = new IssueBuilder(ALICE).withSolutions(VALID_SOLUTION_C).build();
         assertTrue(ALICE.equals(editedAlice));
 
         // different tags, same issue statement -> returns true

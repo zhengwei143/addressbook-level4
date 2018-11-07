@@ -14,10 +14,8 @@ import static seedu.saveit.logic.commands.CommandTestUtil.STATEMENT_DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_SYNTAX;
 import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_UI;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_REMARK_C;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_REMARK_JAVA;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_LINK_C;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_LINK_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_SYNTAX;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
@@ -36,7 +34,6 @@ import seedu.saveit.model.Issue;
 import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.testutil.IssueBuilder;
-import seedu.saveit.testutil.SolutionBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
@@ -60,9 +57,7 @@ public class AddCommandParserTest {
 
         // multiple solutions - all accepted
         Issue expectedIssueMultipleSolutions = new IssueBuilder(BOB)
-                .withSolutions(
-                        new SolutionBuilder().withLink(VALID_SOLUTION_LINK_JAVA).withRemark(VALID_REMARK_JAVA).build(),
-                        new SolutionBuilder().withLink(VALID_SOLUTION_LINK_C).withRemark(VALID_REMARK_C).build())
+                .withSolutions(VALID_SOLUTION_JAVA, VALID_SOLUTION_C)
                 .build();
         assertParseSuccess(parser, STATEMENT_DESC_C + DESCRIPTION_DESC_C + SOLUTION_DESC_JAVA
                 + SOLUTION_DESC_C + CommandTestUtil.TAG_DESC_UI, new AddCommand(expectedIssueMultipleSolutions));

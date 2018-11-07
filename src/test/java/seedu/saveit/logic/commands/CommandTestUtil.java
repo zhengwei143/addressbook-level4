@@ -21,7 +21,9 @@ import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.issue.IssueContainsKeywordsPredicate;
+import seedu.saveit.model.issue.Solution;
 import seedu.saveit.testutil.EditIssueDescriptorBuilder;
+import seedu.saveit.testutil.SolutionBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -34,14 +36,10 @@ public class CommandTestUtil {
     public static final String VALID_DESCRIPTION_C = "94351253";
     public static final String VALID_SOLUTION_LINK_JAVA = "http://www.oracle.com";
     public static final String VALID_REMARK_JAVA = "RemarkJava";
-    public static final String[] VALID_SOLUTION_JAVA = {VALID_SOLUTION_LINK_JAVA, VALID_REMARK_JAVA};
     public static final String VALID_SOLUTION_LINK_C = "https://stackoverflow.com/";
     public static final String VALID_REMARK_C = "RemarkC";
-    public static final String[] VALID_SOLUTION_C = {VALID_SOLUTION_LINK_C, VALID_REMARK_C};
     public static final String VALID_SOLUTION_LINK_STACKOVERFLOW = "https://stackoverflow.com/";
     public static final String VALID_REMARK_STACKOVERFLOW = "newSol";
-    public static final String[] VALID_SOLUTION_STACKOVERFLOW =
-        {VALID_SOLUTION_LINK_STACKOVERFLOW, VALID_REMARK_STACKOVERFLOW};
     public static final String VALID_TAG_UI = "ui";
     public static final String VALID_TAG_SYNTAX = "syntax";
     public static final String VALID_TAG_PYTHON = "python";
@@ -65,6 +63,14 @@ public class CommandTestUtil {
     public static final String INVALID_DESCRIPTION_DESC =
         " " + PREFIX_DESCRIPTION + " "; // 'empty' not allowed in descriptions
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + " "; // 'empty' not allowed in tags
+
+
+    public static final Solution VALID_SOLUTION_C = new SolutionBuilder().withLink(VALID_SOLUTION_LINK_C)
+            .withRemark(VALID_REMARK_C).build();
+    public static final Solution VALID_SOLUTION_JAVA = new SolutionBuilder().withLink(VALID_SOLUTION_LINK_JAVA)
+            .withRemark(VALID_REMARK_JAVA).build();
+    public static final Solution VALID_SOLUTION_STACKOVERFLOW = new SolutionBuilder()
+            .withLink(VALID_SOLUTION_LINK_STACKOVERFLOW).withRemark(VALID_REMARK_STACKOVERFLOW).build();
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

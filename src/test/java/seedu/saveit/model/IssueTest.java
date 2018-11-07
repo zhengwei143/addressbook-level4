@@ -3,12 +3,12 @@ package seedu.saveit.model;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_STACKOVERFLOW;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
 import static seedu.saveit.testutil.TypicalIssues.ALICE;
 import static seedu.saveit.testutil.TypicalIssues.BOB;
+import static seedu.saveit.testutil.TypicalSolutions.C;
+import static seedu.saveit.testutil.TypicalSolutions.STACKOVERFLOW;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -45,7 +45,7 @@ public class IssueTest {
 
         // same name, same description, different attributes -> returns true
         editedAlice = new IssueBuilder(ALICE)
-                .withSolutions(VALID_SOLUTION_STACKOVERFLOW)
+                .withSolutions(STACKOVERFLOW)
                 .withTags(VALID_TAG_UI).build();
         assertTrue(ALICE.isSameIssue(editedAlice));
     }
@@ -64,7 +64,7 @@ public class IssueTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different solutions, same issue statement -> returns true
-        editedAlice = new IssueBuilder(ALICE).withSolutions(VALID_SOLUTION_C).build();
+        editedAlice = new IssueBuilder(ALICE).withSolutions(C).build();
         assertTrue(ALICE.equals(editedAlice));
 
         // different tags, same issue statement -> returns true

@@ -8,6 +8,8 @@ import static seedu.saveit.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.saveit.testutil.TypicalSolutions.C;
+import static seedu.saveit.testutil.TypicalSolutions.JAVA;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,9 +23,7 @@ import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.issue.IssueContainsKeywordsPredicate;
-import seedu.saveit.model.issue.Solution;
 import seedu.saveit.testutil.EditIssueDescriptorBuilder;
-import seedu.saveit.testutil.SolutionBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -38,7 +38,7 @@ public class CommandTestUtil {
     public static final String VALID_REMARK_JAVA = "RemarkJava";
     public static final String VALID_SOLUTION_LINK_C = "https://stackoverflow.com/";
     public static final String VALID_REMARK_C = "RemarkC";
-    public static final String VALID_SOLUTION_LINK_STACKOVERFLOW = "https://stackoverflow.com/";
+    public static final String VALID_SOLUTION_LINK_STACKOVERFLOW = "https://www.stackoverflow.com/";
     public static final String VALID_REMARK_STACKOVERFLOW = "newSol";
     public static final String VALID_TAG_UI = "ui";
     public static final String VALID_TAG_SYNTAX = "syntax";
@@ -64,14 +64,6 @@ public class CommandTestUtil {
         " " + PREFIX_DESCRIPTION + " "; // 'empty' not allowed in descriptions
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + " "; // 'empty' not allowed in tags
 
-
-    public static final Solution VALID_SOLUTION_C = new SolutionBuilder().withLink(VALID_SOLUTION_LINK_C)
-            .withRemark(VALID_REMARK_C).build();
-    public static final Solution VALID_SOLUTION_JAVA = new SolutionBuilder().withLink(VALID_SOLUTION_LINK_JAVA)
-            .withRemark(VALID_REMARK_JAVA).build();
-    public static final Solution VALID_SOLUTION_STACKOVERFLOW = new SolutionBuilder()
-            .withLink(VALID_SOLUTION_LINK_STACKOVERFLOW).withRemark(VALID_REMARK_STACKOVERFLOW).build();
-
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
@@ -81,11 +73,11 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditIssueDescriptorBuilder().withStatement(VALID_STATEMENT_JAVA)
             .withDescription(VALID_DESCRIPTION_JAVA)
-            .withSolutions(VALID_SOLUTION_JAVA)
+            .withSolutions(JAVA)
             .withTags(VALID_TAG_SYNTAX).build();
         DESC_BOB = new EditIssueDescriptorBuilder().withStatement(VALID_STATEMENT_C)
             .withDescription(VALID_DESCRIPTION_C)
-            .withSolutions(VALID_SOLUTION_C)
+            .withSolutions(C)
             .withTags(VALID_TAG_UI, VALID_TAG_SYNTAX).build();
     }
 

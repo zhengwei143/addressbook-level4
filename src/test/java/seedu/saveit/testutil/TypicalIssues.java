@@ -2,13 +2,11 @@ package seedu.saveit.testutil;
 
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_REMARK_C;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_REMARK_JAVA;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_LINK_C;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_LINK_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
+import static seedu.saveit.testutil.TypicalSolutions.C;
+import static seedu.saveit.testutil.TypicalSolutions.JAVA;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -77,14 +75,13 @@ public class TypicalIssues {
     // Manually added - Issue's details found in {@code CommandTestUtil}
     public static final Issue AMY = new IssueBuilder().withStatement(VALID_STATEMENT_JAVA)
             .withDescription(VALID_DESCRIPTION_JAVA)
-            .withSolutions(
-                    new SolutionBuilder().withLink(VALID_SOLUTION_LINK_JAVA).withRemark(VALID_REMARK_JAVA).build())
+            .withSolutions(JAVA)
             .withTags(VALID_TAG_UI)
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .withLastModifiedTime().build();
     public static final Issue BOB = new IssueBuilder().withStatement(VALID_STATEMENT_C)
             .withDescription(VALID_DESCRIPTION_C)
-            .withSolutions(new SolutionBuilder().withLink(VALID_SOLUTION_LINK_C).withRemark(VALID_REMARK_C).build())
+            .withSolutions(C)
             .withTags(VALID_TAG_UI)
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .withLastModifiedTime().build();

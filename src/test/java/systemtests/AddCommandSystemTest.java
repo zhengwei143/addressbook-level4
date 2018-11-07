@@ -11,7 +11,6 @@ import static seedu.saveit.logic.commands.CommandTestUtil.STATEMENT_DESC_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.STATEMENT_DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_UI;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.saveit.testutil.TypicalIssues.ALICE;
@@ -21,6 +20,7 @@ import static seedu.saveit.testutil.TypicalIssues.CARL;
 import static seedu.saveit.testutil.TypicalIssues.HOON;
 import static seedu.saveit.testutil.TypicalIssues.IDA;
 import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MEIER;
+import static seedu.saveit.testutil.TypicalSolutions.C;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -121,7 +121,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         assertCommandSuccess(toAdd);
 
         /* Case: add a duplicate issue except with different solution -> rejected */
-        toAdd = new IssueBuilder(HOON).withSolutions(VALID_SOLUTION_C).build();
+        toAdd = new IssueBuilder(HOON).withSolutions(C).build();
         command = IssueUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_ISSUE);
 

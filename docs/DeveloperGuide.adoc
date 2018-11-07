@@ -366,22 +366,6 @@ They can serve the three sort type we provide in SaveIt. When more sort type is 
 ** Pros: Easy to understand and implement
 
 ** Cons: Time consuming.
-
-===== Aspect: Comparator to support the sort command
-
-* Sort by added time: `sort` +
-  This sorting follows how the data is stored in Storage, reflecting the user's learning journey. +
-  There is no need to implement new Comparator for that.
-
-* Sort by chronological order: `sort chro` +
-  This sorting require the Comparator to compare the last modified time of the issue. Therefore, a Timestamp needs to be stored and updated every time an issue is added or edited.
-
-* Sort by first Tag: `sort tag` +
-  This sorting requires the tag attribute of every issue to be tracked. We retrieve tag lists and get the first tags. A String Comparator is enough for sorting tagName of them.
-  Those issues without a tag should be put at the end of the lists.
-
-* Sort by search frequency: `sort freq` +
-  This sorting requires the search frequency tracker. We retrieve the IssueSearchFrequency and sort them by the compare method provided in that class.
 // end::sort[]
 
 // tag::undoredo[]

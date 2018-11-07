@@ -24,26 +24,30 @@ SaveIt is written in Java and JavaFX, and is morphed from AddressBook-level4, th
 
 * *Major enhancement*: added *the ability to sort issue list*
 ** What it does: It allows the user to sort issues shown.
-** Justification: This feature improves the product significantly because a user can view the issues in the order that they want.
+** Justification: This feature improves the product significantly because a user can view the issues in the order that they want, helping them to organize issues better.
 ** Highlights: This command changed the way how issues are listed in the application. It needs effort to combine sorting and filtering together properly.
 
-* *Minor enhancement*: added a confirmation check for clear command.
+* *Minor enhancement*:
+** Added a confirmation check for clear command.
+** Added the ability to set and reset primary solution.
+** Update solution structure.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=yshu7[Functional code]]
 
 * *Other contributions*:
 
 ** Project management:
 *** Managed milestones and checked issue status on GitHub
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Updated tests to fit mid-v1.2 features (Pull requests https://github.com/CS2103-AY1819S1-T12-4/main/pull/52[#52])
 ** Documentation:
 *** Update About Us Page: https://github.com/CS2103-AY1819S1-T12-4/main/pull/2[#2]
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-T12-4/main/pull/25[#25],
 https://github.com/CS2103-AY1819S1-T12-4/main/pull/32[#32], https://github.com/CS2103-AY1819S1-T12-4/main/pull/77[#77],
-https://github.com/CS2103-AY1819S1-T12-4/main/pull/123[#123]
+https://github.com/CS2103-AY1819S1-T12-4/main/pull/123[#123], https://github.com/CS2103-AY1819S1-T12-4/main/pull/168[#168],
+https://github.com/CS2103-AY1819S1-T12-4/main/pull/169[#169],https://github.com/CS2103-AY1819S1-T12-4/main/pull/178[#178],
+
 *** Reported bugs and suggestions for other team members in the group:  https://github.com/CS2103-AY1819S1-T12-4/main/issues/111[111], https://github.com/CS2103-AY1819S1-T12-4/main/issues/115[115]
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
 
@@ -58,6 +62,8 @@ include::../UserGuide.adoc[tag=sort]
 
 include::../UserGuide.adoc[tag=clear]
 
+include::../UserGuide.adoc[tag=setprimary]
+
 == Contributions to the Developer Guide
 
 |===
@@ -67,6 +73,8 @@ include::../UserGuide.adoc[tag=clear]
 include::../DeveloperGuide.adoc[tag=sort]
 
 include::../DeveloperGuide.adoc[tag=confirmation]
+
+include::../DeveloperGuide.adoc[tag=setprimary]
 
 == PROJECT: PowerPointLabs
 

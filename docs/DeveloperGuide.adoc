@@ -319,6 +319,7 @@ This diagram shows the sequence that how add solution command is executed. It co
 * Pros: Relatively easier to implement
 * Cons: Lots of changes on structure.
 
+// tag::sort
 === Sort feature
 
 The sort command can sort an issue list shown in the GUI.

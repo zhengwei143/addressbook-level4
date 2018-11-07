@@ -55,7 +55,7 @@ public class RetrieveCommand extends Command {
             selectedIssue = lastShownList.get(issueIndex - 1);
             try {
                 String selectedLink = selectedIssue.getSolutions().get(targetedIndex.getZeroBased())
-                        .getLink().value;
+                        .getLink().getValue();
                 copyToClipBoard(selectedLink);
                 return new CommandResult(
                         String.format(MESSAGE_RETRIEVE_LINK_SUCCESS, targetedIndex.getOneBased()));

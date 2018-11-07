@@ -11,12 +11,14 @@ import static seedu.saveit.testutil.TypicalIssues.ELLE;
 import static seedu.saveit.testutil.TypicalIssues.FIONA;
 import static seedu.saveit.testutil.TypicalIssues.GEORGE;
 
+import org.assertj.core.internal.bytebuddy.TypeCache;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.saveit.commons.core.Messages;
 import seedu.saveit.logic.commands.FindCommand;
 import seedu.saveit.logic.commands.ListCommand;
+import seedu.saveit.logic.commands.SelectCommand;
 import seedu.saveit.logic.commands.SortCommand;
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
@@ -32,46 +34,39 @@ public class SortCommandSystemTest extends SaveItSystemTest {
         String command = "   " + SortCommand.COMMAND_WORD + " " + TAG_SORT + "   ";
         ModelHelper.setSortedList(expectedModel, DANIEL, BENSON, ALICE, CARL, ELLE, FIONA, GEORGE);
         assertCommandSuccess(command, IssueSort.TAG, expectedModel);
-        assertSelectedCardUnchanged();
 
         /* Case: repeat previous find command where issue list is displaying in the order we are using
          * -> no change
          */
         command = SortCommand.COMMAND_WORD + " " + TAG_SORT;
         assertCommandSuccess(command, IssueSort.TAG, expectedModel);
-        assertSelectedCardUnchanged();
 
         /* Case: sort issues by default sort in saveit book */
         command = SortCommand.COMMAND_WORD;
         ModelHelper.setSortedList(expectedModel, ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE);
         assertCommandSuccess(command, IssueSort.DEFAULT, expectedModel);
-        assertSelectedCardUnchanged();
 
         /* Case: sort issues by frequency sort in saveit book when frequency of all issues is the same
          * -> no change
          */
         command = SortCommand.COMMAND_WORD + " " + FREQUENCY_SORT;
         assertCommandSuccess(command, IssueSort.FREQUENCY, expectedModel);
-        assertSelectedCardUnchanged();
 
         /* Case: update issue frequency. The issue list is updated accordingly. */
         updateFrequency(ELLE, ELLE, CARL, GEORGE);
         ModelHelper.setSortedList(expectedModel, ELLE, CARL, GEORGE, ALICE, BENSON, DANIEL, FIONA);
         assertCommandSuccess(command, IssueSort.FREQUENCY, expectedModel);
-        assertSelectedCardUnchanged();
 
         /* Case: sort issues by chronological sort in saveit book when frequency of all issues is the same */
         command = SortCommand.COMMAND_WORD + " " + CHRONOLOGICAL_SORT;
         ModelHelper.setSortedList(expectedModel, GEORGE, FIONA, ELLE, DANIEL, CARL, BENSON, ALICE);
         assertCommandSuccess(command, IssueSort.CHRONOLOGICAL, expectedModel);
-        assertSelectedCardUnchanged();
 
         /* Case: sort the filtered list */
         filterList(ALICE, DANIEL, BENSON);
         ModelHelper.setFilteredList(expectedModel, ALICE, DANIEL, BENSON);
         ModelHelper.setSortedList(expectedModel, DANIEL, BENSON, ALICE);
         assertCommandSuccess(command, IssueSort.CHRONOLOGICAL, expectedModel);
-        assertSelectedCardUnchanged();
 
         /* Case: invalid sort type
          * -> failure
@@ -79,6 +74,13 @@ public class SortCommandSystemTest extends SaveItSystemTest {
         command = SortCommand.COMMAND_WORD + " random";
         assertCommandFailure(command,
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+
+        /* Case: sort after selectiong
+         * -> failure
+         */
+        executeCommand(SelectCommand.COMMAND_WORD + " 1");
+        command = SortCommand.COMMAND_WORD;
+        assertCommandFailure(command, Messages.MESSAGE_WRONG_DIRECTORY);
     }
 
     /**

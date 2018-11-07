@@ -4,6 +4,8 @@ import static junit.framework.TestCase.assertEquals;
 import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_SOLUTION;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.ALICE;
 import static seedu.saveit.testutil.TypicalIssues.BENSON;
 import static seedu.saveit.testutil.TypicalIssues.CARL;
@@ -32,6 +34,7 @@ import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueContainsKeywordsPredicate;
 import seedu.saveit.model.issue.IssueSort;
 import seedu.saveit.model.issue.IssueStatement;
+import seedu.saveit.testutil.DirectoryBuilder;
 
 public class SortCommandTest {
     private Model model;
@@ -86,9 +89,12 @@ public class SortCommandTest {
 
     @Test
     public void execute_notUnderRootLevel_failure() {
-        model.resetDirectory(Directory.formDirectory(INDEX_FIRST_ISSUE.getOneBased(), 0));
+        model.resetDirectory(new DirectoryBuilder().withIssueIndex(INDEX_FIRST_ISSUE).build());
         IssueSort issueSort = prepareIssueSort(IssueSort.TAG_SORT);
         SortCommand command = new SortCommand(issueSort);
+        assertCommandFailure(command, model, commandHistory, Messages.MESSAGE_WRONG_DIRECTORY);
+
+        model.resetDirectory(new DirectoryBuilder().withIssueIndex(INDEX_THIRD_ISSUE).withSolutionIndex(INDEX_FIRST_SOLUTION).build());
         assertCommandFailure(command, model, commandHistory, Messages.MESSAGE_WRONG_DIRECTORY);
     }
 

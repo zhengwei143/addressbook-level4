@@ -171,8 +171,7 @@ public class Issue {
 
         Issue otherIssue = (Issue) other;
         return otherIssue.getStatement().equals(getStatement())
-                && otherIssue.getDescription().equals(getDescription())
-                && otherIssue.getTags().equals(getTags());
+                && otherIssue.getDescription().equals(getDescription());
     }
 
     @Override

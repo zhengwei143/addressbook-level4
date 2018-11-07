@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.fxmisc.richtext.InlineCssTextArea;
 
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.input.KeyCode;
 
@@ -49,14 +48,14 @@ public class CommandBoxHandle extends NodeHandle<InlineCssTextArea> {
     /**
      * return the word list that matches the styleInCSS required
      */
-    public List<String> getWordListWithStyle(String styleInCSS) {
+    public List<String> getWordListWithStyle(String styleInCss) {
         InlineCssTextArea inputBox = (InlineCssTextArea) getRootNode();
         ArrayList<String> wordList = new ArrayList<>();
 
         StringBuilder sb = new StringBuilder();
 
         for (int pos = 0; pos < inputBox.getLength(); pos++) {
-            while (pos < inputBox.getLength() && inputBox.getStyleOfChar(pos).equals(styleInCSS)) {
+            while (pos < inputBox.getLength() && inputBox.getStyleOfChar(pos).equals(styleInCss)) {
                 sb.append(inputBox.getText().charAt(pos));
                 pos++;
             }

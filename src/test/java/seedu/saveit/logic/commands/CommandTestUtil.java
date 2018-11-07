@@ -4,9 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_NEW_TAG;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_C;
+import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_JAVA;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,12 +31,15 @@ import seedu.saveit.testutil.EditIssueDescriptorBuilder;
 public class CommandTestUtil {
 
     public static final String VALID_STATEMENT_JAVA = "Java Issue";
-    public static final String VALID_STATEMENT_C = "C Issue";
+    public static final String VALID_STATEMENT_C = "SOLUTION_C Issue";
     public static final String VALID_DESCRIPTION_JAVA = "syntax error";
     public static final String VALID_DESCRIPTION_C = "94351253";
-    public static final String VALID_SOLUTION_JAVA = "http://www.oracle.com RemarkJava";
-    public static final String VALID_SOLUTION_C = "https://stackoverflow.com/ RemarkC";
-    public static final String VALID_SOLUTION_STACKOVERFLOW = "https://www.stackoverflow.com/ newSol";
+    public static final String VALID_SOLUTION_LINK_JAVA = "http://www.oracle.com";
+    public static final String VALID_REMARK_JAVA = "RemarkJava";
+    public static final String VALID_SOLUTION_LINK_C = "https://stackoverflow.com/";
+    public static final String VALID_REMARK_C = "RemarkC";
+    public static final String VALID_SOLUTION_LINK_STACKOVERFLOW = "https://www.stackoverflow.com/";
+    public static final String VALID_REMARK_STACKOVERFLOW = "newSol";
     public static final String VALID_TAG_UI = "ui";
     public static final String VALID_TAG_SYNTAX = "syntax";
     public static final String VALID_TAG_PYTHON = "python";
@@ -42,8 +48,10 @@ public class CommandTestUtil {
     public static final String STATEMENT_DESC_C = " " + PREFIX_STATEMENT + VALID_STATEMENT_C;
     public static final String DESCRIPTION_DESC_JAVA = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_JAVA;
     public static final String DESCRIPTION_DESC_C = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_C;
-    public static final String SOLUTION_DESC_JAVA = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_JAVA;
-    public static final String SOLUTION_DESC_C = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_C;
+    public static final String SOLUTION_DESC_JAVA = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_LINK_JAVA
+            + " " + PREFIX_REMARK + VALID_REMARK_JAVA;
+    public static final String SOLUTION_DESC_C = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_LINK_C
+            + " " + PREFIX_REMARK + VALID_REMARK_C;
     public static final String TAG_DESC_SYNTAX = " " + PREFIX_TAG + VALID_TAG_SYNTAX;
     public static final String TAG_DESC_UI = " " + PREFIX_TAG + VALID_TAG_UI;
     public static final String TAG_DESC_PYTHON = " " + PREFIX_TAG + VALID_TAG_PYTHON;
@@ -65,11 +73,11 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditIssueDescriptorBuilder().withStatement(VALID_STATEMENT_JAVA)
             .withDescription(VALID_DESCRIPTION_JAVA)
-            .withSolutions(VALID_SOLUTION_JAVA)
+            .withSolutions(SOLUTION_JAVA)
             .withTags(VALID_TAG_SYNTAX).build();
         DESC_BOB = new EditIssueDescriptorBuilder().withStatement(VALID_STATEMENT_C)
             .withDescription(VALID_DESCRIPTION_C)
-            .withSolutions(VALID_SOLUTION_C)
+            .withSolutions(SOLUTION_C)
             .withTags(VALID_TAG_UI, VALID_TAG_SYNTAX).build();
     }
 

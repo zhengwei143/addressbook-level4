@@ -48,11 +48,11 @@ public class SelectCommandTest {
     }
 
     @Test
-    @Ignore
     public void execute_invalidIndexUnfilteredList_failure() {
         Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredAndSortedIssueList().size() + 1);
 
-        assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
+        assertExecutionFailure(outOfBoundsIndex,
+                Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX + "\n" + SelectCommand.MESSAGE_USAGE);
     }
 
     @Test
@@ -64,7 +64,6 @@ public class SelectCommandTest {
     }
 
     @Test
-    @Ignore
     public void execute_invalidIndexFilteredList_failure() {
         showIssueAtIndex(model, INDEX_FIRST_ISSUE);
         showIssueAtIndex(expectedModel, INDEX_FIRST_ISSUE);
@@ -73,7 +72,8 @@ public class SelectCommandTest {
         // ensures that outOfBoundIndex is still in bounds of saveit book list
         assertTrue(outOfBoundsIndex.getZeroBased() < model.getSaveIt().getIssueList().size());
 
-        assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
+        assertExecutionFailure(outOfBoundsIndex,
+                Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX + "\n" + SelectCommand.MESSAGE_USAGE);
     }
 
     @Test

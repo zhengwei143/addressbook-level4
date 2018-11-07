@@ -1,6 +1,7 @@
 package seedu.saveit.logic;
 
 import javafx.collections.ObservableList;
+import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.logic.commands.CommandResult;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.logic.parser.exceptions.ParseException;
@@ -27,6 +28,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of issues */
     ObservableList<Issue> getFilteredAndSortedIssueList();
 
-    /**Returns an unmodifiable view of the filtered list of solutions of the selected issue */
+    /** Returns an unmodifiable view of the filtered list of solutions of the selected issue */
     ObservableList<Solution> getFilteredSolutionList();
+
+    /** Reset the directory of current model */
+    void resetDirectory(Directory directory);
 }

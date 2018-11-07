@@ -1,16 +1,16 @@
-package seedu.saveit.commons.events.ui;
+package seedu.saveit.commons.events.model;
 
 import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.events.BaseEvent;
 
 /**
- * Indicates a request to change model directory.
+ * Indicates model directory was changed.
  */
-public class ChangeDirectoryRequestEvent extends BaseEvent {
+public class DirectoryChangedEvent extends BaseEvent {
 
     public final Directory directory;
 
-    public ChangeDirectoryRequestEvent(Directory newDirectory) {
+    public DirectoryChangedEvent(Directory newDirectory) {
         this.directory = newDirectory;
     }
 

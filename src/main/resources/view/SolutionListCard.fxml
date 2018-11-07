@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -26,7 +25,7 @@
                 </Label>
             </HBox>
             <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
-            <Label fx:id="link" styleClass="cell_small_label" text="\$link" />
+            <Label fx:id="link" styleClass="cell_small_label_italic" text="\$link" />
         </VBox>
     </GridPane>
 </HBox>

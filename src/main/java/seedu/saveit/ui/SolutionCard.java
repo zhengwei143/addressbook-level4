@@ -13,6 +13,7 @@ import seedu.saveit.model.issue.Solution;
 public class SolutionCard extends UiPart<Region> {
 
     private static final String FXML = "SolutionListCard.fxml";
+    private static final String STYLE_PRIMARY_SOLUTION = "list_primary_cell";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX. As a
@@ -23,7 +24,6 @@ public class SolutionCard extends UiPart<Region> {
      */
 
     public final Solution solution;
-    private static final String STYLE_PRIMARY_SOLUTION = "list_primary_cell";
 
     @FXML
     private HBox cardPane;

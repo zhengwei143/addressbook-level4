@@ -10,7 +10,6 @@ import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
-import seedu.saveit.model.issue.Solution;
 
 /**
  * Star one existing solution for an issue.
@@ -31,7 +30,7 @@ public class ResetPrimaryCommand extends Command {
         Directory currentDirectory = model.getCurrentDirectory();
         List<Issue> lastShownIssueList = model.getFilteredAndSortedIssueList();
 
-        if (!currentDirectory.isIssueLevel() && !currentDirectory.isSolutionLevel()) {
+        if (!currentDirectory.isIssueLevel()) {
             throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
         }
 

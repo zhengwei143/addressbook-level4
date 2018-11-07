@@ -39,7 +39,7 @@ public class SetPrimaryCommand extends Command {
         Directory currentDirectory = model.getCurrentDirectory();
         List<Issue> lastShownIssueList = model.getFilteredAndSortedIssueList();
 
-        if (!currentDirectory.isIssueLevel() && !currentDirectory.isSolutionLevel()) {
+        if (!currentDirectory.isIssueLevel()) {
             throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
         }
 

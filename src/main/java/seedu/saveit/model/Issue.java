@@ -25,7 +25,7 @@ import seedu.saveit.model.issue.Tag;
  */
 public class Issue {
 
-    private final int RESET_PRIMARY_SOLUTION = -1;
+    private static final int RESET_PRIMARY_SOLUTION = -1;
 
     // Identity fields
     private final IssueStatement statement;

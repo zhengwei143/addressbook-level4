@@ -15,6 +15,7 @@ import seedu.saveit.commons.util.CollectionUtil;
 import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueSearchFrequency;
 import seedu.saveit.model.issue.IssueStatement;
+import seedu.saveit.model.issue.PrimarySolution;
 import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;
 
@@ -23,6 +24,8 @@ import seedu.saveit.model.issue.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Issue {
+
+    private static final int RESET_PRIMARY_SOLUTION = -1;
 
     // Identity fields
     private final IssueStatement statement;
@@ -139,6 +142,40 @@ public class Issue {
      */
     public void updateFrequency() {
         frequency.increment();
+    }
+
+    /**
+     * Set the primary solution.
+     */
+    public Issue setPrimarySolution(int index) {
+        return updatePrimarySolution(index);
+    }
+
+    /**
+     * Reset the primary solution.
+     */
+    public Issue resetPrimarySolution() {
+        return updatePrimarySolution(RESET_PRIMARY_SOLUTION);
+    }
+
+    /**
+     * Updates the primary solution.
+     */
+    public Issue updatePrimarySolution(int index) {
+        List<Solution> newSolutions = new ArrayList<>(this.solutions);
+
+        for (int i = 0; i < newSolutions.size(); i++) {
+            Solution s = newSolutions.get(i);
+            if (s.isPrimarySolution()) {
+                newSolutions.set(i, new Solution(s));
+            }
+        }
+
+        if (index != RESET_PRIMARY_SOLUTION) {
+            PrimarySolution newPrimarySolution = new PrimarySolution(this.solutions.get(index));
+            newSolutions.set(index, newPrimarySolution);
+        }
+        return new Issue(this.statement, this.description, newSolutions, this.tags, this.frequency);
     }
 
     /**

@@ -48,12 +48,28 @@ public class Solution {
         this.solutionName = solutionLink + " " + remark;
     }
 
+    public Solution(SolutionLink solutionLink, Remark remark) {
+        this.solutionLink = solutionLink;
+        this.remark = remark;
+        this.solutionName = solutionLink + " " + remark;
+    }
+
+    public Solution(Solution solution) {
+        this.solutionLink = solution.getLink();
+        this.remark = solution.remark;
+        this.solutionName = solutionLink + " " + remark;
+    }
+
     public SolutionLink getLink() {
         return solutionLink;
     }
 
     public Remark getRemark() {
         return remark;
+    }
+
+    public boolean isPrimarySolution() {
+        return false;
     }
 
     @Override

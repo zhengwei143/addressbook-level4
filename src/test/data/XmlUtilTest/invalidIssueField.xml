@@ -3,7 +3,10 @@
 <issue>
     <statement>Hans Muster</statement>
     <description> </description>
-    <solutions>webSite remark</solutions>
+    <solutions>
+        <solutionLink>webSite</solutionLink>
+        <remark>remark</remark>
+    </solutions>
     <tagged>friends</tagged>
     <frequency>1</frequency>
     <lastModifiedTime>1541509287278</lastModifiedTime>

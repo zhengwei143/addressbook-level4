@@ -93,7 +93,7 @@ public class SampleDataUtil {
      */
     public static boolean isCommandWordNeedIndex(String commandWord) {
         String[] commandWordNotNeedIndex = {
-            "addtag", "delete", "edit", "retrieve", "select", "at", "d", "e", "rv", "s"};
+            "addtag", "delete", "edit", "retrieve", "select", "setprimary", "at", "d", "e", "rv", "s", "sp"};
         return Arrays.stream(commandWordNotNeedIndex).parallel().anyMatch(commandWord::equals);
     }
 

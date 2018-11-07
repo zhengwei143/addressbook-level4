@@ -98,6 +98,7 @@ public class CommandTestUtil {
         // only do so by copying its components.
         SaveIt expectedSaveIt = new SaveIt(actualModel.getSaveIt());
         List<Issue> expectedFilteredList = new ArrayList<>(actualModel.getFilteredIssueList());
+        List<Issue> expectedFilteredAndSortedList = new ArrayList<>(actualModel.getFilteredAndSortedIssueList());
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
         try {
@@ -107,6 +108,7 @@ public class CommandTestUtil {
             assertEquals(expectedMessage, e.getMessage());
             assertEquals(expectedSaveIt, actualModel.getSaveIt());
             assertEquals(expectedFilteredList, actualModel.getFilteredIssueList());
+            assertEquals(expectedFilteredAndSortedList, actualModel.getFilteredAndSortedIssueList());
             assertEquals(expectedCommandHistory, actualCommandHistory);
         }
     }

@@ -267,18 +267,20 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /**
-     * A comparator for puting primary solution on top of the solution list.
+     * A comparator for putting primary solution on top of the solution list.
      */
     private class SolutionComparator implements Comparator<Solution> {
         @Override
         public int compare(Solution solutionOne, Solution solutionTwo) {
-            if (solutionOne.isPrimarySolution()) {
+            if (solutionOne.isPrimarySolution() && !solutionTwo.isPrimarySolution()) {
                 return -1;
-            } else if (solutionTwo.isPrimarySolution()) {
-                return 1;
-            } else {
-                return 0;
             }
+
+            if (solutionTwo.isPrimarySolution() && !solutionOne.isPrimarySolution()) {
+                return 1;
+            }
+
+            return 0;
         }
     }
 }

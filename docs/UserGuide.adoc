@@ -466,7 +466,7 @@ Examples:
 ****
 // end::sort[]
 
-// tag::star[]
+// tag::setprimary[]
 === Choosing one primary solution: `(sp)setprimary`
 
 Chooses one solution of the issue and make it the primary solution.
@@ -481,7 +481,7 @@ Format: `setprimary INDEX`
 * The index *must be a positive integer* 1, 2, 3, ...
 * The index cannot be bigger than the number of issues.
 ====
-// end::star[]
+// end::setprimary[]
 
 === Refactoring tag: `(rt)refactortag`
 

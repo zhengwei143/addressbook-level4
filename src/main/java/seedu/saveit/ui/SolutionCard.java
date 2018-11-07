@@ -23,6 +23,7 @@ public class SolutionCard extends UiPart<Region> {
      */
 
     public final Solution solution;
+    private static final String STYLE_PRIMARY_SOLUTION = "list_primary_cell";
 
     @FXML
     private HBox cardPane;
@@ -47,9 +48,9 @@ public class SolutionCard extends UiPart<Region> {
 
         if (solution.isPrimarySolution()) {
             id.setText(String.valueOf(displayedIndex) + ". Primary Solution");
-            solutionPane.getStyleClass().add("list_primary_cell");
+            solutionPane.getStyleClass().add(STYLE_PRIMARY_SOLUTION);
         } else {
-            solutionPane.getStyleClass().remove("list_primary_cell");
+            solutionPane.getStyleClass().remove(STYLE_PRIMARY_SOLUTION);
         }
     }
 

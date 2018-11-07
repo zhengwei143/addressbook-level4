@@ -11,9 +11,9 @@ import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.saveit.testutil.TypicalDirectories.ROOT_LEVEL;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_SOLUTION;
-import static seedu.saveit.testutil.TypicalSolutions.C;
-import static seedu.saveit.testutil.TypicalSolutions.JAVA;
-import static seedu.saveit.testutil.TypicalSolutions.STACKOVERFLOW;
+import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_C;
+import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_JAVA;
+import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_STACKOVERFLOW;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -114,12 +114,12 @@ public class AddCommandTest {
                 initialise_acceptingSolutionAdded_issueLevel(new IssueBuilder().build(), INDEX_FIRST_ISSUE);
 
         Issue validIssue = new IssueBuilder().withDummyStatement().withDummyDescription()
-                .withSolutions(STACKOVERFLOW).build();
-        Issue expectedIssue = new IssueBuilder().withSolutions(STACKOVERFLOW).build();
+                .withSolutions(SOLUTION_STACKOVERFLOW).build();
+        Issue expectedIssue = new IssueBuilder().withSolutions(SOLUTION_STACKOVERFLOW).build();
         CommandResult commandResult = new AddCommand(validIssue).execute(modelStub, commandHistory);
 
         assertEquals(String.format(AddCommand.MESSAGE_SOLUTION_SUCCESS,
-                new Solution(STACKOVERFLOW)), commandResult.feedbackToUser);
+                new Solution(SOLUTION_STACKOVERFLOW)), commandResult.feedbackToUser);
         assertEquals(Arrays.asList(expectedIssue), modelStub.issuesAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
@@ -127,17 +127,17 @@ public class AddCommandTest {
     @Test
     public void execute_issueAcceptedByModel_solutionLevelAddSuccessful() throws Exception {
         ModelStubAcceptingSolutionAdded modelStub = initialise_acceptingSolutionAdded_solutionLevel(
-                new IssueBuilder().withSolutions(JAVA, C)
+                new IssueBuilder().withSolutions(SOLUTION_JAVA, SOLUTION_C)
                         .build(), INDEX_FIRST_ISSUE, INDEX_SECOND_SOLUTION);
 
         Issue validIssue = new IssueBuilder().withDummyStatement().withDummyDescription()
-                .withSolutions(STACKOVERFLOW).build();
+                .withSolutions(SOLUTION_STACKOVERFLOW).build();
         Issue expectedIssue = new IssueBuilder()
-                .withSolutions(JAVA, C, STACKOVERFLOW).build();
+                .withSolutions(SOLUTION_JAVA, SOLUTION_C, SOLUTION_STACKOVERFLOW).build();
         CommandResult commandResult = new AddCommand(validIssue).execute(modelStub, commandHistory);
 
         assertEquals(String.format(AddCommand.MESSAGE_SOLUTION_SUCCESS,
-                new Solution(STACKOVERFLOW)), commandResult.feedbackToUser);
+                new Solution(SOLUTION_STACKOVERFLOW)), commandResult.feedbackToUser);
         assertEquals(Arrays.asList(expectedIssue), modelStub.issuesAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
@@ -145,10 +145,10 @@ public class AddCommandTest {
     @Test
     public void execute_duplicateSolution_throwsCommandException() throws Exception {
         ModelStubAcceptingSolutionAdded modelStub = initialise_acceptingSolutionAdded_issueLevel(
-                new IssueBuilder().withSolutions(JAVA, C).build(), INDEX_FIRST_ISSUE);
+                new IssueBuilder().withSolutions(SOLUTION_JAVA, SOLUTION_C).build(), INDEX_FIRST_ISSUE);
 
         Issue validIssue = new IssueBuilder().withDummyStatement().withDummyDescription()
-                .withSolutions(JAVA).build();
+                .withSolutions(SOLUTION_JAVA).build();
         AddCommand addCommand = new AddCommand(validIssue);
 
         thrown.expect(CommandException.class);
@@ -161,7 +161,7 @@ public class AddCommandTest {
         ModelStubAcceptingSolutionAdded modelStub = new ModelStubAcceptingSolutionAdded(new IssueBuilder().build());
 
         Issue validIssue = new IssueBuilder().withDummyStatement().withDummyDescription()
-                .withSolutions(JAVA).build();
+                .withSolutions(SOLUTION_JAVA).build();
         AddCommand addCommand = new AddCommand(validIssue);
 
         thrown.expect(CommandException.class);
@@ -184,12 +184,12 @@ public class AddCommandTest {
 
         modelStub.resetDirectory(new DirectoryBuilder().withIssueIndex(INDEX_FIRST_ISSUE).build());
         validIssue = new IssueBuilder().withDummyStatement().withDummyDescription()
-                .withSolutions(STACKOVERFLOW).build();
+                .withSolutions(SOLUTION_STACKOVERFLOW).build();
         Issue expectedIssue = new IssueBuilder().withStatement(VALID_STATEMENT_C)
-                .withDescription(VALID_DESCRIPTION_C).withSolutions(STACKOVERFLOW).build();
+                .withDescription(VALID_DESCRIPTION_C).withSolutions(SOLUTION_STACKOVERFLOW).build();
         commandResult = new AddCommand(validIssue).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SOLUTION_SUCCESS, STACKOVERFLOW),
+        assertEquals(String.format(AddCommand.MESSAGE_SOLUTION_SUCCESS, SOLUTION_STACKOVERFLOW),
                 commandResult.feedbackToUser);
         assertEquals(Arrays.asList(expectedIssue), modelStub.issuesAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);

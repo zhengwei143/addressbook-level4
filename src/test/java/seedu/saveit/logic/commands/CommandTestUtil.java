@@ -8,8 +8,8 @@ import static seedu.saveit.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.saveit.testutil.TypicalSolutions.C;
-import static seedu.saveit.testutil.TypicalSolutions.JAVA;
+import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_C;
+import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_JAVA;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,7 +31,7 @@ import seedu.saveit.testutil.EditIssueDescriptorBuilder;
 public class CommandTestUtil {
 
     public static final String VALID_STATEMENT_JAVA = "Java Issue";
-    public static final String VALID_STATEMENT_C = "C Issue";
+    public static final String VALID_STATEMENT_C = "SOLUTION_C Issue";
     public static final String VALID_DESCRIPTION_JAVA = "syntax error";
     public static final String VALID_DESCRIPTION_C = "94351253";
     public static final String VALID_SOLUTION_LINK_JAVA = "http://www.oracle.com";
@@ -73,11 +73,11 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditIssueDescriptorBuilder().withStatement(VALID_STATEMENT_JAVA)
             .withDescription(VALID_DESCRIPTION_JAVA)
-            .withSolutions(JAVA)
+            .withSolutions(SOLUTION_JAVA)
             .withTags(VALID_TAG_SYNTAX).build();
         DESC_BOB = new EditIssueDescriptorBuilder().withStatement(VALID_STATEMENT_C)
             .withDescription(VALID_DESCRIPTION_C)
-            .withSolutions(C)
+            .withSolutions(SOLUTION_C)
             .withTags(VALID_TAG_UI, VALID_TAG_SYNTAX).build();
     }
 

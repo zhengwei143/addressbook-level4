@@ -22,8 +22,8 @@ import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseSuccess
 import static seedu.saveit.testutil.TypicalIssues.AMY;
 import static seedu.saveit.testutil.TypicalIssues.BOB;
 import static seedu.saveit.testutil.TypicalIssues.INITIALIZED_ISSUE_FREQUENCY;
-import static seedu.saveit.testutil.TypicalSolutions.C;
-import static seedu.saveit.testutil.TypicalSolutions.JAVA;
+import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_C;
+import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_JAVA;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -57,7 +57,7 @@ public class AddCommandParserTest {
 
         // multiple solutions - all accepted
         Issue expectedIssueMultipleSolutions = new IssueBuilder(BOB)
-                .withSolutions(JAVA, C)
+                .withSolutions(SOLUTION_JAVA, SOLUTION_C)
                 .build();
         assertParseSuccess(parser, STATEMENT_DESC_C + DESCRIPTION_DESC_C + SOLUTION_DESC_JAVA
                 + SOLUTION_DESC_C + CommandTestUtil.TAG_DESC_UI, new AddCommand(expectedIssueMultipleSolutions));

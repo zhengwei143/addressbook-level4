@@ -20,7 +20,7 @@ import static seedu.saveit.testutil.TypicalIssues.CARL;
 import static seedu.saveit.testutil.TypicalIssues.HOON;
 import static seedu.saveit.testutil.TypicalIssues.IDA;
 import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MEIER;
-import static seedu.saveit.testutil.TypicalSolutions.C;
+import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_C;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -121,7 +121,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         assertCommandSuccess(toAdd);
 
         /* Case: add a duplicate issue except with different solution -> rejected */
-        toAdd = new IssueBuilder(HOON).withSolutions(C).build();
+        toAdd = new IssueBuilder(HOON).withSolutions(SOLUTION_C).build();
         command = IssueUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_ISSUE);
 

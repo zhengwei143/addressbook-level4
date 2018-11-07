@@ -3,7 +3,7 @@ package seedu.saveit.ui;
 import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static seedu.saveit.testutil.EventsUtil.postNow;
-import static seedu.saveit.testutil.TypicalSolutions.REPO;
+import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_REPO;
 import static seedu.saveit.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.saveit.ui.UiPart.FXML_FILE_FOLDER;
 
@@ -30,7 +30,7 @@ public class BrowserPanelTest extends GuiUnitTest {
 
     @Before
     public void setUp() {
-        selectionChangedEventStub = new SolutionPanelSelectionChangedEvent(REPO);
+        selectionChangedEventStub = new SolutionPanelSelectionChangedEvent(SOLUTION_REPO);
         jumpToListRequestEventStub = new JumpToListRequestEvent(Index.fromOneBased(1));
         directoryChangedEventStub = new DirectoryChangedEvent(new Directory(0, 0));
 
@@ -48,7 +48,7 @@ public class BrowserPanelTest extends GuiUnitTest {
 
         // associated web page of an solution
         postNow(selectionChangedEventStub);
-        URL expectedSolutionUrl = new URL(REPO.getLink().getValue());
+        URL expectedSolutionUrl = new URL(SOLUTION_REPO.getLink().getValue());
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedSolutionUrl, browserPanelHandle.getLoadedUrl());

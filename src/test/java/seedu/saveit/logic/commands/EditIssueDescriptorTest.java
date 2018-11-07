@@ -7,7 +7,7 @@ import static seedu.saveit.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
-import static seedu.saveit.testutil.TypicalSolutions.C;
+import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_C;
 
 import org.junit.Test;
 
@@ -44,7 +44,7 @@ public class EditIssueDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different solutions -> returns false
-        editedAmy = new EditIssueDescriptorBuilder(DESC_AMY).withSolutions(C).build();
+        editedAmy = new EditIssueDescriptorBuilder(DESC_AMY).withSolutions(SOLUTION_C).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false

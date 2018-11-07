@@ -5,8 +5,8 @@ import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
-import static seedu.saveit.testutil.TypicalSolutions.C;
-import static seedu.saveit.testutil.TypicalSolutions.JAVA;
+import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_C;
+import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_JAVA;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -75,13 +75,13 @@ public class TypicalIssues {
     // Manually added - Issue's details found in {@code CommandTestUtil}
     public static final Issue AMY = new IssueBuilder().withStatement(VALID_STATEMENT_JAVA)
             .withDescription(VALID_DESCRIPTION_JAVA)
-            .withSolutions(JAVA)
+            .withSolutions(SOLUTION_JAVA)
             .withTags(VALID_TAG_UI)
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .withLastModifiedTime().build();
     public static final Issue BOB = new IssueBuilder().withStatement(VALID_STATEMENT_C)
             .withDescription(VALID_DESCRIPTION_C)
-            .withSolutions(C)
+            .withSolutions(SOLUTION_C)
             .withTags(VALID_TAG_UI)
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .withLastModifiedTime().build();

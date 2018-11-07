@@ -11,7 +11,6 @@ import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 

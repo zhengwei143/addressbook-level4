@@ -27,8 +27,8 @@ public class TypicalSolutions {
             .withRemark(VALID_REMARK_C).build();
     public static final Solution SOLUTION_JAVA = new SolutionBuilder().withLink(VALID_SOLUTION_LINK_JAVA)
             .withRemark(VALID_REMARK_JAVA).build();
-    public static final Solution SOLUTION_STACKOVERFLOW = new SolutionBuilder().withLink(VALID_SOLUTION_LINK_STACKOVERFLOW)
-            .withRemark(VALID_REMARK_STACKOVERFLOW).build();
+    public static final Solution SOLUTION_STACKOVERFLOW = new SolutionBuilder()
+            .withLink(VALID_SOLUTION_LINK_STACKOVERFLOW).withRemark(VALID_REMARK_STACKOVERFLOW).build();
 
     private TypicalSolutions() {} // prevents instantiation
 

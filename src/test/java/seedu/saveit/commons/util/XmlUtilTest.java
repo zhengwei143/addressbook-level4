@@ -43,6 +43,8 @@ public class XmlUtilTest {
             .singletonList(new XmlAdaptedSolution("webSite remark"));
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections
             .singletonList(new XmlAdaptedTag("friends"));
+    private static final Integer VALID_FREQUENCY = 1;
+    private static final Long VALID_TIMESTAMP = new Long("1541509287278");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -91,7 +93,7 @@ public class XmlUtilTest {
         XmlAdaptedIssue actualIssue = XmlUtil.getDataFromFile(
             INVALID_ISSUE_FIELD_FILE, XmlAdaptedIssueWithRootElement.class);
         XmlAdaptedIssue expectedIssue = new XmlAdaptedIssue(
-                VALID_STATEMENT, INVALID_DESCRIPTION, VALID_SOLUTIONS, VALID_TAGS);
+                VALID_STATEMENT, INVALID_DESCRIPTION, VALID_SOLUTIONS, VALID_TAGS, VALID_FREQUENCY, VALID_TIMESTAMP);
         assertEquals(expectedIssue, actualIssue);
     }
 

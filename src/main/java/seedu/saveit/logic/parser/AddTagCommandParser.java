@@ -141,7 +141,7 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
     private void checkLowerBound(int indexToAdd) throws ParseException {
         if (indexToAdd < indexLowerLimit) {
             throw new ParseException(String
-                .format(MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX, AddTagCommand.MESSAGE_ADD_TAG_LOWER_BOUND_FAILURE));
+                .format(MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX, Messages.MESSAGE_INVALID_DISPLAYED_INDEX));
         }
     }
 }

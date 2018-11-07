@@ -5,8 +5,6 @@ import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_SOLUTION;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
 
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +17,6 @@ import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.UserPrefs;
-import seedu.saveit.model.issue.Solution;
 import seedu.saveit.testutil.DirectoryBuilder;
 
 public class ResetPrimaryCommandTest {
@@ -28,7 +25,6 @@ public class ResetPrimaryCommandTest {
     private CommandHistory commandHistory;
     private Index selectedIssueOneBasedIndex;
     private Issue issueSelected;
-    private List<Solution> solutionList;
 
     @Before
     public void setUp() {
@@ -83,7 +79,6 @@ public class ResetPrimaryCommandTest {
         Directory newDirectory = new DirectoryBuilder().withIssueIndex(selectedIssueOneBasedIndex).build();
         model.resetDirectory(newDirectory);
         expectedModel.resetDirectory(newDirectory);
-        solutionList = expectedModel.getFilteredSolutionList();
         issueSelected = expectedModel.getFilteredAndSortedIssueList().get(selectedIssueOneBasedIndex.getZeroBased());
     }
 }

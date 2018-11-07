@@ -79,9 +79,14 @@ public class EditCommand extends Command {
             .isAnySolutionFieldEdited()) {
             int solutionListSize = lastShownList.get(currentDirectory.getIssue() - 1).getSolutions().size();
             issueToEdit = getIssueToEdit(lastShownList, solutionListSize, currentDirectory.getIssue() - 1);
-        } else {
+        } else if ((currentDirectory.isRootLevel() && editIssueDescriptor.isAnySolutionFieldEdited())
+                || (currentDirectory.isIssueLevel() && editIssueDescriptor.isAnyIssueFieldEdited())) {
+            // Mismatch of directory level and fields modified
             throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
+        } else {
+            throw new CommandException(MESSAGE_USAGE);
         }
+
         Issue editedIssue = createEditedIssue(issueToEdit, editIssueDescriptor);
 
         if (!issueToEdit.isSameIssue(editedIssue) && model.hasIssue(editedIssue)) {

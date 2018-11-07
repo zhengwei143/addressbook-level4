@@ -33,9 +33,9 @@ public class SampleDataUtil {
         String[] solutionArrH = {"https://www.google.com.sg/", "newRemark"};
         return new Issue[]{
             new Issue(new IssueStatement("Java NullPointer"), new Description("cannot find object"),
-                    getSolutionList(new Solution(new SolutionLink("https://stackoverflow.com/"),
-                            new Remark("remark"))), getTagSet("solved")),
-        new Issue(new IssueStatement("StackOverflow"), new Description("Cannot run"),
+                getSolutionList(new Solution(new SolutionLink("https://stackoverflow.com/"),
+                        new Remark("remark"))), getTagSet("solved")),
+            new Issue(new IssueStatement("StackOverflow"), new Description("Cannot run"),
                     getSolutionList(
                             new Solution(new SolutionLink("https://ivle.nus.edu.sg/v1/workspace.aspx"),
                                     new Remark("newRemark")),

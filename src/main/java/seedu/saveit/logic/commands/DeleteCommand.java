@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.saveit.commons.core.Messages;
+import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
@@ -37,6 +38,11 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
+
+        Directory currentDirectory = model.getCurrentDirectory();
+        if (!currentDirectory.isRootLevel()) {
+            throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
+        }
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);

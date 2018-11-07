@@ -77,17 +77,13 @@ public class EditCommand extends Command {
 
         if (currentDirectory.isRootLevel() && editIssueDescriptor.isAnyIssueFieldEdited()) {
             issueToEdit = getIssueToEdit(lastShownList, lastShownList.size(), index.getZeroBased());
-        } else if (currentDirectory.isSolutionLevel() && editIssueDescriptor
+        } else if ((currentDirectory.isIssueLevel() || currentDirectory.isSolutionLevel()) && editIssueDescriptor
             .isAnySolutionFieldEdited()) {
             int issueIndex = currentDirectory.getIssue() - 1;
             int solutionListSize = lastShownList.get(issueIndex).getSolutions().size();
             issueToEdit = getIssueToEdit(lastShownList, solutionListSize, issueIndex);
-        } else if ((currentDirectory.isRootLevel() && editIssueDescriptor.isAnySolutionFieldEdited())
-            || (currentDirectory.isIssueLevel() && editIssueDescriptor.isAnyIssueFieldEdited())) {
-            // Mismatch of directory level and fields modified
-            throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
         } else {
-            throw new CommandException(MESSAGE_USAGE);
+            throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
         }
 
         Issue editedIssue = createEditedIssue(issueToEdit, editIssueDescriptor);
@@ -104,6 +100,7 @@ public class EditCommand extends Command {
     private Issue getIssueToEdit(List<Issue> lastShownList, int listSize, int issueIndex) throws CommandException {
         Issue issueToEdit;
         if (index.getZeroBased() < listSize) {
+            System.out.println();
             issueToEdit = lastShownList.get(issueIndex);
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_DISPLAYED_INDEX);

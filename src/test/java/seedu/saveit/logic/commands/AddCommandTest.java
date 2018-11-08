@@ -126,7 +126,6 @@ public class AddCommandTest {
     }
 
     @Test
-    @Ignore
     public void execute_issueAcceptedByModel_solutionLevelAddSuccessful() throws Exception {
         ModelStubAcceptingSolutionAdded modelStub = initialise_acceptingSolutionAdded_solutionLevel(
                 new IssueBuilder().withSolutions(SOLUTION_JAVA, SOLUTION_C)

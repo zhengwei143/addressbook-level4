@@ -3,8 +3,8 @@ package seedu.saveit.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -68,7 +68,7 @@ public class AddTagCommand extends Command {
 
         int numOfIssues = model.getFilteredAndSortedIssueList().size();
         checkHigherBound(numOfIssues, index);
-        Set<Issue> issueToEdit = new HashSet<>();
+        Set<Issue> issueToEdit = new LinkedHashSet<>();
         try {
             List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
             index.forEach(issueIndex -> {

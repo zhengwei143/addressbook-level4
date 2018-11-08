@@ -1,7 +1,6 @@
 package seedu.saveit.ui;
 
 import static junit.framework.TestCase.assertTrue;
-
 import static seedu.saveit.model.util.SampleDataUtil.isPrefixParameter;
 
 import java.util.List;

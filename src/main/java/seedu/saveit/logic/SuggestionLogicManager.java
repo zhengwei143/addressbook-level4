@@ -9,7 +9,6 @@ import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT_STRING;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG_STRING;
-
 import static seedu.saveit.logic.parser.SaveItParser.BASIC_COMMAND_FORMAT;
 
 import java.util.LinkedList;

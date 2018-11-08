@@ -37,6 +37,7 @@ import seedu.saveit.logic.suggestion.SuggestionValue;
 public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "-fx-fill: #ff6060";
+    private static final int DEFAULT_CARET_OFFSET = 8;
     private static final int MAX_NUMBER_SUGGESTIONS = 5;
 
     private static final String FXML = "CommandBox.fxml";
@@ -94,34 +95,34 @@ public class CommandBox extends UiPart<Region> {
      * Populates the
      */
     private void displaySuggestion(SuggestionResult suggestionResult) {
-        if (suggestionResult.values.size() == 0) {
+        if (suggestionResult.getSuggestionValue().size() == 0) {
             popUpWindow.getItems().clear();
             popUpWindow.hide();
             return;
         }
 
-        int count = Math.min(suggestionResult.values.size(), MAX_NUMBER_SUGGESTIONS);
+        int count = Math.min(suggestionResult.getSuggestionValue().size(), MAX_NUMBER_SUGGESTIONS);
         // Builds the dropdown
         List<CustomMenuItem> menuItems = new LinkedList<>();
         for (int i = 0; i < count; i++) {
-            final SuggestionValue value = suggestionResult.values.get(i);
-            String oldText = commandTextArea.getText();
-            String newText = StringUtil.replaceAt(oldText, value.result, suggestionResult.startPosition,
-                    suggestionResult.endPosition);
-            Label entryLabel = new Label(value.label);
-            commandTextArea.requestFocus();
+            final SuggestionValue value = suggestionResult.getSuggestionValue().get(i);
+            Label entryLabel = new Label(value.getLabel());
             CustomMenuItem item = new CustomMenuItem(entryLabel, true);
-            item.setOnAction(actionEvent -> {
-                commandTextArea.replaceText(newText);
-                commandTextArea.moveTo(suggestionResult.startPosition + value.result.length());
-                popUpWindow.hide();
-            });
+            handleSelectOnItem(item, value, suggestionResult);
             menuItems.add(item);
         }
-        popUpWindow.getItems().clear();
-        popUpWindow.getItems().addAll(menuItems);
-        getFocused();
-        popUpWindow.show(commandTextArea, Side.BOTTOM, (double) suggestionResult.startPosition * 8, 0);
+
+        if (checkInputValue(suggestionResult)) {
+            //hide the dropdown when the suggested value has already been entered by user
+            popUpWindow.getItems().clear();
+            popUpWindow.hide();
+        } else {
+            popUpWindow.getItems().clear();
+            popUpWindow.getItems().addAll(menuItems);
+            getFocused();
+            popUpWindow.show(commandTextArea, Side.BOTTOM,
+                    (double) suggestionResult.getStartPosition() * DEFAULT_CARET_OFFSET, 0);
+        }
     }
 
     /**
@@ -216,7 +217,8 @@ public class CommandBox extends UiPart<Region> {
      * Makes the popup window get ready to get focused before next showing
      */
     private void getFocused() {
-        popUpWindow.show(commandTextArea, Side.BOTTOM, (double) commandTextArea.getCaretPosition() * 8, 0);
+        popUpWindow.show(commandTextArea, Side.BOTTOM,
+                (double) commandTextArea.getCaretPosition() * DEFAULT_CARET_OFFSET, 0);
         popUpWindow.hide();
     }
 
@@ -245,5 +247,29 @@ public class CommandBox extends UiPart<Region> {
     private void handleBrowserPanelFocusChangeEvent(BrowserPanelFocusChangeEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         commandTextArea.requestFocus();
+    }
+
+    // ======================= Suggestion display util ==========================================================
+
+    /**
+     * Checks if the input value is the same as the suggested keyword.
+     */
+    private boolean checkInputValue(SuggestionResult suggestionResult) {
+        String oldValue = suggestionResult.getOldValue();
+        return oldValue.equals(suggestionResult.getSuggestionValue().get(0).getResult());
+    }
+
+    /**
+     * Sets on action for item in {@code CustomMenuItem}.
+     */
+    private void handleSelectOnItem(CustomMenuItem item, SuggestionValue value, SuggestionResult suggestionResult) {
+        item.setOnAction(actionEvent -> {
+            String oldText = commandTextArea.getText();
+            String newText = StringUtil.replaceAt(oldText, value.getResult(), suggestionResult.getStartPosition(),
+                    suggestionResult.getEndPosition());
+            commandTextArea.replaceText(newText);
+            commandTextArea.moveTo(suggestionResult.getStartPosition() + value.getResult().length());
+            popUpWindow.hide();
+        });
     }
 }

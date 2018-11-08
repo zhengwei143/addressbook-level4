@@ -1,8 +1,9 @@
 package seedu.saveit.storage;
 
-import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.XmlElement;
 
 import seedu.saveit.commons.exceptions.IllegalValueException;
+import seedu.saveit.model.issue.PrimarySolution;
 import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.solution.Remark;
 import seedu.saveit.model.issue.solution.SolutionLink;
@@ -14,8 +15,14 @@ public class XmlAdaptedSolution {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Solution's %s field is missing!";
 
-    @XmlValue
-    private String solutionName;
+    @XmlElement(required = true)
+    private String solutionLink;
+
+    @XmlElement(required = true)
+    private String remark;
+
+    @XmlElement
+    private boolean isPrimarySolution;
 
 
     /**
@@ -25,10 +32,11 @@ public class XmlAdaptedSolution {
     }
 
     /**
-     * Constructs a {@code XmlAdaptedSolution} with the given {@code solutionName}.
+     * Constructs a {@code XmlAdaptedSolution} with the given {@code solutionLink} and {@code remark}.
      */
-    public XmlAdaptedSolution(String solutionName) {
-        this.solutionName = solutionName;
+    public XmlAdaptedSolution(String solutionLink, String remark) {
+        this.solutionLink = solutionLink;
+        this.remark = remark;
     }
 
     /**
@@ -37,7 +45,9 @@ public class XmlAdaptedSolution {
      * @param source future changes to this will not affect the created
      */
     public XmlAdaptedSolution(Solution source) {
-        solutionName = source.getLink() + " " + source.getRemark();
+        solutionLink = source.getLink().toString();
+        remark = source.getRemark().toString();
+        isPrimarySolution = source.isPrimarySolution();
     }
 
     /**
@@ -46,24 +56,31 @@ public class XmlAdaptedSolution {
      * @throws IllegalValueException if there were any data constraints violated in the adapted issue
      */
     public Solution toModelType() throws IllegalValueException {
-
-        int index = solutionName.indexOf(' ');
-        String link = solutionName;
-        String remark = solutionName;
-
-        if (index != -1) {
-            link = solutionName.substring(0, index);
-            remark = solutionName.substring(solutionName.indexOf(' ') + 1);
+        if (solutionLink == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    SolutionLink.class.getSimpleName()));
         }
-
-        if (link != null && !Remark.isValidRemark(remark)) {
-            throw new IllegalValueException(Remark.MESSAGE_REMARK_CONSTRAINTS);
-        }
-        if (remark != null && !SolutionLink.isValidLink(link)) {
+        if (!SolutionLink.isValidLink(solutionLink)) {
             throw new IllegalValueException(SolutionLink.MESSAGE_SOLUTION_LINK_CONSTRAINTS);
         }
+        final SolutionLink modelSolutionLink = new SolutionLink(solutionLink);
 
-        return new Solution(link, remark);
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Remark.class.getSimpleName()));
+        }
+        if (!Remark.isValidRemark(remark)) {
+            throw new IllegalValueException(Remark.MESSAGE_REMARK_CONSTRAINTS);
+        }
+        final Remark modelRemark = new Remark(remark);
+
+
+
+        if (isPrimarySolution) {
+            return new PrimarySolution(modelSolutionLink, modelRemark);
+        } else {
+            return new Solution(modelSolutionLink, modelRemark);
+        }
     }
 
     @Override
@@ -76,6 +93,8 @@ public class XmlAdaptedSolution {
             return false;
         }
 
-        return solutionName.equals(((XmlAdaptedSolution) other).solutionName);
+        return solutionLink.equals(((XmlAdaptedSolution) other).solutionLink)
+                && remark.equals(((XmlAdaptedSolution) other).remark)
+                && isPrimarySolution == (((XmlAdaptedSolution) other).isPrimarySolution);
     }
 }

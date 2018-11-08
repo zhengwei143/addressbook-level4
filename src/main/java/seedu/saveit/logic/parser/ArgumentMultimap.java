@@ -78,9 +78,7 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Returns a list String which belongs to the requested prefix
-     * @param prefix
-     * @return
+     * Returns a list String which belongs to the requested prefix.
      */
     private List<String> retrieveIdenticalPrefixValue(Prefix prefix) {
         List<String> list = new ArrayList<>();

@@ -11,7 +11,7 @@ import seedu.saveit.commons.util.AppUtil;
 public class Tag {
 
     public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should not contain white space";
-    public static final String TAG_VALIDATION_REGEX = "^[^\\d\\s]+$";
+    public static final String TAG_VALIDATION_REGEX = "[\\S]+";
 
     public final String tagName;
 

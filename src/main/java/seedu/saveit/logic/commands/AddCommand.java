@@ -1,6 +1,7 @@
 package seedu.saveit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.saveit.commons.core.Messages.MESSAGE_WRONG_DIRECTORY;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_REMARK_STRING;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK_STRING;
@@ -40,10 +41,9 @@ public class AddCommand extends Command {
     public static final String DUMMY_STATEMENT = "dummyStatement";
     public static final String DUMMY_DESCRIPTION = "dummyDescription";
 
-    private static final String MESSAGE_FAILED_ISSUE =
+    public static final String MESSAGE_FAILED_ISSUE =
             "Issue has to be selected first before adding solution";
-    private static final String MESSAGE_WRONG_DIRECTORY = "Wrong directory, please check!";
-    private static final String MESSAGE_SOLUTION_SUCCESS = "New solution added: %1$s";
+    public static final String MESSAGE_SOLUTION_SUCCESS = "New solution added: %1$s";
     private final Issue toAdd;
 
     /**
@@ -52,17 +52,6 @@ public class AddCommand extends Command {
     public AddCommand(Issue issue) {
         requireNonNull(issue);
         toAdd = issue;
-    }
-
-    /**
-     * Add a solution to a existing issue in the issue list
-     */
-    private void addSolutionToIssue(Model model, Solution solutionToBeAdded, Index index) throws CommandException {
-        if (model.hasSolution(index, solutionToBeAdded)) {
-            throw new CommandException(MESSAGE_DUPLICATE_SOLUTION);
-        }
-        model.addSolution(index, solutionToBeAdded);
-        model.commitSaveIt();
     }
 
     @Override
@@ -74,7 +63,7 @@ public class AddCommand extends Command {
         case DUMMY_STATEMENT: //adding solution to existing issue
             assert (toAdd.getDescription().getValue().equals(DUMMY_DESCRIPTION));
             assert (toAdd.getSolutions().size() == 1);
-            if (model.getCurrentDirectory().isIssueLevel()) {
+            if (model.getCurrentDirectory().isIssueLevel() || model.getCurrentDirectory().isSolutionLevel()) {
                 Index issueIndex = Index.fromOneBased(model.getCurrentDirectory().getIssue());
                 Solution solutionToBeAdded = toAdd.getSolutions().get(0);
                 addSolutionToIssue(model, solutionToBeAdded, issueIndex);
@@ -85,17 +74,34 @@ public class AddCommand extends Command {
 
         default: //adding new issue
             assert (toAdd.getSolutions().size() == 0);
-            if (model.getCurrentDirectory().isIssueLevel()) {
+            if (!model.getCurrentDirectory().isRootLevel()) {
                 throw new CommandException(MESSAGE_WRONG_DIRECTORY);
             }
-
-            if (model.hasIssue(toAdd)) {
-                throw new CommandException(MESSAGE_DUPLICATE_ISSUE);
-            }
-            model.addIssue(toAdd);
-            model.commitSaveIt();
+            addIssueToSaveIt(model, toAdd);
             return new CommandResult(String.format(MESSAGE_ISSUE_SUCCESS, toAdd));
         }
+    }
+
+    /**
+     * Add an issue to saveIt
+     */
+    private void addIssueToSaveIt(Model model, Issue toAdd) throws CommandException {
+        if (model.hasIssue(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_ISSUE);
+        }
+        model.addIssue(toAdd);
+        model.commitSaveIt();
+    }
+
+    /**
+     * Add a solution to a existing issue in the issue list
+     */
+    private void addSolutionToIssue(Model model, Solution solutionToBeAdded, Index index) throws CommandException {
+        if (model.hasSolution(index, solutionToBeAdded)) {
+            throw new CommandException(MESSAGE_DUPLICATE_SOLUTION);
+        }
+        model.addSolution(index, solutionToBeAdded);
+        model.commitSaveIt();
     }
 
     @Override

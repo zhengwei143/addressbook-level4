@@ -14,7 +14,6 @@ import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_ISSUE;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 

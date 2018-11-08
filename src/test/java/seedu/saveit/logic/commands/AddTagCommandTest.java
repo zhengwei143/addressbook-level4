@@ -11,7 +11,6 @@ import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -173,7 +172,8 @@ public class AddTagCommandTest {
 
         AddTagCommand addTagCommand = new AddTagCommand(indexSet, tagSet);
 
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_ADD_TAG_HIGHER_BOUND_FAILURE);
+        String expectedMessage =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_ADD_TAG_HIGHER_BOUND_FAILURE);
 
         assertCommandFailure(addTagCommand, model, commandHistory, expectedMessage);
     }

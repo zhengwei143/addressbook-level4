@@ -30,7 +30,11 @@ public class BrowserPanelTest extends GuiUnitTest {
 
     @Before
     public void setUp() {
+<<<<<<< Updated upstream
         selectionChangedEventStub = new SolutionPanelSelectionChangedEvent(SOLUTION_REPO);
+=======
+        selectionChangedEventStub = new SolutionPanelSelectionChangedEvent(GOOGLE);
+>>>>>>> Stashed changes
         jumpToListRequestEventStub = new JumpToListRequestEvent(Index.fromOneBased(1));
         directoryChangedEventStub = new DirectoryChangedEvent(new Directory(0, 0));
 

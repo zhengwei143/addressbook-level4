@@ -38,7 +38,7 @@ public class SolutionLink {
     }
 
     public String getValue() {
-        return this.value;
+        return appendUrlPrefix(this.value);
     }
 
     private static String appendUrlPrefix(String value) {

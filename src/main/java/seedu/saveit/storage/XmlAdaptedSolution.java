@@ -32,7 +32,7 @@ public class XmlAdaptedSolution {
     }
 
     /**
-     * Constructs a {@code XmlAdaptedSolution} with the given {@code solutionName}.
+     * Constructs a {@code XmlAdaptedSolution} with the given {@code solutionLink} and {@code remark}.
      */
     public XmlAdaptedSolution(String solutionLink, String remark) {
         this.solutionLink = solutionLink;

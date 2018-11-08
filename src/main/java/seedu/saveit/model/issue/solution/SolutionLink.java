@@ -54,7 +54,7 @@ public class SolutionLink {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
             || (other instanceof SolutionLink // instanceof handles nulls
-            && value.equals(((SolutionLink) other).getValue())); // state check
+            && value.equals(((SolutionLink) other).value)); // state check
     }
 
     @Override

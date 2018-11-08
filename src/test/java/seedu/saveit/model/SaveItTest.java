@@ -3,10 +3,10 @@ package seedu.saveit.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_STACKOVERFLOW;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
 import static seedu.saveit.testutil.TypicalIssues.ALICE;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
+import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_STACKOVERFLOW;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -51,7 +51,8 @@ public class SaveItTest {
     @Test
     public void resetData_withDuplicateIssues_throwsDuplicateIssueException() {
         // Two issues with the same identity fields
-        Issue editedAlice = new IssueBuilder(ALICE).withSolutions(VALID_SOLUTION_STACKOVERFLOW)
+        Issue editedAlice = new IssueBuilder(ALICE)
+                .withSolutions(SOLUTION_STACKOVERFLOW)
                 .withTags(VALID_TAG_UI).build();
         List<Issue> newIssues = Arrays.asList(ALICE, editedAlice);
         SaveItStub newData = new SaveItStub(newIssues);
@@ -80,7 +81,8 @@ public class SaveItTest {
     @Test
     public void hasIssue_issueWithSameIdentityFieldsInSaveIt_returnsTrue() {
         saveIt.addIssue(ALICE);
-        Issue editedAlice = new IssueBuilder(ALICE).withSolutions(VALID_SOLUTION_STACKOVERFLOW)
+        Issue editedAlice = new IssueBuilder(ALICE)
+                .withSolutions(SOLUTION_STACKOVERFLOW)
                 .withTags(VALID_TAG_UI).build();
         assertTrue(saveIt.hasIssue(editedAlice));
     }

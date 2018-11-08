@@ -74,7 +74,7 @@ public class SortCommandTest {
     public void execute_sortAfterUpdate_success() {
         IssueSort issueSort = prepareIssueSort(IssueSort.TAG_SORT);
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, issueSort.getSortType());
-        Issue issue = new Issue(new IssueStatement("new C++ problem"),
+        Issue issue = new Issue(new IssueStatement("new SOLUTION_C++ problem"),
                 new Description("only for test"), new ArrayList<>(), new HashSet<>());
 
         expectedModel.updateFilteredAndSortedIssueList(issueSort.getComparator());

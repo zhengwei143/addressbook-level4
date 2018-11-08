@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_SYNTAX;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
 import static seedu.saveit.testutil.TypicalIssues.ALICE;
@@ -96,7 +95,7 @@ public class UniqueIssueListTest {
     @Test
     public void setIssue_editedIssueHasSameIdentity_success() {
         uniqueIssueList.add(ALICE);
-        Issue editedAlice = new IssueBuilder(ALICE).withDescription(VALID_SOLUTION_C).withTags(VALID_TAG_UI)
+        Issue editedAlice = new IssueBuilder(ALICE).withDescription(VALID_DESCRIPTION_C).withTags(VALID_TAG_UI)
                 .build();
         uniqueIssueList.setIssue(ALICE, editedAlice);
         UniqueIssueList expectedUniqueIssueList = new UniqueIssueList();

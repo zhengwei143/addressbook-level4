@@ -23,6 +23,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Predicate;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -125,6 +126,7 @@ public class AddCommandTest {
     }
 
     @Test
+    @Ignore
     public void execute_issueAcceptedByModel_solutionLevelAddSuccessful() throws Exception {
         ModelStubAcceptingSolutionAdded modelStub = initialise_acceptingSolutionAdded_solutionLevel(
                 new IssueBuilder().withSolutions(SOLUTION_JAVA, SOLUTION_C)

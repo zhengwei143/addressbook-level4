@@ -12,6 +12,7 @@ import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -33,8 +34,8 @@ public class AddTagCommandTest {
 
     @Test
     public void execute_addValidTagValidIndex_success() throws Exception {
-        Set<Tag> tagSet = new HashSet<>();
-        Set<Index> indexSet = new HashSet<>();
+        Set<Tag> tagSet = new LinkedHashSet();
+        Set<Index> indexSet = new LinkedHashSet();
         Tag tagToAdd = new Tag(VALID_TAG_UI);
         tagSet.add(tagToAdd);
         indexSet.add(INDEX_FIRST_ISSUE);
@@ -55,8 +56,8 @@ public class AddTagCommandTest {
 
     @Test
     public void execute_addValidTagDiscreteIndexes_success() throws Exception {
-        Set<Tag> tagSet = new HashSet<>();
-        Set<Index> indexSet = new HashSet<>();
+        Set<Tag> tagSet = new LinkedHashSet();
+        Set<Index> indexSet = new LinkedHashSet();
         Tag tagToAdd = new Tag(VALID_TAG_UI);
         tagSet.add(tagToAdd);
         indexSet.add(INDEX_FIRST_ISSUE);
@@ -82,8 +83,8 @@ public class AddTagCommandTest {
         Tag tagToAdd1 = new Tag(VALID_TAG_PYTHON);
         Tag tagToAdd2 = new Tag(VALID_TAG_UI);
         Tag tagToAdd3 = new Tag(VALID_TAG_SYNTAX);
-        Set<Index> indexSet = new HashSet<>();
-        Set<Tag> tagSet = new HashSet<>();
+        Set<Index> indexSet = new LinkedHashSet();
+        Set<Tag> tagSet = new LinkedHashSet();
         tagSet.add(tagToAdd1);
         tagSet.add(tagToAdd2);
         tagSet.add(tagToAdd3);
@@ -108,8 +109,8 @@ public class AddTagCommandTest {
         Tag tagToAdd1 = new Tag(VALID_TAG_PYTHON);
         Tag tagToAdd2 = new Tag(VALID_TAG_UI);
         Tag tagToAdd3 = new Tag(VALID_TAG_SYNTAX);
-        Set<Index> indexSet = new HashSet<>();
-        Set<Tag> tagSet = new HashSet<>();
+        Set<Index> indexSet = new LinkedHashSet();
+        Set<Tag> tagSet = new LinkedHashSet();
         tagSet.add(tagToAdd1);
         tagSet.add(tagToAdd2);
         tagSet.add(tagToAdd3);
@@ -130,8 +131,8 @@ public class AddTagCommandTest {
     public void execute_addMultipleValidTagsValidIndexes_success() throws Exception {
         Tag tagToAdd1 = new Tag(VALID_TAG_PYTHON);
         Tag tagToAdd2 = new Tag(VALID_TAG_UI);
-        Set<Index> indexSet = new HashSet<>();
-        Set<Tag> tagSet = new HashSet<>();
+        Set<Index> indexSet = new LinkedHashSet();
+        Set<Tag> tagSet = new LinkedHashSet();
         tagSet.add(tagToAdd1);
         tagSet.add(tagToAdd2);
         indexSet.add(INDEX_FIRST_ISSUE);
@@ -150,8 +151,8 @@ public class AddTagCommandTest {
     @Test
     public void execute_addDuplicateTag_throwsCommandException() throws Exception {
         Tag tagToAdd = new Tag(VALID_TAG_SYNTAX);
-        Set<Index> indexSet = new HashSet<>();
-        Set<Tag> tagSet = new HashSet<>();
+        Set<Index> indexSet = new LinkedHashSet();
+        Set<Tag> tagSet = new LinkedHashSet();
         tagSet.add(tagToAdd);
         indexSet.add(INDEX_FIRST_ISSUE);
 
@@ -164,22 +165,22 @@ public class AddTagCommandTest {
 
     @Test
     public void execute_addValidTagBiggerThanHigherBoundIndex_throwsCommandException() throws Exception {
-        Set<Tag> tagSet = new HashSet<>();
-        Set<Index> indexSet = new HashSet<>();
+        Set<Tag> tagSet = new LinkedHashSet();
+        Set<Index> indexSet = new LinkedHashSet();
         Tag tagToAdd = new Tag(VALID_TAG_UI);
         tagSet.add(tagToAdd);
         indexSet.add(Index.fromOneBased(model.getFilteredAndSortedIssueList().size() + 1));
 
         AddTagCommand addTagCommand = new AddTagCommand(indexSet, tagSet);
 
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_ADD_TAG_HIGHER_BOUND_FAILURE);
 
         assertCommandFailure(addTagCommand, model, commandHistory, expectedMessage);
     }
 
 
     private Set<Issue> getIssueToEdit(Set<Index> indexSet, ModelManager expectedModel) {
-        Set<Issue> issueToEdit = new HashSet<>();
+        Set<Issue> issueToEdit = new LinkedHashSet();
         List<Issue> lastShownList = expectedModel.getFilteredAndSortedIssueList();
         indexSet.forEach(issueIndex -> {
             issueToEdit.add(lastShownList.get(issueIndex.getZeroBased()));

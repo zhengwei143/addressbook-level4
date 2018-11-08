@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -37,7 +38,7 @@ public class IssueBuilder {
         statement = new IssueStatement(DEFAULT_STATEMENT);
         description = new Description(DEFAULT_DESCRIPTION);
         solutions = new ArrayList<>();
-        tags = new HashSet<>();
+        tags = new LinkedHashSet<>();
         frequency = new IssueSearchFrequency(TypicalIssues.COMMON_ISSUE_FREQUENCY);
         lastModifiedTime = new Timestamp(new Date().getTime());
     }
@@ -49,7 +50,7 @@ public class IssueBuilder {
         statement = issueToCopy.getStatement();
         description = issueToCopy.getDescription();
         solutions = new ArrayList<>(issueToCopy.getSolutions());
-        tags = new HashSet<>(issueToCopy.getTags());
+        tags = new LinkedHashSet<>(issueToCopy.getTags());
         frequency = issueToCopy.getFrequency();
         lastModifiedTime = issueToCopy.getLastModifiedTime();
     }

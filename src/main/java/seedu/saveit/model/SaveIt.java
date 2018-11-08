@@ -173,8 +173,7 @@ public class SaveIt implements ReadOnlySaveIt {
         requireNonNull(oldTag);
         for (Issue issueToUpdate : issues) {
             Set<Tag> tagsToUpdate = new LinkedHashSet<>(issueToUpdate.getTags());
-            if (tagsToUpdate.contains(oldTag)) {
-                tagsToUpdate.remove(oldTag);
+            if (tagsToUpdate.remove(oldTag)) {
                 tagsToUpdate.add(newTag);
                 isEdit = true;
                 updateTags(issueToUpdate, tagsToUpdate);
@@ -192,8 +191,7 @@ public class SaveIt implements ReadOnlySaveIt {
         requireNonNull(tag);
         for (Issue issueToUpdate : issues) {
             Set<Tag> tagsToUpdate = new LinkedHashSet<>(issueToUpdate.getTags());
-            if (tagsToUpdate.contains(tag)) {
-                tagsToUpdate.remove(tag);
+            if (tagsToUpdate.remove(tag)) {
                 isEdit = true;
                 updateTags(issueToUpdate, tagsToUpdate);
             }

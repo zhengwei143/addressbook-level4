@@ -63,7 +63,7 @@ public class AddCommand extends Command {
         case DUMMY_STATEMENT: //adding solution to existing issue
             assert (toAdd.getDescription().getValue().equals(DUMMY_DESCRIPTION));
             assert (toAdd.getSolutions().size() == 1);
-            if (model.getCurrentDirectory().isIssueLevel() || model.getCurrentDirectory().isSolutionLevel()) {
+            if (model.getCurrentDirectory().isIssueLevel()) {
                 Index issueIndex = Index.fromOneBased(model.getCurrentDirectory().getIssue());
                 Solution solutionToBeAdded = toAdd.getSolutions().get(0);
                 addSolutionToIssue(model, solutionToBeAdded, issueIndex);

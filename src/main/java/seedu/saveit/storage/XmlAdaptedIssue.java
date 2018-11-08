@@ -3,7 +3,7 @@ package seedu.saveit.storage;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -136,7 +136,7 @@ public class XmlAdaptedIssue {
 
         final List<Solution> modelSolutions = new ArrayList<>(issueSolutions);
 
-        final Set<Tag> modelTags = new HashSet<>(issueTags);
+        final Set<Tag> modelTags = new LinkedHashSet<>(issueTags);
 
         final IssueSearchFrequency searchFrequency = new IssueSearchFrequency(frequency);
 

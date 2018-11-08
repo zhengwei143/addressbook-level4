@@ -1,5 +1,6 @@
 package seedu.saveit.testutil;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -60,8 +61,8 @@ public class EditIssueDescriptorBuilder {
      * Parses the {@code solutions} into a {@code Set<Solution>} and set it to the {@code EditIssueDescriptor} that we
      * are building.
      */
-    public EditIssueDescriptorBuilder withSolutions(String... solutions) {
-        List<Solution> solutionSet = Stream.of(solutions).map(Solution::new).collect(Collectors.toList());
+    public EditIssueDescriptorBuilder withSolutions(Solution... solutions) {
+        List<Solution> solutionSet = Arrays.asList(solutions);
         descriptor.setSolutions(solutionSet);
         return this;
     }

@@ -18,7 +18,6 @@ import org.junit.rules.ExpectedException;
 import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueStatement;
-import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;
 import seedu.saveit.model.issue.solution.Remark;
 import seedu.saveit.testutil.Assert;
@@ -124,8 +123,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseRemark_validValueWithoutWhitespace_returnsRemark() throws Exception {
-        Solution expectedSolution = new Solution(VALID_LINK, VALID_REMARK);
-        assertEquals(expectedSolution, ParserUtil.parseSolution(VALID_LINK, VALID_REMARK));
+        Remark expectedSolution = new Remark(VALID_REMARK);
+        assertEquals(expectedSolution, ParserUtil.parseSolutionRemark(VALID_REMARK));
     }
 
     @Test

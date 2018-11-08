@@ -28,6 +28,8 @@ import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.model.issue.PrimarySolution;
 import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;
+import seedu.saveit.model.issue.solution.Remark;
+import seedu.saveit.model.issue.solution.SolutionLink;
 
 /**
  * Edits the details of an existing issue in the saveIt.
@@ -148,12 +150,12 @@ public class EditCommand extends Command {
         Solution oldSolution = issueToEdit.getSolutions().get(index);
         Solution updatedSolution;
 
-        String updatedSolutionLink =
-            newSolution.getLink().getValue().equals(DUMMY_SOLUTION_LINK) ? oldSolution.getLink().getValue()
-                : newSolution.getLink().getValue();
-        String updatedSolutionRemark =
-            newSolution.getRemark().getValue().equals(DUMMY_SOLUTION_REMARK) ? oldSolution.getRemark().getValue()
-                : newSolution.getRemark().getValue();
+        SolutionLink updatedSolutionLink =
+                newSolution.getLink().getValue().equals(DUMMY_SOLUTION_LINK) ? oldSolution.getLink()
+                        : newSolution.getLink();
+        Remark updatedSolutionRemark =
+                newSolution.getRemark().getValue().equals(DUMMY_SOLUTION_REMARK) ? oldSolution.getRemark()
+                        : newSolution.getRemark();
 
         if (oldSolution.isPrimarySolution()) {
             updatedSolution = new PrimarySolution(updatedSolutionLink, updatedSolutionRemark);

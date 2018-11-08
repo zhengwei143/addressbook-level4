@@ -75,13 +75,6 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_failure() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_ISSUE, new EditIssueDescriptor());
-
-        assertCommandFailure(editCommand, model, commandHistory, EditCommand.MESSAGE_USAGE);
-    }
-
-    @Test
     public void execute_filteredList_success() {
         showIssueAtIndex(model, INDEX_FIRST_ISSUE);
 

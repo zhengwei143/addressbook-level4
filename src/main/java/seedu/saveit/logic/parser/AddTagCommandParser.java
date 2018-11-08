@@ -11,7 +11,7 @@ import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import seedu.saveit.commons.core.Messages;
@@ -39,7 +39,7 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
     public AddTagCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        Set<Index> index = new HashSet<>();
+        Set<Index> index = new LinkedHashSet<>();
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 

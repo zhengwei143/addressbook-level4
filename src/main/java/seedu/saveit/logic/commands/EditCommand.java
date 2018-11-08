@@ -102,7 +102,6 @@ public class EditCommand extends Command {
     private Issue getIssueToEdit(List<Issue> lastShownList, int listSize, int issueIndex) throws CommandException {
         Issue issueToEdit;
         if (index.getZeroBased() < listSize) {
-            System.out.println();
             issueToEdit = lastShownList.get(issueIndex);
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_DISPLAYED_INDEX);

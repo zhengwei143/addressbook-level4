@@ -14,7 +14,7 @@ import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_ISSUE;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.junit.Test;
@@ -34,8 +34,8 @@ public class AddTagCommandParserTest {
 
     @Test
     public void parse_singleIndexSingleTag_returnAddTagCommand() {
-        Set<Tag> tagSet = new HashSet<>();
-        Set<Index> indexSet = new HashSet<>();
+        Set<Tag> tagSet = new LinkedHashSet();
+        Set<Index> indexSet = new LinkedHashSet();
         Tag toAdd = new Tag(VALID_TAG_UI);
 
         tagSet.add(toAdd);
@@ -49,8 +49,8 @@ public class AddTagCommandParserTest {
 
     @Test
     public void parse_singleIndexTwoTags_returnAddTagCommand() {
-        Set<Tag> tagSet = new HashSet<>();
-        Set<Index> indexSet = new HashSet<>();
+        Set<Tag> tagSet = new LinkedHashSet();
+        Set<Index> indexSet = new LinkedHashSet();
         Tag toAdd1 = new Tag(VALID_TAG_UI);
         Tag toAdd2 = new Tag(VALID_TAG_SYNTAX);
         tagSet.add(toAdd1);
@@ -65,8 +65,8 @@ public class AddTagCommandParserTest {
 
     @Test
     public void parse_singleIndexMoreTags_returnAddTagCommand() {
-        Set<Tag> tagSet = new HashSet<>();
-        Set<Index> indexSet = new HashSet<>();
+        Set<Tag> tagSet = new LinkedHashSet();
+        Set<Index> indexSet = new LinkedHashSet();
         Tag toAdd1 = new Tag(VALID_TAG_UI);
         Tag toAdd2 = new Tag(VALID_TAG_SYNTAX);
         Tag toAdd3 = new Tag(VALID_TAG_PYTHON);
@@ -83,8 +83,8 @@ public class AddTagCommandParserTest {
 
     @Test
     public void parse_rangeIndexSingleTag_returnAddTagCommand() {
-        Set<Tag> tagSet = new HashSet<>();
-        Set<Index> indexSet = new HashSet<>();
+        Set<Tag> tagSet = new LinkedHashSet();
+        Set<Index> indexSet = new LinkedHashSet();
         Tag toAdd = new Tag(VALID_TAG_UI);
 
         tagSet.add(toAdd);
@@ -101,8 +101,8 @@ public class AddTagCommandParserTest {
 
     @Test
     public void parse_rangeIndexTwoTags_returnAddTagCommand() {
-        Set<Tag> tagSet = new HashSet<>();
-        Set<Index> indexSet = new HashSet<>();
+        Set<Tag> tagSet = new LinkedHashSet();
+        Set<Index> indexSet = new LinkedHashSet();
         Tag toAdd1 = new Tag(VALID_TAG_UI);
         Tag toAdd2 = new Tag(VALID_TAG_SYNTAX);
 
@@ -121,8 +121,8 @@ public class AddTagCommandParserTest {
 
     @Test
     public void parse_rangeIndexMoreTags_returnAddTagCommand() {
-        Set<Tag> tagSet = new HashSet<>();
-        Set<Index> indexSet = new HashSet<>();
+        Set<Tag> tagSet = new LinkedHashSet();
+        Set<Index> indexSet = new LinkedHashSet();
         Tag toAdd1 = new Tag(VALID_TAG_UI);
         Tag toAdd2 = new Tag(VALID_TAG_SYNTAX);
         Tag toAdd3 = new Tag(VALID_TAG_PYTHON);
@@ -144,8 +144,8 @@ public class AddTagCommandParserTest {
 
     @Test
     public void parse_indexesSingleTag_returnAddTagCommand() {
-        Set<Tag> tagSet = new HashSet<>();
-        Set<Index> indexSet = new HashSet<>();
+        Set<Tag> tagSet = new LinkedHashSet();
+        Set<Index> indexSet = new LinkedHashSet();
         Tag toAdd = new Tag(VALID_TAG_UI);
 
         tagSet.add(toAdd);
@@ -161,8 +161,8 @@ public class AddTagCommandParserTest {
 
     @Test
     public void parse_indexesTwoTags_returnAddTagCommand() {
-        Set<Tag> tagSet = new HashSet<>();
-        Set<Index> indexSet = new HashSet<>();
+        Set<Tag> tagSet = new LinkedHashSet();
+        Set<Index> indexSet = new LinkedHashSet();
         Tag toAdd1 = new Tag(VALID_TAG_UI);
         Tag toAdd2 = new Tag(VALID_TAG_SYNTAX);
 
@@ -180,8 +180,8 @@ public class AddTagCommandParserTest {
 
     @Test
     public void parse_indexesMoreTags_returnAddTagCommand() {
-        Set<Tag> tagSet = new HashSet<>();
-        Set<Index> indexSet = new HashSet<>();
+        Set<Tag> tagSet = new LinkedHashSet();
+        Set<Index> indexSet = new LinkedHashSet();
         Tag toAdd1 = new Tag(VALID_TAG_UI);
         Tag toAdd2 = new Tag(VALID_TAG_SYNTAX);
         Tag toAdd3 = new Tag(VALID_TAG_PYTHON);

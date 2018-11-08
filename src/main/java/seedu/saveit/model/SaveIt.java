@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.saveit.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -149,10 +149,10 @@ public class SaveIt implements ReadOnlySaveIt {
 
         while (issueIterator.hasNext()) {
             Issue issueToEdit = issueIterator.next();
-            Set<Tag> currentTags = new HashSet<>(issueToEdit.getTags());
-            Set<Tag> updateTags = new HashSet<>();
-            updateTags.addAll(tagList);
+            Set<Tag> currentTags = new LinkedHashSet<>(issueToEdit.getTags());
+            Set<Tag> updateTags = new LinkedHashSet<>();
             updateTags.addAll(currentTags);
+            updateTags.addAll(tagList);
 
             if (currentTags.size() != updateTags.size()) {
                 added = true;
@@ -172,9 +172,8 @@ public class SaveIt implements ReadOnlySaveIt {
         boolean isEdit = false;
         requireNonNull(oldTag);
         for (Issue issueToUpdate : issues) {
-            Set<Tag> tagsToUpdate = new HashSet<>(issueToUpdate.getTags());
-            if (tagsToUpdate.contains(oldTag)) {
-                tagsToUpdate.remove(oldTag);
+            Set<Tag> tagsToUpdate = new LinkedHashSet<>(issueToUpdate.getTags());
+            if (tagsToUpdate.remove(oldTag)) {
                 tagsToUpdate.add(newTag);
                 isEdit = true;
                 updateTags(issueToUpdate, tagsToUpdate);
@@ -191,9 +190,8 @@ public class SaveIt implements ReadOnlySaveIt {
         boolean isEdit = false;
         requireNonNull(tag);
         for (Issue issueToUpdate : issues) {
-            Set<Tag> tagsToUpdate = new HashSet<>(issueToUpdate.getTags());
-            if (tagsToUpdate.contains(tag)) {
-                tagsToUpdate.remove(tag);
+            Set<Tag> tagsToUpdate = new LinkedHashSet<>(issueToUpdate.getTags());
+            if (tagsToUpdate.remove(tag)) {
                 isEdit = true;
                 updateTags(issueToUpdate, tagsToUpdate);
             }

@@ -4,7 +4,7 @@ import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.events.BaseEvent;
 
 /**
- * Indicates a request to jump to the list of issues
+ * Indicates a request to change model directory.
  */
 public class ChangeDirectoryRequestEvent extends BaseEvent {
 

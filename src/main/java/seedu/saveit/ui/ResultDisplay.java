@@ -12,7 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import seedu.saveit.commons.core.LogsCenter;
-import seedu.saveit.commons.events.ui.ChangeDirectoryRequestEvent;
+import seedu.saveit.commons.events.model.DirectoryChangedEvent;
 import seedu.saveit.commons.events.ui.NewResultAvailableEvent;
 
 /**
@@ -48,7 +48,7 @@ public class ResultDisplay extends UiPart<Region> {
 
 
     @Subscribe
-    private void handleChangeDirectoryRequestEvent(ChangeDirectoryRequestEvent event) {
+    private void handleChangeDirectoryRequestEvent(DirectoryChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         Platform.runLater(() -> currentDirectory.setValue(event.directory.toString()));
     }

@@ -14,7 +14,7 @@ public class Description {
     public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
         "Issue description can take any values, but it should not be blank.";
     public static final String DESCRIPTION_VALIDATION_REGEX = "[^\\s].*";
-    public final String value;
+    private final String value;
 
     /**
      * Constructs a {@code Description}.
@@ -25,6 +25,13 @@ public class Description {
         requireNonNull(description);
         AppUtil.checkArgument(isValidDescription(description), MESSAGE_DESCRIPTION_CONSTRAINTS);
         value = description;
+    }
+
+    /**
+     * Return a string of description.
+     */
+    public String getValue() {
+        return value;
     }
 
     /**

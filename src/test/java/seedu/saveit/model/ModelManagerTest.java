@@ -69,7 +69,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentSaveIt, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getStatement().issue.split("\\s+");
+        String[] keywords = ALICE.getStatement().getValue().split("\\s+");
         modelManager.updateFilteredIssueList(new IssueContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(saveIt, userPrefs)));
 

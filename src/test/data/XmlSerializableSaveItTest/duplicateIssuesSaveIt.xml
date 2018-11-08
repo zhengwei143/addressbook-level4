@@ -5,6 +5,7 @@
         <description>94351253</description>
         <tagged>friends</tagged>
         <frequency>1</frequency>
+        <lastModifiedTime>1541509287278</lastModifiedTime>
     </issues>
 
     <!-- Issue with same identity as Alice Pauline -->
@@ -12,5 +13,6 @@
         <statement>Alice Pauline</statement>
         <description>94351253</description>
         <frequency>1</frequency>
+        <lastModifiedTime>1541509287278</lastModifiedTime>
     </issues>
 </saveit>

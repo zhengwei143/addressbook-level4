@@ -15,6 +15,7 @@ import java.util.List;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
+import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.SaveIt;
@@ -26,15 +27,16 @@ import seedu.saveit.testutil.EditIssueDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_STATEMENT_JAVA = "Jave Issue";
+    public static final String VALID_STATEMENT_JAVA = "Java Issue";
     public static final String VALID_STATEMENT_C = "C Issue";
     public static final String VALID_DESCRIPTION_JAVA = "syntax error";
     public static final String VALID_DESCRIPTION_C = "94351253";
     public static final String VALID_SOLUTION_JAVA = "http://www.oracle.com RemarkJava";
     public static final String VALID_SOLUTION_C = "https://stackoverflow.com/ RemarkC";
-    public static final String VALID_SOLUTION_STACKOVERFLOW = "https://stackoverflow.com/ newSol";
+    public static final String VALID_SOLUTION_STACKOVERFLOW = "https://www.stackoverflow.com/ newSol";
     public static final String VALID_TAG_UI = "ui";
     public static final String VALID_TAG_SYNTAX = "syntax";
+    public static final String VALID_TAG_PYTHON = "python";
 
     public static final String STATEMENT_DESC_JAVA = " " + PREFIX_STATEMENT + VALID_STATEMENT_JAVA;
     public static final String STATEMENT_DESC_C = " " + PREFIX_STATEMENT + VALID_STATEMENT_C;
@@ -44,6 +46,8 @@ public class CommandTestUtil {
     public static final String SOLUTION_DESC_C = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_C;
     public static final String TAG_DESC_SYNTAX = " " + PREFIX_TAG + VALID_TAG_SYNTAX;
     public static final String TAG_DESC_UI = " " + PREFIX_TAG + VALID_TAG_UI;
+    public static final String TAG_DESC_PYTHON = " " + PREFIX_TAG + VALID_TAG_PYTHON;
+
     public static final String NEWTAG_DESC_SYNTAX = " " + PREFIX_NEW_TAG + VALID_TAG_SYNTAX;
     public static final String NEWTAG_DESC_UI = " " + PREFIX_NEW_TAG + VALID_TAG_UI;
 
@@ -80,10 +84,16 @@ public class CommandTestUtil {
         try {
             CommandResult result = command.execute(actualModel, actualCommandHistory);
             assertEquals(expectedMessage, result.feedbackToUser);
+
+
+
+
             assertEquals(expectedModel, actualModel);
             assertEquals(expectedCommandHistory, actualCommandHistory);
         } catch (CommandException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 
@@ -98,6 +108,7 @@ public class CommandTestUtil {
         // only do so by copying its components.
         SaveIt expectedSaveIt = new SaveIt(actualModel.getSaveIt());
         List<Issue> expectedFilteredList = new ArrayList<>(actualModel.getFilteredIssueList());
+        List<Issue> expectedFilteredAndSortedList = new ArrayList<>(actualModel.getFilteredAndSortedIssueList());
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
         try {
@@ -107,7 +118,10 @@ public class CommandTestUtil {
             assertEquals(expectedMessage, e.getMessage());
             assertEquals(expectedSaveIt, actualModel.getSaveIt());
             assertEquals(expectedFilteredList, actualModel.getFilteredIssueList());
+            assertEquals(expectedFilteredAndSortedList, actualModel.getFilteredAndSortedIssueList());
             assertEquals(expectedCommandHistory, actualCommandHistory);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 
@@ -119,7 +133,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredAndSortedIssueList().size());
 
         Issue issue = model.getFilteredAndSortedIssueList().get(targetIndex.getZeroBased());
-        final String[] splitName = issue.getStatement().issue.split("\\s+");
+        final String[] splitName = issue.getStatement().getValue().split("\\s+");
         model.updateFilteredIssueList(new IssueContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredAndSortedIssueList().size());

@@ -19,8 +19,7 @@ public class IssueContainsKeywordsPredicate implements Predicate<Issue> {
     @Override
     public boolean test(Issue issue) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.partialMatchIgnoreCase(issue.getStatement().issue, keyword)
-                    || StringUtil.partialMatchIgnoreCase(issue.getDescription().value, keyword));
+                .anyMatch(keyword -> StringUtil.partialMatch(issue.getStatement().getValue(), keyword));
     }
 
     @Override

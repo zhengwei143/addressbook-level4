@@ -1,6 +1,7 @@
 package systemtests;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -35,5 +36,23 @@ public class ModelHelper {
      */
     private static Predicate<Issue> getPredicateMatching(Issue other) {
         return issue -> issue.equals(other);
+    }
+
+    public static void setSortedList(Model model, List<Issue> toDisplay) {
+        Comparator<Issue> comparator = getComparatorMatching(toDisplay);
+        model.updateFilteredAndSortedIssueList(comparator);
+    }
+
+    public static void setSortedList(Model model, Issue... toDisplay) {
+        setSortedList(model, Arrays.asList(toDisplay));
+    }
+
+    private static Comparator<Issue> getComparatorMatching(List<Issue> issues) {
+        return new Comparator<Issue>() {
+            @Override
+            public int compare(Issue o1, Issue o2) {
+                return issues.indexOf(o1) - issues.indexOf(o2);
+            }
+        };
     }
 }

@@ -58,13 +58,13 @@ public class IssueTest {
         // same object -> returns true
         assertTrue(ALICE.equals(ALICE));
 
-        // different description, same issue statement -> returns true
+        // different description, same issue statement -> returns false
         Issue editedAlice = new IssueBuilder(ALICE).withDescription(VALID_DESCRIPTION_JAVA).build();
-        assertTrue(ALICE.equals(editedAlice));
+        assertFalse(ALICE.equals(editedAlice));
 
-        // different solutions, same issue statement -> returns true
+        // different solutions, same issue statement -> returns false
         editedAlice = new IssueBuilder(ALICE).withDescription(VALID_SOLUTION_C).build();
-        assertTrue(ALICE.equals(editedAlice));
+        assertFalse(ALICE.equals(editedAlice));
 
         // different tags, same issue statement -> returns true
         editedAlice = new IssueBuilder(ALICE).withTags(VALID_TAG_UI).build();

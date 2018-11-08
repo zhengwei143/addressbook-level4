@@ -56,11 +56,10 @@ public class EditCommandParser implements Parser<EditCommand> {
             return getIssueLevelEditCommand(argMultimap, index);
         } else if (arePrefixesNotPresent(args, PREFIX_STATEMENT, PREFIX_DESCRIPTION, PREFIX_TAG) && (
             arePrefixesPresent(args, PREFIX_SOLUTION_LINK, PREFIX_REMARK))) {
-
             return getSolutionLevelEditCommand(argMultimap, index);
+
         } else {
-            throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
     }
 

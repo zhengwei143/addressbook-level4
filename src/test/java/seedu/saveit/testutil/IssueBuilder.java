@@ -1,6 +1,8 @@
 package seedu.saveit.testutil;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,21 +20,26 @@ import seedu.saveit.model.util.SampleDataUtil;
  */
 public class IssueBuilder {
 
-    public static final String DEFAULT_STATEMENT = "Java Problem";
-    public static final String DEFAULT_DESCRIPTION = "new bug";
+    private static final String DEFAULT_STATEMENT = "Java Problem";
+    private static final String DEFAULT_DESCRIPTION = "new bug";
+    private static final String DUMMY_STATEMENT = "dummyStatement";
+    private static final String DUMMY_DESCRIPTION = "dummyDescription";
+
 
     private IssueStatement statement;
     private Description description;
     private List<Solution> solutions;
     private Set<Tag> tags;
     private IssueSearchFrequency frequency;
+    private Timestamp lastModifiedTime;
 
     public IssueBuilder() {
         statement = new IssueStatement(DEFAULT_STATEMENT);
-        description = new Description(DEFAULT_DESCRIPTION);;
+        description = new Description(DEFAULT_DESCRIPTION);
         solutions = new ArrayList<>();
         tags = new HashSet<>();
         frequency = new IssueSearchFrequency(TypicalIssues.COMMON_ISSUE_FREQUENCY);
+        lastModifiedTime = new Timestamp(new Date().getTime());
     }
 
     /**
@@ -44,6 +51,7 @@ public class IssueBuilder {
         solutions = new ArrayList<>(issueToCopy.getSolutions());
         tags = new HashSet<>(issueToCopy.getTags());
         frequency = issueToCopy.getFrequency();
+        lastModifiedTime = issueToCopy.getLastModifiedTime();
     }
 
     /**
@@ -51,6 +59,15 @@ public class IssueBuilder {
      */
     public IssueBuilder withStatement(String statement) {
         this.statement = new IssueStatement(statement);
+        return this;
+    }
+
+    /**
+     * Sets the {@code IssueStatement} of the {@code Issue} that we are building
+     * to dummy statement.
+     */
+    public IssueBuilder withDummyStatement() {
+        this.statement = new IssueStatement(DUMMY_STATEMENT);
         return this;
     }
 
@@ -79,10 +96,35 @@ public class IssueBuilder {
     }
 
     /**
+     * Sets the {@code Description} of the {@code Issue} that we are
+     * building to dummy description.
+     */
+    public IssueBuilder withDummyDescription() {
+        this.description = new Description(DUMMY_DESCRIPTION);
+        return this;
+    }
+
+    /**
      * Sets the {@code IssueSearchFrequency} of the {@code Issue} that we are building.
      */
     public IssueBuilder withFrequency(Integer frequency) {
         this.frequency = new IssueSearchFrequency(frequency);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Timestamp} of the {@code Issue} that we are building.
+     */
+    public IssueBuilder withLastModifiedTime(Long time) {
+        this.lastModifiedTime = new Timestamp(time);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Timestamp} of the {@code Issue} that we are building.
+     */
+    public IssueBuilder withLastModifiedTime() {
+        this.lastModifiedTime = new Timestamp(new Date().getTime());
         return this;
     }
 

@@ -154,10 +154,11 @@ image::AddingNewSolution.png[width="800"]
 * User can add solutions to the same issue continuously
 ====
 
+// tag::edit[]
 
 === Editing an issue : `(e)edit`
 
-Edits an existing issue or solution in the SaveIt App.
+To edit an existing issue or solution in the SaveIt App.
 
 Format: `edit INDEX [i/NEW_ISSUE] [d/NEW_DESCRIPTION] [t/TAG]...`
 
@@ -170,13 +171,19 @@ Format: `edit INDEX s/NEW_SOLUTION_LINK r/NEW_SOLUTION_REMARK`
 
 Examples: +
 ****
-* `edit 1 i/map function d/how to use map`
+* `edit 1 i/map function d/how to use map` +
+Edits the issue statement and description of the first issue to be `map function` and `how to use map` respectively.
+* `edit 3 i/git command t/git` +
+Edits the issue statement and tags of the third issue to be `git command` and `git` respectively.
+
 
 .Command Edit solution link to a solution
-
 image::edit-issue.png[width="790"]
-* `select 1` (select the first issue)
-* `edit 3 s/www.youtube.com` (the third solution link and remark will be updated)
+
+* `select 1` +
+select the first issue
+* `edit 3 s/https://github.com/joshnh/Git-Commands` +
+Edits the third solution link to be `https://github.com/joshnh/Git-Commands`
 
 .Command Edit solution link to a solution
 image::edit-solution.png[width="790"]
@@ -190,25 +197,70 @@ image::edit-solution.png[width="790"]
 * When editing tags, the existing tags of the statement will be removed i.e. adding of solutions is not cumulative.
 * You can remove all the tags by typing `t/` without specifying any tags after it.
 ====
+// tag::edit[]
 
-=== Adding a tag : `(at)addtag`
+// tag::refacotrTag[]
+=== Refactoring tag: `(rt)refactortag`
 
-Adds tags on existing issue in the SaveIt App.
+To rename or remove a specific tag for all entries with that tag.
 
-Format: `addTag INDEX t/TAG_1 [t/TAG_2] [t/TAG_3]...`
+Format: `refactortag t/OLD_TAG [n/NEW_TAG]`
 
-Examples: +
+[TIP]
+====
+* Replace the old tag with the new tag provided
+* Remove the old tag if the user does not provide a new tag
+====
+
+Examples:
 ****
-* `addtag 2 t/python t/java t/algorithm`
+* `refactorTag t/solved n/TIL` +
+Changes all entries tagged `solved` to be tagged `TIL`.
+* `refactorTag t/solved` +
+Removes the tag `solved` from all entries.
 
-.Command Add tag(s) to an issue
-image::add-tag.png[width="790"]
+
+.Refactor tag
+image::refactor-tag.png[width="790"]
 ****
 
 [NOTE]
 ====
-* If the tag already exits in the current issue, it will be ignored.
+* The old tag must be provided.
+* If the user provides multiple old tags or new tags, only take the one as an effect.
+* If the new tag exits in the issue already, it will only remove the old tag.
 ====
+// end::refactortag[]
+
+// tag::addTag[]
+
+=== Adding tag: `(at)addtag`
+
+To add tags for issue(s).
+
+Format: `addtag INDEX t/TAG1 [t/TAG2]...`
+
+Examples:
+****
+* `addtag 1 t/python` +
+Adds the `python` tag to the first issue in the issue list.
+* `addtag 2 t/python t/java` +
+Adds the `python` and `java` tag to the second issue in the issue list.
+* `addtag 2 3 5 t/python t/java` +
+Adds the `python` and `java` tag to the second, third and fifth issues in the issue list.
+* `addtag 2-5 t/python t/java` +
+Adds the `python` and `java` tag from second to fifth issues in the issue list.
+****
+
+[NOTE]
+====
+* If the tag exits in the issue already, it will not take any actions.
+* The INDEX refers to the index number shown in the issue list.
+* The index must be a positive integer (1, 2, 3...).
+* Range of the index can be used.
+* The lower limit of range must be smaller than or equal to the upper limit (2-4, 2-2).
+====
+// end::addtag[]
 
 === Retrieving a solution link: `(rv)retrieve`
 Retrieves the solution link to the system clipboard
@@ -432,6 +484,9 @@ Shows a list of all issues.
 // tag::sort[]
 === Sorting the list of issues: `(sr)sort`
 
+Sorts the list of issue according to a specified sort type.
+
+The list always follow this sort type until another sort command is executed.
 
 Format: `sort`
 [TIP]
@@ -454,7 +509,9 @@ Format: `sort freq`
 Format: `sort tag`
 [TIP]
 ====
-* Sort the issue list by their first tag in alphabetical order.
+* Sort the issue list by their tag in alphabetical order.
+If their first tags start with the same character, the following tags are compared until there is a difference or one tag set comes to the end.
+In the second case, the issue with fewer tags is give higher priority.
 * Sort the issues without tags at the end of the display issue list.
 ====
 
@@ -463,47 +520,43 @@ Examples:
 * sort
 * sort freq
 * sort tag
+
+.Sort Tag Command
+image::sort-command.png[width="790"]
 ****
 // end::sort[]
 
-=== Refactoring tag: `(rt)refactortag`
+// tag::setprimary[]
+=== Choosing one primary solution: `(sp)setprimary`
 
-To rename or remove a specific tag for all entries with that tag.
+Chooses one solution of the issue and make it the primary solution.
 
-Format: `refactortag t/OLD_TAG [n/NEW_TAG]`
+If there is an existing primary solution, `setprimary` will reset the primary solution to the latest one.
 
-[TIP]
-====
-* Replace the old tag with the new tag provided
-* Remove the old tag if the user does not provide a new tag
-====
+The primary solution is shown on the top of the solution list and is highlighted.
 
-Examples:
-****
-* refactorTag t/solved n/TIL (Changes all entries tagged [solved] to be tagged [TIL])
-* refactorTag t/solved (Removes the tag [solved] from all the entries)
-
-
-.Refactor tag
-image::refactor-tag.png[width="790"]
-****
-
-
-
-=== Adding tag: `(at)addtag`
-
-To add tags for a specific issue.
-
-Format: `addtag INDEX t/TAG1 [t/TAG2]...`
-
-Examples:
-****
-* addtag t/python t/java)
-****
+Format: `setprimary INDEX`
 
 [NOTE]
 ====
-* If the tag exits in the issue already, it will not take any actions.
+* The index refers to the index number on the solution list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* The index cannot be bigger than the number of issues.
+* This command can only be executed *after you select an issue or a solution*.
+====
+// end::setprimary[]
+
+=== Resetting the primary solution: `(rp)resetprimary`
+
+Resets the primary solution and make all solutions normal and not highlighted.
+
+Even if there is no primary solution, this command can still be executed.
+
+Format: `resetprimary`
+
+[NOTE]
+====
+* This command can only be executed *after you select an issue or a solution*.
 ====
 
 === Autosuggesting existing issue in find command
@@ -514,7 +567,7 @@ Example:
 .Autosuggesting of exsiting issues statements
 image::FindIssueAutoSuggestion.png[width="800"]
 
-=== Autosuggesting existing tags
+=== Autosuggesting existing tags in findByTag command
 
 To prevent the user from creating many similar tags / duplicates, whenever the user creates a record with a tag, or modifies a record’s tag, the application searches for similar tags in the system and prompts the user with a list of similar tags.
 
@@ -601,5 +654,7 @@ e.g. `refactorTag t/java n/C++`
 * *Exit* : `exit`
 * *List* : `list`
 * *Sort* : `sort TYPE`
+* *Set Primary* : `setprimary [INDEX]`
+* *Reset Primary* : `resetprimary`
 * *Refactor Tag* : `refactor [OLDTAG] [NEWTAG]` +
 e.g. `refactorTag java C++`

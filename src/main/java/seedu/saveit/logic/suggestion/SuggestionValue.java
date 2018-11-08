@@ -7,11 +7,19 @@ package seedu.saveit.logic.suggestion;
  */
 public class SuggestionValue {
 
-    public final String label;
-    public final String result;
+    private final String label;
+    private final String result;
 
     public SuggestionValue(String label, String result) {
         this.label = label;
         this.result = result;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public String getResult() {
+        return result;
     }
 }

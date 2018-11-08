@@ -75,18 +75,6 @@ public class IssueContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_descriptionContainsKeywords_returnsTrue() {
-        // Keywords match description
-        IssueContainsKeywordsPredicate predicate = new IssueContainsKeywordsPredicate(
-                Arrays.asList("12345", "Main", "Street"));
-        assertTrue(predicate.test(new IssueBuilder().withDescription("12345").build()));
-
-        // Keywords partially matches description
-        predicate = new IssueContainsKeywordsPredicate(Arrays.asList("null"));
-        assertTrue(predicate.test(new IssueBuilder().withDescription("has NULL pointer").build()));
-    }
-
-    @Test
     public void test_descriptionAndIssueStatementDoNotContainKeywords_returnsFalse() {
         // Keywords do not match description or issue statement
         IssueContainsKeywordsPredicate predicate = new IssueContainsKeywordsPredicate(

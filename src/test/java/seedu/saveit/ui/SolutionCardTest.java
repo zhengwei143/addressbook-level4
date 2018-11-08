@@ -59,7 +59,7 @@ public class SolutionCardTest extends GuiUnitTest {
         SolutionCardHandle solutionCardHandle = new SolutionCardHandle(solutionCard.getRoot());
 
         // verify id is displayed correctly
-        assertEquals("Solution " + Integer.toString(expectedId), solutionCardHandle.getId());
+        assertEquals(Integer.toString(expectedId) + ". Solution", solutionCardHandle.getId());
 
         // verify solution details are displayed correctly
         assertCardDisplaysSolution(expectedSolution, solutionCardHandle);

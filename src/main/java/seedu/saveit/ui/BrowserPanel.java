@@ -55,7 +55,7 @@ public class BrowserPanel extends UiPart<Region> {
 
 
     private void loadSolutionPage(Solution solution) {
-        loadPage(solution.solutionLink.getValue());
+        loadPage(solution.getLink().getValue());
     }
 
     public void loadPage(String url) {

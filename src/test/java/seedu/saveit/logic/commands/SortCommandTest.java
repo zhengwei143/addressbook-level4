@@ -1,7 +1,11 @@
 package seedu.saveit.logic.commands;
 
 import static junit.framework.TestCase.assertEquals;
+import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_SOLUTION;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.ALICE;
 import static seedu.saveit.testutil.TypicalIssues.BENSON;
 import static seedu.saveit.testutil.TypicalIssues.CARL;
@@ -19,6 +23,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import seedu.saveit.commons.core.Messages;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
@@ -28,6 +33,7 @@ import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueContainsKeywordsPredicate;
 import seedu.saveit.model.issue.IssueSort;
 import seedu.saveit.model.issue.IssueStatement;
+import seedu.saveit.testutil.DirectoryBuilder;
 
 public class SortCommandTest {
     private Model model;
@@ -47,7 +53,7 @@ public class SortCommandTest {
         expectedModel.updateFilteredAndSortedIssueList(issueSort.getComparator());
         SortCommand command = new SortCommand(issueSort);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(DANIEL, BENSON, ALICE, GEORGE, FIONA, ELLE, CARL),
+        assertEquals(Arrays.asList(DANIEL, BENSON, ALICE, CARL, ELLE, FIONA, GEORGE),
                 model.getFilteredAndSortedIssueList());
     }
 
@@ -68,7 +74,7 @@ public class SortCommandTest {
     public void execute_sortAfterUpdate_success() {
         IssueSort issueSort = prepareIssueSort(IssueSort.TAG_SORT);
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, issueSort.getSortType());
-        Issue issue = new Issue(new IssueStatement("new C++ problem"),
+        Issue issue = new Issue(new IssueStatement("new SOLUTION_C++ problem"),
                 new Description("only for test"), new ArrayList<>(), new HashSet<>());
 
         expectedModel.updateFilteredAndSortedIssueList(issueSort.getComparator());
@@ -76,8 +82,20 @@ public class SortCommandTest {
         model.addIssue(issue);
         SortCommand command = new SortCommand(issueSort);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(DANIEL, BENSON, ALICE, issue, GEORGE, FIONA, ELLE, CARL),
+        assertEquals(Arrays.asList(DANIEL, BENSON, ALICE, CARL, ELLE, FIONA, GEORGE, issue),
                 model.getFilteredAndSortedIssueList());
+    }
+
+    @Test
+    public void execute_notUnderRootLevel_failure() {
+        model.resetDirectory(new DirectoryBuilder().withIssueIndex(INDEX_FIRST_ISSUE).build());
+        IssueSort issueSort = prepareIssueSort(IssueSort.TAG_SORT);
+        SortCommand command = new SortCommand(issueSort);
+        assertCommandFailure(command, model, commandHistory, Messages.MESSAGE_WRONG_DIRECTORY);
+
+        model.resetDirectory(new DirectoryBuilder().withIssueIndex(INDEX_THIRD_ISSUE)
+                .withSolutionIndex(INDEX_FIRST_SOLUTION).build());
+        assertCommandFailure(command, model, commandHistory, Messages.MESSAGE_WRONG_DIRECTORY);
     }
 
     /**

@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.saveit.model.issue.Solution;
 
 /**
@@ -12,6 +13,7 @@ import seedu.saveit.model.issue.Solution;
 public class SolutionCard extends UiPart<Region> {
 
     private static final String FXML = "SolutionListCard.fxml";
+    private static final String STYLE_PRIMARY_SOLUTION = "list-primary-cell";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX. As a
@@ -26,6 +28,8 @@ public class SolutionCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private VBox solutionPane;
+    @FXML
     private Label link;
     @FXML
     private Label id;
@@ -35,11 +39,19 @@ public class SolutionCard extends UiPart<Region> {
     public SolutionCard(Solution solution, int displayedIndex) {
         super(FXML);
         this.solution = solution;
-        id.setText("Solution " + String.valueOf(displayedIndex));
+        id.setText(String.valueOf(displayedIndex) + ". Solution");
         link.setText(solution.getLink().getValue());
         link.setWrapText(true);
         remark.setText(solution.getRemark().toString());
         remark.setWrapText(true);
+        solutionPane = (VBox) link.getParent();
+
+        if (solution.isPrimarySolution()) {
+            id.setText(String.valueOf(displayedIndex) + ". Primary Solution");
+            solutionPane.getStyleClass().add(STYLE_PRIMARY_SOLUTION);
+        } else {
+            solutionPane.getStyleClass().remove(STYLE_PRIMARY_SOLUTION);
+        }
     }
 
 

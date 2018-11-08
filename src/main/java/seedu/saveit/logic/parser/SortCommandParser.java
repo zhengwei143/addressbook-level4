@@ -21,7 +21,7 @@ public class SortCommandParser implements Parser<SortCommand> {
      */
     public SortCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        Set<String> sortTypes = new HashSet<String>();
+        Set<String> sortTypes = new HashSet<>();
         sortTypes.add(IssueSort.EMPTY_SORT);
         sortTypes.add(IssueSort.CHRONOLOGICAL_SORT);
         sortTypes.add(IssueSort.FREQUENCY_SORT);

@@ -55,7 +55,7 @@ public class SuggestionLogicManager implements SuggestionLogic {
     public SuggestionResult evaluate(String userInput) {
         Suggestion suggestion = parseUserInput(userInput);
         if (suggestion == null) {
-            return new SuggestionResult(new LinkedList<>(), "", 0, 0);
+            return new SuggestionResult(new LinkedList<>(), "", "", 0, 0);
         }
         return suggestion.evaluate();
     }
@@ -74,7 +74,7 @@ public class SuggestionLogicManager implements SuggestionLogic {
         Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput);
 
         if (!matcher.matches()) {
-            // TODO: Handle invalid userInput(s)
+            //let SaveItParser handle the invalid command format
             return null;
         }
 

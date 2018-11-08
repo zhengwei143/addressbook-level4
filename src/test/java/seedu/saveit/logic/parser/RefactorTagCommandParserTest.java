@@ -35,6 +35,13 @@ public class RefactorTagCommandParserTest {
 
         // different order
         assertParseSuccess(parser, TAG_DESC_SYNTAX + TAG_DESC_UI, expectedRefactorTagCommand);
+
+        // multiple old tag
+        assertParseSuccess(parser, "t/python t/TIL t/solved", expectedRefactorTagCommand);
+
+        // multiple old tags and multiple new tags
+        assertParseSuccess(parser, "t/python t/TIL t/solved n/python n/java", expectedRefactorTagCommand);
+
     }
 
     @Test
@@ -66,6 +73,11 @@ public class RefactorTagCommandParserTest {
         // only has new tag, but not original tag
         assertParseFailure(parser, NEWTAG_DESC_UI,
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+
+        // without prefix
+        assertParseFailure(parser, "python",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+
 
     }
 

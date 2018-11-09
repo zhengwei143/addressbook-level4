@@ -123,6 +123,9 @@ public class IssueBuilder {
         return this;
     }
 
+    /**
+     * Create new Issue.
+     */
     public Issue build() {
         return new Issue(statement, description, solutions, tags, frequency,
                 new Timestamp(new Date().getTime()), lastModifiedTime);

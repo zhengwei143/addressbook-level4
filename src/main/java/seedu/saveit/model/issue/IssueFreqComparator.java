@@ -9,7 +9,12 @@ import seedu.saveit.model.Issue;
  */
 public class IssueFreqComparator implements Comparator<Issue> {
     public int compare(Issue a, Issue b) {
-        return b.getFrequency().compare(a.getFrequency());
+        int freqDiff = b.getFrequency().compare(a.getFrequency());
+        if (freqDiff == 0) {
+            return a.getCreatedTime().compareTo(b.getCreatedTime());
+        } else {
+            return freqDiff;
+        }
     }
 
     @Override

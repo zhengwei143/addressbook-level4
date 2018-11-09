@@ -18,7 +18,7 @@ import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.events.model.SaveItChangedEvent;
-import seedu.saveit.model.issue.IssueSort;
+import seedu.saveit.model.issue.SortType;
 import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;
 
@@ -160,7 +160,7 @@ public class ModelManager extends ComponentManager implements Model {
 
 
     @Override
-    public void sortIssues(IssueSort sortType) {
+    public void sortIssues(SortType sortType) {
         updateFilteredAndSortedIssueList(sortType.getComparator());
         versionedSaveIt.setCurrentSortType(sortType.getComparator());
     }
@@ -186,13 +186,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredIssueList(Predicate<Issue> predicate) {
         requireNonNull(predicate);
         filteredIssues.setPredicate(predicate);
-        updateFilteredAndSortedIssueList(getCurrentSortType());
     }
 
     //=========== Sorted Issue List Accessors =============================================================
     @Override
     public void updateFilteredAndSortedIssueList(Comparator<Issue> comparator) {
-        filteredAndSortedIssues.setComparator(null);
         filteredAndSortedIssues.setComparator(comparator);
     }
 

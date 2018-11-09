@@ -34,7 +34,13 @@ public class IssueTagComparator implements Comparator<Issue> {
                 return tagA.compare(tagB);
             }
         }
-        return tagSetA.size() - tagSetB.size();
+        int sizeDiff = tagSetA.size() - tagSetB.size();
+
+        if (sizeDiff == 0) {
+            return a.getCreatedTime().compareTo(b.getCreatedTime());
+        } else {
+            return sizeDiff;
+        }
     }
 
     @Override

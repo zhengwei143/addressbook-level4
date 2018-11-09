@@ -9,7 +9,7 @@ import seedu.saveit.commons.events.model.SortTypeChangedEvent;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.model.Model;
-import seedu.saveit.model.issue.IssueSort;
+import seedu.saveit.model.issue.SortType;
 
 /**
  * Lists all persons in the saveIt to the user.
@@ -22,13 +22,13 @@ public class SortCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort all issues with index numbers based on "
             + "the provided sortType: freq (search frequency), chro (chronological), tag (tag names).\n"
             + "Parameters: KEYWORD\n"
-            + "Example: " + COMMAND_WORD + " " + IssueSort.TAG_SORT;
+            + "Example: " + COMMAND_WORD + " " + SortType.TAG_SORT;
 
     public static final String MESSAGE_SUCCESS = "Sorted issues by %s.";
 
-    private final IssueSort sortType;
+    private final SortType sortType;
 
-    public SortCommand(IssueSort sortType) {
+    public SortCommand(SortType sortType) {
         this.sortType = sortType;
     }
 

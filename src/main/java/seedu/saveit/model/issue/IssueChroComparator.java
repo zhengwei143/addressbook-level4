@@ -9,7 +9,12 @@ import seedu.saveit.model.Issue;
  */
 public class IssueChroComparator implements Comparator<Issue> {
     public int compare(Issue a, Issue b) {
-        return b.getLastModifiedTime().compareTo(a.getLastModifiedTime());
+        int timeDiff = b.getLastModifiedTime().compareTo(a.getLastModifiedTime());
+        if (timeDiff == 0) {
+            return a.getCreatedTime().compareTo(b.getCreatedTime());
+        } else {
+            return timeDiff;
+        }
     }
 
     @Override

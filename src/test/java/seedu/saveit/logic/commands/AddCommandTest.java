@@ -36,7 +36,7 @@ import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ReadOnlySaveIt;
 import seedu.saveit.model.SaveIt;
-import seedu.saveit.model.issue.IssueSort;
+import seedu.saveit.model.issue.SortType;
 import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;
 import seedu.saveit.testutil.DirectoryBuilder;
@@ -345,7 +345,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void sortIssues(IssueSort sortType) {
+        public void sortIssues(SortType sortType) {
             throw new AssertionError("This method should not be called.");
         }
 

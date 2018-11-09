@@ -11,7 +11,9 @@ import seedu.saveit.model.Issue;
  */
 public class IssueTagComparator implements Comparator<Issue> {
     /**
-     * Compare Issue a and b with their first tag in the tag set. Tag is compared based on String tagName.
+     * Compare Issue a and b with their tags in the tag set. Tag is compared based on String tagName.
+     * Compare tags one by one until one tag set reach to the end. In that case, compare tag set size.
+     * If tag set size are the same as well, sort by created time.
      */
     public int compare(Issue a, Issue b) {
         Set<Tag> tagSetB = b.getTags();

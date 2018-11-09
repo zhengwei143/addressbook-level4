@@ -8,6 +8,10 @@ import seedu.saveit.model.Issue;
  * Comparator used to sort the Issues in chronological order
  */
 public class IssueChroComparator implements Comparator<Issue> {
+    /**
+     * Compare Issue a and b with their lastModifiedTime.
+     * If lastModifiedTime are the same, sort by created time.
+     */
     public int compare(Issue a, Issue b) {
         int timeDiff = b.getLastModifiedTime().compareTo(a.getLastModifiedTime());
         if (timeDiff == 0) {

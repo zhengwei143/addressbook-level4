@@ -18,8 +18,8 @@ import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.events.model.SaveItChangedEvent;
-import seedu.saveit.model.issue.SortType;
 import seedu.saveit.model.issue.Solution;
+import seedu.saveit.model.issue.SortType;
 import seedu.saveit.model.issue.Tag;
 
 /**

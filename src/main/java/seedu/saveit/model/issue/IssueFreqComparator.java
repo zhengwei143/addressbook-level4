@@ -8,6 +8,10 @@ import seedu.saveit.model.Issue;
  * Comparator used to sort the Issues in search frequency order
  */
 public class IssueFreqComparator implements Comparator<Issue> {
+    /**
+     * Compare Issue a and b with their searchFrequency.
+     * If searchFrequency are the same, sort by created time.
+     */
     public int compare(Issue a, Issue b) {
         int freqDiff = b.getFrequency().compare(a.getFrequency());
         if (freqDiff == 0) {

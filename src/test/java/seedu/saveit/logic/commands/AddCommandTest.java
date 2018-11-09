@@ -505,7 +505,7 @@ public class AddCommandTest {
             List<Solution> solutionsToUpdate = new ArrayList<>(issueToEdit.getSolutions());
             solutionsToUpdate.add(solution);
             Issue updateIssue = new Issue(issueToEdit.getStatement(), issueToEdit.getDescription(),
-                    solutionsToUpdate, issueToEdit.getTags(), issueToEdit.getFrequency());
+                    solutionsToUpdate, issueToEdit.getTags(), issueToEdit.getFrequency(), issueToEdit.getCreatedTime());
             issuesAdded.set(index.getZeroBased(), updateIssue);
         }
 

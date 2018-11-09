@@ -50,5 +50,5 @@ public class IssueNameSuggestion implements Suggestion {
                 ? endPrefix.getPosition() : endPrefix.getPosition() - 1;
 
         return new SuggestionResult(values, STATEMENT_SUCCESS, argument, startPosition, endPosition);
-}
+    }
 }

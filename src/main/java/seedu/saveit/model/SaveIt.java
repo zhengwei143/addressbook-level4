@@ -134,7 +134,7 @@ public class SaveIt implements ReadOnlySaveIt {
         solutionsToUpdate.add(solution);
 
         Issue updateIssue = new Issue(issueToEdit.getStatement(), issueToEdit.getDescription(),
-                solutionsToUpdate, issueToEdit.getTags(), issueToEdit.getFrequency());
+                solutionsToUpdate, issueToEdit.getTags(), issueToEdit.getFrequency(), issueToEdit.getCreatedTime());
         updateIssue(issueToEdit, updateIssue);
     }
 
@@ -212,7 +212,7 @@ public class SaveIt implements ReadOnlySaveIt {
 
     private void updateTags(Issue issueToUpdate, Set<Tag> tagsToUpdate) {
         Issue updateIssue = new Issue(issueToUpdate.getStatement(), issueToUpdate.getDescription(),
-            issueToUpdate.getSolutions(), tagsToUpdate, issueToUpdate.getFrequency());
+            issueToUpdate.getSolutions(), tagsToUpdate, issueToUpdate.getFrequency(), issueToUpdate.getCreatedTime());
         updateIssue(issueToUpdate, updateIssue);
     }
 

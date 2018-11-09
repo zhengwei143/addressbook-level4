@@ -132,7 +132,8 @@ public class EditCommand extends Command {
         Description updatedDescription = editIssueDescriptor.getDescription().orElse(issueToEdit.getDescription());
         Set<Tag> updatedTags = editIssueDescriptor.getTags().orElse(issueToEdit.getTags());
 
-        return new Issue(updatedName, updatedDescription, updatedSolutions, updatedTags);
+        return new Issue(updatedName, updatedDescription, updatedSolutions, updatedTags,
+                issueToEdit.getFrequency(), issueToEdit.getCreatedTime());
     }
 
     /**

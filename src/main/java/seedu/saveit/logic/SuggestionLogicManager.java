@@ -123,7 +123,7 @@ public class SuggestionLogicManager implements SuggestionLogic {
      * Determine which {@code Suggestion} to return given the arguments and caret position
      * for the {@code AddCommand}
      */
-    public Suggestion parseAddCommandSuggestion(
+    private Suggestion parseAddCommandSuggestion(
             ArgumentMultimap argMultiMap, Prefix startPrefix, Prefix endPrefix) {
         Optional<String> posArgs = argMultiMap.getValueOrdered(startPrefix);
 
@@ -141,7 +141,7 @@ public class SuggestionLogicManager implements SuggestionLogic {
      * Determine which {@code Suggestion} to return given the arguments and caret position
      * for the {@code EditCommand}
      */
-    public Suggestion parseEditCommandSuggestion(
+    private Suggestion parseEditCommandSuggestion(
             ArgumentMultimap argMultiMap, Prefix startPrefix, Prefix endPrefix) {
 
         Index index;
@@ -172,7 +172,7 @@ public class SuggestionLogicManager implements SuggestionLogic {
      * Determine which {@code Suggestion} to return given the arguments and caret position
      * for the {@code FindCommand}
      */
-    public Suggestion parseFindCommandSuggestion(
+    private Suggestion parseFindCommandSuggestion(
             ArgumentMultimap argMultiMap, Prefix startPrefix, Prefix endPrefix) {
 
         Optional<String> posArgs = argMultiMap.getValueOrdered(startPrefix);
@@ -191,7 +191,7 @@ public class SuggestionLogicManager implements SuggestionLogic {
      * Determine which {@code Suggestion} to return given the arguments and caret position
      * for the {@code FindByTagCommand}
      */
-    public Suggestion parseFindByTagCommandSuggestion(
+    private Suggestion parseFindByTagCommandSuggestion(
             ArgumentMultimap argMultiMap, Prefix startPrefix, Prefix endPrefix) {
 
         Optional<String> posArgs = argMultiMap.getValueOrdered(startPrefix);
@@ -211,7 +211,7 @@ public class SuggestionLogicManager implements SuggestionLogic {
     /**
      * Generates a {@code CopyExistingSuggestion} if the arguments are valid
      */
-    public Suggestion handleCopyExistingSuggestion(
+    private Suggestion handleCopyExistingSuggestion(
             Optional<String> posArgs, Index index, Prefix startPrefix, Prefix endPrefix) {
         // Only show Suggestion box if the string is empty
         if (posArgs.isPresent() && posArgs.get().length() == 0) {
@@ -223,7 +223,7 @@ public class SuggestionLogicManager implements SuggestionLogic {
     /**
      * Generates a {@code TagNameSuggestion} if the arguments are valid
      */
-    public Suggestion handleTagNameSuggestion(
+    private Suggestion handleTagNameSuggestion(
             Optional<String> posArgs, Prefix startPrefix, Prefix endPrefix) {
         // Only show Suggestion box if the string is not empty
         if (posArgs.isPresent() && posArgs.get().length() > 0) {
@@ -235,7 +235,7 @@ public class SuggestionLogicManager implements SuggestionLogic {
     /**
      * Generates a {@code TagNameSuggestion} if the arguments are valid
      */
-    public Suggestion handleIssueNameSuggestion(
+    private Suggestion handleIssueNameSuggestion(
             Optional<String> posArgs, Prefix startPrefix, Prefix endPrefix) {
         // Only show Suggestion box if the string is not empty
         if (posArgs.isPresent() && posArgs.get().length() > 0) {

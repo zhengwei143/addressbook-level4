@@ -40,16 +40,14 @@ public class AddCommandParserTest {
 
     @Test
     @Ignore
-    public void parse_allFieldsPresent_success() {
+    public void parseIssue_allFieldsPresent_success() {
         Issue expectedIssue = new IssueBuilder(BOB).withTags(VALID_TAG_UI).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + STATEMENT_DESC_C + DESCRIPTION_DESC_C
-                + SOLUTION_DESC_C + CommandTestUtil.TAG_DESC_UI, new AddCommand(expectedIssue));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + STATEMENT_DESC_C + DESCRIPTION_DESC_C + CommandTestUtil.TAG_DESC_UI, new AddCommand(expectedIssue));
 
         // multiple names - last name accepted
-        assertParseSuccess(parser, STATEMENT_DESC_JAVA + STATEMENT_DESC_C + DESCRIPTION_DESC_C
-                + SOLUTION_DESC_C + CommandTestUtil.TAG_DESC_UI, new AddCommand(expectedIssue));
+        assertParseSuccess(parser, STATEMENT_DESC_JAVA + STATEMENT_DESC_C + DESCRIPTION_DESC_C + CommandTestUtil.TAG_DESC_UI, new AddCommand(expectedIssue));
 
         // multiple descriptionss - last descriptions accepted
         assertParseSuccess(parser, STATEMENT_DESC_C + DESCRIPTION_DESC_JAVA + DESCRIPTION_DESC_C

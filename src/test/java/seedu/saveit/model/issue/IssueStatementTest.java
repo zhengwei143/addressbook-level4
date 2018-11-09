@@ -28,12 +28,12 @@ public class IssueStatementTest {
         // invalid name
         assertFalse(IssueStatement.isValidIssueStatement("")); // empty string
         assertFalse(IssueStatement.isValidIssueStatement(" ")); // spaces only
+        assertFalse(IssueStatement.isValidIssueStatement("David Roger Jackson Ray Jr 2nd")); // long names
 
         // valid name
         assertTrue(IssueStatement.isValidIssueStatement("peter jack")); // alphabets only
         assertTrue(IssueStatement.isValidIssueStatement("12345")); // numbers only
         assertTrue(IssueStatement.isValidIssueStatement("peter the 2nd")); // alphanumeric characters
         assertTrue(IssueStatement.isValidIssueStatement("Capital Tan")); // with capital letters
-        assertTrue(IssueStatement.isValidIssueStatement("David Roger Jackson Ray Jr 2nd")); // long names
     }
 }

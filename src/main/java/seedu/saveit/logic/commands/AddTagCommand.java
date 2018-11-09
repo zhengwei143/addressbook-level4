@@ -3,8 +3,8 @@ package seedu.saveit.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -66,10 +66,10 @@ public class AddTagCommand extends Command {
             throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
         }
 
-        int numOfIssues = model.getFilteredAndSortedIssueList().size();
-        checkHigherBound(numOfIssues, index);
-        Set<Issue> issueToEdit = new HashSet<>();
         try {
+            int numOfIssues = model.getFilteredAndSortedIssueList().size();
+            checkHigherBound(numOfIssues, index);
+            Set<Issue> issueToEdit = new LinkedHashSet<>();
             List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
             index.forEach(issueIndex -> {
                 issueToEdit.add(lastShownList.get(issueIndex.getZeroBased()));
@@ -80,10 +80,13 @@ public class AddTagCommand extends Command {
             model.commitSaveIt();
         } catch (DuplicateIssueException die) {
             throw new CommandException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         } catch (IssueNotFoundException infe) {
             throw new CommandException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_DUPLICATE_TAG));
+        } catch (ParseException pe) {
+            throw new CommandException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_ADD_TAG_HIGHER_BOUND_FAILURE));
         }
 
         return new CommandResult(MESSAGE_ADD_TAG_SUCCESS);

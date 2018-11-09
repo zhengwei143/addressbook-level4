@@ -61,8 +61,8 @@ public class Directory {
         if (issue != 0) {
             result.append("Issue ");
             result.append(issue);
-            result.append("/");
             if (solution != 0) {
+                result.append("/");
                 result.append("Solution ");
                 result.append(solution);
             }

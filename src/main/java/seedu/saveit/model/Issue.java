@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -35,7 +35,7 @@ public class Issue {
     private final Description description;
     private final IssueSearchFrequency frequency;
     private final Timestamp lastModifiedTime;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Tag> tags = new LinkedHashSet<>();
 
     /**
      * Every field must be present and not null.

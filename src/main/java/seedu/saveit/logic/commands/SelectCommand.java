@@ -73,8 +73,8 @@ public class SelectCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_SOLUTION_DISPLAYED_INDEX + "\n" + MESSAGE_USAGE);
         }
         model.resetDirectory(new Directory(model.getCurrentDirectory().getIssue(), targetIndex.getOneBased()));
-        EventsCenter.getInstance().post(
-                new DirectoryChangedEvent(model.getCurrentDirectory()));
+        //EventsCenter.getInstance().post(
+        //        new DirectoryChangedEvent(model.getCurrentDirectory()));
         EventsCenter.getInstance().post(new JumpToSolutionListRequestEvent(targetIndex));
         return new CommandResult(
                 String.format(MESSAGE_SELECT_ISSUE_SUCCESS, model.getCurrentDirectory().getIssue())

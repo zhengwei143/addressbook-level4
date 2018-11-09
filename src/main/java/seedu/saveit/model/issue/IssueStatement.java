@@ -11,7 +11,10 @@ import seedu.saveit.commons.util.AppUtil;
 public class IssueStatement {
 
     public static final String MESSAGE_ISSUE_STATEMENT_CONSTRAINTS =
-            "Issue statement can take any values, but it should not be blank.";
+            "Issue statement can take any values, but it should not be blank.\n"
+                + "and should not be more than 25 characters.";
+
+    public static final int lengthLimit = 25;
 
     /*
      * The first character of the saveit must not be a whitespace,
@@ -43,7 +46,7 @@ public class IssueStatement {
      * Returns true if a given string is a valid issuestatement.
      */
     public static boolean isValidIssueStatement(String test) {
-        return test.matches(ISSUE_STATEMENT_VALIDATION_REGEX);
+        return test.matches(ISSUE_STATEMENT_VALIDATION_REGEX) && test.length() <= lengthLimit;
     }
 
 

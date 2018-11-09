@@ -2,8 +2,6 @@ package seedu.saveit.ui;
 
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,7 +11,6 @@ import javafx.scene.layout.Region;
 import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.events.ui.ChangeDirectoryRequestEvent;
-import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.model.Issue;
 
 /**
@@ -58,12 +55,6 @@ public class IssueListPanel extends UiPart<Region> {
             issueListView.scrollTo(index);
             issueListView.getSelectionModel().clearAndSelect(index);
         });
-    }
-
-    @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        scrollTo(event.targetIndex);
     }
 
     /**

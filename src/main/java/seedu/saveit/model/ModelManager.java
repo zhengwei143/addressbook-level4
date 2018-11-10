@@ -186,7 +186,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredIssueList(Predicate<Issue> predicate) {
         requireNonNull(predicate);
         filteredIssues.setPredicate(predicate);
-        updateFilteredAndSortedIssueList(getCurrentSortType());
     }
 
     //=========== Sorted Issue List Accessors =============================================================

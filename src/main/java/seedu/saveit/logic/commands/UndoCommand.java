@@ -2,8 +2,6 @@ package seedu.saveit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.saveit.commons.core.EventsCenter;
-import seedu.saveit.commons.events.model.SortTypeChangedEvent;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.model.Model;

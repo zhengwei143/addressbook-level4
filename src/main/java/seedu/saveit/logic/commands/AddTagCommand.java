@@ -8,9 +8,11 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import seedu.saveit.commons.core.EventsCenter;
 import seedu.saveit.commons.core.Messages;
 import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
+import seedu.saveit.commons.events.model.AddTagEvent;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.logic.parser.exceptions.ParseException;
@@ -89,6 +91,7 @@ public class AddTagCommand extends Command {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_ADD_TAG_HIGHER_BOUND_FAILURE));
         }
 
+        EventsCenter.getInstance().post(new AddTagEvent());
         return new CommandResult(MESSAGE_ADD_TAG_SUCCESS);
     }
 

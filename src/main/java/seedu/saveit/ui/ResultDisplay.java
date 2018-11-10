@@ -11,7 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
-import org.controlsfx.control.StatusBar;
+
 import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.events.model.DirectoryChangedEvent;
 import seedu.saveit.commons.events.model.SortTypeChangedEvent;

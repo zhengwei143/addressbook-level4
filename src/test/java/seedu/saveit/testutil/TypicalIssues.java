@@ -1,5 +1,7 @@
 package seedu.saveit.testutil;
 
+import static seedu.saveit.logic.commands.CommandTestUtil.DUMMY_DESCRIPTION;
+import static seedu.saveit.logic.commands.CommandTestUtil.DUMMY_STATEMENT;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
@@ -81,6 +83,13 @@ public class TypicalIssues {
             .build();
     public static final Issue BOB = new IssueBuilder().withStatement(VALID_STATEMENT_C)
             .withDescription(VALID_DESCRIPTION_C)
+            .withSolutions(SOLUTION_C)
+            .withTags(VALID_TAG_UI)
+            .withFrequency(COMMON_ISSUE_FREQUENCY)
+            .build();
+
+    public static final Issue DUMMY_ISSUE = new IssueBuilder().withStatement(DUMMY_STATEMENT)
+            .withDescription(DUMMY_DESCRIPTION)
             .withSolutions(SOLUTION_C)
             .withTags(VALID_TAG_UI)
             .withFrequency(COMMON_ISSUE_FREQUENCY)

@@ -30,10 +30,12 @@ import seedu.saveit.testutil.EditIssueDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    public static final String DUMMY_STATEMENT = AddCommand.DUMMY_STATEMENT;
     public static final String VALID_STATEMENT_JAVA = "Java Issue";
     public static final String VALID_STATEMENT_C = "SOLUTION_C Issue";
     public static final String VALID_DESCRIPTION_JAVA = "syntax error";
     public static final String VALID_DESCRIPTION_C = "94351253";
+    public static final String DUMMY_DESCRIPTION = AddCommand.DUMMY_DESCRIPTION;
     public static final String VALID_SOLUTION_LINK_JAVA = "http://www.oracle.com";
     public static final String VALID_REMARK_JAVA = "RemarkJava";
     public static final String VALID_SOLUTION_LINK_C = "https://stackoverflow.com/";
@@ -48,6 +50,10 @@ public class CommandTestUtil {
     public static final String STATEMENT_DESC_C = " " + PREFIX_STATEMENT + VALID_STATEMENT_C;
     public static final String DESCRIPTION_DESC_JAVA = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_JAVA;
     public static final String DESCRIPTION_DESC_C = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_C;
+    public static final String REMARK_DES_JAVA = " " + PREFIX_REMARK + VALID_REMARK_JAVA;
+    public static final String REMARK_DES_STACKOVERFLOW = " " + PREFIX_REMARK + VALID_REMARK_STACKOVERFLOW;
+    public static final String SOLUTION_LINK_DES_JAVA = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_LINK_JAVA;
+    public static final String SOLUTION_LINK_DES_C = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_LINK_C;
     public static final String SOLUTION_DESC_JAVA = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_LINK_JAVA
             + " " + PREFIX_REMARK + VALID_REMARK_JAVA;
     public static final String SOLUTION_DESC_C = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_LINK_C

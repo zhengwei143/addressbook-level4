@@ -31,8 +31,8 @@ import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.UserPrefs;
 import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueContainsKeywordsPredicate;
-import seedu.saveit.model.issue.SortType;
 import seedu.saveit.model.issue.IssueStatement;
+import seedu.saveit.model.issue.SortType;
 import seedu.saveit.testutil.DirectoryBuilder;
 
 public class SortCommandTest {

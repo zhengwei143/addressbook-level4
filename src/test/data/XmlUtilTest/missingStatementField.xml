@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- Issue with an invalid description field -->
+<!-- Issue with missing statement field -->
 <issue>
-    <statement>Sort Command doesn't work</statement>
-    <description> </description>
+    <description>When input sort, the list doesn't change properly</description>
     <solutions>
         <solutionLink>https://docs.oracle.com/javase/8/javafx/api/javafx/collections/transformation/SortedList.html</solutionLink>
         <remark>Use UI related class SortedList to update immediately</remark>>

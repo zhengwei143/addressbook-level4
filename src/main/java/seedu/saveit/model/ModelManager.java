@@ -18,8 +18,8 @@ import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.commons.events.model.SaveItChangedEvent;
-import seedu.saveit.model.issue.IssueSort;
 import seedu.saveit.model.issue.Solution;
+import seedu.saveit.model.issue.SortType;
 import seedu.saveit.model.issue.Tag;
 
 /**
@@ -43,7 +43,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedSaveIt = new VersionedSaveIt(saveIt);
         filteredIssues = new FilteredList<>(versionedSaveIt.getIssueList());
-        filteredAndSortedIssues = new SortedList<>(getFilteredIssueList());
+        filteredAndSortedIssues = new SortedList<>(filteredIssues);
     }
 
     public ModelManager() {
@@ -65,6 +65,11 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public Directory getCurrentDirectory() {
         return versionedSaveIt.getCurrentDirectory();
+    }
+
+    @Override
+    public Comparator<Issue> getCurrentSortType() {
+        return versionedSaveIt.getCurrentSortType();
     }
 
     @Override
@@ -96,8 +101,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void addSolution(Index index, Solution solution) {
-        versionedSaveIt.addSolution(index, solution);
+    public void addSolution(Issue targetIssue, Solution solution) {
+        versionedSaveIt.addSolution(targetIssue, solution);
         indicateSaveItChanged();
     }
 
@@ -155,21 +160,12 @@ public class ModelManager extends ComponentManager implements Model {
 
 
     @Override
-    public void sortIssues(IssueSort sortType) {
+    public void sortIssues(SortType sortType) {
         updateFilteredAndSortedIssueList(sortType.getComparator());
+        versionedSaveIt.setCurrentSortType(sortType.getComparator());
     }
 
     //=========== Filtered Issue List Accessors =============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Issue} backed by the internal list of
-     * {@code versionedSaveIt}
-     */
-    @Override
-    public ObservableList<Issue> getFilteredIssueList() {
-        return FXCollections.unmodifiableObservableList(filteredIssues);
-    }
-
     /**
      * Returns an unmodifiable view of the list of {@code Solution} backed by the internal list of
      * {@code Issue}

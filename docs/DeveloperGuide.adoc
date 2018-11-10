@@ -279,7 +279,7 @@ The add command can add both issue and solution to SaveIt. It includes two level
 Add issue happens on the issue level
 
 ===== Current implementation
-We use `SaveItParser` to call `AddCommandParser` so as to pass the entered issue, then `AddCommand` is invoked which will ask model to add the issue to the `Model` component.
+The `SaveItParser` is used to call `AddCommandParser` so as to pass the entered issue. In order to build a new `Issue` object, a dummy solution link and dummy solution remark will be used. After that, `AddCommand` is invoked which will ask model to add the issue to the `Model` component.
 In order to store the new issue inside the SaveIt, `VersionedSaveIt` will be invoked and it will add issue to the `UniqueIssueList`.
 
 The following sequence diagram illustrates how the add new issue feature functions:
@@ -293,7 +293,7 @@ This diagram gives a clear procedure that how the user input is passed step by s
 Add solution happens on the solution level
 
 ===== Current implementation
-We use `SaveItParser` to call `AddCommandParser` just like how add issue features functions as above mentioned. However, this time, the solution link and solution remark is provided to `AddCommand` instead. During execution, `updateIssue` and `updateFilteredIssueList` will be called respectively in `ModelManager` as a way to replace the original issue with the new edition of issue which has the new solution entered.
+The `SaveItParser` is used to call `AddCommandParser` just like how add issue features functions as above mentioned. However, this time, the new solution link and solution remark is provided to `AddCommand` instead. In order to build a new `Issue` object, dummy issue statement and dummy issue description will be used. During execution, `addSolution` method, which was newly added, in Model component will be invoked, to add the solution. The detailed implementation of `addSolution` in model component is quite simple. Since the list stored in application is immutable, each time, a new issue will be created with original statement and description, then the new solution will be added to that particular issue. Finally, `updateIssue` method will be called to replace the issue in `versionedSaveIt`.
 
 The following sequence diagram illustrates how the add solution feature functions
 
@@ -718,6 +718,37 @@ image::add-tag-sequence-diagram.jpeg[width="800"]
 ** Cons: It will increase coupling between IndexRange class and Index class
 // end::addTag[]
 
+=== Suggestion for find command Feature
+The suggestion for find command allows user to quickly find the desired issue in SaveIt by showing a drop-down window when related keyword is matched.
+
+==== Current Implementation
+
+The figure below shows a basic relationship between each class.
+The `SuggestionLogicManager` implements `SuggestionLogic` interface and overrides the `evaluate` method. Similarly, `IssueNameSuggestion`, `TagNameSuggestion` and `CopyExistingSuggestion` implement `Suggestion` interface and override `evaluate` method.
+
+.Suggestion Diagram
+image::SuggestionClassUML.png[width="400"]
+
+Since the suggestion component has to retrieve the data from model component to give suggestion according user's entered keywords, it is considered as a part of `Logic` component. By listening to the text field which locates in `CommandBox`, `SuggestionLogicManager` will be able to decide which type of suggestion should be given through parsing the prefix from `ArgumentTokenizer`. Once the `parseFindCommandSuggestion` is triggered, a new `IssueNameSuggestion` class will be created. By calling `getCurrentIssueStatementSet`, `IssueNameSuggestion` is able to match the user input and thus gives the relevant issue statement as a suggestion. The returned `SuggestionResult` will be passed to the `displaySuggestion` method in `CommandBox`. One thing to be noticed, the drop-down window will be hidden once a user input is matched any given suggestion value.
+
+.IssueNameSuggestion Sequence
+image::IssueNameSuggestionDiagram.png[width="800"]
+
+==== Design Consideration
+===== Aspect: How to distinguish value of each field and recognize the order of each value
+Since the original tokenizer hashes prefix, there is no way to distinguish the order of each value after prefix. For instance, if several prefixes of tag appear, it is impossible to distinguish each tag using tokenizer.
+
+* **Alternative 1 (current choice):** Hash Prefix with its relative distance together
+
+** Pros: Code has a high readability and easy to understand
+
+** Cons: Quite hard to implement as other commands do not require to distinguish the order of each value but suggestion component does. Once hash with prefix and distance, it needs to handle both situation.
+
+* **Alternative 2:** Using subString to get each field from command line input
+
+** Pros: Easy to implement.
+
+** Cons: Bad readability and code quality, no consistency.
 
 // tag::commandHighlight[]
 === Command Highlight

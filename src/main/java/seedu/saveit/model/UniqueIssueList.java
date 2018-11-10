@@ -69,7 +69,6 @@ public class UniqueIssueList implements Iterable<Issue> {
         }
 
         internalList.set(index, editedIssue);
-        int i = 1;
     }
 
     /**

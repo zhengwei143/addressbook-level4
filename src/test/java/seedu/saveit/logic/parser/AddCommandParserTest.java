@@ -31,10 +31,8 @@ import static seedu.saveit.testutil.TypicalIssues.AMY;
 import static seedu.saveit.testutil.TypicalIssues.BOB;
 import static seedu.saveit.testutil.TypicalIssues.DUMMY_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.INITIALIZED_ISSUE_FREQUENCY;
-import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_C;
 import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_JAVA;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.saveit.logic.commands.AddCommand;

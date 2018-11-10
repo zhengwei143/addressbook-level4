@@ -54,7 +54,7 @@ public interface Model {
      * Adds the given solution to the indexed issue.
      * {@code solution} must not already exist in the given issue.
      */
-    void addSolution(Index index, Solution solution);
+    void addSolution(Issue targetIssue, Solution solution);
 
     /**
      * Adds the given issue.
@@ -100,7 +100,7 @@ public interface Model {
     /**
      * Adds tag(s) to the existing data of this {@code SaveIt} with {@code tagList} for a range of {@code issues}.
      */
-    void addTag(Set<Issue> issues, Set<Tag> tagList);
+    void addTag(Set<Index> indexSet, Set<Tag> tagList);
 
     /**
      * Returns a Set of strings representing all the Tag(s) contained in the issues

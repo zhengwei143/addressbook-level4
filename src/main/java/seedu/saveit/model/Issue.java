@@ -177,8 +177,7 @@ public class Issue {
     }
 
     /**
-     * Returns true if both issues of the same statement have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two issues.Solution
+     * Returns true if both issues of the same statement.
      */
     public boolean isSameIssue(Issue otherIssue) {
         if (otherIssue == this) {
@@ -186,8 +185,7 @@ public class Issue {
         }
 
         return otherIssue != null
-                && otherIssue.getStatement().equals(getStatement())
-                && otherIssue.getDescription().equals(getDescription());
+                && otherIssue.getStatement().equals(getStatement());
     }
 
     /**
@@ -205,8 +203,7 @@ public class Issue {
         }
 
         Issue otherIssue = (Issue) other;
-        return otherIssue.getStatement().equals(getStatement())
-                && otherIssue.getDescription().equals(getDescription());
+        return otherIssue.getStatement().equals(getStatement());
     }
 
     @Override

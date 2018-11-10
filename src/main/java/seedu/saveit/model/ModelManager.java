@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.saveit.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Comparator;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Predicate;
@@ -101,8 +103,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void addSolution(Index index, Solution solution) {
-        versionedSaveIt.addSolution(index, solution);
+    public void addSolution(Issue targetIssue, Solution solution) {
+        versionedSaveIt.addSolution(targetIssue, solution);
         indicateSaveItChanged();
     }
 
@@ -132,10 +134,15 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Add Tag ===================================================================================
     @Override
-    public void addTag(Set<Issue> issues, Set<Tag> tagList) {
-        requireAllNonNull(issues, tagList);
-        versionedSaveIt.addTag(issues, tagList);
+    public void addTag(Set<Index> indexSet, Set<Tag> tagList) {
+        requireAllNonNull(indexSet, tagList);
+        Set<Issue> issueToEdit = new LinkedHashSet<>();
+        List<Issue> lastShownList = getFilteredAndSortedIssueList();
+        indexSet.forEach(issueIndex -> {
+            issueToEdit.add(lastShownList.get(issueIndex.getZeroBased()));
+        });
 
+        versionedSaveIt.addTag(issueToEdit, tagList);
         indicateSaveItChanged();
     }
 

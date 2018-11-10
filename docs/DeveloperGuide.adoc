@@ -326,7 +326,7 @@ The sort command can sort an issue list shown in the GUI.
 
 ==== Current implementation
 
-We use JavaFX `SortedList` and the Comparator provided by `IssueSort` to sort the list, `ModelManager#getSortedList()` to retrieve the sorted list.
+We use JavaFX `SortedList` and the Comparator provided by `SortType` to sort the list, `ModelManager#getFilteredAndSortedList()` to retrieve the sorted list.
 
 In order to allow sort work with filtered list, we implement the new method `getFilteredAndSortedList()`, which calls `getSortedList()` and apply it to the filtered list.
 

@@ -68,7 +68,7 @@ public class SortCommandTest {
         expectedModel.updateFilteredAndSortedIssueList(sortType.getComparator());
         SortCommand command = new SortCommand(sortType);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ELLE, BENSON, DANIEL, ALICE), model.getFilteredAndSortedIssueList());
+        assertEquals(Arrays.asList(DANIEL, ELLE, BENSON, ALICE), model.getFilteredAndSortedIssueList());
     }
 
     @Test
@@ -77,7 +77,7 @@ public class SortCommandTest {
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, sortType.getSortType());
         Issue issue = new Issue(new IssueStatement("new SOLUTION_C++ problem"),
                 new Description("only for test"), new ArrayList<>(), new HashSet<>());
-        updateFrequency(ELLE, ELLE, ELLE, BENSON, BENSON, BENSON, ALICE, ALICE, CARL, FIONA);
+        updateFrequency(ELLE, ELLE, ELLE, BENSON, BENSON, BENSON, BENSON, ALICE, ALICE, CARL, FIONA);
 
         expectedModel.addIssue(issue);
         expectedModel.updateFilteredAndSortedIssueList(sortType.getComparator());

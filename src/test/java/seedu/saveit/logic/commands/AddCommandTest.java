@@ -356,7 +356,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addTag(Set<Issue> issues, Set<Tag> tagList) {
+        public void addTag(Set<Index> indexSet, Set<Tag> tagList) {
             throw new AssertionError("This method should not be called.");
         }
 

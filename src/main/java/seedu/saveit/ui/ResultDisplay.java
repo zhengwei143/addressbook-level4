@@ -57,7 +57,7 @@ public class ResultDisplay extends UiPart<Region> {
 
 
     @Subscribe
-    private void handleChangeDirectoryRequestEvent(DirectoryChangedEvent event) {
+    private void handleDirectoryChangedEvent(DirectoryChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         Platform.runLater(() -> currentDirectory.setValue(event.directory.toString()));
     }

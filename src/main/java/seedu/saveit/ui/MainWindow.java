@@ -232,7 +232,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     @Subscribe
-    private void handleChangeDirectoryRequestEvent(DirectoryChangedEvent event) {
+    private void handleDirectoryChangedEvent(DirectoryChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         if (event.directory.isRootLevel()) {
             issueListPanelPlaceholder.getChildren().remove(solutionListPanel.getRoot());

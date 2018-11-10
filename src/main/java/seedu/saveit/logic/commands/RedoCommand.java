@@ -31,7 +31,7 @@ public class RedoCommand extends Command {
         model.redoSaveIt();
         model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
         model.resetDirectory(new Directory(0, 0));
-        EventsCenter.getInstance().post(new DirectoryChangedEvent(new Directory(0, 0)));
+        EventsCenter.getInstance().post(new DirectoryChangedEvent(Directory.formRootDirectory()));
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

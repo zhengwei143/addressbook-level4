@@ -27,6 +27,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
@@ -315,7 +316,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addSolution(Index index, Solution solution) {
+        public void addSolution(Issue targetIssue, Solution solution) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -498,15 +499,20 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addSolution(Index index, Solution solution) {
-            requireAllNonNull(index, solution);
+        public ObservableList<Issue> getFilteredAndSortedIssueList() {
+            return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(issuesAdded));
+        }
 
-            Issue issueToEdit = issuesAdded.get(index.getZeroBased());
-            List<Solution> solutionsToUpdate = new ArrayList<>(issueToEdit.getSolutions());
+        @Override
+        public void addSolution(Issue targetIssue, Solution solution) {
+            requireAllNonNull(targetIssue, solution);
+
+            List<Solution> solutionsToUpdate = new ArrayList<>(targetIssue.getSolutions());
             solutionsToUpdate.add(solution);
-            Issue updateIssue = new Issue(issueToEdit.getStatement(), issueToEdit.getDescription(),
-                    solutionsToUpdate, issueToEdit.getTags(), issueToEdit.getFrequency(), issueToEdit.getCreatedTime());
-            issuesAdded.set(index.getZeroBased(), updateIssue);
+            Issue updateIssue = new Issue(targetIssue.getStatement(), targetIssue.getDescription(),
+                    solutionsToUpdate, targetIssue.getTags(), targetIssue.getFrequency(), targetIssue.getCreatedTime());
+            int index = issuesAdded.indexOf(targetIssue);
+            issuesAdded.set(index, updateIssue);
         }
 
         @Override

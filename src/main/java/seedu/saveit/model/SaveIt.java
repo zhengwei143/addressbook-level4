@@ -128,14 +128,12 @@ public class SaveIt implements ReadOnlySaveIt {
      * Adds an issue to the saveIt.
      * The issue must not already exist in the saveIt.
      */
-    public void addSolution(Index index, Solution solution) {
-        Issue issueToEdit = issues.getIssue(index);
-        List<Solution> solutionsToUpdate = new ArrayList<>(issueToEdit.getSolutions());
+    public void addSolution(Issue targetIssue, Solution solution) {
+        List<Solution> solutionsToUpdate = new ArrayList<>(targetIssue.getSolutions());
         solutionsToUpdate.add(solution);
-
-        Issue updateIssue = new Issue(issueToEdit.getStatement(), issueToEdit.getDescription(),
-                solutionsToUpdate, issueToEdit.getTags(), issueToEdit.getFrequency(), issueToEdit.getCreatedTime());
-        updateIssue(issueToEdit, updateIssue);
+        Issue updateIssue = new Issue(targetIssue.getStatement(), targetIssue.getDescription(),
+                solutionsToUpdate, targetIssue.getTags(), targetIssue.getFrequency(), targetIssue.getCreatedTime());
+        updateIssue(targetIssue, updateIssue);
     }
 
 

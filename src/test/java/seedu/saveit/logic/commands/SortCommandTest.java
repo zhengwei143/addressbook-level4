@@ -1,11 +1,23 @@
 package seedu.saveit.logic.commands;
 
 import static junit.framework.TestCase.assertEquals;
-import static seedu.saveit.logic.commands.CommandTestUtil.*;
+import static seedu.saveit.logic.commands.CommandTestUtil.C_RACE_CONDITION_STATEMENT;
+import static seedu.saveit.logic.commands.CommandTestUtil.C_SEGMENTATION_FAULT_STATEMENT;
+import static seedu.saveit.logic.commands.CommandTestUtil.JAVA_NULL_POINTER_STATEMENT;
+import static seedu.saveit.logic.commands.CommandTestUtil.TRAVIS_BUILD_STATEMENT;
+import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_SOLUTION;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_ISSUE;
-import static seedu.saveit.testutil.TypicalIssues.*;
+import static seedu.saveit.testutil.TypicalIssues.CHECKSTYLE_ERROR;
+import static seedu.saveit.testutil.TypicalIssues.C_RACE_CONDITION;
+import static seedu.saveit.testutil.TypicalIssues.C_SEGMENTATION_FAULT;
+import static seedu.saveit.testutil.TypicalIssues.JAVA_NULL_POINTER;
+import static seedu.saveit.testutil.TypicalIssues.QUICKSORT_BUG;
+import static seedu.saveit.testutil.TypicalIssues.RUBY_HASH_BUG;
+import static seedu.saveit.testutil.TypicalIssues.TRAVIS_BUILD;
+import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,6 +61,7 @@ public class SortCommandTest {
                 Arrays.asList(C_SEGMENTATION_FAULT, JAVA_NULL_POINTER, TRAVIS_BUILD, RUBY_HASH_BUG,
                         CHECKSTYLE_ERROR, QUICKSORT_BUG, C_RACE_CONDITION),
                 model.getFilteredAndSortedIssueList());
+
     }
 
     @Test
@@ -67,7 +80,8 @@ public class SortCommandTest {
         expectedModel.updateFilteredAndSortedIssueList(sortType.getComparator());
         SortCommand command = new SortCommand(sortType);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(C_SEGMENTATION_FAULT, JAVA_NULL_POINTER, TRAVIS_BUILD, C_RACE_CONDITION), model.getFilteredAndSortedIssueList());
+        assertEquals(Arrays.asList(C_SEGMENTATION_FAULT, JAVA_NULL_POINTER, TRAVIS_BUILD, C_RACE_CONDITION),
+                model.getFilteredAndSortedIssueList());
     }
 
     @Test
@@ -82,7 +96,8 @@ public class SortCommandTest {
         model.addIssue(issue);
         SortCommand command = new SortCommand(sortType);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(C_SEGMENTATION_FAULT, JAVA_NULL_POINTER, TRAVIS_BUILD, RUBY_HASH_BUG, CHECKSTYLE_ERROR, QUICKSORT_BUG, C_RACE_CONDITION, issue),
+        assertEquals(Arrays.asList(C_SEGMENTATION_FAULT, JAVA_NULL_POINTER, TRAVIS_BUILD, RUBY_HASH_BUG,
+                CHECKSTYLE_ERROR, QUICKSORT_BUG, C_RACE_CONDITION, issue),
                 model.getFilteredAndSortedIssueList());
     }
 

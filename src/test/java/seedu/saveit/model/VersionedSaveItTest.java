@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.saveit.testutil.TypicalIssues.VALID_JAVA_ISSUE;
-import static seedu.saveit.testutil.TypicalIssues.VALID_C_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.RUBY_HASH_BUG;
+import static seedu.saveit.testutil.TypicalIssues.VALID_C_ISSUE;
+import static seedu.saveit.testutil.TypicalIssues.VALID_JAVA_ISSUE;
 
 import java.util.Arrays;
 import java.util.Collections;

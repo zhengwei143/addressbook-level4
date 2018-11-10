@@ -14,12 +14,12 @@ import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.saveit.testutil.TypicalIssues.JAVA_NULL_POINTER;
-import static seedu.saveit.testutil.TypicalIssues.VALID_JAVA_ISSUE;
-import static seedu.saveit.testutil.TypicalIssues.VALID_C_ISSUE;
-import static seedu.saveit.testutil.TypicalIssues.RUBY_HASH_BUG;
+import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MYSQL;
 import static seedu.saveit.testutil.TypicalIssues.MYSQL_ERROR;
 import static seedu.saveit.testutil.TypicalIssues.POSTGRESQL_ERROR;
-import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MYSQL;
+import static seedu.saveit.testutil.TypicalIssues.RUBY_HASH_BUG;
+import static seedu.saveit.testutil.TypicalIssues.VALID_C_ISSUE;
+import static seedu.saveit.testutil.TypicalIssues.VALID_JAVA_ISSUE;
 import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_C;
 
 import org.junit.Ignore;

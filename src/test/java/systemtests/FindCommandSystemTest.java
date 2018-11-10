@@ -4,9 +4,9 @@ import static org.junit.Assert.assertFalse;
 import static seedu.saveit.commons.core.Messages.MESSAGE_ISSUES_LISTED_OVERVIEW;
 import static seedu.saveit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.saveit.testutil.TypicalIssues.C_SEGMENTATION_FAULT;
+import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MYSQL;
 import static seedu.saveit.testutil.TypicalIssues.RUBY_HASH_BUG;
 import static seedu.saveit.testutil.TypicalIssues.TRAVIS_BUILD;
-import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MYSQL;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class FindCommandSystemTest extends SaveItSystemTest {
          */
         String command = "   " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MYSQL + "   ";
         Model expectedModel = getModel();
-        ModelHelper.setFilteredList(expectedModel, C_SEGMENTATION_FAULT, TRAVIS_BUILD); // first names of Benson and Daniel are "Meier"
+        ModelHelper.setFilteredList(expectedModel, C_SEGMENTATION_FAULT, TRAVIS_BUILD);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 

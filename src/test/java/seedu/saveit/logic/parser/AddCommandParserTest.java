@@ -28,9 +28,9 @@ import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.saveit.testutil.TypicalIssues.DUMMY_ISSUE;
-import static seedu.saveit.testutil.TypicalIssues.VALID_JAVA_ISSUE;
-import static seedu.saveit.testutil.TypicalIssues.VALID_C_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.INITIALIZED_ISSUE_FREQUENCY;
+import static seedu.saveit.testutil.TypicalIssues.VALID_C_ISSUE;
+import static seedu.saveit.testutil.TypicalIssues.VALID_JAVA_ISSUE;
 import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_JAVA;
 
 import org.junit.Test;

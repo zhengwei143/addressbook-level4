@@ -1,6 +1,34 @@
 package seedu.saveit.testutil;
 
-import static seedu.saveit.logic.commands.CommandTestUtil.*;
+import static seedu.saveit.logic.commands.CommandTestUtil.CHECKSTYLE_ERROR_DESCRIPTION;
+import static seedu.saveit.logic.commands.CommandTestUtil.CHECKSTYLE_ERROR_STATEMENT;
+import static seedu.saveit.logic.commands.CommandTestUtil.C_RACE_CONDITION_DESCRIPTION;
+import static seedu.saveit.logic.commands.CommandTestUtil.C_RACE_CONDITION_STATEMENT;
+import static seedu.saveit.logic.commands.CommandTestUtil.C_SEGMENTATION_FAULT_DESCRIPTION;
+import static seedu.saveit.logic.commands.CommandTestUtil.C_SEGMENTATION_FAULT_STATEMENT;
+import static seedu.saveit.logic.commands.CommandTestUtil.DUMMY_DESCRIPTION;
+import static seedu.saveit.logic.commands.CommandTestUtil.DUMMY_STATEMENT;
+import static seedu.saveit.logic.commands.CommandTestUtil.JAVA_NULL_POINTER_DESCRIPTION;
+import static seedu.saveit.logic.commands.CommandTestUtil.JAVA_NULL_POINTER_STATEMENT;
+import static seedu.saveit.logic.commands.CommandTestUtil.MYSQL_ERROR_DESCRIPTION;
+import static seedu.saveit.logic.commands.CommandTestUtil.MYSQL_ERROR_STATEMENT;
+import static seedu.saveit.logic.commands.CommandTestUtil.POSTGRESQL_ERROR_DESCRIPTION;
+import static seedu.saveit.logic.commands.CommandTestUtil.POSTGRESQL_ERROR_STATEMENT;
+import static seedu.saveit.logic.commands.CommandTestUtil.QUICKSORT_BUG_DESCRIPTION;
+import static seedu.saveit.logic.commands.CommandTestUtil.QUICKSORT_BUG_STATEMENT;
+import static seedu.saveit.logic.commands.CommandTestUtil.RUBY_HASH_BUG_DESCRIPTION;
+import static seedu.saveit.logic.commands.CommandTestUtil.RUBY_HASH_BUG_STATEMENT;
+import static seedu.saveit.logic.commands.CommandTestUtil.TRAVIS_BUILD_DESCRIPTION;
+import static seedu.saveit.logic.commands.CommandTestUtil.TRAVIS_BUILD_STATEMENT;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_BUG;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_CPP;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_SYNTAX;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_TRAVIS;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
 import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_C;
 import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_JAVA;
 
@@ -52,15 +80,6 @@ public class TypicalIssues {
                     new SolutionBuilder().withLink("http://www.ZhiHu.com").withRemark("newSol").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .build();
-    public static final Issue ELLE = new IssueBuilder().withStatement("Elle Meyer").withDescription("9482224")
-            .withSolutions(new SolutionBuilder().withLink("http://www.google.com").withRemark("ave").build())
-            .withFrequency(COMMON_ISSUE_FREQUENCY)
-            .build();
-    public static final Issue FIONA = new IssueBuilder().withStatement("Fiona Kunz")
-            .withDescription("9482427")
-            .withSolutions(
-                    new SolutionBuilder().withLink("http://www.reddit.com").withRemark("tokyo").build())
-            .withLastModifiedTime(COMMON_ISSUE_TIME + 40).build();
     public static final Issue CHECKSTYLE_ERROR = new IssueBuilder()
             .withStatement(CHECKSTYLE_ERROR_STATEMENT)
             .withDescription(CHECKSTYLE_ERROR_DESCRIPTION)
@@ -97,26 +116,28 @@ public class TypicalIssues {
             .build();
 
     // Manually added - Issue's details found in {@code CommandTestUtil}
-    public static final Issue VALID_JAVA_ISSUE = new IssueBuilder().withStatement(VALID_STATEMENT_JAVA)
+    public static final Issue VALID_JAVA_ISSUE = new IssueBuilder()
+            .withStatement(VALID_STATEMENT_JAVA)
             .withDescription(VALID_DESCRIPTION_JAVA)
             .withSolutions(SOLUTION_JAVA)
             .withTags(VALID_TAG_UI)
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .withLastModifiedTime(COMMON_ISSUE_TIME + 60).build();
-    public static final Issue VALID_C_ISSUE = new IssueBuilder().withStatement(VALID_STATEMENT_C)
+    public static final Issue VALID_C_ISSUE = new IssueBuilder()
+            .withStatement(VALID_STATEMENT_C)
             .withDescription(VALID_DESCRIPTION_C)
             .withSolutions(SOLUTION_C)
             .withTags(VALID_TAG_UI)
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .build();
 
-    public static final Issue DUMMY_ISSUE = new IssueBuilder().withStatement(DUMMY_STATEMENT)
+    public static final Issue DUMMY_ISSUE = new IssueBuilder()
+            .withStatement(DUMMY_STATEMENT)
             .withDescription(DUMMY_DESCRIPTION)
             .withSolutions(SOLUTION_C)
             .withTags(VALID_TAG_UI)
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .build();
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     // A keyword that matches the MYSQL_ERROR_STATEMENT
     public static final String KEYWORD_MATCHING_MYSQL = MYSQL_ERROR_STATEMENT.split("\\s+")[0];
@@ -136,6 +157,7 @@ public class TypicalIssues {
     }
 
     public static List<Issue> getTypicalIssues() {
-        return new ArrayList<>(Arrays.asList(JAVA_NULL_POINTER, C_SEGMENTATION_FAULT, RUBY_HASH_BUG, TRAVIS_BUILD, CHECKSTYLE_ERROR, QUICKSORT_BUG, C_RACE_CONDITION));
+        return new ArrayList<>(Arrays.asList(JAVA_NULL_POINTER, C_SEGMENTATION_FAULT, RUBY_HASH_BUG,
+                TRAVIS_BUILD, CHECKSTYLE_ERROR, QUICKSORT_BUG, C_RACE_CONDITION));
     }
 }

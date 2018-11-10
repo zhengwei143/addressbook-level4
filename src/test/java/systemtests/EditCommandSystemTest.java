@@ -20,9 +20,9 @@ import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.saveit.model.Model.PREDICATE_SHOW_ALL_ISSUES;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
-import static seedu.saveit.testutil.TypicalIssues.VALID_JAVA_ISSUE;
-import static seedu.saveit.testutil.TypicalIssues.VALID_C_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MYSQL;
+import static seedu.saveit.testutil.TypicalIssues.VALID_C_ISSUE;
+import static seedu.saveit.testutil.TypicalIssues.VALID_JAVA_ISSUE;
 
 import org.junit.Ignore;
 import org.junit.Test;

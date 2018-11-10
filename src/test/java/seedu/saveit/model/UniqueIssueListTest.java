@@ -3,7 +3,11 @@ package seedu.saveit.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.saveit.logic.commands.CommandTestUtil.*;
+import static seedu.saveit.logic.commands.CommandTestUtil.JAVA_NULL_POINTER_DESCRIPTION;
+import static seedu.saveit.logic.commands.CommandTestUtil.JAVA_NULL_POINTER_STATEMENT;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_SYNTAX;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
 import static seedu.saveit.testutil.TypicalIssues.JAVA_NULL_POINTER;
 import static seedu.saveit.testutil.TypicalIssues.VALID_C_ISSUE;
 
@@ -100,7 +104,9 @@ public class UniqueIssueListTest {
     @Test
     public void setIssue_editedIssueHasSameIdentity_success() {
         uniqueIssueList.add(JAVA_NULL_POINTER);
-        Issue editedAlice = new IssueBuilder(JAVA_NULL_POINTER).withDescription(VALID_DESCRIPTION_C).withTags(VALID_TAG_UI)
+        Issue editedAlice = new IssueBuilder(JAVA_NULL_POINTER)
+                .withDescription(VALID_DESCRIPTION_C)
+                .withTags(VALID_TAG_UI)
                 .build();
         uniqueIssueList.setIssue(JAVA_NULL_POINTER, editedAlice);
         UniqueIssueList expectedUniqueIssueList = new UniqueIssueList();

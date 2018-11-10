@@ -27,12 +27,11 @@ public class TypicalIssues {
     // {@code IssueSearchFrequency} value commonly used across the test cases
     public static final Integer COMMON_ISSUE_FREQUENCY = 1;
     public static final long COMMON_ISSUE_TIME = 0;
-
     public static final Issue ALICE = new IssueBuilder().withStatement("Alice Pauline")
-            .withDescription("94351253")
-            .withTags("syntax")
-            .withFrequency(COMMON_ISSUE_FREQUENCY)
-            .build();
+        .withDescription("94351253")
+        .withTags("syntax")
+        .withFrequency(COMMON_ISSUE_FREQUENCY)
+        .build();
     public static final Issue BENSON = new IssueBuilder().withStatement("Benson Meier")
             .withDescription("98765432")
             .withTags("owesMoney", "friends")
@@ -100,7 +99,7 @@ public class TypicalIssues {
             .withTags(VALID_TAG_UI)
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .build();
-
+  
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalIssues() {

@@ -83,25 +83,27 @@ public class TypicalIssues {
             .build();
 
     // Manually added
-    public static final Issue HOON = new IssueBuilder()
-            .withStatement("Hoon Meier")
-            .withDescription("8482424")
+    public static final Issue MYSQL_ERROR = new IssueBuilder()
+            .withStatement(MYSQL_ERROR_STATEMENT)
+            .withDescription(MYSQL_ERROR_DESCRIPTION)
             .withSolutions(new SolutionBuilder().withLink("https://stackoverflow.com/").withRemark("india").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
-            .build();
-    public static final Issue IDA = new IssueBuilder().withStatement("Ida Mueller").withDescription("8482131")
+            .withLastModifiedTime().build();
+    public static final Issue POSTGRESQL_ERROR = new IssueBuilder()
+            .withStatement(POSTGRESQL_ERROR_STATEMENT)
+            .withDescription(POSTGRESQL_ERROR_DESCRIPTION)
             .withSolutions(new SolutionBuilder().withLink("http://www.baidu.com").withRemark("ave").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .build();
 
     // Manually added - Issue's details found in {@code CommandTestUtil}
-    public static final Issue AMY = new IssueBuilder().withStatement(VALID_STATEMENT_JAVA)
+    public static final Issue VALID_JAVA_ISSUE = new IssueBuilder().withStatement(VALID_STATEMENT_JAVA)
             .withDescription(VALID_DESCRIPTION_JAVA)
             .withSolutions(SOLUTION_JAVA)
             .withTags(VALID_TAG_UI)
             .withFrequency(COMMON_ISSUE_FREQUENCY)
-            .build();
-    public static final Issue BOB = new IssueBuilder().withStatement(VALID_STATEMENT_C)
+            .withLastModifiedTime(COMMON_ISSUE_TIME + 60).build();
+    public static final Issue VALID_C_ISSUE = new IssueBuilder().withStatement(VALID_STATEMENT_C)
             .withDescription(VALID_DESCRIPTION_C)
             .withSolutions(SOLUTION_C)
             .withTags(VALID_TAG_UI)
@@ -115,6 +117,9 @@ public class TypicalIssues {
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .build();
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+
+    // A keyword that matches the MYSQL_ERROR_STATEMENT
+    public static final String KEYWORD_MATCHING_MYSQL = MYSQL_ERROR_STATEMENT.split("\\s+")[0];
 
     private TypicalIssues() {
     } // prevents instantiation

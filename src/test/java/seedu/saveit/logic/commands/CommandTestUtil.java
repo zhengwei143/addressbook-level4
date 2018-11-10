@@ -66,6 +66,11 @@ public class CommandTestUtil {
     public static final String C_RACE_CONDITION_STATEMENT = "Race Conditions";
     public static final String C_RACE_CONDITION_DESCRIPTION = "Algorithm is having race condition problems.";
 
+    public static final String MYSQL_ERROR_STATEMENT = "MySQL Error";
+    public static final String MYSQL_ERROR_DESCRIPTION = "Some problems with my query";
+    public static final String POSTGRESQL_ERROR_STATEMENT = "PostgreSQL Error";
+    public static final String POSTGRESQL_ERROR_DESCRIPTION = "Foreign key problem";
+
     public static final String STATEMENT_DESC_JAVA = " " + PREFIX_STATEMENT + VALID_STATEMENT_JAVA;
     public static final String STATEMENT_DESC_C = " " + PREFIX_STATEMENT + VALID_STATEMENT_C;
     public static final String DESCRIPTION_DESC_JAVA = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_JAVA;

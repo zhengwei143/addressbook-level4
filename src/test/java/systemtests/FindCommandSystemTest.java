@@ -6,7 +6,7 @@ import static seedu.saveit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.saveit.testutil.TypicalIssues.C_SEGMENTATION_FAULT;
 import static seedu.saveit.testutil.TypicalIssues.RUBY_HASH_BUG;
 import static seedu.saveit.testutil.TypicalIssues.TRAVIS_BUILD;
-import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MEIER;
+import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MYSQL;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class FindCommandSystemTest extends SaveItSystemTest {
         /* Case: find multiple issues in saveit book, command with leading spaces and trailing spaces
          * -> 2 issues found
          */
-        String command = "   " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER + "   ";
+        String command = "   " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MYSQL + "   ";
         Model expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, C_SEGMENTATION_FAULT, TRAVIS_BUILD); // first names of Benson and Daniel are "Meier"
         assertCommandSuccess(command, expectedModel);
@@ -39,7 +39,7 @@ public class FindCommandSystemTest extends SaveItSystemTest {
         /* Case: repeat previous find command where issue list is displaying the issues we are finding
          * -> 2 issues found
          */
-        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
+        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MYSQL;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -85,7 +85,7 @@ public class FindCommandSystemTest extends SaveItSystemTest {
         /* Case: find same issues in saveit book after deleting 1 of them -> 1 issue found */
         executeCommand(DeleteCommand.COMMAND_WORD + " 1");
         assertFalse(getModel().getSaveIt().getIssueList().contains(C_SEGMENTATION_FAULT));
-        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
+        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MYSQL;
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, TRAVIS_BUILD);
         assertCommandSuccess(command, expectedModel);
@@ -136,7 +136,7 @@ public class FindCommandSystemTest extends SaveItSystemTest {
 
         /* Case: find issue in empty saveit book -> 0 issues found */
         deleteAllIssues();
-        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
+        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MYSQL;
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, TRAVIS_BUILD);
         assertCommandSuccess(command, expectedModel);

@@ -27,9 +27,9 @@ import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.saveit.testutil.TypicalIssues.AMY;
-import static seedu.saveit.testutil.TypicalIssues.BOB;
 import static seedu.saveit.testutil.TypicalIssues.DUMMY_ISSUE;
+import static seedu.saveit.testutil.TypicalIssues.VALID_JAVA_ISSUE;
+import static seedu.saveit.testutil.TypicalIssues.VALID_C_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.INITIALIZED_ISSUE_FREQUENCY;
 import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_JAVA;
 
@@ -47,7 +47,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parseIssue_allFieldsPresent_success() {
-        Issue expectedIssue = new IssueBuilder(BOB).withTags(VALID_TAG_UI).build();
+        Issue expectedIssue = new IssueBuilder(VALID_C_ISSUE).withTags(VALID_TAG_UI).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + STATEMENT_DESC_C + DESCRIPTION_DESC_C
@@ -69,7 +69,7 @@ public class AddCommandParserTest {
                 new AddCommand(expectedIssueMultipleSolutions));
 
         // multiple tags - all accepted
-        Issue expectedIssueMultipleTags = new IssueBuilder(BOB).withTags(VALID_TAG_SYNTAX, VALID_TAG_UI)
+        Issue expectedIssueMultipleTags = new IssueBuilder(VALID_C_ISSUE).withTags(VALID_TAG_SYNTAX, VALID_TAG_UI)
                 .build();
         assertParseSuccess(parser, STATEMENT_DESC_C + DESCRIPTION_DESC_C
                 + TAG_DESC_SYNTAX + CommandTestUtil.TAG_DESC_UI, new AddCommand(expectedIssueMultipleTags));
@@ -78,7 +78,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Issue expectedIssue = new IssueBuilder(AMY).withTags().withSolutions()
+        Issue expectedIssue = new IssueBuilder(VALID_JAVA_ISSUE).withTags().withSolutions()
                 .withFrequency(INITIALIZED_ISSUE_FREQUENCY).build();
 
         assertParseSuccess(parser, STATEMENT_DESC_JAVA + DESCRIPTION_DESC_JAVA,

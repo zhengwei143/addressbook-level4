@@ -6,7 +6,7 @@ import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
 import static seedu.saveit.testutil.TypicalIssues.JAVA_NULL_POINTER;
-import static seedu.saveit.testutil.TypicalIssues.BOB;
+import static seedu.saveit.testutil.TypicalIssues.VALID_C_ISSUE;
 import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_C;
 import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_STACKOVERFLOW;
 
@@ -77,7 +77,7 @@ public class IssueTest {
         assertFalse(JAVA_NULL_POINTER.equals(5));
 
         // different issue -> returns false
-        assertFalse(JAVA_NULL_POINTER.equals(BOB));
+        assertFalse(JAVA_NULL_POINTER.equals(VALID_C_ISSUE));
 
         // different statement -> returns false
         editedAlice = new IssueBuilder(JAVA_NULL_POINTER).withStatement(VALID_STATEMENT_C).build();

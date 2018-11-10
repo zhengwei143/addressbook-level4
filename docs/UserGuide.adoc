@@ -386,7 +386,7 @@ image::home.png[width="790"]
 ====
 * All issues are listed in the list panel in home directory.
 * The following commands can only be executed at home directory:
- sort, addtag, refactortag, find, findtag.
+ `sort`, `addtag`, `refactortag`, `find`, `findtag`.
 ====
 
 === Undoing previous command : `(u)undo`

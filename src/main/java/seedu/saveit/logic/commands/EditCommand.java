@@ -10,7 +10,7 @@ import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -79,8 +79,7 @@ public class EditCommand extends Command {
 
         if (currentDirectory.isRootLevel() && editIssueDescriptor.isAnyIssueFieldEdited()) {
             issueToEdit = getIssueToEdit(lastShownList, lastShownList.size(), index.getZeroBased());
-        } else if ((currentDirectory.isIssueLevel() || currentDirectory.isSolutionLevel()) && editIssueDescriptor
-            .isAnySolutionFieldEdited()) {
+        } else if (!currentDirectory.isRootLevel() && editIssueDescriptor.isAnySolutionFieldEdited()) {
             int issueIndex = currentDirectory.getIssue() - 1;
             int solutionListSize = lastShownList.get(issueIndex).getSolutions().size();
             issueToEdit = getIssueToEdit(lastShownList, solutionListSize, issueIndex);
@@ -150,11 +149,11 @@ public class EditCommand extends Command {
         Solution updatedSolution;
 
         SolutionLink updatedSolutionLink =
-                newSolution.getLink().getValue().equals(DUMMY_SOLUTION_LINK) ? oldSolution.getLink()
-                        : newSolution.getLink();
+            newSolution.getLink().getValue().equals(DUMMY_SOLUTION_LINK) ? oldSolution.getLink()
+                : newSolution.getLink();
         Remark updatedSolutionRemark =
-                newSolution.getRemark().getValue().equals(DUMMY_SOLUTION_REMARK) ? oldSolution.getRemark()
-                        : newSolution.getRemark();
+            newSolution.getRemark().getValue().equals(DUMMY_SOLUTION_REMARK) ? oldSolution.getRemark()
+                : newSolution.getRemark();
 
         if (oldSolution.isPrimarySolution()) {
             updatedSolution = new PrimarySolution(updatedSolutionLink, updatedSolutionRemark);
@@ -197,6 +196,7 @@ public class EditCommand extends Command {
         private Solution solution;
 
         public EditIssueDescriptor() {
+            solutions = new ArrayList<>();
         }
 
         public EditIssueDescriptor(Index index, Solution solution) {
@@ -254,18 +254,19 @@ public class EditCommand extends Command {
         }
 
         public void setSolutions(List<Solution> solutions) {
-            this.solutions = (solutions != null) ? new ArrayList<>(solutions) : null;
+            this.solutions = (solutions.size() != 0) ? new ArrayList<>(solutions) : new ArrayList<>();
         }
 
         public Optional<List<Solution>> getSolutions() {
-            return (solutions != null) ? Optional.of(Collections.unmodifiableList(solutions)) : Optional.empty();
+            return (solutions.size() != 0) ? Optional.of(Collections.unmodifiableList(solutions))
+                : Optional.of(new ArrayList<>());
         }
 
         /**
          * Sets {@code tags} to this object's {@code tags}. A defensive copy of {@code tags} is used internally.
          */
         public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+            this.tags = (tags.size() != 0) ? new LinkedHashSet<>(tags) : new LinkedHashSet<>();
         }
 
         /**
@@ -273,7 +274,8 @@ public class EditCommand extends Command {
          * attempted. Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+            return (tags.size() != 0) ? Optional.of(Collections.unmodifiableSet(tags))
+                : Optional.of(new LinkedHashSet<>());
         }
 
         @Override

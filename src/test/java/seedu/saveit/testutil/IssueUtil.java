@@ -52,17 +52,13 @@ public class IssueUtil {
         descriptor.getStatement().ifPresent(name -> sb.append(PREFIX_STATEMENT).append(name.getValue()).append(" "));
         descriptor.getDescription()
             .ifPresent(description -> sb.append(PREFIX_DESCRIPTION).append(description.getValue()).append(" "));
-        if (descriptor.getSolutions().isPresent()) {
-            List<Solution> solutions = descriptor.getSolutions().get();
-            if (solutions.isEmpty()) {
-                sb.append(PREFIX_SOLUTION_LINK).append(" ");
-            } else {
-                solutions.forEach(
-                    s -> sb.append(PREFIX_SOLUTION_LINK)
-                            .append(s.getLink().getValue()).append(" ")
-                            .append(PREFIX_REMARK)
-                            .append(s.getRemark().getValue()).append(" ")
-                );
+        if (descriptor.getSolution().isPresent()) {
+            Solution solution = descriptor.getSolution().get();
+            if (solution.getLink() != null) {
+                sb.append(PREFIX_SOLUTION_LINK).append(solution.getLink().getValue()).append(" ");
+            }
+            if (solution.getRemark() != null) {
+                sb.append(PREFIX_REMARK).append(solution.getRemark().getValue()).append(" ");
             }
         }
 

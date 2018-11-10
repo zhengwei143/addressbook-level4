@@ -44,6 +44,8 @@ public class CommandTestUtil {
     public static final String VALID_TAG_SYNTAX = "syntax";
     public static final String VALID_TAG_PYTHON = "python";
 
+    public static final String INVALID_SOLUTION_LINK_STACKOVERFLOW = "wwwstackoverflow";
+
     public static final String STATEMENT_DESC_JAVA = " " + PREFIX_STATEMENT + VALID_STATEMENT_JAVA;
     public static final String STATEMENT_DESC_C = " " + PREFIX_STATEMENT + VALID_STATEMENT_C;
     public static final String DESCRIPTION_DESC_JAVA = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_JAVA;
@@ -63,6 +65,8 @@ public class CommandTestUtil {
     public static final String INVALID_DESCRIPTION_DESC =
         " " + PREFIX_DESCRIPTION + " "; // 'empty' not allowed in descriptions
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + " "; // 'empty' not allowed in tags
+    public static final String INVALID_SOLUTION_LINK = " " + PREFIX_SOLUTION_LINK + INVALID_SOLUTION_LINK_STACKOVERFLOW;
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

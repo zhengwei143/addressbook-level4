@@ -4,6 +4,7 @@ import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
+import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_SOLUTION_LINK;
 import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_STATEMENT_DESC;
 import static seedu.saveit.logic.commands.CommandTestUtil.STATEMENT_DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_UI;
@@ -28,6 +29,7 @@ import seedu.saveit.logic.commands.EditCommand;
 import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.model.issue.Tag;
+import seedu.saveit.model.issue.solution.SolutionLink;
 import seedu.saveit.testutil.EditIssueDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -71,7 +73,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_STATEMENT_DESC,
-            IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS); // invalid name
+            IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS); // invalid statement
         assertParseFailure(parser, "1" + INVALID_DESCRIPTION_DESC,
             Description.MESSAGE_DESCRIPTION_CONSTRAINTS); // invalid description
 
@@ -93,6 +95,9 @@ public class EditCommandParserTest {
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_STATEMENT_DESC + INVALID_DESCRIPTION_DESC + TAG_DESC_UI,
             IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS);
+
+        // invalid solution link
+        assertParseFailure(parser, "1" + INVALID_SOLUTION_LINK, SolutionLink.MESSAGE_SOLUTION_LINK_CONSTRAINTS);
     }
 
     @Test
@@ -109,6 +114,8 @@ public class EditCommandParserTest {
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
+
+
 
     // TODO: test solution-level edit
 

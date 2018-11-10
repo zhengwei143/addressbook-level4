@@ -164,7 +164,7 @@ public class SaveItParserTest {
 
     @Test
     public void parseCommand_retrieveCommand_returnsRedoCommand() throws Exception {
-        assertTrue(parser.parseCommand( RetrieveCommand.COMMAND_WORD + " 1") instanceof RetrieveCommand);
+        assertTrue(parser.parseCommand(RetrieveCommand.COMMAND_WORD + " 1") instanceof RetrieveCommand);
     }
 
     @Test

@@ -150,7 +150,6 @@ public class AddTagCommandTest {
         indexSet.add(INDEX_FIRST_ISSUE);
 
         AddTagCommand addTagCommand = new AddTagCommand(indexSet, tagSet);
-
         assertCommandFailure(addTagCommand, model, commandHistory, String.format(
             MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_DUPLICATE_TAG));
 
@@ -171,23 +170,4 @@ public class AddTagCommandTest {
 
         assertCommandFailure(addTagCommand, model, commandHistory, expectedMessage);
     }
-
-//    @Test
-//    public void execute_addtagWrongDiretory_throwsCommandException() throws Exception {
-//
-//        Set<Tag> tagSet = new LinkedHashSet();
-//        Set<Index> indexSet = new LinkedHashSet();
-//        Tag tagToAdd = new Tag(VALID_TAG_UI);
-//        tagSet.add(tagToAdd);
-//        indexSet.add(INDEX_FIRST_ISSUE);
-//
-//        Directory directory = new DirectoryBuilder().withIssueIndex(INDEX_FIRST_ISSUE).withSolutionIndex(INDEX_FIRST_SOLUTION).build();
-//        model.resetDirectory(directory);
-//        AddTagCommand addTagCommand = new AddTagCommand(indexSet, tagSet);
-//
-//        String expectedMessage = Messages.MESSAGE_WRONG_DIRECTORY;
-//
-//        assertCommandFailure(addTagCommand, model, commandHistory, expectedMessage);
-//    }
-
 }

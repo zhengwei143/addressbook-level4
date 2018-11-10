@@ -9,9 +9,18 @@
 
 == Overview
 
-SaveIt​ is geared at keeping track of the issues that the user finds and to link it with the email found on google.
-More importantly, SaveIt is ​optimized for those who prefer to work with a Command Line Interface​ (CLI) while still having the benefits of a Graphical User Interface (GUI).
-If you can type fast, SaveIt can help you search the same statement that save previously faster than traditional GUI apps.
+This document is to summarize and elaborate all my contributions to the project. The project, SaveIt, is a issue tracker application which was morphed from AddressBook4. https://github.com/nus-cs2103-AY1819S1/addressbook-level4[#1] SaveIt targets at programmers and dedicates to provide a platform for storing, managing and viewing their programming related issues during daily practice. It is especially designed for the user who prefers command line interface (CLI) as the all the commands requires command line input. It also preserves the benefits of a Graphical User Interface (GUI) at the same time. If you can type fast, SaveIt can help you search the same statement that save previously faster than traditional GUI apps.
+The project is implemented for applying and showing the learning outcomes of CS2103T, and it is done by a group of five CS2103T students including myself.
+
+The main features include:
+
+* Add new issue, new solution or new tags
+* Select issue
+* Select solution to show the corresponding web page
+* Edit existing issue or existing solution
+* Rearrange the order of issue list
+* Find existing issue according to issue statement or tag
+
 == Summary of contributions
 
 * *Major enhancement*: added *the ability to undo/redo previous commands*

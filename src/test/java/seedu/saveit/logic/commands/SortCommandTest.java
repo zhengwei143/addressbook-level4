@@ -31,8 +31,8 @@ import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.UserPrefs;
 import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueContainsKeywordsPredicate;
-import seedu.saveit.model.issue.IssueSort;
 import seedu.saveit.model.issue.IssueStatement;
+import seedu.saveit.model.issue.SortType;
 import seedu.saveit.testutil.DirectoryBuilder;
 
 public class SortCommandTest {
@@ -48,10 +48,10 @@ public class SortCommandTest {
 
     @Test
     public void execute_sortIsNotFiltered_success() {
-        IssueSort issueSort = prepareIssueSort(IssueSort.TAG_SORT);
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, issueSort.getSortType());
-        expectedModel.updateFilteredAndSortedIssueList(issueSort.getComparator());
-        SortCommand command = new SortCommand(issueSort);
+        SortType sortType = prepareIssueSort(SortType.TAG_SORT);
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, sortType.getSortType());
+        expectedModel.updateFilteredAndSortedIssueList(sortType.getComparator());
+        SortCommand command = new SortCommand(sortType);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(DANIEL, BENSON, ALICE, CARL, ELLE, FIONA, GEORGE),
                 model.getFilteredAndSortedIssueList());
@@ -62,25 +62,25 @@ public class SortCommandTest {
         String[] keywordArray = {"Alice", "Benson", "Daniel", "Meyer"};
         filterIssueList(keywordArray);
 
-        IssueSort issueSort = prepareIssueSort(IssueSort.TAG_SORT);
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, issueSort.getSortType());
-        expectedModel.updateFilteredAndSortedIssueList(issueSort.getComparator());
-        SortCommand command = new SortCommand(issueSort);
+        SortType sortType = prepareIssueSort(SortType.TAG_SORT);
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, sortType.getSortType());
+        expectedModel.updateFilteredAndSortedIssueList(sortType.getComparator());
+        SortCommand command = new SortCommand(sortType);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(DANIEL, BENSON, ALICE, ELLE), model.getFilteredAndSortedIssueList());
     }
 
     @Test
     public void execute_sortAfterUpdate_success() {
-        IssueSort issueSort = prepareIssueSort(IssueSort.TAG_SORT);
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, issueSort.getSortType());
+        SortType sortType = prepareIssueSort(SortType.TAG_SORT);
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, sortType.getSortType());
         Issue issue = new Issue(new IssueStatement("new SOLUTION_C++ problem"),
                 new Description("only for test"), new ArrayList<>(), new HashSet<>());
 
-        expectedModel.updateFilteredAndSortedIssueList(issueSort.getComparator());
         expectedModel.addIssue(issue);
+        expectedModel.updateFilteredAndSortedIssueList(sortType.getComparator());
         model.addIssue(issue);
-        SortCommand command = new SortCommand(issueSort);
+        SortCommand command = new SortCommand(sortType);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(DANIEL, BENSON, ALICE, CARL, ELLE, FIONA, GEORGE, issue),
                 model.getFilteredAndSortedIssueList());
@@ -89,8 +89,8 @@ public class SortCommandTest {
     @Test
     public void execute_notUnderRootLevel_failure() {
         model.resetDirectory(new DirectoryBuilder().withIssueIndex(INDEX_FIRST_ISSUE).build());
-        IssueSort issueSort = prepareIssueSort(IssueSort.TAG_SORT);
-        SortCommand command = new SortCommand(issueSort);
+        SortType sortType = prepareIssueSort(SortType.TAG_SORT);
+        SortCommand command = new SortCommand(sortType);
         assertCommandFailure(command, model, commandHistory, Messages.MESSAGE_WRONG_DIRECTORY);
 
         model.resetDirectory(new DirectoryBuilder().withIssueIndex(INDEX_THIRD_ISSUE)
@@ -101,8 +101,8 @@ public class SortCommandTest {
     /**
      * Parses {@code userInput} into a {@code Comparator<Issue>}.
      */
-    private IssueSort prepareIssueSort(String userInput) {
-        return new IssueSort(userInput);
+    private SortType prepareIssueSort(String userInput) {
+        return new SortType(userInput);
     }
 
     /**

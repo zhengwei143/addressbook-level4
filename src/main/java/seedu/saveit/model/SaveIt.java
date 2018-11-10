@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.saveit.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -25,6 +26,7 @@ public class SaveIt implements ReadOnlySaveIt {
 
     private final UniqueIssueList issues;
     private Directory currentDirectory;
+    private Comparator<Issue> currentSortType;
 
 
     /*
@@ -37,6 +39,7 @@ public class SaveIt implements ReadOnlySaveIt {
     {
         issues = new UniqueIssueList();
         currentDirectory = new Directory(0, 0);
+        currentSortType = null;
     }
 
     public SaveIt() {}
@@ -79,12 +82,20 @@ public class SaveIt implements ReadOnlySaveIt {
     }
 
     /**
+     * Update the current sortType.
+     */
+    public void setCurrentSortType(Comparator<Issue> sortType) {
+        currentSortType = sortType;
+    }
+
+    /**
      * Resets the existing data of this {@code SaveIt} with {@code newData}.
      */
     public void resetData(ReadOnlySaveIt newData) {
         requireNonNull(newData);
         setIssues(newData.getIssueList());
         setCurrentDirectory(newData.getCurrentDirectory());
+        setCurrentSortType(newData.getCurrentSortType());
     }
 
     //// issue-level operations
@@ -117,13 +128,13 @@ public class SaveIt implements ReadOnlySaveIt {
      * Adds an issue to the saveIt.
      * The issue must not already exist in the saveIt.
      */
-    public void addSolution(Issue issue, Solution solution) {
+    public void addSolution(Issue targetIssue, Solution solution) {
         List<Solution> solutionsToUpdate = new ArrayList<>(issue.getSolutions());
         solutionsToUpdate.add(solution);
 
-        Issue updateIssue = new Issue(issue.getStatement(), issue.getDescription(),
-                solutionsToUpdate, issue.getTags(), issue.getFrequency());
-        updateIssue(issue, updateIssue);
+        Issue updateIssue = new Issue(targetIssue.getStatement(), targetIssue.getDescription(),
+                solutionsToUpdate, targetIssue.getTags(), targetIssue.getFrequency());
+        updateIssue(targetIssue, updateIssue);
     }
 
 
@@ -200,7 +211,7 @@ public class SaveIt implements ReadOnlySaveIt {
 
     private void updateTags(Issue issueToUpdate, Set<Tag> tagsToUpdate) {
         Issue updateIssue = new Issue(issueToUpdate.getStatement(), issueToUpdate.getDescription(),
-            issueToUpdate.getSolutions(), tagsToUpdate, issueToUpdate.getFrequency());
+            issueToUpdate.getSolutions(), tagsToUpdate, issueToUpdate.getFrequency(), issueToUpdate.getCreatedTime());
         updateIssue(issueToUpdate, updateIssue);
     }
 
@@ -228,6 +239,11 @@ public class SaveIt implements ReadOnlySaveIt {
     @Override
     public Directory getCurrentDirectory() {
         return currentDirectory;
+    }
+
+    @Override
+    public Comparator getCurrentSortType() {
+        return currentSortType;
     }
 
     @Override

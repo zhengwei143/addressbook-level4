@@ -36,8 +36,8 @@ import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ReadOnlySaveIt;
 import seedu.saveit.model.SaveIt;
-import seedu.saveit.model.issue.IssueSort;
 import seedu.saveit.model.issue.Solution;
+import seedu.saveit.model.issue.SortType;
 import seedu.saveit.model.issue.Tag;
 import seedu.saveit.testutil.DirectoryBuilder;
 import seedu.saveit.testutil.IssueBuilder;
@@ -290,6 +290,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Comparator<Issue> getCurrentSortType() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlySaveIt getSaveIt() {
             throw new AssertionError("This method should not be called.");
         }
@@ -320,11 +325,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Issue> getFilteredIssueList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Solution> getFilteredSolutionList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -345,7 +345,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void sortIssues(IssueSort sortType) {
+        public void sortIssues(SortType sortType) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -505,7 +505,7 @@ public class AddCommandTest {
             List<Solution> solutionsToUpdate = new ArrayList<>(issueToEdit.getSolutions());
             solutionsToUpdate.add(solution);
             Issue updateIssue = new Issue(issueToEdit.getStatement(), issueToEdit.getDescription(),
-                    solutionsToUpdate, issueToEdit.getTags(), issueToEdit.getFrequency());
+                    solutionsToUpdate, issueToEdit.getTags(), issueToEdit.getFrequency(), issueToEdit.getCreatedTime());
             issuesAdded.set(index.getZeroBased(), updateIssue);
         }
 

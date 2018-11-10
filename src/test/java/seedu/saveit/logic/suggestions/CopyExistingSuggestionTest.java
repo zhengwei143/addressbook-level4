@@ -15,9 +15,10 @@ import static seedu.saveit.logic.suggestion.CopyExistingSuggestion.COPY_EXISTING
 import static seedu.saveit.logic.suggestion.CopyExistingSuggestion.COPY_EXISTING_SUCCESS;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
 
-import org.junit.Test;
 import java.util.Arrays;
 import java.util.LinkedList;
+
+import org.junit.Test;
 
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.parser.Prefix;

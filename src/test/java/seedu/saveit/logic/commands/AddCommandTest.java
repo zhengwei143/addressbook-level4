@@ -326,7 +326,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Solution> getFilteredSolutionList() {
+        public ObservableList<Solution> getFilteredAndSortedSolutionList() {
             throw new AssertionError("This method should not be called.");
         }
 

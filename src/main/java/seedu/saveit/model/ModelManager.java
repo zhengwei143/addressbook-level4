@@ -178,12 +178,13 @@ public class ModelManager extends ComponentManager implements Model {
      * {@code Issue}
      */
     @Override
-    public ObservableList<Solution> getFilteredSolutionList() {
+    public ObservableList<Solution> getFilteredAndSortedSolutionList() {
         Directory directory = getCurrentDirectory();
         if (directory.isRootLevel()) {
             return null;
         } else {
-            ObservableList<Solution> solutions = filteredIssues.get(directory.getIssue() - 1).getObservableSolutions();
+            ObservableList<Solution> solutions =
+                    filteredAndSortedIssues.get(directory.getIssue() - 1).getObservableSolutions();
             solutions.sort(new SolutionComparator());
             return FXCollections.unmodifiableObservableList(solutions);
         }

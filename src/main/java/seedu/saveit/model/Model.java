@@ -70,7 +70,7 @@ public interface Model {
     void updateIssue(Issue target, Issue editedIssue);
 
     /**Returns an unmodified view of the filtered solution list of the selected issue */
-    ObservableList<Solution> getFilteredSolutionList();
+    ObservableList<Solution> getFilteredAndSortedSolutionList();
 
     /**
      * Filters the issues given the predicate and sorts them based on the search frequency

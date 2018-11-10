@@ -37,7 +37,7 @@ public class IssueTest {
 
         // different description -> returns false
         Issue editedAlice = new IssueBuilder(JAVA_NULL_POINTER).withDescription(VALID_DESCRIPTION_JAVA).build();
-        assertFalse(JAVA_NULL_POINTER.isSameIssue(editedAlice));
+        assertTrue(JAVA_NULL_POINTER.isSameIssue(editedAlice));
 
         // different statement -> returns false
         editedAlice = new IssueBuilder(JAVA_NULL_POINTER).withStatement(VALID_STATEMENT_C).build();
@@ -59,9 +59,9 @@ public class IssueTest {
         // same object -> returns true
         assertTrue(JAVA_NULL_POINTER.equals(JAVA_NULL_POINTER));
 
-        // different description, same issue statement -> returns false
+        // different description, same issue statement -> returns true
         Issue editedAlice = new IssueBuilder(JAVA_NULL_POINTER).withDescription(VALID_DESCRIPTION_JAVA).build();
-        assertFalse(JAVA_NULL_POINTER.equals(editedAlice));
+        assertTrue(JAVA_NULL_POINTER.equals(editedAlice));
 
         // different solutions, same issue statement -> returns true
         editedAlice = new IssueBuilder(JAVA_NULL_POINTER).withSolutions(SOLUTION_C).build();

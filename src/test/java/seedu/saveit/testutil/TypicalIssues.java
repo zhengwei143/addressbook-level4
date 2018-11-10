@@ -88,7 +88,7 @@ public class TypicalIssues {
             .withDescription(MYSQL_ERROR_DESCRIPTION)
             .withSolutions(new SolutionBuilder().withLink("https://stackoverflow.com/").withRemark("india").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
-            .withLastModifiedTime().build();
+            .withLastModifiedTime(COMMON_ISSUE_TIME + 60).build();
     public static final Issue POSTGRESQL_ERROR = new IssueBuilder()
             .withStatement(POSTGRESQL_ERROR_STATEMENT)
             .withDescription(POSTGRESQL_ERROR_DESCRIPTION)

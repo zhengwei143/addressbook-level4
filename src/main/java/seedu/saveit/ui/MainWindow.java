@@ -221,7 +221,7 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        issueListPanelPlaceholder.getChildren().remove(issueListPanel.getRoot());
+        issueListPanelPlaceholder.getChildren().clear();
         issueListPanelPlaceholder.getChildren().add(solutionListPanel.getRoot());
     }
 
@@ -235,7 +235,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handleDirectoryChangedEvent(DirectoryChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         if (event.directory.isRootLevel()) {
-            issueListPanelPlaceholder.getChildren().remove(solutionListPanel.getRoot());
+            issueListPanelPlaceholder.getChildren().clear();
             issueListPanelPlaceholder.getChildren().add(issueListPanel.getRoot());
         }
     }
@@ -243,7 +243,7 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleAddTagEvent(AddTagEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        issueListPanelPlaceholder.getChildren().remove(issueListPanel.getRoot());
+        issueListPanelPlaceholder.getChildren().clear();
         issueListPanel = new IssueListPanel(logic.getFilteredAndSortedIssueList());
         issueListPanelPlaceholder.getChildren().add(issueListPanel.getRoot());
     }

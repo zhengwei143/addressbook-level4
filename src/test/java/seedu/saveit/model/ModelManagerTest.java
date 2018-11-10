@@ -3,8 +3,8 @@ package seedu.saveit.model;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.saveit.model.Model.PREDICATE_SHOW_ALL_ISSUES;
-import static seedu.saveit.testutil.TypicalIssues.JAVA_NULL_POINTER;
 import static seedu.saveit.testutil.TypicalIssues.C_SEGMENTATION_FAULT;
+import static seedu.saveit.testutil.TypicalIssues.JAVA_NULL_POINTER;
 
 import java.nio.file.Paths;
 import java.util.Arrays;

@@ -60,7 +60,7 @@ public class SortCommandTest {
     @Test
     public void execute_sortIsFiltered_success() {
         String[] keywordArray = {"Alice", "Benson", "Daniel", "Meyer"};
-        updateLastModifiedTime(BENSON, ELLE);
+        updateLastModifiedTime(BENSON, ELLE, DANIEL);
         filterIssueList(keywordArray);
 
         SortType sortType = prepareIssueSort(SortType.CHRONOLOGICAL_SORT);
@@ -77,14 +77,14 @@ public class SortCommandTest {
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, sortType.getSortType());
         Issue issue = new Issue(new IssueStatement("new SOLUTION_C++ problem"),
                 new Description("only for test"), new ArrayList<>(), new HashSet<>());
-        updateFrequency(ELLE, BENSON, BENSON);
+        updateFrequency(ELLE, ELLE, ELLE, BENSON, BENSON, BENSON, ALICE, ALICE, CARL, FIONA);
 
         expectedModel.addIssue(issue);
         expectedModel.updateFilteredAndSortedIssueList(sortType.getComparator());
         model.addIssue(issue);
         SortCommand command = new SortCommand(sortType);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BENSON, ELLE, ALICE, CARL, DANIEL, FIONA, GEORGE, issue),
+        assertEquals(Arrays.asList(BENSON, ELLE, ALICE, CARL, FIONA, DANIEL, GEORGE, issue),
                 model.getFilteredAndSortedIssueList());
     }
 

@@ -32,12 +32,12 @@ public class IssueTest {
         // same object -> returns true
         assertTrue(ALICE.isSameIssue(ALICE));
 
+        // different description but same statement -> returns True
+        Issue editedAlice = new IssueBuilder(ALICE).withDescription(VALID_DESCRIPTION_JAVA).build();
+        assertTrue(ALICE.isSameIssue(editedAlice));
+
         // null -> returns false
         assertFalse(ALICE.isSameIssue(null));
-
-        // different description -> returns false
-        Issue editedAlice = new IssueBuilder(ALICE).withDescription(VALID_DESCRIPTION_JAVA).build();
-        assertFalse(ALICE.isSameIssue(editedAlice));
 
         // different statement -> returns false
         editedAlice = new IssueBuilder(ALICE).withStatement(VALID_STATEMENT_C).build();
@@ -59,9 +59,9 @@ public class IssueTest {
         // same object -> returns true
         assertTrue(ALICE.equals(ALICE));
 
-        // different description, same issue statement -> returns false
+        // different description, same issue statement -> returns true
         Issue editedAlice = new IssueBuilder(ALICE).withDescription(VALID_DESCRIPTION_JAVA).build();
-        assertFalse(ALICE.equals(editedAlice));
+        assertTrue(ALICE.equals(editedAlice));
 
         // different solutions, same issue statement -> returns true
         editedAlice = new IssueBuilder(ALICE).withSolutions(SOLUTION_C).build();

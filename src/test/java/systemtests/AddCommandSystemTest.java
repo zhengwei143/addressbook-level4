@@ -13,10 +13,10 @@ import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_UI;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.saveit.testutil.TypicalIssues.ALICE;
+import static seedu.saveit.testutil.TypicalIssues.JAVA_NULL_POINTER;
 import static seedu.saveit.testutil.TypicalIssues.AMY;
 import static seedu.saveit.testutil.TypicalIssues.BOB;
-import static seedu.saveit.testutil.TypicalIssues.CARL;
+import static seedu.saveit.testutil.TypicalIssues.RUBY_HASH_BUG;
 import static seedu.saveit.testutil.TypicalIssues.HOON;
 import static seedu.saveit.testutil.TypicalIssues.IDA;
 import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MEIER;
@@ -83,7 +83,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
 
         /* Case: add to empty saveit book -> added */
         deleteAllIssues();
-        assertCommandSuccess(ALICE);
+        assertCommandSuccess(JAVA_NULL_POINTER);
 
         /* Case: add an issue with tags, command with parameters in random order -> added */
         toAdd = BOB;
@@ -107,7 +107,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         /* Case: selects first card in the issue list, add an issue -> added, card selection remains
         unchanged */
         selectIssue(Index.fromOneBased(1));
-        assertCommandSuccess(CARL);
+        assertCommandSuccess(RUBY_HASH_BUG);
 
         /* ----------------------------------- Perform invalid add operations
         --------------------------------------- */

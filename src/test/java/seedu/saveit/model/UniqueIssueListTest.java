@@ -3,10 +3,8 @@ package seedu.saveit.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_SYNTAX;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
-import static seedu.saveit.testutil.TypicalIssues.ALICE;
+import static seedu.saveit.logic.commands.CommandTestUtil.*;
+import static seedu.saveit.testutil.TypicalIssues.JAVA_NULL_POINTER;
 import static seedu.saveit.testutil.TypicalIssues.BOB;
 
 import java.util.Arrays;
@@ -35,21 +33,24 @@ public class UniqueIssueListTest {
 
     @Test
     public void contains_issueNotInList_returnsFalse() {
-        assertFalse(uniqueIssueList.contains(ALICE));
+        assertFalse(uniqueIssueList.contains(JAVA_NULL_POINTER));
     }
 
     @Test
     public void contains_issueInList_returnsTrue() {
-        uniqueIssueList.add(ALICE);
-        assertTrue(uniqueIssueList.contains(ALICE));
+        uniqueIssueList.add(JAVA_NULL_POINTER);
+        assertTrue(uniqueIssueList.contains(JAVA_NULL_POINTER));
     }
 
     @Test
     public void contains_issueWithSameIdentityFieldsInList_returnsTrue() {
-        uniqueIssueList.add(ALICE);
-        Issue editedAlice = new IssueBuilder(ALICE).withDescription(VALID_DESCRIPTION_C).withTags(VALID_TAG_SYNTAX)
+        uniqueIssueList.add(JAVA_NULL_POINTER);
+        Issue editedJavaIssue = new IssueBuilder(JAVA_NULL_POINTER)
+                .withStatement(JAVA_NULL_POINTER_STATEMENT)
+                .withDescription(JAVA_NULL_POINTER_DESCRIPTION)
+                .withTags(VALID_TAG_SYNTAX)
                 .build();
-        assertTrue(uniqueIssueList.contains(editedAlice));
+        assertTrue(uniqueIssueList.contains(editedJavaIssue));
     }
 
     @Test
@@ -60,44 +61,44 @@ public class UniqueIssueListTest {
 
     @Test
     public void add_duplicateIssue_throwsDuplicateIssueException() {
-        uniqueIssueList.add(ALICE);
+        uniqueIssueList.add(JAVA_NULL_POINTER);
         thrown.expect(DuplicateIssueException.class);
-        uniqueIssueList.add(ALICE);
+        uniqueIssueList.add(JAVA_NULL_POINTER);
     }
 
     @Test
     public void setIssue_nullTargetIssue_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        uniqueIssueList.setIssue(null, ALICE);
+        uniqueIssueList.setIssue(null, JAVA_NULL_POINTER);
     }
 
     @Test
     public void setIssue_nullEditedIssue_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        uniqueIssueList.setIssue(ALICE, null);
+        uniqueIssueList.setIssue(JAVA_NULL_POINTER, null);
     }
 
     @Test
     public void setIssue_targetIssueNotInList_throwsIssueNotFoundException() {
         thrown.expect(IssueNotFoundException.class);
-        uniqueIssueList.setIssue(ALICE, ALICE);
+        uniqueIssueList.setIssue(JAVA_NULL_POINTER, JAVA_NULL_POINTER);
     }
 
     @Test
     public void setIssue_editedIssueIsSameIssue_success() {
-        uniqueIssueList.add(ALICE);
-        uniqueIssueList.setIssue(ALICE, ALICE);
+        uniqueIssueList.add(JAVA_NULL_POINTER);
+        uniqueIssueList.setIssue(JAVA_NULL_POINTER, JAVA_NULL_POINTER);
         UniqueIssueList expectedUniqueIssueList = new UniqueIssueList();
-        expectedUniqueIssueList.add(ALICE);
+        expectedUniqueIssueList.add(JAVA_NULL_POINTER);
         assertEquals(expectedUniqueIssueList, uniqueIssueList);
     }
 
     @Test
     public void setIssue_editedIssueHasSameIdentity_success() {
-        uniqueIssueList.add(ALICE);
-        Issue editedAlice = new IssueBuilder(ALICE).withDescription(VALID_DESCRIPTION_C).withTags(VALID_TAG_UI)
+        uniqueIssueList.add(JAVA_NULL_POINTER);
+        Issue editedAlice = new IssueBuilder(JAVA_NULL_POINTER).withDescription(VALID_DESCRIPTION_C).withTags(VALID_TAG_UI)
                 .build();
-        uniqueIssueList.setIssue(ALICE, editedAlice);
+        uniqueIssueList.setIssue(JAVA_NULL_POINTER, editedAlice);
         UniqueIssueList expectedUniqueIssueList = new UniqueIssueList();
         expectedUniqueIssueList.add(editedAlice);
         assertEquals(expectedUniqueIssueList, uniqueIssueList);
@@ -105,8 +106,8 @@ public class UniqueIssueListTest {
 
     @Test
     public void setIssue_editedIssueHasDifferentIdentity_success() {
-        uniqueIssueList.add(ALICE);
-        uniqueIssueList.setIssue(ALICE, BOB);
+        uniqueIssueList.add(JAVA_NULL_POINTER);
+        uniqueIssueList.setIssue(JAVA_NULL_POINTER, BOB);
         UniqueIssueList expectedUniqueIssueList = new UniqueIssueList();
         expectedUniqueIssueList.add(BOB);
         assertEquals(expectedUniqueIssueList, uniqueIssueList);
@@ -114,10 +115,10 @@ public class UniqueIssueListTest {
 
     @Test
     public void setIssue_editedIssueHasNonUniqueIdentity_throwsDuplicateIssueException() {
-        uniqueIssueList.add(ALICE);
+        uniqueIssueList.add(JAVA_NULL_POINTER);
         uniqueIssueList.add(BOB);
         thrown.expect(DuplicateIssueException.class);
-        uniqueIssueList.setIssue(ALICE, BOB);
+        uniqueIssueList.setIssue(JAVA_NULL_POINTER, BOB);
     }
 
     @Test
@@ -129,13 +130,13 @@ public class UniqueIssueListTest {
     @Test
     public void remove_issueDoesNotExist_throwsIssueNotFoundException() {
         thrown.expect(IssueNotFoundException.class);
-        uniqueIssueList.remove(ALICE);
+        uniqueIssueList.remove(JAVA_NULL_POINTER);
     }
 
     @Test
     public void remove_existingIssue_removesIssue() {
-        uniqueIssueList.add(ALICE);
-        uniqueIssueList.remove(ALICE);
+        uniqueIssueList.add(JAVA_NULL_POINTER);
+        uniqueIssueList.remove(JAVA_NULL_POINTER);
         UniqueIssueList expectedUniqueIssueList = new UniqueIssueList();
         assertEquals(expectedUniqueIssueList, uniqueIssueList);
     }
@@ -148,7 +149,7 @@ public class UniqueIssueListTest {
 
     @Test
     public void setIssues_uniqueIssueList_replacesOwnListWithProvidedUniqueIssueList() {
-        uniqueIssueList.add(ALICE);
+        uniqueIssueList.add(JAVA_NULL_POINTER);
         UniqueIssueList expectedUniqueIssueList = new UniqueIssueList();
         expectedUniqueIssueList.add(BOB);
         uniqueIssueList.setIssues(expectedUniqueIssueList);
@@ -163,7 +164,7 @@ public class UniqueIssueListTest {
 
     @Test
     public void setIssues_list_replacesOwnListWithProvidedList() {
-        uniqueIssueList.add(ALICE);
+        uniqueIssueList.add(JAVA_NULL_POINTER);
         List<Issue> issueList = Collections.singletonList(BOB);
         uniqueIssueList.setIssues(issueList);
         UniqueIssueList expectedUniqueIssueList = new UniqueIssueList();
@@ -173,7 +174,7 @@ public class UniqueIssueListTest {
 
     @Test
     public void setIssues_listWithDuplicateIssues_throwsDuplicateIssueException() {
-        List<Issue> listWithDuplicateIssues = Arrays.asList(ALICE, ALICE);
+        List<Issue> listWithDuplicateIssues = Arrays.asList(JAVA_NULL_POINTER, JAVA_NULL_POINTER);
         thrown.expect(DuplicateIssueException.class);
         uniqueIssueList.setIssues(listWithDuplicateIssues);
     }

@@ -3,8 +3,8 @@ package seedu.saveit.model;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.saveit.model.Model.PREDICATE_SHOW_ALL_ISSUES;
-import static seedu.saveit.testutil.TypicalIssues.ALICE;
-import static seedu.saveit.testutil.TypicalIssues.BENSON;
+import static seedu.saveit.testutil.TypicalIssues.JAVA_NULL_POINTER;
+import static seedu.saveit.testutil.TypicalIssues.C_SEGMENTATION_FAULT;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -30,13 +30,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasIssue_issueNotInSaveIt_returnsFalse() {
-        assertFalse(modelManager.hasIssue(ALICE));
+        assertFalse(modelManager.hasIssue(JAVA_NULL_POINTER));
     }
 
     @Test
     public void hasIssue_issueInSaveIt_returnsTrue() {
-        modelManager.addIssue(ALICE);
-        assertTrue(modelManager.hasIssue(ALICE));
+        modelManager.addIssue(JAVA_NULL_POINTER);
+        assertTrue(modelManager.hasIssue(JAVA_NULL_POINTER));
     }
 
     @Test
@@ -47,7 +47,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        SaveIt saveIt = new SaveItBuilder().withIssue(ALICE).withIssue(BENSON).build();
+        SaveIt saveIt = new SaveItBuilder().withIssue(JAVA_NULL_POINTER).withIssue(C_SEGMENTATION_FAULT).build();
         SaveIt differentSaveIt = new SaveIt();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -69,7 +69,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentSaveIt, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getStatement().getValue().split("\\s+");
+        String[] keywords = JAVA_NULL_POINTER.getStatement().getValue().split("\\s+");
         modelManager.updateFilteredIssueList(new IssueContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(saveIt, userPrefs)));
 

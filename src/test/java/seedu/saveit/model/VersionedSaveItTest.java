@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.saveit.testutil.TypicalIssues.AMY;
 import static seedu.saveit.testutil.TypicalIssues.BOB;
-import static seedu.saveit.testutil.TypicalIssues.CARL;
+import static seedu.saveit.testutil.TypicalIssues.RUBY_HASH_BUG;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,7 +20,7 @@ public class VersionedSaveItTest {
 
     private final ReadOnlySaveIt saveItWithAmy = new SaveItBuilder().withIssue(AMY).build();
     private final ReadOnlySaveIt saveItWithBob = new SaveItBuilder().withIssue(BOB).build();
-    private final ReadOnlySaveIt saveItWithCarl = new SaveItBuilder().withIssue(CARL).build();
+    private final ReadOnlySaveIt saveItWithCarl = new SaveItBuilder().withIssue(RUBY_HASH_BUG).build();
     private final ReadOnlySaveIt emptySaveIt = new SaveItBuilder().build();
 
     @Test

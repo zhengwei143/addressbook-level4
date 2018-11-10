@@ -2,7 +2,7 @@ package seedu.saveit.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static seedu.saveit.testutil.TypicalIssues.ALICE;
+import static seedu.saveit.testutil.TypicalIssues.JAVA_NULL_POINTER;
 import static seedu.saveit.testutil.TypicalIssues.HOON;
 import static seedu.saveit.testutil.TypicalIssues.IDA;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
@@ -80,7 +80,7 @@ public class XmlSaveItStorageTest {
 
         //Modify data, overwrite exiting file, and read back
         original.addIssue(HOON);
-        original.removeIssue(ALICE);
+        original.removeIssue(JAVA_NULL_POINTER);
         xmlSaveItStorage.saveSaveIt(original, filePath);
         readBack = xmlSaveItStorage.readSaveIt(filePath).get();
         assertEquals(original, new SaveIt(readBack));

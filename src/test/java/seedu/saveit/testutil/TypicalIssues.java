@@ -1,12 +1,6 @@
 package seedu.saveit.testutil;
 
-import static seedu.saveit.logic.commands.CommandTestUtil.DUMMY_DESCRIPTION;
-import static seedu.saveit.logic.commands.CommandTestUtil.DUMMY_STATEMENT;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_JAVA;
-import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
+import static seedu.saveit.logic.commands.CommandTestUtil.*;
 import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_C;
 import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_JAVA;
 
@@ -27,24 +21,31 @@ public class TypicalIssues {
     // {@code IssueSearchFrequency} value commonly used across the test cases
     public static final Integer COMMON_ISSUE_FREQUENCY = 1;
     public static final long COMMON_ISSUE_TIME = 0;
-    public static final Issue ALICE = new IssueBuilder().withStatement("Alice Pauline")
-        .withDescription("94351253")
-        .withTags("syntax")
-        .withFrequency(COMMON_ISSUE_FREQUENCY)
-        .build();
-    public static final Issue BENSON = new IssueBuilder().withStatement("Benson Meier")
-            .withDescription("98765432")
-            .withTags("owesMoney", "friends")
+
+    public static final Issue JAVA_NULL_POINTER = new IssueBuilder()
+            .withStatement(JAVA_NULL_POINTER_STATEMENT)
+            .withDescription(JAVA_NULL_POINTER_DESCRIPTION)
+            .withTags(VALID_TAG_SYNTAX)
             .withFrequency(COMMON_ISSUE_FREQUENCY)
-            .build();
-    public static final Issue CARL = new IssueBuilder().withStatement("Carl Kurz").withDescription("95352563")
-            .withSolutions(new SolutionBuilder().withLink("https://github.com/CS2103-AY1819S1-T12-4/main")
+            .withLastModifiedTime(COMMON_ISSUE_TIME + 10).build();
+    public static final Issue C_SEGMENTATION_FAULT = new IssueBuilder()
+            .withStatement(C_SEGMENTATION_FAULT_STATEMENT)
+            .withDescription(C_SEGMENTATION_FAULT_DESCRIPTION)
+            .withTags(VALID_TAG_CPP, VALID_TAG_BUG)
+            .withFrequency(COMMON_ISSUE_FREQUENCY)
+            .withLastModifiedTime(COMMON_ISSUE_TIME + 20).build();
+    public static final Issue RUBY_HASH_BUG = new IssueBuilder()
+            .withStatement(RUBY_HASH_BUG_STATEMENT)
+            .withDescription(RUBY_HASH_BUG_DESCRIPTION)
+            .withSolutions(new SolutionBuilder()
+                    .withLink("https://github.com/CS2103-AY1819S1-T12-4/main")
                     .withRemark("repoPage").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
-            .build();
-    public static final Issue DANIEL = new IssueBuilder().withStatement("Daniel Meier")
-            .withDescription("87652533")
-            .withTags("friends")
+            .withLastModifiedTime(COMMON_ISSUE_TIME + 30).build();
+    public static final Issue TRAVIS_BUILD = new IssueBuilder()
+            .withStatement(TRAVIS_BUILD_STATEMENT)
+            .withDescription(TRAVIS_BUILD_DESCRIPTION)
+            .withTags(VALID_TAG_TRAVIS)
             .withSolutions(
                     new SolutionBuilder().withLink("https://stackoverflow.com/").withRemark("newSolution")
                             .build(),
@@ -59,18 +60,32 @@ public class TypicalIssues {
             .withDescription("9482427")
             .withSolutions(
                     new SolutionBuilder().withLink("http://www.reddit.com").withRemark("tokyo").build())
+            .withLastModifiedTime(COMMON_ISSUE_TIME + 40).build();
+    public static final Issue CHECKSTYLE_ERROR = new IssueBuilder()
+            .withStatement(CHECKSTYLE_ERROR_STATEMENT)
+            .withDescription(CHECKSTYLE_ERROR_DESCRIPTION)
+            .withSolutions(
+                    new SolutionBuilder().withLink("http://www.google.com").withRemark("ave").build())
+            .withFrequency(COMMON_ISSUE_FREQUENCY)
+            .withLastModifiedTime(COMMON_ISSUE_TIME + 50).build();
+    public static final Issue QUICKSORT_BUG = new IssueBuilder()
+            .withStatement(QUICKSORT_BUG_STATEMENT)
+            .withDescription(QUICKSORT_BUG_DESCRIPTION)
+            .withSolutions(new SolutionBuilder().withLink("http://www.reddit.com").withRemark("tokyo").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .build();
 
-    public static final Issue GEORGE = new IssueBuilder().withStatement("George Best")
-            .withDescription("9482442")
-            .withSolutions(
-                    new SolutionBuilder().withLink("http://www.yahoo.com").withRemark("street").build())
+    public static final Issue C_RACE_CONDITION = new IssueBuilder()
+            .withStatement(C_RACE_CONDITION_STATEMENT)
+            .withDescription(C_RACE_CONDITION_DESCRIPTION)
+            .withSolutions(new SolutionBuilder().withLink("http://www.yahoo.com").withRemark("street").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .build();
 
     // Manually added
-    public static final Issue HOON = new IssueBuilder().withStatement("Hoon Meier").withDescription("8482424")
+    public static final Issue HOON = new IssueBuilder()
+            .withStatement("Hoon Meier")
+            .withDescription("8482424")
             .withSolutions(new SolutionBuilder().withLink("https://stackoverflow.com/").withRemark("india").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .build();
@@ -116,6 +131,6 @@ public class TypicalIssues {
     }
 
     public static List<Issue> getTypicalIssues() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(JAVA_NULL_POINTER, C_SEGMENTATION_FAULT, RUBY_HASH_BUG, TRAVIS_BUILD, CHECKSTYLE_ERROR, QUICKSORT_BUG, C_RACE_CONDITION));
     }
 }

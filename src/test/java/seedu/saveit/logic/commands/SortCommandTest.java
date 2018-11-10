@@ -60,29 +60,31 @@ public class SortCommandTest {
     @Test
     public void execute_sortIsFiltered_success() {
         String[] keywordArray = {"Alice", "Benson", "Daniel", "Meyer"};
+        updateLastModifiedTime(BENSON, ELLE);
         filterIssueList(keywordArray);
 
-        SortType sortType = prepareIssueSort(SortType.TAG_SORT);
+        SortType sortType = prepareIssueSort(SortType.CHRONOLOGICAL_SORT);
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, sortType.getSortType());
         expectedModel.updateFilteredAndSortedIssueList(sortType.getComparator());
         SortCommand command = new SortCommand(sortType);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(DANIEL, BENSON, ALICE, ELLE), model.getFilteredAndSortedIssueList());
+        assertEquals(Arrays.asList(ELLE, BENSON, DANIEL, ALICE), model.getFilteredAndSortedIssueList());
     }
 
     @Test
     public void execute_sortAfterUpdate_success() {
-        SortType sortType = prepareIssueSort(SortType.TAG_SORT);
+        SortType sortType = prepareIssueSort(SortType.FREQUENCY_SORT);
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, sortType.getSortType());
         Issue issue = new Issue(new IssueStatement("new SOLUTION_C++ problem"),
                 new Description("only for test"), new ArrayList<>(), new HashSet<>());
+        updateFrequency(ELLE, BENSON, BENSON);
 
         expectedModel.addIssue(issue);
         expectedModel.updateFilteredAndSortedIssueList(sortType.getComparator());
         model.addIssue(issue);
         SortCommand command = new SortCommand(sortType);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(DANIEL, BENSON, ALICE, CARL, ELLE, FIONA, GEORGE, issue),
+        assertEquals(Arrays.asList(BENSON, ELLE, ALICE, CARL, DANIEL, FIONA, GEORGE, issue),
                 model.getFilteredAndSortedIssueList());
     }
 
@@ -114,5 +116,24 @@ public class SortCommandTest {
         IssueContainsKeywordsPredicate predicate = new IssueContainsKeywordsPredicate(keywords);
         model.updateFilteredIssueList(predicate);
         expectedModel.updateFilteredIssueList(predicate);
+    }
+
+    /**
+     * Update frequency of data.
+     */
+    private void updateFrequency(Issue... issues) {
+        Arrays.stream(issues).forEach(i -> i.updateFrequency());
+    }
+
+    /**
+     * Update frequency of data.
+     */
+    private void updateLastModifiedTime(Issue... issues) {
+        for (Issue issue : issues) {
+            Issue newIssue = new Issue(issue.getStatement(), issue.getDescription(),
+                    issue.getSolutions(), issue.getTags(), issue.getFrequency(), issue.getCreatedTime());
+            model.updateIssue(issue, newIssue);
+            expectedModel.updateIssue(issue, newIssue);
+        }
     }
 }

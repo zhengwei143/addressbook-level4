@@ -16,9 +16,9 @@ import seedu.saveit.commons.events.ui.NewResultAvailableEvent;
 public class ResultDisplayTest extends GuiUnitTest {
 
     private static final NewResultAvailableEvent NEW_RESULT_EVENT_STUB = new NewResultAvailableEvent("Stub");
-    private static final DirectoryChangedEvent  DIRECTORY_CHANGED_ROOT_EVENT_STUB =
+    private static final DirectoryChangedEvent DIRECTORY_CHANGED_ROOT_EVENT_STUB =
             new DirectoryChangedEvent(ROOT_LEVEL);
-    private static final DirectoryChangedEvent  DIRECTORY_CHANGED_ISSUE_EVENT_STUB =
+    private static final DirectoryChangedEvent DIRECTORY_CHANGED_ISSUE_EVENT_STUB =
             new DirectoryChangedEvent(ISSUE_LEVEL);
 
     private ResultDisplayHandle resultDisplayHandle;

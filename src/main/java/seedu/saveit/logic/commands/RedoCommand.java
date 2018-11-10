@@ -28,8 +28,6 @@ public class RedoCommand extends Command {
         }
 
         model.redoSaveIt();
-        EventsCenter.getInstance().post(
-                new SortTypeChangedEvent(model.getCurrentSortType()));
         model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
         return new CommandResult(MESSAGE_SUCCESS);
     }

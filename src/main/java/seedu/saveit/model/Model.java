@@ -100,7 +100,7 @@ public interface Model {
     /**
      * Adds tag(s) to the existing data of this {@code SaveIt} with {@code tagList} for a range of {@code issues}.
      */
-    void addTag(Set<Issue> issues, Set<Tag> tagList);
+    void addTag(Set<Index> indexSet, Set<Tag> tagList);
 
     /**
      * Returns a Set of strings representing all the Tag(s) contained in the issues

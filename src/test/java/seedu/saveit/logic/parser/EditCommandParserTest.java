@@ -180,6 +180,7 @@ public class EditCommandParserTest {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_ISSUE;
         String userInput = targetIndex.getOneBased() + INVALID_DESCRIPTION_DESC + DESCRIPTION_DESC_C;
+        System.out.println(userInput);
         EditCommand.EditIssueDescriptor descriptor =
             new EditIssueDescriptorBuilder().withDescription(VALID_DESCRIPTION_C).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);

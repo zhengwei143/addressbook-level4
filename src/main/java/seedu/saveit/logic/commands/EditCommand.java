@@ -79,7 +79,8 @@ public class EditCommand extends Command {
 
         if (currentDirectory.isRootLevel() && editIssueDescriptor.isAnyIssueFieldEdited()) {
             issueToEdit = getIssueToEdit(lastShownList, lastShownList.size(), index.getZeroBased());
-        } else if (!currentDirectory.isRootLevel() && editIssueDescriptor.isAnySolutionFieldEdited()) {
+        } else if ((currentDirectory.isIssueLevel() || currentDirectory.isSolutionLevel()) && editIssueDescriptor
+            .isAnySolutionFieldEdited()) {
             int issueIndex = currentDirectory.getIssue() - 1;
             int solutionListSize = lastShownList.get(issueIndex).getSolutions().size();
             issueToEdit = getIssueToEdit(lastShownList, solutionListSize, issueIndex);
@@ -198,6 +199,7 @@ public class EditCommand extends Command {
 
         public EditIssueDescriptor() {
             solutions = new ArrayList<>();
+            tags = new LinkedHashSet<>();
         }
 
         public EditIssueDescriptor(Index index, Solution solution) {
@@ -255,7 +257,7 @@ public class EditCommand extends Command {
         }
 
         public void setSolutions(List<Solution> solutions) {
-            this.solutions = (solutions.size() != 0) ? new ArrayList<>(solutions) : new ArrayList<>();
+            this.solutions = (solutions != null) ? new ArrayList<>(solutions) : null;
         }
 
         public Optional<List<Solution>> getSolutions() {

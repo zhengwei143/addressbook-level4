@@ -6,7 +6,6 @@ import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.List;
 import java.util.Set;
 
 import seedu.saveit.logic.commands.AddCommand;
@@ -36,7 +35,7 @@ public class IssueUtil {
         sb.append(PREFIX_DESCRIPTION + issue.getDescription().getValue() + " ");
         issue.getSolutions().stream().forEach(
             s -> sb.append(PREFIX_SOLUTION_LINK + s.getLink().getValue() + " " + PREFIX_REMARK
-                    + s.getRemark().getValue() + " ")
+                + s.getRemark().getValue() + " ")
         );
         issue.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")

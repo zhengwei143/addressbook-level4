@@ -4,7 +4,7 @@
 :stylesDir: ../stylesheets
 :sectnums:
 
-== PROJECT: SaveIt
+= PROJECT: SaveIt
 
 ---
 
@@ -25,12 +25,14 @@ SaveIt is written in Java and JavaFX, and is morphed from AddressBook-level4, th
 * *Major enhancement*: added *the ability to sort issue list*
 ** What it does: It allows the user to sort issues shown.
 ** Justification: This feature improves the product significantly because a user can view the issues in the order that they want, helping them to organize issues better.
-** Highlights: This command changed the way how issues are listed in the application. It needs effort to combine sorting and filtering together properly.
+** Highlights: This command changes the way how issues are listed in the application. It needs effort to combine sorting and filtering together properly.
 
 * *Minor enhancement*:
 ** Added a confirmation check for clear command.
 ** Added the ability to set and reset primary solution.
-** Update solution structure.
+** Improve backend storage of Issue.
+** Improve solution structure.
+** Implement UI for SortType.
 
 * *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=yshu7[Functional code]]
 

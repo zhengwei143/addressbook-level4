@@ -494,12 +494,17 @@ Examples:
 
 Shows a list of all issues.
 
+[NOTE]
+====
+* List command can only be executed in root level.
+====
+
 // tag::sort[]
 === Sorting the list of issues: `(sr)sort`
 
 Sorts the list of issue according to a specified sort type.
 
-The list always follow this sort type until another sort command is executed.
+The list *always follow this sort type* until another sort command is executed.
 
 Format: `sort`
 [TIP]
@@ -523,9 +528,9 @@ Format: `sort tag`
 [TIP]
 ====
 * Sort the issue list by their tag in alphabetical order.
-If their first tags start with the same character, the following tags are compared until there is a difference or one tag set comes to the end.
+If their first tags are the same, the following tags are compared until there is a difference or one tag set comes to the end.
 In the second case, the issue with fewer tags is give higher priority.
-* Sort the issues without tags at the end of the display issue list.
+* Put the issues without tags at the end of the displayed issue list.
 ====
 
 Examples:

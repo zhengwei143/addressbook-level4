@@ -51,7 +51,7 @@ public interface Model {
      * Adds the given solution to the indexed issue.
      * {@code solution} must not already exist in the given issue.
      */
-    void addSolution(Index index, Solution solution);
+    void addSolution(Issue targetIssue, Solution solution);
 
     /**
      * Adds the given issue.

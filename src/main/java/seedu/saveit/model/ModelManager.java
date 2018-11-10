@@ -96,8 +96,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void addSolution(Index index, Solution solution) {
-        versionedSaveIt.addSolution(index, solution);
+    public void addSolution(Issue targetIssue, Solution solution) {
+        versionedSaveIt.addSolution(targetIssue, solution);
         indicateSaveItChanged();
     }
 

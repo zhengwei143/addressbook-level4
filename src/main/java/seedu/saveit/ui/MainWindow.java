@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import seedu.saveit.commons.core.Config;
 import seedu.saveit.commons.core.GuiSettings;
 import seedu.saveit.commons.core.LogsCenter;
+import seedu.saveit.commons.events.model.AddTagEvent;
 import seedu.saveit.commons.events.model.DirectoryChangedEvent;
 import seedu.saveit.commons.events.model.SaveItChangedEvent;
 import seedu.saveit.commons.events.ui.ExitAppRequestEvent;
@@ -237,5 +238,13 @@ public class MainWindow extends UiPart<Stage> {
             issueListPanelPlaceholder.getChildren().remove(solutionListPanel.getRoot());
             issueListPanelPlaceholder.getChildren().add(issueListPanel.getRoot());
         }
+    }
+
+    @Subscribe
+    private void handleAddTagEvent(AddTagEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        issueListPanelPlaceholder.getChildren().remove(issueListPanel.getRoot());
+        issueListPanel = new IssueListPanel(logic.getFilteredAndSortedIssueList());
+        issueListPanelPlaceholder.getChildren().add(issueListPanel.getRoot());
     }
 }

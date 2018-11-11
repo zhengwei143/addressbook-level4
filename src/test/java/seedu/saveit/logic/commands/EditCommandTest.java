@@ -3,22 +3,29 @@ package seedu.saveit.logic.commands;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.saveit.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.saveit.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.saveit.logic.commands.CommandTestUtil.DESC_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.DESC_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_REMARK_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_REMARK_STACKOVERFLOW;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_LINK_STACKOVERFLOW;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
 import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.saveit.logic.commands.CommandTestUtil.showIssueAtIndex;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_SOLUTION;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_ISSUE;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_SOLUTION;
+import static seedu.saveit.testutil.TypicalIssues.getTypicalIssues;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.saveit.commons.core.Messages;
+import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.EditCommand.EditIssueDescriptor;
@@ -27,8 +34,11 @@ import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.SaveIt;
 import seedu.saveit.model.UserPrefs;
+import seedu.saveit.model.issue.Solution;
+import seedu.saveit.testutil.DirectoryBuilder;
 import seedu.saveit.testutil.EditIssueDescriptorBuilder;
 import seedu.saveit.testutil.IssueBuilder;
+import seedu.saveit.testutil.SolutionBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
@@ -54,7 +64,6 @@ public class EditCommandTest {
     }
 
     @Test
-    @Ignore
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         Index indexLastIssue = Index.fromOneBased(model.getFilteredAndSortedIssueList().size());
         Issue lastIssue = model.getFilteredAndSortedIssueList().get(indexLastIssue.getZeroBased());
@@ -77,7 +86,6 @@ public class EditCommandTest {
     }
 
     @Test
-    @Ignore
     public void execute_filteredList_success() {
         showIssueAtIndex(model, INDEX_FIRST_ISSUE);
 
@@ -143,6 +151,29 @@ public class EditCommandTest {
                 new EditIssueDescriptorBuilder().withStatement(VALID_STATEMENT_C).build());
 
         assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
+    }
+
+    /**
+     * Edit solution remark in the issue list
+     */
+    @Test
+    public void execute_validSolutionRemarkIndexFilteredList_Success() {
+        Directory directory = new DirectoryBuilder().withIssueIndex(INDEX_THIRD_ISSUE).build();
+        model.resetDirectory(directory);
+
+        Solution updatedSolution = new SolutionBuilder().withRemark(VALID_REMARK_JAVA).build();
+        EditIssueDescriptor descriptor = new EditIssueDescriptorBuilder(INDEX_FIRST_SOLUTION, updatedSolution).build();
+
+        Issue previousIssue = getTypicalIssues().get(INDEX_THIRD_ISSUE.getZeroBased());
+        Issue editedIssue = new IssueBuilder(previousIssue).withSolution(INDEX_FIRST_SOLUTION, updatedSolution).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_SOLUTION, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue);
+        Model expectedModel = new ModelManager(new SaveIt(model.getSaveIt()), new UserPrefs());
+        expectedModel.updateIssue(model.getFilteredAndSortedIssueList().get(INDEX_THIRD_ISSUE.getZeroBased()), editedIssue);
+        expectedModel.commitSaveIt();
+
+        assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
@@ -215,10 +246,10 @@ public class EditCommandTest {
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_ISSUE, DESC_AMY);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_ISSUE, DESC_JAVA);
 
         // same values -> returns true
-        EditIssueDescriptor copyDescriptor = new EditIssueDescriptor(DESC_AMY);
+        EditIssueDescriptor copyDescriptor = new EditIssueDescriptor(DESC_JAVA);
         EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_ISSUE, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -232,10 +263,10 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_ISSUE, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_ISSUE, DESC_JAVA)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_ISSUE, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_ISSUE, DESC_C)));
     }
 
 }

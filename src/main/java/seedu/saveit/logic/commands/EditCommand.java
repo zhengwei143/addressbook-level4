@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.saveit.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_REMARK_STRING;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK_STRING;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -42,16 +44,20 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_ISSUE = "This issue already exists in the saveIt.";
     public static final String MESSAGE_EDIT_ISSUE_SUCCESS = "Edited Issue: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_USAGE =
-        "Edit issue or solution by the index number (positive integer) used in the displayed list: \n"
-            + "******  " + COMMAND_WORD + " INDEX "
-            + "[" + PREFIX_STATEMENT + "ISSUE_STATEMENT] "
-            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Edit solution by the index number used in the displayed solution list: \n"
-            + "******  " + COMMAND_WORD + " INDEX "
-            + "[" + PREFIX_SOLUTION_LINK + "NEW_SOLUTION_LINK] "
-            + "[" + PREFIX_REMARK + "NEW_SOLUTION_REMARK] \n";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edit an issue (Positive Index must be provided). "
+        + "Parameters: "
+        + "index "
+        + PREFIX_STATEMENT + "issue statement "
+        + PREFIX_DESCRIPTION + "description "
+        + PREFIX_TAG + "tag1 "
+        + PREFIX_TAG + "tag2\n"
+        + "_____________________________\n"
+        + COMMAND_WORD
+        + ": Edits a solution (Positive Index must be provided). "
+        + "index "
+        + PREFIX_SOLUTION_LINK + "new solution link "
+        + PREFIX_REMARK + "new solution remark \n";
 
 
     public static final String DUMMY_SOLUTION_REMARK = "dummySolutionRemark";
@@ -79,8 +85,7 @@ public class EditCommand extends Command {
 
         if (currentDirectory.isRootLevel() && editIssueDescriptor.isAnyIssueFieldEdited()) {
             issueToEdit = getIssueToEdit(lastShownList, lastShownList.size(), index.getZeroBased());
-        } else if ((currentDirectory.isIssueLevel() || currentDirectory.isSolutionLevel()) && editIssueDescriptor
-            .isAnySolutionFieldEdited()) {
+        } else if (!currentDirectory.isRootLevel() && editIssueDescriptor.isAnySolutionFieldEdited()) {
             int issueIndex = currentDirectory.getIssue() - 1;
             int solutionListSize = lastShownList.get(issueIndex).getSolutions().size();
             issueToEdit = getIssueToEdit(lastShownList, solutionListSize, issueIndex);
@@ -202,8 +207,6 @@ public class EditCommand extends Command {
         private Solution solution;
 
         public EditIssueDescriptor() {
-            solutions = new ArrayList<>();
-            tags = new LinkedHashSet<>();
         }
 
         public EditIssueDescriptor(Index index, Solution solution) {
@@ -273,15 +276,14 @@ public class EditCommand extends Command {
         }
 
         public Optional<List<Solution>> getSolutions() {
-            return (solutions.size() != 0) ? Optional.of(Collections.unmodifiableList(solutions))
-                : Optional.of(new ArrayList<>());
+            return (solutions != null) ? Optional.of(Collections.unmodifiableList(solutions)) : Optional.empty();
         }
 
         /**
          * Sets {@code tags} to this object's {@code tags}. A defensive copy of {@code tags} is used internally.
          */
         public void setTags(Set<Tag> tags) {
-            this.tags = (tags.size() != 0) ? new LinkedHashSet<>(tags) : new LinkedHashSet<>();
+            this.tags = (tags != null) ? new LinkedHashSet<>(tags) : null;
         }
 
         /**
@@ -289,8 +291,7 @@ public class EditCommand extends Command {
          * attempted. Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
-            return (tags.size() != 0) ? Optional.of(Collections.unmodifiableSet(tags))
-                : Optional.of(new LinkedHashSet<>());
+            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
         @Override

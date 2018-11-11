@@ -80,9 +80,9 @@ public class CommandTestUtil {
     public static final String SOLUTION_LINK_DES_JAVA = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_LINK_JAVA;
     public static final String SOLUTION_LINK_DES_C = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_LINK_C;
     public static final String SOLUTION_DESC_JAVA = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_LINK_JAVA
-            + " " + PREFIX_REMARK + VALID_REMARK_JAVA;
+        + " " + PREFIX_REMARK + VALID_REMARK_JAVA;
     public static final String SOLUTION_DESC_C = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_LINK_C
-            + " " + PREFIX_REMARK + VALID_REMARK_C;
+        + " " + PREFIX_REMARK + VALID_REMARK_C;
     public static final String TAG_DESC_SYNTAX = " " + PREFIX_TAG + VALID_TAG_SYNTAX;
     public static final String TAG_DESC_UI = " " + PREFIX_TAG + VALID_TAG_UI;
     public static final String TAG_DESC_PYTHON = " " + PREFIX_TAG + VALID_TAG_PYTHON;
@@ -100,15 +100,15 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditIssueDescriptor DESC_AMY;
-    public static final EditCommand.EditIssueDescriptor DESC_BOB;
+    public static final EditCommand.EditIssueDescriptor DESC_JAVA;
+    public static final EditCommand.EditIssueDescriptor DESC_C;
 
     static {
-        DESC_AMY = new EditIssueDescriptorBuilder().withStatement(VALID_STATEMENT_JAVA)
+        DESC_JAVA = new EditIssueDescriptorBuilder().withStatement(VALID_STATEMENT_JAVA)
             .withDescription(VALID_DESCRIPTION_JAVA)
             .withSolutions(SOLUTION_JAVA)
             .withTags(VALID_TAG_SYNTAX).build();
-        DESC_BOB = new EditIssueDescriptorBuilder().withStatement(VALID_STATEMENT_C)
+        DESC_C = new EditIssueDescriptorBuilder().withStatement(VALID_STATEMENT_C)
             .withDescription(VALID_DESCRIPTION_C)
             .withSolutions(SOLUTION_C)
             .withTags(VALID_TAG_UI, VALID_TAG_SYNTAX).build();

@@ -10,6 +10,7 @@ import static seedu.saveit.logic.commands.CommandTestUtil.STATEMENT_DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_UI;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_REMARK_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_LINK_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_SYNTAX;
@@ -22,20 +23,20 @@ import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_SOLUTION;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_ISSUE;
-import static seedu.saveit.testutil.TypicalIssues.TRAVIS_BUILD;
 
 import org.junit.Test;
 
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.commands.CommandTestUtil;
 import seedu.saveit.logic.commands.EditCommand;
-import seedu.saveit.model.Issue;
 import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueStatement;
+import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;
 import seedu.saveit.model.issue.solution.SolutionLink;
 import seedu.saveit.testutil.EditIssueDescriptorBuilder;
 import seedu.saveit.testutil.SolutionBuilder;
+
 
 public class EditCommandParserTest {
 
@@ -120,10 +121,6 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
-
-
-    // TODO: test solution-level edit
-
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_ISSUE;
@@ -138,50 +135,41 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_oneFieldSpecified_success() {
-//        // statement
-//        Index targetIndex = INDEX_THIRD_ISSUE;
-//        String userInput = targetIndex.getOneBased() + STATEMENT_DESC_JAVA;
-//        EditCommand.EditIssueDescriptor descriptor = new EditIssueDescriptorBuilder()
-//                .withStatement(VALID_STATEMENT_JAVA).build();
-//        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-//        assertParseSuccess(parser, userInput, expectedCommand);
-//
-//        // description
-//        userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_JAVA;
-//        descriptor = new EditIssueDescriptorBuilder().withDescription(VALID_DESCRIPTION_JAVA).build();
-//        expectedCommand = new EditCommand(targetIndex, descriptor);
-//        assertParseSuccess(parser, userInput, expectedCommand);
-//
-//        // tags
-//        userInput = targetIndex.getOneBased() + CommandTestUtil.TAG_DESC_UI;
-//        descriptor = new EditIssueDescriptorBuilder().withTags(VALID_TAG_UI).build();
-//        expectedCommand = new EditCommand(targetIndex, descriptor);
-//        assertParseSuccess(parser, userInput, expectedCommand);
-
-        // solution link
-//        Issue validIssue = new IssueBuilder().build();
-//        Issue editedIssue = new IssueBuilder(validIssue).withSolutionLink(INDEX_FIRST_SOLUTION, VALID_SOLUTION_LINK_STACKOVERFLOW).build();
-
-        Issue editedIssue = TRAVIS_BUILD;
-
-        String userInput = INDEX_FIRST_SOLUTION.getOneBased() + CommandTestUtil.SOLUTION_LINK_DES_C;
-        EditCommand.EditIssueDescriptor descriptor = new EditIssueDescriptorBuilder(INDEX_FIRST_SOLUTION, new SolutionBuilder().withLink(VALID_SOLUTION_LINK_C).build()).build();
-        System.out.println("statement:" + descriptor.getStatement().get());
-        System.out.println("description:" + descriptor.getDescription().get());
-        System.out.println("tags:" + descriptor.getTags().get());
-        System.out.println("solutions:" + descriptor.getStatement().get());
-
-        EditCommand expectedCommand = new EditCommand(INDEX_FIRST_SOLUTION, descriptor);
+        // statement
+        Index targetIndex = INDEX_THIRD_ISSUE;
+        String userInput = targetIndex.getOneBased() + STATEMENT_DESC_JAVA;
+        EditCommand.EditIssueDescriptor descriptor = new EditIssueDescriptorBuilder()
+                .withStatement(VALID_STATEMENT_JAVA).build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-//        // solution link
-//        Index targetSolutionIndex = INDEX_FIRST_SOLUTION;
-//        userInput = targetSolutionIndex.getOneBased() + CommandTestUtil.SOLUTION_LINK_DES_C;
-//        System.out.println(userInput);
-//        descriptor = new EditIssueDescriptorBuilder().withSolutionLink(targetSolutionIndex, VALID_SOLUTION_LINK_C).build();
-//        expectedCommand = new EditCommand(targetSolutionIndex, descriptor);
-//        assertParseSuccess(parser, userInput, expectedCommand);
+        // description
+        userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_JAVA;
+        descriptor = new EditIssueDescriptorBuilder().withDescription(VALID_DESCRIPTION_JAVA).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // tags
+        userInput = targetIndex.getOneBased() + CommandTestUtil.TAG_DESC_UI;
+        descriptor = new EditIssueDescriptorBuilder().withTags(VALID_TAG_UI).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // solution link
+        userInput = INDEX_FIRST_SOLUTION.getOneBased() + CommandTestUtil.SOLUTION_LINK_DES_C;
+        Solution updateSolution = new SolutionBuilder().withLink(VALID_SOLUTION_LINK_C).build();
+        descriptor = new EditIssueDescriptorBuilder(INDEX_FIRST_SOLUTION, updateSolution).build();
+        expectedCommand = new EditCommand(INDEX_FIRST_SOLUTION, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // solution remark
+        userInput = INDEX_FIRST_SOLUTION.getOneBased() + CommandTestUtil.REMARK_DES_JAVA;
+        updateSolution = new SolutionBuilder().withRemark(VALID_REMARK_JAVA).build();
+        descriptor = new EditIssueDescriptorBuilder(INDEX_FIRST_SOLUTION, updateSolution).build();
+        expectedCommand = new EditCommand(INDEX_FIRST_SOLUTION, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
+
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
@@ -200,14 +188,12 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
-    // TODO: test solution-level multiple repeated fields edit
 
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_ISSUE;
         String userInput = targetIndex.getOneBased() + INVALID_DESCRIPTION_DESC + DESCRIPTION_DESC_C;
-        System.out.println(userInput);
         EditCommand.EditIssueDescriptor descriptor =
             new EditIssueDescriptorBuilder().withDescription(VALID_DESCRIPTION_C).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);

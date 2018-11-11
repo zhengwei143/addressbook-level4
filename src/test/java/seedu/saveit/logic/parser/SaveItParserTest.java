@@ -5,9 +5,12 @@ import static org.junit.Assert.assertTrue;
 import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.saveit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.saveit.logic.commands.CommandTestUtil.NEWTAG_DESC_SYNTAX;
+import static seedu.saveit.logic.commands.CommandTestUtil.STATEMENT_DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_PYTHON;
+import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_PYTHON;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_SYNTAX;
+import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.INITIALIZED_ISSUE_FREQUENCY;
@@ -92,8 +95,9 @@ public class SaveItParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Issue issue = new IssueBuilder().build();
-        EditIssueDescriptor descriptor = new EditIssueDescriptorBuilder(issue).build();
+        // statement
+        EditIssueDescriptor descriptor = new EditIssueDescriptorBuilder()
+            .withStatement(VALID_STATEMENT_JAVA).build();
 
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
             + INDEX_FIRST_ISSUE.getOneBased() + " " + IssueUtil.getEditIssueDescriptorDetails(descriptor));

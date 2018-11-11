@@ -50,8 +50,8 @@ https://github.com/CS2103-AY1819S1-T12-4/main/pull/32[#32], https://github.com/C
 https://github.com/CS2103-AY1819S1-T12-4/main/pull/123[#123], https://github.com/CS2103-AY1819S1-T12-4/main/pull/168[#168],
 https://github.com/CS2103-AY1819S1-T12-4/main/pull/169[#169],https://github.com/CS2103-AY1819S1-T12-4/main/pull/178[#178],
 
-*** Reported bugs and suggestions for other team members in the group:  https://github.com/CS2103-AY1819S1-T12-4/main/issues/111[111], https://github.com/CS2103-AY1819S1-T12-4/main/issues/115[115]
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Reported bugs and suggestions for other team members in the group:  https://github.com/CS2103-AY1819S1-T12-4/main/issues/111[111], https://github.com/CS2103-AY1819S1-T12-4/main/issues/115[115],
+https://github.com/CS2103-AY1819S1-T12-4/main/issues/203[203], https://github.com/CS2103-AY1819S1-T12-4/main/issues/210[210]
 
 == Contributions to the User Guide
 
@@ -77,9 +77,3 @@ include::../DeveloperGuide.adoc[tag=sort]
 include::../DeveloperGuide.adoc[tag=confirmation]
 
 include::../DeveloperGuide.adoc[tag=setprimary]
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_

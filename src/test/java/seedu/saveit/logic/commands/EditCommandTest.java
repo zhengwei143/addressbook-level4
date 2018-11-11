@@ -68,10 +68,10 @@ public class EditCommandTest {
 
         IssueBuilder issueInList = new IssueBuilder(lastIssue);
         Issue editedIssue = issueInList.withStatement(VALID_STATEMENT_C).withDescription(VALID_DESCRIPTION_C)
-                .withTags(VALID_TAG_UI).build();
+            .withTags(VALID_TAG_UI).build();
 
         EditIssueDescriptor descriptor = new EditIssueDescriptorBuilder().withStatement(VALID_STATEMENT_C)
-                .withDescription(VALID_DESCRIPTION_C).withTags(VALID_TAG_UI).build();
+            .withDescription(VALID_DESCRIPTION_C).withTags(VALID_TAG_UI).build();
         EditCommand editCommand = new EditCommand(indexLastIssue, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue);
@@ -87,12 +87,11 @@ public class EditCommandTest {
     public void execute_filteredList_success() {
         showIssueAtIndex(model, INDEX_FIRST_ISSUE);
 
-
         Issue issueInFilteredList = model.getFilteredAndSortedIssueList().get(INDEX_FIRST_ISSUE.getZeroBased());
         Issue editedIssue = new IssueBuilder(issueInFilteredList).withStatement(VALID_STATEMENT_C).build();
 
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ISSUE,
-                new EditIssueDescriptorBuilder().withStatement(VALID_STATEMENT_C).build());
+            new EditIssueDescriptorBuilder().withStatement(VALID_STATEMENT_C).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue);
 
@@ -119,7 +118,7 @@ public class EditCommandTest {
         // edit issue in filtered list into a duplicate in saveit book
         Issue issueInList = model.getSaveIt().getIssueList().get(INDEX_SECOND_ISSUE.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ISSUE,
-                new EditIssueDescriptorBuilder(issueInList).build());
+            new EditIssueDescriptorBuilder(issueInList).build());
 
         assertCommandFailure(editCommand, model, commandHistory, EditCommand.MESSAGE_DUPLICATE_ISSUE);
     }
@@ -128,15 +127,14 @@ public class EditCommandTest {
     public void execute_invalidIssueIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAndSortedIssueList().size() + 1);
         EditCommand.EditIssueDescriptor descriptor = new EditIssueDescriptorBuilder()
-                .withStatement(VALID_STATEMENT_C).build();
+            .withStatement(VALID_STATEMENT_C).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
     }
 
     /**
-     * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of saveit book
+     * Edit filtered list where index is larger than size of filtered list, but smaller than size of saveit book
      */
     @Test
     public void execute_invalidIssueIndexFilteredList_failure() {
@@ -146,7 +144,7 @@ public class EditCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getSaveIt().getIssueList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditIssueDescriptorBuilder().withStatement(VALID_STATEMENT_C).build());
+            new EditIssueDescriptorBuilder().withStatement(VALID_STATEMENT_C).build());
 
         assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
     }
@@ -155,7 +153,7 @@ public class EditCommandTest {
      * Edit solution remark in the issue list
      */
     @Test
-    public void execute_validSolutionRemarkIndexFilteredList_Success() {
+    public void execute_validRemarkIndexFilteredList_uccess() {
         Directory directory = new DirectoryBuilder().withIssueIndex(INDEX_THIRD_ISSUE).build();
         model.resetDirectory(directory);
 
@@ -168,7 +166,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue);
         Model expectedModel = new ModelManager(new SaveIt(model.getSaveIt()), new UserPrefs());
-        expectedModel.updateIssue(model.getFilteredAndSortedIssueList().get(INDEX_THIRD_ISSUE.getZeroBased()), editedIssue);
+        expectedModel
+            .updateIssue(model.getFilteredAndSortedIssueList().get(INDEX_THIRD_ISSUE.getZeroBased()), editedIssue);
         expectedModel.commitSaveIt();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -178,7 +177,7 @@ public class EditCommandTest {
      * Edit solution link in the issue list
      */
     @Test
-    public void execute_validSolutionLinkIndexFilteredList_Success() {
+    public void execute_validSolutionLinkFilteredList_success() {
         Directory directory = new DirectoryBuilder().withIssueIndex(INDEX_THIRD_ISSUE).build();
         model.resetDirectory(directory);
 
@@ -191,7 +190,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue);
         Model expectedModel = new ModelManager(new SaveIt(model.getSaveIt()), new UserPrefs());
-        expectedModel.updateIssue(model.getFilteredAndSortedIssueList().get(INDEX_THIRD_ISSUE.getZeroBased()), editedIssue);
+        expectedModel
+            .updateIssue(model.getFilteredAndSortedIssueList().get(INDEX_THIRD_ISSUE.getZeroBased()), editedIssue);
         expectedModel.commitSaveIt();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -234,11 +234,9 @@ public class EditCommandTest {
     }
 
     /**
-     * 1. Edits a {@code Issue} from a filtered list.
-     * 2. Undo the edit.
-     * 3. The unfiltered list should be shown now. Verify that the index of the previously edited issue in the
-     * unfiltered list is different from the index at the filtered list.
-     * 4. Redo the edit. This ensures {@code RedoCommand} edits the issue object regardless of indexing.
+     * 1. Edits a {@code Issue} from a filtered list. 2. Undo the edit. 3. The unfiltered list should be shown now.
+     * Verify that the index of the previously edited issue in the unfiltered list is different from the index at the
+     * filtered list. 4. Redo the edit. This ensures {@code RedoCommand} edits the issue object regardless of indexing.
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_sameIssueEdited() throws Exception {

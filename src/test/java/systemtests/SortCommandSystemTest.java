@@ -130,7 +130,6 @@ public class SortCommandSystemTest extends SaveItSystemTest {
     private void updateFrequency(Issue... issues) {
         String command;
         for (Issue issue : issues) {
-            // .split(" ")[1] can be removed once autosuggestion is fixed
             String statement = issue.getStatement().getValue().split(" ")[1];
             command = FindCommand.COMMAND_WORD + " " + statement;
             executeCommand(command);
@@ -145,7 +144,7 @@ public class SortCommandSystemTest extends SaveItSystemTest {
     private void filterList(Issue... issues) {
         String keyword = "";
         for (Issue issue : issues) {
-            keyword = keyword + issue.getStatement().getValue().split(" ")[1] + " ";
+            keyword = keyword + issue.getStatement().getValue();
         }
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
     }

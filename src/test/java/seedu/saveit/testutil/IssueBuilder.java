@@ -90,55 +90,12 @@ public class IssueBuilder {
     }
 
     /**
-     * Parses the {@code solution} into a {@code Set<Solution>} and set it to the {@code Issue} that we are building.
+     * Parses the {@code solution} into a {@code Set<Solution>} with {@code Index} issue and set it to the {@code Issue} that we are building.
      */
-    public IssueBuilder withSolutionLink (Index index, String solutionLink) {
-        Solution solution = processSolutionWithSolutionLink(index, solutionLink);
-        solutions.set(index.getZeroBased(), solution);
-        return this;
-    }
-
-    /**
-     * Parses the {@code solution} into a {@code Set<Solution>} and set it to the {@code Issue} that we are building.
-     */
-    public IssueBuilder withRemark (Index index, String solutionRemark) {
-        Solution solution = processSolutionWithSolutionRemark(index, solutionRemark);
-        solutions.set(index.getZeroBased(),solution);
-        return this;
-    }
-
-    /**
-     * Parses the {@code solution} into a {@code Set<Solution>} and set it to the {@code Issue} that we are building.
-     */
-
-
-    public Solution processSolutionWithSolutionLink (Index index, String solutionLink){
-        SolutionLink link = new SolutionLink(solutionLink);
-        Remark remark = this.solutions.get(index.getZeroBased()).getRemark();
-        return new Solution(link, remark);
-    }
-
-    public Solution processSolutionWithSolutionRemark (Index index, String solutionRemark){
-        SolutionLink link = this.solutions.get(index.getZeroBased()).getLink();
-        Remark remark = new Remark(solutionRemark);
-        return new Solution(link, remark);
-    }
-
     public IssueBuilder withSolution(Index index, Solution solution) {
         solutions.set(index.getZeroBased(), solution);
         return this;
     }
-
-    /**
-     * Parses the {@code solution} into a {@code Set<Solution>} and set it to the {@code Issue} that we are building.
-     */
-    public IssueBuilder withSolutionRemark (Index index, String solutionRemark) {
-        Solution solution = processSolutionWithSolutionRemark(index, solutionRemark);
-        solutions.set(index.getZeroBased(), solution);
-        return this;
-    }
-
-
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Issue} that we are building.

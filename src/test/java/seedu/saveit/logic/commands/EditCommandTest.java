@@ -176,6 +176,29 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
+    /**
+     * Edit solution link in the issue list
+     */
+    @Test
+    public void execute_validSolutionLinkIndexFilteredList_Success() {
+        Directory directory = new DirectoryBuilder().withIssueIndex(INDEX_THIRD_ISSUE).build();
+        model.resetDirectory(directory);
+
+        Solution updatedSolution = new SolutionBuilder().withLink(VALID_SOLUTION_LINK_STACKOVERFLOW).build();
+        EditIssueDescriptor descriptor = new EditIssueDescriptorBuilder(INDEX_FIRST_SOLUTION, updatedSolution).build();
+
+        Issue previousIssue = getTypicalIssues().get(INDEX_THIRD_ISSUE.getZeroBased());
+        Issue editedIssue = new IssueBuilder(previousIssue).withSolution(INDEX_FIRST_SOLUTION, updatedSolution).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_SOLUTION, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ISSUE_SUCCESS, editedIssue);
+        Model expectedModel = new ModelManager(new SaveIt(model.getSaveIt()), new UserPrefs());
+        expectedModel.updateIssue(model.getFilteredAndSortedIssueList().get(INDEX_THIRD_ISSUE.getZeroBased()), editedIssue);
+        expectedModel.commitSaveIt();
+
+        assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
+
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Issue editedIssue = new IssueBuilder().build();

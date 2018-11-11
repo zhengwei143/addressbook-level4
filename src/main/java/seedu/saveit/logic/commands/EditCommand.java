@@ -4,9 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.saveit.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.saveit.logic.parser.CliSyntax.PREFIX_REMARK_STRING;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
-import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK_STRING;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -65,6 +63,8 @@ public class EditCommand extends Command {
 
     private final Index index;
     private final EditIssueDescriptor editIssueDescriptor;
+
+    protected static int DEFAULT_SOLUTION_INDEX = -1;
 
     /**
      * @param index of the issue in the filtered issue list to edit
@@ -203,7 +203,7 @@ public class EditCommand extends Command {
         private List<Solution> solutions;
         private Description description;
         private Set<Tag> tags;
-        private int index = -1;
+        private int index = DEFAULT_SOLUTION_INDEX;
         private Solution solution;
 
         public EditIssueDescriptor() {

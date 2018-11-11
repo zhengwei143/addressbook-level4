@@ -3,16 +3,13 @@ package seedu.saveit.ui;
 import static java.time.Duration.ofMillis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
-import static seedu.saveit.testutil.EventsUtil.postNow;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalIssues;
 import static seedu.saveit.ui.testutil.GuiTestAssert.assertCardDisplaysIssue;
-import static seedu.saveit.ui.testutil.GuiTestAssert.assertCardEquals;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import guitests.guihandles.IssueCardHandle;
@@ -30,8 +27,6 @@ public class IssueListPanelTest extends GuiUnitTest {
     private static final ObservableList<Issue> TYPICAL_ISSUES =
             FXCollections.observableList(getTypicalIssues());
 
-    private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(INDEX_SECOND_ISSUE);
-
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "sandbox");
 
     private static final long CARD_CREATION_AND_DELETION_TIMEOUT = 2500;
@@ -39,7 +34,6 @@ public class IssueListPanelTest extends GuiUnitTest {
     private IssueListPanelHandle issueListPanelHandle;
 
     @Test
-    @Ignore
     public void display() {
         initUi(TYPICAL_ISSUES);
 
@@ -53,24 +47,11 @@ public class IssueListPanelTest extends GuiUnitTest {
         }
     }
 
-    @Test
-    @Ignore
-    public void handleJumpToListRequestEvent() {
-        initUi(TYPICAL_ISSUES);
-        postNow(JUMP_TO_SECOND_EVENT);
-        guiRobot.pauseForHuman();
-
-        IssueCardHandle expectedIssue = issueListPanelHandle.getIssueCardHandle(INDEX_SECOND_ISSUE.getZeroBased());
-        IssueCardHandle selectedIssue = issueListPanelHandle.getHandleToSelectedCard();
-        assertCardEquals(expectedIssue, selectedIssue);
-    }
-
     /**
      * Verifies that creating and deleting large number of issues in {@code IssueListPanel} requires lesser than
      * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
      */
     @Test
-    @Ignore
     public void performanceTest() throws Exception {
         ObservableList<Issue> backingList = createBackingList(10000);
 
@@ -103,9 +84,13 @@ public class IssueListPanelTest extends GuiUnitTest {
             builder.append("<statement>").append(i).append("a</statement>\n");
             builder.append("<description>000</description>\n");
             builder.append("<solutions>\n");
-            builder.append("<solutionLink>www.example.com></solutionLink>\n");
+            builder.append("<solutionLink>https://www.example.com</solutionLink>\n");
             builder.append("<remark>remark</remark>\n");
+            builder.append("<isPrimarySolution>false</isPrimarySolution>\n");
             builder.append("</solutions>\n");
+            builder.append("<frequency>0</frequency>\n");
+            builder.append("<createdTime>1541846485039</createdTime>\n");
+            builder.append("<lastModifiedTime>1541846485039</lastModifiedTime>\n");
             builder.append("</issues>\n");
         }
         builder.append("</saveit>\n");

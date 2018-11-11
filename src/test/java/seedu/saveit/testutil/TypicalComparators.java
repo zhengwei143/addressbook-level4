@@ -7,6 +7,9 @@ import seedu.saveit.model.issue.IssueChroComparator;
 import seedu.saveit.model.issue.IssueFreqComparator;
 import seedu.saveit.model.issue.IssueTagComparator;
 
+/**
+ * A utility class containing a list of {@code Comparator} objects to be used in tests.
+ */
 public class TypicalComparators {
     public static final Comparator<Issue> FREQUENCY_COMPARATOR = new IssueFreqComparator();
     public static final Comparator<Issue> TAG_COMPARATOR = new IssueTagComparator();

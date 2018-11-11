@@ -13,7 +13,6 @@ import guitests.guihandles.ResultDisplayHandle;
 import seedu.saveit.commons.events.model.DirectoryChangedEvent;
 import seedu.saveit.commons.events.model.SortTypeChangedEvent;
 import seedu.saveit.commons.events.ui.NewResultAvailableEvent;
-import seedu.saveit.model.issue.IssueFreqComparator;
 
 
 public class ResultDisplayTest extends GuiUnitTest {

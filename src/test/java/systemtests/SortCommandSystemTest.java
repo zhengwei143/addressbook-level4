@@ -12,7 +12,6 @@ import static seedu.saveit.testutil.TypicalIssues.QUICKSORT_BUG;
 import static seedu.saveit.testutil.TypicalIssues.RUBY_HASH_BUG;
 import static seedu.saveit.testutil.TypicalIssues.TRAVIS_BUILD;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.saveit.commons.core.Messages;
@@ -26,7 +25,6 @@ import seedu.saveit.model.issue.SortType;
 
 public class SortCommandSystemTest extends SaveItSystemTest {
     @Test
-    @Ignore
     public void sort() {
         Model expectedModel = getModel();
 

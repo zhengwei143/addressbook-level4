@@ -229,11 +229,9 @@ Since the original tokenizer hashes prefix, there is no way to distinguish the o
 * **Alternative 1 (current choice):** Hash Prefix with its relative distance together
 
 ** Pros: Code has a high readability and easy to understand
-
 ** Cons: Quite hard to implement as other commands do not require to distinguish the order of each value but suggestion component does. Once hash with prefix and distance, it needs to handle both situation.
 
 * **Alternative 2:** Using subString to get each field from command line input
 
 ** Pros: Easy to implement.
-
 ** Cons: Bad readability and code quality, no consistency.

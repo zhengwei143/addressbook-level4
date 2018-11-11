@@ -92,9 +92,10 @@ public class SortCommandTest {
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, sortType.getSortType());
         Issue issue = new Issue(new IssueStatement("new SOLUTION_C++ problem"),
                 new Description("only for test"), new ArrayList<>(), new HashSet<>());
-        updateFrequency(JAVA_NULL_POINTER, JAVA_NULL_POINTER, JAVA_NULL_POINTER,
+        updateFrequency(JAVA_NULL_POINTER, JAVA_NULL_POINTER, JAVA_NULL_POINTER, JAVA_NULL_POINTER,
                 C_SEGMENTATION_FAULT, C_SEGMENTATION_FAULT, C_SEGMENTATION_FAULT, C_SEGMENTATION_FAULT,
-                TRAVIS_BUILD, TRAVIS_BUILD, RUBY_HASH_BUG, CHECKSTYLE_ERROR);
+                TRAVIS_BUILD, TRAVIS_BUILD, TRAVIS_BUILD,
+                RUBY_HASH_BUG, CHECKSTYLE_ERROR, C_SEGMENTATION_FAULT, QUICKSORT_BUG);
 
         expectedModel.addIssue(issue);
         expectedModel.updateFilteredAndSortedIssueList(sortType.getComparator());

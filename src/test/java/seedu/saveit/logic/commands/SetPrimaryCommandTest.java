@@ -74,7 +74,7 @@ public class SetPrimaryCommandTest {
      * Reset the directory of model and expected to Root Level.
      */
     private void setUpRootLevel() {
-        Directory rootDirectory = new DirectoryBuilder().build();
+        Directory rootDirectory = Directory.formRootDirectory();
         model.resetDirectory(rootDirectory);
         expectedModel.resetDirectory(rootDirectory);
         issueSelected = null;

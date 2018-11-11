@@ -184,5 +184,4 @@ public class CommandTestUtil {
         model.deleteIssue(firstIssue);
         model.commitSaveIt();
     }
-
 }

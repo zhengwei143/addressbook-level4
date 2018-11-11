@@ -3,25 +3,23 @@ package seedu.saveit.logic;
 import static org.junit.Assert.assertEquals;
 import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX;
 import static seedu.saveit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_ISSUE;
+import static seedu.saveit.testutil.TypicalIndexes.*;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.saveit.commons.core.directory.Directory;
-import seedu.saveit.logic.commands.ClearCommand;
-import seedu.saveit.logic.commands.CommandResult;
-import seedu.saveit.logic.commands.DangerCommand;
-import seedu.saveit.logic.commands.HistoryCommand;
-import seedu.saveit.logic.commands.ListCommand;
+import seedu.saveit.commons.exceptions.IllegalValueException;
+import seedu.saveit.logic.commands.*;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.UserPrefs;
 import seedu.saveit.testutil.DirectoryBuilder;
+import seedu.saveit.testutil.IssueBuilder;
+import seedu.saveit.testutil.SolutionBuilder;
 
 
 public class LogicManagerTest {
@@ -79,11 +77,50 @@ public class LogicManagerTest {
     }
 
     @Test
-    @Ignore
     public void getFilteredSolutionList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        logic.resetDirectory(new DirectoryBuilder().withSolutionIndex(INDEX_THIRD_ISSUE).build());
-        logic.getFilteredSolutionList().remove(0);
+        model.addIssue(new IssueBuilder().build());
+        assertCommandSuccess(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_ISSUE.getOneBased(),
+                String.format(SelectCommand.MESSAGE_SELECT_ISSUE_SUCCESS, INDEX_FIRST_ISSUE.getOneBased()), model);
+        logic.getFilteredSolutionList().add(new SolutionBuilder().build());
+    }
+
+    @Test
+    public void resetValidDirectory_success() {
+        // reset to the root directory
+        Directory rootDirectory = Directory.formRootDirectory();
+        logic.resetDirectory(rootDirectory);
+        assertEquals(model.getCurrentDirectory(), rootDirectory);
+
+        // reset to valid Issue directory
+        model.addIssue(new IssueBuilder().build());
+        Directory validIssueDirectory = new DirectoryBuilder().withIssueIndex(INDEX_FIRST_ISSUE).build();
+        logic.resetDirectory(validIssueDirectory);
+        assertEquals(model.getCurrentDirectory(), validIssueDirectory);
+
+        // reset to valid Solution directory
+        model.addSolution(model.getFilteredAndSortedIssueList().get(INDEX_FIRST_ISSUE.getZeroBased()),
+                new SolutionBuilder().build());
+        Directory validSolutionDirectory = new DirectoryBuilder().withIssueIndex(INDEX_FIRST_ISSUE)
+                .withSolutionIndex(INDEX_FIRST_SOLUTION).build();
+        logic.resetDirectory(validSolutionDirectory);
+        assertEquals(model.getCurrentDirectory(), validSolutionDirectory);
+    }
+
+    @Test
+    public void resetInvalidDirectory_success() {
+        Directory rootDirectory = Directory.formRootDirectory();
+        // reset to invalid Issue directory
+        Directory invalidIssueDirectory = new DirectoryBuilder().withIssueIndex(INDEX_FIRST_ISSUE).build();
+        logic.resetDirectory(invalidIssueDirectory);
+        assertEquals(model.getCurrentDirectory(), rootDirectory);
+
+        // reset to valid Solution directory
+        model.addIssue(new IssueBuilder().build());
+        Directory invalidSolutionDirectory = new DirectoryBuilder().withIssueIndex(INDEX_FIRST_ISSUE)
+                .withSolutionIndex(INDEX_FIRST_SOLUTION).build();
+        logic.resetDirectory(invalidSolutionDirectory);
+        assertEquals(model.getCurrentDirectory(), rootDirectory);
     }
 
     /**

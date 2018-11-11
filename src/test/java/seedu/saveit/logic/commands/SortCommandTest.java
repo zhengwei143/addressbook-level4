@@ -72,7 +72,8 @@ public class SortCommandTest {
                 TRAVIS_BUILD_STATEMENT.split("\\s+")[0],
                 C_RACE_CONDITION_STATEMENT.split("\\s+")[0]
         };
-        updateLastModifiedTime(C_RACE_CONDITION, C_SEGMENTATION_FAULT, TRAVIS_BUILD, JAVA_NULL_POINTER, C_SEGMENTATION_FAULT);
+        updateLastModifiedTime(C_RACE_CONDITION, C_SEGMENTATION_FAULT, TRAVIS_BUILD,
+                JAVA_NULL_POINTER, C_SEGMENTATION_FAULT);
         // Filtered the issue list to the above 4 issues
         filterIssueList(keywordArray);
 

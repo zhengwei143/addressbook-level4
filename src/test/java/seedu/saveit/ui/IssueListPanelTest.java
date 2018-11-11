@@ -3,7 +3,6 @@ package seedu.saveit.ui;
 import static java.time.Duration.ofMillis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
-import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalIssues;
 import static seedu.saveit.ui.testutil.GuiTestAssert.assertCardDisplaysIssue;
 
@@ -16,7 +15,6 @@ import guitests.guihandles.IssueCardHandle;
 import guitests.guihandles.IssueListPanelHandle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.saveit.commons.events.ui.JumpToListRequestEvent;
 import seedu.saveit.commons.util.FileUtil;
 import seedu.saveit.commons.util.XmlUtil;
 import seedu.saveit.model.Issue;

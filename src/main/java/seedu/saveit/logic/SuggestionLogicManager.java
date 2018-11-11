@@ -53,7 +53,8 @@ public class SuggestionLogicManager implements SuggestionLogic {
     @Override
     public SuggestionResult evaluate(String userInput) {
         Suggestion suggestion = parseUserInput(userInput);
-        if (suggestion == null) {
+        // Autosuggestions should only be at the root level - for issues
+        if (suggestion == null || !model.getCurrentDirectory().isRootLevel()) {
             return new SuggestionResult(new LinkedList<>(), "", "", 0, 0);
         }
         return suggestion.evaluate();

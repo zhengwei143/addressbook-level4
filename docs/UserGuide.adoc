@@ -527,10 +527,13 @@ Format: `sort freq`
 Format: `sort tag`
 [TIP]
 ====
-* Sort the issue list by their tag in alphabetical order.
-If their first tags are the same, the following tags are compared until there is a difference or one tag set comes to the end.
-In the second case, the issue with fewer tags is give higher priority.
+* Sort the issue list by each issue's tag set in lexicographical order, following ASCII lexicography.
 * Put the issues without tags at the end of the displayed issue list.
+====
+
+[NOTE]
+====
+* This command can only be executed in *home directory*.
 ====
 
 Examples:
@@ -560,7 +563,7 @@ Format: `setprimary INDEX`
 * The index refers to the index number on the solution list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * The index cannot be bigger than the number of issues.
-* This command can only be executed *after you select an issue or a solution*.
+* This command can only be executed in *issue or solution directory*.
 ====
 // end::setprimary[]
 
@@ -574,7 +577,7 @@ Format: `resetprimary`
 
 [NOTE]
 ====
-* This command can only be executed *after you select an issue or a solution*.
+* This command can only be executed in *issue or solution directory*.
 ====
 
 === Autosuggesting existing issue in find command

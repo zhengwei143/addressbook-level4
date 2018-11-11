@@ -35,21 +35,21 @@ public class EditIssueDescriptorTest {
         assertFalse(DESC_JAVA.equals(DESC_C));
 
         // different name -> returns false
-        EditIssueDescriptor editedJAVA = new EditIssueDescriptorBuilder(DESC_JAVA)
+        EditIssueDescriptor editedJava = new EditIssueDescriptorBuilder(DESC_JAVA)
                 .withStatement(VALID_STATEMENT_C).build();
-        assertFalse(DESC_JAVA.equals(editedJAVA));
+        assertFalse(DESC_JAVA.equals(editedJava));
 
         // different description -> returns false
-        editedJAVA = new EditIssueDescriptorBuilder(DESC_JAVA).withDescription(VALID_DESCRIPTION_C).build();
-        assertFalse(DESC_JAVA.equals(editedJAVA));
+        editedJava = new EditIssueDescriptorBuilder(DESC_JAVA).withDescription(VALID_DESCRIPTION_C).build();
+        assertFalse(DESC_JAVA.equals(editedJava));
 
         // different solutions -> returns false
-        editedJAVA = new EditIssueDescriptorBuilder(DESC_JAVA).withSolutions(SOLUTION_C).build();
-        assertFalse(DESC_JAVA.equals(editedJAVA));
+        editedJava = new EditIssueDescriptorBuilder(DESC_JAVA).withSolutions(SOLUTION_C).build();
+        assertFalse(DESC_JAVA.equals(editedJava));
 
         // different tags -> returns false
-        editedJAVA = new EditIssueDescriptorBuilder(DESC_JAVA).withTags(VALID_TAG_UI).build();
-        assertFalse(DESC_JAVA.equals(editedJAVA));
+        editedJava = new EditIssueDescriptorBuilder(DESC_JAVA).withTags(VALID_TAG_UI).build();
+        assertFalse(DESC_JAVA.equals(editedJava));
 
     }
 }

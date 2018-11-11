@@ -117,13 +117,19 @@ public class EditIssueDescriptorBuilder {
         return this;
     }
 
-    public Solution processSolutionWithSolutionLink (Index index, String solutionLink){
+    /**
+     * Parses the {@code solutionLink} to get a new Solution for {@code index} solution in the solution list
+     */
+    public Solution processSolutionWithSolutionLink(Index index, String solutionLink) {
         SolutionLink link = new SolutionLink(solutionLink);
         Remark remark = descriptor.getSolutions().get().get(index.getZeroBased()).getRemark();
         return new Solution(link, remark);
     }
 
-    public Solution processSolutionWithSolutionRemark (Index index, String solutionRemark){
+    /**
+     * Parses the {@code solutionRemark} to get a new Solution for {@code index} solution in the solution list
+     */
+    public Solution processSolutionWithSolutionRemark(Index index, String solutionRemark) {
         SolutionLink link = descriptor.getSolutions().get().get(index.getZeroBased()).getLink();
         Remark remark = new Remark(solutionRemark);
         return new Solution(link, remark);

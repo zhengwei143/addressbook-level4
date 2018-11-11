@@ -34,7 +34,8 @@ public class FindCommand extends Command {
         if (model.getCurrentDirectory().isRootLevel()) {
             model.filterIssues(predicate);
             return new CommandResult(
-                    String.format(Messages.MESSAGE_ISSUES_LISTED_OVERVIEW, model.getFilteredAndSortedIssueList().size()));
+                    String.format(Messages.MESSAGE_ISSUES_LISTED_OVERVIEW,
+                            model.getFilteredAndSortedIssueList().size()));
         } else {
             throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
         }

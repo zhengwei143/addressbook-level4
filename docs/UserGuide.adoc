@@ -33,7 +33,7 @@ To get started with SaveIt, please follow the  instructions below:
 .  Double-click the file to start the app. The GUI should appear in a few seconds, as shown below.
 +
 .Application Interface
-image::UI_Design.png[width="790"]
+image::UI.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -61,7 +61,7 @@ The following is a list of commands that you can use in the application.
 
 === Viewing help : `(h)help`
 
-Types `help` to view the handy help page!
+Type `help` to view the handy help page!
 
 Format: `help`
 
@@ -85,7 +85,7 @@ image::command-highlight2.png[width="790"]
 
 === Selecting an issue/solution  : `(s)select`
 
-If the user is at the root directory, the command selects
+If the user is at the home directory, the command selects
  an issue identified by the index number used in the issue panel.
   The command also displays the solutions
   of the selected issue in the solution panel. Now the edit directory
@@ -135,7 +135,7 @@ Format: `add i/ISSUE_STATEMENT d/DESCRIPTION [t/TAG]...`
 
 Adds a solution to an existing issue in SaveIt App.
 
-Format: `add s/SOLUTION_LINK2 r/REMARK`
+Format: `add s/SOLUTION_LINK r/REMARK`
 [TIP]
 ====
 * Select an issue before adding solution
@@ -176,7 +176,7 @@ image::AddingNewSolution.png[width="800"]
 
 === Editing an issue : `(e)edit`
 
-To edit an existing issue or solution in the SaveIt App.
+Edits an existing issue or solution in the SaveIt App.
 
 Format: `edit INDEX [i/NEW_ISSUE] [d/NEW_DESCRIPTION] [t/TAG]...`
 
@@ -209,10 +209,10 @@ image::edit-solution.png[width="790"]
 
 [NOTE]
 ====
-* Edits the issue at the specified `INDEX`. The index refers to the index number shown in the displayed statement list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the issue at the specified `INDEX`. The index refers to the index number shown in the displayed issue list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the statement will be removed i.e. adding of solutions is not cumulative.
+* When editing tags, the existing tags of the issue will be removed i.e. adding of solutions is not cumulative.
 * You can remove all the tags by typing `t/` without specifying any tags after it.
 ====
 // tag::edit[]
@@ -220,7 +220,7 @@ image::edit-solution.png[width="790"]
 // tag::refacotrTag[]
 === Refactoring tag: `(rt)refactortag`
 
-To rename or remove a specific tag for all entries with that tag.
+Renames or removes a specific tag for all entries with that tag.
 
 Format: `refactortag t/OLD_TAG [n/NEW_TAG]`
 
@@ -232,9 +232,9 @@ Format: `refactortag t/OLD_TAG [n/NEW_TAG]`
 
 Examples:
 ****
-* `refactorTag t/solved n/TIL` +
-Changes all entries tagged `solved` to be tagged `TIL`.
-* `refactorTag t/solved` +
+* `refactortag t/solved n/TIL` +
+Changes all entries tagged with `solved` to be tagged with `TIL`.
+* `refactortag t/solved` +
 Removes the tag `solved` from all entries.
 
 
@@ -245,8 +245,9 @@ image::refactor-tag.png[width="790"]
 [NOTE]
 ====
 * The old tag must be provided.
-* If the user provides multiple old tags or new tags, only take the one as an effect.
+* If the user provides multiple old tags or new tags, only take the last one as an effect.
 * If the new tag exits in the issue already, it will only remove the old tag.
+* This command can only be executed in home directory.
 ====
 // end::refactortag[]
 
@@ -254,7 +255,7 @@ image::refactor-tag.png[width="790"]
 
 === Adding tag: `(at)addtag`
 
-To add tags for issue(s).
+Adds tags for issue(s).
 
 Format: `addtag INDEX t/TAG1 [t/TAG2]...`
 
@@ -272,11 +273,12 @@ Adds the `python` and `java` tag from second to fifth issues in the issue list.
 
 [NOTE]
 ====
-* If the tag exits in the issue already, it will not take any actions.
+* If the tag exits in the issue already, it will not take any action.
 * The INDEX refers to the index number shown in the issue list.
-* The index must be a positive integer (1, 2, 3...).
+* The index *must be a positive integer* (1, 2, 3...).
 * Range of the index can be used.
 * The lower limit of range must be smaller than or equal to the upper limit (2-4, 2-2).
+* This command can only be executed in home directory.
 ====
 // end::addtag[]
 
@@ -317,6 +319,7 @@ Examples: +
 * The index refers to the index number on the issue list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * The index cannot be bigger than the number of issues.
+* This command can only be executed in home directory.
 ====
 
 
@@ -346,6 +349,7 @@ Examples:
 * The keywords can partially match the statement.
 * Issues matching at least one keyword will be returned.
 * Searching the keyword will increment the search frequency of the issue (so that it can be ordered accordingly later on).
+* This command can only be executed in home directory.
 ====
 
 === Locating issues by tags: `(ft)findtag`
@@ -371,11 +375,12 @@ Examples:
 * If multiple tags are searched, only issues containing *all* the searched tags will be displayed
 * A matched issue can have other tags (aside from the ones searched).
 e.g `issue[cplusplus][segmentation]` will match with a single searched tag `[cplusplus]`
+* This command can only be executed in home directory.
 ====
 
-=== Returning to home directory  : `(h)home`
+=== Returning to home directory  : `(hm)home`
 
-Changes the current editing directory to the root directory. Besides,
+Changes the current editing directory to the home directory. Besides,
  Shows a list of all issues in the list panel by index.
 
 Format: `home`
@@ -403,17 +408,17 @@ Format: `undo`
 
 [TIP]
 ====
-* Undoable commands: those commands that modify the application’s content (add, addE, edit, editE, delete, deleteE, and clear).
+* Undoable commands: those commands that modify the application’s content (add, edit, delete, and clear).
 ====
 
 Examples:
 ****
 * `delete 1` +
-`list chr` +
+`sort chro` +
 `undo` (reverses the `delete 1` command)
 
 * `select 1` +
-`list chr` +
+`sort chro` +
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
 
@@ -463,6 +468,7 @@ Format:  `clear`
 Example:
 ****
 * `clear`
+* `Yes` or `Y`
 ****
 
 [NOTE]
@@ -500,12 +506,17 @@ Examples:
 
 Shows a list of all issues.
 
+[NOTE]
+====
+* This command can only be executed in home directory.
+====
+
 // tag::sort[]
 === Sorting the list of issues: `(sr)sort`
 
 Sorts the list of issue according to a specified sort type.
 
-The list always follow this sort type until another sort command is executed.
+The list *always follow this sort type* until another sort command is executed.
 
 Format: `sort`
 [TIP]
@@ -528,10 +539,13 @@ Format: `sort freq`
 Format: `sort tag`
 [TIP]
 ====
-* Sort the issue list by their tag in alphabetical order.
-If their first tags start with the same character, the following tags are compared until there is a difference or one tag set comes to the end.
-In the second case, the issue with fewer tags is give higher priority.
-* Sort the issues without tags at the end of the display issue list.
+* Sort the issue list by each issue's tag set in lexicographical order, following ASCII lexicography.
+* Put the issues without tags at the end of the displayed issue list.
+====
+
+[NOTE]
+====
+* This command can only be executed in home directory.
 ====
 
 Examples:
@@ -552,7 +566,7 @@ Chooses one solution of the issue and make it the primary solution.
 
 If there is an existing primary solution, `setprimary` will reset the primary solution to the latest one.
 
-The primary solution is shown on the top of the solution list and is highlighted.
+The primary solution is shown on the top of the solution list and is highlighted in white.
 
 Format: `setprimary INDEX`
 
@@ -560,8 +574,8 @@ Format: `setprimary INDEX`
 ====
 * The index refers to the index number on the solution list.
 * The index *must be a positive integer* 1, 2, 3, ...
-* The index cannot be bigger than the number of issues.
-* This command can only be executed *after you select an issue or a solution*.
+* The index cannot be larger than the number of solutions of this issue.
+* This command can only be executed in issue or solution directory.
 ====
 // end::setprimary[]
 
@@ -569,13 +583,13 @@ Format: `setprimary INDEX`
 
 Resets the primary solution and make all solutions normal and not highlighted.
 
-Even if there is no primary solution, this command can still be executed.
+Even if there is no primary solution, this command can still be executed, but no change will be shown.
 
 Format: `resetprimary`
 
 [NOTE]
 ====
-* This command can only be executed *after you select an issue or a solution*.
+* This command can only be executed in issue or solution directory.
 ====
 
 === Autosuggesting existing issue in find command
@@ -623,7 +637,7 @@ Developers usually work in teams, and since they are working on the same code ba
 * Switching projects: switch 1 OR switch cs2103project
 
 === Highlighting the page : `highlight` [coming in v2.0]
-Highlight the certain part of the page that shows on the window, use an annotation box.
+Highlights the certain part of the page that shows on the window, use an annotation box.
 Format: `highlight`
 
 

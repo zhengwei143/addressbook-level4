@@ -319,18 +319,18 @@ This diagram shows the sequence that how add solution command is executed. It co
 * Pros: Relatively easier to implement
 * Cons: Lots of changes on structure.
 
-// tag::sort
+// tag::sort[]
 === Sort feature
 
 The sort command can sort an issue list shown in the GUI.
 
 ==== Current implementation
 
-We use JavaFX `SortedList` and the Comparator provided by `IssueSort` to sort the list, `ModelManager#getSortedList()` to retrieve the sorted list.
+We use JavaFX `SortedList` and the Comparator provided by `SortType` to sort the list.
 
-In order to allow sort work with filtered list, we implement the new method `getFilteredAndSortedList()`, which calls `getSortedList()` and apply it to the filtered list.
+In order to allow sort work with filtered list, we wrap `FilteredList` with `SortedList` and retrieve this new list with a new method `getFilteredAndSortedList()`.
 
-The following sequence diagram illustrates how the mechanism works:
+The following two sequence diagrams illustrate how the mechanism works:
 
 .Sort Command Sequence Diagram
 image::SortCommandSequenceDiagram.png[width="800"]
@@ -339,18 +339,18 @@ image::SortCommandSequenceDiagram.png[width="800"]
 image::InitializeComparator.png[width="800"]
 
 
-This two diagrams show that after the input is parsed, a IssueSort object is initialized before the SortCommand object.
+This two diagrams show that after the input is parsed, a SortType object is initialized before the SortCommand object.
 
-As shown in the diagram, an IssueSort object can provide the required comparator with the input String passed from SortCommand.
-We use the retrieved Comparator the sort the list when executing the sort command.
+As shown in the diagram, an SortType object can provide the required comparator with the input String passed from SortCommand.
+We use the retrieved Comparator to sort the list when the sort command is executed.
 
-The following is a class diagram for IssueSort.
+The following is a class diagram for SortType.
 
-.IssueSort Class Diagram
-image::IssueSort.png[width="800"]
+.SortType Class Diagram
+image::SortType.png[width="800"]
 
-It shows that Comparator is an attribute of IssueSort class. We create three different classes that implement the Comparator Interface.
-They can serve the three sort type we provide in SaveIt. When more sort type is needed, we can simple create another class implementing Comparator, and add anther case in switch statement.
+It shows that Comparator is an attribute of SortType class. We create three different classes that implement the Comparator Interface.
+They can serve the three sort types we provide in SaveIt. When more sort types are needed, we can simply create another class implementing Comparator, and add anther case in switch statement.
 
 ==== Design Considerations
 
@@ -362,11 +362,11 @@ They can serve the three sort type we provide in SaveIt. When more sort type is 
 
 ** Cons: Need effort to make sure the correct list is retrieved.
 
-* **Alternative 2:** Reconstruct UniqueIssueList directly, sort at Storage
+* **Alternative 2:** Reconstruct UniqueIssueList directly, sort in Storage
 
-** Pros: Easy to understand and implement
+** Pros: Easy to understand and implement.
 
-** Cons: Time consuming.
+** Cons: Break the persistence of the backend list.
 // end::sort[]
 
 // tag::undoredo[]
@@ -636,6 +636,7 @@ The retrieve feature allows user to choose a solution link to copy to the system
 
 The retrieve feature basically takes the user entered index and call `getFilteredAndSortedList` method in `Model` to get the selected solution. Then Java `Toolkit` package is used to copy the url link of solution to the system clipboard.
 
+// tag::setprimary[]
 === Set Primary feature
 The set primary feature allows users to choose one solution as primary solution.
 
@@ -656,6 +657,13 @@ The set primary mechanism is facilitated by the method `isPrimarySolution()` ove
 ** Pros: Easy to understand.
 
 ** Cons: Solution constructor is affected. The flag attribute is redundant for non-primary solutions.
+
+* **Alternative 3:** Store the primary solution index in solution list.
+
+** Pros: No new constructor and attribute are introduced.
+
+** Cons: Need to check if the index is affected every time when the solution list is updated.
+// end::setprimary[]
 
 === Refactor tag Feature
 The refactor tag feature allows users to rename or remove a specified tag for all entries with that tag.

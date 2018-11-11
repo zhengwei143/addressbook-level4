@@ -121,24 +121,26 @@ Adds an issue to the SaveIt App.
 
 Format: `add i/ISSUE_STATEMENT d/DESCRIPTION [t/TAG]...`
 
-Adds a solution to an existing issue in SaveIT App.
+Adds a solution to an existing issue in SaveIt App.
 
 Format: `add s/SOLUTION_LINK2 r/REMARK`
 [TIP]
 ====
 * Select an issue before adding solution
-* The url validation check only provides most basic format checking
+* The solution link validation check only provides most basic format checking
 ====
 
 Examples: +
 
 ****
-* `add i/ArrayIndexOutOfBound d/issue description t/unsolved`
+* `add i/ArrayIndexOutOfBound d/issue description t/unsolved` +
+Adds a new issue which has a issue statment called `ArrayIndexOutOfBounds` and issue description called `issue description`
 
 .Add new issue to the issue list
 image::AddingNewIssue.png[width="800"]
 * `select 3`
-* `add s/www.stackoverflow.com r/use functional programming`
+* `add s/www.stackoverflow.com r/use functional programming` +
+Adds a new solution link which is `www.stackoverflow.com` and a solution remark called `use functional programming`
 
 .Add new solution to the third issue in the issue list
 image::AddingNewSolution.png[width="800"]

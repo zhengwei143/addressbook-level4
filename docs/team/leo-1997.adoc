@@ -23,20 +23,24 @@ The main features include:
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+* *Major enhancement*: added the *solution filed to model structure along with enable the add command to add solution or issue*
+** What it does: It constitutes the basic model structure by adding new issue and new solution into SaveIt. This allows all the following features to be carried out in SaveIt.
+** Justification: This feature improves the product significantly because a user can now add more issues and more solutions to the application. This is the most important and fundamental function our application aims to achieve.
+** Highlights: This enhancement involved not only model component but also GUI, storage component in the application and it requires a lot of effort to build it properly. The add command on the other hand needs to handle different request in different directories.
+
 ** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+* *Minor enhancement*:
+** Implemented basic autosuggestion feature for find and findByTag command
+** Refactored autosuggestion component
+** Added retrieve command to copy the solution link to system clipboard
 
 * *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=leo-1997[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+*** Managed milestones and checked issue status on GitHub
 ** Enhancements to existing features:
 *** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
 *** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])

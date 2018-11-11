@@ -183,7 +183,7 @@ public class EditCommandTest {
 
         Solution updatedSolution = new SolutionBuilder().withLink(VALID_SOLUTION_LINK_STACKOVERFLOW).build();
         EditIssueDescriptor descriptor = new EditIssueDescriptorBuilder(INDEX_FIRST_SOLUTION, updatedSolution).build();
-
+        EditCommand
         Issue previousIssue = getTypicalIssues().get(INDEX_THIRD_ISSUE.getZeroBased());
         Issue editedIssue = new IssueBuilder(previousIssue).withSolution(INDEX_FIRST_SOLUTION, updatedSolution).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_SOLUTION, descriptor);

@@ -61,10 +61,11 @@ public class EditCommand extends Command {
     public static final String DUMMY_SOLUTION_REMARK = "dummySolutionRemark";
     public static final String DUMMY_SOLUTION_LINK = "https://www.dummySolutionLink.com";
 
+    protected static int defaultSolutionIndex = -1;
+
     private final Index index;
     private final EditIssueDescriptor editIssueDescriptor;
 
-    protected static int DEFAULT_SOLUTION_INDEX = -1;
 
     /**
      * @param index of the issue in the filtered issue list to edit
@@ -138,7 +139,7 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editIssueDescriptor.getTags().orElse(issueToEdit.getTags());
 
         return new Issue(updatedName, updatedDescription, updatedSolutions, updatedTags,
-                issueToEdit.getFrequency(), issueToEdit.getCreatedTime());
+            issueToEdit.getFrequency(), issueToEdit.getCreatedTime());
     }
 
     /**
@@ -152,9 +153,8 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
         }
 
-        assert(!newSolution.getLink().getValue().equals(DUMMY_SOLUTION_LINK));
-        assert(!newSolution.getLink().getValue().equals(DUMMY_SOLUTION_LINK));
-
+        assert (!newSolution.getLink().getValue().equals(DUMMY_SOLUTION_LINK));
+        assert (!newSolution.getLink().getValue().equals(DUMMY_SOLUTION_LINK));
 
         Solution oldSolution = issueToEdit.getSolutions().get(index);
         Solution updatedSolution;
@@ -203,7 +203,7 @@ public class EditCommand extends Command {
         private List<Solution> solutions;
         private Description description;
         private Set<Tag> tags;
-        private int index = DEFAULT_SOLUTION_INDEX;
+        private int index = defaultSolutionIndex;
         private Solution solution;
 
         public EditIssueDescriptor() {
@@ -259,11 +259,11 @@ public class EditCommand extends Command {
             return Optional.ofNullable(solution);
         }
 
-        public void setSolution(Solution solution){
+        public void setSolution(Solution solution) {
             this.solution = solution;
         }
 
-        public void setIndex(Index index){
+        public void setIndex(Index index) {
             this.index = index.getZeroBased();
         }
 

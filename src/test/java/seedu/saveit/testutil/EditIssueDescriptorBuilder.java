@@ -1,7 +1,5 @@
 package seedu.saveit.testutil;
 
-import static seedu.saveit.logic.commands.EditCommand.DUMMY_SOLUTION_REMARK;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

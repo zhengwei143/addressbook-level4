@@ -2,8 +2,8 @@ package seedu.saveit.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.saveit.logic.commands.CommandTestUtil.DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.DESC_C;
+import static seedu.saveit.logic.commands.CommandTestUtil.DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;

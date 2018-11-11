@@ -1,7 +1,5 @@
 package seedu.saveit.testutil;
 
-import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_REPO;
-
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,8 +14,6 @@ import seedu.saveit.model.issue.IssueSearchFrequency;
 import seedu.saveit.model.issue.IssueStatement;
 import seedu.saveit.model.issue.Solution;
 import seedu.saveit.model.issue.Tag;
-import seedu.saveit.model.issue.solution.Remark;
-import seedu.saveit.model.issue.solution.SolutionLink;
 import seedu.saveit.model.util.SampleDataUtil;
 
 /**
@@ -44,7 +40,6 @@ public class IssueBuilder {
         statement = new IssueStatement(DEFAULT_STATEMENT);
         description = new Description(DEFAULT_DESCRIPTION);
         solutions = new ArrayList<>();
-//        solutions.add(SOLUTION_REPO);
         tags = new LinkedHashSet<>();
         frequency = new IssueSearchFrequency(TypicalIssues.COMMON_ISSUE_FREQUENCY);
         createdTime = new Timestamp(new Date().getTime());
@@ -73,8 +68,7 @@ public class IssueBuilder {
     }
 
     /**
-     * Sets the {@code IssueStatement} of the {@code Issue} that we are building
-     * to dummy statement.
+     * Sets the {@code IssueStatement} of the {@code Issue} that we are building to dummy statement.
      */
     public IssueBuilder withDummyStatement() {
         this.statement = new IssueStatement(DUMMY_STATEMENT);
@@ -84,13 +78,14 @@ public class IssueBuilder {
     /**
      * Parses the {@code solutions} into a {@code Set<Solution>} and set it to the {@code Issue} that we are building.
      */
-    public IssueBuilder withSolutions (Solution... solutions) {
+    public IssueBuilder withSolutions(Solution... solutions) {
         this.solutions = SampleDataUtil.getSolutionList(solutions);
         return this;
     }
 
     /**
-     * Parses the {@code solution} into a {@code Set<Solution>} with {@code Index} issue and set it to the {@code Issue} that we are building.
+     * Parses the {@code solution} into a {@code Set<Solution>} with {@code Index} issue and set it to the {@code Issue}
+     * that we are building.
      */
     public IssueBuilder withSolution(Index index, Solution solution) {
         solutions.set(index.getZeroBased(), solution);
@@ -100,7 +95,7 @@ public class IssueBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Issue} that we are building.
      */
-    public IssueBuilder withTags(String ... tags) {
+    public IssueBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -114,8 +109,7 @@ public class IssueBuilder {
     }
 
     /**
-     * Sets the {@code Description} of the {@code Issue} that we are
-     * building to dummy description.
+     * Sets the {@code Description} of the {@code Issue} that we are building to dummy description.
      */
     public IssueBuilder withDummyDescription() {
         this.description = new Description(DUMMY_DESCRIPTION);
@@ -143,7 +137,7 @@ public class IssueBuilder {
      */
     public Issue build() {
         return new Issue(statement, description, solutions, tags, frequency,
-                new Timestamp(new Date().getTime()), lastModifiedTime);
+            new Timestamp(new Date().getTime()), lastModifiedTime);
     }
 
 }

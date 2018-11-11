@@ -129,7 +129,7 @@ image::select solution.png[width="790"]
 
 === Adding: `(a)add`
 
-To add an issue to the SaveIt App.
+Adds an issue to the SaveIt App.
 
 Format: `add i/ISSUE_STATEMENT d/DESCRIPTION [t/TAG]...`
 
@@ -174,7 +174,7 @@ image::AddingNewSolution.png[width="800"]
 
 === Editing an issue : `(e)edit`
 
-To edit an existing issue or solution in the SaveIt App.
+Edits an existing issue or solution in the SaveIt App.
 
 Format: `edit INDEX [i/NEW_ISSUE] [d/NEW_DESCRIPTION] [t/TAG]...`
 
@@ -218,7 +218,7 @@ image::edit-solution.png[width="790"]
 // tag::refacotrTag[]
 === Refactoring tag: `(rt)refactortag`
 
-To rename or remove a specific tag for all entries with that tag.
+Renames or removes a specific tag for all entries with that tag.
 
 Format: `refactortag t/OLD_TAG [n/NEW_TAG]`
 
@@ -253,7 +253,7 @@ image::refactor-tag.png[width="790"]
 
 === Adding tag: `(at)addtag`
 
-To add tags for issue(s).
+Adds tags for issue(s).
 
 Format: `addtag INDEX t/TAG1 [t/TAG2]...`
 
@@ -303,7 +303,7 @@ Examples: +
 ====
 
 === Deleting a statement : `(d)delete`
-To delete the specified issue from SaveIt App.
+Deletes the specified issue from SaveIt App.
 
 Format: `delete INDEX`
 
@@ -323,7 +323,7 @@ Examples: +
 
 === Locating issues by statement: `(f)find`
 
-To find issues whose statement contain any of the given search queries.
+Finds issues whose statement contain any of the given search queries.
 
 Format: `find [KEYWORDS...]`
 
@@ -466,6 +466,7 @@ Format:  `clear`
 Example:
 ****
 * `clear`
+* `Yes` or `Y`
 ****
 
 [NOTE]
@@ -505,7 +506,7 @@ Shows a list of all issues.
 
 [NOTE]
 ====
-* List command can only be executed in root level.
+* This command can only be executed in home directory.
 ====
 
 // tag::sort[]
@@ -542,7 +543,7 @@ Format: `sort tag`
 
 [NOTE]
 ====
-* This command can only be executed in *home directory*.
+* This command can only be executed in home directory.
 ====
 
 Examples:
@@ -563,7 +564,7 @@ Chooses one solution of the issue and make it the primary solution.
 
 If there is an existing primary solution, `setprimary` will reset the primary solution to the latest one.
 
-The primary solution is shown on the top of the solution list and is highlighted.
+The primary solution is shown on the top of the solution list and is highlighted in white.
 
 Format: `setprimary INDEX`
 
@@ -571,8 +572,8 @@ Format: `setprimary INDEX`
 ====
 * The index refers to the index number on the solution list.
 * The index *must be a positive integer* 1, 2, 3, ...
-* The index cannot be bigger than the number of issues.
-* This command can only be executed in *issue or solution directory*.
+* The index cannot be larger than the number of solutions of this issue.
+* This command can only be executed in issue or solution directory.
 ====
 // end::setprimary[]
 
@@ -580,13 +581,13 @@ Format: `setprimary INDEX`
 
 Resets the primary solution and make all solutions normal and not highlighted.
 
-Even if there is no primary solution, this command can still be executed.
+Even if there is no primary solution, this command can still be executed, but no change will be shown.
 
 Format: `resetprimary`
 
 [NOTE]
 ====
-* This command can only be executed in *issue or solution directory*.
+* This command can only be executed in issue or solution directory.
 ====
 
 === Autosuggesting existing issue in find command
@@ -634,7 +635,7 @@ Developers usually work in teams, and since they are working on the same code ba
 * Switching projects: switch 1 OR switch cs2103project
 
 === Highlighting the page : `highlight` [coming in v2.0]
-Highlight the certain part of the page that shows on the window, use an annotation box.
+Highlights the certain part of the page that shows on the window, use an annotation box.
 Format: `highlight`
 
 

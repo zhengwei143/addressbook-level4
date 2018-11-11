@@ -95,7 +95,7 @@ public class CommandTestUtil {
         " " + PREFIX_DESCRIPTION + " "; // 'empty' not allowed in descriptions
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + " "; // 'empty' not allowed in tags
     public static final String INVALID_SOLUTION_LINK = " " + PREFIX_SOLUTION_LINK + INVALID_SOLUTION_LINK_STACKOVERFLOW;
-
+    public static final String INVALID_REMARK = " " + PREFIX_REMARK + "";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

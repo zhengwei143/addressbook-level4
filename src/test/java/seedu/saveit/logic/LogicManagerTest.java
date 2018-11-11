@@ -3,11 +3,14 @@ package seedu.saveit.logic;
 import static org.junit.Assert.assertEquals;
 import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX;
 import static seedu.saveit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_ISSUE;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.logic.commands.ClearCommand;
 import seedu.saveit.logic.commands.CommandResult;
 import seedu.saveit.logic.commands.DangerCommand;
@@ -18,6 +21,7 @@ import seedu.saveit.logic.parser.exceptions.ParseException;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.UserPrefs;
+import seedu.saveit.testutil.DirectoryBuilder;
 
 
 public class LogicManagerTest {
@@ -72,6 +76,14 @@ public class LogicManagerTest {
     public void getFilteredAndSortedIssueList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         logic.getFilteredAndSortedIssueList().remove(0);
+    }
+
+    @Test
+    @Ignore
+    public void getFilteredSolutionList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        logic.resetDirectory(new DirectoryBuilder().withSolutionIndex(INDEX_THIRD_ISSUE).build());
+        logic.getFilteredSolutionList().remove(0);
     }
 
     /**

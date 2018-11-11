@@ -149,7 +149,8 @@ public class SelectCommandTest {
 
         assertCommandSuccess(selectCommand, model, commandHistory, expectedMessage, expectedModel);
 
-        JumpToSolutionListRequestEvent lastEvent = (JumpToSolutionListRequestEvent) eventsCollectorRule.eventsCollector.getMostRecent();
+        JumpToSolutionListRequestEvent lastEvent = (JumpToSolutionListRequestEvent) eventsCollectorRule
+                .eventsCollector.getMostRecent();
         assertEquals(solutionIndex, Index.fromZeroBased(lastEvent.targetIndex));
     }
 

@@ -33,7 +33,7 @@ image::leo-1997.png[width="150", align="left"]
 {empty}[http://github.com/leo-1997[github]] [<<leo-1997#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Add, Delete
+Responsibilities: Add, Retrieve Link, AutoSuggestion for Find
 
 '''
 

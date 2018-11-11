@@ -3,6 +3,9 @@ package guitests.guihandles;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 
+/**
+ * A handler for the {@code StatusMessage} of the UI, including directory and sortType
+ */
 public class StatusMessageHandle extends NodeHandle<Node> {
 
     private static final String DIRECTORY_FIELD_ID = "#directory";

@@ -150,7 +150,7 @@ Examples: +
 .Add new issue to the issue list
 image::AddingNewIssue.png[width="800"]
 * `select 3`
-* `add s/www.example1a.com r/use functional programming`
+* `add s/www.stackoverflow.com r/use functional programming`
 
 .Add new solution to the third issue in the issue list
 image::AddingNewSolution.png[width="800"]

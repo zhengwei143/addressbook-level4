@@ -3,7 +3,8 @@ package seedu.saveit.logic;
 import static org.junit.Assert.assertEquals;
 import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX;
 import static seedu.saveit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.saveit.testutil.TypicalIndexes.*;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_SOLUTION;
 
 import org.junit.Rule;
 import org.junit.Test;

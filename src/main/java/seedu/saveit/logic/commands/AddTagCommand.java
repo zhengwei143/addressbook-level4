@@ -3,7 +3,11 @@ package seedu.saveit.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.saveit.commons.core.EventsCenter;
@@ -68,7 +72,12 @@ public class AddTagCommand extends Command {
             int numOfIssues = model.getFilteredAndSortedIssueList().size();
             checkHigherBound(numOfIssues, index);
 
-            model.addTag(index, tagList);
+            // reverse the index so when user uses sort chro command, it will keep order.
+            List<Index> reverseIndex = new ArrayList<>(index);
+            Collections.reverse(reverseIndex);
+            Set<Index> indexToEdit = new LinkedHashSet<>(reverseIndex);
+
+            model.addTag(indexToEdit, tagList);
             model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
             model.commitSaveIt();
         } catch (IssueNotFoundException infe) {

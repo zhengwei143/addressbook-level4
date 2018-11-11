@@ -30,10 +30,12 @@ import seedu.saveit.testutil.EditIssueDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    public static final String DUMMY_STATEMENT = AddCommand.DUMMY_STATEMENT;
     public static final String VALID_STATEMENT_JAVA = "Java Issue";
     public static final String VALID_STATEMENT_C = "SOLUTION_C Issue";
     public static final String VALID_DESCRIPTION_JAVA = "syntax error";
     public static final String VALID_DESCRIPTION_C = "94351253";
+    public static final String DUMMY_DESCRIPTION = AddCommand.DUMMY_DESCRIPTION;
     public static final String VALID_SOLUTION_LINK_JAVA = "http://www.oracle.com";
     public static final String VALID_REMARK_JAVA = "RemarkJava";
     public static final String VALID_SOLUTION_LINK_C = "https://stackoverflow.com/";
@@ -45,11 +47,38 @@ public class CommandTestUtil {
     public static final String VALID_TAG_PYTHON = "python";
 
     public static final String INVALID_SOLUTION_LINK_STACKOVERFLOW = "wwwstackoverflow";
+    public static final String VALID_TAG_BUG = "bug";
+    public static final String VALID_TAG_CPP = "c++";
+    public static final String VALID_TAG_TRAVIS = "travis";
+
+    public static final String JAVA_NULL_POINTER_STATEMENT = "Java NullPointer";
+    public static final String JAVA_NULL_POINTER_DESCRIPTION = "Bug found in CS2103";
+    public static final String C_SEGMENTATION_FAULT_STATEMENT = "Segmentation Fault C++";
+    public static final String C_SEGMENTATION_FAULT_DESCRIPTION = "Found this in CS2106 Assignment";
+    public static final String RUBY_HASH_BUG_STATEMENT = "Ruby hash error";
+    public static final String RUBY_HASH_BUG_DESCRIPTION = "For some reason my code is not working";
+    public static final String TRAVIS_BUILD_STATEMENT = "Travis not building";
+    public static final String TRAVIS_BUILD_DESCRIPTION = "Tried to set up travis for 2103 project";
+    public static final String CHECKSTYLE_ERROR_STATEMENT = "Checkstyle error";
+    public static final String CHECKSTYLE_ERROR_DESCRIPTION = "Checkstyle keeps showing error";
+    public static final String QUICKSORT_BUG_STATEMENT = "Quicksort bug";
+    public static final String QUICKSORT_BUG_DESCRIPTION = "My quicksort algorithm is not sorting correctly";
+    public static final String C_RACE_CONDITION_STATEMENT = "Race Conditions";
+    public static final String C_RACE_CONDITION_DESCRIPTION = "Algorithm is having race condition problems.";
+
+    public static final String MYSQL_ERROR_STATEMENT = "MySQL Error";
+    public static final String MYSQL_ERROR_DESCRIPTION = "Some problems with my query";
+    public static final String POSTGRESQL_ERROR_STATEMENT = "PostgreSQL Error";
+    public static final String POSTGRESQL_ERROR_DESCRIPTION = "Foreign key problem";
 
     public static final String STATEMENT_DESC_JAVA = " " + PREFIX_STATEMENT + VALID_STATEMENT_JAVA;
     public static final String STATEMENT_DESC_C = " " + PREFIX_STATEMENT + VALID_STATEMENT_C;
     public static final String DESCRIPTION_DESC_JAVA = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_JAVA;
     public static final String DESCRIPTION_DESC_C = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_C;
+    public static final String REMARK_DES_JAVA = " " + PREFIX_REMARK + VALID_REMARK_JAVA;
+    public static final String REMARK_DES_STACKOVERFLOW = " " + PREFIX_REMARK + VALID_REMARK_STACKOVERFLOW;
+    public static final String SOLUTION_LINK_DES_JAVA = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_LINK_JAVA;
+    public static final String SOLUTION_LINK_DES_C = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_LINK_C;
     public static final String SOLUTION_DESC_JAVA = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_LINK_JAVA
             + " " + PREFIX_REMARK + VALID_REMARK_JAVA;
     public static final String SOLUTION_DESC_C = " " + PREFIX_SOLUTION_LINK + VALID_SOLUTION_LINK_C
@@ -66,7 +95,7 @@ public class CommandTestUtil {
         " " + PREFIX_DESCRIPTION + " "; // 'empty' not allowed in descriptions
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + " "; // 'empty' not allowed in tags
     public static final String INVALID_SOLUTION_LINK = " " + PREFIX_SOLUTION_LINK + INVALID_SOLUTION_LINK_STACKOVERFLOW;
-
+    public static final String INVALID_REMARK = " " + PREFIX_REMARK + "";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

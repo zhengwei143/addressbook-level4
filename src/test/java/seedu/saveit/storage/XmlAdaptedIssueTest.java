@@ -2,7 +2,7 @@ package seedu.saveit.storage;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.saveit.storage.XmlAdaptedIssue.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.saveit.testutil.TypicalIssues.BENSON;
+import static seedu.saveit.testutil.TypicalIssues.C_SEGMENTATION_FAULT;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +22,12 @@ public class XmlAdaptedIssueTest {
     private static final String INVALID_SOLUTION_LINK = "&StackπOverflow";
     private static final String INVALID_REMARK = "*remark";
 
-    private static final String VALID_STATEMENT = BENSON.getStatement().toString();
-    private static final String VALID_DESCRIPTION = BENSON.getDescription().toString();
-    private static final List<XmlAdaptedSolution> VALID_SOLUTIONS = BENSON.getSolutions().stream()
+    private static final String VALID_STATEMENT = C_SEGMENTATION_FAULT.getStatement().toString();
+    private static final String VALID_DESCRIPTION = C_SEGMENTATION_FAULT.getDescription().toString();
+    private static final List<XmlAdaptedSolution> VALID_SOLUTIONS = C_SEGMENTATION_FAULT.getSolutions().stream()
             .map(XmlAdaptedSolution::new)
             .collect(Collectors.toList());
-    private static final List<XmlAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
+    private static final List<XmlAdaptedTag> VALID_TAGS = C_SEGMENTATION_FAULT.getTags().stream()
         .map(XmlAdaptedTag::new)
         .collect(Collectors.toList());
     private static final Integer VALID_FREQUENCY = 1;
@@ -35,8 +35,8 @@ public class XmlAdaptedIssueTest {
 
     @Test
     public void toModelType_validIssueDetails_returnsIssue() throws Exception {
-        XmlAdaptedIssue issue = new XmlAdaptedIssue(BENSON);
-        assertEquals(BENSON, issue.toModelType());
+        XmlAdaptedIssue issue = new XmlAdaptedIssue(C_SEGMENTATION_FAULT);
+        assertEquals(C_SEGMENTATION_FAULT, issue.toModelType());
     }
 
     @Test

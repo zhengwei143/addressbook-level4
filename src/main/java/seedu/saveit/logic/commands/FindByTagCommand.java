@@ -14,10 +14,12 @@ public class FindByTagCommand extends Command {
     public static final String COMMAND_WORD = "findtag";
     public static final String COMMAND_ALIAS = "ft";
 
+    public static final String EMPTY_TAGS_ERROR_MESSAGE = "Please ensure that there is at least one t/ identifier "
+            + "with an actual keyword (non-empty)";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all issues that contain all the tags "
             + "represented by the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " java IndexOutOfBounds";
+            + "Parameters: t/KEYWORD [t/KEYWORD]*\n"
+            + "Example: " + COMMAND_WORD + " t/java t/IndexOutOfBounds";
 
     private final IssueHasTagsPredicate predicate;
 

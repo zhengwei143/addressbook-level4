@@ -3,6 +3,7 @@ package guitests.guihandles;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.StackPane;
 
 /**
  * A handler for the {@code ResultDisplay} of the UI
@@ -14,14 +15,16 @@ public class ResultDisplayHandle extends NodeHandle<Node> {
     private static final String SORT_TYPE_ID = "#sortType";
 
     private final TextArea resultDisplay;
+    private final StatusMessageHandle statusMessageHandle;
     private final Label directory;
     private final Label sortType;
 
     public ResultDisplayHandle(Node resultDisplayNode) {
         super(resultDisplayNode);
         resultDisplay = getChildNode(RESULT_DISPLAY_ID);
-        directory = getChildNode(DIRECTORY_FIELD_ID);
-        sortType = getChildNode(SORT_TYPE_ID);
+        statusMessageHandle = new StatusMessageHandle(resultDisplayNode.getParent());
+        directory = statusMessageHandle.getChildNode(DIRECTORY_FIELD_ID);
+        sortType = statusMessageHandle.getChildNode(SORT_TYPE_ID);
     }
 
     /**

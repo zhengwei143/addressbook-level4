@@ -4,12 +4,12 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
-<BorderPane fx:id="placeHolder" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane styleClass="pane-with-border" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
   <center>
     <TextArea fx:id="resultDisplay" editable="false" styleClass="result-display" />
   </center>
   <bottom>
-    <StackPane styleClass="pane-with-border">
+    <StackPane fx:id="statusPane" styleClass="pane-with-border">
       <Label fx:id="sortType" styleClass="status-msg" StackPane.alignment="BOTTOM_LEFT"/>
       <Label fx:id="directory" styleClass="status-msg" StackPane.alignment="BOTTOM_RIGHT"/>
     </StackPane>

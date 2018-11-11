@@ -79,7 +79,7 @@ public class TypicalIssues {
                             .build(),
                     new SolutionBuilder().withLink("http://www.ZhiHu.com").withRemark("newSol").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
-            .build();
+            .withLastModifiedTime(COMMON_ISSUE_TIME + 40).build();
     public static final Issue CHECKSTYLE_ERROR = new IssueBuilder()
             .withStatement(CHECKSTYLE_ERROR_STATEMENT)
             .withDescription(CHECKSTYLE_ERROR_DESCRIPTION)
@@ -92,14 +92,14 @@ public class TypicalIssues {
             .withDescription(QUICKSORT_BUG_DESCRIPTION)
             .withSolutions(new SolutionBuilder().withLink("http://www.reddit.com").withRemark("tokyo").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
-            .build();
+            .withLastModifiedTime(COMMON_ISSUE_TIME + 60).build();
 
     public static final Issue C_RACE_CONDITION = new IssueBuilder()
             .withStatement(C_RACE_CONDITION_STATEMENT)
             .withDescription(C_RACE_CONDITION_DESCRIPTION)
             .withSolutions(new SolutionBuilder().withLink("http://www.yahoo.com").withRemark("street").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
-            .build();
+            .withLastModifiedTime(COMMON_ISSUE_TIME + 70).build();
 
     // Manually added
     public static final Issue MYSQL_ERROR = new IssueBuilder()
@@ -107,7 +107,7 @@ public class TypicalIssues {
             .withDescription(MYSQL_ERROR_DESCRIPTION)
             .withSolutions(new SolutionBuilder().withLink("https://stackoverflow.com/").withRemark("india").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
-            .withLastModifiedTime(COMMON_ISSUE_TIME + 60).build();
+            .build();
     public static final Issue POSTGRESQL_ERROR = new IssueBuilder()
             .withStatement(POSTGRESQL_ERROR_STATEMENT)
             .withDescription(POSTGRESQL_ERROR_DESCRIPTION)
@@ -122,7 +122,7 @@ public class TypicalIssues {
             .withSolutions(SOLUTION_JAVA)
             .withTags(VALID_TAG_UI)
             .withFrequency(COMMON_ISSUE_FREQUENCY)
-            .withLastModifiedTime(COMMON_ISSUE_TIME + 60).build();
+            .build();
     public static final Issue VALID_C_ISSUE = new IssueBuilder()
             .withStatement(VALID_STATEMENT_C)
             .withDescription(VALID_DESCRIPTION_C)

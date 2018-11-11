@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.events.model.DirectoryChangedEvent;
 import seedu.saveit.commons.events.model.SortTypeChangedEvent;
@@ -33,6 +34,9 @@ public class ResultDisplay extends UiPart<Region> {
 
     @FXML
     private TextArea resultDisplay;
+
+    @FXML
+    private StackPane stackPane;
 
     @FXML
     private Label directory;

@@ -147,6 +147,10 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
         }
 
+        assert(!newSolution.getLink().getValue().equals(DUMMY_SOLUTION_LINK));
+        assert(!newSolution.getLink().getValue().equals(DUMMY_SOLUTION_LINK));
+
+
         Solution oldSolution = issueToEdit.getSolutions().get(index);
         Solution updatedSolution;
 
@@ -250,6 +254,14 @@ public class EditCommand extends Command {
 
         public Optional<Solution> getSolution() {
             return Optional.ofNullable(solution);
+        }
+
+        public void setSolution(Solution solution){
+            this.solution = solution;
+        }
+
+        public void setIndex(Index index){
+            this.index = index.getZeroBased();
         }
 
         public Optional<Description> getDescription() {

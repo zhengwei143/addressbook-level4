@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.commands.EditCommand;
 import seedu.saveit.logic.commands.EditCommand.EditIssueDescriptor;
 import seedu.saveit.model.Issue;
@@ -38,6 +39,15 @@ public class EditIssueDescriptorBuilder {
         descriptor.setDescription(issue.getDescription());
         descriptor.setSolutions(issue.getSolutions());
         descriptor.setTags(issue.getTags());
+    }
+
+    /**
+     * Returns an {@code EditIssueDescriptor} with fields containing {@code issue}'s details
+     */
+    public EditIssueDescriptorBuilder(Index index, Solution solution) {
+        descriptor = new EditIssueDescriptor();
+        descriptor.setSolution(solution);
+        descriptor.setIndex(index);
     }
 
 

@@ -314,9 +314,9 @@ Examples: +
 ====
 
 
-=== Locating issues by statement or description: `(f)find`
+=== Locating issues by statement: `(f)find`
 
-Finds issues whose statement and description contain any of the given search queries.
+Finds issues whose statement contain any of the given search queries.
 
 Format: `find [KEYWORDS...]`
 
@@ -336,8 +336,8 @@ Examples:
 ====
 * The search is case-insensitive. e.g hans will match Hans
 * The order of the keywords does not matter. e.g. ‘kill port’ will match ‘port kill’
-* Searches through the issue statement or description.
-* The keywords can partially match the statement or description.
+* Searches through the issue statement.
+* The keywords can partially match the statement.
 * Issues matching at least one keyword will be returned.
 * Searching the keyword will increment the search frequency of the issue (so that it can be ordered accordingly later on).
 ====

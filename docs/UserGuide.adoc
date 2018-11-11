@@ -33,7 +33,7 @@ To get started with SaveIt, please follow the  instructions below:
 .  Double-click the file to start the app. The GUI should appear in a few seconds, as shown below.
 +
 .Application Interface
-image::UI_Design.png[width="790"]
+image::UI.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -61,7 +61,7 @@ The following is a list of commands that you can use in the application.
 
 === Viewing help : `(h)help`
 
-Types `help` to view the handy help page!
+Type `help` to view the handy help page!
 
 Format: `help`
 
@@ -85,7 +85,7 @@ image::command-highlight2.png[width="790"]
 
 === Selecting an issue/solution  : `(s)select`
 
-If the user is at the root directory, the command selects
+If the user is at the home directory, the command selects
  an issue identified by the index number used in the issue panel.
   The command also displays the solutions
   of the selected issue in the solution panel. Now the edit directory
@@ -129,13 +129,13 @@ image::select solution.png[width="790"]
 
 === Adding: `(a)add`
 
-Adds an issue to the SaveIt App.
+To add an issue to the SaveIt App.
 
 Format: `add i/ISSUE_STATEMENT d/DESCRIPTION [t/TAG]...`
 
 Adds a solution to an existing issue in SaveIT App.
 
-Format: `add s/SOLUTION_LINK2 r/REMARK`
+Format: `add s/SOLUTION_LINK r/REMARK`
 [TIP]
 ====
 * Select an issue before adding solution
@@ -207,10 +207,10 @@ image::edit-solution.png[width="790"]
 
 [NOTE]
 ====
-* Edits the issue at the specified `INDEX`. The index refers to the index number shown in the displayed statement list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the issue at the specified `INDEX`. The index refers to the index number shown in the displayed issue list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the statement will be removed i.e. adding of solutions is not cumulative.
+* When editing tags, the existing tags of the issue will be removed i.e. adding of solutions is not cumulative.
 * You can remove all the tags by typing `t/` without specifying any tags after it.
 ====
 // tag::edit[]
@@ -230,9 +230,9 @@ Format: `refactortag t/OLD_TAG [n/NEW_TAG]`
 
 Examples:
 ****
-* `refactorTag t/solved n/TIL` +
-Changes all entries tagged `solved` to be tagged `TIL`.
-* `refactorTag t/solved` +
+* `refactortag t/solved n/TIL` +
+Changes all entries tagged with `solved` to be tagged with `TIL`.
+* `refactortag t/solved` +
 Removes the tag `solved` from all entries.
 
 
@@ -243,8 +243,9 @@ image::refactor-tag.png[width="790"]
 [NOTE]
 ====
 * The old tag must be provided.
-* If the user provides multiple old tags or new tags, only take the one as an effect.
+* If the user provides multiple old tags or new tags, only take the last one as an effect.
 * If the new tag exits in the issue already, it will only remove the old tag.
+* This command can only be executed in home directory.
 ====
 // end::refactortag[]
 
@@ -270,11 +271,12 @@ Adds the `python` and `java` tag from second to fifth issues in the issue list.
 
 [NOTE]
 ====
-* If the tag exits in the issue already, it will not take any actions.
+* If the tag exits in the issue already, it will not take any action.
 * The INDEX refers to the index number shown in the issue list.
-* The index must be a positive integer (1, 2, 3...).
+* The index *must be a positive integer* (1, 2, 3...).
 * Range of the index can be used.
 * The lower limit of range must be smaller than or equal to the upper limit (2-4, 2-2).
+* This command can only be executed in home directory.
 ====
 // end::addtag[]
 
@@ -301,7 +303,7 @@ Examples: +
 ====
 
 === Deleting a statement : `(d)delete`
-Deletes the specified issue from SaveIt App.
+To delete the specified issue from SaveIt App.
 
 Format: `delete INDEX`
 
@@ -315,12 +317,13 @@ Examples: +
 * The index refers to the index number on the issue list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * The index cannot be bigger than the number of issues.
+* This command can only be executed in home directory.
 ====
 
 
 === Locating issues by statement: `(f)find`
 
-Finds issues whose statement contain any of the given search queries.
+To find issues whose statement contain any of the given search queries.
 
 Format: `find [KEYWORDS...]`
 
@@ -344,6 +347,7 @@ Examples:
 * The keywords can partially match the statement.
 * Issues matching at least one keyword will be returned.
 * Searching the keyword will increment the search frequency of the issue (so that it can be ordered accordingly later on).
+* This command can only be executed in home directory.
 ====
 
 === Locating issues by tags: `(ft)findtag`
@@ -369,11 +373,12 @@ Examples:
 * If multiple tags are searched, only issues containing *all* the searched tags will be displayed
 * A matched issue can have other tags (aside from the ones searched).
 e.g `issue[cplusplus][segmentation]` will match with a single searched tag `[cplusplus]`
+* This command can only be executed in home directory.
 ====
 
-=== Returning to home directory  : `(h)home`
+=== Returning to home directory  : `(hm)home`
 
-Changes the current editing directory to the root directory. Besides,
+Changes the current editing directory to the home directory. Besides,
  Shows a list of all issues in the list panel by index.
 
 Format: `home`
@@ -401,17 +406,17 @@ Format: `undo`
 
 [TIP]
 ====
-* Undoable commands: those commands that modify the application’s content (add, addE, edit, editE, delete, deleteE, and clear).
+* Undoable commands: those commands that modify the application’s content (add, edit, delete, and clear).
 ====
 
 Examples:
 ****
 * `delete 1` +
-`list chr` +
+`sort chro` +
 `undo` (reverses the `delete 1` command)
 
 * `select 1` +
-`list chr` +
+`sort chro` +
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
 

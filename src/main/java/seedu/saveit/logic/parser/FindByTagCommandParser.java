@@ -19,7 +19,7 @@ import seedu.saveit.model.issue.Tag;
 /**
  * Parses input arguments and creates a new FindByTagCommand object
  */
-public class FindByTagCommandParser {
+public class FindByTagCommandParser implements Parser<FindByTagCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand

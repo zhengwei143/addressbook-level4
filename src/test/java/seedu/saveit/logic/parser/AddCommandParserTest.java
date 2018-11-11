@@ -160,7 +160,7 @@ public class AddCommandParserTest {
 
         //invalid solution link
         assertParseFailure(parser, INVALID_SOLUTION_LINK + REMARK_DES_STACKOVERFLOW,
-                String.format( MESSAGE_SOLUTION_LINK_CONSTRAINTS, AddCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_SOLUTION_LINK_CONSTRAINTS, AddCommand.MESSAGE_USAGE));
 
         //invalid solution remark
         assertParseFailure(parser, SOLUTION_LINK_DES_JAVA + INVALID_REMARK,

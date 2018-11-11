@@ -117,8 +117,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseSolution_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class,
-                () -> ParserUtil.parseSolution((String) null, (String) null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseSolution((String) null, (String) null));
     }
 
     @Test
@@ -192,7 +191,7 @@ public class ParserUtilTest {
     @Test
     public void parseTag_lengthExceedsLimit_throwsParseException() {
         String longTag = new String(new char[4]).replace("\0", VALID_TAG_1);
-        Assert.assertThrows(ParseException.class,
-                () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2, longTag)));
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1,
+                VALID_TAG_2, longTag)));
     }
 }

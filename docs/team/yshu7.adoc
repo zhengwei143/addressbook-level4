@@ -30,7 +30,7 @@ SaveIt is written in Java and JavaFX and is morphed from AddressBook-level4, the
 * *Minor enhancement*:
 ** Add the ability to set and reset the primary solution. https://github.com/CS2103-AY1819S1-T12-4/main/pull/177[#177]
 ** Add confirmation check for danger command (i.e. clear command for current version). https://github.com/CS2103-AY1819S1-T12-4/main/pull/116[#116]
-** Improve solution structure. https://github.com/CS2103-AY1819S1-T12-4/main/pull/180[#180]
+** Improve Solution structure. https://github.com/CS2103-AY1819S1-T12-4/main/pull/180[#180]
 
 * *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=yshu7[Functional code]]
 

@@ -352,7 +352,7 @@ The sort command can sort an issue list shown in the GUI.
 
 We use JavaFX `SortedList` and the Comparator provided by `SortType` to sort the list.
 
-In order to allow sorting to work with filtered list, we wrap `FilteredList` with `SortedList` and retrieve this new list with a new method `getFilteredAndSortedList()`.
+In order to allow sorting to work with the filtered list, we wrap `FilteredList` with `SortedList` and retrieve this new list with a new method `getFilteredAndSortedList()`.
 
 The following sequence diagram illustrates how the mechanism works:
 
@@ -369,7 +369,7 @@ The following is a class diagram for SortType.
 image::SortType.png[width="500"]
 
 It shows that Comparator is an attribute of SortType class. We create three different classes that implement the Comparator Interface.
-They can serve the three sort types (excluding the default one) we provide in SaveIt. When more sort types are needed, we can simply create another class implementing Comparator, and add anther case in switch statement.
+They can serve the three sort types (excluding the default one) we provide in SaveIt. When more sort types are needed, we can simply create another class implementing Comparator, and add another case in the switch statement.
 
 ==== Design Considerations
 
@@ -504,7 +504,7 @@ Step 4. Generate the CommandResult according to the confirmation message entered
 
 ** Pros: Easy to implement.
 
-** Cons: Command information leaked. Inaccurate, e.g. two classes from different package can have the same class name.
+** Cons: Command information leaked. Inaccurate, e.g. two classes from different packages can have the same class name.
 
 ===== Aspect: How to connect the confirmation message with the command requiring it
 
@@ -512,7 +512,7 @@ Step 4. Generate the CommandResult according to the confirmation message entered
 
 ** Pros: Protect CommandBox from being accessed by Command, i.e. retrieve the input message in Command Class
 
-** Cons: Another variable introduced. Need effort to deal with the buffered command properly.
+** Cons: Another variable introduced. Need efforts to deal with the buffered command properly.
 
 * **Alternative 2:** Let Command check the confirmation message
 
@@ -706,7 +706,7 @@ The set primary solution mechanism is facilitated by the method `isPrimarySoluti
 
 ** Cons: Solution constructor is affected. The flag attribute is redundant for non-primary solutions.
 
-* **Alternative 3:** Store the primary solution index in solution list.
+* **Alternative 3:** Store the primary solution index in the solution list.
 
 ** Pros: No new constructor and attribute are introduced.
 
@@ -719,8 +719,8 @@ The reset primary feature allows users to reset the primary solution and make al
 
 ==== Current Implementation
 
-The reset primary solution mechanism goes through the solution list once and check if a solution is primary or not.
-If it is primary, we replace it by a new Solution object with the same data of the primary solution. If it is not primary, we continue checking until we reach the end of the list.
+The reset primary solution mechanism goes through the solution list once and checks if a solution is primary or not.
+If it is primary, we replace it with a new Solution object with the same data of the primary solution. If it is not primary, we continue checking until we reach the end of the list.
 // end::resetprimary[]
 
 // tag::refactortag[]

@@ -4,7 +4,7 @@
 :stylesDir: ../stylesheets
 :sectnums:
 
-== PROJECT: SaveIt
+= PROJECT: SaveIt
 
 ---
 
@@ -12,19 +12,19 @@
 
 This project portfolio is intended to document my contributions to the development of SaveIt App.
 
-*SaveIt* is an issue tracker application targeted programmers. It provides a platform for storing, managing and viewing their programming related issues during daily practice. It was developed as part of the module requirements for CS2103T (Software Engineering).
+*SaveIt* is an issue tracker application targeting programmers. It provides a platform for storing, managing and viewing their programming related issues during daily practices. It was developed as part of the module requirements for CS2103T (Software Engineering).
 
 == Summary of contributions
 
 * *Major enhancement*: Enhance *the ability to edit `issue`, `solution` and `tag`*.
 
 *** What it does: This feature allows a user to edit any fields in an issue and solution. Also it improves flexibility to edit tags (Relevant commands: `edit`, `addtag` and `refactortag`)
-*** Justification: This feature improves the products significantly, since it reduces the amount of time needed to edit existing entries instead of deleting the issue and adding a new issue.
-*** Highlights: This feature allows users to edit issue and solution easily. Also, they can add tags by range of indexes and refactor tags easily. It requires a depth analysis for different conditions whether the command is valid.
+*** Justification: This feature improves this application significantly, by reducing the amount of time needed to edit existing entries, instead of deleting the issue and adding a new issue.
+*** Highlights: This feature allows users to edit issue and solution easily. Also, they can add tags by range of indexes and refactor tags easily. It requires a depth analysis for different conditions to judge if the command is valid.
 
 * *Minor enhancements*:
 ** Implement `command highlight` feature: Allows users to differentiate their inputs by highlighting command word, parameters and values in different colors.
-** Implement `command alias` feature: Allows users to type command words less but achieve the same functionality.
+** Implement `command alias` feature: Allows users to type less command words but achieve the same functionality.
 ** Refactor the application from AddressBook Level 4 to SaveIt app. https://github.com/CS2103-AY1819S1-T12-4/main/issues/30[#30] https://github.com/CS2103-AY1819S1-T12-4/main/pull/44[#44]
 
 * *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=jasonvank[Functional code]]
@@ -38,7 +38,7 @@ This project portfolio is intended to document my contributions to the developme
 
 ** Enhancements to existing features:
 *** Write additional tests for existing features to increase coverage. (https://github.com/CS2103-AY1819S1-T12-4/main/pull/216[#216])
-*** Improve Solution link validation （https://github.com/CS2103-AY1819S1-T12-4/main/pull/162/files [162] https://github.com/CS2103-AY1819S1-T12-4/main/pull/164[164])
+*** Improve Solution link validation （https://github.com/CS2103-AY1819S1-T12-4/main/pull/162[162] https://github.com/CS2103-AY1819S1-T12-4/main/pull/164[164])
 
 ** Documentation:
 *** Draft the User Guide for the team. https://github.com/CS2103-AY1819S1-T12-4/main/pull/1[#1], https://github.com/CS2103-AY1819S1-T12-4/main/pull/76[#76]

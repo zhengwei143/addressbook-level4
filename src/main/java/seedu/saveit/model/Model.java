@@ -98,7 +98,7 @@ public interface Model {
     void updateFilteredAndSortedIssueList(Comparator<Issue> sortType);
 
     /**
-     * Adds tag(s) to the existing data of this {@code SaveIt} with {@code tagList} for a range of {@code issues}.
+     * Adds tag(s) to the existing data of this {@code SaveIt} with {@code tagList} for a range of {@code indexSet}.
      */
     void addTag(Set<Index> indexSet, Set<Tag> tagList);
 
@@ -138,7 +138,7 @@ public interface Model {
     void commitSaveIt();
 
     /**
-     * To rename or remove a specified {@code oldTag} to {@code newTag} for all entries.
+     * To replace a specified {@code oldTag} with {@code newTag} for all entries.
      * @return true if any tag has been replaced, otherwise false.
      */
     boolean refactorTag(Tag oldTag, Tag newTag);

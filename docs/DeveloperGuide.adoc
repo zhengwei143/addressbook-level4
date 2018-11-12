@@ -628,7 +628,7 @@ image::UI_Sequence_Diagram_2.png[width="790"]
 The edit feature allows users to edit any field of the issue and solution.
 
 ==== Current Implementation
-The edit mechanism is facilitated by `editCommandParser` and `editCommand`. Users are allowed to edit any field in the issue list. includes: +
+The edit mechanism is facilitated by `editCommandParser` and `editCommand`. Users are allowed to edit any field in the issue list, which includes: +
 
 * root level
 ** Issue statement
@@ -649,7 +649,7 @@ The `editCommandParser` extends `Parser` and implements the following operations
 If it fails to parse the command, it will throw `ParseException` and display edit command usage message.
 
 * `editCommand#execute(Model model, CommandHistory history)`
-** Analyses the user in the root directory or issue directory. If the user in the root directory but provide solution edit command or in issue level but provide issue edit command +
+** Analyses the user in the root directory or issue directory. Since the root directoy can only edit issues, if user provides solution related command, it will fail to execute. Also, in the issue directory, it only allows to edit solution, it will fail to execute the issue related command. Then it will
 throw `CommandException` and show wrong directory information.
 
 ** Checks if the user index in editDescriptor is larger than the size of the issue list or solution list. +
@@ -671,7 +671,7 @@ image::edit-command-sequence-diagram.jpg[width="800"]
 
 ** Pros: It will use less memory.
 
-** Cons: It has lower security if it the issue is the mutable object.
+** Cons: It has lower security if the issue is the mutable object.
 // end::edit[]
 
 // tag::retrieve[]
@@ -754,7 +754,7 @@ image::refactor-tag-activity-diagram.png[width="400"]
 ===== Aspect: Implementation of RefactorTag command parser.
 * **Alternative 1 (current choice):** Allows only to rename or remove the old tags that user input lastly.
 ** Pros: It is easy to implement.
-** Cons: It is inconvenient if the user wants to replace the tags once.
+** Cons: It is inconvenient if the user wants to replace multiple tags once.
 * Alternative 2: Allows to rename or remove multiple old tags with multiple new tags.
 ** Pros: It is convenient for users to replace or remove the tags once.
 ** Cons: It is not clear for users to see the changes since tags are displayed disordered.
@@ -777,7 +777,7 @@ image::add-tag-sequence-diagram.jpeg[width="800"]
 ==== Design Consideration
 
 ===== Aspect: Implementation of AddTag command parser.
-* **Alternative 1 (current choice):** Allows range of `Index` and discrete `Index` to be accepted as index parameter.
+* **Alternative 1 (current choice):** Allows range of indexes and multiple indexes to be accepted as index parameter.
 ** Pros: It is efficient to add multiple `Tags` to multiple issues instead of doing it singly.
 ** Cons: It has to consider various conditions of the user input.
 * Alternative 2: Creates an `IndexRange` class for index.
@@ -890,10 +890,10 @@ The Command Highlight mechanism uses `InlineCssTextArea` class. It uses listener
 ==== Design Consideration
 ===== Aspect: Implementation of command highlight manager.
 
-* **Alternative 1 (current choice):** Check the character that user input in the command box should be highlight.
+* **Alternative 1 (current choice):** Check the character in the command box and assign different colors based on precondition.
 ** Pros: easy to implement by checking the prefix, index and command word.
 ** Cons: due to the limitation of using the character '/' as part of the prefix, it may still have some corner cases that we cannot cover.
-* **Alternative 2:** Parse the user command simultaneously when user input.
+* **Alternative 2:** Parse the user command simultaneously when user input command.
 ** Pros: if user inputs wrong command format, it will highlight the color correspondingly. Hence, user can correct his input immediately.
 ** Cons: difficult to implement.
 // end::commandhighlight[]

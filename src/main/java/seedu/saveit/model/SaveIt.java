@@ -149,7 +149,7 @@ public class SaveIt implements ReadOnlySaveIt {
     }
 
     /**
-     * Adds tag(s) to the existing data of this {@code SaveIt} with {@code tagList} for a range of {@code index} issue.
+     * Adds tag(s) to the existing data of this {@code SaveIt} with {@code tagList} for a range of {@code issues}.
      */
     public void addTag(Set<Issue> issues, Set<Tag> tagList) {
         requireNonNull(tagList);
@@ -175,7 +175,7 @@ public class SaveIt implements ReadOnlySaveIt {
     }
 
     /**
-     * Adds tag(s) to the existing data of this {@code SaveIt} issue with {@code tagList} for {@code index} issue.
+     * Replace the {@code oldTag} to the {@code newTag} for all issue entries in the {@code SaveIt}
      */
     public boolean refactorTag(Tag oldTag, Tag newTag) {
         boolean isEdit = false;

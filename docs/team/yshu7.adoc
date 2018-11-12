@@ -12,27 +12,28 @@
 
 This document is written for summarizing my contributions in the project SaveIt.
 
-SaveIt is geared at keeping track of the issues that the user finds and to link it with the email found on google.
-More importantly, SaveIt is ​optimized for those who prefer to work with a Command Line Interface​ (CLI) while still having the benefits of a Graphical User Interface (GUI).
-It is designed for programmers who are used to CLI applications and are good at typing.
+SaveIt is geared at keeping track of the issues and solutions that the user finds online.
+It is designed for programmers who are used to Command Line Interface​ (CLI) applications and are good at typing while still having the benefits of a Graphical User Interface (GUI).
 
 SaveIt​ is implemented for applying CS2103 learning outcomes and show understanding of the software design.
-It is implemented by a group of CS2103 students, including myself. My key contribution is sort command.
+It is implemented by a group of CS2103 students, including myself. My key contribution is *sort command*.
+
 SaveIt is written in Java and JavaFX, and is morphed from AddressBook-level4, the application used for teaching Software Engineering principles.
 
 == Summary of contributions
 
 * *Major enhancement*: added *the ability to sort issue list*
-** What it does: It allows the user to sort issues shown.
-** Justification: This feature improves the product significantly because a user can view the issues in the order that they want, helping them to organize issues better.
-** Highlights: This command changes the way how issues are listed in the application. It needs effort to combine sorting and filtering together properly.
+** What it does: It allows the user to sort issues shown in the list.
+** Justification: This feature improves the product significantly because it helps the user to view the issues in the order that they want, so that they can organize the record of issues better.
+** Highlights: This command changes the way how issues are listed in the application. It needs effort to combine sorting and filtering together properly and make sure the correct issue can be retrieved from the sorted list.
 
 * *Minor enhancement*:
-** Added a confirmation check for clear command.
-** Added the ability to set and reset primary solution.
-** Improve backend storage of Issue.
-** Improve solution structure.
-** Implement UI for SortType.
+** Added the ability to set and reset primary solution. https://github.com/CS2103-AY1819S1-T12-4/main/pull/177[#177]
+** Added a confirmation check for clear command. https://github.com/CS2103-AY1819S1-T12-4/main/pull/116[#116]
+** Implement UI for SortType. https://github.com/CS2103-AY1819S1-T12-4/main/pull/208[#208]
+** Improve backend storage of Issue (added createdTime, lastModifiedTime). https://github.com/CS2103-AY1819S1-T12-4/main/pull/108/files#diff-f1fa68a447dd90e93ca8a91b132a026a[#108],
+https://github.com/CS2103-AY1819S1-T12-4/main/pull/208/files#diff-f1fa68a447dd90e93ca8a91b132a026a[#208]
+** Improve solution structure. https://github.com/CS2103-AY1819S1-T12-4/main/pull/180[#180]
 
 * *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=yshu7[Functional code]]
 
@@ -51,7 +52,8 @@ https://github.com/CS2103-AY1819S1-T12-4/main/pull/123[#123], https://github.com
 https://github.com/CS2103-AY1819S1-T12-4/main/pull/169[#169],https://github.com/CS2103-AY1819S1-T12-4/main/pull/178[#178],
 
 *** Reported bugs and suggestions for other team members in the group:  https://github.com/CS2103-AY1819S1-T12-4/main/issues/111[111], https://github.com/CS2103-AY1819S1-T12-4/main/issues/115[115],
-https://github.com/CS2103-AY1819S1-T12-4/main/issues/203[203], https://github.com/CS2103-AY1819S1-T12-4/main/issues/210[210]
+https://github.com/CS2103-AY1819S1-T12-4/main/issues/203[203], https://github.com/CS2103-AY1819S1-T12-4/main/issues/210[210], https://github.com/CS2103-AY1819S1-T12-4/main/issues/236[236],
+https://github.com/CS2103-AY1819S1-T12-4/main/issues/237[237]
 
 == Contributions to the User Guide
 

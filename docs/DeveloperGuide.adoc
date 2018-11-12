@@ -328,7 +328,7 @@ The sort command can sort an issue list shown in the GUI.
 
 We use JavaFX `SortedList` and the Comparator provided by `SortType` to sort the list.
 
-In order to allow sort work with filtered list, we wrap `FilteredList` with `SortedList` and retrieve this new list with a new method `getFilteredAndSortedList()`.
+In order to allow sort to work with filtered list, we wrap `FilteredList` with `SortedList` and retrieve this new list with a new method `getFilteredAndSortedList()`.
 
 The following two sequence diagrams illustrate how the mechanism works:
 
@@ -640,7 +640,7 @@ The set primary feature allows users to choose one solution as primary solution.
 
 ==== Current Implementation
 
-The set primary mechanism is facilitated by the method `isPrimarySolution()` override by `PrimarySolution` inheriting from `Solution`.
+The set primary mechanism is facilitated by the method `isPrimarySolution()`, which is overrode by `PrimarySolution` inheriting from `Solution`.
 
 ==== Design Consideration
 ===== Aspect: How to distinguish between PrimarySolution and Solution

@@ -165,7 +165,7 @@ public abstract class SaveItSystemTest {
      */
     protected void selectIssue(Index index) {
         executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
-        //assertEquals(index.getZeroBased(), getIssueListPanel().getSelectedCardIndex());
+        assertEquals(index.getZeroBased(), getIssueListPanel().getSelectedCardIndex());
     }
 
     /**

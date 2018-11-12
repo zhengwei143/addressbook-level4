@@ -149,6 +149,7 @@ image::AddingNewSolution.png[width="800"]
 
 [NOTE]
 ====
+* The order of the issues may be updated if the user uses sort command.
 * If multiple identical prefixes are entered, the last prefix value will be accepted
 * An issue can have only one statement and description
 * An issue can have any number of tags (including 0)

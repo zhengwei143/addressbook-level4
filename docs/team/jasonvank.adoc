@@ -10,34 +10,50 @@
 
 == Overview
 
-This document is written for summarizing my contributions in the project SaveIt.
+This project portfolio is intended to document my contributions to the development of SaveIt App.
+
+*SaveIt* is an issue tracker application targeted programmers. It provides a platform for storing, managing and viewing their programming related issues during daily practice. It was developed as part of the module requirements for CS2103T (Software Engineering).
 
 == Summary of contributions
-SaveIt is a platform for you to keep track of issues that you encounter and the corresponding solutions that you found on through your search engine.
-More importantly, SaveIt is ​optimized for those who prefer to work with a Command Line Interface​ (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
-* *Major enhancements*:
-** Improved *Edit* Command feature
-*** What it does: It allows a user to edit any fields in the issue and solution.
-*** Justification: The current data structure is an issue is bound to multiple solutions. Since a solution includes a solution link and a solution remark, users should be able to edit any field in a solution instead of replacing the whole solution.
-*** Highlights: It requires a depth analysis for different conditions whether the command is valid. Also, we need to tell the user if he is in the wrong directory. It improves the efficiency to edit their issues and solutions.
+* *Major enhancement*: Enhanced *the ability to edit `issue`, `solution` and `tag`*
 
-** Implemented *Add Tags*
-*** What it does: It allows the user to add tags to specified issues.
-*** Justification: This feature allows users to add tags to an issue if they forgot to add tags when they create an issue. It is troublesome to replace all the issues when using `edit` command.
-*** Highlights: It requires a depth analysis to decide whether the command should be accepted. It is flexible to users as they can provide a range of indexes or some discrete indexes to add tags in one execution.
+*** What it does: This feature allows a user to edit any fields in an issue and solution. Also it improves flexibility to edit tags (Relevant commands: `edit`, `addtag` and `refactortag`)
+*** Justification: This feature improve the products significantly, since it reduces the amount of time needed to edit exist entries instead of adding a nre issue.
+*** Highlights: This feature allows users to edit issue and solution easily. Also, they can add tags by range and refactor tags easily. It requires a depth analysis for different conditions whether the command is valid. It improves the efficiency to edit their issues and solutions.
 
 * *Minor enhancements*:
-** Implemented `refactortag` command: Allows users to rename or remove a specific tag for all entries with that tag.
 ** Implemented `command highlight` feature: Allows users to differentiate their inputs by highlight command word,  parameters and values in different colors.
 ** Implemented `command alias` feature: Allows users to type command words less but achieving the same functionality.
+** Refactored the application from AddressBook Level 4 to SaveIt app.
 
-* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=jasonvank[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=jasonvank[Functional code]]
 
 * *Other contributions*:
 
 ** Project management:
+*** Managed releases v1.1, v1.3.* - v1.4.* (6 releases) on GitHub
+*** Managed milestones and checked issue status on GitHub
+*** Set up `CodCoverage` and `CodeQuality` badge for tracking of project build. (Pull request #49)
+
+** Enhancements to existing features:
+*** Morphing from AddressBook4 to SaveIt  (Pull requests https://github.com/CS2103-AY1819S1-T12-4/main/pull/52[#52])
+*** Updated tests to fit mid-v1.2 features (Pull requests https://github.com/CS2103-AY1819S1-T12-4/main/pull/52[#52])
+
+** Documentation:
+*** Drafted the User Guide for the team: https://github.com/CS2103-AY1819S1-T12-4/main/pull/2[#2]
+*** Modified build.gradle to reflect our project and removed elements of AddressBook-Level4 from the documentation website. (Pull request #150, #153)
+*** Updated organisation landing page https://github.com/CS2103-AY1819S1-T12-4/main/pull/183[#183]
+
 ** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-T12-4/main/pull/25[#25],
+https://github.com/CS2103-AY1819S1-T12-4/main/pull/32[#32], https://github.com/CS2103-AY1819S1-T12-4/main/pull/77[#77],
+https://github.com/CS2103-AY1819S1-T12-4/main/pull/123[#123], https://github.com/CS2103-AY1819S1-T12-4/main/pull/168[#168],
+https://github.com/CS2103-AY1819S1-T12-4/main/pull/169[#169],https://github.com/CS2103-AY1819S1-T12-4/main/pull/178[#178],
+
+*** Reported bugs and suggestions for other team members in the group:  https://github.com/CS2103-AY1819S1-T12-4/main/issues/111[111], https://github.com/CS2103-AY1819S1-T12-4/main/issues/115[115],
+https://github.com/CS2103-AY1819S1-T12-4/main/issues/203[203], https://github.com/CS2103-AY1819S1-T12-4/main/issues/210[210]
+
 
 == Contributions to the User Guide
 
@@ -46,10 +62,25 @@ More importantly, SaveIt is ​optimized for those who prefer to work with a Com
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
+include::../UserGuide.adoc[tag=edit]
+
+include::../UserGuide.adoc[tag=addtag]
+
+include::../UserGuide.adoc[tag=refactortag]
+
+include::../UserGuide.adoc[tag=commandhighlight]
 
 == Contributions to the Developer Guide
 
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
+
+include::../DeveloperGuide.adoc[tag=edit]
+
+include::../DeveloperGuide.adoc[tag=addtag]
+
+include::../DeveloperGuide.adoc[tag=refactortag]
+
+include::../DeveloperGuide.adoc[tag=commandhighlight]
 

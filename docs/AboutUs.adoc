@@ -24,7 +24,7 @@ image::jasonvank.png[width="150", align="left"]
 {empty}[https://github.com/jasonvank[github]] [<<jasonvank#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Edit, Command Highlight
+Responsibilities: Edit exiting data, Command Highlight
 
 '''
 

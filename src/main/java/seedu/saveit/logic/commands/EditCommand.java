@@ -152,7 +152,6 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
         }
 
-
         Solution oldSolution = issueToEdit.getSolutions().get(index);
         Solution updatedSolution;
 

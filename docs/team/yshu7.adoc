@@ -62,7 +62,7 @@ include::../UserGuide.adoc[tag=clear]
 
 include::../UserGuide.adoc[tag=setprimary]
 
-include::../UserGuide.adoc[tag=setprimary]
+include::../UserGuide.adoc[tag=resetprimary]
 
 == Contributions to the Developer Guide
 

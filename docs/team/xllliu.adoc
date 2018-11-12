@@ -17,7 +17,7 @@ Command Line Interface​ (CLI). But it still has the benefits of a Graphical
 User Interface (GUI) created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 == 2. Summary of contributions
-* *Major enhancement*: Redesign the list panel in GUI
+* *Major enhancement*: Redesigned the list panel in GUI
 ** What it does: It allows the users to view solutions and issues in the list panel
  when they are at the specified directory.
 ** Justification: This feature improves the product significantly
@@ -27,28 +27,28 @@ UI and model structure of Addressbook level 4, the new GUI is more user-friendly
 ** Credits: Addressbook level 4.
 
 * *Minor enhancements*: There are three minor enhancements as listed below:
-** Add a home command that allows the user to return to home directory for edition.
-** Refactor the selection command that allows the user to change edit directory.
-** Enable the user to load solution web-page.
+** Added a home command that allows the user to return to home directory for edition.
+** Refactored the selection command that allows the user to change edit directory.
+** Enabled the user to load solution web-page.
 
 * *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=xllliu[Functional code]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Manage releases `v1.2` on GitHub
-** Improve JUnit tests:
-*** Rewrite exiting failing tests and add new tests: https://github.com/CS2103-AY1819S1-T12-4/main/pull/110[#110]
+*** Managed releases `v1.2` on GitHub
+** Improved JUnit tests:
+*** Rewrote exiting failing tests and added new tests: https://github.com/CS2103-AY1819S1-T12-4/main/pull/110[#110]
 https://github.com/CS2103-AY1819S1-T12-4/main/pull/140[#140],
 https://github.com/CS2103-AY1819S1-T12-4/main/pull/171[#171],
 https://github.com/CS2103-AY1819S1-T12-4/main/pull/221[#221],
 https://github.com/CS2103-AY1819S1-T12-4/main/pull/234[#234],
 ** Documentation:
-*** Add cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2103-AY1819S1-T12-4/main/pull/55[#55]
-*** Update README.adoc: https://github.com/CS2103-AY1819S1-T12-4/main/pull/46[#46]
+*** Added cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2103-AY1819S1-T12-4/main/pull/55[#55]
+*** Updated README.adoc: https://github.com/CS2103-AY1819S1-T12-4/main/pull/46[#46]
 ** Community:
-*** Review PRs (with non-trivial review comments): https://github.com/CS2103-AY1819S1-T12-4/main/pull/170[#170], https://github.com/CS2103-AY1819S1-T12-4/main/pull/215[#215]
-*** Report bugs and suggestions for other team members in the group: https://github.com/CS2103-AY1819S1-T12-4/main/issues/251[#251]
+*** Reviewed PRs (with non-trivial review comments): https://github.com/CS2103-AY1819S1-T12-4/main/pull/170[#170], https://github.com/CS2103-AY1819S1-T12-4/main/pull/215[#215]
+*** Reported bugs and suggestions for other team members in the group: https://github.com/CS2103-AY1819S1-T12-4/main/issues/251[#251]
 
 
 == 3. Contributions to the User Guide

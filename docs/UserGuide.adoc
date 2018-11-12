@@ -677,7 +677,7 @@ e.g. `delete 3`
 e.g. `Search BST`
 * *Add Tag* : `addtag INDEX t/TAG1 [t/TAG2]...` +
 e.g. `addtag 2 t/python t/java t/TIL`
-* *Refactor Tag* : `refactor t/OLDTAG [n/NEWTAG]` +
+* *Refactor Tag* : `refactortag t/OLDTAG [n/NEWTAG]` +
 e.g. `refactorTag t/java n/C++`
 * *Home* : `home`
 * *Clear* : `clear`
@@ -689,5 +689,3 @@ e.g. `refactorTag t/java n/C++`
 * *Sort* : `sort TYPE`
 * *Set Primary* : `setprimary [INDEX]`
 * *Reset Primary* : `resetprimary`
-* *Refactor Tag* : `refactor [OLDTAG] [NEWTAG]` +
-e.g. `refactorTag java C++`

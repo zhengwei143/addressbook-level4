@@ -23,9 +23,6 @@ public class CommandHighlightManager {
         String userInput = commandTextField.getText();
         StringBuilder commandWord = new StringBuilder();
         int position = 0;
-        boolean indexHighlighted = false;
-        boolean indexNeedToHighlight;
-        boolean isSolutionLink = false;
 
         // if there are space chars before command word, pos++
         while (isShorterThanInput(userInput, position) && isSpace(userInput, position)) {
@@ -39,17 +36,32 @@ public class CommandHighlightManager {
             position++;
         }
 
-        // check for some command word that does not require index
+        highlightCommandKeyValue(commandTextField, userInput, commandWord, position);
+
+    }
+
+    /**
+     * This is to highlight the command index, parameters and values
+     */
+    private static void highlightCommandKeyValue(InlineCssTextArea commandTextField, String userInput,
+        StringBuilder commandWord, int position) {
+
+        boolean indexHighlighted = false;
+        boolean indexNeedToHighlight;
+        boolean isSolutionLink = false;
+        // some command words do not require the index, to avoid confusing, the index will not be highlighted
         indexNeedToHighlight = checkCommandWord(commandWord);
 
         // highlight the following parameters, which are key-value pairs
         while (isShorterThanInput(userInput, position)) {
+            // highlight index
             while (indexNeedToHighlight && !indexHighlighted && isIndex(userInput, position) && !isSpace(userInput,
                 position)) {
                 commandTextField.setStyle(position, position + 1, STYLE_INDEX);
                 position++;
             }
 
+            // highlight parameters
             if (!isSolutionLink && isShorterThanInput(userInput, position) && isParameter(userInput, position)) {
                 commandTextField.setStyle(position - 1, position + 1, STYLE_PARAMETER_KEY);
                 position++;

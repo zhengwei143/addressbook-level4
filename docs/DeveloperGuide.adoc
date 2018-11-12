@@ -364,7 +364,7 @@ As shown in the diagram, a SortType object can provide the required comparator a
 The following is a class diagram for SortType.
 
 .SortType Class Diagram
-image::SortType.png[width="800"]
+image::SortType.png[width="500"]
 
 It shows that Comparator is an attribute of SortType class. We create three different classes that implement the Comparator Interface.
 They can serve the three sort types (excluding the default one) we provide in SaveIt. When more sort types are needed, we can simply create another class implementing Comparator, and add anther case in switch statement.

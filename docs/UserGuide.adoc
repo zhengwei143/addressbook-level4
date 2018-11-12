@@ -470,16 +470,16 @@ Example:
 * `clear`
 
 .Clear Command - Ask for confirmation
-image::clear-command-ask-for-confirmation.png[width="790"]
+image::clear-command-ask-for-confirmation.png[width="400"]
 * `Yes` or `Y` (confirme the clear desiction)
 
 .Clear Command - Confirmed
-image::clear-command-confirmed.png[width="790"]
+image::clear-command-confirmed.png[width="400"]
 ****
 
 [NOTE]
 ====
-* User needs to confirm this command before the operation can be executed.
+* User needs to confirm this command before the operation can  executed.
 * User can undo this operation to restore the issue lists.
 ====
 // end::clear[]
@@ -558,9 +558,6 @@ Format: `sort tag`
 Examples:
 ****
 * `sort`
-
-.Sort Default Command
-image::sort-default-command.png[width="400"]
 
 * `edit 1 d/First edited issue` (edit to update last modified time) +
 `edit 4 d/Second edited issue` +

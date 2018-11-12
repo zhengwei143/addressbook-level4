@@ -70,27 +70,6 @@ Examples:
 * `help`
 ****
 
-// tag::commandhighlight[]
-
-=== Highlighting command parameters
-
-When the user types the command in the command line, it is difficult for user to distinguish his inputs and parameters. Hence highlighted command is essential to help user to differentiate the parameters and values that he inputs.
-
-Examples:
-****
-.Command highlight 1
-image::command-highlight1.png[width="400"]
-
-.Command highlight 2
-image::command-highlight2.png[width="400"]
-****
-
-[NOTE]
-====
-* The index will be highlighted only for certain commands that requires index (e.g. `edit`, `select`).
-====
-// end::commandhighlight[]
-
 === Selecting an issue/solution  : `(s)select`
 
 If the user is at the home directory, the command selects
@@ -170,6 +149,7 @@ image::AddingNewSolution.png[width="800"]
 
 [NOTE]
 ====
+* The order of the issues may be updated if the user uses sort command.
 * If multiple identical prefixes are entered, the last prefix value will be accepted
 * An issue can have only one statement and description
 * An issue can have any number of tags (including 0)
@@ -181,6 +161,41 @@ image::AddingNewSolution.png[width="800"]
 * User can add solutions to the same issue continuously
 ====
 // end::add[]
+
+// tag::setprimary[]
+=== Choosing one primary solution: `(sp)setprimary`
+
+Chooses one solution of the issue and make it the primary solution.
+
+If there is an existing primary solution, `setprimary` will reset the primary solution to the latest one.
+
+The primary solution is shown on the top of the solution list and is highlighted in white.
+
+Format: `setprimary INDEX`
+
+[NOTE]
+====
+* The index refers to the index number on the solution list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* The index cannot be larger than the number of solutions of this issue.
+* This command can only be executed in the issue or solution directory.
+====
+// end::setprimary[]
+
+// tag::resetprimary[]
+=== Resetting the primary solution: `(rp)resetprimary`
+
+Resets the primary solution and make all solutions normal and not highlighted.
+
+Even if there is no primary solution, this command can still be executed, but no change will be shown.
+
+Format: `resetprimary`
+
+[NOTE]
+====
+* This command can only be executed in the issue or solution directory.
+====
+// end::resetprimary[]
 
 // tag::edit[]
 
@@ -399,6 +414,82 @@ e.g `issue[cplusplus][segmentation]` will match with a single searched tag `[cpl
 * This command can only be executed in the home directory.
 ====
 
+=== Listing all issues : `(l)list`
+
+Shows a list of all issues.
+
+[NOTE]
+====
+* This command can only be executed in the home directory.
+====
+
+// tag::sort[]
+=== Sorting the list of issues: `(sr)sort`
+
+Sorts the list of issues according to a specified sort type.
+
+The list *always follows the specified sort type* until another sort command is executed.
+
+Format: `sort`
+[TIP]
+====
+* Sorts the issues based on the time when they are created. The first issue created has the highest priority.
+====
+
+Format: `sort chro`
+[TIP]
+====
+* Sorts the issues by their last modified time chronologically. The last modified one has the highest priority.
+* Creation is considered as a modification, i.e. last modified time is set to the created time when an issue is added.
+====
+
+Format: `sort freq`
+[TIP]
+====
+* Sorts the issues by their search frequency. The one which matches the search keywords most frequently has the highest priority.
+====
+
+Format: `sort tag`
+[TIP]
+====
+* Sorts the issues by each issue's tag set in a lexicographical order, following ASCII lexicography.
+* Puts the issues without tags at the end of the displayed issue list.
+====
+
+[NOTE]
+====
+* This command can only be executed in the home directory.
+====
+
+Examples:
+****
+* `sort`
+
+* `edit 1 d/First edited issue` (edit to update last modified time) +
+`edit 4 d/Second edited issue` +
+`add i/Third created issue d/Third created issue` (add a new issue) +
+`sort chro`
+
+.Sort Chro Command
+image::sort-chro-command.png[width="790"]
+
+* `find ArrayIndexOutOfBounds` (find to update search frequency) +
+`list` +
+`find ClassNotFoundException` +
+`find ClassNotFoundException` +
+`list` +
+`sort freq`
+
+.Sort Freq Command
+image::sort-freq-command.png[width="790"]
+
+* sort tag
+
+.Sort Tag Command
+image::sort-tag-command.png[width="790"]
+****
+// end::sort[]
+
 === Returning to home directory  : `(hm)home`
 
 Changes the current editing directory to the home directory. Besides,
@@ -528,118 +619,6 @@ Examples:
 * `exit`
 ****
 
-
-=== Listing all issues : `(l)list`
-
-Shows a list of all issues.
-
-[NOTE]
-====
-* This command can only be executed in the home directory.
-====
-
-// tag::sort[]
-=== Sorting the list of issues: `(sr)sort`
-
-Sorts the list of issues according to a specified sort type.
-
-The list *always follows the specified sort type* until another sort command is executed.
-
-Format: `sort`
-[TIP]
-====
-* Sorts the issues based on the time when they are created. The first issue created has the highest priority.
-====
-
-Format: `sort chro`
-[TIP]
-====
-* Sorts the issues by their last modified time chronologically. The last modified one has the highest priority.
-* Creation is considered as a modification, i.e. last modified time is set to the created time when an issue is added.
-====
-
-Format: `sort freq`
-[TIP]
-====
-* Sorts the issues by their search frequency. The one which matches the search keywords most frequently has the highest priority.
-====
-
-Format: `sort tag`
-[TIP]
-====
-* Sorts the issues by each issue's tag set in a lexicographical order, following ASCII lexicography.
-* Puts the issues without tags at the end of the displayed issue list.
-====
-
-[NOTE]
-====
-* This command can only be executed in the home directory.
-====
-
-Examples:
-****
-* `sort`
-
-* `edit 1 d/First edited issue` (edit to update last modified time) +
-`edit 4 d/Second edited issue` +
-`add i/Third created issue d/Third created issue` (add a new issue) +
-`sort chro`
-
-.Sort Chro Command
-image::sort-chro-command.png[width="790"]
-
-* `find ArrayIndexOutOfBounds` (find to update search frequency) +
-`list` +
-`find ClassNotFoundException` +
-`find ClassNotFoundException` +
-`list` +
-`sort freq`
-
-.Sort Freq Command
-image::sort-freq-command.png[width="790"]
-
-* sort tag
-
-.Sort Tag Command
-image::sort-tag-command.png[width="790"]
-****
-// end::sort[]
-
-// tag::setprimary[]
-=== Setting the primary solution: `(sp)setprimary`
-
-Chooses one solution of the issue and make it the primary solution.
-
-If there is an existing primary solution, `setprimary` will reset the primary solution to the latest one.
-
-The primary solution is shown on the top of the solution list and is highlighted in white.
-
-Format: `setprimary INDEX`
-
-[NOTE]
-====
-* The index refers to the index number on the solution list.
-* The index *must be a positive integer* 1, 2, 3, ...
-* The index cannot be larger than the number of solutions of this issue.
-* This command can only be executed in the issue or solution directory.
-====
-// end::setprimary[]
-
-// tag::resetprimary[]
-=== Resetting the primary solution: `(rp)resetprimary`
-
-Resets the primary solution and make all solutions normal and not highlighted.
-
-Even if there is no primary solution, this command can still be executed, but no change will be shown.
-
-Format: `resetprimary`
-
-[NOTE]
-====
-* This command can only be executed in the issue or solution directory.
-====
-// end::resetprimary[]
-
 // tag::suggestion[]
 === Autosuggesting existing issue in find command
 To prevent the issue list is so large such that user can hardly remember all the issues, whenever user types in any keyword in find command, SaveIt will auto suggest any related issue name according to the keyword entered.
@@ -647,7 +626,7 @@ To prevent the issue list is so large such that user can hardly remember all the
 Example:
 
 .Autosuggesting of exsiting issues statements
-image::FindIssueAutoSuggestion.png[width="800"]
+image::FindIssueAutoSuggestion.png[width="500"]
 // end::suggestion[]
 
 === Autosuggesting existing tags in findByTag command
@@ -657,7 +636,7 @@ To prevent the user from creating many similar tags / duplicates, whenever the u
 Example:
 
 .Autosuggesting of existing tags
-image::autosuggest-tag.png[width="790"]
+image::autosuggest-tag.png[width="500"]
 
 
 === Suggesting to copy existing values
@@ -669,7 +648,26 @@ Example:
 .Copying existing fields
 image::copy-existing.png[width="790"]
 
+// tag::commandhighlight[]
 
+=== Highlighting command parameters
+
+When the user types the command in the command line, it is difficult for user to distinguish his inputs and parameters. Hence highlighted command is essential to help user to differentiate the parameters and values that he inputs.
+
+Examples:
+****
+.Command highlight 1
+image::command-highlight1.png[width="400"]
+
+.Command highlight 2
+image::command-highlight2.png[width="400"]
+****
+
+[NOTE]
+====
+* The index will be highlighted only for certain commands that requires index (e.g. `edit`, `select`).
+====
+// end::commandhighlight[]
 
 
 === Team based - Creating / Switching projects [coming in v2.0]
@@ -723,8 +721,8 @@ For solutions: `retrieve SOLUTION_INDEX` +
 e.g. `retrieve 3`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
-* *Search* : `search KEYWORD [MORE_KEYWORDS]` +
-e.g. `Search BST`
+* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
+e.g. `find BST`
 * *Add Tag* : `addtag INDEX t/TAG1 [t/TAG2]...` +
 e.g. `addtag 2 t/python t/java t/TIL`
 * *Refactor Tag* : `refactortag t/OLDTAG [n/NEWTAG]` +

@@ -15,6 +15,15 @@ public class CommandHighlightManager {
     public static final String STYLE_INDEX = "-fx-fill: #55ae47;";
     public static final String STYLE_NORMAL_VALUE = "-fx-fill: #42c3f4;";
 
+
+    // for singleton pattern
+    public static CommandHighlightManager getInstance() {
+        if (instance == null) {
+            instance = new CommandHighlightManager();
+        }
+        return instance;
+    }
+
     /**
      * highlight user input in different colors.
      */

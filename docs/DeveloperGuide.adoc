@@ -286,19 +286,20 @@ Classes used by multiple components are in the `seedu.saveit.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented. Note that this section does not fully encompass all the features, but the more core features of the application.
 
+// tag::add[]
 === Add feature
 The add command can add both issue and solution to SaveIt. It includes two levels:
 
-* Issue level
+* Root level
 ** Issue statement
 ** Issue description
 ** Issue tags
-* Solution level
+* Issue level
 ** Solution link
 ** Solution remark
 
 ==== Add issue
-Add issue happens on the issue level
+Adding a new issue can only happen at the root level
 
 ===== Current implementation
 The `SaveItParser` is used to call `AddCommandParser` so as to pass the entered issue. In order to build a new `Issue` object, a dummy solution link and dummy solution remark will be used. After that, `AddCommand` is invoked which will ask model to add the issue to the `Model` component.
@@ -309,13 +310,13 @@ The following sequence diagram illustrates how the add new issue feature functio
 .Add Issue Command Sequence Diagram
 image::AddNewIssue.png[width="800"]
 
-This diagram gives a clear procedure that how the user input is passed step by step and calling different methods and objects at different sequences.
+This diagram gives a clear procedure that how the user input is passed step by step by calling different methods and objects in different sequences.
 
 ==== Add solution to existing issue
-Add solution happens on the solution level
+Adding a new solution can only happen at the issue level
 
 ===== Current implementation
-The `SaveItParser` is used to call `AddCommandParser` just like how add issue features functions as above mentioned. However, this time, the new solution link and solution remark is provided to `AddCommand` instead. In order to build a new `Issue` object, dummy issue statement and dummy issue description will be used. During execution, `addSolution` method, which was newly added, in Model component will be invoked, to add the solution. The detailed implementation of `addSolution` in model component is quite simple. Since the list stored in application is immutable, each time, a new issue will be created with original statement and description, then the new solution will be added to that particular issue. Finally, `updateIssue` method will be called to replace the issue in `versionedSaveIt`.
+The `SaveItParser` is used to call `AddCommandParser` just like how adding issue feature functions as above mentioned. However, this time, the new solution link and solution remark is provided to `AddCommand` instead. In order to build a new `Issue` object, dummy issue statement and dummy issue description will be used. During execution, `addSolution` method, which was newly added, in Model component will be invoked to add the solution. The detailed implementation of `addSolution` in model component is quite simple. Since the list stored in application is immutable, each time, a new issue will be created with original statement and description, then the new solution will be added to that particular issue. Finally, `updateIssue` method will be called to replace the issue in `versionedSaveIt`.
 
 The following sequence diagram illustrates how the add solution feature functions
 
@@ -326,7 +327,7 @@ This diagram shows the sequence that how add solution command is executed. It co
 
 ==== Design Considerations
 ===== Aspect: How add solutions executes
-* **Alternative 1 (current choice):** Combine AddIssue and AddSolution combined together and distinguishes them at the stage of `AddCommandParser`
+* **Alternative 1 (current choice):** Combine AddIssue and AddSolution together and distinguish them at the stage of `AddCommandParser`
 ** Pros: Consistent syntax between the two features, so the command is more user-friendly.
 ** Cons: Need to put more effort on distinguishing the difference between these two requests, `AddCommandParser` is relatively complex compared to the other parser component.
 * **Alternative 2:** Build a new command especially for adding solution
@@ -334,12 +335,13 @@ This diagram shows the sequence that how add solution command is executed. It co
 ** Cons: The command set becomes too complex for the user.
 
 ===== Aspect: How add command distinguishes between adding solution and adding issue
-* **Alternative 1 (current choice):** Passing a new created issue with dummy issue statement or dummy solution link
+* **Alternative 1 (current choice):** Pass a newly created issue with dummy issue statement or dummy solution link
 ** Pros: Consistent coding style and less change on logic structure
 ** Cons: Quite complex implementation compared to other command
-* **Alternative 2:** Overloading Issue constructor so that different issues will be passing to `AddCommand` accordingly.
+* **Alternative 2:** Overload Issue constructor so that different issues will be passed to `AddCommand` accordingly.
 * Pros: Relatively easier to implement
 * Cons: Lots of changes on structure.
+// end::add[]
 
 // tag::sort[]
 === Sort feature
@@ -621,13 +623,12 @@ image::UI_Sequence_Diagram_2.png[width="790"]
 ** Pros: Both lists can be viewed at the same time. Implementation is easier.
 ** Cons: It takes too much space in the UI.
 
-// end::edit[]
+// tag::edit[]
 === Edit Feature
 The edit feature allows users to edit any field of the issue and solution.
 
 ==== Current Implementation
-The edit mechanism is facilitated by `editCommandParser` and `editCommand`.
-Users are allowed to edit any field in the issue list. includes: +
+The edit mechanism is facilitated by `editCommandParser` and `editCommand`. Users are allowed to edit any field in the issue list, which includes: +
 
 * root level
 ** Issue statement
@@ -648,13 +649,13 @@ The `editCommandParser` extends `Parser` and implements the following operations
 If it fails to parse the command, it will throw `ParseException` and display edit command usage message.
 
 * `editCommand#execute(Model model, CommandHistory history)`
-** Analyses the user in the root directory or issue directory. If the user in the root directory but provide solution edit command or in issue level but provide issue edit command +
+** Analyses the user in the root directory or issue directory. Since the root directoy can only edit issues, if user provides solution related command, it will fail to execute. Also, in the issue directory, it only allows to edit solution, it will fail to execute the issue related command. Then it will
 throw `CommandException` and show wrong directory information.
 
 ** Checks if the user index in editDescriptor is larger than the size of the issue list or solution list. +
 Throw `CommandException` and show invalid index warning. Otherwise, call the function `model.updateIssue(issueToEdit, editedIssue)` to update issue list.
 
-Please refer to the Sequence Diagram below for the edit operation.
+Please refer to the Sequence Diagram below for the illustration of edit operation.
 
 .Edit Command Sequence Diagram
 image::edit-command-sequence-diagram.jpg[width="800"]
@@ -670,14 +671,18 @@ image::edit-command-sequence-diagram.jpg[width="800"]
 
 ** Pros: It will use less memory.
 
-** Cons: It has lower security if it the issue is the mutable object.
+** Cons: It has lower security if the issue is the mutable object.
+// end::edit[]
 
+// tag::retrieve[]
 === Retrieve Feature
-The retrieve feature allows user to choose a solution link to copy to the system clipboard.
+The retrieve feature allows user to choose a solution link and copy it to the system clipboard.
 
 ==== Current Implementation
 
 The retrieve feature basically takes the user entered index and call `getFilteredAndSortedList` method in `Model` to get the selected solution. Then Java `Toolkit` package is used to copy the url link of solution to the system clipboard.
+// end::retrieve[]
+
 
 // tag::setprimary[]
 === Set Primary Feature
@@ -718,7 +723,8 @@ The reset primary solution mechanism goes through the solution list once and che
 If it is primary, we replace it by a new Solution object with the same data of the primary solution. If it is not primary, we continue checking until we reach the end of the list.
 // end::resetprimary[]
 
-=== Refactor tag Feature
+// tag::refactortag[]
+=== Refactor Tag Feature
 The refactor tag feature allows users to rename or remove a specified tag for all entries with that tag.
 
 ==== Current Implementation
@@ -728,42 +734,42 @@ The `RefactorTagCommandParser` extends `Parser` and implements the following ope
 
 * `refactorTagCommandParser#parser(String args)`
 ** Checks the arguments for empty strings and throws a `ParseException` if an empty string is found.
-** Analyses the argument to check if it is a valid command format. Users are only allowed to use two prefixes in refactor tag command.
-*** `t/` the tag that user wants to refactor, which must be input by the user, otherwise throws `ParserException` and shows refactor tag command usage message.
-*** `n/` the new tag that user wants to replace the original one, which is optional. (if the user does not provide, then remove the original one)
+** Analyses the argument to check if it is a valid command format. Users are not allowed to provide other prefixes, except `t/` and `n/` in refactor tag command.
+*** `t/` the tag that user wants to refactor, which must be input by users, otherwise throws `ParserException` and shows refactor tag command usage message.
+*** `n/` the new tag that the user wants to replace the original one with, which is optional. (if the user does not provide, then remove the original one)
 
 If it fails to parse the command, it will throw `ParseException` and display refactor tag command usage message.
 
 * `refactorTagCommand#execute(Model model, CommandHisotry history)`
-** update the issue list and return success message if it has edited an issue, otherwise show an unsuccessful message.
-** It will iterate all the issues in the saveIt, if it contains the old tag, it will replace with the new tag if provided. Then update the list.
+** updates the issue list and returns success message if it has edited an issue, otherwise shows an unsuccessful message.
+** Iterates all the issues in the saveIt, if it contains the old tag, it will replace with the new tag if provided. Then update the list.
 
 Please refer to the Sequence Diagram below for the refactor tag operation.
 
-.Refactor Tag Command Activity Diagram
-image::refactor-tag.jpeg[width="800"]
+.Refactor Tag Activity Diagram
+image::refactor-tag-activity-diagram.png[width="400"]
 
 ==== Design Consideration
 
 ===== Aspect: Implementation of RefactorTag command parser.
-* Alternative 1 (current choice): Allows only to rename or remove the old tags that user input lastly.
+* **Alternative 1 (current choice):** Allows only to rename or remove the old tags that user input lastly.
 ** Pros: It is easy to implement.
-** Cons: It is inconvenient if the user wants to replace the tags once.
+** Cons: It is inconvenient if the user wants to replace multiple tags once.
 * Alternative 2: Allows to rename or remove multiple old tags with multiple new tags.
 ** Pros: It is convenient for users to replace or remove the tags once.
 ** Cons: It is not clear for users to see the changes since tags are displayed disordered.
-// end::refactorTag[]
+// end::refactortag[]
 
 
 
-// tag::addTag[]
+// tag::addtag[]
 === Add tag Feature
 The add tag feature allows users to add `Tag(s)` to specified `Indexed` issues.
 
 ==== Current Implementation
 The add tag mechanism is facilitated by `AddTagCommandParser` and `AddTagCommand`.
 
-Please refer to the Sequence Diagram below for the add tag operation.
+Please refer to the Sequence Diagram below for the illustration of add tag operation.
 
 .Add Tag Command Sequence Diagram
 image::add-tag-sequence-diagram.jpeg[width="800"]
@@ -771,14 +777,15 @@ image::add-tag-sequence-diagram.jpeg[width="800"]
 ==== Design Consideration
 
 ===== Aspect: Implementation of AddTag command parser.
-* Alternative 1 (current choice):** Allows range of `Index` to be accepted as index parameter.
+* **Alternative 1 (current choice):** Allows range of indexes and multiple indexes to be accepted as index parameter.
 ** Pros: It is efficient to add multiple `Tags` to multiple issues instead of doing it singly.
 ** Cons: It has to consider various conditions of the user input.
-* Alternative 2: Creates a IndexRange class for index.
+* Alternative 2: Creates an `IndexRange` class for index.
 ** Pros: It is easy to understand and maintain.
-** Cons: It will increase coupling between IndexRange class and Index class
-// end::addTag[]
+** Cons: It increases coupling between `IndexRange` class and `Index` class
+// end::addtag[]
 
+// tag::suggestion[]
 === Suggestion Feature
 The suggestion feature allows user to quickly complete commands by showing a drop-down window of suggested values when the user input matches a specific keyword or identifier.
 
@@ -795,6 +802,7 @@ Since the suggestion component has to retrieve the data from model component to 
 . The command typed
 . The prefixes from `ArgumentTokenizer`
 . The caret position (position of the text cursor in the user input string)
+// end::suggestion[]
 
 
 For example, when entering `find issueName` as the user input, the command is parsed to match `SuggestionLogicManager#parseFindCommandSuggestion`. The prefixes are then matched accordingly and a new `IssueNameSuggestion` object will be instantiated. By calling `Model#getCurrentIssueStatementSet`, `IssueNameSuggestion` is able to find the relvant issue statements based on the user input. The returned `SuggestionResult` will be passed to the `CommandBox#displaySuggestion` method to handle the displaying of the results.
@@ -872,13 +880,23 @@ The hashcode used by `Prefix` only hashes the prefix string, as such, adding a `
 
 We eventually chose Alternative 1 as it provides a better structure and encapsulation for our code overall. We also came up with a workaround for Alternative 1's cons, by modifying the method `ArgumentMultimap#getValue`.
 
-// tag::commandHighlight[]
+// tag::commandhighlight[]
 === Command Highlight
 The command highlight feature is to differentiate command word, index, prefix and values that user input in Command Line.
 
 ==== Current Implementation
-The Command Highlight mechanism uses `InlineCssTextArea` class. It uses listener to detect the change in the `commandTextField` and check if it is command word, parameter, index or values and assign different colors correspondingly.
-// end::commandHighlight[]
+The Command Highlight mechanism uses `InlineCssTextArea` class. It uses listener to detect the change in the `commandTextArea` and check if it contains command word, parameter, index or values and assign different colors correspondingly.
+
+==== Design Consideration
+===== Aspect: Implementation of command highlight manager.
+
+* **Alternative 1 (current choice):** Check the character in the command box and assign different colors based on precondition.
+** Pros: easy to implement by checking the prefix, index and command word.
+** Cons: due to the limitation of using the character '/' as part of the prefix, it may still have some corner cases that we cannot cover.
+* **Alternative 2:** Parse the user command simultaneously when user input command.
+** Pros: if user inputs wrong command format, it will highlight the color correspondingly. Hence, user can correct his input immediately.
+** Cons: difficult to implement.
+// end::commandhighlight[]
 
 
 == Documentation

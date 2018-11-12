@@ -70,18 +70,26 @@ Examples:
 * `help`
 ****
 
+// tag::commandhighlight[]
+
 === Highlighting command parameters
 
-When the user types the command in the command line, it is difficult for users to distinguish their inputs and parameters. Hence command gets highlighted is essential to differentiate the parameter and values that user input.
+When the user types the command in the command line, it is difficult for user to distinguish his inputs and parameters. Hence highlighted command is essential to help user to differentiate the parameters and values that he inputs.
 
 Examples:
 ****
 .Command highlight 1
-image::command-highlight1.png[width="790"]
+image::command-highlight1.png[width="700"]
 
 .Command highlight 2
-image::command-highlight2.png[width="790"]
+image::command-highlight2.png[width="700"]
 ****
+
+[NOTE]
+====
+* The index will be highlighted only for certain commands that requires index (e.g. `edit`, `select`).
+====
+// end::commandhighlight[]
 
 === Selecting an issue/solution  : `(s)select`
 
@@ -127,6 +135,8 @@ image::select solution.png[width="790"]
 * All properties of this solutions will be displayed at the left side of the interface.
 ====
 
+// tag::add[]
+
 === Adding: `(a)add`
 
 Adds an issue to the SaveIt App.
@@ -138,8 +148,8 @@ Adds a solution to an existing issue in SaveIt App.
 Format: `add s/SOLUTION_LINK r/REMARK`
 [TIP]
 ====
-* Select an issue before adding solution
-* The solution link validation check only provides most basic format checking
+* Select an issue before adding a solution
+* The link validation check only provides most basic format checking
 ====
 
 Examples: +
@@ -152,7 +162,7 @@ Adds a new issue which has a issue statment called `ArrayIndexOutOfBounds` and i
 image::AddingNewIssue.png[width="800"]
 * `select 3`
 * `add s/www.stackoverflow.com r/use functional programming` +
-Adds a new solution link which is `www.stackoverflow.com` and a solution remark called `use functional programming`
+Adds a new solution which has a solution link called `www.stackoverflow.com` and a solution remark called `use functional programming`
 
 .Add new solution to the third issue in the issue list
 image::AddingNewSolution.png[width="800"]
@@ -167,57 +177,60 @@ image::AddingNewSolution.png[width="800"]
 * The index *must be a positive integer* and `1, 2, 3, ...`
 * The index cannot be bigger than the number of issues.
 * User needs to select the issue index to add a solution to that issue
-* The display panel will display the first solution link of the issue at the specified `INDEX`.
 * A solution contains one solution link and one remark
 * User can add solutions to the same issue continuously
 ====
+// end::add[]
 
 // tag::edit[]
 
-=== Editing an issue : `(e)edit`
+=== Editing: `(e)edit`
 
-Edits an existing issue or solution in the SaveIt App.
+Edits an issue in the SaveIt App.
 
 Format: `edit INDEX [i/NEW_ISSUE] [d/NEW_DESCRIPTION] [t/TAG]...`
+
+Edits a solution in an exit solution in the issue.
 
 Format: `edit INDEX s/NEW_SOLUTION_LINK r/NEW_SOLUTION_REMARK`
 
 [TIP]
 ====
-* Select an issue before editing solution
+* Select an issue before editing the solution.
 ====
 
 Examples: +
 ****
-* `edit 1 i/map function d/how to use map` +
-Edits the issue statement and description of the first issue to be `map function` and `how to use map` respectively.
 * `edit 3 i/git command t/git` +
-Edits the issue statement and tags of the third issue to be `git command` and `git` respectively.
+Edits the issue statement and the tag of the third issue to become `git command` and `git` respectively.
+* `edit 1 i/map function d/how to use map` +
+Edits the issue statement and  description of the first issue to become `map function` and `how to use map` respectively.
 
 
-.Command Edit solution link to a solution
+.Edits issue statement and tag of an issue
 image::edit-issue.png[width="790"]
 
 * `select 1` +
-select the first issue
-* `edit 3 s/https://github.com/joshnh/Git-Commands` +
-Edits the third solution link to be `https://github.com/joshnh/Git-Commands`
+selects the first issue
+* `edit 1 s/https://github.com/joshnh/Git-Commands` +
+Edits the first solution link to be `https://github.com/joshnh/Git-Commands`
 
-.Command Edit solution link to a solution
+.Edits solution link and remark of the second solution
 image::edit-solution.png[width="790"]
 ****
 
 [NOTE]
 ====
-* Edits the issue at the specified `INDEX`. The index refers to the index number shown in the displayed issue list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the issue at the specified `INDEX`, which refers to the index number shown in the displayed issue list.
+* Edits the solution at the specified `Index`, which refers to the index number shown in the displayed solution list.
+* The index *must be a positive integer* (1, 2, 3...), otherwise it will be considered as invalid command.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the issue will be removed i.e. adding of solutions is not cumulative.
-* You can remove all the tags by typing `t/` without specifying any tags after it.
+* Removes all the tags by typing `t/` without specifying any tags after it.
 ====
-// tag::edit[]
+// end::edit[]
 
-// tag::refacotrTag[]
+// tag::refactortag[]
 === Refactoring tag: `(rt)refactortag`
 
 Renames or removes a specific tag for all entries with that tag.
@@ -232,13 +245,16 @@ Format: `refactortag t/OLD_TAG [n/NEW_TAG]`
 
 Examples:
 ****
-* `refactortag t/solved n/TIL` +
-Changes all entries tagged with `solved` to be tagged with `TIL`.
+* `refactortag t/notSolved n/solved` +
+Changes all entries tagged with `notSolved` to be tagged with `solved`.
+
+.Refactor tag （rename)
+image::refactor-tag2.png[width="790"]
+
 * `refactortag t/solved` +
 Removes the tag `solved` from all entries.
 
-
-.Refactor tag
+.Refactor tag (remove)
 image::refactor-tag.png[width="790"]
 ****
 
@@ -247,11 +263,12 @@ image::refactor-tag.png[width="790"]
 * The old tag must be provided.
 * If the user provides multiple old tags or new tags, only take the last one as an effect.
 * If the new tag exits in the issue already, it will only remove the old tag.
+* The order of the issues may be updated if the user uses sort command.
 * This command can only be executed in home directory.
 ====
 // end::refactortag[]
 
-// tag::addTag[]
+// tag::addtag[]
 
 === Adding tag: `(at)addtag`
 
@@ -265,25 +282,35 @@ Examples:
 Adds the `python` tag to the first issue in the issue list.
 * `addtag 2 t/python t/java` +
 Adds the `python` and `java` tag to the second issue in the issue list.
-* `addtag 2 3 5 t/python t/java` +
-Adds the `python` and `java` tag to the second, third and fifth issues in the issue list.
-* `addtag 2-5 t/python t/java` +
-Adds the `python` and `java` tag from second to fifth issues in the issue list.
+* `addtag 1 2 3 t/difficult` +
+Adds the `difficult` tag to the first, second and third issues in the issue list.
+
+.Add tag (multiple index(es))
+image::add-tag2.png[width="790"]
+
+* `addtag 1-4 t/TIL t/java` +
+Adds the `TIL` tag from first to fourth issues in the issue list.
+
+.Add tag (range index)
+image::add-tag.png[width="790"]
 ****
 
 [NOTE]
 ====
-* If the tag exits in the issue already, it will not take any action.
+* It will not take any action if the tag exits in the issue.
 * The INDEX refers to the index number shown in the issue list.
-* The index *must be a positive integer* (1, 2, 3...).
-* Range of the index can be used.
-* The lower limit of range must be smaller than or equal to the upper limit (2-4, 2-2).
-* This command can only be executed in home directory.
+* The index *must be a positive integer* (1, 2, 3...), otherwise it will be considered as invalid command.
+* The Range of the index can be used.
+* The lower limit of the range must be smaller than or equal to the upper limit (2-4, 2-2).
+* The range cannot be used with multiple index(es) together.
+* The order of the issues may be updated if the user uses sort command.
+* This command can only be executed in root directory.
 ====
 // end::addtag[]
 
+// tag::retrieve[]
 === Retrieving a solution link: `(rv)retrieve`
-Retrieves the solution link to the system clipboard
+Retrieves the solution link so that the link is copied to the system clipboard
 
 Format: `retrieve INDEX`
 
@@ -303,6 +330,7 @@ Examples: +
 * The index *must be a positive integer* 1, 2, 3, ...
 * The index cannot be bigger than the number of solutions of a certain issue.
 ====
+// end::retrieve[]
 
 === Deleting a statement : `(d)delete`
 Deletes the specified issue from SaveIt App.
@@ -619,13 +647,15 @@ Format: `resetprimary`
 ====
 // end::resetprimary[]
 
+// tag::suggestion[]
 === Autosuggesting existing issue in find command
-To prevent the issue list is so large that user can hardly remember all the issues, whenever user types in any keyword in find command, SaveIt will auto suggest any related issue name according to the keyword entered.
+To prevent the issue list is so large such that user can hardly remember all the issues, whenever user types in any keyword in find command, SaveIt will auto suggest any related issue name according to the keyword entered.
 
 Example:
 
 .Autosuggesting of exsiting issues statements
 image::FindIssueAutoSuggestion.png[width="800"]
+// end::suggestion[]
 
 === Autosuggesting existing tags in findByTag command
 
@@ -704,7 +734,7 @@ e.g. `delete 3`
 e.g. `Search BST`
 * *Add Tag* : `addtag INDEX t/TAG1 [t/TAG2]...` +
 e.g. `addtag 2 t/python t/java t/TIL`
-* *Refactor Tag* : `refactor t/OLDTAG [n/NEWTAG]` +
+* *Refactor Tag* : `refactortag t/OLDTAG [n/NEWTAG]` +
 e.g. `refactorTag t/java n/C++`
 * *Home* : `home`
 * *Clear* : `clear`
@@ -716,5 +746,3 @@ e.g. `refactorTag t/java n/C++`
 * *Sort* : `sort TYPE`
 * *Set Primary* : `setprimary [INDEX]`
 * *Reset Primary* : `resetprimary`
-* *Refactor Tag* : `refactor [OLDTAG] [NEWTAG]` +
-e.g. `refactorTag java C++`

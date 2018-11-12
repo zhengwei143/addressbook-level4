@@ -11,9 +11,9 @@
 == Overview
 
 This document is to summarize and elaborate all my contributions to the project.
-Our project, SaveIt, is a issue tracker application which was morphed from AddressBook4.
+Our project, SaveIt, is a issue tracker application which is morphed from AddressBook4.
 
-SaveIt dedicates to provide a platform for storing, managing and viewing their programming related issues during daily practice for the programmers. Its main features includes adding new issue and solution, managing existing issues as well as finding existing issues. It is especially designed for the user who prefers command line interface (CLI) as the all the commands requires command line input. It also preserved the benefits of a Graphical User Interface (GUI) at the same time. If you can type fast, SaveIt can help you search the same issue that save previously faster than traditional GUI apps.
+SaveIt dedicates to providing a platform for storing, managing and viewing their programming related issues during daily practice for the programmers. Its main features include adding new issue and solution, managing existing issues as well as finding existing issues. It is especially designed for the user who prefers command line interface (CLI) as all the commands require command line input. It also preserves the benefits of a Graphical User Interface (GUI) at the same time. If you can type fast, SaveIt can help you search the same issue that save previously faster than traditional GUI apps.
 
 The project is implemented for applying and showing the learning outcomes of CS2103T, and it is done by a group of five CS2103T students including myself.
 
@@ -23,7 +23,7 @@ This section is to summarize and explain my contributions towards this project.
 * *Major enhancement*: add the *solution filed to model structure along with enable adding solution or issue*
 ** What it does: It constitutes the basic model structure by adding new issue and new solution into SaveIt. This allows all the following features to be carried out in SaveIt.
 ** Justification: This feature improves the product significantly as a user can now add more issues and solutions to the application. This is the most important and fundamental function our application aims to achieve.
-** Highlights: This enhancement involves not only model component but also GUI, storage components in the application and it requires a lot of effort to build it properly. The add command on the other hand needs to handle different request in different directories.
+** Highlights: This enhancement involves not only model component but also GUI, storage components in the application and it requires a lot of effort to build it properly. The add command on the other hand needs to handle different requests in different directories.
 
 * *Minor enhancement*:
 ** Implement basic autosuggestion feature for find and findByTag command. https://github.com/CS2103-AY1819S1-T12-4/main/pull/107[#107]
@@ -47,7 +47,7 @@ https://github.com/CS2103-AY1819S1-T12-4/main/pull/253[#253]
 *** Update ArgumentMultimap to enable hashing the prefix with its relative position(Pull requests https://github.com/CS2103-AY1819S1-T12-4/main/pull/165[#165])
 *** Write additional tests for existing features to increase coverage from 79% to 81% (Pull requests https://github.com/CS2103-AY1819S1-T12-4/main/pull/219[#219], https://github.com/CS2103-AY1819S1-T12-4/main/pull/233[#223])
 ** Documentation:
-*** Modify the undo/redo implementation diagram to fit current edition of Developer Guide: (Pull requests https://github.com/CS2103-AY1819S1-T12-4/main/pull/243[#243])
+*** Modify the undo/redo implementation diagrams to fit current edition of Developer Guide: (Pull requests https://github.com/CS2103-AY1819S1-T12-4/main/pull/243[#243])
 ** Community:
 *** Review PRs (with non-trivial review comments): https://github.com/CS2103-AY1819S1-T12-4/main/pull/169[#169], https://github.com/CS2103-AY1819S1-T12-4/main/pull/170[#170], https://github.com/CS2103-AY1819S1-T12-4/main/pull/180[#180], https://github.com/CS2103-AY1819S1-T12-4/main/pull/208[#208], https://github.com/CS2103-AY1819S1-T12-4/main/pull/215[#215]
 *** Report bugs and suggestions for other teammates in the group (https://github.com/CS2103-AY1819S1-T12-4/main/issues/188[#188], https://github.com/CS2103-AY1819S1-T12-4/main/issues/197[#197] https://github.com/CS2103-AY1819S1-T12-4/main/issues/199[#199], https://github.com/CS2103-AY1819S1-T12-4/main/issues/200[#200], https://github.com/CS2103-AY1819S1-T12-4/main/issues/202[#202], https://github.com/CS2103-AY1819S1-T12-4/main/issues/204[#204], https://github.com/CS2103-AY1819S1-T12-4/main/issues/222[#222], https://github.com/CS2103-AY1819S1-T12-4/main/issues/223[#223])

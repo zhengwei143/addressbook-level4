@@ -299,7 +299,7 @@ The add command can add both issue and solution to SaveIt. It includes two level
 ** Solution remark
 
 ==== Add issue
-Add issue happens on the issue level
+Adding a new issue can only happen at the issue level
 
 ===== Current implementation
 The `SaveItParser` is used to call `AddCommandParser` so as to pass the entered issue. In order to build a new `Issue` object, a dummy solution link and dummy solution remark will be used. After that, `AddCommand` is invoked which will ask model to add the issue to the `Model` component.
@@ -310,13 +310,13 @@ The following sequence diagram illustrates how the add new issue feature functio
 .Add Issue Command Sequence Diagram
 image::AddNewIssue.png[width="800"]
 
-This diagram gives a clear procedure that how the user input is passed step by step and calling different methods and objects at different sequences.
+This diagram gives a clear procedure that how the user input is passed step by step by calling different methods and objects in different sequences.
 
 ==== Add solution to existing issue
-Add solution happens on the solution level
+Adding a new solution can only happen at the solution level
 
 ===== Current implementation
-The `SaveItParser` is used to call `AddCommandParser` just like how add issue features functions as above mentioned. However, this time, the new solution link and solution remark is provided to `AddCommand` instead. In order to build a new `Issue` object, dummy issue statement and dummy issue description will be used. During execution, `addSolution` method, which was newly added, in Model component will be invoked, to add the solution. The detailed implementation of `addSolution` in model component is quite simple. Since the list stored in application is immutable, each time, a new issue will be created with original statement and description, then the new solution will be added to that particular issue. Finally, `updateIssue` method will be called to replace the issue in `versionedSaveIt`.
+The `SaveItParser` is used to call `AddCommandParser` just like how adding issue feature functions as above mentioned. However, this time, the new solution link and solution remark is provided to `AddCommand` instead. In order to build a new `Issue` object, dummy issue statement and dummy issue description will be used. During execution, `addSolution` method, which was newly added, in Model component will be invoked to add the solution. The detailed implementation of `addSolution` in model component is quite simple. Since the list stored in application is immutable, each time, a new issue will be created with original statement and description, then the new solution will be added to that particular issue. Finally, `updateIssue` method will be called to replace the issue in `versionedSaveIt`.
 
 The following sequence diagram illustrates how the add solution feature functions
 
@@ -327,7 +327,7 @@ This diagram shows the sequence that how add solution command is executed. It co
 
 ==== Design Considerations
 ===== Aspect: How add solutions executes
-* **Alternative 1 (current choice):** Combine AddIssue and AddSolution combined together and distinguishes them at the stage of `AddCommandParser`
+* **Alternative 1 (current choice):** Combine AddIssue and AddSolution together and distinguish them at the stage of `AddCommandParser`
 ** Pros: Consistent syntax between the two features, so the command is more user-friendly.
 ** Cons: Need to put more effort on distinguishing the difference between these two requests, `AddCommandParser` is relatively complex compared to the other parser component.
 * **Alternative 2:** Build a new command especially for adding solution
@@ -335,10 +335,10 @@ This diagram shows the sequence that how add solution command is executed. It co
 ** Cons: The command set becomes too complex for the user.
 
 ===== Aspect: How add command distinguishes between adding solution and adding issue
-* **Alternative 1 (current choice):** Passing a new created issue with dummy issue statement or dummy solution link
+* **Alternative 1 (current choice):** Pass a newly created issue with dummy issue statement or dummy solution link
 ** Pros: Consistent coding style and less change on logic structure
 ** Cons: Quite complex implementation compared to other command
-* **Alternative 2:** Overloading Issue constructor so that different issues will be passing to `AddCommand` accordingly.
+* **Alternative 2:** Overload Issue constructor so that different issues will be passed to `AddCommand` accordingly.
 * Pros: Relatively easier to implement
 * Cons: Lots of changes on structure.
 // end::add[]
@@ -674,7 +674,7 @@ image::edit-command-sequence-diagram.jpg[width="800"]
 
 // tag::retrieve[]
 === Retrieve Feature
-The retrieve feature allows user to choose a solution link to copy to the system clipboard.
+The retrieve feature allows user to choose a solution link and copy it to the system clipboard.
 
 ==== Current Implementation
 

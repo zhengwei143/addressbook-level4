@@ -655,7 +655,7 @@ Format: `resetprimary`
 
 // tag::suggestion[]
 === Autosuggesting existing issue in find command
-To prevent the issue list is so large that user can hardly remember all the issues, whenever user types in any keyword in find command, SaveIt will auto suggest any related issue name according to the keyword entered.
+To prevent the issue list is so large such that user can hardly remember all the issues, whenever user types in any keyword in find command, SaveIt will auto suggest any related issue name according to the keyword entered.
 
 Example:
 

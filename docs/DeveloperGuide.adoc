@@ -877,7 +877,7 @@ The original hashcode used by `Prefix` only hashes the prefix string, as such, a
 
 We eventually chose Alternative 1 as it provides a better structure and encapsulation for our code overall. We also came up with a workaround for Alternative 1's cons, by modifying the method `ArgumentMultimap#getValue`.
 
-// tag::suggestionDesignConsiderations[]
+// end::suggestionDesignConsiderations[]
 
 // tag::commandhighlight[]
 === Command Highlight

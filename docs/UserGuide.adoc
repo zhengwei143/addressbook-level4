@@ -45,7 +45,6 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * *`exit`* : exits the app
 
 
-[[Features]]
 == Features
 The following is a list of commands that you can use in the application.
 

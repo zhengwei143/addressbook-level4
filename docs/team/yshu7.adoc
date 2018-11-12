@@ -22,7 +22,7 @@ SaveIt is written in Java and JavaFX, and is morphed from AddressBook-level4, th
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to sort issue list*
+* *Major enhancement*: Added *the ability to sort issue list* and UI of sort type
 ** What it does: It allows the user to sort issues shown in the list.
 ** Justification: This feature improves the product significantly because it helps the user to view the issues in the order that they want, so that they can organize the record of issues better.
 ** Highlights: This command changes the way how issues are listed in the application. It needs effort to combine sorting and filtering together properly and make sure the correct issue can be retrieved from the sorted list.
@@ -30,10 +30,7 @@ SaveIt is written in Java and JavaFX, and is morphed from AddressBook-level4, th
 * *Minor enhancement*:
 ** Added the ability to set and reset primary solution. https://github.com/CS2103-AY1819S1-T12-4/main/pull/177[#177]
 ** Added a confirmation check for clear command. https://github.com/CS2103-AY1819S1-T12-4/main/pull/116[#116]
-** Implement UI for SortType. https://github.com/CS2103-AY1819S1-T12-4/main/pull/208[#208]
-** Improve backend storage of Issue (added createdTime, lastModifiedTime). https://github.com/CS2103-AY1819S1-T12-4/main/pull/108/files#diff-f1fa68a447dd90e93ca8a91b132a026a[#108],
-https://github.com/CS2103-AY1819S1-T12-4/main/pull/208/files#diff-f1fa68a447dd90e93ca8a91b132a026a[#208]
-** Improve solution structure. https://github.com/CS2103-AY1819S1-T12-4/main/pull/180[#180]
+** Improved solution structure. https://github.com/CS2103-AY1819S1-T12-4/main/pull/180[#180]
 
 * *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=yshu7[Functional code]]
 
@@ -44,7 +41,7 @@ https://github.com/CS2103-AY1819S1-T12-4/main/pull/208/files#diff-f1fa68a447dd90
 ** Enhancements to existing features:
 *** Updated tests to fit mid-v1.2 features (Pull requests https://github.com/CS2103-AY1819S1-T12-4/main/pull/52[#52])
 ** Documentation:
-*** Update About Us Page: https://github.com/CS2103-AY1819S1-T12-4/main/pull/2[#2]
+*** Updated About Us Page: https://github.com/CS2103-AY1819S1-T12-4/main/pull/2[#2]
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-T12-4/main/pull/25[#25],
 https://github.com/CS2103-AY1819S1-T12-4/main/pull/32[#32], https://github.com/CS2103-AY1819S1-T12-4/main/pull/77[#77],

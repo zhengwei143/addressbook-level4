@@ -479,7 +479,7 @@ image::clear-command-confirmed.png[width="400"]
 
 [NOTE]
 ====
-* User needs to confirm this command before the operation can  executed.
+* User needs to confirm this command before the operation can be executed.
 * User can undo this operation to restore the issue lists.
 ====
 // end::clear[]

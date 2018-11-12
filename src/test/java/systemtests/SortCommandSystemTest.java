@@ -131,6 +131,7 @@ public class SortCommandSystemTest extends SaveItSystemTest {
     private void updateFrequency(Issue... issues) {
         String command;
         for (Issue issue : issues) {
+            // To avoid autosuggestion
             String statement = issue.getStatement().getValue().split(" ")[1];
             command = FindCommand.COMMAND_WORD + " " + statement;
             executeCommand(command);

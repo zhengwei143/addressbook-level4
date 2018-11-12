@@ -10,20 +10,14 @@ import javafx.scene.control.TextArea;
 public class ResultDisplayHandle extends NodeHandle<Node> {
 
     public static final String RESULT_DISPLAY_ID = "#resultDisplay";
-    private static final String DIRECTORY_FIELD_ID = "#directory";
-    private static final String SORT_TYPE_ID = "#sortType";
 
     private final TextArea resultDisplay;
     private final StatusMessageHandle statusMessageHandle;
-    private final Label directory;
-    private final Label sortType;
 
     public ResultDisplayHandle(Node resultDisplayNode) {
         super(resultDisplayNode);
         resultDisplay = getChildNode(RESULT_DISPLAY_ID);
         statusMessageHandle = new StatusMessageHandle(resultDisplayNode.getParent());
-        directory = statusMessageHandle.getChildNode(DIRECTORY_FIELD_ID);
-        sortType = statusMessageHandle.getChildNode(SORT_TYPE_ID);
     }
 
     /**
@@ -37,13 +31,13 @@ public class ResultDisplayHandle extends NodeHandle<Node> {
      * Returns the text in the currentDirectory in the result display.
      */
     public String getDirectory() {
-        return directory.getText();
+        return statusMessageHandle.getDirectory().getText();
     }
 
     /**
      * Returns the text in the sort type.
      */
     public String getSortType() {
-        return sortType.getText();
+        return statusMessageHandle.getSortType().getText();
     }
 }

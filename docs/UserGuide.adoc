@@ -359,7 +359,6 @@ Examples: +
 
 // tag::find[]
 === Locating issues by statement: `(f)find`
-
 Finds issues whose statement contain any of the given search queries.
 
 Format: `find [KEYWORDS...]`

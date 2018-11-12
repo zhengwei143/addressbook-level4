@@ -47,24 +47,24 @@ This document outlines the contributions that **Tan Zheng Wei** has made to the 
 
 == Contributions to the User Guide
 
-
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.
 |===
 
 include::../UserGuide.adoc[tag=find]
 
 include::../UserGuide.adoc[tag=findtag]
 
-include::../UserGuide.adoc[findbytagsuggestion]
+include::../UserGuide.adoc[tag=findbytagsuggestion]
 
-include::../UserGuide.adoc[copyexistingsuggestion]
+include::../UserGuide.adoc[tag=copyexistingsuggestion]
 
 == Contributions to the Developer Guide
 
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.
 |===
+
 
 include::../DeveloperGuide.adoc[tag=logiccomponent]
 

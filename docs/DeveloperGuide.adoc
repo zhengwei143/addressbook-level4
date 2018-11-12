@@ -451,6 +451,9 @@ For the current version, `clear` is the only command that needs confirmation.
 
 ==== Current Implementation
 
+.Clear Command Activity Diagram
+image::ClearCommand.png[width="800"]
+
 Instead of letting LogicManager execute the command directly after parsing it, we now check if we need confirmation before the command is executed.
 
 In order to connect the confirmation with the command: +

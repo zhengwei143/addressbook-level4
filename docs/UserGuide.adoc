@@ -148,8 +148,8 @@ Adds a solution to an existing issue in SaveIt App.
 Format: `add s/SOLUTION_LINK r/REMARK`
 [TIP]
 ====
-* Select an issue before adding solution
-* The solution link validation check only provides most basic format checking
+* Select an issue before adding a solution
+* The link validation check only provides most basic format checking
 ====
 
 Examples: +

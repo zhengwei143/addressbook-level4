@@ -290,16 +290,16 @@ This section describes some noteworthy details on how certain features are imple
 === Add feature
 The add command can add both issue and solution to SaveIt. It includes two levels:
 
-* Issue level
+* Root level
 ** Issue statement
 ** Issue description
 ** Issue tags
-* Solution level
+* Issue level
 ** Solution link
 ** Solution remark
 
 ==== Add issue
-Adding a new issue can only happen at the issue level
+Adding a new issue can only happen at the root level
 
 ===== Current implementation
 The `SaveItParser` is used to call `AddCommandParser` so as to pass the entered issue. In order to build a new `Issue` object, a dummy solution link and dummy solution remark will be used. After that, `AddCommand` is invoked which will ask model to add the issue to the `Model` component.
@@ -313,7 +313,7 @@ image::AddNewIssue.png[width="800"]
 This diagram gives a clear procedure that how the user input is passed step by step by calling different methods and objects in different sequences.
 
 ==== Add solution to existing issue
-Adding a new solution can only happen at the solution level
+Adding a new solution can only happen at the issue level
 
 ===== Current implementation
 The `SaveItParser` is used to call `AddCommandParser` just like how adding issue feature functions as above mentioned. However, this time, the new solution link and solution remark is provided to `AddCommand` instead. In order to build a new `Issue` object, dummy issue statement and dummy issue description will be used. During execution, `addSolution` method, which was newly added, in Model component will be invoked to add the solution. The detailed implementation of `addSolution` in model component is quite simple. Since the list stored in application is immutable, each time, a new issue will be created with original statement and description, then the new solution will be added to that particular issue. Finally, `updateIssue` method will be called to replace the issue in `versionedSaveIt`.

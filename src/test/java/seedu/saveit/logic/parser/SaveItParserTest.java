@@ -64,7 +64,7 @@ public class SaveItParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Issue issue = new IssueBuilder().withFrequency(INITIALIZED_ISSUE_FREQUENCY).build();
-        AddCommand command = (AddCommand) parser.parseCommand(IssueUtil.getAddCommand(issue));
+        AddCommand command = (AddCommand) parser.parseCommand(IssueUtil.getAddIssueCommand(issue));
         assertEquals(new AddCommand(issue), command);
     }
 

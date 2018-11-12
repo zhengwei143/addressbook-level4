@@ -44,7 +44,7 @@ public class RetrieveCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (model.getCurrentDirectory().isIssueLevel()) {
+        if (model.getCurrentDirectory().isIssueLevel() || model.getCurrentDirectory().isSolutionLevel()) {
             try {
                 String selectedLink = model.getFilteredAndSortedSolutionList().get(targetedIndex.getZeroBased())
                         .getLink().getValue();
@@ -55,6 +55,7 @@ public class RetrieveCommand extends Command {
                 throw new CommandException(MESSAGE_FAILED_SOLUTION);
             }
         } else {
+            assert (model.getCurrentDirectory().isRootLevel());
             throw new CommandException(MESSAGE_FAILED_SELECTION);
         }
     }

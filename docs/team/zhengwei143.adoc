@@ -4,7 +4,7 @@
 :stylesDir: ../stylesheets
 :sectnums:
 
-== PROJECT: SaveIt
+= PROJECT: SaveIt
 
 ---
 
@@ -38,23 +38,12 @@ This document outlines the contributions that **Tan Zheng Wei** has made to the 
 ** Project management:
 *** Manage milestones and issues on the repository
 ** Testing
-*** Additional tests written that covers the new features and Suggestion component -
-https://github.com/CS2103-AY1819S1-T12-4/main/pull/178[#178],
-https://github.com/CS2103-AY1819S1-T12-4/main/pull/230[#230],
-https://github.com/CS2103-AY1819S1-T12-4/main/pull/242[#242],
-https://github.com/CS2103-AY1819S1-T12-4/main/pull/245[#245]
+*** Additional tests written that covers the new features and Suggestion component - https://github.com/CS2103-AY1819S1-T12-4/main/pull/178[#178], https://github.com/CS2103-AY1819S1-T12-4/main/pull/230[#230], https://github.com/CS2103-AY1819S1-T12-4/main/pull/242[#242], https://github.com/CS2103-AY1819S1-T12-4/main/pull/245[#245]
 ** Documentation:
-*** Update images of diagrams for User Guide and Developer Guide, as well as documentation for new features -
-https://github.com/CS2103-AY1819S1-T12-4/main/pull/73[#73],
-https://github.com/CS2103-AY1819S1-T12-4/main/pull/74[#74],
-https://github.com/CS2103-AY1819S1-T12-4/main/pull/127[#127],
-https://github.com/CS2103-AY1819S1-T12-4/main/pull/254[#254]
+*** Update images of diagrams for User Guide and Developer Guide, as well as documentation for new features - https://github.com/CS2103-AY1819S1-T12-4/main/pull/73[#73], https://github.com/CS2103-AY1819S1-T12-4/main/pull/74[#74], https://github.com/CS2103-AY1819S1-T12-4/main/pull/127[#127], https://github.com/CS2103-AY1819S1-T12-4/main/pull/254[#254]
 
 ** Community:
-*** Reported bugs and suggestions for other teams in the class -
-https://github.com/CS2103-AY1819S1-T10-2/main/issues/84[#84],
-https://github.com/CS2103-AY1819S1-T10-2/main/issues/91[#91],
-https://github.com/CS2103-AY1819S1-T10-2/main/issues/95[#95]
+*** Reported bugs and suggestions for other teams in the class - https://github.com/CS2103-AY1819S1-T10-2/main/issues/84[#84], https://github.com/CS2103-AY1819S1-T10-2/main/issues/91[#91], https://github.com/CS2103-AY1819S1-T10-2/main/issues/95[#95]
 
 == Contributions to the User Guide
 

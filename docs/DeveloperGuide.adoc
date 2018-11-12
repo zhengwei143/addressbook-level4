@@ -205,19 +205,41 @@ The `UI` component,
 .Structure of the Logic Component
 image::LogicClassDiagram.png[width="800"]
 
-The `Logic` Component encapsulates the execution of all commands. Each command is represented its own class (e.g. `FindCommand.java`, `AddCommand.java`) which all inherit from an abstract `Command.java` class.
+The `Logic` Component can be split into two subcomponents:
+
+*1. Command Logic Subcomponent*
+
+The command logic subcomponent encapsulates the execution of all commands. Each command is represented its own class (e.g. `FindCommand.java`, `AddCommand.java`) which all inherit from an abstract `Command.java` class.
 
 *API* :
 link:{repoURL}/src/main/java/seedu/saveit/logic/Logic.java[`Logic.java`]
+
 
 .  `Logic` uses the `SaveItParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
 .  The command execution can affect the `Model` (e.g. adding a statement) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+*2. Suggestion Logic Subcomponent*
 
-.Interactions Inside the Logic Component for the `delete 1` Command
+The suggestion logic subcomponent encapsulates the evaluation of user inputs as it is keyed into the command line, differing from the command logic in that command logic is only executed upon entering the command, whereas suggestion logic is called whenever the user input changes (without the need to enter).
+
+*API* :
+link:{repoURL}/src/main/java/seedu/saveit/logic/SuggestionLogic.java[`SuggestionLogic.java`]
+
+
+. `SuggestionLogic` parses user inputs whenever it changes.
+. This determines which `Suggestion` object is created by the `SuggestionLogicManager`.
+. The evaluation of the `Suggestion` object reads data from the `Model` (e.g. finds a specific `Issue`).
+. The result of the evaluation is encapsulated as a `SuggestionResult` object which is passed back to the `Ui`.
+
+
+Given below is the Sequence Diagram for interactions within the `Logic` component when an API call is made. The Sequence Diagram is split into two branches of logic:
+
+. *Command logic:* Shows an example command execution of the `delete 1` Command, which calls the `DeleteCommand`.
+. *Suggestion logic:* Shows an example suggestion evaluation of the user input `edit 1 i/`, which calls the `CopyExistingSuggestion`.
+
+.Example Interactions Inside the Logic Component for the command and suggestion logic subcomponents.
 image::SDexamplesForLogic.png[width="800"]
 
 [[Design-Model]]
@@ -746,8 +768,8 @@ image::add-tag-sequence-diagram.jpeg[width="800"]
 ** Cons: It will increase coupling between IndexRange class and Index class
 // end::addTag[]
 
-=== Suggestion for find command Feature
-The suggestion for find command allows user to quickly find the desired issue in SaveIt by showing a drop-down window when related keyword is matched.
+=== Suggestion Feature
+The suggestion feature allows user to quickly complete commands by showing a drop-down window of suggested values when the user input matches a specific keyword or identifier.
 
 ==== Current Implementation
 
@@ -757,26 +779,87 @@ The `SuggestionLogicManager` implements `SuggestionLogic` interface and override
 .SuggestionLogic Class Diagram
 image::SuggestionClassUML.png[width="400"]
 
-Since the suggestion component has to retrieve the data from model component to give suggestion according user's entered keywords, it is considered as a part of `Logic` component. By listening to the text field which locates in `CommandBox`, `SuggestionLogicManager` will be able to decide which type of suggestion should be given through parsing the prefix from `ArgumentTokenizer`. Once the `parseFindCommandSuggestion` is triggered, a new `IssueNameSuggestion` class will be created. By calling `getCurrentIssueStatementSet`, `IssueNameSuggestion` is able to match the user input and thus gives the relevant issue statement as a suggestion. The returned `SuggestionResult` will be passed to the `displaySuggestion` method in `CommandBox`. One thing to be noticed, the drop-down window will be hidden once a user input is matched any given suggestion value.
+Since the suggestion component has to retrieve the data from model component to give a suggestion according to the user's input, it is considered as a part of `Logic` component. By listening to changes in the text field, which is handled in `CommandBox`, the `SuggestionLogicManager` will be able to decide which type of suggestion should be given by parsing the following fields:
+
+. The command typed
+. The prefixes from `ArgumentTokenizer`
+. The caret position (position of the text cursor in the user input string)
+
+
+For example, when entering `find issueName` as the user input, the command is parsed to match `SuggestionLogicManager#parseFindCommandSuggestion`. The prefixes are then matched accordingly and a new `IssueNameSuggestion` object will be instantiated. By calling `Model#getCurrentIssueStatementSet`, `IssueNameSuggestion` is able to find the relvant issue statements based on the user input. The returned `SuggestionResult` will be passed to the `CommandBox#displaySuggestion` method to handle the displaying of the results.
+
+One thing to take note of, the drop-down window will be hidden once a user input is matched any given suggestion value.
 
 .IssueNameSuggestion Sequence Diagram
 image::IssueNameSuggestionDiagram.png[width="800"]
 
 ==== Design Consideration
-===== Aspect: How to distinguish value of each field and recognize the order of each value
-Since the original tokenizer hashes prefix, there is no way to distinguish the order of each value after prefix. For instance, if several prefixes of tag appear, it is impossible to distinguish each tag using tokenizer.
 
-* **Alternative 1 (current choice):** Hash Prefix with its relative distance together
+===== Aspect 1: Architecture Design of the Suggestion Logic subcomponent
+The architecture behind the Suggestion Logic subcomponent was designed by mimicking the original `Logic` component that handled the command logic. This was because we realized that the required implementation behind both was actually similar, needing to access both the `Ui` and the `Model` components. Hence, the `SuggestionLogic` and `Suggestion` were built similar to the original Logic component which had the corresponding classes `Logic` and `Command` which served as interfaces to the `Ui` and `Model` components respectively. However, the internal implementation of the internal classes was changed (i.e. `Parser`).
 
-** Pros: Code has a high readability and easy to understand
+* **Alternative 1 (current choice):** have parser methods all within `SuggestionLogicManager` that parse the user input directly, first parsing them based the commands (handled in `SuggestionLogicManager#parseUserInput`) and subsequently parsing based on the `Prefix` that the text cursor is at.
 
-** Cons: Quite hard to implement as other commands do not require to distinguish the order of each value but suggestion component does. Once hash with prefix and distance, it needs to handle both situation.
+** Pros: Keeps the code DRY.
 
-* **Alternative 2:** Using subString to get each field from command line input
+** Cons: Deviates from the original internal structure of the Command Logic subcomponent.
 
-** Pros: Easy to implement.
+* **Alternative 2:** have parser classes for each command (e.g. `EditSuggestionParser`) that handles the further parsing of the `Prefix` that creates the relevant `Suggestion` object.
 
-** Cons: Bad readability and code quality, no consistency.
+** Pros: Code would be more modularized since the parsing is now handled by classes.
+
+** Cons: Code would be repeated in each `SuggestionParser` class.
+
+We chose the first alternative as it would best handle the issue of having duplicate logic. The internal parsing of the user inputs for suggestions differs from the Command Logic in that, Command Logic only has one level of parsing (parsing commands), whereas Suggestion Logic requires two levels (parsing commands and parsing prefixes). In order to ensure the same way of handling the same prefix in different commands (e.g. `findtag t/` and `edit 1 t/`), methods were created to do so (e.g. `SuggestionLogicManager#handleTagNameSuggestion`). This keeps the code DRY and reduces repeats logic in the code.
+
+Further abstractions can be made to this in the future as more `Suggestion`(s) added, by moving the suggestion handlers (`SuggestionLogicManager#handleTagNameSuggestion`) into a new `Suggestion` class (instead of an interface) that the specific `XYZSuggestion`(s) inherit from.
+
+===== Aspect 2: Deciding on how to parse the user input
+We had two options we had to parse the user input and find the prefixes and their values.
+
+* **Alternative 1 (current choice):** Use the existing `ArgumentTokenizer` and `ArgumentMultimap` to parse the user input
+
+** Pros: The logic for separating the prefixes in `ArgumentTokenizer` and storing them in `ArgumentMultimap` is similar to what we need to parse our user input. By reusing the code, it prevents us from needing to rewrite code with duplicated logic elsewhere in our code base, which keeps our code DRY.
+
+** Cons: `ArgumentTokenizer` and `ArgumentMultimap` is also used by the command logic subcomponent, by reusing this code in the suggestion logic subcomponent, it increases the coupling between the implementation of the two subcomponents which resulted in issues (which is described in the aspects 3 and 4).
+
+* **Alternative 2:** Parse the input by using a separate piece of code (duplicated logic from the `ArgumentTokenizer` and `ArgumentMultimap`). Slight modifications would need to be made to the duplicated logic due to differences in implementation.
+
+** Pros: Reduces the coupling between the two command and suggestion logic subcomponents. Although the logic behind the implementation would be similar to `ArgumentTokenizer`, having it as a duplicate piece of code means that any changes would not affect and cause bugs in the other subcomponent.
+
+** Cons: Having it duplicated logic might affect future development, especially when this duplicated logic needs to be modified, then the implementation for both pieces of code would have to be modified as well. If not documented properly, this could cause bugs if only one piece of code was modified.
+
+===== Aspect 3: Data structure of Prefix
+The original implementation of `Prefix` only stored the value of the prefix string (e.g. `/t` or `/i`), however since the implementation of the suggestion logic subcomponent uses `ArgumentMultimap`, it requires that the position of the `Prefix` in the user input string be known as well.
+
+* **Alternative 1 (current choice):** Store an additional field `position` in `Prefix`
+
+** Pros: Since the prefix and its location are related, this keeps all the information pertaining to the prefix encapsulated in a single class, which helps with the modularity of the code.
+
+** Cons: The command logic subcomponent does not require the `position` field in `Prefix`, which results in it being unused. This might be confusing for future developers. This also resulted in having another aspect to consider later on (aspect 4).
+
+* **Alternative 2:** Move the implementation and checks for the prefix position out of `Prefix`
+
+** Pros: This would not affect the code implemented in the Command logic subcomponent, and we would have less to fix.
+
+** Cons: Related pieces of code would be separated (i.e. since the position is stored separately, it is not properly encapsulated).
+
+===== Aspect 4: Distinguishing each Prefix in ArgumentMultimap
+The hashcode used by `Prefix` only hashes the prefix string, as such, adding a `position` field would not make a difference since two same prefixes with different positions (e.g. `/t ... /t`) will still hash to the same key. The previous implementation handles this by having the value in the `HashMap` within `ArgumentMultimap` store a `List<String>` which will append all values with the same prefix.
+
+* **Alternative 1 (current choice):** Set the hashcode of `Prefix` to use both the prefix string and the position.
+
+** Pros: The prefixes now hash differently if they have the same prefix string but different position, this allowed us to have finer control needed for the Suggestion logic subcomponent when handling the prefixes in `ArgumentMultimap`.
+
+** Cons: The Command logic subcomponent does not make use of the `position` field. As such, when attempting to extract out the values of each `Prefix` at the `Parser`, it cannot find the values as they are now hashed with the `position` as this is unknown to the `Parser`.
+
+* **Alternative 2:** Use the original implementation
+
+** Pros: Code would not affect the Command logic subcomponent, which already takes up a significant portion of the code base, hence less changes would be needed.
+
+** Cons: The code and logic would not be well encapsulated (for the `Prefix`) and we would have repeated logic in the codebase.
+
+We eventually chose Alternative 1 as it provides a better structure and encapsulation for our code overall. We also came up with a workaround for Alternative 1's cons, by modifying the method `ArgumentMultimap#getValue`.
 
 // tag::commandHighlight[]
 === Command Highlight

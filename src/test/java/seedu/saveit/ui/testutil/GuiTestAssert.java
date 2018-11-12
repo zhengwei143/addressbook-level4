@@ -5,12 +5,10 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import guitests.guihandles.IssueCardHandle;
-import guitests.guihandles.IssueListPanelHandle;
-import guitests.guihandles.ResultDisplayHandle;
-import guitests.guihandles.SolutionCardHandle;
+import guitests.guihandles.*;
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.issue.Solution;
+import seedu.saveit.ui.SolutionListPanel;
 
 /**
  * A set of assertion methods useful for writing GUI tests.
@@ -61,6 +59,25 @@ public class GuiTestAssert {
      */
     public static void assertListMatching(IssueListPanelHandle issueListPanelHandle, List<Issue> issues) {
         assertListMatching(issueListPanelHandle, issues.toArray(new Issue[0]));
+    }
+
+    /**
+     * Asserts that the list in {@code solutionListPanelHandle} displays the details of {@code solutions} correctly and
+     * in the correct order.
+     */
+    public static void assertListMatching(SolutionListPanelHandle solutionListPanelHandle, Solution... solutions) {
+        for (int i = 0; i < solutions.length; i++) {
+            //solutionListPanelHandle.navigateToCard(i);
+            assertCardDisplaysSolution(solutions[i], solutionListPanelHandle.getSolutionCardHandle(i));
+        }
+    }
+
+    /**
+     * Asserts that the list in {@code solutionListPanelHandle} displays the details of {@code solutions} correctly and
+     * in the correct order.
+     */
+    public static void assertListMatching(SolutionListPanelHandle solutionListPanelHandle, List<Solution> solutions) {
+        assertListMatching(solutionListPanelHandle, solutions.toArray(new Solution[0]));
     }
 
     /**

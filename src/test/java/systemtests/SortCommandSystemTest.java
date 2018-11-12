@@ -1,9 +1,10 @@
 package systemtests;
 
-import static org.junit.Assert.assertEquals;
+import static junit.framework.TestCase.assertEquals;
 import static seedu.saveit.model.issue.SortType.CHRONOLOGICAL_SORT;
 import static seedu.saveit.model.issue.SortType.FREQUENCY_SORT;
 import static seedu.saveit.model.issue.SortType.TAG_SORT;
+import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.CHECKSTYLE_ERROR;
 import static seedu.saveit.testutil.TypicalIssues.C_RACE_CONDITION;
 import static seedu.saveit.testutil.TypicalIssues.C_SEGMENTATION_FAULT;
@@ -33,6 +34,7 @@ public class SortCommandSystemTest extends SaveItSystemTest {
         ModelHelper.setSortedList(expectedModel, C_SEGMENTATION_FAULT, JAVA_NULL_POINTER, TRAVIS_BUILD, RUBY_HASH_BUG,
                 CHECKSTYLE_ERROR, QUICKSORT_BUG, C_RACE_CONDITION);
         assertCommandSuccess(command, SortType.TAG, expectedModel);
+
 
         /* Case: repeat previous find command where issue list is displaying in the order we are using
          * -> no change
@@ -80,11 +82,12 @@ public class SortCommandSystemTest extends SaveItSystemTest {
         /* Case: sort after selectiong
          * -> failure
          */
-        executeCommand(SelectCommand.COMMAND_WORD + " 1");
+        executeCommand(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_ISSUE.getOneBased());
         command = SortCommand.COMMAND_WORD;
         executeCommand(command);
         assertEquals(command, getCommandBox().getInput());
         assertEquals(Messages.MESSAGE_WRONG_DIRECTORY, getResultDisplay().getText());
+        assertStatusBarUnchanged();
     }
 
     /**
@@ -145,9 +148,5 @@ public class SortCommandSystemTest extends SaveItSystemTest {
             keyword = keyword + issue.getStatement().getValue().split(" ")[0] + " ";
         }
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        for (Issue i : getModel().getFilteredAndSortedIssueList()) {
-            System.out.println(i.getStatement().getValue());
-        }
-
     }
 }

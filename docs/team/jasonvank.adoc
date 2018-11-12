@@ -25,7 +25,7 @@ This project portfolio is intended to document my contributions to the developme
 * *Minor enhancements*:
 ** Implemented `command highlight` feature: Allows users to differentiate their inputs by highlight command word,  parameters and values in different colors.
 ** Implemented `command alias` feature: Allows users to type command words less but achieving the same functionality.
-** Refactored the application from AddressBook Level 4 to SaveIt app.
+** Refactored the application from AddressBook Level 4 to SaveIt app. https://github.com/CS2103-AY1819S1-T12-4/main/issues/30[#30] https://github.com/CS2103-AY1819S1-T12-4/main/pull/44[#44]
 
 * *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=jasonvank[Functional code]]
 
@@ -33,7 +33,7 @@ This project portfolio is intended to document my contributions to the developme
 
 ** Project management:
 *** Managed releases v1.1, v1.3.* - v1.4.* (6 releases) on GitHub
-*** Managed milestones and checked issue status on GitHub
+*** Managed milestones and checked issue status on GitHubIndex.fromOneBased(directory.getSolution()
 *** Set up `CodCoverage` and `CodeQuality` badge for tracking of project build. (Pull request #49)
 
 ** Enhancements to existing features:
@@ -41,7 +41,7 @@ This project portfolio is intended to document my contributions to the developme
 *** Updated tests to fit mid-v1.2 features (Pull requests https://github.com/CS2103-AY1819S1-T12-4/main/pull/52[#52])
 
 ** Documentation:
-*** Drafted the User Guide for the team: https://github.com/CS2103-AY1819S1-T12-4/main/pull/2[#2]
+*** Drafted the User Guide for the team: https://github.com/CS2103-AY1819S1-T12-4/main/pull/1[#1]
 *** Modified build.gradle to reflect our project and removed elements of AddressBook-Level4 from the documentation website. (Pull request #150, #153)
 *** Updated organisation landing page https://github.com/CS2103-AY1819S1-T12-4/main/pull/183[#183]
 

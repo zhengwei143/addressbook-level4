@@ -70,7 +70,7 @@ Examples:
 * `help`
 ****
 
-// tag::commandHighlight[]
+// tag::commandhighlight[]
 
 === Highlighting command parameters
 
@@ -91,7 +91,7 @@ image::command-highlight2.png[width="700"]
 * The index will be highlight only for certain commands required index.
 * The prefix will be highlighted even it does not have space before, but it is valid or not depends on command validation.
 ====
-// end::commandHighlight[]
+// end::commandhighlight[]
 
 === Selecting an issue/solution  : `(s)select`
 
@@ -230,7 +230,7 @@ image::edit-solution.png[width="790"]
 ====
 // end::edit[]
 
-// tag::refacotrTag[]
+// tag::refactortag[]
 === Refactoring tag: `(rt)refactortag`
 
 Renames or removes a specific tag for all entries with that tag.
@@ -268,7 +268,7 @@ image::refactor-tag.png[width="790"]
 ====
 // end::refactortag[]
 
-// tag::addTag[]
+// tag::addtag[]
 
 === Adding tag: `(at)addtag`
 

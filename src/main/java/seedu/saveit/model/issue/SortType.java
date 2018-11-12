@@ -14,8 +14,8 @@ public class SortType {
     public static final String EMPTY_SORT = "";
     public static final String FREQUENCY = "search frequency";
     public static final String CHRONOLOGICAL = "last modified time";
-    public static final String TAG = "tag in alphabetical order";
-    public static final String DEFAULT = "added time";
+    public static final String TAG = "tag set in lexicographical order";
+    public static final String DEFAULT = "created time";
     private final Comparator<Issue> comparator;
     private final String sortType;
 

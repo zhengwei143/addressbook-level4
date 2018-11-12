@@ -16,33 +16,33 @@ This project portfolio is intended to document my contributions to the developme
 
 == Summary of contributions
 
-* *Major enhancement*: Enhance *the ability to edit `issue`, `solution` and `tag`*.
+* *Major enhancement*: Enhanced *the ability to edit `issue`, `solution` and `tag`*
 
 *** What it does: This feature allows a user to edit any fields in an issue and solution. Also it improves flexibility to edit tags (Relevant commands: `edit`, `addtag` and `refactortag`)
-*** Justification: This feature improves the products significantly, since it reduces the amount of time needed to edit existing entries instead of deleting the issue and adding a new issue.
-*** Highlights: This feature allows users to edit issue and solution easily. Also, they can add tags by range of indexes and refactor tags easily. It requires a depth analysis for different conditions whether the command is valid.
+*** Justification: This feature improve the products significantly, since it reduces the amount of time needed to edit exist entries instead of adding a nre issue.
+*** Highlights: This feature allows users to edit issue and solution easily. Also, they can add tags by range and refactor tags easily. It requires a depth analysis for different conditions whether the command is valid. It improves the efficiency to edit their issues and solutions.
 
 * *Minor enhancements*:
-** Implement `command highlight` feature: Allows users to differentiate their inputs by highlighting command word, parameters and values in different colors.
-** Implement `command alias` feature: Allows users to type command words less but achieve the same functionality.
-** Refactor the application from AddressBook Level 4 to SaveIt app. https://github.com/CS2103-AY1819S1-T12-4/main/issues/30[#30] https://github.com/CS2103-AY1819S1-T12-4/main/pull/44[#44]
+** Implemented `command highlight` feature: Allows users to differentiate their inputs by highlight command word,  parameters and values in different colors. https://github.com/CS2103-AY1819S1-T12-4/main/pull/99[#99]
+** Implemented `command alias` feature: Allows users to type command words less but achieving the same functionality. https://github.com/CS2103-AY1819S1-T12-4/main/pull/82[#82]
+** Refactored the application from AddressBook Level 4 to SaveIt app. https://github.com/CS2103-AY1819S1-T12-4/main/issues/30[#30], https://github.com/CS2103-AY1819S1-T12-4/main/pull/44[#44], https://github.com/CS2103-AY1819S1-T12-4/main/pull/81[#81]
 
 * *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=jasonvank[Functional code]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Manage releases v1.1, v1.3.* - v1.4.* (6 releases) on GitHub.
-*** Manage milestones and check issue status on GitHub.
+*** Managed releases v1.1, v1.3.* - v1.4.* (6 releases) on GitHub.
+*** Managed milestones and checked issue status on GitHub.
 *** Set up `Code Coverage` and `Code Quality` badge for tracking of project status. (Pull requests https://github.com/CS2103-AY1819S1-T12-4/main/pull/49[#49])
 
 ** Enhancements to existing features:
-*** Write additional tests for existing features to increase coverage. (https://github.com/CS2103-AY1819S1-T12-4/main/pull/216[#216])
-*** Improve Solution link validation （https://github.com/CS2103-AY1819S1-T12-4/main/pull/162/files [162] https://github.com/CS2103-AY1819S1-T12-4/main/pull/164[164])
+*** Wrote additional tests for existing features to increase coverage. (https://github.com/CS2103-AY1819S1-T12-4/main/pull/216[#216])
+*** Improved Solution link validation （https://github.com/CS2103-AY1819S1-T12-4/main/pull/162/files [162] https://github.com/CS2103-AY1819S1-T12-4/main/pull/164[164])
 
 ** Documentation:
-*** Draft the User Guide for the team. https://github.com/CS2103-AY1819S1-T12-4/main/pull/1[#1], https://github.com/CS2103-AY1819S1-T12-4/main/pull/76[#76]
-*** Modify the app name to SaveIt and create app logo
+*** Drafted the User Guide for the team. https://github.com/CS2103-AY1819S1-T12-4/main/pull/1[#1], https://github.com/CS2103-AY1819S1-T12-4/main/pull/76[#76]
+*** Modified the app name to SaveIt and created app logo
 *** Updated organisation landing page https://github.com/CS2103-AY1819S1-T12-4/main/pull/183[#183]
 
 ** Community:

@@ -198,7 +198,7 @@ public class SuggestionLogicManager implements SuggestionLogic {
 
         switch (startPrefix.getPrefix()) {
 
-        case START_MARKER:
+        case PREFIX_TAG_STRING:
             return handleTagNameSuggestion(posArgs, startPrefix, endPrefix);
 
         default:

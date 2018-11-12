@@ -9,6 +9,7 @@ import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_PYTHON;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_PYTHON;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_SYNTAX;
+import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG_STRING;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.INITIALIZED_ISSUE_FREQUENCY;
@@ -63,7 +64,7 @@ public class SaveItParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Issue issue = new IssueBuilder().withFrequency(INITIALIZED_ISSUE_FREQUENCY).build();
-        AddCommand command = (AddCommand) parser.parseCommand(IssueUtil.getAddCommand(issue));
+        AddCommand command = (AddCommand) parser.parseCommand(IssueUtil.getAddIssueCommand(issue));
         assertEquals(new AddCommand(issue), command);
     }
 
@@ -118,7 +119,8 @@ public class SaveItParserTest {
 
     @Test
     public void parseCommand_findByTag() throws Exception {
-        assertTrue(parser.parseCommand(FindByTagCommand.COMMAND_WORD + " tag") instanceof FindByTagCommand);
+        assertTrue(parser.parseCommand(FindByTagCommand.COMMAND_WORD + " "
+                + PREFIX_TAG_STRING + "tag") instanceof FindByTagCommand);
     }
 
     @Test

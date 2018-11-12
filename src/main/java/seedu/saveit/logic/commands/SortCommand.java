@@ -24,7 +24,7 @@ public class SortCommand extends Command {
             + "Parameters: KEYWORD\n"
             + "Example: " + COMMAND_WORD + " " + SortType.TAG_SORT;
 
-    public static final String MESSAGE_SUCCESS = "Sorted issues by %s.";
+    public static final String MESSAGE_SUCCESS = "Successfully sorted issues by %s.";
 
     private final SortType sortType;
 

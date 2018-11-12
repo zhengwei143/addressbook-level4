@@ -180,7 +180,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
             Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
 
         /* Case: edit a issue with new values same as another issue's values -> rejected */
-        executeCommand(IssueUtil.getAddCommand(VALID_C_ISSUE));
+        executeCommand(IssueUtil.getAddIssueCommand(VALID_C_ISSUE));
         assertTrue(getModel().getSaveIt().getIssueList().contains(VALID_C_ISSUE));
         index = INDEX_FIRST_ISSUE;
         assertFalse(getModel().getFilteredAndSortedIssueList().get(index.getZeroBased()).equals(VALID_C_ISSUE));

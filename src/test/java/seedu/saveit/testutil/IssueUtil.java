@@ -22,7 +22,7 @@ public class IssueUtil {
     /**
      * Returns an add command string for adding the {@code issue}.
      */
-    public static String getAddCommand(Issue issue) {
+    public static String getAddIssueCommand(Issue issue) {
         return AddCommand.COMMAND_WORD + " " + getIssueDetails(issue);
     }
 

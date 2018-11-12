@@ -607,6 +607,7 @@ Format: `setprimary INDEX`
 ====
 // end::setprimary[]
 
+// tag::resetprimary[]
 === Resetting the primary solution: `(rp)resetprimary`
 
 Resets the primary solution and make all solutions normal and not highlighted.
@@ -619,6 +620,7 @@ Format: `resetprimary`
 ====
 * This command can only be executed in issue or solution directory.
 ====
+// end::resetprimary[]
 
 === Autosuggesting existing issue in find command
 To prevent the issue list is so large that user can hardly remember all the issues, whenever user types in any keyword in find command, SaveIt will auto suggest any related issue name according to the keyword entered.

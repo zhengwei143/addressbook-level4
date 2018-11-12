@@ -631,24 +631,24 @@ The retrieve feature allows user to choose a solution link to copy to the system
 The retrieve feature basically takes the user entered index and call `getFilteredAndSortedList` method in `Model` to get the selected solution. Then Java `Toolkit` package is used to copy the url link of solution to the system clipboard.
 
 // tag::setprimary[]
-=== Set Primary feature
+=== Set Primary Feature
 The set primary feature allows users to choose one solution as primary solution.
 
 ==== Current Implementation
 
-The set primary mechanism is facilitated by the method `isPrimarySolution()`, which is overrode by `PrimarySolution` inheriting from `Solution`.
+The set primary solution mechanism is facilitated by the method `isPrimarySolution()`, which is overrode by `PrimarySolution` inheriting from `Solution`.
 
 ==== Design Consideration
 ===== Aspect: How to distinguish between PrimarySolution and Solution
 * **Alternative 1 (current choice):** Use PrimarySolution as a subclass of Solution
 
-** Pros: No flag attribute is introduced. Solution structure remains the same.
+** Pros: No flag attribute is introduced. More sustainable.
 
 ** Cons: New object is created. May affect performance.
 
 * **Alternative 2:** Add a flag attribute to Solution
 
-** Pros: Easy to understand.
+** Pros: Easy to understand and implement.
 
 ** Cons: Solution constructor is affected. The flag attribute is redundant for non-primary solutions.
 
@@ -658,6 +658,16 @@ The set primary mechanism is facilitated by the method `isPrimarySolution()`, wh
 
 ** Cons: Need to check if the index is affected every time when the solution list is updated.
 // end::setprimary[]
+
+// tag::resetprimary[]
+=== Reset Primary Feature
+The reset primary feature allows users to reset the primary solution and make all solutions normal and not highlighted.
+
+==== Current Implementation
+
+The reset primary solution mechanism goes through the solution list once and check if a solution is primary or not.
+If it is primary, then replace it by a new Solution object with the same fields. If it is not primary, we continue checking until reach the end of the list.
+// end::resetprimary[]
 
 === Refactor tag Feature
 The refactor tag feature allows users to rename or remove a specified tag for all entries with that tag.

@@ -68,6 +68,8 @@ include::../UserGuide.adoc[tag=clear]
 
 include::../UserGuide.adoc[tag=setprimary]
 
+include::../UserGuide.adoc[tag=resetprimary]
+
 == Contributions to the Developer Guide
 
 |===
@@ -79,3 +81,5 @@ include::../DeveloperGuide.adoc[tag=sort]
 include::../DeveloperGuide.adoc[tag=confirmation]
 
 include::../DeveloperGuide.adoc[tag=setprimary]
+
+include::../DeveloperGuide.adoc[tag=resetprimary]

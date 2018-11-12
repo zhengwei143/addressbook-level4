@@ -561,28 +561,50 @@ image::HomeCommandSequenceDiagram.png[width="800"]
 ** Cons:The structure is not clear and the users may be confused.
 
 === UI Enhancement
-The figure below shows the current UI for SaveIt v1.4.
+The figures below show the current UI for SaveIt v1.4.
 
-.SaveIt UI
-image::UI.png[width="800"]
+.SaveIt UI Displaying Issue List
+image::UI.png[width="790"]
 
-In the above figure, it is shown the left column displays the list of all issues,
- The column in the middle displays solutions of the selected issue. The blank part
-  at bottom right displays the web page of the url as in the solution link.
+.SaveIt UI Displaying Solution List
+image::UI2.png[width="790"]
 
-  *The web page should be able to be accessed via the Internet as well as loaded locally.
+In the above figures, the left column is the list panel which displays the list of issues or
+the list of solutions. The browser panel at bottom right displays the web page of the url as in the solution link.
+When no page is loaded, it displays the default page as above. Whenever a solution is selected,
+the browser panel loads the url given in the solution link as below.
 
-For SaveIt v1.4, The list of issues and list of solutions can be displayed in the same
- column, as shown below, Besides, the display panel will be used to display the website
- or the content of issue remark.
+.Browser Panel loading Web-Page
+image::after selecting solution.png[width="790"]
 
+==== Current Implementation
+Currently the list panel implements a two-level structure. When the directory is at root level, it displays
+a list of issues. When the directory is at issue level, it displays the solution list of the selected issue.
+The list panel interacts with other components through `DirectoryChangedEvent` and `JumpToListRequestEvent`.
+The sequence diagram is as shown below.
+
+.Change From Solution List to Issue List
+image::UI_Sequence_Diagram_1.png[width="790"]
+
+.Change from Issue List to Solution List
+image::UI_Sequence_Diagram_2.png[width="790"]
+
+==== Design Consideration
+* **Alternative 1 (current choice):** Use one panel and switch between the two list.
+** Pros: The panel takes less space. It also represents the directory structure model in UI.
+** Cons: Need to switch between lists. Cannot display the issues while displaying the solutions.
+
+* **Alternative 2:** Use two panels to display the issue list and solution list.
+** Pros: Both lists can be viewed at the same time. Implementation is easier.
+** Cons: It takes too much space in the UI.
 
 // end::edit[]
 === Edit Feature
 The edit feature allows users to edit any field of the issue and solution.
 
 ==== Current Implementation
-The edit mechanism is facilitated by `editCommandParser` and `editCommand`. Users are allowed to edit any field in the issue list. includes: +
+The edit mechanism is facilitated by `editCommandParser` and `editCommand`.
+Users are allowed to edit any field in the issue list. includes: +
 
 * root level
 ** Issue statement

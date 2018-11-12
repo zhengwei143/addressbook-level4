@@ -55,7 +55,8 @@ public class TypicalIssues {
             .withDescription(JAVA_NULL_POINTER_DESCRIPTION)
             .withTags(VALID_TAG_SYNTAX)
             .withFrequency(COMMON_ISSUE_FREQUENCY)
-            .withLastModifiedTime(COMMON_ISSUE_TIME + 10).build();
+            .withLastModifiedTime
+                    (COMMON_ISSUE_TIME + 10).build();
     public static final Issue C_SEGMENTATION_FAULT = new IssueBuilder()
             .withStatement(C_SEGMENTATION_FAULT_STATEMENT)
             .withDescription(C_SEGMENTATION_FAULT_DESCRIPTION)
@@ -90,14 +91,16 @@ public class TypicalIssues {
     public static final Issue QUICKSORT_BUG = new IssueBuilder()
             .withStatement(QUICKSORT_BUG_STATEMENT)
             .withDescription(QUICKSORT_BUG_DESCRIPTION)
-            .withSolutions(new SolutionBuilder().withLink("http://www.reddit.com").withRemark("tokyo").build())
+            .withSolutions(
+                    new SolutionBuilder().withLink("http://www.reddit.com").withRemark("tokyo").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .withLastModifiedTime(COMMON_ISSUE_TIME + 60).build();
 
     public static final Issue C_RACE_CONDITION = new IssueBuilder()
             .withStatement(C_RACE_CONDITION_STATEMENT)
             .withDescription(C_RACE_CONDITION_DESCRIPTION)
-            .withSolutions(new SolutionBuilder().withLink("http://www.yahoo.com").withRemark("street").build())
+            .withSolutions(
+                    new SolutionBuilder().withLink("http://www.yahoo.com").withRemark("street").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .withLastModifiedTime(COMMON_ISSUE_TIME + 70).build();
 
@@ -105,7 +108,13 @@ public class TypicalIssues {
     public static final Issue MYSQL_ERROR = new IssueBuilder()
             .withStatement(MYSQL_ERROR_STATEMENT)
             .withDescription(MYSQL_ERROR_DESCRIPTION)
-            .withSolutions(new SolutionBuilder().withLink("https://stackoverflow.com/").withRemark("india").build())
+            .withSolutions(
+                    new SolutionBuilder().withLink("https://stackoverflow.com/").withRemark("india").build())
+            .withFrequency(COMMON_ISSUE_FREQUENCY)
+            .build();
+    public static final Issue MYSQL_ERROR_NO_SOLUTION = new IssueBuilder()
+            .withStatement(MYSQL_ERROR_STATEMENT)
+            .withDescription(MYSQL_ERROR_DESCRIPTION)
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .build();
     public static final Issue POSTGRESQL_ERROR = new IssueBuilder()
@@ -114,8 +123,17 @@ public class TypicalIssues {
             .withSolutions(new SolutionBuilder().withLink("http://www.baidu.com").withRemark("ave").build())
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .build();
+    public static final Issue POSTGRESQL_ERROR_NO_SOLUTION = new IssueBuilder()
+            .withStatement(POSTGRESQL_ERROR_STATEMENT)
+            .withDescription(POSTGRESQL_ERROR_DESCRIPTION)
+            .withFrequency(COMMON_ISSUE_FREQUENCY)
+            .build();
 
     // Manually added - Issue's details found in {@code CommandTestUtil}
+    public static final Issue VALID_JAVA_ISSUE_NO_SOLUTION = new IssueBuilder()
+            .withStatement(VALID_STATEMENT_JAVA).withDescription(VALID_DESCRIPTION_JAVA)
+            .withTags(VALID_TAG_UI).withFrequency(COMMON_ISSUE_FREQUENCY).build();
+
     public static final Issue VALID_JAVA_ISSUE = new IssueBuilder()
             .withStatement(VALID_STATEMENT_JAVA)
             .withDescription(VALID_DESCRIPTION_JAVA)
@@ -127,6 +145,12 @@ public class TypicalIssues {
             .withStatement(VALID_STATEMENT_C)
             .withDescription(VALID_DESCRIPTION_C)
             .withSolutions(SOLUTION_C)
+            .withTags(VALID_TAG_UI)
+            .withFrequency(COMMON_ISSUE_FREQUENCY)
+            .build();
+    public static final Issue VALID_C_ISSUE_NO_SOLUTION = new IssueBuilder()
+            .withStatement(VALID_STATEMENT_C)
+            .withDescription(VALID_DESCRIPTION_C)
             .withTags(VALID_TAG_UI)
             .withFrequency(COMMON_ISSUE_FREQUENCY)
             .build();

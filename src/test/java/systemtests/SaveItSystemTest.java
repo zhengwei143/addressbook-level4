@@ -36,6 +36,7 @@ import seedu.saveit.MainApp;
 import seedu.saveit.TestApp;
 import seedu.saveit.commons.core.EventsCenter;
 import seedu.saveit.commons.core.index.Index;
+import seedu.saveit.logic.LogicManager;
 import seedu.saveit.logic.commands.ClearCommand;
 import seedu.saveit.logic.commands.FindCommand;
 import seedu.saveit.logic.commands.ListCommand;
@@ -172,6 +173,7 @@ public abstract class SaveItSystemTest {
      */
     protected void deleteAllIssues() {
         executeCommand(ClearCommand.COMMAND_WORD);
+        executeCommand(LogicManager.CONFIRM_WORD);
         assertEquals(0, getModel().getSaveIt().getIssueList().size());
     }
 

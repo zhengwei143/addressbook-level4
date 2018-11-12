@@ -138,13 +138,13 @@ Examples: +
 Adds a new issue which has a issue statment called `ArrayIndexOutOfBounds` and issue description called `issue description`
 
 .Add new issue to the issue list
-image::AddingNewIssue.png[width="800"]
+image::AddingNewIssue.png[width="500"]
 * `select 3`
 * `add s/www.stackoverflow.com r/use functional programming` +
 Adds a new solution which has a solution link called `www.stackoverflow.com` and a solution remark called `use functional programming`
 
 .Add new solution to the third issue in the issue list
-image::AddingNewSolution.png[width="800"]
+image::AddingNewSolution.png[width="500"]
 ****
 
 [NOTE]
@@ -636,7 +636,7 @@ To prevent the user from creating many similar tags / duplicates, whenever the u
 Example:
 
 .Autosuggesting of existing tags
-image::autosuggest-tag.png[width="500"]
+image::autosuggest-tag.png[width="600"]
 
 
 === Suggesting to copy existing values

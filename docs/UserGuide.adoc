@@ -79,7 +79,7 @@ When the user types the command in the command line, it is difficult for users t
 Examples:
 ****
 .Command highlight 1
-image::command-highlight1.png[width="790"]
+image::command-highlight1.png[width="700"]
 
 .Command highlight 2
 image::command-highlight2.png[width="700"]
@@ -88,8 +88,8 @@ image::command-highlight2.png[width="700"]
 [NOTE]
 ====
 * The command word will be highlight no matter it is valid or not.
-* The index will be highlight only for certain commands required index.
-* The prefix will be highlighted even it does not have space before, but it is valid or not depends on command validation.
+* The index will be highlight only for certain commands required index (e.g. `edit`, `select`).
+
 ====
 // end::commandhighlight[]
 

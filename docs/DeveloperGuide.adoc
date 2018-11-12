@@ -626,6 +626,7 @@ image::edit-command-sequence-diagram.jpg[width="800"]
 ** Pros: It will use less memory.
 
 ** Cons: It has lower security if it the issue is the mutable object.
+// end::edit[]
 
 === Retrieve Feature
 The retrieve feature allows user to choose a solution link to copy to the system clipboard.
@@ -633,7 +634,7 @@ The retrieve feature allows user to choose a solution link to copy to the system
 ==== Current Implementation
 
 The retrieve feature basically takes the user entered index and call `getFilteredAndSortedList` method in `Model` to get the selected solution. Then Java `Toolkit` package is used to copy the url link of solution to the system clipboard.
-// end::edit[]
+
 
 // tag::setprimary[]
 === Set Primary feature
@@ -766,8 +767,8 @@ The Command Highlight mechanism uses `InlineCssTextArea` class. It uses listener
 * **Alternative 1 (current choice):** Check the position of user input in the command box and assign the color
 ** Pros: easy to implement by check the prefix, index and command word.
 ** Cons: due to the limitation of the solution link, if the link contains the prefix, it will be highlighted.
-* **Alternative 2:** Check the user command in real time.
-** Pros: all the prefix color will be corrected shown to user as expected.
+* **Alternative 2:** Parse the user command simutaneouly when user input.
+** Pros: if user input wrong format, it will highlight the color corresponging.
 ** Cons: difficult to implement.
 // end::commandhighlight[]
 

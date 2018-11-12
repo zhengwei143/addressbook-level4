@@ -4,7 +4,7 @@
 :stylesDir: ../stylesheets
 :sectnums:
 
-= PROJECT: SaveIt
+== PROJECT: SaveIt
 
 ---
 

@@ -630,7 +630,7 @@ The edit feature allows users to edit any field of the issue and solution.
 ==== Current Implementation
 The edit mechanism is facilitated by `editCommandParser` and `editCommand`. Users are allowed to edit any field in the issue list, which includes: +
 
-* root level
+* home level
 ** Issue statement
 ** Issue description
 ** Issue tags
@@ -649,7 +649,7 @@ The `editCommandParser` extends `Parser` and implements the following operations
 If it fails to parse the command, it will throw `ParseException` and display edit command usage message.
 
 * `editCommand#execute(Model model, CommandHistory history)`
-** Analyses the user in the root directory or issue directory. Since the root directoy can only edit issues, if user provides solution related command, it will fail to execute. Also, in the issue directory, it only allows to edit solution, it will fail to execute the issue related command. Then it will
+** Analyses the user in the home directory or issue directory. Since the home directory can only edit issues, if user provides solution related command, it will fail to execute. Also, in the issue directory, it only allows to edit solution, it will fail to execute the issue related command. Then it will
 throw `CommandException` and show wrong directory information.
 
 ** Checks if the user index in editDescriptor is larger than the size of the issue list or solution list. +
@@ -777,7 +777,7 @@ image::add-tag-sequence-diagram.jpeg[width="800"]
 ==== Design Consideration
 
 ===== Aspect: Implementation of AddTag command parser.
-* **Alternative 1 (current choice):** Allows range of indexes and multiple indexes to be accepted as index parameter.
+* **Alternative 1 (current choice):** Allows a range of index and multiple indexes to be accepted as index parameter.
 ** Pros: It is efficient to add multiple `Tags` to multiple issues instead of doing it singly.
 ** Cons: It has to consider various conditions of the user input.
 * Alternative 2: Creates an `IndexRange` class for index.
@@ -1701,9 +1701,9 @@ _{ more test cases ... }_
 
 === Editing an issue
 
-. Editing an issue in root directory
+. Editing an issue in home directory
 
-.. Prerequisites: User is in root directory
+.. Prerequisites: User is in home directory
 .. Test case: `edit 1 i/problem` +
    Expected: First issue is edited. Its new issue statement is problem.
 .. Test case: `edit 1 d/description d/newdescription` +

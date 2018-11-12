@@ -74,7 +74,7 @@ Examples:
 
 === Highlighting command parameters
 
-When the user types the command in the command line, it is difficult for users to distinguish their inputs and parameters. Hence command gets highlighted is essential to differentiate the parameter and values that user input.
+When the user types the command in the command line, it is difficult for user to distinguish his inputs and parameters. Hence highlighted command is essential to help user to differentiate the parameters and values that he inputs.
 
 Examples:
 ****
@@ -87,9 +87,7 @@ image::command-highlight2.png[width="700"]
 
 [NOTE]
 ====
-* The command word will be highlight no matter it is valid or not.
-* The index will be highlight only for certain commands required index (e.g. `edit`, `select`).
-
+* The index will be highlighted only for certain commands that requires index (e.g. `edit`, `select`).
 ====
 // end::commandhighlight[]
 
@@ -204,20 +202,20 @@ Format: `edit INDEX s/NEW_SOLUTION_LINK r/NEW_SOLUTION_REMARK`
 Examples: +
 ****
 * `edit 3 i/git command t/git` +
-Edits the issue statement and tags of the third issue to be `git command` and `git` respectively.
+Edits the issue statement and the tag of the third issue to become `git command` and `git` respectively.
 * `edit 1 i/map function d/how to use map` +
-Edits the issue statement and description of the first issue to be `map function` and `how to use map` respectively.
+Edits the issue statement and  description of the first issue to become `map function` and `how to use map` respectively.
 
 
-.Command Edit solution link to a solution
+.Edits issue statement and tag of an issue
 image::edit-issue.png[width="790"]
 
 * `select 1` +
-select the first issue
+selects the first issue
 * `edit 1 s/https://github.com/joshnh/Git-Commands` +
 Edits the first solution link to be `https://github.com/joshnh/Git-Commands`
 
-.Command Edit solution link to a solution
+.Edits solution link and remark of the second solution
 image::edit-solution.png[width="790"]
 ****
 
@@ -265,7 +263,7 @@ image::refactor-tag.png[width="790"]
 * The old tag must be provided.
 * If the user provides multiple old tags or new tags, only take the last one as an effect.
 * If the new tag exits in the issue already, it will only remove the old tag.
-* The order of the issues may be updated if user using sort command.
+* The order of the issues may be updated if the user uses sort command.
 * This command can only be executed in home directory.
 ====
 // end::refactortag[]
@@ -287,7 +285,7 @@ Adds the `python` and `java` tag to the second issue in the issue list.
 * `addtag 1 2 3 t/difficult` +
 Adds the `difficult` tag to the first, second and third issues in the issue list.
 
-.Add tag (discrete index(es))
+.Add tag (multiple index(es))
 image::add-tag2.png[width="790"]
 
 * `addtag 1-4 t/TIL t/java` +
@@ -299,14 +297,14 @@ image::add-tag.png[width="790"]
 
 [NOTE]
 ====
-* If the tag exits in the issue already, it will not take any action.
+* It will not take any action if the tag exits in the issue.
 * The INDEX refers to the index number shown in the issue list.
 * The index *must be a positive integer* (1, 2, 3...), otherwise it will be considered as invalid command.
 * The Range of the index can be used.
 * The lower limit of the range must be smaller than or equal to the upper limit (2-4, 2-2).
-* The range cannot be used with discrete index(es) together.
-* The order of the issues may be updated if user using sort command.
-* This command can only be executed in home directory.
+* The range cannot be used with multiple index(es) together.
+* The order of the issues may be updated if the user uses sort command.
+* This command can only be executed in root directory.
 ====
 // end::addtag[]
 

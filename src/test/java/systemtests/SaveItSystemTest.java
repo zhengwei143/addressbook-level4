@@ -30,6 +30,7 @@ import guitests.guihandles.IssueListPanelHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
 import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.SolutionListPanelHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.saveit.MainApp;
 import seedu.saveit.TestApp;
@@ -52,9 +53,9 @@ public abstract class SaveItSystemTest {
     @ClassRule
     public static ClockRule clockRule = new ClockRule();
 
-    private static final List<String> COMMAND_BOX_DEFAULT_STYLE = Arrays.asList("text-input", "text-field");
+    private static final List<String> COMMAND_BOX_DEFAULT_STYLE = Arrays.asList("styled-text-area");
     private static final List<String> COMMAND_BOX_ERROR_STYLE =
-            Arrays.asList("text-input", "text-field", CommandBox.ERROR_STYLE_CLASS);
+            Arrays.asList("styled-text-area", CommandBox.ERROR_STYLE_CLASS);
 
     private MainWindowHandle mainWindowHandle;
     private TestApp testApp;
@@ -105,6 +106,10 @@ public abstract class SaveItSystemTest {
 
     public IssueListPanelHandle getIssueListPanel() {
         return mainWindowHandle.getIssueListPanel();
+    }
+
+    public SolutionListPanelHandle getSolutionListPanel() {
+        return mainWindowHandle.getSolutionListPanel();
     }
 
     public MainMenuHandle getMainMenu() {
@@ -180,7 +185,13 @@ public abstract class SaveItSystemTest {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new SaveIt(expectedModel.getSaveIt()), testApp.readStorageSaveIt());
-        assertListMatching(getIssueListPanel(), expectedModel.getFilteredAndSortedIssueList());
+        if (expectedModel.getCurrentDirectory().isSolutionLevel()) {
+            assertListMatching(getSolutionListPanel(), expectedModel.getFilteredAndSortedSolutionList());
+        }
+
+        if (expectedModel.getCurrentDirectory().isRootLevel() || expectedModel.getCurrentDirectory().isIssueLevel()) {
+            assertListMatching(getIssueListPanel(), expectedModel.getFilteredAndSortedIssueList());
+        }
     }
 
     /**
@@ -275,6 +286,7 @@ public abstract class SaveItSystemTest {
      */
     private void assertApplicationStartingStateIsCorrect() {
         assertEquals("", getCommandBox().getInput());
+        System.out.println(getResultDisplay().getText());
         assertEquals("", getResultDisplay().getText());
         assertListMatching(getIssueListPanel(), getModel().getFilteredAndSortedIssueList());
         assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE), getBrowserPanel().getLoadedUrl());

@@ -335,11 +335,7 @@ The following two sequence diagrams illustrate how the mechanism works:
 .Sort Command Sequence Diagram
 image::SortCommandSequenceDiagram.png[width="800"]
 
-.Reference Frame Initialize Comparator
-image::InitializeComparator.png[width="800"]
-
-
-This two diagrams show that after the input is parsed, a SortType object is initialized before the SortCommand object.
+This diagram shows that after the input is parsed, a SortType object is initialized before the SortCommand object.
 
 As shown in the diagram, an SortType object can provide the required comparator with the input String passed from SortCommand.
 We use the retrieved Comparator to sort the list when the sort command is executed.

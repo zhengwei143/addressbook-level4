@@ -557,11 +557,32 @@ Format: `sort tag`
 Examples:
 ****
 * sort
+
+.Sort Default Command
+image::sort-default-command.png[width="400"]
+
+* edit 1 d/First edited issue
+* edit 4 d/Second edited issue
+* add i/Third created issue d/Third created issue
+* sort chro
+
+.Sort Chro Command
+image::sort-chro-command.png[width="790"]
+
+* find ArrayIndexOutOfBounds
+* list
+* find ClassNotFoundException
+* find ClassNotFoundException
+* list
 * sort freq
+
+.Sort Freq Command
+image::sort-freq-command.png[width="790"]
+
 * sort tag
 
 .Sort Tag Command
-image::sort-command.png[width="790"]
+image::sort-tag-command.png[width="790"]
 ****
 // end::sort[]
 

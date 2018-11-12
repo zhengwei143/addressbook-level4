@@ -164,7 +164,7 @@ Adds a new issue which has a issue statment called `ArrayIndexOutOfBounds` and i
 image::AddingNewIssue.png[width="800"]
 * `select 3`
 * `add s/www.stackoverflow.com r/use functional programming` +
-Adds a new solution link which is `www.stackoverflow.com` and a solution remark called `use functional programming`
+Adds a new solution which has a solution link called `www.stackoverflow.com` and a solution remark called `use functional programming`
 
 .Add new solution to the third issue in the issue list
 image::AddingNewSolution.png[width="800"]
@@ -179,7 +179,6 @@ image::AddingNewSolution.png[width="800"]
 * The index *must be a positive integer* and `1, 2, 3, ...`
 * The index cannot be bigger than the number of issues.
 * User needs to select the issue index to add a solution to that issue
-* The display panel will display the first solution link of the issue at the specified `INDEX`.
 * A solution contains one solution link and one remark
 * User can add solutions to the same issue continuously
 ====
@@ -313,7 +312,7 @@ image::add-tag.png[width="790"]
 
 // tag::retrieve[]
 === Retrieving a solution link: `(rv)retrieve`
-Retrieves the solution link to the system clipboard
+Retrieves the solution link so that the link is copied to the system clipboard
 
 Format: `retrieve INDEX`
 

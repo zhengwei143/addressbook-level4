@@ -18,7 +18,6 @@ import static seedu.saveit.testutil.TypicalIssues.POSTGRESQL_ERROR_NO_SOLUTION;
 import static seedu.saveit.testutil.TypicalIssues.VALID_C_ISSUE_NO_SOLUTION;
 import static seedu.saveit.testutil.TypicalIssues.VALID_JAVA_ISSUE_NO_SOLUTION;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.saveit.commons.core.Messages;
@@ -47,7 +46,9 @@ public class AddCommandSystemTest extends SaveItSystemTest {
          * -> added
          */
         Issue toAdd = VALID_JAVA_ISSUE_NO_SOLUTION;
-        String command = "   " + AddCommand.COMMAND_WORD + " " + STATEMENT_DESC_JAVA + " " + DESCRIPTION_DESC_JAVA + CommandTestUtil.TAG_DESC_UI + " ";
+        String command =
+                "   " + AddCommand.COMMAND_WORD + " " + STATEMENT_DESC_JAVA + " " + DESCRIPTION_DESC_JAVA
+                        + CommandTestUtil.TAG_DESC_UI + " ";
         assertCommandSuccess(command, toAdd);
 
         /* Case: undo adding Amy to the list -> Amy deleted */
@@ -61,9 +62,11 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
-        /* Case: add a issue with all fields same as another issue in the saveit book except statement -> added */
+        /* Case: add a issue with all fields same as another issue in the saveit book except statement ->
+        added */
         toAdd = new IssueBuilder(VALID_JAVA_ISSUE_NO_SOLUTION).withStatement(VALID_STATEMENT_C).build();
-        command = AddCommand.COMMAND_WORD + STATEMENT_DESC_C + DESCRIPTION_DESC_JAVA + CommandTestUtil.TAG_DESC_UI;
+        command = AddCommand.COMMAND_WORD + STATEMENT_DESC_C + DESCRIPTION_DESC_JAVA
+                + CommandTestUtil.TAG_DESC_UI;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add an issue with all fields same as another issue in the saveit book except description
@@ -79,7 +82,8 @@ public class AddCommandSystemTest extends SaveItSystemTest {
 
         /* Case: add an issue with tags, command with parameters in random order -> added */
         toAdd = VALID_C_ISSUE_NO_SOLUTION;
-        command = AddCommand.COMMAND_WORD + CommandTestUtil.TAG_DESC_UI + DESCRIPTION_DESC_C + STATEMENT_DESC_C + TAG_DESC_UI;
+        command = AddCommand.COMMAND_WORD + CommandTestUtil.TAG_DESC_UI
+                + DESCRIPTION_DESC_C + STATEMENT_DESC_C + TAG_DESC_UI;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add an issue, missing tags -> added */
@@ -105,7 +109,8 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_ISSUE);
 
         /* Case: add a duplicate issue except with different tags -> rejected */
-        command = IssueUtil.getAddIssueCommand(MYSQL_ERROR_NO_SOLUTION) + " " + PREFIX_TAG.getPrefix() + "friends";
+        command = IssueUtil.getAddIssueCommand(MYSQL_ERROR_NO_SOLUTION) + " " + PREFIX_TAG.getPrefix()
+                + "friends";
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_ISSUE);
 
         /* Case: missing statement -> rejected */
@@ -132,12 +137,13 @@ public class AddCommandSystemTest extends SaveItSystemTest {
     }
 
     /**
-     * Executes the {@code AddCommand} that adds {@code toAdd} to the model and asserts that the,<br> 1. Command box
-     * displays an empty string.<br> 2. Command box has the default style class.<br> 3. Result display box displays the
-     * success message of executing {@code AddCommand} with the details of {@code toAdd}.<br> 4. {@code Storage} and
-     * {@code IssueListPanel} equal to the corresponding components in the current model added with {@code toAdd}.<br>
-     * 5. Browser url and selected card remain unchanged.<br> 6. Status bar's sync status changes.<br> Verifications 1,
-     * 3 and 4 are performed by {@code SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * Executes the {@code AddCommand} that adds {@code toAdd} to the model and asserts that the,<br> 1.
+     * Command box displays an empty string.<br> 2. Command box has the default style class.<br> 3. Result
+     * display box displays the success message of executing {@code AddCommand} with the details of {@code
+     * toAdd}.<br> 4. {@code Storage} and {@code IssueListPanel} equal to the corresponding components in the
+     * current model added with {@code toAdd}.<br> 5. Browser url and selected card remain unchanged.<br> 6.
+     * Status bar's sync status changes.<br> Verifications 1, 3 and 4 are performed by {@code
+     * SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      *
      * @see SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
@@ -146,7 +152,8 @@ public class AddCommandSystemTest extends SaveItSystemTest {
     }
 
     /**
-     * Performs the same verification as {@code assertCommandSuccess(Issue)}. Executes {@code command} instead.
+     * Performs the same verification as {@code assertCommandSuccess(Issue)}. Executes {@code command}
+     * instead.
      *
      * @see AddCommandSystemTest#assertCommandSuccess(Issue)
      */
@@ -159,9 +166,9 @@ public class AddCommandSystemTest extends SaveItSystemTest {
     }
 
     /**
-     * Performs the same verification as {@code assertCommandSuccess(String, Issue)} except asserts that the,<br> 1.
-     * Result display box displays {@code expectedResultMessage}.<br> 2. {@code Storage} and {@code IssueListPanel}
-     * equal to the corresponding components in {@code expectedModel}.<br>
+     * Performs the same verification as {@code assertCommandSuccess(String, Issue)} except asserts that
+     * the,<br> 1. Result display box displays {@code expectedResultMessage}.<br> 2. {@code Storage} and
+     * {@code IssueListPanel} equal to the corresponding components in {@code expectedModel}.<br>
      *
      * @see AddCommandSystemTest#assertCommandSuccess(String, Issue)
      */
@@ -174,11 +181,11 @@ public class AddCommandSystemTest extends SaveItSystemTest {
     }
 
     /**
-     * Executes {@code command} and asserts that the,<br> 1. Command box displays {@code command}.<br> 2. Command box
-     * has the error style class.<br> 3. Result display box displays {@code expectedResultMessage}.<br> 4. {@code
-     * Storage} and {@code IssueListPanel} remain unchanged.<br> 5. Browser url, selected card and status bar remain
-     * unchanged.<br> Verifications 1, 3 and 4 are performed by
-     * {@code SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * Executes {@code command} and asserts that the,<br> 1. Command box displays {@code command}.<br> 2.
+     * Command box has the error style class.<br> 3. Result display box displays {@code
+     * expectedResultMessage}.<br> 4. {@code Storage} and {@code IssueListPanel} remain unchanged.<br> 5.
+     * Browser url, selected card and status bar remain unchanged.<br> Verifications 1, 3 and 4 are performed
+     * by {@code SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      *
      * @see SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */

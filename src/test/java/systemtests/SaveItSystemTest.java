@@ -41,7 +41,6 @@ import seedu.saveit.logic.commands.ClearCommand;
 import seedu.saveit.logic.commands.FindCommand;
 import seedu.saveit.logic.commands.ListCommand;
 import seedu.saveit.logic.commands.SelectCommand;
-import seedu.saveit.logic.parser.SaveItParser;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.SaveIt;
 import seedu.saveit.testutil.TypicalIssues;

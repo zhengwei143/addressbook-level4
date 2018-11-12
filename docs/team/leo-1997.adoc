@@ -36,9 +36,9 @@ This section is to summarize and explain my contributions towards this project.
 * *Other contributions*:
 
 ** Project management:
-*** Manage milestones and checked issue status on GitHub
+*** Manage milestones and check issue status on GitHub
 ** Improve JUnit tests:
-*** Rewrite exiting failing tests and add new tests:
+*** Rewrite existing failing tests and add new tests:
 https://github.com/CS2103-AY1819S1-T12-4/main/pull/219[#219],
 https://github.com/CS2103-AY1819S1-T12-4/main/pull/233[#233],
 https://github.com/CS2103-AY1819S1-T12-4/main/pull/253[#253]

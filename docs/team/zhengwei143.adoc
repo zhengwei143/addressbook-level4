@@ -62,14 +62,20 @@ https://github.com/CS2103-AY1819S1-T10-2/main/issues/95[#95]
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
+include::../UserGuide.adoc[tag=find]
+
+include::../UserGuide.adoc[tag=findtag]
+
+include::../UserGuide.adoc[findbytagsuggestion]
+
+include::../UserGuide.adoc[copyexistingsuggestion]
+
 == Contributions to the Developer Guide
 
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-== PROJECT: PowerPointLabs
+include::../DeveloperGuide.adoc[tag=logiccomponent]
 
----
-
-_{Optionally, you may include other projects in your portfolio.}_
+include::../DeveloperGuide.adoc[tag=suggestionDesignConsiderations]

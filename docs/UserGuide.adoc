@@ -358,6 +358,7 @@ Examples: +
 * This command can only be executed in the home directory.
 ====
 
+// tag::find[]
 
 === Locating issues by statement: `(f)find`
 
@@ -388,6 +389,10 @@ Examples:
 * This command can only be executed in the home directory.
 ====
 
+// end::find[]
+
+// tag::findtag[]
+
 === Locating issues by tags: `(ft)findtag`
 
 Finds issues that contain the tags entered in the search queries.
@@ -413,6 +418,8 @@ Examples:
 e.g `issue[cplusplus][segmentation]` will match with a single searched tag `[cplusplus]`
 * This command can only be executed in the home directory.
 ====
+
+// end::findtag[]
 
 === Listing all issues : `(l)list`
 
@@ -629,6 +636,8 @@ Example:
 image::FindIssueAutoSuggestion.png[width="500"]
 // end::suggestion[]
 
+// tag::findbytagsuggestion[]
+
 === Autosuggesting existing tags in findByTag command
 
 To prevent the user from creating many similar tags / duplicates, whenever the user creates a record with a tag, or modifies a record’s tag, the application searches for similar tags in the system and prompts the user with a list of similar tags.
@@ -638,6 +647,9 @@ Example:
 .Autosuggesting of existing tags
 image::autosuggest-tag.png[width="600"]
 
+// end::findbytagsuggestion[]
+
+// tag::copyexistingsuggestion[]
 
 === Suggesting to copy existing values
 When editing fields in an issue (e.g. Editing an issue statement), if only slight modifications are required, the user will have to copy paste the existing issue statement and modify it, or type it out again.
@@ -647,6 +659,8 @@ Example:
 
 .Copying existing fields
 image::copy-existing.png[width="790"]
+
+// end::copyexistingsuggestion[]
 
 // tag::commandhighlight[]
 

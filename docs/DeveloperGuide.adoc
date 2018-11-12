@@ -198,6 +198,8 @@ The `UI` component,
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
+// tag::logiccomponent[]
+
 [[Design-Logic]]
 === Logic component
 
@@ -241,6 +243,8 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 .Example Interactions Inside the Logic Component for the command and suggestion logic subcomponents.
 image::SDexamplesForLogic.png[width="800"]
+
+// end::logiccomponent[]
 
 [[Design-Model]]
 === Model component
@@ -796,6 +800,7 @@ Since the suggestion component has to retrieve the data from model component to 
 . The prefixes from `ArgumentTokenizer`
 . The caret position (position of the text cursor in the user input string)
 
+// tag::suggestionDesignConsiderations
 
 For example, when entering `find issueName` as the user input, the command is parsed to match `SuggestionLogicManager#parseFindCommandSuggestion`. The prefixes are then matched accordingly and a new `IssueNameSuggestion` object will be instantiated. By calling `Model#getCurrentIssueStatementSet`, `IssueNameSuggestion` is able to find the relvant issue statements based on the user input. The returned `SuggestionResult` will be passed to the `CommandBox#displaySuggestion` method to handle the displaying of the results.
 
@@ -871,6 +876,8 @@ The original hashcode used by `Prefix` only hashes the prefix string, as such, a
 ** Cons: The code and logic are not be well encapsulated (for the `Prefix`) and we will have repeated logic in the codebase.
 
 We eventually chose Alternative 1 as it provides a better structure and encapsulation for our code overall. We also came up with a workaround for Alternative 1's cons, by modifying the method `ArgumentMultimap#getValue`.
+
+// tag::suggestionDesignConsiderations[]
 
 // tag::commandhighlight[]
 === Command Highlight

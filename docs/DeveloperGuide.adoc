@@ -628,15 +628,7 @@ image::UI_Sequence_Diagram_2.png[width="790"]
 The edit feature allows users to edit any field of the issue and solution.
 
 ==== Current Implementation
-The edit mechanism is facilitated by `editCommandParser` and `editCommand`. Users are allowed to edit any field in the issue list, which includes: +
-
-* home level
-** Issue statement
-** Issue description
-** Issue tags
-* Issue level
-** Solution link
-** Solution remark
+The edit mechanism is facilitated by `editCommandParser` and `editCommand`. Users are allowed to edit any field in the issue list.
 
 The `editCommandParser` extends `Parser` and implements the following operations:
 
@@ -772,7 +764,7 @@ The add tag mechanism is facilitated by `AddTagCommandParser` and `AddTagCommand
 Please refer to the Sequence Diagram below for the illustration of add tag operation.
 
 .Add Tag Command Sequence Diagram
-image::add-tag-sequence-diagram.jpeg[width="800"]
+image::add-tag-sequence-diagram.jpeg[width="600"]
 
 ==== Design Consideration
 

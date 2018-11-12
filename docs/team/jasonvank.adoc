@@ -63,9 +63,9 @@ https://github.com/CS2103-AY1819S1-T12-4/main/issues/132[132], https://github.co
 
 include::../UserGuide.adoc[tag=edit]
 
-include::../UserGuide.adoc[tag=addtag]
-
 include::../UserGuide.adoc[tag=refactortag]
+
+include::../UserGuide.adoc[tag=addtag]
 
 include::../UserGuide.adoc[tag=commandhighlight]
 
@@ -77,9 +77,9 @@ include::../UserGuide.adoc[tag=commandhighlight]
 
 include::../DeveloperGuide.adoc[tag=edit]
 
-include::../DeveloperGuide.adoc[tag=addtag]
-
 include::../DeveloperGuide.adoc[tag=refactortag]
+
+include::../DeveloperGuide.adoc[tag=addtag]
 
 include::../DeveloperGuide.adoc[tag=commandhighlight]
 

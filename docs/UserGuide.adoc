@@ -612,7 +612,7 @@ image::sort-tag-command.png[width="790"]
 // end::sort[]
 
 // tag::setprimary[]
-=== Choosing one primary solution: `(sp)setprimary`
+=== Setting the primary solution: `(sp)setprimary`
 
 Chooses one solution of the issue and make it the primary solution.
 

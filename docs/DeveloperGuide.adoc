@@ -286,6 +286,7 @@ Classes used by multiple components are in the `seedu.saveit.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented. Note that this section does not fully encompass all the features, but the more core features of the application.
 
+// tag::add[]
 === Add feature
 The add command can add both issue and solution to SaveIt. It includes two levels:
 
@@ -340,6 +341,7 @@ This diagram shows the sequence that how add solution command is executed. It co
 * **Alternative 2:** Overloading Issue constructor so that different issues will be passing to `AddCommand` accordingly.
 * Pros: Relatively easier to implement
 * Cons: Lots of changes on structure.
+// end::add[]
 
 // tag::sort[]
 === Sort feature
@@ -670,12 +672,14 @@ image::edit-command-sequence-diagram.jpg[width="800"]
 
 ** Cons: It has lower security if it the issue is the mutable object.
 
+// tag::retrieve[]
 === Retrieve Feature
 The retrieve feature allows user to choose a solution link to copy to the system clipboard.
 
 ==== Current Implementation
 
 The retrieve feature basically takes the user entered index and call `getFilteredAndSortedList` method in `Model` to get the selected solution. Then Java `Toolkit` package is used to copy the url link of solution to the system clipboard.
+// end::retrieve[]
 
 // tag::setprimary[]
 === Set Primary Feature
@@ -777,6 +781,7 @@ image::add-tag-sequence-diagram.jpeg[width="800"]
 ** Cons: It will increase coupling between IndexRange class and Index class
 // end::addTag[]
 
+// tag::suggestion[]
 === Suggestion Feature
 The suggestion feature allows user to quickly complete commands by showing a drop-down window of suggested values when the user input matches a specific keyword or identifier.
 
@@ -793,6 +798,7 @@ Since the suggestion component has to retrieve the data from model component to 
 . The command typed
 . The prefixes from `ArgumentTokenizer`
 . The caret position (position of the text cursor in the user input string)
+// end::suggestion[]
 
 
 For example, when entering `find issueName` as the user input, the command is parsed to match `SuggestionLogicManager#parseFindCommandSuggestion`. The prefixes are then matched accordingly and a new `IssueNameSuggestion` object will be instantiated. By calling `Model#getCurrentIssueStatementSet`, `IssueNameSuggestion` is able to find the relvant issue statements based on the user input. The returned `SuggestionResult` will be passed to the `CommandBox#displaySuggestion` method to handle the displaying of the results.

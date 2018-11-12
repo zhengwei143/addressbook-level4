@@ -59,80 +59,11 @@ https://github.com/CS2103-AY1819S1-T12-4/main/pull/253[#253]
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-=== Adding: `(a)add`
+include::../UserGuide.adoc[tag=add]
 
-Adds an issue to the SaveIt App.
+include::../UserGuide.adoc[tag=retrieve]
 
-Format: `add i/ISSUE_STATEMENT d/DESCRIPTION [t/TAG]...`
-
-Adds a solution to an existing issue in SaveIt App.
-
-Format: `add s/SOLUTION_LINK r/REMARK`
-[TIP]
-====
-* Select an issue before adding solution
-* The solution link validation check only provides most basic format checking
-====
-
-Examples: +
-
-****
-* `add i/ArrayIndexOutOfBound d/issue description t/unsolved` +
-Adds a new issue which has a issue statment called `ArrayIndexOutOfBounds` and issue description called `issue description`
-
-.Add new issue to the issue list
-image::AddingNewIssue.png[width="800"]
-* `select 3`
-* `add s/www.stackoverflow.com r/use functional programming` +
-Adds a new solution link which is `www.stackoverflow.com` and a solution remark called `use functional programming`
-
-.Add new solution to the third issue in the issue list
-image::AddingNewSolution.png[width="800"]
-****
-
-[NOTE]
-====
-* If multiple identical prefixes are entered, the last prefix value will be accepted
-* An issue can have only one statement and description
-* An issue can have any number of tags (including 0)
-* The index refers to the index number shown in the displayed issue list.
-* The index *must be a positive integer* and `1, 2, 3, ...`
-* The index cannot be bigger than the number of issues.
-* User needs to select the issue index to add a solution to that issue
-* The display panel will display the first solution link of the issue at the specified `INDEX`.
-* A solution contains one solution link and one remark
-* User can add solutions to the same issue continuously
-====
-
-=== Retrieving a solution link: `(rv)retrieve`
-Retrieves the solution link to the system clipboard
-
-Format: `retrieve INDEX`
-
-[TIP]
-====
-* Select an issue before retrieving solution link
-====
-
-Examples: +
-****
-* `retrieve 1`
-****
-
-[NOTE]
-====
-* The index refers to the index number on the solution list of a certain issue.
-* The index *must be a positive integer* 1, 2, 3, ...
-* The index cannot be bigger than the number of solutions of a certain issue.
-====
-
-=== Autosuggesting existing issue in find command
-To prevent the issue list is so large that user can hardly remember all the issues, whenever user types in any keyword in find command, SaveIt will auto suggest any related issue name according to the keyword entered.
-
-Example:
-
-.Autosuggesting of exsiting issues statements
-image::FindIssueAutoSuggestion.png[width="800"]
+include::../UserGuide.adoc[tag=suggestion]
 
 == Contributions to the Developer Guide
 
@@ -140,80 +71,8 @@ image::FindIssueAutoSuggestion.png[width="800"]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-=== Add feature
-The add command can add both issue and solution to SaveIt. It includes two levels:
+include::../DeveloperGuide.adoc[tag=add]
 
-* Issue level
-** Issue statement
-** Issue description
-** Issue tags
-* Solution level
-** Solution link
-** Solution remark
+include::../DeveloperGuide.adoc[tag=retrieve]
 
-==== Add issue
-Add issue happens on the issue level
-
-===== Current implementation
-The `SaveItParser` is used to call `AddCommandParser` so as to pass the entered issue. In order to build a new `Issue` object, a dummy solution link and dummy solution remark will be used. After that, `AddCommand` is invoked which will ask model to add the issue to the `Model` component.
-In order to store the new issue inside the SaveIt, `VersionedSaveIt` will be invoked and it will add issue to the `UniqueIssueList`.
-
-The following sequence diagram illustrates how the add new issue feature functions:
-
-.Add Issue Command Sequence Diagram
-image::AddNewIssue.png[width="800"]
-
-This diagram gives a clear procedure that how the user input is passed step by step and calling different methods and objects at different sequences.
-
-==== Add solution to existing issue
-Add solution happens on the solution level
-
-===== Current implementation
-The `SaveItParser` is used to call `AddCommandParser` just like how add issue features functions as above mentioned. However, this time, the new solution link and solution remark is provided to `AddCommand` instead. In order to build a new `Issue` object, dummy issue statement and dummy issue description will be used. During execution, `addSolution` method, which was newly added, in Model component will be invoked, to add the solution. The detailed implementation of `addSolution` in model component is quite simple. Since the list stored in application is immutable, each time, a new issue will be created with original statement and description, then the new solution will be added to that particular issue. Finally, `updateIssue` method will be called to replace the issue in `versionedSaveIt`.
-
-The following sequence diagram illustrates how the add solution feature functions
-
-.Add Solution Command Sequence Diagram
-image::AddNewSolution.png[width="800"]
-
-This diagram shows the sequence that how add solution command is executed. It could be also noticed that it is basically similar to that of add new issue feature besides it invokes updateIssue method in Model component rather than addIssue method.
-
-==== Design Considerations
-===== Aspect: How add solutions executes
-* **Alternative 1 (current choice):** Combine AddIssue and AddSolution combined together and distinguishes them at the stage of `AddCommandParser`
-** Pros: Consistent syntax between the two features, so the command is more user-friendly.
-** Cons: Need to put more effort on distinguishing the difference between these two requests, `AddCommandParser` is relatively complex compared to the other parser component.
-* **Alternative 2:** Build a new command especially for adding solution
-** Pros: Easy to implement.
-** Cons: The command set becomes too complex for the user.
-
-===== Aspect: How add command distinguishes between adding solution and adding issue
-* **Alternative 1 (current choice):** Passing a new created issue with dummy issue statement or dummy solution link
-** Pros: Consistent coding style and less change on logic structure
-** Cons: Quite complex implementation compared to other command
-* **Alternative 2:** Overloading Issue constructor so that different issues will be passing to `AddCommand` accordingly.
-* Pros: Relatively easier to implement
-* Cons: Lots of changes on structure.
-
-=== Retrieve Feature
-The retrieve feature allows user to choose a solution link to copy to the system clipboard.
-
-==== Current Implementation
-
-The retrieve feature basically takes the user entered index and call `getFilteredAndSortedList` method in `Model` to get the selected solution. Then Java `Toolkit` package is used to copy the url link of solution to the system clipboard.
-
-=== Suggestion Feature
-The suggestion for find command allows user to quickly find the desired issue in SaveIt by showing a drop-down window when related keyword is matched.
-
-==== Current Implementation
-
-The figure below shows a basic relationship between each class.
-The `SuggestionLogicManager` implements `SuggestionLogic` interface and overrides the `evaluate` method. Similarly, `IssueNameSuggestion`, `TagNameSuggestion` and `CopyExistingSuggestion` implement `Suggestion` interface and override `evaluate` method.
-
-.SuggestionLogic Class Diagram
-image::SuggestionClassUML.png[width="400"]
-
-Since the suggestion component has to retrieve the data from model component to give suggestion according user's entered keywords, it is considered as a part of `Logic` component. By listening to the text field which locates in `CommandBox`, `SuggestionLogicManager` will be able to decide which type of suggestion should be given through parsing the prefix from `ArgumentTokenizer`.
-
-.IssueNameSuggestion Sequence Diagram
-image::IssueNameSuggestionDiagram.png[width="800"]
+include::../DeveloperGuide.adoc[tag=suggestion]

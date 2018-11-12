@@ -127,6 +127,8 @@ image::select solution.png[width="790"]
 * All properties of this solutions will be displayed at the left side of the interface.
 ====
 
+// tag::add[]
+
 === Adding: `(a)add`
 
 Adds an issue to the SaveIt App.
@@ -171,6 +173,7 @@ image::AddingNewSolution.png[width="800"]
 * A solution contains one solution link and one remark
 * User can add solutions to the same issue continuously
 ====
+// end::add[]
 
 // tag::edit[]
 
@@ -282,6 +285,7 @@ Adds the `python` and `java` tag from second to fifth issues in the issue list.
 ====
 // end::addtag[]
 
+// tag::retrieve[]
 === Retrieving a solution link: `(rv)retrieve`
 Retrieves the solution link to the system clipboard
 
@@ -303,6 +307,7 @@ Examples: +
 * The index *must be a positive integer* 1, 2, 3, ...
 * The index cannot be bigger than the number of solutions of a certain issue.
 ====
+// end::retrieve[]
 
 === Deleting a statement : `(d)delete`
 Deletes the specified issue from SaveIt App.
@@ -622,6 +627,7 @@ Format: `resetprimary`
 ====
 // end::resetprimary[]
 
+// tag::suggestion[]
 === Autosuggesting existing issue in find command
 To prevent the issue list is so large that user can hardly remember all the issues, whenever user types in any keyword in find command, SaveIt will auto suggest any related issue name according to the keyword entered.
 
@@ -629,6 +635,7 @@ Example:
 
 .Autosuggesting of exsiting issues statements
 image::FindIssueAutoSuggestion.png[width="800"]
+// end::suggestion[]
 
 === Autosuggesting existing tags in findByTag command
 

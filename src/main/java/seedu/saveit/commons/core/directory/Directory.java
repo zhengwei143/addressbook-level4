@@ -68,4 +68,12 @@ public class Directory {
         }
         return result.toString();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return this == other
+                || (other instanceof Directory
+                && issue == ((Directory) other).issue
+                && solution == ((Directory) other).solution);
+    }
 }

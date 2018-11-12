@@ -72,10 +72,12 @@ public class SortCommandTest {
                 TRAVIS_BUILD_STATEMENT.split("\\s+")[0],
                 C_RACE_CONDITION_STATEMENT.split("\\s+")[0]
         };
+        updateLastModifiedTime(C_RACE_CONDITION, C_SEGMENTATION_FAULT, TRAVIS_BUILD,
+                JAVA_NULL_POINTER, C_SEGMENTATION_FAULT);
         // Filtered the issue list to the above 4 issues
         filterIssueList(keywordArray);
 
-        SortType sortType = prepareIssueSort(SortType.TAG_SORT);
+        SortType sortType = prepareIssueSort(SortType.CHRONOLOGICAL_SORT);
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, sortType.getSortType());
         expectedModel.updateFilteredAndSortedIssueList(sortType.getComparator());
         SortCommand command = new SortCommand(sortType);
@@ -86,17 +88,21 @@ public class SortCommandTest {
 
     @Test
     public void execute_sortAfterUpdate_success() {
-        SortType sortType = prepareIssueSort(SortType.TAG_SORT);
+        SortType sortType = prepareIssueSort(SortType.FREQUENCY_SORT);
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, sortType.getSortType());
         Issue issue = new Issue(new IssueStatement("new SOLUTION_C++ problem"),
                 new Description("only for test"), new ArrayList<>(), new HashSet<>());
+        updateFrequency(JAVA_NULL_POINTER, JAVA_NULL_POINTER, JAVA_NULL_POINTER, JAVA_NULL_POINTER, JAVA_NULL_POINTER,
+                C_SEGMENTATION_FAULT, C_SEGMENTATION_FAULT, C_SEGMENTATION_FAULT, C_SEGMENTATION_FAULT,
+                TRAVIS_BUILD, TRAVIS_BUILD, TRAVIS_BUILD,
+                RUBY_HASH_BUG, CHECKSTYLE_ERROR, C_SEGMENTATION_FAULT, QUICKSORT_BUG);
 
         expectedModel.addIssue(issue);
         expectedModel.updateFilteredAndSortedIssueList(sortType.getComparator());
         model.addIssue(issue);
         SortCommand command = new SortCommand(sortType);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(C_SEGMENTATION_FAULT, JAVA_NULL_POINTER, TRAVIS_BUILD, RUBY_HASH_BUG,
+        assertEquals(Arrays.asList(JAVA_NULL_POINTER, C_SEGMENTATION_FAULT, TRAVIS_BUILD, RUBY_HASH_BUG,
                 CHECKSTYLE_ERROR, QUICKSORT_BUG, C_RACE_CONDITION, issue),
                 model.getFilteredAndSortedIssueList());
     }
@@ -130,5 +136,24 @@ public class SortCommandTest {
         IssueContainsKeywordsPredicate predicate = new IssueContainsKeywordsPredicate(keywords);
         model.updateFilteredIssueList(predicate);
         expectedModel.updateFilteredIssueList(predicate);
+    }
+
+    /**
+     * Update frequency of data.
+     */
+    private void updateFrequency(Issue... issues) {
+        Arrays.stream(issues).forEach(i -> i.updateFrequency());
+    }
+
+    /**
+     * Update frequency of data.
+     */
+    private void updateLastModifiedTime(Issue... issues) {
+        for (Issue issue : issues) {
+            Issue newIssue = new Issue(issue.getStatement(), issue.getDescription(),
+                    issue.getSolutions(), issue.getTags(), issue.getFrequency(), issue.getCreatedTime());
+            model.updateIssue(issue, newIssue);
+            expectedModel.updateIssue(issue, newIssue);
+        }
     }
 }

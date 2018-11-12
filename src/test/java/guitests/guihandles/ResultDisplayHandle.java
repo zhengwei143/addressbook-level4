@@ -1,7 +1,6 @@
 package guitests.guihandles;
 
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
 /**

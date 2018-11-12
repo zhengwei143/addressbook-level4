@@ -1,8 +1,6 @@
 package guitests.guihandles;
 
 import javafx.stage.Stage;
-import seedu.saveit.model.issue.Solution;
-import seedu.saveit.ui.SolutionListPanel;
 
 /**
  * Provides a handle for {@code MainWindow}.

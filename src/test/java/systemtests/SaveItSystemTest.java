@@ -19,12 +19,19 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import guitests.guihandles.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 
+import guitests.guihandles.BrowserPanelHandle;
+import guitests.guihandles.CommandBoxHandle;
+import guitests.guihandles.IssueListPanelHandle;
+import guitests.guihandles.MainMenuHandle;
+import guitests.guihandles.MainWindowHandle;
+import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.SolutionListPanelHandle;
+import guitests.guihandles.StatusBarFooterHandle;
 import seedu.saveit.MainApp;
 import seedu.saveit.TestApp;
 import seedu.saveit.commons.core.EventsCenter;
@@ -37,7 +44,6 @@ import seedu.saveit.model.Model;
 import seedu.saveit.model.SaveIt;
 import seedu.saveit.testutil.TypicalIssues;
 import seedu.saveit.ui.CommandBox;
-import seedu.saveit.ui.SolutionListPanel;
 
 /**
  * A system test class for SaveIt, which provides access to handles of GUI components and helper methods

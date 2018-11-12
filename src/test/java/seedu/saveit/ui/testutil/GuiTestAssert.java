@@ -5,10 +5,13 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import guitests.guihandles.*;
+import guitests.guihandles.IssueCardHandle;
+import guitests.guihandles.IssueListPanelHandle;
+import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.SolutionCardHandle;
+import guitests.guihandles.SolutionListPanelHandle;
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.issue.Solution;
-import seedu.saveit.ui.SolutionListPanel;
 
 /**
  * A set of assertion methods useful for writing GUI tests.

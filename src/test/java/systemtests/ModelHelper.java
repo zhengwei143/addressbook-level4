@@ -6,11 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import seedu.saveit.commons.core.directory.Directory;
-import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
-import seedu.saveit.testutil.DirectoryBuilder;
 
 /**
  * Contains helper methods to set up {@code Model} for testing.

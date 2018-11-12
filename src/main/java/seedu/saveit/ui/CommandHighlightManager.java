@@ -1,6 +1,5 @@
 package seedu.saveit.ui;
 
-import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK_STRING;
 import static seedu.saveit.model.util.SampleDataUtil.isCommandWordNeedIndex;
 import static seedu.saveit.model.util.SampleDataUtil.isPrefixParameter;
 
@@ -48,7 +47,6 @@ public class CommandHighlightManager {
 
         boolean indexHighlighted = false;
         boolean indexNeedToHighlight;
-        boolean isSolutionLink = false;
         // some command words do not require the index, to avoid confusing, the index will not be highlighted
         indexNeedToHighlight = checkCommandWord(commandWord);
 
@@ -62,13 +60,11 @@ public class CommandHighlightManager {
             }
 
             // highlight parameters
-            if (!isSolutionLink && isShorterThanInput(userInput, position) && isParameter(userInput, position)) {
+            if (isShorterThanInput(userInput, position) && isParameter(userInput, position)) {
                 commandTextField.setStyle(position - 1, position + 1, STYLE_PARAMETER_KEY);
                 position++;
                 indexHighlighted = true;
             }
-
-            isSolutionLink = isSolutionLinkStart(userInput, position, isSolutionLink);
 
             if (!isShorterThanInput(userInput, position)) {
                 break;
@@ -76,35 +72,7 @@ public class CommandHighlightManager {
 
             commandTextField.setStyle(position, position + 1, STYLE_NORMAL_VALUE);
             position++;
-
-            isSolutionLink = isSolutionLinkEnd(userInput, position, isSolutionLink);
         }
-    }
-
-
-    /**
-     * This method is used to check whether user is currently input the solution link, return true if solution link
-     * prefix is found.
-     */
-    private static boolean isSolutionLinkStart(String userInput, int position, boolean isSolutionLink) {
-        if (userInput.charAt(position - 1) == '/') {
-            String inputCheck = getString(userInput, position, 2, position - 1);
-            if (inputCheck.equals(PREFIX_SOLUTION_LINK_STRING)) {
-                isSolutionLink = true;
-            }
-        }
-        return isSolutionLink;
-    }
-
-    /**
-     * This method is used to check whether the user finishes solution link by checking whether space is input, return
-     * false if it is not solution link, otherwise return true.
-     */
-    private static boolean isSolutionLinkEnd(String userInput, int position, boolean isSolutionLink) {
-        if (isSolutionLink && isSpace(userInput, position - 1)) {
-            isSolutionLink = false;
-        }
-        return isSolutionLink;
     }
 
     /**
@@ -128,6 +96,9 @@ public class CommandHighlightManager {
         return position < userInput.length();
     }
 
+    /**
+     * check if the parameter is index
+     */
     private static boolean isIndex(String userInput, int position) {
         return isShorterThanInput(userInput, position) && Character.isDigit(userInput.charAt(position));
     }
@@ -137,19 +108,15 @@ public class CommandHighlightManager {
      * @return true if parameter, otherwise false
      */
     private static boolean isParameter(String userInput, int position) {
-        if (userInput.charAt(position) == '/') {
-            String inputCheck = getString(userInput, position, 1, position);
+        if (userInput.charAt(position) == '/' && userInput.charAt(position - 2) == ' ') {
+            StringBuilder input = new StringBuilder();
+            input.append(userInput.charAt(position - 1));
+            input.append(userInput.charAt(position));
+            String inputCheck = input.toString();
             if (isPrefixParameter(inputCheck)) {
                 return true;
             }
         }
         return false;
-    }
-
-    private static String getString(String userInput, int position, int i, int i2) {
-        StringBuilder input = new StringBuilder();
-        input.append(userInput.charAt(position - i));
-        input.append(userInput.charAt(i2));
-        return input.toString();
     }
 }

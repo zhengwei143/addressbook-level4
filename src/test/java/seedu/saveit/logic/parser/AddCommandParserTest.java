@@ -4,13 +4,17 @@ import static seedu.saveit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.DESCRIPTION_DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
+import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_REMARK;
+import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_SOLUTION_LINK;
 import static seedu.saveit.logic.commands.CommandTestUtil.INVALID_STATEMENT_DESC;
 import static seedu.saveit.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.saveit.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.saveit.logic.commands.CommandTestUtil.REMARK_DES_JAVA;
+import static seedu.saveit.logic.commands.CommandTestUtil.REMARK_DES_STACKOVERFLOW;
 import static seedu.saveit.logic.commands.CommandTestUtil.SOLUTION_DESC_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.SOLUTION_DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.SOLUTION_LINK_DES_C;
+import static seedu.saveit.logic.commands.CommandTestUtil.SOLUTION_LINK_DES_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.STATEMENT_DESC_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.STATEMENT_DESC_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_SYNTAX;
@@ -27,6 +31,8 @@ import static seedu.saveit.logic.parser.CliSyntax.PREFIX_SOLUTION_LINK;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_STATEMENT;
 import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.saveit.model.issue.solution.Remark.MESSAGE_REMARK_CONSTRAINTS;
+import static seedu.saveit.model.issue.solution.SolutionLink.MESSAGE_SOLUTION_LINK_CONSTRAINTS;
 import static seedu.saveit.testutil.TypicalIssues.DUMMY_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.INITIALIZED_ISSUE_FREQUENCY;
 import static seedu.saveit.testutil.TypicalIssues.VALID_C_ISSUE;
@@ -129,6 +135,15 @@ public class AddCommandParserTest {
     }
 
     @Test
+    public void parse_rootLevelAndIssueLevelPresent_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+
+        //all fields present at the same time
+        assertParseFailure(parser, PREFIX_STATEMENT + DESCRIPTION_DESC_C + SOLUTION_DESC_JAVA
+                + TAG_DESC_SYNTAX + CommandTestUtil.TAG_DESC_UI, expectedMessage);
+    }
+
+    @Test
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_STATEMENT_DESC + DESCRIPTION_DESC_C
@@ -142,5 +157,13 @@ public class AddCommandParserTest {
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + STATEMENT_DESC_C + DESCRIPTION_DESC_C
                 + TAG_DESC_UI + CommandTestUtil.TAG_DESC_UI,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+
+        //invalid solution link
+        assertParseFailure(parser, INVALID_SOLUTION_LINK + REMARK_DES_STACKOVERFLOW,
+                String.format(MESSAGE_SOLUTION_LINK_CONSTRAINTS, AddCommand.MESSAGE_USAGE));
+
+        //invalid solution remark
+        assertParseFailure(parser, SOLUTION_LINK_DES_JAVA + INVALID_REMARK,
+                String.format(MESSAGE_REMARK_CONSTRAINTS, AddCommand.MESSAGE_USAGE));
     }
 }

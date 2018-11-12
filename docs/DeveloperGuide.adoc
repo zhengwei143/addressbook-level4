@@ -800,7 +800,7 @@ Since the suggestion component has to retrieve the data from model component to 
 . The prefixes from `ArgumentTokenizer`
 . The caret position (position of the text cursor in the user input string)
 
-// tag::suggestionDesignConsiderations
+// tag::suggestionDesignConsiderations[]
 
 For example, when entering `find issueName` as the user input, the command is parsed to match `SuggestionLogicManager#parseFindCommandSuggestion`. The prefixes are then matched accordingly and a new `IssueNameSuggestion` object will be instantiated. By calling `Model#getCurrentIssueStatementSet`, `IssueNameSuggestion` is able to find the relvant issue statements based on the user input. The returned `SuggestionResult` will be passed to the `CommandBox#displaySuggestion` method to handle the displaying of the results.
 

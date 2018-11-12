@@ -471,7 +471,7 @@ Example:
 
 .Clear Command - Ask for confirmation
 image::clear-command-ask-for-confirmation.png[width="790"]
-* `Yes` or `Y`
+* `Yes` or `Y` (confirme the clear desiction)
 
 .Clear Command - Confirmed
 image::clear-command-confirmed.png[width="790"]
@@ -534,6 +534,7 @@ Format: `sort chro`
 [TIP]
 ====
 * Sorts the issue list by their last modified time chronologically. The last modified one has the highest priority.
+* Creation is considered as modification, i.e. last modified time is set to created time when an issue is added.
 ====
 
 Format: `sort freq`
@@ -556,25 +557,25 @@ Format: `sort tag`
 
 Examples:
 ****
-* sort
+* `sort`
 
 .Sort Default Command
 image::sort-default-command.png[width="400"]
 
-* edit 1 d/First edited issue
-* edit 4 d/Second edited issue
-* add i/Third created issue d/Third created issue
-* sort chro
+* `edit 1 d/First edited issue` (edit to update last modified time) +
+`edit 4 d/Second edited issue` +
+`add i/Third created issue d/Third created issue` (add a new issue) +
+`sort chro`
 
 .Sort Chro Command
 image::sort-chro-command.png[width="790"]
 
-* find ArrayIndexOutOfBounds
-* list
-* find ClassNotFoundException
-* find ClassNotFoundException
-* list
-* sort freq
+* `find ArrayIndexOutOfBounds` (find to update search frequency) +
+`list` +
+`find ClassNotFoundException` +
+`find ClassNotFoundException` +
+`list` +
+`sort freq`
 
 .Sort Freq Command
 image::sort-freq-command.png[width="790"]

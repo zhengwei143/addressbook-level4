@@ -211,11 +211,11 @@ Edits the issue statement and  description of the first issue to become `map fun
 image::edit-issue.png[width="790"]
 
 * `select 1` +
-selects the first issue
+Selects the first issue.
 * `edit 1 s/https://github.com/joshnh/Git-Commands` +
-Edits the first solution link to be `https://github.com/joshnh/Git-Commands`
+Edits the first solution link to be `https://github.com/joshnh/Git-Commands`.
 
-.Edits solution link and remark of the second solution
+.Edits solution link and remark of a solution
 image::edit-solution.png[width="790"]
 ****
 
@@ -225,7 +225,6 @@ image::edit-solution.png[width="790"]
 * Edits the solution at the specified `Index`, which refers to the index number shown in the displayed solution list.
 * The index *must be a positive integer* (1, 2, 3...), otherwise it will be considered as invalid command.
 * At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
 * Removes all the tags by typing `t/` without specifying any tags after it.
 ====
 // end::edit[]
@@ -246,13 +245,13 @@ Format: `refactortag t/OLD_TAG [n/NEW_TAG]`
 Examples:
 ****
 * `refactortag t/notSolved n/solved` +
-Changes all entries tagged with `notSolved` to be tagged with `solved`.
+Changes all issue entries tagged with `notSolved` to be tagged with `solved`.
 
 .Refactor tag （rename)
 image::refactor-tag2.png[width="790"]
 
 * `refactortag t/solved` +
-Removes the tag `solved` from all entries.
+Removes the tag `solved` from all issue entries.
 
 .Refactor tag (remove)
 image::refactor-tag.png[width="790"]
@@ -261,7 +260,7 @@ image::refactor-tag.png[width="790"]
 [NOTE]
 ====
 * The old tag must be provided.
-* If the user provides multiple old tags or new tags, only take the last one as an effect.
+* If user provides multiple old tags or new tags, only take the last one as an effect.
 * If the new tag exits in the issue already, it will only remove the old tag.
 * The order of the issues may be updated if the user uses sort command.
 * This command can only be executed in the home directory.
@@ -300,11 +299,11 @@ image::add-tag.png[width="790"]
 * It will not take any action if the tag exits in the issue.
 * The INDEX refers to the index number shown in the issue list.
 * The index *must be a positive integer* (1, 2, 3...), otherwise it will be considered as invalid command.
-* The Range of the index can be used.
+* The range of the index can be used.
 * The lower limit of the range must be smaller than or equal to the upper limit (2-4, 2-2).
 * The range cannot be used with multiple index(es) together.
 * The order of the issues may be updated if the user uses sort command.
-* This command can only be executed in root directory.
+* This command can only be executed in home directory.
 ====
 // end::addtag[]
 

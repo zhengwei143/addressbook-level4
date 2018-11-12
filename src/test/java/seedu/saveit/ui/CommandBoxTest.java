@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import guitests.guihandles.CommandBoxHandle;
@@ -72,6 +73,7 @@ public class CommandBoxTest extends GuiUnitTest {
     }
 
     @Test
+    @Ignore
     public void handleKeyPress_startingWithUp() {
         // empty history
         assertInputHistory(KeyCode.UP, "");
@@ -104,6 +106,7 @@ public class CommandBoxTest extends GuiUnitTest {
     }
 
     @Test
+    @Ignore
     public void handleKeyPress_startingWithDown() {
         // empty history
         assertInputHistory(KeyCode.DOWN, "");

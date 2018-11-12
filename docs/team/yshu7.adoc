@@ -15,8 +15,8 @@ This document is written for summarizing my contributions in the project SaveIt.
 SaveIt is geared at keeping track of the issues and solutions that the user finds online.
 It is designed for programmers who are used to Command Line Interface​ (CLI) applications and are good at typing while still having the benefits of a Graphical User Interface (GUI).
 
-SaveIt​ is implemented for applying CS2103 learning outcomes and show understanding of the software design.
-It is implemented by a group of CS2103 students, including myself. My key contribution is *sort command*.
+SaveIt​ is implemented for applying CS2103 learning outcomes and showing understanding of the software design.
+It is implemented by a group of CS2103 students, including myself. My key contribution is *sort command and User Interface (UI) related with this function*.
 
 SaveIt is written in Java and JavaFX and is morphed from AddressBook-level4, the application used for teaching Software Engineering principles.
 
@@ -24,12 +24,12 @@ SaveIt is written in Java and JavaFX and is morphed from AddressBook-level4, the
 
 * *Major enhancement*: Add *the ability to sort issue list* and UI of the sort type
 ** What it does: It allows the user to sort issues shown in the list.
-** Justification: This feature improves the product significantly because it helps the user to view the issues in the order that they want so that they can organize the record of issues better.
-** Highlights: This command changes the way how issues are listed in the application. It needs efforts to combine sorting and filtering together properly and make sure the correct issue can be retrieved from the sorted list.
+** Justification: This feature improves the product significantly because it helps the user to view the issues in the order that they want so that they can organize the record of issues better. That can help users to search and learn more efficiently.
+** Highlights: This command changes the way how issues are listed in the application. It needs efforts to combine sorting and filtering together properly and make sure the correct issue can be retrieved from the sorted list. Backend structure also needs to be changed for comparing the issues in different order.
 
 * *Minor enhancement*:
-** Add the ability to set and reset primary solution. https://github.com/CS2103-AY1819S1-T12-4/main/pull/177[#177]
-** Add a confirmation check for clear command. https://github.com/CS2103-AY1819S1-T12-4/main/pull/116[#116]
+** Add the ability to set and reset the primary solution. https://github.com/CS2103-AY1819S1-T12-4/main/pull/177[#177]
+** Add confirmation check for danger command (i.e. clear command for current version). https://github.com/CS2103-AY1819S1-T12-4/main/pull/116[#116]
 ** Improve solution structure. https://github.com/CS2103-AY1819S1-T12-4/main/pull/180[#180]
 
 * *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=yshu7[Functional code]]

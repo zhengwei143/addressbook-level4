@@ -135,6 +135,8 @@ image::select solution.png[width="790"]
 * All properties of this solutions will be displayed at the left side of the interface.
 ====
 
+// tag::add[]
+
 === Adding: `(a)add`
 
 Adds an issue to the SaveIt App.
@@ -160,7 +162,7 @@ Adds a new issue which has a issue statment called `ArrayIndexOutOfBounds` and i
 image::AddingNewIssue.png[width="800"]
 * `select 3`
 * `add s/www.stackoverflow.com r/use functional programming` +
-Adds a new solution link which is `www.stackoverflow.com` and a solution remark called `use functional programming`
+Adds a new solution which has a solution link called `www.stackoverflow.com` and a solution remark called `use functional programming`
 
 .Add new solution to the third issue in the issue list
 image::AddingNewSolution.png[width="800"]
@@ -175,10 +177,10 @@ image::AddingNewSolution.png[width="800"]
 * The index *must be a positive integer* and `1, 2, 3, ...`
 * The index cannot be bigger than the number of issues.
 * User needs to select the issue index to add a solution to that issue
-* The display panel will display the first solution link of the issue at the specified `INDEX`.
 * A solution contains one solution link and one remark
 * User can add solutions to the same issue continuously
 ====
+// end::add[]
 
 // tag::edit[]
 
@@ -306,8 +308,9 @@ image::add-tag.png[width="790"]
 ====
 // end::addtag[]
 
+// tag::retrieve[]
 === Retrieving a solution link: `(rv)retrieve`
-Retrieves the solution link to the system clipboard
+Retrieves the solution link so that the link is copied to the system clipboard
 
 Format: `retrieve INDEX`
 
@@ -327,6 +330,7 @@ Examples: +
 * The index *must be a positive integer* 1, 2, 3, ...
 * The index cannot be bigger than the number of solutions of a certain issue.
 ====
+// end::retrieve[]
 
 === Deleting a statement : `(d)delete`
 Deletes the specified issue from SaveIt App.
@@ -485,7 +489,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 // tag::clear[]
 === Clearing all entries : `(c)clear`
 
-Clears all issues from the saveIt App.
+Clears all issues and their solutions from SaveIt.
 
 Format:  `clear`
 
@@ -503,7 +507,7 @@ image::clear-command-confirmed.png[width="790"]
 
 [NOTE]
 ====
-* User needs to confirm this command before the operation is executed.
+* User needs to confirm this command before the operation can be executed.
 * User can undo this operation to restore the issue lists.
 ====
 // end::clear[]
@@ -551,26 +555,26 @@ The list *always follows the specified sort type* until another sort command is 
 Format: `sort`
 [TIP]
 ====
-* Sorts the issue list based on the time when they are created. The first issue added has the highest priority.
+* Sorts the issues based on the time when they are created. The first issue created has the highest priority.
 ====
 
 Format: `sort chro`
 [TIP]
 ====
-* Sorts the issue list by their last modified time chronologically. The last modified one has the highest priority.
+* Sorts the issues by their last modified time chronologically. The last modified one has the highest priority.
 * Creation is considered as modification, i.e. last modified time is set to created time when an issue is added.
 ====
 
 Format: `sort freq`
 [TIP]
 ====
-* Sorts the issue list based on search frequency. The one which matches the search keywords most frequently has the highest priority.
+* Sorts the issues by their search frequency. The one which matches the search keywords most frequently has the highest priority.
 ====
 
 Format: `sort tag`
 [TIP]
 ====
-* Sorts the issue list by each issue's tag set in lexicographical order, following ASCII lexicography.
+* Sorts the issues by each issue's tag set in a lexicographical order, following ASCII lexicography.
 * Puts the issues without tags at the end of the displayed issue list.
 ====
 
@@ -646,13 +650,15 @@ Format: `resetprimary`
 ====
 // end::resetprimary[]
 
+// tag::suggestion[]
 === Autosuggesting existing issue in find command
-To prevent the issue list is so large that user can hardly remember all the issues, whenever user types in any keyword in find command, SaveIt will auto suggest any related issue name according to the keyword entered.
+To prevent the issue list is so large such that user can hardly remember all the issues, whenever user types in any keyword in find command, SaveIt will auto suggest any related issue name according to the keyword entered.
 
 Example:
 
 .Autosuggesting of exsiting issues statements
 image::FindIssueAutoSuggestion.png[width="800"]
+// end::suggestion[]
 
 === Autosuggesting existing tags in findByTag command
 

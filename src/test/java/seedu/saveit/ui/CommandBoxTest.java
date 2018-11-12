@@ -45,14 +45,12 @@ public class CommandBoxTest extends GuiUnitTest {
     }
 
     @Test
-    @Ignore
     public void commandBox_startingWithSuccessfulCommand() {
         assertBehaviorForSuccessfulCommand();
         assertBehaviorForFailedCommand();
     }
 
     @Test
-    @Ignore
     public void commandBox_startingWithFailedCommand() {
         assertBehaviorForFailedCommand();
         assertBehaviorForSuccessfulCommand();
@@ -64,7 +62,6 @@ public class CommandBoxTest extends GuiUnitTest {
     }
 
     @Test
-    @Ignore
     public void commandBox_handleKeyPress() {
         commandBoxHandle.run(COMMAND_THAT_FAILS);
         assertEquals(errorStyleOfCommandBox, commandBoxHandle.getStyleClass());
@@ -76,7 +73,6 @@ public class CommandBoxTest extends GuiUnitTest {
     }
 
     @Test
-    @Ignore
     public void handleKeyPress_startingWithUp() {
         // empty history
         assertInputHistory(KeyCode.UP, "");
@@ -109,7 +105,6 @@ public class CommandBoxTest extends GuiUnitTest {
     }
 
     @Test
-    @Ignore //TODO: find out why local can pass but fails on travis
     public void handleKeyPress_startingWithDown() {
         // empty history
         assertInputHistory(KeyCode.DOWN, "");

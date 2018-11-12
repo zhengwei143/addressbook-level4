@@ -4,7 +4,7 @@
 :stylesDir: ../stylesheets
 :sectnums:
 
-= PROJECT: SaveIt
+== PROJECT: SaveIt
 
 ---
 
@@ -30,7 +30,7 @@ SaveIt is written in Java and JavaFX and is morphed from AddressBook-level4, the
 * *Minor enhancement*:
 ** Add the ability to set and reset the primary solution. https://github.com/CS2103-AY1819S1-T12-4/main/pull/177[#177]
 ** Add confirmation check for danger command (i.e. clear command for current version). https://github.com/CS2103-AY1819S1-T12-4/main/pull/116[#116]
-** Improve solution structure. https://github.com/CS2103-AY1819S1-T12-4/main/pull/180[#180]
+** Improve Solution structure. https://github.com/CS2103-AY1819S1-T12-4/main/pull/180[#180]
 
 * *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=yshu7[Functional code]]
 
@@ -43,14 +43,11 @@ SaveIt is written in Java and JavaFX and is morphed from AddressBook-level4, the
 ** Documentation:
 *** Update About Us Page: https://github.com/CS2103-AY1819S1-T12-4/main/pull/2[#2]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-T12-4/main/pull/25[#25],
-https://github.com/CS2103-AY1819S1-T12-4/main/pull/32[#32], https://github.com/CS2103-AY1819S1-T12-4/main/pull/77[#77],
-https://github.com/CS2103-AY1819S1-T12-4/main/pull/123[#123], https://github.com/CS2103-AY1819S1-T12-4/main/pull/168[#168],
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-T12-4/main/pull/168[#168],
 https://github.com/CS2103-AY1819S1-T12-4/main/pull/169[#169], https://github.com/CS2103-AY1819S1-T12-4/main/pull/178[#178],
 
-*** Report bugs and suggestions for other team members in the group:  https://github.com/CS2103-AY1819S1-T12-4/main/issues/111[111], https://github.com/CS2103-AY1819S1-T12-4/main/issues/115[115],
-https://github.com/CS2103-AY1819S1-T12-4/main/issues/203[203], https://github.com/CS2103-AY1819S1-T12-4/main/issues/210[210], https://github.com/CS2103-AY1819S1-T12-4/main/issues/236[236],
-https://github.com/CS2103-AY1819S1-T12-4/main/issues/237[237]
+*** Report bugs and suggestions for other team members in the group: https://github.com/CS2103-AY1819S1-T12-4/main/issues/111[111], https://github.com/CS2103-AY1819S1-T12-4/main/issues/115[115],
+https://github.com/CS2103-AY1819S1-T12-4/main/issues/203[203], https://github.com/CS2103-AY1819S1-T12-4/main/issues/237[237]
 
 == Contributions to the User Guide
 

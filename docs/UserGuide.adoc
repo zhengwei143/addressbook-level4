@@ -262,8 +262,8 @@ image::refactor-tag.png[width="790"]
 * The old tag must be provided.
 * If user provides multiple old tags or new tags, only take the last one as an effect.
 * If the new tag exits in the issue already, it will only remove the old tag.
-* The order of the issues may be updated if user uses sort command.
-* This command can only be executed in root directory.
+* The order of the issues may be updated if the user uses sort command.
+* This command can only be executed in the home directory.
 ====
 // end::refactortag[]
 
@@ -346,7 +346,7 @@ Examples: +
 * The index refers to the index number on the issue list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * The index cannot be bigger than the number of issues.
-* This command can only be executed in home directory.
+* This command can only be executed in the home directory.
 ====
 
 
@@ -376,7 +376,7 @@ Examples:
 * The keywords can partially match the statement.
 * Issues matching at least one keyword will be returned.
 * Searching the keyword will increment the search frequency of the issue (so that it can be ordered accordingly later on).
-* This command can only be executed in home directory.
+* This command can only be executed in the home directory.
 ====
 
 === Locating issues by tags: `(ft)findtag`
@@ -402,7 +402,7 @@ Examples:
 * If multiple tags are searched, only issues containing *all* the searched tags will be displayed
 * A matched issue can have other tags (aside from the ones searched).
 e.g `issue[cplusplus][segmentation]` will match with a single searched tag `[cplusplus]`
-* This command can only be executed in home directory.
+* This command can only be executed in the home directory.
 ====
 
 === Returning to home directory  : `(hm)home`
@@ -497,17 +497,17 @@ Example:
 * `clear`
 
 .Clear Command - Ask for confirmation
-image::clear-command-ask-for-confirmation.png[width="790"]
-* `Yes` or `Y` (confirme the clear desiction)
+image::clear-command-ask-for-confirmation.png[width="400"]
+* `Yes` or `Y` (confirm the clear decision)
 
 .Clear Command - Confirmed
-image::clear-command-confirmed.png[width="790"]
+image::clear-command-confirmed.png[width="400"]
 ****
 
 [NOTE]
 ====
-* User needs to confirm this command before the operation can be executed.
-* User can undo this operation to restore the issue lists.
+* The user needs to confirm this command before the operation can be executed.
+* The user can undo this operation to restore the issue lists.
 ====
 // end::clear[]
 
@@ -541,13 +541,13 @@ Shows a list of all issues.
 
 [NOTE]
 ====
-* This command can only be executed in home directory.
+* This command can only be executed in the home directory.
 ====
 
 // tag::sort[]
 === Sorting the list of issues: `(sr)sort`
 
-Sorts the list of issue according to a specified sort type.
+Sorts the list of issues according to a specified sort type.
 
 The list *always follows the specified sort type* until another sort command is executed.
 
@@ -561,7 +561,7 @@ Format: `sort chro`
 [TIP]
 ====
 * Sorts the issues by their last modified time chronologically. The last modified one has the highest priority.
-* Creation is considered as modification, i.e. last modified time is set to created time when an issue is added.
+* Creation is considered as a modification, i.e. last modified time is set to the created time when an issue is added.
 ====
 
 Format: `sort freq`
@@ -579,15 +579,12 @@ Format: `sort tag`
 
 [NOTE]
 ====
-* This command can only be executed in home directory.
+* This command can only be executed in the home directory.
 ====
 
 Examples:
 ****
 * `sort`
-
-.Sort Default Command
-image::sort-default-command.png[width="400"]
 
 * `edit 1 d/First edited issue` (edit to update last modified time) +
 `edit 4 d/Second edited issue` +
@@ -630,7 +627,7 @@ Format: `setprimary INDEX`
 * The index refers to the index number on the solution list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * The index cannot be larger than the number of solutions of this issue.
-* This command can only be executed in issue or solution directory.
+* This command can only be executed in the issue or solution directory.
 ====
 // end::setprimary[]
 
@@ -645,7 +642,7 @@ Format: `resetprimary`
 
 [NOTE]
 ====
-* This command can only be executed in issue or solution directory.
+* This command can only be executed in the issue or solution directory.
 ====
 // end::resetprimary[]
 

@@ -168,8 +168,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void sortIssues(SortType sortType) {
-        updateFilteredAndSortedIssueList(sortType.getComparator());
-        versionedSaveIt.setCurrentSortType(sortType.getComparator());
+        Comparator comparator = sortType.getComparator();
+        updateFilteredAndSortedIssueList(comparator);
+        versionedSaveIt.setCurrentSortType(comparator);
     }
 
     //=========== Filtered Issue List Accessors =============================================================

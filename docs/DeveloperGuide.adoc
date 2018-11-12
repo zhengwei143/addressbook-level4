@@ -357,11 +357,7 @@ The following two sequence diagrams illustrate how the mechanism works:
 .Sort Command Sequence Diagram
 image::SortCommandSequenceDiagram.png[width="800"]
 
-.Reference Frame Initialize Comparator
-image::InitializeComparator.png[width="800"]
-
-
-This two diagrams show that after the input is parsed, a SortType object is initialized before the SortCommand object.
+This diagram shows that after the input is parsed, a SortType object is initialized before the SortCommand object.
 
 As shown in the diagram, an SortType object can provide the required comparator with the input String passed from SortCommand.
 We use the retrieved Comparator to sort the list when the sort command is executed.
@@ -477,7 +473,10 @@ For the current version, `clear` is the only command that needs confirmation.
 
 ==== Current Implementation
 
-Instead of letting LogicManager execute the command directly after parsing it, we now check if we need confirmation before the command is executed.
+.Clear Command Activity Diagram
+image::ClearCommand.png[width="800"]
+
+As shown in the diagram, instead of letting LogicManager execute the command directly after parsing it, we now check if we need confirmation before the command is executed.
 
 In order to connect the confirmation with the command: +
 
@@ -679,24 +678,24 @@ The retrieve feature allows user to choose a solution link to copy to the system
 The retrieve feature basically takes the user entered index and call `getFilteredAndSortedList` method in `Model` to get the selected solution. Then Java `Toolkit` package is used to copy the url link of solution to the system clipboard.
 
 // tag::setprimary[]
-=== Set Primary feature
+=== Set Primary Feature
 The set primary feature allows users to choose one solution as primary solution.
 
 ==== Current Implementation
 
-The set primary mechanism is facilitated by the method `isPrimarySolution()`, which is overrode by `PrimarySolution` inheriting from `Solution`.
+The set primary solution mechanism is facilitated by the method `isPrimarySolution()`, which is overrode by `PrimarySolution` inheriting from `Solution`.
 
 ==== Design Consideration
 ===== Aspect: How to distinguish between PrimarySolution and Solution
 * **Alternative 1 (current choice):** Use PrimarySolution as a subclass of Solution
 
-** Pros: No flag attribute is introduced. Solution structure remains the same.
+** Pros: No flag attribute is introduced. More sustainable.
 
 ** Cons: New object is created. May affect performance.
 
 * **Alternative 2:** Add a flag attribute to Solution
 
-** Pros: Easy to understand.
+** Pros: Easy to understand and implement.
 
 ** Cons: Solution constructor is affected. The flag attribute is redundant for non-primary solutions.
 
@@ -706,6 +705,16 @@ The set primary mechanism is facilitated by the method `isPrimarySolution()`, wh
 
 ** Cons: Need to check if the index is affected every time when the solution list is updated.
 // end::setprimary[]
+
+// tag::resetprimary[]
+=== Reset Primary Feature
+The reset primary feature allows users to reset the primary solution and make all solutions normal and not highlighted.
+
+==== Current Implementation
+
+The reset primary solution mechanism goes through the solution list once and check if a solution is primary or not.
+If it is primary, then replace it by a new Solution object with the same fields. If it is not primary, we continue checking until reach the end of the list.
+// end::resetprimary[]
 
 === Refactor tag Feature
 The refactor tag feature allows users to rename or remove a specified tag for all entries with that tag.

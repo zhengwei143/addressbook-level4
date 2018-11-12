@@ -49,7 +49,7 @@ https://github.com/CS2103-AY1819S1-T12-4/main/pull/208/files#diff-f1fa68a447dd90
 *** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-T12-4/main/pull/25[#25],
 https://github.com/CS2103-AY1819S1-T12-4/main/pull/32[#32], https://github.com/CS2103-AY1819S1-T12-4/main/pull/77[#77],
 https://github.com/CS2103-AY1819S1-T12-4/main/pull/123[#123], https://github.com/CS2103-AY1819S1-T12-4/main/pull/168[#168],
-https://github.com/CS2103-AY1819S1-T12-4/main/pull/169[#169],https://github.com/CS2103-AY1819S1-T12-4/main/pull/178[#178],
+https://github.com/CS2103-AY1819S1-T12-4/main/pull/169[#169], https://github.com/CS2103-AY1819S1-T12-4/main/pull/178[#178],
 
 *** Reported bugs and suggestions for other team members in the group:  https://github.com/CS2103-AY1819S1-T12-4/main/issues/111[111], https://github.com/CS2103-AY1819S1-T12-4/main/issues/115[115],
 https://github.com/CS2103-AY1819S1-T12-4/main/issues/203[203], https://github.com/CS2103-AY1819S1-T12-4/main/issues/210[210], https://github.com/CS2103-AY1819S1-T12-4/main/issues/236[236],
@@ -68,6 +68,8 @@ include::../UserGuide.adoc[tag=clear]
 
 include::../UserGuide.adoc[tag=setprimary]
 
+include::../UserGuide.adoc[tag=resetprimary]
+
 == Contributions to the Developer Guide
 
 |===
@@ -79,3 +81,5 @@ include::../DeveloperGuide.adoc[tag=sort]
 include::../DeveloperGuide.adoc[tag=confirmation]
 
 include::../DeveloperGuide.adoc[tag=setprimary]
+
+include::../DeveloperGuide.adoc[tag=resetprimary]

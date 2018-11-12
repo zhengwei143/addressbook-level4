@@ -16,16 +16,16 @@ This project portfolio is intended to document my contributions to the developme
 
 == Summary of contributions
 
-* *Major enhancement*: Enhanced *the ability to edit `issue`, `solution` and `tag`*
+* *Major enhancement*: Enhanced *the ability to edit `issue`, `solution` and `tag`*.
 
 *** What it does: This feature allows a user to edit any fields in an issue and solution. Also it improves flexibility to edit tags (Relevant commands: `edit`, `addtag` and `refactortag`)
-*** Justification: This feature improve the products significantly, since it reduces the amount of time needed to edit exist entries instead of adding a nre issue.
-*** Highlights: This feature allows users to edit issue and solution easily. Also, they can add tags by range and refactor tags easily. It requires a depth analysis for different conditions whether the command is valid. It improves the efficiency to edit their issues and solutions.
+*** Justification: This feature improves the products significantly, since it reduces the amount of time needed to edit existing entries instead of deleting the issue and adding a new issue.
+*** Highlights: This feature allows users to edit issue and solution easily. Also, they can add tags by range of indexes and refactor tags easily. It requires a depth analysis for different conditions whether the command is valid.
 
 * *Minor enhancements*:
-** Implemented `command highlight` feature: Allows users to differentiate their inputs by highlight command word,  parameters and values in different colors. https://github.com/CS2103-AY1819S1-T12-4/main/pull/99[#99]
-** Implemented `command alias` feature: Allows users to type command words less but achieving the same functionality. https://github.com/CS2103-AY1819S1-T12-4/main/pull/82[#82]
-** Refactored the application from AddressBook Level 4 to SaveIt app. https://github.com/CS2103-AY1819S1-T12-4/main/issues/30[#30], https://github.com/CS2103-AY1819S1-T12-4/main/pull/44[#44], https://github.com/CS2103-AY1819S1-T12-4/main/pull/81[#81]
+** Implemented `command highlight` feature: Allows users to differentiate their inputs by highlighting command word, parameters and values in different colors.
+** Implemented `command alias` feature: Allows users to type command words less but achieve the same functionality.
+** Refactored the application from AddressBook Level 4 to SaveIt app. https://github.com/CS2103-AY1819S1-T12-4/main/issues/30[#30] https://github.com/CS2103-AY1819S1-T12-4/main/pull/44[#44]
 
 * *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=jasonvank[Functional code]]
 

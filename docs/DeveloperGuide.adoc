@@ -609,7 +609,7 @@ throw `CommandException` and show wrong directory information.
 ** Checks if the user index in editDescriptor is larger than the size of the issue list or solution list. +
 Throw `CommandException` and show invalid index warning. Otherwise, call the function `model.updateIssue(issueToEdit, editedIssue)` to update issue list.
 
-Please refer to the Sequence Diagram below for the edit operation.
+Please refer to the Sequence Diagram below for the illustration of edit operation.
 
 .Edit Command Sequence Diagram
 image::edit-command-sequence-diagram.jpg[width="800"]
@@ -677,14 +677,14 @@ The `RefactorTagCommandParser` extends `Parser` and implements the following ope
 * `refactorTagCommandParser#parser(String args)`
 ** Checks the arguments for empty strings and throws a `ParseException` if an empty string is found.
 ** Analyses the argument to check if it is a valid command format. Users are not allowed to provide other prefixes, except `t/` and `n/` in refactor tag command.
-*** `t/` the tag that user wants to refactor, which must be input by user, otherwise throws `ParserException` and shows refactor tag command usage message.
-*** `n/` the new tag that user wants to replace the original one, which is optional. (if the user does not provide, then remove the original one)
+*** `t/` the tag that user wants to refactor, which must be input by users, otherwise throws `ParserException` and shows refactor tag command usage message.
+*** `n/` the new tag that the user wants to replace the original one with, which is optional. (if the user does not provide, then remove the original one)
 
 If it fails to parse the command, it will throw `ParseException` and display refactor tag command usage message.
 
 * `refactorTagCommand#execute(Model model, CommandHisotry history)`
-** update the issue list and return success message if it has edited an issue, otherwise show an unsuccessful message.
-** It will iterate all the issues in the saveIt, if it contains the old tag, it will replace with the new tag if provided. Then update the list.
+** updates the issue list and returns success message if it has edited an issue, otherwise shows an unsuccessful message.
+** Iterates all the issues in the saveIt, if it contains the old tag, it will replace with the new tag if provided. Then update the list.
 
 Please refer to the Sequence Diagram below for the refactor tag operation.
 
@@ -711,7 +711,7 @@ The add tag feature allows users to add `Tag(s)` to specified `Indexed` issues.
 ==== Current Implementation
 The add tag mechanism is facilitated by `AddTagCommandParser` and `AddTagCommand`.
 
-Please refer to the Sequence Diagram below for the add tag operation.
+Please refer to the Sequence Diagram below for the illustration of add tag operation.
 
 .Add Tag Command Sequence Diagram
 image::add-tag-sequence-diagram.jpeg[width="800"]
@@ -722,9 +722,9 @@ image::add-tag-sequence-diagram.jpeg[width="800"]
 * **Alternative 1 (current choice):** Allows range of `Index` and discrete `Index` to be accepted as index parameter.
 ** Pros: It is efficient to add multiple `Tags` to multiple issues instead of doing it singly.
 ** Cons: It has to consider various conditions of the user input.
-* Alternative 2: Creates a IndexRange class for index.
+* Alternative 2: Creates an `IndexRange` class for index.
 ** Pros: It is easy to understand and maintain.
-** Cons: It will increase coupling between IndexRange class and Index class
+** Cons: It increases coupling between `IndexRange` class and `Index` class
 // end::addtag[]
 
 === Suggestion for find command Feature

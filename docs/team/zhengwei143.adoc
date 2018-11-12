@@ -13,7 +13,7 @@ This document outlines the contributions that **Tan Zheng Wei** has made to the 
 
 **SaveIt** is targetted at programmer, and aims to help the user store and keep track of problems and solutions that they encounter. The application is meant to replace traditional use of bookmarks on browsers, and is customized especially for programmers, to make it easier for them to search for previously found solutions online. **SaveIt** is a desktop application that uses the Command Line Interface (CLI) as a mode to interact with it.
 
-**SaveIt** is a project 
+**SaveIt** is a project that is built over the course of CS2103T with a group of five members including myself.
 
 == Summary of contributions
 
@@ -30,27 +30,30 @@ This document outlines the contributions that **Tan Zheng Wei** has made to the 
 ** Architecture: Designed and implemented the overall architecture of the Suggestion Component - https://github.com/CS2103-AY1819S1-T12-4/main/pull/167[#167].
 
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=zhengwei143&sort=displayName&since=2018-09-12&until=2018-11-10&timeframe=day&reverse=false&repoSort=true[Functional code]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Manage milestones and issues on the repository
+** Testing
+*** Additional tests written that covers the new features and Suggestion component -
+https://github.com/CS2103-AY1819S1-T12-4/main/pull/178[#178],
+https://github.com/CS2103-AY1819S1-T12-4/main/pull/230[#230],
+https://github.com/CS2103-AY1819S1-T12-4/main/pull/242[#242],
+https://github.com/CS2103-AY1819S1-T12-4/main/pull/245[#245]
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
-** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
+*** Update images of diagrams for User Guide and Developer Guide, as well as documentation for new features -
+https://github.com/CS2103-AY1819S1-T12-4/main/pull/73[#73],
+https://github.com/CS2103-AY1819S1-T12-4/main/pull/74[#74],
+https://github.com/CS2103-AY1819S1-T12-4/main/pull/127[#127],
+https://github.com/CS2103-AY1819S1-T12-4/main/pull/254[#254]
 
-_{you can add/remove categories in the list above}_
+** Community:
+*** Reported bugs and suggestions for other teams in the class -
+https://github.com/CS2103-AY1819S1-T10-2/main/issues/84[#84],
+https://github.com/CS2103-AY1819S1-T10-2/main/issues/91[#91],
+https://github.com/CS2103-AY1819S1-T10-2/main/issues/95[#95]
 
 == Contributions to the User Guide
 

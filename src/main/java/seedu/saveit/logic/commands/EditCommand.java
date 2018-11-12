@@ -43,19 +43,18 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_ISSUE_SUCCESS = "Edited Issue: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edit an issue (Positive Index must be provided). "
-        + "Parameters: "
-        + "index "
-        + PREFIX_STATEMENT + "issue statement "
-        + PREFIX_DESCRIPTION + "description "
-        + PREFIX_TAG + "tag1 "
-        + PREFIX_TAG + "tag2\n"
-        + "_____________________________\n"
-        + COMMAND_WORD
-        + ": Edits a solution (Positive Index must be provided). "
-        + "index "
-        + PREFIX_SOLUTION_LINK + "new solution link "
-        + PREFIX_REMARK + "new solution remark \n";
+    public static final String MESSAGE_USAGE =
+        COMMAND_WORD + " issue or solution by the index number (positive integer)"
+            + " used in the displayed list. At least one field must be provided.\n"
+            + "******  " + COMMAND_WORD + " INDEX "
+            + "[" + PREFIX_STATEMENT + "ISSUE_STATEMENT] "
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Edit solution by the index number used in the displayed solution list. "
+            + "At least one field must be provided.\n"
+            + "******  " + COMMAND_WORD + " INDEX "
+            + "[" + PREFIX_SOLUTION_LINK + "NEW_SOLUTION_LINK] "
+            + "[" + PREFIX_REMARK + "NEW_SOLUTION_REMARK]";
 
 
     public static final String DUMMY_SOLUTION_REMARK = "dummySolutionRemark";
@@ -152,9 +151,6 @@ public class EditCommand extends Command {
         if (index >= issueToEdit.getSolutions().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
         }
-
-        assert (!newSolution.getLink().getValue().equals(DUMMY_SOLUTION_LINK));
-        assert (!newSolution.getLink().getValue().equals(DUMMY_SOLUTION_LINK));
 
         Solution oldSolution = issueToEdit.getSolutions().get(index);
         Solution updatedSolution;

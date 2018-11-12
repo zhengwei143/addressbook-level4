@@ -619,13 +619,12 @@ image::UI_Sequence_Diagram_2.png[width="790"]
 ** Pros: Both lists can be viewed at the same time. Implementation is easier.
 ** Cons: It takes too much space in the UI.
 
-// end::edit[]
+// tag::edit[]
 === Edit Feature
 The edit feature allows users to edit any field of the issue and solution.
 
 ==== Current Implementation
-The edit mechanism is facilitated by `editCommandParser` and `editCommand`.
-Users are allowed to edit any field in the issue list. includes: +
+The edit mechanism is facilitated by `editCommandParser` and `editCommand`. Users are allowed to edit any field in the issue list. includes: +
 
 * root level
 ** Issue statement
@@ -652,7 +651,7 @@ throw `CommandException` and show wrong directory information.
 ** Checks if the user index in editDescriptor is larger than the size of the issue list or solution list. +
 Throw `CommandException` and show invalid index warning. Otherwise, call the function `model.updateIssue(issueToEdit, editedIssue)` to update issue list.
 
-Please refer to the Sequence Diagram below for the edit operation.
+Please refer to the Sequence Diagram below for the illustration of edit operation.
 
 .Edit Command Sequence Diagram
 image::edit-command-sequence-diagram.jpg[width="800"]
@@ -669,6 +668,7 @@ image::edit-command-sequence-diagram.jpg[width="800"]
 ** Pros: It will use less memory.
 
 ** Cons: It has lower security if it the issue is the mutable object.
+// end::edit[]
 
 === Retrieve Feature
 The retrieve feature allows user to choose a solution link to copy to the system clipboard.
@@ -676,6 +676,7 @@ The retrieve feature allows user to choose a solution link to copy to the system
 ==== Current Implementation
 
 The retrieve feature basically takes the user entered index and call `getFilteredAndSortedList` method in `Model` to get the selected solution. Then Java `Toolkit` package is used to copy the url link of solution to the system clipboard.
+
 
 // tag::setprimary[]
 === Set Primary Feature
@@ -716,7 +717,8 @@ The reset primary solution mechanism goes through the solution list once and che
 If it is primary, then replace it by a new Solution object with the same fields. If it is not primary, we continue checking until reach the end of the list.
 // end::resetprimary[]
 
-=== Refactor tag Feature
+// tag::refactortag[]
+=== Refactor Tag Feature
 The refactor tag feature allows users to rename or remove a specified tag for all entries with that tag.
 
 ==== Current Implementation
@@ -726,42 +728,42 @@ The `RefactorTagCommandParser` extends `Parser` and implements the following ope
 
 * `refactorTagCommandParser#parser(String args)`
 ** Checks the arguments for empty strings and throws a `ParseException` if an empty string is found.
-** Analyses the argument to check if it is a valid command format. Users are only allowed to use two prefixes in refactor tag command.
-*** `t/` the tag that user wants to refactor, which must be input by the user, otherwise throws `ParserException` and shows refactor tag command usage message.
-*** `n/` the new tag that user wants to replace the original one, which is optional. (if the user does not provide, then remove the original one)
+** Analyses the argument to check if it is a valid command format. Users are not allowed to provide other prefixes, except `t/` and `n/` in refactor tag command.
+*** `t/` the tag that user wants to refactor, which must be input by users, otherwise throws `ParserException` and shows refactor tag command usage message.
+*** `n/` the new tag that the user wants to replace the original one with, which is optional. (if the user does not provide, then remove the original one)
 
 If it fails to parse the command, it will throw `ParseException` and display refactor tag command usage message.
 
 * `refactorTagCommand#execute(Model model, CommandHisotry history)`
-** update the issue list and return success message if it has edited an issue, otherwise show an unsuccessful message.
-** It will iterate all the issues in the saveIt, if it contains the old tag, it will replace with the new tag if provided. Then update the list.
+** updates the issue list and returns success message if it has edited an issue, otherwise shows an unsuccessful message.
+** Iterates all the issues in the saveIt, if it contains the old tag, it will replace with the new tag if provided. Then update the list.
 
 Please refer to the Sequence Diagram below for the refactor tag operation.
 
-.Refactor Tag Command Activity Diagram
-image::refactor-tag.jpeg[width="800"]
+.Refactor Tag Activity Diagram
+image::refactor-tag-activity-diagram.png[width="400"]
 
 ==== Design Consideration
 
 ===== Aspect: Implementation of RefactorTag command parser.
-* Alternative 1 (current choice): Allows only to rename or remove the old tags that user input lastly.
+* **Alternative 1 (current choice):** Allows only to rename or remove the old tags that user input lastly.
 ** Pros: It is easy to implement.
 ** Cons: It is inconvenient if the user wants to replace the tags once.
 * Alternative 2: Allows to rename or remove multiple old tags with multiple new tags.
 ** Pros: It is convenient for users to replace or remove the tags once.
 ** Cons: It is not clear for users to see the changes since tags are displayed disordered.
-// end::refactorTag[]
+// end::refactortag[]
 
 
 
-// tag::addTag[]
+// tag::addtag[]
 === Add tag Feature
 The add tag feature allows users to add `Tag(s)` to specified `Indexed` issues.
 
 ==== Current Implementation
 The add tag mechanism is facilitated by `AddTagCommandParser` and `AddTagCommand`.
 
-Please refer to the Sequence Diagram below for the add tag operation.
+Please refer to the Sequence Diagram below for the illustration of add tag operation.
 
 .Add Tag Command Sequence Diagram
 image::add-tag-sequence-diagram.jpeg[width="800"]
@@ -769,13 +771,13 @@ image::add-tag-sequence-diagram.jpeg[width="800"]
 ==== Design Consideration
 
 ===== Aspect: Implementation of AddTag command parser.
-* Alternative 1 (current choice):** Allows range of `Index` to be accepted as index parameter.
+* **Alternative 1 (current choice):** Allows range of `Index` and discrete `Index` to be accepted as index parameter.
 ** Pros: It is efficient to add multiple `Tags` to multiple issues instead of doing it singly.
 ** Cons: It has to consider various conditions of the user input.
-* Alternative 2: Creates a IndexRange class for index.
+* Alternative 2: Creates an `IndexRange` class for index.
 ** Pros: It is easy to understand and maintain.
-** Cons: It will increase coupling between IndexRange class and Index class
-// end::addTag[]
+** Cons: It increases coupling between `IndexRange` class and `Index` class
+// end::addtag[]
 
 === Suggestion Feature
 The suggestion feature allows user to quickly complete commands by showing a drop-down window of suggested values when the user input matches a specific keyword or identifier.
@@ -870,13 +872,23 @@ The hashcode used by `Prefix` only hashes the prefix string, as such, adding a `
 
 We eventually chose Alternative 1 as it provides a better structure and encapsulation for our code overall. We also came up with a workaround for Alternative 1's cons, by modifying the method `ArgumentMultimap#getValue`.
 
-// tag::commandHighlight[]
+// tag::commandhighlight[]
 === Command Highlight
 The command highlight feature is to differentiate command word, index, prefix and values that user input in Command Line.
 
 ==== Current Implementation
-The Command Highlight mechanism uses `InlineCssTextArea` class. It uses listener to detect the change in the `commandTextField` and check if it is command word, parameter, index or values and assign different colors correspondingly.
-// end::commandHighlight[]
+The Command Highlight mechanism uses `InlineCssTextArea` class. It uses listener to detect the change in the `commandTextArea` and check if it contains command word, parameter, index or values and assign different colors correspondingly.
+
+==== Design Consideration
+===== Aspect: Implementation of command highlight manager.
+
+* **Alternative 1 (current choice):** Check the character that user input in the command box should be highlight.
+** Pros: easy to implement by checking the prefix, index and command word.
+** Cons: due to the limitation of using the character '/' as part of the prefix, it may still have some corner cases that we cannot cover.
+* **Alternative 2:** Parse the user command simultaneously when user input.
+** Pros: if user inputs wrong command format, it will highlight the color correspondingly. Hence, user can correct his input immediately.
+** Cons: difficult to implement.
+// end::commandhighlight[]
 
 
 == Documentation

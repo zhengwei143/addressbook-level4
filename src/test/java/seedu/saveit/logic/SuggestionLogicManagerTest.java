@@ -33,6 +33,10 @@ public class SuggestionLogicManagerTest {
         assertParseFailure("edit 1 i/IssueName d/Description t/s", 30);
         // Correct format but invalid index
         assertParseFailure("edit coolIndex i/IssueName t/so", 23);
+
+        assertParseFailure("findtag t/", 10);
+        // Wrong caret position
+        assertParseFailure("findtag t/ t/sometag", 9);
     }
 
     /**
@@ -49,7 +53,8 @@ public class SuggestionLogicManagerTest {
         assertParseSuccess("edit 1 i/IssueName t/so", 23);
         assertParseSuccess("edit 1 i/IssueName t/so d/description", 23);
 
-        assertParseSuccess("findtag s", 9);
+        assertParseSuccess("findtag t/s", 11);
+        assertParseSuccess("findtag t/s t/d", 14);
     }
 
     // ========================= CopyExistingSuggestion =================================

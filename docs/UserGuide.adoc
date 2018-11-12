@@ -364,8 +364,8 @@ Finds issues that contain the tags entered in the search queries.
 
 Examples:
 ****
-* `findtag java`
-* `findtag cplusplus segmentationFault`
+* `findtag t/java`
+* `findtag t/cplusplus t/segmentationFault`
 ****
 
 [NOTE]
